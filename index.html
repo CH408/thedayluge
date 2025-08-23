@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>The DayLuge</title>
     <style>
         body {
@@ -12,72 +12,74 @@
             padding: 20px;
             line-height: 1.4;
         }
-        
+
         .header {
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .header h1 {
             font-size: 36px;
             color: #000;
             margin: 0;
             font-weight: bold;
         }
-        
+
         .container {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(4, 1fr);
             gap: 25px;
             width: 100%;
             margin: 0;
             padding: 0 20px;
             box-sizing: border-box;
         }
-        
+
         .column {
             border: 1px solid #ccc;
             padding: 15px;
             background-color: #f9f9f9;
         }
-        
+
         .link-item {
             margin-bottom: 15px;
             font-size: 18px;
             font-weight: bold;
         }
-        
+
         .link-item a {
             text-decoration: none;
             display: block;
             padding: 2px 0;
         }
-        
+
         .link-item a:hover {
             text-decoration: underline;
         }
-        
+
+        /* Color classes for links in columns */
         .red-links a { color: #cc0000; }
         .orange-links a { color: #ff6600; }
         .green-links a { color: #009900; }
-        .blue-links a { color: #0066cc; }
-        .pink-links a { color: #cc0099; }
         .limegreen-links a { color: #32CD32; }
+        .blue-links a { color: #0066cc; }
+        .lightblue-links a { color: #3399ff; }
+        .indigo-links a { color: #4b0082; }
         .violet-links a { color: #8F00FF; }
-        .purple-links a { color: #9900cc; }
-        
+        .pink-links a { color: #cc0099; }
+
         @media (max-width: 768px) {
             .container {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .container {
                 grid-template-columns: 1fr;
             }
-            
+
             .header h1 {
                 font-size: 24px;
             }
@@ -88,121 +90,76 @@
     <div class="header">
         <h1>THE DAYLUGE</h1>
     </div>
-    
+
     <div class="container">
         <div class="column red-links">
             <div class="link-item">
                 <a href="https://www.zerohedge.com/political/shocking-new-documents-expose-multi-front-effort-protect-clintons-while-framing-trump">Shocking NEW Documents Expose Multi-Front Effort To Protect Clintons While Framing Trump</a>
             </div>
-            <div class="link-item">
-                <a href="https://www.businesswire.com/news/home/20250820615513/en/Statement-from-Marcus-Lemonis-Executive-Chairman-of-Bed-Bath-Beyond">Bed, Bath & Beyond Chairman: "We will not open or operate retail stores in California"</a>
-            </div>
-            <div class="link-item">
-                <a href="https://www.washingtontimes.com/news/2025/aug/22/ghislaine-maxwell-epstein-co-conspirator-says-never-saw-trump-act/">Ghislaine Maxwell says she never saw Trump act inappropriately</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Senate Committee Schedules Hearings</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Governor Signs Climate Legislation</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">House Passes Defense Budget</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Presidential Campaign Update</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">State Election Results Finalized</a>
-            </div>
+            <!-- More red links here -->
         </div>
-        
+
         <div class="column orange-links">
             <div class="link-item">
                 <a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/">Going Full Bud Light</a>
             </div>
-            <div class="link-item">
-                <a href="https://example.com">Federal Reserve Raises Interest Rates</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Major Merger Creates Industry Giant</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Oil Prices Surge on Supply Concerns</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Cryptocurrency Market Shows Volatility</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Retail Sales Beat Expectations</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Unemployment Rate Drops to New Low</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Corporate Earnings Exceed Forecasts</a>
-            </div>
+            <!-- More orange links here -->
         </div>
-        
+
         <div class="column green-links">
             <div class="link-item">
                 <a href="https://example.com">Apple Unveils Revolutionary iPhone</a>
             </div>
-            <div class="link-item">
-                <a href="https://example.com">Google's AI Breakthrough Changes Everything</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">SpaceX Successfully Launches Mars Mission</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Tesla Announces New Battery Technology</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Microsoft Acquires Gaming Company</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Amazon Expands Cloud Services</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Facebook Rebrands to Meta Universe</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">Netflix Launches Interactive Content</a>
-            </div>
+            <!-- More green links here -->
         </div>
-        
+
+        <div class="column limegreen-links">
+            <div class="link-item">
+                <a href="https://example.com">Green Tech Innovations</a>
+            </div>
+            <!-- Add lime green links -->
+        </div>
+
         <div class="column blue-links">
             <div class="link-item">
                 <a href="https://reason.com/2025/08/06/how-the-elite-changed-its-mind-on-christianity/">How the Elite Changed Its Mind on Christianity</a>
             </div>
+            <!-- More blue links here -->
+        </div>
+
+        <div class="column lightblue-links">
             <div class="link-item">
-                <a href="https://example.com">China Launches New Space Station</a>
+                <a href="https://example.com">Sky and Ocean Updates</a>
             </div>
+            <!-- Add light blue links -->
+        </div>
+
+        <div class="column indigo-links">
             <div class="link-item">
-                <a href="https://example.com">Climate Summit Produces Historic Deal</a>
+                <a href="https://example.com">Technology Deep Dives</a>
             </div>
+            <!-- Add indigo links -->
+        </div>
+
+        <div class="column violet-links">
             <div class="link-item">
-                <a href="https://example.com">Middle East Peace Talks Resume</a>
+                <a href="https://example.com">Creative Arts and Culture</a>
             </div>
+            <!-- Add violet links -->
+        </div>
+
+        <div class="column pink-links">
             <div class="link-item">
-                <a href="https://example.com">Japan Announces Olympic Plans</a>
+                <a href="https://example.com">Fashion and Lifestyle</a>
             </div>
-            <div class="link-item">
-                <a href="https://example.com">Australia Implements Carbon Tax</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">United Nations Security Council Meeting</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com">International Trade Relations Improve</a>
-            </div>
+            <!-- More pink links here -->
         </div>
     </div>
-    
+
     <p style="text-align: center; margin-top: 40px; font-size: 12px;">
         <a href="/admin" style="color: #666; text-decoration: none;">Admin</a>
     </p>
-    
+
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </body>
 </html>
