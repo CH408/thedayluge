@@ -28,9 +28,11 @@
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 25px;
+            width: 100%;
+            margin: 0;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
         
         .column {
@@ -48,8 +50,8 @@
         }
         
         .link-item {
-            margin-bottom: 12px;
-            font-size: 13px;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
         
         .link-item a {
@@ -93,7 +95,6 @@
     
     <div class="container">
         <div class="column red-links">
-            <h3>POLITICS</h3>
             <div class="link-item">
                 <a href="https://example.com">Biden Announces New Infrastructure Bill</a>
             </div>
@@ -121,7 +122,6 @@
         </div>
         
         <div class="column orange-links">
-            <h3>BUSINESS</h3>
             <div class="link-item">
                 <a href="https://example.com">Tech Stocks Rally After Earnings</a>
             </div>
@@ -149,7 +149,6 @@
         </div>
         
         <div class="column green-links">
-            <h3>TECHNOLOGY</h3>
             <div class="link-item">
                 <a href="https://example.com">Apple Unveils Revolutionary iPhone</a>
             </div>
@@ -177,7 +176,6 @@
         </div>
         
         <div class="column blue-links">
-            <h3>WORLD</h3>
             <div class="link-item">
                 <a href="https://example.com">European Union Reaches Trade Agreement</a>
             </div>
