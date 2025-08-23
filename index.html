@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The DayLuge</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 36px;
+            color: #000;
+            margin: 0;
+            font-weight: bold;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .column {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        
+        .column h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 16px;
+            color: #000;
+        }
+        
+        .link-item {
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+        
+        .link-item a {
+            text-decoration: none;
+            display: block;
+            padding: 2px 0;
+        }
+        
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .red-links a { color: #cc0000; }
+        .orange-links a { color: #ff6600; }
+        .green-links a { color: #009900; }
+        .blue-links a { color: #0066cc; }
+        .purple-links a { color: #9900cc; }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>THE DAYLUGE</h1>
+    </div>
+    
+    <div class="container">
+        <div class="column red-links">
+            <h3>POLITICS</h3>
+            <div class="link-item">
+                <a href="https://example.com">Biden Announces New Infrastructure Bill</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Congress Debates Immigration Reform</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Supreme Court Hears Voting Rights Case</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Senate Committee Schedules Hearings</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Governor Signs Climate Legislation</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">House Passes Defense Budget</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Presidential Campaign Update</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">State Election Results Finalized</a>
+            </div>
+        </div>
+        
+        <div class="column orange-links">
+            <h3>BUSINESS</h3>
+            <div class="link-item">
+                <a href="https://example.com">Tech Stocks Rally After Earnings</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Federal Reserve Raises Interest Rates</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Major Merger Creates Industry Giant</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Oil Prices Surge on Supply Concerns</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Cryptocurrency Market Shows Volatility</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Retail Sales Beat Expectations</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Unemployment Rate Drops to New Low</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Corporate Earnings Exceed Forecasts</a>
+            </div>
+        </div>
+        
+        <div class="column green-links">
+            <h3>TECHNOLOGY</h3>
+            <div class="link-item">
+                <a href="https://example.com">Apple Unveils Revolutionary iPhone</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Google's AI Breakthrough Changes Everything</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">SpaceX Successfully Launches Mars Mission</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Tesla Announces New Battery Technology</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Microsoft Acquires Gaming Company</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Amazon Expands Cloud Services</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Facebook Rebrands to Meta Universe</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Netflix Launches Interactive Content</a>
+            </div>
+        </div>
+        
+        <div class="column blue-links">
+            <h3>WORLD</h3>
+            <div class="link-item">
+                <a href="https://example.com">European Union Reaches Trade Agreement</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">China Launches New Space Station</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Climate Summit Produces Historic Deal</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Middle East Peace Talks Resume</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Japan Announces Olympic Plans</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">Australia Implements Carbon Tax</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">United Nations Security Council Meeting</a>
+            </div>
+            <div class="link-item">
+                <a href="https://example.com">International Trade Relations Improve</a>
+            </div>
+        </div>
+    </div>
+    
+    <p style="text-align: center; margin-top: 40px; font-size: 12px;">
+        <a href="/admin" style="color: #666; text-decoration: none;">Admin</a>
+    </p>
+    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</body>
+</html>
