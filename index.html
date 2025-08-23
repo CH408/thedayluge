@@ -1,221 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The DayLuge</title>
-    <style>
-        body {
-            font-family: 'Courier New', monospace;
-            background-color: #ffffff;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.4;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .header h1 {
-            font-size: 36px;
-            color: #000;
-            margin: 0;
-            font-weight: bold;
-        }
-        
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 25px;
-            width: 100%;
-            margin: 0;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
-        
-        .column {
-            border: 1px solid #ccc;
-            padding: 15px;
-            background-color: #f9f9f9;
-        }
-        
-        .link-item {
-            margin-bottom: 15px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        
-        .link-item a {
-            text-decoration: none;
-            display: block;
-            padding: 2px 0;
-        }
-        
-        .link-item a:hover {
-            text-decoration: underline;
-        }
-        
-        /* 7-Category Color System */
-        .red { color: #cc0000; }        /* News */
-        .green { color: #009900; }      /* Economics/Finance/Markets */
-        .orange { color: #ff6600; }     /* Editorial */
-        .blue { color: #0066cc; }       /* Animals/Feel-good/Humor */
-        .purple { color: #9900cc; }     /* Arts/Literature/Culture/Music/Food/Travel */
-        .pink { color: #ff3399; }       /* Longform Material */
-        .violet { color: #6600cc; }     /* Miscellany */
-        
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            
-            .header h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The DayLuge</title>
+  <style>
+    :root{
+      --red:#cc0000;
+      --orange:#ff6600;
+      --green:#009900;
+      --lime-green:#32cd32;
+      --blue:#0066cc;
+      --light-blue:#00bfff;
+      --indigo:#4b0082;
+      --violet:#6600cc;
+      --pink:#ff3399;
+    }
+
+    /* Color menu utilities */
+    .c-red{color:var(--red)}
+    .c-orange{color:var(--orange)}
+    .c-green{color:var(--green)}
+    .c-lime-green{color:var(--lime-green)}
+    .c-blue{color:var(--blue)}
+    .c-light-blue{color:var(--light-blue)}
+    .c-indigo{color:var(--indigo)}
+    .c-violet{color:var(--violet)}
+    .c-pink{color:var(--pink)}
+
+    body{
+      font-family:'Courier New', monospace;
+      background-color:#ffffff;
+      margin:0; padding:20px; line-height:1.4;
+    }
+    .header{ text-align:center; margin-bottom:30px; }
+    .header h1{ font-size:36px; color:#000; margin:0; font-weight:bold; }
+
+    .container{
+      display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
+      gap:25px; width:100%; margin:0; padding:0 20px; box-sizing:border-box;
+    }
+    .column{ border:1px solid #ccc; padding:15px; background-color:#f9f9f9; }
+    .link-item{ margin-bottom:15px; font-size:18px; font-weight:bold; }
+    .link-item a{ text-decoration:none; display:block; padding:2px 0; }
+    .link-item a:hover{ text-decoration:underline; }
+
+    @media (max-width:768px){
+      .container{ grid-template-columns:1fr 1fr; gap:10px; }
+    }
+    @media (max-width:480px){
+      .container{ grid-template-columns:1fr; }
+      .header h1{ font-size:24px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>THE DAYLUGE</h1>
+  <div class="header">
+    <h1>THE DAYLUGE</h1>
+  </div>
+
+  <div class="container">
+    <!-- Column 1 -->
+    <div class="column">
+      <div class="link-item">
+        <a href="https://example.com" class="c-red">Breaking News: Major Political Development</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-green">Fed Raises Interest Rates Again</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-orange">Editorial: The State of Modern Politics</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-blue">Adorable Puppies Rescue Kittens</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-violet">New Museum Exhibition Opens in Paris</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-pink">The Atlantic: Deep Dive Into Climate Policy</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-indigo">Random Interesting Discovery</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-red">Supreme Court Ruling Expected Today</a>
+      </div>
     </div>
-    
-    <div class="container">
-        <div class="column">
-            <div class="link-item">
-                <a href="https://example.com" class="red">Breaking News: Major Political Development</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="green">Fed Raises Interest Rates Again</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="orange">Editorial: The State of Modern Politics</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="blue">Adorable Puppies Rescue Kittens</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="purple">New Museum Exhibition Opens in Paris</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="pink">The Atlantic: Deep Dive Into Climate Policy</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="violet">Random Interesting Discovery</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="red">Supreme Court Ruling Expected Today</a>
-            </div>
-        </div>
-        
-        <div class="column">
-            <div class="link-item">
-                <a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" class="orange">Going Full Bud Light</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="green">Stock Market Hits Record High</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="red">Election Results Coming In</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="blue">Dog Learns to Surf in California</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="purple">Chef Opens Revolutionary Restaurant</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="pink">New Yorker: Investigation Into Tech Giants</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="violet">Weird Science: Plants Can Count</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="green">Cryptocurrency Crashes 20%</a>
-            </div>
-        </div>
-        
-        <div class="column">
-            <div class="link-item">
-                <a href="https://example.com" class="blue">Cat Videos Break the Internet Again</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="purple">Broadway Show Gets Standing Ovation</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="red">Senate Votes on Healthcare Bill</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="orange">Opinion: Why Democracy is Failing</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="green">Oil Prices Drop 15% Overnight</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="pink">Harper's: The Future of Work</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="violet">Scientists Discover New Species</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="blue">Baby Elephant Takes First Steps</a>
-            </div>
-        </div>
-        
-        <div class="column">
-            <div class="link-item">
-                <a href="https://example.com" class="purple">Paris Fashion Week Highlights</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="green">Housing Market Shows Signs of Recovery</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="red">International Summit Begins</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="orange">Column: America Needs New Leadership</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="blue">Penguin Colony Adopts Lost Chick</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="pink">Atlantic Monthly: Rise of Authoritarianism</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="violet">Ancient Artifact Found in Egypt</a>
-            </div>
-            <div class="link-item">
-                <a href="https://example.com" class="purple">Wine Country Festival This Weekend</a>
-            </div>
-        </div>
+
+    <!-- Column 2 -->
+    <div class="column">
+      <div class="link-item">
+        <a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" class="c-orange">Going Full Bud Light</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-green">Stock Market Hits Record High</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-red">Election Results Coming In</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-light-blue">Dog Learns to Surf in California</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-violet">Chef Opens Revolutionary Restaurant</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-pink">New Yorker: Investigation Into Tech Giants</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-indigo">Weird Science: Plants Can Count</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-lime-green">Cryptocurrency Crashes 20%</a>
+      </div>
     </div>
-    
-    <!-- Color Legend (hidden by default, can be shown if needed) -->
-    <!--
-    <div style="margin-top: 40px; font-size: 12px; text-align: center;">
-        <span style="color: #cc0000;">■ News</span> |
-        <span style="color: #009900;">■ Economics/Finance</span> |
-        <span style="color: #ff6600;">■ Editorial</span> |
-        <span style="color: #0066cc;">■ Animals/Humor</span> |
-        <span style="color: #9900cc;">■ Arts/Culture</span> |
-        <span style="color: #ff3399;">■ Longform</span> |
-        <span style="color: #6600cc;">■ Miscellany</span>
+
+    <!-- Column 3 -->
+    <div class="column">
+      <div class="link-item">
+        <a href="https://example.com" class="c-light-blue">Cat Videos Break the Internet Again</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-violet">Broadway Show Gets Standing Ovation</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-red">Senate Votes on Healthcare Bill</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-orange">Opinion: Why Democracy is Failing</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-green">Oil Prices Drop 15% Overnight</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-pink">Harper's: The Future of Work</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-indigo">Scientists Discover New Species</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-blue">Baby Elephant Takes First Steps</a>
+      </div>
     </div>
-    -->
-    
-    <p style="text-align: center; margin-top: 40px; font-size: 12px;">
-        <a href="/admin" style="color: #666; text-decoration: none;">Admin</a>
-    </p>
-    
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- Column 4 -->
+    <div class="column">
+      <div class="link-item">
+        <a href="https://example.com" class="c-violet">Paris Fashion Week Highlights</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-green">Housing Market Shows Signs of Recovery</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-red">International Summit Begins</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-orange">Column: America Needs New Leadership</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-blue">Penguin Colony Adopts Lost Chick</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-pink">Atlantic Monthly: Rise of Authoritarianism</a>
+      </div>
+      <div class="link-item">
+        <a href="https://example.com" class="c-indigo">Ancient Artifact Found in Egypt</a>
+      </div>
+      <div class="link-item">
+        <!-- Example: the first link in column 4 set to pink (change class anytime) -->
+        <a href="https://example.com" class="c-pink">Wine Country Festival This Weekend</a>
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align:center; margin-top:40px; font-size:12px;">
+    <a href="/admin" style="color:#666; text-decoration:none;">Admin</a>
+  </p>
+
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </body>
 </html>
