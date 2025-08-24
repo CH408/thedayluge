@@ -115,14 +115,7 @@
    .link-item a{ text-decoration:none; display:block; padding:2px 0; }
    .link-item a:hover{ text-decoration:underline; }
 
-   /* Link counter display */
-   .column-header {
-     font-size: 12px;
-     color: #666;
-     margin-bottom: 10px;
-     text-align: center;
-     font-weight: normal;
-   }
+
 
    /* Admin section */
    .admin-controls {
@@ -183,7 +176,6 @@
  <div class="nav-links">
    <a href="/">Home</a>
    <a href="/archive">Archive</a>
-   <a href="#" onclick="toggleAdmin()">Admin</a>
  </div>
 
  <div class="container" id="mainContainer">
@@ -207,7 +199,8 @@
 
  <p style="text-align:center; margin-top:40px; font-size:12px;">
    <span id="totalLinks"></span> | 
-   <a href="/admin" style="color:#666; text-decoration:none;">Admin</a>
+   <a href="/admin" style="color:#666; text-decoration:none;">Admin</a> |
+   <a href="#" onclick="toggleAdmin()" style="color:#666; text-decoration:none; font-size:10px;">•</a>
  </p>
 
 <script>
@@ -494,7 +487,6 @@ class DayLugeManager {
       const links = this.data[columnKey] || [];
       
       html += `<div class="column">`;
-      html += `<div class="column-header">Column ${i} (${links.length}/${CONFIG.maxLinksPerColumn})</div>`;
       
       links.forEach(link => {
         html += `<div class="link-item">`;
