@@ -27,6 +27,7 @@
    .c-indigo{color:var(--indigo)}
    .c-violet{color:var(--violet)}
    .c-pink{color:var(--pink)}
+   .c-purple{color:var(--violet)}
 
    body{
      font-family:'Courier New', monospace;
@@ -51,6 +52,25 @@
 
    .header{ text-align:center; margin-bottom:30px; }
    .header h1{ font-size:36px; color:#000; margin:0; font-weight:bold; }
+
+   .nav-links {
+     text-align: center;
+     margin-bottom: 20px;
+     padding: 10px 0;
+     border-bottom: 2px solid #ccc;
+   }
+
+   .nav-links a {
+     margin: 0 15px;
+     color: #333;
+     text-decoration: none;
+     font-weight: bold;
+     font-size: 14px;
+   }
+
+   .nav-links a:hover {
+     text-decoration: underline;
+   }
 
    .container{
      display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
@@ -95,6 +115,46 @@
    .link-item a{ text-decoration:none; display:block; padding:2px 0; }
    .link-item a:hover{ text-decoration:underline; }
 
+   /* Link counter display */
+   .column-header {
+     font-size: 12px;
+     color: #666;
+     margin-bottom: 10px;
+     text-align: center;
+     font-weight: normal;
+   }
+
+   /* Admin section */
+   .admin-controls {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     background: rgba(255,255,255,0.9);
+     padding: 15px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     font-size: 12px;
+     max-width: 300px;
+     display: none;
+   }
+
+   .admin-controls.show {
+     display: block;
+   }
+
+   .admin-controls button {
+     margin: 5px;
+     padding: 5px 10px;
+     font-size: 11px;
+     background: #f0f0f0;
+     border: 1px solid #ccc;
+     cursor: pointer;
+   }
+
+   .admin-controls button:hover {
+     background: #e0e0e0;
+   }
+
    @media (max-width:768px){
      .container{ 
        grid-template-columns:1fr 1fr; 
@@ -120,147 +180,445 @@
    <h1>THE DAYLUGE</h1>
  </div>
 
- <div class="container">
+ <div class="nav-links">
+   <a href="/">Home</a>
+   <a href="/archive">Archive</a>
+   <a href="#" onclick="toggleAdmin()">Admin</a>
+ </div>
 
+ <div class="container" id="mainContainer">
+   <!-- Content will be dynamically generated -->
+ </div>
 
-<!-- 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴 -->
-<!--                                    COLUMN 1                                    -->
-<!-- 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴 -->
-
-
-   <div class="column">
-     <div class="link-item">
-       <a href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" class="c-red">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a>
-     </div>
-     <div class="link-item">
-       <a href="https://x.com/onechancefreedm/status/1959315977830903826" class="c-green">Credit Card Delinquencies Surging</a>
-     </div>
-     <div class="link-item">
-       <a href="https://example.com" class="c-orange">Diddy's Arrest Is Part of Something Bigger</a>
-     </div>
-     <div class="link-item">
-       <a href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/?tpa=Y2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_source=newsletter&utm_medium=email&utm_term=https%3A%2F%2Fgeopoliticalfutures.com%2Fan-all-time-high-in-cocaine-production%2F%3Ftpa%3DY2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_content&utm_campaign=PAID%20-%20Daily%20Diges" class="c-blue">All-Time High in Cocaine Production</a>
-     </div>
-     <div class="link-item">
-       <a href="https://x.com/GlobalMktObserv/status/1959654438332670436" class="c-green">Gold International Reserves are SURGING</a>
-     </div>
-     <div class="link-item">
-       <a href="https://x.com/KobeissiLetter/status/1959636646925852986" class="c-green">US Federal Debt Surgng At +$21 Billion Per Day</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" class="c-indigo">This Teacher Loves His Students</a>
-     </div>
-     <div class="link-item">
-       <a href="https://x.com/MAstronomers/status/1959217217410621492" class="c-pink">Number of Starlink Satellites Over Time</a>
-     </div>
+ <!-- Admin Controls -->
+ <div class="admin-controls" id="adminControls">
+   <h4>Admin Controls</h4>
+   <div>
+     <strong>Current Links:</strong>
+     <div id="linkCounts"></div>
    </div>
-
-
-<!-- 🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠 -->
-<!--                                    COLUMN 2                                    -->
-<!-- 🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠 -->
-
-
-   <div class="column">
-     <div class="link-item">
-       <a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" class="c-orange">Going Full Bud Light</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/?user_id=66c4bc5a5d78644b3a979610#google_vignette" class="c-green">The Best Performing Fund in Modern History</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile" class="c-red">Israel Targets Yemen's Capital With Massive Strikes</a>
-     </div>
-     <div class="link-item">
-       <a href="https://tv.garden/" class="c-blue">Watch Global Local TV Online</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" class="c-violet">The "Classic Part" Little Boy Has the Right Attitude</a>
-     </div>
-     <div class="link-item">
-       <a href="https://x.com/engineers_feed/status/1959628877711487203" class="c-pink">30 Years Ago Today, Gates and Balmer and Pals Rocked Out HARD To Celebrate Windows 95</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/" class="c-indigo">The Smithsonian Has Jumped the Shark</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025" class="c-orange">Which New NFL Coaches Are in the Best Position to Win?</a>
-     </div>
+   <div style="margin-top: 10px;">
+     <button onclick="addSampleLink()">Add Sample Link</button>
+     <button onclick="forceArchive()">Force Archive Old</button>
+     <button onclick="exportData()">Export Data</button>
+     <button onclick="clearAll()">Clear All</button>
    </div>
-
-
-<!-- 🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢 -->
-<!--                                    COLUMN 3                                    -->
-<!-- 🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢 -->
-
-
-   <div class="column">
-     <div class="link-item">
-       <a href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" class="c-blue">Six Tips from the Middle Ages on How to Beat the Summer Heat</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" class="c-violet">Cost Of Attending An NFL Game Has Risen 40% In The Last 10 Years</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" class="c-red">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.instagram.com/reel/DBBfjV6KD1d/?igsh=MW5rbDU4bmhzenlwbw%3D%3D" class="c-purple">Turkish Family Surprises Dad On His Birthday</a>
-     </div>
-     <div class="link-item">
-       <a href="https://collider.com/best-war-shows-must-watch-ranked/" class="c-orange">10 Must-Watch War Shows, Ranked</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine" class="c-pink">Systemic Corruption Doesn't Give A Chance For Peace In Ukraine</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m" class="c-indigo">'Holy Grail' Jordan-Bryant Sports Card Sells for Record $12.9M</a>
-     </div>
-     <div class="link-item">
-       <a href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" class="c-blue">The Vegas Shooting Is A Layered Onion of "Max Conspiracy"</a>
-     </div>
-   </div>
-
-
-<!-- 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵 -->
-<!--                                    COLUMN 4                                    -->
-<!-- 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵 -->
-
-
-   <div class="column">
-     <div class="link-item">
-       <a href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" class="c-purple">7 Brilliant Acts of Psychological Warfare in History</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" class="c-blue">1910: The Year the Modern World Lost Its Mind</a>
-     </div>
-     <div class="link-item">
-       <a href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82
-" class="c-pink">Twilight of the House of Lords</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.youtube.com/watch?v=x9cVcGQNxBw" class="c-blue">They Found Giants In A Cave</a>
-     </div>
-     <div class="link-item">
-       <a href="https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird" class="c-green">How Did Moscow Become Europe's Biggest City?</a>
-     </div>
-     <div class="link-item">
-       <a href="https://x.com/Rainmaker1973/status/1959655344709173469" class="c-orange">1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.youtube.com/shorts/0Phz6wnq_GU" class="c-indigo">The Pyramid Power Plant Theory</a>
-     </div>
-     <div class="link-item">
-       <a href="https://www.youtube.com/watch?v=F4M1MlBZyI0" class="c-pink">Dave Smith: "I Was A Militant Atheist" </a>
-     </div>
-   </div>
-
  </div>
 
  <p style="text-align:center; margin-top:40px; font-size:12px;">
+   <span id="totalLinks"></span> | 
    <a href="/admin" style="color:#666; text-decoration:none;">Admin</a>
  </p>
 
- <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+// Configuration
+const CONFIG = {
+  maxLinksPerColumn: 18,
+  totalMaxLinks: 72,
+  storageKey: 'dayluge_links_v2'
+};
+
+// Initial data structure with your current links
+const INITIAL_DATA = {
+  column1: [
+    {
+      url: "https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj",
+      title: "Ghislaine Maxwell: Trump 'Was Never Inappropriate'",
+      color: "c-red",
+      dateAdded: new Date('2025-08-24').toISOString()
+    },
+    {
+      url: "https://x.com/onechancefreedm/status/1959315977830903826",
+      title: "Credit Card Delinquencies Surging",
+      color: "c-green",
+      dateAdded: new Date('2025-08-23').toISOString()
+    },
+    {
+      url: "https://example.com",
+      title: "Diddy's Arrest Is Part of Something Bigger",
+      color: "c-orange",
+      dateAdded: new Date('2025-08-22').toISOString()
+    },
+    {
+      url: "https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/?tpa=Y2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_source=newsletter&utm_medium=email&utm_term=https%3A%2F%2Fgeopoliticalfutures.com%2Fan-all-time-high-in-cocaine-production%2F%3Ftpa%3DY2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_content&utm_campaign=PAID%20-%20Daily%20Diges",
+      title: "All-Time High in Cocaine Production",
+      color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString()
+    },
+    {
+      url: "https://x.com/GlobalMktObserv/status/1959654438332670436",
+      title: "Gold International Reserves are SURGING",
+      color: "c-green",
+      dateAdded: new Date('2025-08-20').toISOString()
+    },
+    {
+      url: "https://x.com/KobeissiLetter/status/1959636646925852986",
+      title: "US Federal Debt Surgng At +$21 Billion Per Day",
+      color: "c-green",
+      dateAdded: new Date('2025-08-19').toISOString()
+    },
+    {
+      url: "https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
+      title: "This Teacher Loves His Students",
+      color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString()
+    },
+    {
+      url: "https://x.com/MAstronomers/status/1959217217410621492",
+      title: "Number of Starlink Satellites Over Time",
+      color: "c-pink",
+      dateAdded: new Date('2025-08-17').toISOString()
+    }
+  ],
+  column2: [
+    {
+      url: "https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/",
+      title: "Going Full Bud Light",
+      color: "c-orange",
+      dateAdded: new Date('2025-08-24').toISOString()
+    },
+    {
+      url: "https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/?user_id=66c4bc5a5d78644b3a979610#google_vignette",
+      title: "The Best Performing Fund in Modern History",
+      color: "c-green",
+      dateAdded: new Date('2025-08-23').toISOString()
+    },
+    {
+      url: "https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile",
+      title: "Israel Targets Yemen's Capital With Massive Strikes",
+      color: "c-red",
+      dateAdded: new Date('2025-08-22').toISOString()
+    },
+    {
+      url: "https://tv.garden/",
+      title: "Watch Global Local TV Online",
+      color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString()
+    },
+    {
+      url: "https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
+      title: "The \"Classic Part\" Little Boy Has the Right Attitude",
+      color: "c-violet",
+      dateAdded: new Date('2025-08-20').toISOString()
+    },
+    {
+      url: "https://x.com/engineers_feed/status/1959628877711487203",
+      title: "30 Years Ago Today, Gates and Balmer and Pals Rocked Out HARD To Celebrate Windows 95",
+      color: "c-pink",
+      dateAdded: new Date('2025-08-19').toISOString()
+    },
+    {
+      url: "https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/",
+      title: "The Smithsonian Has Jumped the Shark",
+      color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString()
+    },
+    {
+      url: "https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025",
+      title: "Which New NFL Coaches Are in the Best Position to Win?",
+      color: "c-orange",
+      dateAdded: new Date('2025-08-17').toISOString()
+    }
+  ],
+  column3: [
+    {
+      url: "https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
+      title: "Six Tips from the Middle Ages on How to Beat the Summer Heat",
+      color: "c-blue",
+      dateAdded: new Date('2025-08-24').toISOString()
+    },
+    {
+      url: "https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
+      title: "Cost Of Attending An NFL Game Has Risen 40% In The Last 10 Years",
+      color: "c-violet",
+      dateAdded: new Date('2025-08-23').toISOString()
+    },
+    {
+      url: "https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
+      title: "\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters",
+      color: "c-red",
+      dateAdded: new Date('2025-08-22').toISOString()
+    },
+    {
+      url: "https://www.instagram.com/reel/DBBfjV6KD1d/?igsh=MW5rbDU4bmhzenlwbw%3D%3D",
+      title: "Turkish Family Surprises Dad On His Birthday",
+      color: "c-purple",
+      dateAdded: new Date('2025-08-21').toISOString()
+    },
+    {
+      url: "https://collider.com/best-war-shows-must-watch-ranked/",
+      title: "10 Must-Watch War Shows, Ranked",
+      color: "c-orange",
+      dateAdded: new Date('2025-08-20').toISOString()
+    },
+    {
+      url: "https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine",
+      title: "Systemic Corruption Doesn't Give A Chance For Peace In Ukraine",
+      color: "c-pink",
+      dateAdded: new Date('2025-08-19').toISOString()
+    },
+    {
+      url: "https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
+      title: "'Holy Grail' Jordan-Bryant Sports Card Sells for Record $12.9M",
+      color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString()
+    },
+    {
+      url: "https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
+      title: "The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"",
+      color: "c-blue",
+      dateAdded: new Date('2025-08-17').toISOString()
+    }
+  ],
+  column4: [
+    {
+      url: "https://www.history.com/articles/brilliant-psyops-psychological-warfare",
+      title: "7 Brilliant Acts of Psychological Warfare in History",
+      color: "c-purple",
+      dateAdded: new Date('2025-08-24').toISOString()
+    },
+    {
+      url: "https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
+      title: "1910: The Year the Modern World Lost Its Mind",
+      color: "c-blue",
+      dateAdded: new Date('2025-08-23').toISOString()
+    },
+    {
+      url: "https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82",
+      title: "Twilight of the House of Lords",
+      color: "c-pink",
+      dateAdded: new Date('2025-08-22').toISOString()
+    },
+    {
+      url: "https://www.youtube.com/watch?v=x9cVcGQNxBw",
+      title: "They Found Giants In A Cave",
+      color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString()
+    },
+    {
+      url: "https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
+      title: "How Did Moscow Become Europe's Biggest City?",
+      color: "c-green",
+      dateAdded: new Date('2025-08-20').toISOString()
+    },
+    {
+      url: "https://x.com/Rainmaker1973/status/1959655344709173469",
+      title: "1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima",
+      color: "c-orange",
+      dateAdded: new Date('2025-08-19').toISOString()
+    },
+    {
+      url: "https://www.youtube.com/shorts/0Phz6wnq_GU",
+      title: "The Pyramid Power Plant Theory",
+      color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString()
+    },
+    {
+      url: "https://www.youtube.com/watch?v=F4M1MlBZyI0",
+      title: "Dave Smith: \"I Was A Militant Atheist\"",
+      color: "c-pink",
+      dateAdded: new Date('2025-08-17').toISOString()
+    }
+  ],
+  archived: []
+};
+
+class DayLugeManager {
+  constructor() {
+    this.data = this.loadData();
+    this.init();
+  }
+
+  loadData() {
+    try {
+      const stored = localStorage.getItem(CONFIG.storageKey);
+      return stored ? JSON.parse(stored) : INITIAL_DATA;
+    } catch (e) {
+      console.log('Using initial data');
+      return INITIAL_DATA;
+    }
+  }
+
+  saveData() {
+    try {
+      localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.data));
+    } catch (e) {
+      console.error('Could not save data');
+    }
+  }
+
+  init() {
+    this.render();
+    this.updateStats();
+  }
+
+  addLink(columnNum, linkData) {
+    const columnKey = `column${columnNum}`;
+    
+    // Add timestamp
+    linkData.dateAdded = new Date().toISOString();
+    
+    // Add to beginning (newest first)
+    this.data[columnKey].unshift(linkData);
+    
+    // Check limits and archive if needed
+    this.enforceColumnLimit(columnKey);
+    
+    this.saveData();
+    this.render();
+    this.updateStats();
+  }
+
+  enforceColumnLimit(columnKey) {
+    const column = this.data[columnKey];
+    
+    if (column.length > CONFIG.maxLinksPerColumn) {
+      // Move excess links to archive
+      const excess = column.splice(CONFIG.maxLinksPerColumn);
+      excess.forEach(link => {
+        link.archivedDate = new Date().toISOString();
+        link.originalColumn = columnKey;
+        this.data.archived.push(link);
+      });
+      
+      console.log(`Archived ${excess.length} links from ${columnKey}`);
+    }
+  }
+
+  render() {
+    const container = document.getElementById('mainContainer');
+    let html = '';
+
+    for (let i = 1; i <= 4; i++) {
+      const columnKey = `column${i}`;
+      const links = this.data[columnKey] || [];
+      
+      html += `<div class="column">`;
+      html += `<div class="column-header">Column ${i} (${links.length}/${CONFIG.maxLinksPerColumn})</div>`;
+      
+      links.forEach(link => {
+        html += `<div class="link-item">`;
+        html += `<a href="${link.url}" class="${link.color}" target="_blank">${link.title}</a>`;
+        html += `</div>`;
+      });
+      
+      html += `</div>`;
+    }
+    
+    container.innerHTML = html;
+  }
+
+  updateStats() {
+    const totalActive = this.data.column1.length + this.data.column2.length + 
+                       this.data.column3.length + this.data.column4.length;
+    const totalArchived = this.data.archived.length;
+    
+    document.getElementById('totalLinks').textContent = 
+      `Active: ${totalActive}/${CONFIG.totalMaxLinks} | Archived: ${totalArchived}`;
+    
+    // Update admin panel
+    const countsDiv = document.getElementById('linkCounts');
+    if (countsDiv) {
+      countsDiv.innerHTML = `
+        Col 1: ${this.data.column1.length}/${CONFIG.maxLinksPerColumn}<br>
+        Col 2: ${this.data.column2.length}/${CONFIG.maxLinksPerColumn}<br>
+        Col 3: ${this.data.column3.length}/${CONFIG.maxLinksPerColumn}<br>
+        Col 4: ${this.data.column4.length}/${CONFIG.maxLinksPerColumn}<br>
+        <strong>Total: ${totalActive}/${CONFIG.totalMaxLinks}</strong>
+      `;
+    }
+  }
+
+  // Admin functions
+  forceArchiveOld() {
+    let totalArchived = 0;
+    
+    ['column1', 'column2', 'column3', 'column4'].forEach(columnKey => {
+      const column = this.data[columnKey];
+      if (column.length > 10) { // Keep only 10 newest
+        const toArchive = column.splice(10);
+        toArchive.forEach(link => {
+          link.archivedDate = new Date().toISOString();
+          link.originalColumn = columnKey;
+          this.data.archived.push(link);
+        });
+        totalArchived += toArchive.length;
+      }
+    });
+    
+    this.saveData();
+    this.render();
+    this.updateStats();
+    
+    alert(`Archived ${totalArchived} older links`);
+  }
+
+  addSampleLink() {
+    const colors = ['c-red', 'c-orange', 'c-green', 'c-blue', 'c-indigo', 'c-violet', 'c-pink'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const randomColumn = Math.floor(Math.random() * 4) + 1;
+    
+    const sampleLink = {
+      url: 'https://example.com/sample-' + Date.now(),
+      title: `Sample Link Added ${new Date().toLocaleTimeString()}`,
+      color: randomColor
+    };
+    
+    this.addLink(randomColumn, sampleLink);
+  }
+
+  exportData() {
+    const dataStr = JSON.stringify(this.data, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'dayluge-data.json';
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  clearAll() {
+    if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+      this.data = {
+        column1: [], column2: [], column3: [], column4: [], archived: []
+      };
+      this.saveData();
+      this.render();
+      this.updateStats();
+    }
+  }
+}
+
+// Global functions for admin panel
+let dayLugeManager;
+
+function toggleAdmin() {
+  const panel = document.getElementById('adminControls');
+  panel.classList.toggle('show');
+}
+
+function addSampleLink() {
+  dayLugeManager.addSampleLink();
+}
+
+function forceArchive() {
+  dayLugeManager.forceArchiveOld();
+}
+
+function exportData() {
+  dayLugeManager.exportData();
+}
+
+function clearAll() {
+  dayLugeManager.clearAll();
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  dayLugeManager = new DayLugeManager();
+});
+</script>
+
 </body>
 </html>
