@@ -30,26 +30,87 @@
 
    body{
      font-family:'Courier New', monospace;
-     background-color:#ffffff;
+     background-color:#f0ede5;
      margin:0; padding:20px; line-height:1.4;
+     position: relative;
    }
+
+   /* Bolder newsprint texture */
+   body::before {
+     content: '';
+     position: fixed;
+     top: 0; left: 0; right: 0; bottom: 0;
+     background-image: 
+       radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 1px),
+       radial-gradient(circle at 4px 4px, rgba(0,0,0,0.04) 1px, transparent 1px),
+       radial-gradient(circle at 7px 7px, rgba(0,0,0,0.03) 1px, transparent 1px);
+     background-size: 6px 6px, 10px 10px, 14px 14px;
+     pointer-events: none;
+     z-index: -1;
+   }
+
    .header{ text-align:center; margin-bottom:30px; }
    .header h1{ font-size:36px; color:#000; margin:0; font-weight:bold; }
 
    .container{
      display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
      gap:25px; width:100%; margin:0; padding:0 20px; box-sizing:border-box;
+     position: relative;
    }
-   .column{ border:1px solid #ccc; padding:15px; background-color:#f9f9f9; }
+
+   /* Column dividers */
+   .container::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: calc(25% - 1px);
+     width: 1px;
+     background-color: #d0d0d0;
+     z-index: 1;
+   }
+   .container::after {
+     content: '';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: calc(50% - 1px);
+     width: 1px;
+     background-color: #d0d0d0;
+     z-index: 1;
+   }
+
+   /* Third column divider */
+   .container {
+     background-image: linear-gradient(to right, transparent calc(75% - 1px), #d0d0d0 calc(75% - 1px), #d0d0d0 calc(75%), transparent calc(75%));
+   }
+
+   .column{ 
+     padding:15px; 
+     background-color: transparent;
+     position: relative;
+     z-index: 2;
+   }
    .link-item{ margin-bottom:15px; font-size:18px; font-weight:bold; }
    .link-item a{ text-decoration:none; display:block; padding:2px 0; }
    .link-item a:hover{ text-decoration:underline; }
 
    @media (max-width:768px){
-     .container{ grid-template-columns:1fr 1fr; gap:10px; }
+     .container{ 
+       grid-template-columns:1fr 1fr; 
+       gap:10px;
+       background-image: linear-gradient(to right, transparent calc(50% - 1px), #d0d0d0 calc(50% - 1px), #d0d0d0 calc(50%), transparent calc(50%));
+     }
+     .container::before,
+     .container::after {
+       display: none;
+     }
    }
    @media (max-width:480px){
-     .container{ grid-template-columns:1fr; }
+     .container{ 
+       grid-template-columns:1fr;
+       background-image: none;
+     }
      .header h1{ font-size:24px; }
    }
  </style>
