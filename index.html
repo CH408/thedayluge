@@ -1,205 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The DayLuge</title>
-  <style>
-    :root{
-      --red:#cc0000;
-      --orange:#ff6600;
-      --green:#009900;
-      --lime-green:#32cd32;
-      --blue:#0066cc;
-      --light-blue:#00bfff;
-      --indigo:#4b0082;
-      --violet:#6600cc;
-      --pink:#ff3399;
-    }
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>The DayLuge</title>
+ <style>
+   :root{
+     --red:#cc0000;
+     --orange:#ff6600;
+     --green:#009900;
+     --lime-green:#32cd32;
+     --blue:#0066cc;
+     --light-blue:#00bfff;
+     --indigo:#4b0082;
+     --violet:#6600cc;
+     --pink:#ff3399;
+   }
 
-    /* Color menu utilities */
-    .c-red{color:var(--red)}
-    .c-orange{color:var(--orange)}
-    .c-green{color:var(--green)}
-    .c-lime-green{color:var(--lime-green)}
-    .c-blue{color:var(--blue)}
-    .c-light-blue{color:var(--light-blue)}
-    .c-indigo{color:var(--indigo)}
-    .c-violet{color:var(--violet)}
-    .c-pink{color:var(--pink)}
+   /* Color menu utilities */
+   .c-red{color:var(--red)}
+   .c-orange{color:var(--orange)}
+   .c-green{color:var(--green)}
+   .c-lime-green{color:var(--lime-green)}
+   .c-blue{color:var(--blue)}
+   .c-light-blue{color:var(--light-blue)}
+   .c-indigo{color:var(--indigo)}
+   .c-violet{color:var(--violet)}
+   .c-pink{color:var(--pink)}
 
-    body{
-      font-family:'Courier New', monospace;
-      background-color:#ffffff;
-      margin:0; padding:20px; line-height:1.4;
-    }
-    .header{ text-align:center; margin-bottom:30px; }
-    .header h1{ font-size:36px; color:#000; margin:0; font-weight:bold; }
+   body{
+     font-family:'Courier New', monospace;
+     background-color:#ffffff;
+     margin:0; padding:20px; line-height:1.4;
+   }
+   .header{ text-align:center; margin-bottom:30px; }
+   .header h1{ font-size:36px; color:#000; margin:0; font-weight:bold; }
 
-    .container{
-      display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
-      gap:25px; width:100%; margin:0; padding:0 20px; box-sizing:border-box;
-    }
-    .column{ border:1px solid #ccc; padding:15px; background-color:#f9f9f9; }
-    .link-item{ margin-bottom:15px; font-size:18px; font-weight:bold; }
-    .link-item a{ text-decoration:none; display:block; padding:2px 0; }
-    .link-item a:hover{ text-decoration:underline; }
+   .container{
+     display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
+     gap:25px; width:100%; margin:0; padding:0 20px; box-sizing:border-box;
+   }
+   .column{ border:1px solid #ccc; padding:15px; background-color:#f9f9f9; }
+   .link-item{ margin-bottom:15px; font-size:18px; font-weight:bold; }
+   .link-item a{ text-decoration:none; display:block; padding:2px 0; }
+   .link-item a:hover{ text-decoration:underline; }
 
-    @media (max-width:768px){
-      .container{ grid-template-columns:1fr 1fr; gap:10px; }
-    }
-    @media (max-width:480px){
-      .container{ grid-template-columns:1fr; }
-      .header h1{ font-size:24px; }
-    }
-  </style>
+   @media (max-width:768px){
+     .container{ grid-template-columns:1fr 1fr; gap:10px; }
+   }
+   @media (max-width:480px){
+     .container{ grid-template-columns:1fr; }
+     .header h1{ font-size:24px; }
+   }
+ </style>
 </head>
 <body>
-  <div class="header">
-    <h1>THE DAYLUGE</h1>
-  </div>
+ <div class="header">
+   <h1>THE DAYLUGE</h1>
+ </div>
 
-  <div class="container">
+ <div class="container">
 
-    <!-- =========================
-         ### COLUMN 1 START ###
-         ========================= -->
-    <div class="column">
-      <div class="link-item">
-        <a href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" class="c-red">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a>
-      </div>
-      <div class="link-item">
-        <a href="https://x.com/onechancefreedm/status/1959315977830903826" class="c-lime-green">Credit Card Delinquencies Surging</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-orange">Editorial: The State of Modern Politics</a>
-      </div>
-      <div class="link-item">
-        <a href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/?tpa=Y2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_source=newsletter&utm_medium=email&utm_term=https%3A%2F%2Fgeopoliticalfutures.com%2Fan-all-time-high-in-cocaine-production%2F%3Ftpa%3DY2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_content&utm_campaign=PAID%20-%20Daily%20Diges" class="c-blue">All-Time High in Cocaine Production</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-violet">New Museum Exhibition Opens in Paris</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-pink">The Atlantic: Deep Dive Into Climate Policy</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-indigo">Random Interesting Discovery</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-red">Supreme Court Ruling Expected Today</a>
-      </div>
-    </div>
-    <!-- =========================
-         ### COLUMN 1 END ###
-         ========================= -->
 
-    <!-- =========================
-         ### COLUMN 2 START ###
-         ========================= -->
-    <div class="column">
-      <div class="link-item">
-        <a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" class="c-orange">Going Full Bud Light</a>
-      </div>
-      <div class="link-item">
-        <a href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/?user_id=66c4bc5a5d78644b3a979610#google_vignette" class="c-lime-green">The Best Performing Fund in Modern History</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-red">Election Results Coming In</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-light-blue">Dog Learns to Surf in California</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-violet">Chef Opens Revolutionary Restaurant</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-pink">New Yorker: Investigation Into Tech Giants</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-indigo">Weird Science: Plants Can Count</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-lime-green">Cryptocurrency Crashes 20%</a>
-      </div>
-    </div>
-    <!-- =========================
-         ### COLUMN 2 END ###
-         ========================= -->
+<!-- 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴 -->
+<!--                                    COLUMN 1                                    -->
+<!-- 🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴 -->
 
-    <!-- =========================
-         ### COLUMN 3 START ###
-         ========================= -->
-    <div class="column">
-      <div class="link-item">
-        <a href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" class="c-light-blue">Six Tips from the Middle Ages on How to Beat the Summer Heat</a>
-      </div>
-      <div class="link-item">
-        <a href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" class="c-violet">Cost Of Attending An NFL Game Has Risen 40% In The Last 10 Years</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-red">Senate Votes on Healthcare Bill</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-orange">Opinion: Why Democracy is Failing</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-green">Oil Prices Drop 15% Overnight</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-pink">Harper's: The Future of Work</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-indigo">Scientists Discover New Species</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-blue">Baby Elephant Takes First Steps</a>
-      </div>
-    </div>
-    <!-- =========================
-         ### COLUMN 3 END ###
-         ========================= -->
 
-    <!-- =========================
-         ### COLUMN 4 START ###
-         ========================= -->
-    <div class="column">
-      <div class="link-item">
-        <a href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" class="c-pink">7 Brilliant Acts of Psychological Warfare in History</a>
-      </div>
-      <div class="link-item">
-        <a href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" class="c-blue">1910: The Year the Modern World Lost Its Mind</a>
-      </div>
-      <div class="link-item">
-        <a href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82
+   <div class="column">
+     <div class="link-item">
+       <a href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" class="c-red">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a>
+     </div>
+     <div class="link-item">
+       <a href="https://x.com/onechancefreedm/status/1959315977830903826" class="c-lime-green">Credit Card Delinquencies Surging</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-orange">Editorial: The State of Modern Politics</a>
+     </div>
+     <div class="link-item">
+       <a href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/?tpa=Y2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_source=newsletter&utm_medium=email&utm_term=https%3A%2F%2Fgeopoliticalfutures.com%2Fan-all-time-high-in-cocaine-production%2F%3Ftpa%3DY2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_content&utm_campaign=PAID%20-%20Daily%20Diges" class="c-blue">All-Time High in Cocaine Production</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-violet">New Museum Exhibition Opens in Paris</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-pink">The Atlantic: Deep Dive Into Climate Policy</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-indigo">Random Interesting Discovery</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-red">Supreme Court Ruling Expected Today</a>
+     </div>
+   </div>
+
+
+<!-- 🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠 -->
+<!--                                    COLUMN 2                                    -->
+<!-- 🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠🟠 -->
+
+
+   <div class="column">
+     <div class="link-item">
+       <a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" class="c-orange">Going Full Bud Light</a>
+     </div>
+     <div class="link-item">
+       <a href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/?user_id=66c4bc5a5d78644b3a979610#google_vignette" class="c-lime-green">The Best Performing Fund in Modern History</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-red">Election Results Coming In</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-light-blue">Dog Learns to Surf in California</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-violet">Chef Opens Revolutionary Restaurant</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-pink">New Yorker: Investigation Into Tech Giants</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-indigo">Weird Science: Plants Can Count</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-lime-green">Cryptocurrency Crashes 20%</a>
+     </div>
+   </div>
+
+
+<!-- 🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢 -->
+<!--                                    COLUMN 3                                    -->
+<!-- 🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢🟢 -->
+
+
+   <div class="column">
+     <div class="link-item">
+       <a href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" class="c-light-blue">Six Tips from the Middle Ages on How to Beat the Summer Heat</a>
+     </div>
+     <div class="link-item">
+       <a href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" class="c-violet">Cost Of Attending An NFL Game Has Risen 40% In The Last 10 Years</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-red">Senate Votes on Healthcare Bill</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-orange">Opinion: Why Democracy is Failing</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-green">Oil Prices Drop 15% Overnight</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-pink">Harper's: The Future of Work</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-indigo">Scientists Discover New Species</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-blue">Baby Elephant Takes First Steps</a>
+     </div>
+   </div>
+
+
+<!-- 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵 -->
+<!--                                    COLUMN 4                                    -->
+<!-- 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵 -->
+
+
+   <div class="column">
+     <div class="link-item">
+       <a href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" class="c-pink">7 Brilliant Acts of Psychological Warfare in History</a>
+     </div>
+     <div class="link-item">
+       <a href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" class="c-blue">1910: The Year the Modern World Lost Its Mind</a>
+     </div>
+     <div class="link-item">
+       <a href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82
 " class="c-pink">Twilight of the House of Lords</a>
-      </div>
-      <div class="link-item">
-        <a href="https://www.youtube.com/watch?v=x9cVcGQNxBw" class="c-blue">They Found Giants In A Cave</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-blue">Penguin Colony Adopts Lost Chick</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-pink">Atlantic Monthly: Rise of Authoritarianism</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-indigo">Ancient Artifact Found in Egypt</a>
-      </div>
-      <div class="link-item">
-        <a href="https://example.com" class="c-pink">Wine Country Festival This Weekend</a>
-      </div>
-    </div>
-    <!-- =========================
-         ### COLUMN 4 END ###
-         ========================= -->
+     </div>
+     <div class="link-item">
+       <a href="https://www.youtube.com/watch?v=x9cVcGQNxBw" class="c-blue">They Found Giants In A Cave</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-blue">Penguin Colony Adopts Lost Chick</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-pink">Atlantic Monthly: Rise of Authoritarianism</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-indigo">Ancient Artifact Found in Egypt</a>
+     </div>
+     <div class="link-item">
+       <a href="https://example.com" class="c-pink">Wine Country Festival This Weekend</a>
+     </div>
+   </div>
 
-  </div>
+ </div>
 
-  <p style="text-align:center; margin-top:40px; font-size:12px;">
-    <a href="/admin" style="color:#666; text-decoration:none;">Admin</a>
-  </p>
+ <p style="text-align:center; margin-top:40px; font-size:12px;">
+   <a href="/admin" style="color:#666; text-decoration:none;">Admin</a>
+ </p>
 
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+ <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </body>
 </html>
