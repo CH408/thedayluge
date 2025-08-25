@@ -252,6 +252,7 @@ const curatedInitial = [
   {t:"Gold International Reserves are SURGING", u:"https://x.com/GlobalMktObserv/status/1959654438332670436", c:"c-green"}
 ];
 
+/* Load or seed store */
 function loadStore(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -259,6 +260,10 @@ function loadStore(){
     const parsed = JSON.parse(raw);
     if(!Array.isArray(parsed.active)) parsed.active = [];
     if(!Array.isArray(parsed.archive)) parsed.archive = [];
+    /* If active got wiped somehow, reseed with curated links */
+    if(parsed.active.length === 0){
+      parsed.active = [...curatedInitial];
+    }
     return parsed;
   }catch(e){
     return {active:[...curatedInitial], archive:[]};
@@ -281,8 +286,8 @@ function renderGrid(){
   gridEl.innerHTML = store.active.map(item => `
     <div class="link"><a class="${item.c || 'c-black'}" href="${item.u}" target="_blank" rel="noopener">${escapeHTML(item.t)}</a></div>
   `).join('');
-  statActive.textContent = `Active: ${store.active.length}/${MAX_ACTIVE}`;
-  statArchive.textContent = `Archived: ${store.archive.length}`;
+  if(statActive) statActive.textContent = `Active: ${store.active.length}/${MAX_ACTIVE}`;
+  if(statArchive) statArchive.textContent = `Archived: ${store.archive.length}`;
 }
 function renderArchive(){
   if(!store.archive.length){
@@ -293,4 +298,127 @@ function renderArchive(){
   `).join('');
 }
 
-/* ====== ADMIN PANEL (PIN
+/* ====== ADMIN PANEL (PIN-locked) ====== */
+const adminPanel = document.getElementById('adminPanel');
+const addBtn = document.getElementById('addBtn');
+const exportBtn = document.getElementById('exportBtn');
+const clearBtn = document.getElementById('clearBtn');
+const lockBtn = document.getElementById('lockBtn');
+const titleTap = document.getElementById('titleTap');
+
+const inputTitle = document.getElementById('linkTitle');
+const inputUrl = document.getElementById('linkUrl');
+const inputColor = document.getElementById('linkColor');
+
+function isAdminUnlocked(){
+  return localStorage.getItem(ADMIN_FLAG_KEY) === '1';
+}
+function lockAdmin(){
+  localStorage.removeItem(ADMIN_FLAG_KEY);
+  adminPanel.classList.remove('show');
+  adminPanel.setAttribute('aria-hidden','true');
+  alert('Admin is now locked on this device.');
+}
+function unlockAdminWithPin(){
+  const pin = prompt('Enter admin PIN:');
+  if(pin === null) return false;
+  if(pin === ADMIN_PIN){
+    localStorage.setItem(ADMIN_FLAG_KEY,'1');
+    return true;
+  } else {
+    alert('Incorrect PIN');
+    return false;
+  }
+}
+function toggleAdmin(){
+  if(!isAdminUnlocked()){
+    if(!unlockAdminWithPin()) return;
+  }
+  const show = !adminPanel.classList.contains('show');
+  adminPanel.classList.toggle('show', show);
+  adminPanel.setAttribute('aria-hidden', show ? 'false' : 'true');
+}
+
+/* Triple-tap to toggle (with PIN) */
+let tapCount = 0, tapTimer = null;
+titleTap.addEventListener('click', () => {
+  tapCount++;
+  if(!tapTimer){
+    tapTimer = setTimeout(() => { tapCount = 0; tapTimer = null; }, 600);
+  }
+  if(tapCount >= 3){
+    toggleAdmin();
+    tapCount = 0; clearTimeout(tapTimer); tapTimer = null;
+  }
+});
+
+/* ?admin=1 tries to open admin (will still require PIN if locked) */
+if (new URLSearchParams(location.search).get('admin') === '1'){
+  toggleAdmin();
+}
+
+/* Admin actions */
+if(addBtn){
+  addBtn.addEventListener('click', () => {
+    if(!isAdminUnlocked()){ alert('Admin locked. Triple-tap title and enter PIN.'); return; }
+    const t = inputTitle.value.trim();
+    const u = inputUrl.value.trim();
+    const c = inputColor.value || 'c-black';
+    if(!t || !u){ alert('Please enter both Title and URL.'); return; }
+    if(!/^https?:\/\//i.test(u)){ alert('URL should start with http:// or https://'); return; }
+
+    store.active.unshift({t,u,c,ts:Date.now()});
+    while(store.active.length > MAX_ACTIVE){
+      const moved = store.active.pop();
+      store.archive.unshift(moved);
+    }
+    saveStore();
+    inputTitle.value = ''; inputUrl.value = '';
+    renderGrid();
+  });
+}
+if(exportBtn){
+  exportBtn.addEventListener('click', () => {
+    if(!isAdminUnlocked()){ alert('Admin locked. Triple-tap title and enter PIN.'); return; }
+    const blob = new Blob([JSON.stringify(store, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'dayluge-export.json'; a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+if(clearBtn){
+  clearBtn.addEventListener('click', () => {
+    if(!isAdminUnlocked()){ alert('Admin locked. Triple-tap title and enter PIN.'); return; }
+    if(confirm('Clear ALL active links and archive? This cannot be undone.')){
+      store = {active:[...curatedInitial], archive:[]};  /* reseed with curated so page isn’t blank */
+      saveStore(); renderGrid();
+    }
+  });
+}
+if(lockBtn){
+  lockBtn.addEventListener('click', () => {
+    if(!isAdminUnlocked()){ alert('Admin is already locked.'); return; }
+    lockAdmin();
+  });
+}
+
+/* Archive modal */
+document.getElementById('openArchive').addEventListener('click', (e) => {
+  e.preventDefault(); renderArchive();
+  archiveModal.classList.add('show'); archiveModal.setAttribute('aria-hidden','false');
+});
+document.getElementById('closeArchive').addEventListener('click', () => {
+  archiveModal.classList.remove('show'); archiveModal.setAttribute('aria-hidden','true');
+});
+archiveModal.addEventListener('click', (e) => {
+  if (e.target === archiveModal){
+    archiveModal.classList.remove('show');
+    archiveModal.setAttribute('aria-hidden','true');
+  }
+});
+
+/* Init render */
+renderGrid();
+</script>
+</body>
+</html>
