@@ -5,12 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THE DAYLUGE</title>
 
-<!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    /* Link colors (blue/green are darker as requested) */
     --red:#cc0000; 
     --orange:#ff6600; 
     --green:#005f00;      /* darker green */
@@ -21,9 +19,8 @@
     --violet:#6600cc; 
     --pink:#ff3399;
 
-    /* Newspaper look */
     --ink:#111; 
-    --paper:#e8e6e3;      /* even light gray paper */
+    --paper:#e8e6e3;      /* even gray “newspaper” */
     --rule:#bfbfbf;
     --maxw:1400px;
 
@@ -31,7 +28,6 @@
     --panel-border:#cfcfcf;
   }
 
-  /* Color classes for links */
   .c-red{color:var(--red)}
   .c-orange{color:var(--orange)}
   .c-green{color:var(--green)}
@@ -47,15 +43,14 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html, body {height:100%}
 
-  /* Old newspaper background */
   body{
     font-family:'Special Elite', monospace;
     color:var(--ink);
     line-height:1.5;
     background:
-      radial-gradient(circle at center, rgba(0,0,0,0.07) 0%, transparent 65%), /* subtle vignette */
-      repeating-linear-gradient(90deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px), /* vertical fibers */
-      repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px),  /* horizontal fibers */
+      radial-gradient(circle at center, rgba(0,0,0,0.07) 0%, transparent 65%),
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px),
       var(--paper);
     background-blend-mode:multiply;
     padding:20px;
@@ -65,8 +60,7 @@
     content:"";
     position:fixed; inset:0; pointer-events:none;
     background:repeating-radial-gradient(circle, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px);
-    mix-blend-mode:multiply;
-    opacity:.25;
+    mix-blend-mode:multiply; opacity:.25;
   }
 
   .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
@@ -82,46 +76,33 @@
   nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px;}
   nav a:hover{text-decoration:underline;}
 
-  /* 3-column layout on desktop */
   .grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px 18px;
-    margin-top:10px;
+    gap:10px 18px; margin-top:10px;
   }
   @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:600px){.grid{grid-template-columns:1fr;} h1{font-size:28px;}}
 
   .link a{
-    display:block;
-    font-size:20px;
-    font-weight:bold;
-    text-decoration:none;
-    word-break:break-word;
-    padding:2px 0;
+    display:block; font-size:20px; font-weight:bold;
+    text-decoration:none; word-break:break-word; padding:2px 0;
     text-shadow:0 .2px 0 rgba(0,0,0,0.35);
   }
   .link a:hover{text-decoration:underline;}
 
-  /* Hidden Admin Panel */
   .admin-panel{
-    display:none;
-    position:sticky; top:8px;
-    background:var(--panel-bg);
-    border:1px solid var(--panel-border);
-    border-radius:8px;
-    padding:12px;
-    margin:10px auto 16px;
-    max-width:720px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    display:none; position:sticky; top:8px;
+    background:var(--panel-bg); border:1px solid var(--panel-border);
+    border-radius:8px; padding:12px; margin:10px auto 16px;
+    max-width:720px; box-shadow:0 6px 18px rgba(0,0,0,0.08);
   }
   .admin-panel.show{display:block;}
   .admin-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
   .admin-panel input[type="text"],
   .admin-panel input[type="url"],
   .admin-panel select{
-    flex:1 1 200px;
-    font-family:inherit; font-size:16px;
+    flex:1 1 200px; font-family:inherit; font-size:16px;
     padding:8px 10px; border:1px solid #d4d4d4; border-radius:6px; background:#fff;
   }
   .admin-panel button{
@@ -129,20 +110,18 @@
     padding:8px 12px; border:1px solid #c8c8c8; border-radius:6px; background:#f5f5f5;
   }
   .admin-panel button:hover{background:#eee;}
-  .admin-help{font-size:12px; color:#666; margin-top:6px;}
   .admin-stats{font-size:12px; color:#444; margin-top:6px;}
+  .admin-help{font-size:12px; color:#666; margin-top:6px;}
 
   .archive-link{font-size:12px; color:#333; text-decoration:underline; cursor:pointer; margin-left:8px;}
   .archive-modal{
-    display:none; position:fixed; inset:0; z-index:50;
-    background:rgba(0,0,0,0.4);
+    display:none; position:fixed; inset:0; z-index:50; background:rgba(0,0,0,0.4);
     align-items:center; justify-content:center; padding:16px;
   }
   .archive-modal.show{display:flex;}
   .archive-card{
     background:#fff; border-radius:10px; padding:16px; max-width:800px; width:100%;
-    max-height:80vh; overflow:auto; border:1px solid #ddd;
-    box-shadow:0 10px 26px rgba(0,0,0,0.25);
+    max-height:80vh; overflow:auto; border:1px solid #ddd; box-shadow:0 10px 26px rgba(0,0,0,0.25);
   }
   .archive-card h3{margin-bottom:10px;}
   .archive-list .link a{font-size:16px;}
@@ -158,7 +137,6 @@
   </header>
   <nav><a href="/">Home</a> <a id="openArchive" class="archive-link">Archive</a></nav>
 
-  <!-- Admin Panel (hidden by default) -->
   <div id="adminPanel" class="admin-panel" aria-hidden="true">
     <strong>Add a new link</strong>
     <div class="admin-row">
@@ -187,11 +165,10 @@
       <span id="statActive"></span> • <span id="statArchive"></span>
     </div>
     <div class="admin-help">
-      New links are inserted at the top. When the list exceeds 48, the oldest item is automatically moved to the Archive.
+      New links appear at the top. Oldest auto-moves to Archive after 48.
     </div>
   </div>
 
-  <!-- Archive Modal -->
   <div id="archiveModal" class="archive-modal" aria-hidden="true">
     <div class="archive-card">
       <span id="closeArchive" class="archive-close">✕</span>
@@ -200,14 +177,15 @@
     </div>
   </div>
 
-  <!-- Grid of links -->
   <div id="grid" class="grid"></div>
 </div>
 
 <script>
-/* =========================
-   DATA / STORAGE
-   ========================= */
+/* ====== CONFIG: Set your secret PIN here ====== */
+const ADMIN_PIN = "2468";   // <---- CHANGE THIS!
+const ADMIN_FLAG_KEY = "dayluge_admin_ok_v1";
+
+/* ====== DATA / STORAGE ====== */
 const STORAGE_KEY = 'dayluge_store_v1';
 const MAX_ACTIVE  = 48;
 
@@ -256,12 +234,8 @@ const curatedInitial = [
 function loadStore(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw){
-      // seed with curated links as active, empty archive
-      return {active:[...curatedInitial], archive:[]};
-    }
+    if(!raw) return {active:[...curatedInitial], archive:[]};
     const parsed = JSON.parse(raw);
-    // Safety checks
     if(!Array.isArray(parsed.active)) parsed.active = [];
     if(!Array.isArray(parsed.archive)) parsed.archive = [];
     return parsed;
@@ -273,45 +247,32 @@ function saveStore(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); 
 
 let store = loadStore();
 
-/* =========================
-   RENDERING
-   ========================= */
+/* ====== RENDERING ====== */
 const gridEl = document.getElementById('grid');
 const statActive = document.getElementById('statActive');
 const statArchive = document.getElementById('statArchive');
 const archiveModal = document.getElementById('archiveModal');
 const archiveList = document.getElementById('archiveList');
 
+function escapeHTML(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
 function renderGrid(){
-  // Render active in current order: left->right->down naturally by CSS grid
   gridEl.innerHTML = store.active.map(item => `
     <div class="link"><a class="${item.c || 'c-black'}" href="${item.u}" target="_blank" rel="noopener">${escapeHTML(item.t)}</a></div>
   `).join('');
-  updateStats();
+  statActive.textContent = `Active: ${store.active.length}/${MAX_ACTIVE}`;
+  statArchive.textContent = `Archived: ${store.archive.length}`;
 }
-
 function renderArchive(){
   if(!store.archive.length){
-    archiveList.innerHTML = '<p style="color:#555;">Archive is empty.</p>';
-    return;
+    archiveList.innerHTML = '<p style="color:#555;">Archive is empty.</p>'; return;
   }
   archiveList.innerHTML = store.archive.map(item => `
     <div class="link"><a class="${item.c || 'c-black'}" href="${item.u}" target="_blank" rel="noopener">${escapeHTML(item.t)}</a></div>
   `).join('');
 }
 
-function updateStats(){
-  statActive.textContent = `Active: ${store.active.length}/${MAX_ACTIVE}`;
-  statArchive.textContent = `Archived: ${store.archive.length}`;
-}
-
-function escapeHTML(s){
-  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-}
-
-/* =========================
-   ADMIN PANEL / INTERACTION
-   ========================= */
+/* ====== ADMIN PANEL (PIN-locked) ====== */
 const adminPanel = document.getElementById('adminPanel');
 const addBtn = document.getElementById('addBtn');
 const exportBtn = document.getElementById('exportBtn');
@@ -322,12 +283,35 @@ const inputTitle = document.getElementById('linkTitle');
 const inputUrl = document.getElementById('linkUrl');
 const inputColor = document.getElementById('linkColor');
 
-function showAdmin(show){
-  adminPanel.classList.toggle('show', !!show);
+function isAdminUnlocked(){
+  return localStorage.getItem(ADMIN_FLAG_KEY) === '1';
+}
+function lockAdmin(){
+  localStorage.removeItem(ADMIN_FLAG_KEY);
+  adminPanel.classList.remove('show');
+  adminPanel.setAttribute('aria-hidden','true');
+}
+function unlockAdminWithPin(){
+  const pin = prompt('Enter admin PIN:');
+  if(pin === null) return false;
+  if(pin === ADMIN_PIN){
+    localStorage.setItem(ADMIN_FLAG_KEY,'1');
+    return true;
+  } else {
+    alert('Incorrect PIN');
+    return false;
+  }
+}
+function toggleAdmin(){
+  if(!isAdminUnlocked()){
+    if(!unlockAdminWithPin()) return;
+  }
+  const show = !adminPanel.classList.contains('show');
+  adminPanel.classList.toggle('show', show);
   adminPanel.setAttribute('aria-hidden', show ? 'false' : 'true');
 }
 
-// Triple-tap detector for header
+/* Triple-tap to toggle (with PIN) */
 let tapCount = 0, tapTimer = null;
 titleTap.addEventListener('click', () => {
   tapCount++;
@@ -335,78 +319,64 @@ titleTap.addEventListener('click', () => {
     tapTimer = setTimeout(() => { tapCount = 0; tapTimer = null; }, 600);
   }
   if(tapCount >= 3){
-    showAdmin(!adminPanel.classList.contains('show'));
+    toggleAdmin();
     tapCount = 0; clearTimeout(tapTimer); tapTimer = null;
   }
 });
 
-// Also allow ?admin=1 to open
+/* ?admin=1 tries to open admin (will still require PIN if locked) */
 if (new URLSearchParams(location.search).get('admin') === '1'){
-  showAdmin(true);
+  toggleAdmin();
 }
 
+/* Admin actions */
 addBtn.addEventListener('click', () => {
+  if(!isAdminUnlocked()){ alert('Admin locked. Triple-tap title and enter PIN.'); return; }
   const t = inputTitle.value.trim();
   const u = inputUrl.value.trim();
   const c = inputColor.value || 'c-black';
+  if(!t || !u){ alert('Please enter both Title and URL.'); return; }
+  if(!/^https?:\/\//i.test(u)){ alert('URL should start with http:// or https://'); return; }
 
-  if(!t || !u){
-    alert('Please enter both Title and URL.');
-    return;
-  }
-  // very light URL sanity
-  if(!/^https?:\/\//i.test(u)){
-    alert('URL should start with http:// or https://');
-    return;
-  }
-  // Insert at top
-  store.active.unshift({t,u,c,ts: Date.now()});
-
-  // Auto-archive if > MAX_ACTIVE
+  store.active.unshift({t,u,c,ts:Date.now()});
   while(store.active.length > MAX_ACTIVE){
     const moved = store.active.pop();
-    store.archive.unshift(moved); // newest archived first
+    store.archive.unshift(moved);
   }
-
   saveStore();
-  // Clear inputs for next
-  inputTitle.value = '';
-  inputUrl.value = '';
+  inputTitle.value = ''; inputUrl.value = '';
   renderGrid();
 });
 
 exportBtn.addEventListener('click', () => {
+  if(!isAdminUnlocked()){ alert('Admin locked. Triple-tap title and enter PIN.'); return; }
   const blob = new Blob([JSON.stringify(store, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'dayluge-export.json';
-  a.click();
+  const a = document.createElement('a'); a.href = url; a.download = 'dayluge-export.json'; a.click();
   URL.revokeObjectURL(url);
 });
 
 clearBtn.addEventListener('click', () => {
+  if(!isAdminUnlocked()){ alert('Admin locked. Triple-tap title and enter PIN.'); return; }
   if(confirm('Clear ALL active links and archive? This cannot be undone.')){
-    store = {active:[], archive:[]};
-    saveStore();
-    renderGrid();
+    store = {active:[], archive:[]}; saveStore(); renderGrid();
   }
 });
 
-/* Archive modal controls */
+/* Archive modal */
 document.getElementById('openArchive').addEventListener('click', (e) => {
-  e.preventDefault();
-  renderArchive();
-  archiveModal.classList.add('show');
-  archiveModal.setAttribute('aria-hidden','false');
+  e.preventDefault(); renderArchive();
+  const modal = document.getElementById('archiveModal');
+  modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
 });
 document.getElementById('closeArchive').addEventListener('click', () => {
-  archiveModal.classList.remove('show');
-  archiveModal.setAttribute('aria-hidden','true');
+  const modal = document.getElementById('archiveModal');
+  modal.classList.remove('show'); modal.setAttribute('aria-hidden','true');
 });
-archiveModal.addEventListener('click', (e) => {
-  if (e.target === archiveModal){
-    archiveModal.classList.remove('show');
-    archiveModal.setAttribute('aria-hidden','true');
+document.getElementById('archiveModal').addEventListener('click', (e) => {
+  if (e.target.id === 'archiveModal'){
+    e.currentTarget.classList.remove('show');
+    e.currentTarget.setAttribute('aria-hidden','true');
   }
 });
 
