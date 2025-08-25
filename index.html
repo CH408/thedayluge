@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THE DAYLUGE</title>
 
+<!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
   :root{
+    /* Link color palette (darker blue/green) */
     --red:#cc0000; 
     --orange:#ff6600; 
     --green:#005f00;      /* darker green */
@@ -19,8 +21,9 @@
     --violet:#6600cc; 
     --pink:#ff3399;
 
+    /* Neutral newspaper tones */
     --ink:#111; 
-    --paper:#e8e6e3;      /* even gray “newspaper” */
+    --paper:#e8e6e3;      /* light grayish paper */
     --rule:#bfbfbf;
     --maxw:1400px;
 
@@ -28,6 +31,7 @@
     --panel-border:#cfcfcf;
   }
 
+  /* Color classes for links */
   .c-red{color:var(--red)}
   .c-orange{color:var(--orange)}
   .c-green{color:var(--green)}
@@ -43,24 +47,27 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html, body {height:100%}
 
+  /* Old newspaper background */
   body{
     font-family:'Special Elite', monospace;
     color:var(--ink);
     line-height:1.5;
     background:
-      radial-gradient(circle at center, rgba(0,0,0,0.07) 0%, transparent 65%),
-      repeating-linear-gradient(90deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px),
-      repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px),
+      radial-gradient(circle at center, rgba(0,0,0,0.07) 0%, transparent 65%), /* subtle vignette */
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px), /* vertical fibers */
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px),  /* horizontal fibers */
       var(--paper);
     background-blend-mode:multiply;
     padding:20px;
     position:relative;
   }
+  /* Fine grain texture overlay */
   body::before{
     content:"";
     position:fixed; inset:0; pointer-events:none;
     background:repeating-radial-gradient(circle, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px);
-    mix-blend-mode:multiply; opacity:.25;
+    mix-blend-mode:multiply;
+    opacity:.25;
   }
 
   .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
@@ -76,43 +83,58 @@
   nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px;}
   nav a:hover{text-decoration:underline;}
 
+  /* 3-column layout on desktop; 2 on tablet; 1 on mobile */
   .grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:10px 18px; margin-top:10px;
+    gap:10px 18px;
+    margin-top:10px;
   }
   @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:600px){.grid{grid-template-columns:1fr;} h1{font-size:28px;}}
 
   .link a{
-    display:block; font-size:20px; font-weight:bold;
-    text-decoration:none; word-break:break-word; padding:2px 0;
+    display:block;
+    font-size:20px;
+    font-weight:bold;
+    text-decoration:none;
+    word-break:break-word;
+    padding:2px 0;
     text-shadow:0 .2px 0 rgba(0,0,0,0.35);
   }
   .link a:hover{text-decoration:underline;}
 
+  /* Admin Panel */
   .admin-panel{
-    display:none; position:sticky; top:8px;
-    background:var(--panel-bg); border:1px solid var(--panel-border);
-    border-radius:8px; padding:12px; margin:10px auto 16px;
-    max-width:720px; box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    display:none;
+    position:sticky; top:8px;
+    background:var(--panel-bg);
+    border:1px solid var(--panel-border);
+    border-radius:8px;
+    padding:12px;
+    margin:10px auto 16px;
+    max-width:720px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
   }
   .admin-panel.show{display:block;}
   .admin-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
   .admin-panel input[type="text"],
   .admin-panel input[type="url"],
   .admin-panel select{
-    flex:1 1 200px; font-family:inherit; font-size:16px;
+    flex:1 1 200px;
+    font-family:inherit; font-size:16px;
     padding:8px 10px; border:1px solid #d4d4d4; border-radius:6px; background:#fff;
   }
   .admin-panel button{
     font-family:inherit; font-weight:bold; font-size:15px;
     padding:8px 12px; border:1px solid #c8c8c8; border-radius:6px; background:#f5f5f5;
+    cursor:pointer;
   }
   .admin-panel button:hover{background:#eee;}
   .admin-stats{font-size:12px; color:#444; margin-top:6px;}
   .admin-help{font-size:12px; color:#666; margin-top:6px;}
 
+  /* Archive modal */
   .archive-link{font-size:12px; color:#333; text-decoration:underline; cursor:pointer; margin-left:8px;}
   .archive-modal{
     display:none; position:fixed; inset:0; z-index:50; background:rgba(0,0,0,0.4);
@@ -137,6 +159,7 @@
   </header>
   <nav><a href="/">Home</a> <a id="openArchive" class="archive-link">Archive</a></nav>
 
+  <!-- Admin Panel (PIN-protected) -->
   <div id="adminPanel" class="admin-panel" aria-hidden="true">
     <strong>Add a new link</strong>
     <div class="admin-row">
@@ -160,6 +183,7 @@
     <div class="admin-row">
       <button id="exportBtn">Export All (JSON)</button>
       <button id="clearBtn" title="Clears everything (including archive)">Clear All</button>
+      <button id="lockBtn" title="Re-lock admin on this device">Lock Admin</button>
     </div>
     <div class="admin-stats">
       <span id="statActive"></span> • <span id="statArchive"></span>
@@ -169,6 +193,7 @@
     </div>
   </div>
 
+  <!-- Archive Modal -->
   <div id="archiveModal" class="archive-modal" aria-hidden="true">
     <div class="archive-card">
       <span id="closeArchive" class="archive-close">✕</span>
@@ -177,18 +202,20 @@
     </div>
   </div>
 
+  <!-- Grid of links -->
   <div id="grid" class="grid"></div>
 </div>
 
 <script>
-/* ====== CONFIG: Set your secret PIN here ====== */
-const ADMIN_PIN = "2468";   // <---- CHANGE THIS!
+/* ====== CONFIG: Admin PIN & flags ====== */
+const ADMIN_PIN = "2134";              // <<< YOUR PIN
 const ADMIN_FLAG_KEY = "dayluge_admin_ok_v1";
 
 /* ====== DATA / STORAGE ====== */
 const STORAGE_KEY = 'dayluge_store_v1';
 const MAX_ACTIVE  = 48;
 
+/* Your curated starting links */
 const curatedInitial = [
   {t:"The Best Performing Fund in Modern History", u:"https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/", c:"c-green"},
   {t:"The Pyramid Power Plant Theory", u:"https://www.youtube.com/shorts/0Phz6wnq_GU", c:"c-indigo"},
@@ -277,6 +304,7 @@ const adminPanel = document.getElementById('adminPanel');
 const addBtn = document.getElementById('addBtn');
 const exportBtn = document.getElementById('exportBtn');
 const clearBtn = document.getElementById('clearBtn');
+const lockBtn = document.getElementById('lockBtn');
 const titleTap = document.getElementById('titleTap');
 
 const inputTitle = document.getElementById('linkTitle');
@@ -290,6 +318,7 @@ function lockAdmin(){
   localStorage.removeItem(ADMIN_FLAG_KEY);
   adminPanel.classList.remove('show');
   adminPanel.setAttribute('aria-hidden','true');
+  alert('Admin is now locked on this device.');
 }
 function unlockAdminWithPin(){
   const pin = prompt('Enter admin PIN:');
@@ -363,20 +392,23 @@ clearBtn.addEventListener('click', () => {
   }
 });
 
+lockBtn.addEventListener('click', () => {
+  if(!isAdminUnlocked()){ alert('Admin is already locked.'); return; }
+  lockAdmin();
+});
+
 /* Archive modal */
 document.getElementById('openArchive').addEventListener('click', (e) => {
   e.preventDefault(); renderArchive();
-  const modal = document.getElementById('archiveModal');
-  modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
+  archiveModal.classList.add('show'); archiveModal.setAttribute('aria-hidden','false');
 });
 document.getElementById('closeArchive').addEventListener('click', () => {
-  const modal = document.getElementById('archiveModal');
-  modal.classList.remove('show'); modal.setAttribute('aria-hidden','true');
+  archiveModal.classList.remove('show'); archiveModal.setAttribute('aria-hidden','true');
 });
-document.getElementById('archiveModal').addEventListener('click', (e) => {
-  if (e.target.id === 'archiveModal'){
-    e.currentTarget.classList.remove('show');
-    e.currentTarget.setAttribute('aria-hidden','true');
+archiveModal.addEventListener('click', (e) => {
+  if (e.target === archiveModal){
+    archiveModal.classList.remove('show');
+    archiveModal.setAttribute('aria-hidden','true');
   }
 });
 
