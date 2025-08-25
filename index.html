@@ -116,7 +116,331 @@
 
     <div class="grid">
       <!-- curated links -->
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE DAYLUGE</title>
+
+<!-- Vintage typewriter font -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --red:#cc0000; --orange:#ff6600; --green:#009900; --lime:#32cd32;
+    --blue:#3388cc; --light-blue:#000080; --indigo:#4b0082; --violet:#6600cc; --pink:#ff3399;
+
+    --ink:#101010;
+    --paper:#f2ede2;  /* base parchment tone */
+    --maxw:1400px;
+  }
+
+  /* Color classes */
+  .c-red{color:var(--red)}
+  .c-orange{color:var(--orange)}
+  .c-green{color:var(--green)}
+  .c-lime-green{color:var(--lime)}
+  .c-blue{color:var(--blue)}
+  .c-light-blue{color:var(--light-blue)}
+  .c-indigo{color:var(--indigo)}
+  .c-violet{color:var(--violet)}
+  .c-pink{color:var(--pink)}
+  .c-purple{color:var(--violet)}
+  .c-black{color:#000}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html, body {height:100%}
+
+  /* Weathered paper background */
+  body{
+    font-family:'Special Elite', monospace;
+    color:var(--ink);
+    line-height:1.5;
+    background:
+      /* Dark corner vignette */
+      radial-gradient(circle at 0% 0%, rgba(0,0,0,0.08), transparent 65%),
+      radial-gradient(circle at 100% 0%, rgba(0,0,0,0.08), transparent 65%),
+      radial-gradient(circle at 0% 100%, rgba(0,0,0,0.08), transparent 65%),
+      radial-gradient(circle at 100% 100%, rgba(0,0,0,0.08), transparent 65%),
+      /* Big blotches */
+      radial-gradient(400px 300px at 20% 30%, rgba(0,0,0,0.07), transparent 70%),
+      radial-gradient(350px 250px at 75% 40%, rgba(0,0,0,0.06), transparent 70%),
+      radial-gradient(300px 300px at 40% 80%, rgba(0,0,0,0.05), transparent 70%),
+      /* Random mid-size stains */
+      radial-gradient(150px 120px at 60% 20%, rgba(0,0,0,0.05), transparent 75%),
+      radial-gradient(120px 100px at 30% 60%, rgba(0,0,0,0.04), transparent 75%),
+      /* Paper fibers & noise grid */
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px),
+      var(--paper);
+    background-blend-mode:multiply, multiply, multiply, multiply,
+                           multiply, multiply, multiply, multiply,
+                           multiply, normal, normal, normal;
+    padding:20px;
+    position:relative;
+  }
+
+  /* Extra fine specks and burn effect */
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none;
+    background:
+      repeating-radial-gradient(circle, rgba(0,0,0,0.035) 0 1px, transparent 1px 4px),
+      radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.06), transparent 80%),
+      radial-gradient(circle at 30% 10%, rgba(0,0,0,0.05), transparent 70%);
+    mix-blend-mode:multiply;
+    opacity:.5;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto;}
+
+  header{text-align:center; margin-bottom:10px}
+  h1{text-transform:uppercase; letter-spacing:.5px; font-size:36px}
+
+  nav{
+    text-align:center; margin:8px 0 18px; padding-bottom:10px;
+    border-bottom:1px dashed #bfb9ab;
+  }
+  nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px}
+  nav a:hover{text-decoration:underline}
+
+  /* 3-column grid desktop; 2 for tablet; 1 for mobile */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px 18px;
+    margin-top:10px;
+  }
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr} h1{font-size:28px}}
+
+  .link a{
+    display:block;
+    font-size:20px;
+    font-weight:bold;
+    text-decoration:none;
+    word-break:break-word;
+    padding:2px 0;
+    text-shadow:0 .15px 0 rgba(0,0,0,0.25);
+  }
+  .link a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><h1>THE DAYLUGE</h1></header>
+    <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
+
+    <div class="grid">
+      <!-- curated links -->
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE DAYLUGE</title>
+
+<!-- Vintage typewriter font -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --red:#cc0000; --orange:#ff6600; --green:#009900; --lime:#32cd32;
+    --blue:#3388cc; --light-blue:#000080; --indigo:#4b0082; --violet:#6600cc; --pink:#ff3399;
+
+    --ink:#101010;
+    --paper:#f2ede2;  /* base parchment tone */
+    --maxw:1400px;
+  }
+
+  /* Color classes */
+  .c-red{color:var(--red)}
+  .c-orange{color:var(--orange)}
+  .c-green{color:var(--green)}
+  .c-lime-green{color:var(--lime)}
+  .c-blue{color:var(--blue)}
+  .c-light-blue{color:var(--light-blue)}
+  .c-indigo{color:var(--indigo)}
+  .c-violet{color:var(--violet)}
+  .c-pink{color:var(--pink)}
+  .c-purple{color:var(--violet)}
+  .c-black{color:#000}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html, body {height:100%}
+
+  /* Weathered paper background */
+  body{
+    font-family:'Special Elite', monospace;
+    color:var(--ink);
+    line-height:1.5;
+    background:
+      /* Dark corner vignette */
+      radial-gradient(circle at 0% 0%, rgba(0,0,0,0.08), transparent 65%),
+      radial-gradient(circle at 100% 0%, rgba(0,0,0,0.08), transparent 65%),
+      radial-gradient(circle at 0% 100%, rgba(0,0,0,0.08), transparent 65%),
+      radial-gradient(circle at 100% 100%, rgba(0,0,0,0.08), transparent 65%),
+      /* Big blotches */
+      radial-gradient(400px 300px at 20% 30%, rgba(0,0,0,0.07), transparent 70%),
+      radial-gradient(350px 250px at 75% 40%, rgba(0,0,0,0.06), transparent 70%),
+      radial-gradient(300px 300px at 40% 80%, rgba(0,0,0,0.05), transparent 70%),
+      /* Random mid-size stains */
+      radial-gradient(150px 120px at 60% 20%, rgba(0,0,0,0.05), transparent 75%),
+      radial-gradient(120px 100px at 30% 60%, rgba(0,0,0,0.04), transparent 75%),
+      /* Paper fibers & noise grid */
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px),
+      var(--paper);
+    background-blend-mode:multiply, multiply, multiply, multiply,
+                           multiply, multiply, multiply, multiply,
+                           multiply, normal, normal, normal;
+    padding:20px;
+    position:relative;
+  }
+
+  /* Extra fine specks and burn effect */
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none;
+    background:
+      repeating-radial-gradient(circle, rgba(0,0,0,0.035) 0 1px, transparent 1px 4px),
+      radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.06), transparent 80%),
+      radial-gradient(circle at 30% 10%, rgba(0,0,0,0.05), transparent 70%);
+    mix-blend-mode:multiply;
+    opacity:.5;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto;}
+
+  header{text-align:center; margin-bottom:10px}
+  h1{text-transform:uppercase; letter-spacing:.5px; font-size:36px}
+
+  nav{
+    text-align:center; margin:8px 0 18px; padding-bottom:10px;
+    border-bottom:1px dashed #bfb9ab;
+  }
+  nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px}
+  nav a:hover{text-decoration:underline}
+
+  /* 3-column grid desktop; 2 for tablet; 1 for mobile */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px 18px;
+    margin-top:10px;
+  }
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr} h1{font-size:28px}}
+
+  .link a{
+    display:block;
+    font-size:20px;
+    font-weight:bold;
+    text-decoration:none;
+    word-break:break-word;
+    padding:2px 0;
+    text-shadow:0 .15px 0 rgba(0,0,0,0.25);
+  }
+  .link a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header><h1>THE DAYLUGE</h1></header>
+    <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
+
+    <div class="grid">
+      <!-- curated links -->
+       <div class="link"><a class="c-orange"  href="https://x.com/rothmus/status/1959747866110427428?s=42" target="_blank" rel="noopener">Men Would Rather Be Lost At Sea Than Go To Therapy</a></div>
       <div class="link"><a class="c-green"  href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank" rel="noopener">The Best Performing Fund in Modern History</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank" rel="noopener">The Pyramid Power Plant Theory</a></div>
+      <div class="link"><a class="c-red"    href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank" rel="noopener">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
+
+      <div class="link"><a class="c-blue"   href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" target="_blank" rel="noopener">The Vegas Shooting Is A Layered Onion of "Max Conspiracy"</a></div>
+      <div class="link"><a class="c-violet" href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" target="_blank" rel="noopener">The "Classic Part" Little Boy Has the Right Attitude</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" target="_blank" rel="noopener">This Teacher Loves His Students</a></div>
+
+      <div class="link"><a class="c-orange" href="https://example.com" target="_blank" rel="noopener">Diddy's Arrest Is Part of Something Bigger</a></div>
+      <div class="link"><a class="c-pink"   href="https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine" target="_blank" rel="noopener">Systemic Corruption Doesn't Give A Chance For Peace In Ukraine</a></div>
+      <div class="link"><a class="c-blue"   href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" target="_blank" rel="noopener">1910: The Year the Modern World Lost Its Mind</a></div>
+
+      <div class="link"><a class="c-green"  href="https://x.com/KobeissiLetter/status/1959636646925852986" target="_blank" rel="noopener">US Federal Debt Surging At +$21 Billion Per Day</a></div>
+      <div class="link"><a class="c-red"    href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" target="_blank" rel="noopener">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a></div>
+      <div class="link"><a class="c-blue"   href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/" target="_blank" rel="noopener">All-Time High in Cocaine Production</a></div>
+
+      <div class="link"><a class="c-orange" href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" target="_blank" rel="noopener">Going Full Bud Light</a></div>
+      <div class="link"><a class="c-pink"   href="https://x.com/engineers_feed/status/1959628877711487203" target="_blank" rel="noopener">Gates, Ballmer and Pals Rocking Out HARD to Windows 95</a></div>
+      <div class="link"><a class="c-orange" href="https://x.com/Rainmaker1973/status/1959655344709173469" target="_blank" rel="noopener">1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima</a></div>
+
+      <div class="link"><a class="c-indigo" href="https://www.youtube.com/watch?v=x9cVcGQNxBw" target="_blank" rel="noopener">They Found Giants In A Cave</a></div>
+      <div class="link"><a class="c-orange" href="https://collider.com/best-war-shows-must-watch-ranked/" target="_blank" rel="noopener">10 Must-Watch War Shows, Ranked</a></div>
+      <div class="link"><a class="c-green"  href="https://x.com/onechancefreedm/status/1959315977830903826" target="_blank" rel="noopener">Credit Card Delinquencies Surging</a></div>
+
+      <div class="link"><a class="c-red"    href="https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile" target="_blank" rel="noopener">Israel Targets Yemen's Capital With Massive Strikes</a></div>
+      <div class="link"><a class="c-blue"   href="https://tv.garden/" target="_blank" rel="noopener">Watch Global Local TV Online</a></div>
+      <div class="link"><a class="c-purple" href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" target="_blank" rel="noopener">7 Brilliant Acts of Psychological Warfare in History</a></div>
+
+      <div class="link"><a class="c-pink"   href="https://www.youtube.com/watch?v=F4M1MlBZyI0" target="_blank" rel="noopener">Dave Smith: "I Was A Militant Atheist"</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/" target="_blank" rel="noopener">The Smithsonian Has Jumped the Shark</a></div>
+      <div class="link"><a class="c-green"  href="https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird" target="_blank" rel="noopener">How Did Moscow Become Europe's Biggest City?</a></div>
+
+      <div class="link"><a class="c-violet" href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" target="_blank" rel="noopener">Cost of Attending an NFL Game +40% in 10 Years</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m" target="_blank" rel="noopener">'Holy Grail' Jordan–Bryant Card Sells for $12.9M</a></div>
+      <div class="link"><a class="c-orange" href="https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025" target="_blank" rel="noopener">Which New NFL Coaches Are in the Best Position to Win?</a></div>
+
+      <div class="link"><a class="c-blue"   href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" target="_blank" rel="noopener">Six Tips from the Middle Ages on How to Beat the Summer Heat</a></div>
+      <div class="link"><a class="c-pink"   href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82" target="_blank" rel="noopener">Twilight of the House of Lords</a></div>
+      <div class="link"><a class="c-green"  href="https://x.com/GlobalMktObserv/status/1959654438332670436" target="_blank" rel="noopener">Gold International Reserves are SURGING</a></div>
+    </div>
+  </div>
+</body>
+</html>
+
+      <div class="link"><a class="c-green"  href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank" rel="noopener">The Best Performing Fund in Modern History</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank" rel="noopener">The Pyramid Power Plant Theory</a></div>
+      <div class="link"><a class="c-red"    href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank" rel="noopener">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
+
+      <div class="link"><a class="c-blue"   href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" target="_blank" rel="noopener">The Vegas Shooting Is A Layered Onion of "Max Conspiracy"</a></div>
+      <div class="link"><a class="c-violet" href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" target="_blank" rel="noopener">The "Classic Part" Little Boy Has the Right Attitude</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" target="_blank" rel="noopener">This Teacher Loves His Students</a></div>
+
+      <div class="link"><a class="c-orange" href="https://example.com" target="_blank" rel="noopener">Diddy's Arrest Is Part of Something Bigger</a></div>
+      <div class="link"><a class="c-pink"   href="https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine" target="_blank" rel="noopener">Systemic Corruption Doesn't Give A Chance For Peace In Ukraine</a></div>
+      <div class="link"><a class="c-blue"   href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" target="_blank" rel="noopener">1910: The Year the Modern World Lost Its Mind</a></div>
+
+      <div class="link"><a class="c-green"  href="https://x.com/KobeissiLetter/status/1959636646925852986" target="_blank" rel="noopener">US Federal Debt Surging At +$21 Billion Per Day</a></div>
+      <div class="link"><a class="c-red"    href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" target="_blank" rel="noopener">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a></div>
+      <div class="link"><a class="c-blue"   href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/" target="_blank" rel="noopener">All-Time High in Cocaine Production</a></div>
+
+      <div class="link"><a class="c-orange" href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" target="_blank" rel="noopener">Going Full Bud Light</a></div>
+      <div class="link"><a class="c-pink"   href="https://x.com/engineers_feed/status/1959628877711487203" target="_blank" rel="noopener">Gates, Ballmer and Pals Rocking Out HARD to Windows 95</a></div>
+      <div class="link"><a class="c-orange" href="https://x.com/Rainmaker1973/status/1959655344709173469" target="_blank" rel="noopener">1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima</a></div>
+
+      <div class="link"><a class="c-indigo" href="https://www.youtube.com/watch?v=x9cVcGQNxBw" target="_blank" rel="noopener">They Found Giants In A Cave</a></div>
+      <div class="link"><a class="c-orange" href="https://collider.com/best-war-shows-must-watch-ranked/" target="_blank" rel="noopener">10 Must-Watch War Shows, Ranked</a></div>
+      <div class="link"><a class="c-green"  href="https://x.com/onechancefreedm/status/1959315977830903826" target="_blank" rel="noopener">Credit Card Delinquencies Surging</a></div>
+
+      <div class="link"><a class="c-red"    href="https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile" target="_blank" rel="noopener">Israel Targets Yemen's Capital With Massive Strikes</a></div>
+      <div class="link"><a class="c-blue"   href="https://tv.garden/" target="_blank" rel="noopener">Watch Global Local TV Online</a></div>
+      <div class="link"><a class="c-purple" href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" target="_blank" rel="noopener">7 Brilliant Acts of Psychological Warfare in History</a></div>
+
+      <div class="link"><a class="c-pink"   href="https://www.youtube.com/watch?v=F4M1MlBZyI0" target="_blank" rel="noopener">Dave Smith: "I Was A Militant Atheist"</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/" target="_blank" rel="noopener">The Smithsonian Has Jumped the Shark</a></div>
+      <div class="link"><a class="c-green"  href="https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird" target="_blank" rel="noopener">How Did Moscow Become Europe's Biggest City?</a></div>
+
+      <div class="link"><a class="c-violet" href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" target="_blank" rel="noopener">Cost of Attending an NFL Game +40% in 10 Years</a></div>
+      <div class="link"><a class="c-indigo" href="https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m" target="_blank" rel="noopener">'Holy Grail' Jordan–Bryant Card Sells for $12.9M</a></div>
+      <div class="link"><a class="c-orange" href="https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025" target="_blank" rel="noopener">Which New NFL Coaches Are in the Best Position to Win?</a></div>
+
+      <div class="link"><a class="c-blue"   href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" target="_blank" rel="noopener">Six Tips from the Middle Ages on How to Beat the Summer Heat</a></div>
+      <div class="link"><a class="c-pink"   href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82" target="_blank" rel="noopener">Twilight of the House of Lords</a></div>
+      <div class="link"><a class="c-green"  href="https://x.com/GlobalMktObserv/status/1959654438332670436" target="_blank" rel="noopener">Gold International Reserves are SURGING</a></div>
+    </div>
+  </div>
+</body>
+</html>
+<div class="link"><a class="c-green"  href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank" rel="noopener">The Best Performing Fund in Modern History</a></div>
       <div class="link"><a class="c-indigo" href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank" rel="noopener">The Pyramid Power Plant Theory</a></div>
       <div class="link"><a class="c-red"    href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank" rel="noopener">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
 
