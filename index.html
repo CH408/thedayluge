@@ -10,22 +10,25 @@
 
 <style>
   :root{
-    /* Color palette */
+    /* Link colors (blue/green are darker as requested) */
     --red:#cc0000; 
     --orange:#ff6600; 
-    --green:#005f00;     /* darker green */
+    --green:#005f00;      /* darker green */
     --lime:#228b22; 
-    --blue:#003366;      /* darker blue */
+    --blue:#003366;       /* darker blue */
     --light-blue:#000066; 
     --indigo:#4b0082; 
     --violet:#6600cc; 
     --pink:#ff3399;
 
-    /* Neutral newspaper tones */
+    /* Newspaper look */
     --ink:#111; 
-    --paper:#e8e6e3;     /* light grayish paper */
+    --paper:#e8e6e3;      /* even light gray paper */
     --rule:#bfbfbf;
     --maxw:1400px;
+
+    --panel-bg:#ffffffee;
+    --panel-border:#cfcfcf;
   }
 
   /* Color classes for links */
@@ -58,13 +61,10 @@
     padding:20px;
     position:relative;
   }
-
-  /* Fine grain texture overlay */
   body::before{
     content:"";
     position:fixed; inset:0; pointer-events:none;
-    background:
-      repeating-radial-gradient(circle, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px);
+    background:repeating-radial-gradient(circle, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px);
     mix-blend-mode:multiply;
     opacity:.25;
   }
@@ -72,7 +72,8 @@
   .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
 
   header{text-align:center; margin-bottom:10px;}
-  h1{text-transform:uppercase; letter-spacing:.5px; font-size:36px;}
+  h1{text-transform:uppercase; letter-spacing:.5px; font-size:36px; cursor:pointer;}
+  h1 small{display:block; font-size:11px; color:#666; letter-spacing:0; margin-top:4px;}
 
   nav{
     text-align:center; margin:8px 0 18px; padding-bottom:10px;
@@ -101,56 +102,316 @@
     text-shadow:0 .2px 0 rgba(0,0,0,0.35);
   }
   .link a:hover{text-decoration:underline;}
+
+  /* Hidden Admin Panel */
+  .admin-panel{
+    display:none;
+    position:sticky; top:8px;
+    background:var(--panel-bg);
+    border:1px solid var(--panel-border);
+    border-radius:8px;
+    padding:12px;
+    margin:10px auto 16px;
+    max-width:720px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  }
+  .admin-panel.show{display:block;}
+  .admin-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .admin-panel input[type="text"],
+  .admin-panel input[type="url"],
+  .admin-panel select{
+    flex:1 1 200px;
+    font-family:inherit; font-size:16px;
+    padding:8px 10px; border:1px solid #d4d4d4; border-radius:6px; background:#fff;
+  }
+  .admin-panel button{
+    font-family:inherit; font-weight:bold; font-size:15px;
+    padding:8px 12px; border:1px solid #c8c8c8; border-radius:6px; background:#f5f5f5;
+  }
+  .admin-panel button:hover{background:#eee;}
+  .admin-help{font-size:12px; color:#666; margin-top:6px;}
+  .admin-stats{font-size:12px; color:#444; margin-top:6px;}
+
+  .archive-link{font-size:12px; color:#333; text-decoration:underline; cursor:pointer; margin-left:8px;}
+  .archive-modal{
+    display:none; position:fixed; inset:0; z-index:50;
+    background:rgba(0,0,0,0.4);
+    align-items:center; justify-content:center; padding:16px;
+  }
+  .archive-modal.show{display:flex;}
+  .archive-card{
+    background:#fff; border-radius:10px; padding:16px; max-width:800px; width:100%;
+    max-height:80vh; overflow:auto; border:1px solid #ddd;
+    box-shadow:0 10px 26px rgba(0,0,0,0.25);
+  }
+  .archive-card h3{margin-bottom:10px;}
+  .archive-list .link a{font-size:16px;}
+  .archive-close{float:right; cursor:pointer; font-weight:bold;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header><h1>THE DAYLUGE</h1></header>
-  <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
+  <header>
+    <h1 id="titleTap">THE DAYLUGE
+      <small>(tap title 3× to toggle admin)</small>
+    </h1>
+  </header>
+  <nav><a href="/">Home</a> <a id="openArchive" class="archive-link">Archive</a></nav>
 
-  <div class="grid">
-    <!-- Curated links -->
-    <div class="link"><a class="c-green"  href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank" rel="noopener">The Best Performing Fund in Modern History</a></div>
-    <div class="link"><a class="c-pink"   href="https://x.com/mastronomers/status/1959621002314264675?s=42" target="_blank" rel="noopener">Say Hello to a Never-Before-Seen Quantum State Called a “Quantum Liquid Crystal.”</a></div>
-    <div class="link"><a class="c-indigo" href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank" rel="noopener">The Pyramid Power Plant Theory</a></div>
-    <div class="link"><a class="c-red"    href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank" rel="noopener">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
-
-    <div class="link"><a class="c-blue"   href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" target="_blank" rel="noopener">The Vegas Shooting Is A Layered Onion of "Max Conspiracy"</a></div>
-    <div class="link"><a class="c-violet" href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" target="_blank" rel="noopener">The "Classic Part" Little Boy Has the Right Attitude</a></div>
-    <div class="link"><a class="c-indigo" href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" target="_blank" rel="noopener">This Teacher Loves His Students</a></div>
-
-    <div class="link"><a class="c-orange" href="https://example.com" target="_blank" rel="noopener">Diddy's Arrest Is Part of Something Bigger</a></div>
-    <div class="link"><a class="c-pink"   href="https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine" target="_blank" rel="noopener">Systemic Corruption Doesn't Give A Chance For Peace In Ukraine</a></div>
-    <div class="link"><a class="c-blue"   href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" target="_blank" rel="noopener">1910: The Year the Modern World Lost Its Mind</a></div>
-
-    <div class="link"><a class="c-green"  href="https://x.com/KobeissiLetter/status/1959636646925852986" target="_blank" rel="noopener">US Federal Debt Surging At +$21 Billion Per Day</a></div>
-    <div class="link"><a class="c-red"    href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" target="_blank" rel="noopener">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a></div>
-    <div class="link"><a class="c-blue"   href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/" target="_blank" rel="noopener">All-Time High in Cocaine Production</a></div>
-
-    <div class="link"><a class="c-orange" href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" target="_blank" rel="noopener">Going Full Bud Light</a></div>
-    <div class="link"><a class="c-pink"   href="https://x.com/engineers_feed/status/1959628877711487203" target="_blank" rel="noopener">Gates, Ballmer and Pals Rocking Out HARD to Windows 95</a></div>
-    <div class="link"><a class="c-orange" href="https://x.com/Rainmaker1973/status/1959655344709173469" target="_blank" rel="noopener">1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima</a></div>
-
-    <div class="link"><a class="c-indigo" href="https://www.youtube.com/watch?v=x9cVcGQNxBw" target="_blank" rel="noopener">They Found Giants In A Cave</a></div>
-    <div class="link"><a class="c-orange" href="https://collider.com/best-war-shows-must-watch-ranked/" target="_blank" rel="noopener">10 Must-Watch War Shows, Ranked</a></div>
-    <div class="link"><a class="c-green"  href="https://x.com/onechancefreedm/status/1959315977830903826" target="_blank" rel="noopener">Credit Card Delinquencies Surging</a></div>
-
-    <div class="link"><a class="c-red"    href="https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile" target="_blank" rel="noopener">Israel Targets Yemen's Capital With Massive Strikes</a></div>
-    <div class="link"><a class="c-blue"   href="https://tv.garden/" target="_blank" rel="noopener">Watch Global Local TV Online</a></div>
-    <div class="link"><a class="c-purple" href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" target="_blank" rel="noopener">7 Brilliant Acts of Psychological Warfare in History</a></div>
-
-    <div class="link"><a class="c-pink"   href="https://www.youtube.com/watch?v=F4M1MlBZyI0" target="_blank" rel="noopener">Dave Smith: "I Was A Militant Atheist"</a></div>
-    <div class="link"><a class="c-indigo" href="https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/" target="_blank" rel="noopener">The Smithsonian Has Jumped the Shark</a></div>
-    <div class="link"><a class="c-green"  href="https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird" target="_blank" rel="noopener">How Did Moscow Become Europe's Biggest City?</a></div>
-
-    <div class="link"><a class="c-violet" href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" target="_blank" rel="noopener">Cost of Attending an NFL Game +40% in 10 Years</a></div>
-    <div class="link"><a class="c-indigo" href="https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m" target="_blank" rel="noopener">'Holy Grail' Jordan–Bryant Card Sells for $12.9M</a></div>
-    <div class="link"><a class="c-orange" href="https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025" target="_blank" rel="noopener">Which New NFL Coaches Are in the Best Position to Win?</a></div>
-
-    <div class="link"><a class="c-blue"   href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" target="_blank" rel="noopener">Six Tips from the Middle Ages on How to Beat the Summer Heat</a></div>
-    <div class="link"><a class="c-pink"   href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82" target="_blank" rel="noopener">Twilight of the House of Lords</a></div>
-    <div class="link"><a class="c-green"  href="https://x.com/GlobalMktObserv/status/1959654438332670436" target="_blank" rel="noopener">Gold International Reserves are SURGING</a></div>
+  <!-- Admin Panel (hidden by default) -->
+  <div id="adminPanel" class="admin-panel" aria-hidden="true">
+    <strong>Add a new link</strong>
+    <div class="admin-row">
+      <input id="linkTitle" type="text" placeholder="Link title" autocomplete="off" />
+      <input id="linkUrl"   type="url"  placeholder="https://example.com" inputmode="url" />
+      <select id="linkColor">
+        <option value="c-blue">Blue</option>
+        <option value="c-green">Green</option>
+        <option value="c-red">Red</option>
+        <option value="c-orange">Orange</option>
+        <option value="c-pink">Pink</option>
+        <option value="c-indigo">Indigo</option>
+        <option value="c-violet">Violet</option>
+        <option value="c-light-blue">Light Blue</option>
+        <option value="c-lime-green">Lime Green</option>
+        <option value="c-black">Black</option>
+        <option value="c-purple">Purple</option>
+      </select>
+      <button id="addBtn">+ Add Link</button>
+    </div>
+    <div class="admin-row">
+      <button id="exportBtn">Export All (JSON)</button>
+      <button id="clearBtn" title="Clears everything (including archive)">Clear All</button>
+    </div>
+    <div class="admin-stats">
+      <span id="statActive"></span> • <span id="statArchive"></span>
+    </div>
+    <div class="admin-help">
+      New links are inserted at the top. When the list exceeds 48, the oldest item is automatically moved to the Archive.
+    </div>
   </div>
+
+  <!-- Archive Modal -->
+  <div id="archiveModal" class="archive-modal" aria-hidden="true">
+    <div class="archive-card">
+      <span id="closeArchive" class="archive-close">✕</span>
+      <h3>Archive</h3>
+      <div id="archiveList" class="archive-list"></div>
+    </div>
+  </div>
+
+  <!-- Grid of links -->
+  <div id="grid" class="grid"></div>
 </div>
+
+<script>
+/* =========================
+   DATA / STORAGE
+   ========================= */
+const STORAGE_KEY = 'dayluge_store_v1';
+const MAX_ACTIVE  = 48;
+
+const curatedInitial = [
+  {t:"The Best Performing Fund in Modern History", u:"https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/", c:"c-green"},
+  {t:"The Pyramid Power Plant Theory", u:"https://www.youtube.com/shorts/0Phz6wnq_GU", c:"c-indigo"},
+  {t:"\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters", u:"https://www.history.com/articles/kryptos-cia-sculpture-mystery-code", c:"c-red"},
+
+  {t:"The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"", u:"https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j", c:"c-blue"},
+  {t:"The \"Classic Part\" Little Boy Has the Right Attitude", u:"https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D", c:"c-violet"},
+  {t:"This Teacher Loves His Students", u:"https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D", c:"c-indigo"},
+
+  {t:"Diddy's Arrest Is Part of Something Bigger", u:"https://example.com", c:"c-orange"},
+  {t:"Systemic Corruption Doesn't Give A Chance For Peace In Ukraine", u:"https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine", c:"c-pink"},
+  {t:"1910: The Year the Modern World Lost Its Mind", u:"https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost", c:"c-blue"},
+
+  {t:"US Federal Debt Surging At +$21 Billion Per Day", u:"https://x.com/KobeissiLetter/status/1959636646925852986", c:"c-green"},
+  {t:"Ghislaine Maxwell: Trump 'Was Never Inappropriate'", u:"https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj", c:"c-red"},
+  {t:"All-Time High in Cocaine Production", u:"https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/", c:"c-blue"},
+
+  {t:"Going Full Bud Light", u:"https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/", c:"c-orange"},
+  {t:"Gates, Ballmer and Pals Rocking Out HARD to Windows 95", u:"https://x.com/engineers_feed/status/1959628877711487203", c:"c-pink"},
+  {t:"1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima", u:"https://x.com/Rainmaker1973/status/1959655344709173469", c:"c-orange"},
+
+  {t:"They Found Giants In A Cave", u:"https://www.youtube.com/watch?v=x9cVcGQNxBw", c:"c-indigo"},
+  {t:"10 Must-Watch War Shows, Ranked", u:"https://collider.com/best-war-shows-must-watch-ranked/", c:"c-orange"},
+  {t:"Credit Card Delinquencies Surging", u:"https://x.com/onechancefreedm/status/1959315977830903826", c:"c-green"},
+
+  {t:"Israel Targets Yemen's Capital With Massive Strikes", u:"https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile", c:"c-red"},
+  {t:"Watch Global Local TV Online", u:"https://tv.garden/", c:"c-blue"},
+  {t:"7 Brilliant Acts of Psychological Warfare in History", u:"https://www.history.com/articles/brilliant-psyops-psychological-warfare", c:"c-purple"},
+
+  {t:"Dave Smith: \"I Was A Militant Atheist\"", u:"https://www.youtube.com/watch?v=F4M1MlBZyI0", c:"c-pink"},
+  {t:"The Smithsonian Has Jumped the Shark", u:"https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/", c:"c-indigo"},
+  {t:"How Did Moscow Become Europe's Biggest City?", u:"https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird", c:"c-green"},
+
+  {t:"Cost of Attending an NFL Game +40% in 10 Years", u:"https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years", c:"c-violet"},
+  {t:"'Holy Grail' Jordan–Bryant Card Sells for $12.9M", u:"https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m", c:"c-indigo"},
+  {t:"Which New NFL Coaches Are in the Best Position to Win?", u:"https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025", c:"c-orange"},
+
+  {t:"Six Tips from the Middle Ages on How to Beat the Summer Heat", u:"https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290", c:"c-blue"},
+  {t:"Twilight of the House of Lords", u:"https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82", c:"c-pink"},
+  {t:"Gold International Reserves are SURGING", u:"https://x.com/GlobalMktObserv/status/1959654438332670436", c:"c-green"}
+];
+
+function loadStore(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw){
+      // seed with curated links as active, empty archive
+      return {active:[...curatedInitial], archive:[]};
+    }
+    const parsed = JSON.parse(raw);
+    // Safety checks
+    if(!Array.isArray(parsed.active)) parsed.active = [];
+    if(!Array.isArray(parsed.archive)) parsed.archive = [];
+    return parsed;
+  }catch(e){
+    return {active:[...curatedInitial], archive:[]};
+  }
+}
+function saveStore(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); }
+
+let store = loadStore();
+
+/* =========================
+   RENDERING
+   ========================= */
+const gridEl = document.getElementById('grid');
+const statActive = document.getElementById('statActive');
+const statArchive = document.getElementById('statArchive');
+const archiveModal = document.getElementById('archiveModal');
+const archiveList = document.getElementById('archiveList');
+
+function renderGrid(){
+  // Render active in current order: left->right->down naturally by CSS grid
+  gridEl.innerHTML = store.active.map(item => `
+    <div class="link"><a class="${item.c || 'c-black'}" href="${item.u}" target="_blank" rel="noopener">${escapeHTML(item.t)}</a></div>
+  `).join('');
+  updateStats();
+}
+
+function renderArchive(){
+  if(!store.archive.length){
+    archiveList.innerHTML = '<p style="color:#555;">Archive is empty.</p>';
+    return;
+  }
+  archiveList.innerHTML = store.archive.map(item => `
+    <div class="link"><a class="${item.c || 'c-black'}" href="${item.u}" target="_blank" rel="noopener">${escapeHTML(item.t)}</a></div>
+  `).join('');
+}
+
+function updateStats(){
+  statActive.textContent = `Active: ${store.active.length}/${MAX_ACTIVE}`;
+  statArchive.textContent = `Archived: ${store.archive.length}`;
+}
+
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+/* =========================
+   ADMIN PANEL / INTERACTION
+   ========================= */
+const adminPanel = document.getElementById('adminPanel');
+const addBtn = document.getElementById('addBtn');
+const exportBtn = document.getElementById('exportBtn');
+const clearBtn = document.getElementById('clearBtn');
+const titleTap = document.getElementById('titleTap');
+
+const inputTitle = document.getElementById('linkTitle');
+const inputUrl = document.getElementById('linkUrl');
+const inputColor = document.getElementById('linkColor');
+
+function showAdmin(show){
+  adminPanel.classList.toggle('show', !!show);
+  adminPanel.setAttribute('aria-hidden', show ? 'false' : 'true');
+}
+
+// Triple-tap detector for header
+let tapCount = 0, tapTimer = null;
+titleTap.addEventListener('click', () => {
+  tapCount++;
+  if(!tapTimer){
+    tapTimer = setTimeout(() => { tapCount = 0; tapTimer = null; }, 600);
+  }
+  if(tapCount >= 3){
+    showAdmin(!adminPanel.classList.contains('show'));
+    tapCount = 0; clearTimeout(tapTimer); tapTimer = null;
+  }
+});
+
+// Also allow ?admin=1 to open
+if (new URLSearchParams(location.search).get('admin') === '1'){
+  showAdmin(true);
+}
+
+addBtn.addEventListener('click', () => {
+  const t = inputTitle.value.trim();
+  const u = inputUrl.value.trim();
+  const c = inputColor.value || 'c-black';
+
+  if(!t || !u){
+    alert('Please enter both Title and URL.');
+    return;
+  }
+  // very light URL sanity
+  if(!/^https?:\/\//i.test(u)){
+    alert('URL should start with http:// or https://');
+    return;
+  }
+  // Insert at top
+  store.active.unshift({t,u,c,ts: Date.now()});
+
+  // Auto-archive if > MAX_ACTIVE
+  while(store.active.length > MAX_ACTIVE){
+    const moved = store.active.pop();
+    store.archive.unshift(moved); // newest archived first
+  }
+
+  saveStore();
+  // Clear inputs for next
+  inputTitle.value = '';
+  inputUrl.value = '';
+  renderGrid();
+});
+
+exportBtn.addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(store, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'dayluge-export.json';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+clearBtn.addEventListener('click', () => {
+  if(confirm('Clear ALL active links and archive? This cannot be undone.')){
+    store = {active:[], archive:[]};
+    saveStore();
+    renderGrid();
+  }
+});
+
+/* Archive modal controls */
+document.getElementById('openArchive').addEventListener('click', (e) => {
+  e.preventDefault();
+  renderArchive();
+  archiveModal.classList.add('show');
+  archiveModal.setAttribute('aria-hidden','false');
+});
+document.getElementById('closeArchive').addEventListener('click', () => {
+  archiveModal.classList.remove('show');
+  archiveModal.setAttribute('aria-hidden','true');
+});
+archiveModal.addEventListener('click', (e) => {
+  if (e.target === archiveModal){
+    archiveModal.classList.remove('show');
+    archiveModal.setAttribute('aria-hidden','true');
+  }
+});
+
+/* Init */
+renderGrid();
+</script>
 </body>
 </html>
