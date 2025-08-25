@@ -1,518 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <title>The DayLuge</title>
- <style>
-   :root{
-     --red:#cc0000;
-     --orange:#ff6600;
-     --green:#009900;
-     --lime-green:#32cd32;
-     --blue:#3388cc;
-     --light-blue:#000080;
-     --indigo:#4b0082;
-     --violet:#6600cc;
-     --pink:#ff3399;
-   }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The DayLuge — Keep Every Link + Import if Needed</title>
+<style>
+  :root{
+    --red:#cc0000; --orange:#ff6600; --green:#009900; --lime:#32cd32;
+    --blue:#3388cc; --light-blue:#000080; --indigo:#4b0082; --violet:#6600cc; --pink:#ff3399;
+    --ink:#111827; --muted:#6b7280; --bg:#f3f4f6; --paper:#fff; --rule:#e5e7eb;
+    --maxw:1400px;
+  }
 
-   /* Color utilities */
-   .c-red{color:var(--red)}
-   .c-orange{color:var(--orange)}
-   .c-green{color:var(--green)}
-   .c-lime-green{color:var(--lime-green)}
-   .c-blue{color:var(--blue)}
-   .c-light-blue{color:var(--light-blue)}
-   .c-indigo{color:var(--indigo)}
-   .c-violet{color:var(--violet)}
-   .c-pink{color:var(--pink)}
-   .c-purple{color:var(--violet)}
+  /* Color classes */
+  .c-red{color:var(--red)} .c-orange{color:var(--orange)} .c-green{color:var(--green)}
+  .c-lime-green{color:var(--lime)} .c-blue{color:var(--blue)} .c-light-blue{color:var(--light-blue)}
+  .c-indigo{color:var(--indigo)} .c-violet{color:var(--violet)} .c-pink{color:var(--pink)}
+  .c-purple{color:var(--violet)} .c-black{color:#000}
 
-   body{
-     font-family:'Courier New', monospace;
-     background-color:#e0e0e0;
-     margin:0; padding:20px; line-height:1.4;
-     position: relative;
-   }
+  *{box-sizing:border-box}
+  body{margin:0; font-family:"Courier New",monospace; background:var(--bg); color:var(--ink)}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:20px}
+  header{text-align:center; margin-bottom:16px}
+  h1{margin:0; font-size:32px; letter-spacing:1px}
+  nav{text-align:center; margin-bottom:20px; border-bottom:1px solid var(--rule); padding-bottom:12px}
+  nav a{margin:0 12px; text-decoration:none; font-weight:bold; color:#333}
+  nav a:hover{text-decoration:underline}
 
-   /* Newsprint texture */
-   body::before {
-     content: '';
-     position: fixed;
-     inset: 0;
-     background-image:
-       radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 1px),
-       radial-gradient(circle at 4px 4px, rgba(0,0,0,0.04) 1px, transparent 1px),
-       radial-gradient(circle at 7px 7px, rgba(0,0,0,0.03) 1px, transparent 1px);
-     background-size: 6px 6px, 10px 10px, 14px 14px;
-     pointer-events: none;
-     z-index: -1;
-   }
+  .bar{
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; justify-content:space-between; align-items:center;
+  }
+  .bar .left, .bar .right{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
+  input[type="text"], select, textarea{
+    border:1px solid var(--rule); border-radius:6px; padding:8px 10px; font-size:14px; background:#fff;
+  }
+  textarea{ width:100%; min-height:120px; font-family:monospace }
 
-   .header{ text-align:center; margin-bottom:30px; }
-   .header h1{ font-size:36px; color:#000; margin:0; font-weight:bold; }
+  button{
+    border:1px solid var(--rule); border-radius:6px; padding:8px 12px; background:#fff; cursor:pointer;
+  }
+  button:hover{background:#f2f2f2}
+  .meter{font-size:12px; color:var(--muted)}
 
-   .nav-links {
-     text-align: center;
-     margin-bottom: 12px;
-     padding: 10px 0;
-     border-bottom: 2px solid #ccc;
-   }
-   .nav-links a {
-     margin: 0 15px;
-     color: #333;
-     text-decoration: none;
-     font-weight: bold;
-     font-size: 14px;
-   }
-   .nav-links a:hover { text-decoration: underline; }
+  /* Grid: row-wise flow (left→right→down), responsive columns */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+  }
+  .link{
+    background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:10px 12px;
+    font-weight:bold; font-size:18px;
+  }
+  .link a{text-decoration:none; color:inherit; display:block; word-break:break-word}
+  .link a:hover{text-decoration:underline}
+  .time{font-size:12px; color:var(--muted); margin-top:4px}
 
-   /* Mobile tabs */
-   .mobile-tabs {
-     display: none;
-     text-align: center;
-     margin: 12px auto 10px;
-     max-width: 720px;
-   }
-   .tabs-row {
-     display: grid;
-     grid-template-columns: 1fr 1fr 1fr;
-     gap: 8px;
-     padding: 0 20px;
-     box-sizing: border-box;
-   }
-   .tab-btn {
-     border: 1px solid #bbb;
-     border-radius: 6px;
-     padding: 10px 10px;
-     font-weight: bold;
-     background: #f7f7f7;
-     cursor: pointer;
-     user-select: none;
-   }
-   .tab-btn:active { transform: translateY(1px); }
-   .tab-btn:hover { background:#efefef; }
-   .tab-active {
-     background: #111827;
-     color: #fff;
-     border-color: #111827;
-   }
+  .empty{ color:var(--muted); text-align:center; padding:30px 0; }
 
-   .container{
-     display:grid; grid-template-columns:1fr 1fr 1fr;  /* 3 columns */
-     gap:25px; width:100%; margin:0; padding:0 20px; box-sizing:border-box;
-     position: relative;
-     max-width: 1400px;
-     margin-left: auto;
-     margin-right: auto;
-   }
-
-   /* Column dividers */
-   .container::before,
-   .container::after {
-     content: '';
-     position: absolute;
-     top: 0;
-     bottom: 0;
-     width: 1px;
-     background-color: #d0d0d0;
-     z-index: 1;
-   }
-   .container::before { left: calc(33.333% - 1px); }
-   .container::after  { left: calc(66.666% - 1px); }
-
-   .column{
-     padding:15px;
-     background-color: transparent;
-     position: relative;
-     z-index: 2;
-   }
-   .link-item{ margin-bottom:15px; font-size:18px; font-weight:bold; }
-   .link-item a{ text-decoration:none; display:block; padding:2px 0; }
-   .link-item a:hover{ text-decoration:underline; }
-
-   /* Admin panel */
-   .admin-controls {
-     position: fixed;
-     bottom: 20px;
-     right: 20px;
-     background: rgba(255,255,255,0.9);
-     padding: 15px;
-     border: 1px solid #ccc;
-     border-radius: 5px;
-     font-size: 12px;
-     max-width: 300px;
-     display: none;
-   }
-   .admin-controls.show { display: block; }
-   .admin-controls button {
-     margin: 5px;
-     padding: 5px 10px;
-     font-size: 11px;
-     background: #f0f0f0;
-     border: 1px solid #ccc;
-     cursor: pointer;
-   }
-   .admin-controls button:hover { background: #e0e0e0; }
-
-   /* Tablet */
-   @media (max-width:900px){
-     .container{ grid-template-columns:1fr 1fr 1fr; gap:18px; }
-   }
-
-   /* Mobile: tabs & one column at a time */
-   @media (max-width:640px){
-     .mobile-tabs { display:block; }
-     .container{ grid-template-columns:1fr; gap:12px; }
-     .container::before, .container::after { display:none; }
-     .header h1{ font-size:28px; }
-   }
-
-   .hidden { display: none !important; }
- </style>
+  .import-panel{
+    background:#fff; border:1px solid var(--rule); border-radius:10px; padding:12px; margin-bottom:14px;
+  }
+  .import-row{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+  .import-note{font-size:12px; color:var(--muted)}
+</style>
 </head>
 <body>
- <div class="header">
-   <h1>THE DAYLUGE</h1>
- </div>
+<div class="wrap">
+  <header><h1>THE DAYLUGE</h1></header>
+  <nav><a href="/">Home</a> <a href="/archive">Archive</a></nav>
 
- <div class="nav-links">
-   <a href="/">Home</a>
-   <a href="/archive">Archive</a>
- </div>
+  <!-- Migration Report + Import Helpers -->
+  <div id="importPanel" class="import-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
+      <strong>Migration Report</strong>
+      <button id="hideImportBtn" title="Hide">Hide</button>
+    </div>
+    <div id="migrationReport" class="import-note">Checking old storage…</div>
+    <div class="import-row" style="margin-top:8px;">
+      <input type="file" id="fileInput" accept="application/json" />
+      <button id="importFileBtn">Import from file</button>
+      <button id="showPasteBtn">Paste JSON…</button>
+      <button id="backupOldBtn" title="Download old 3-col storage (if present)">Backup old</button>
+    </div>
+    <div id="pasteBox" style="display:none; margin-top:8px;">
+      <textarea id="pasteArea" placeholder='Paste the JSON from your old site’s localStorage["dayluge_links_v3"] here…'></textarea>
+      <div class="import-row" style="margin-top:6px;">
+        <button id="importPasteBtn">Import pasted JSON</button>
+        <span class="import-note">Tip: open the old site, DevTools → Console → copy localStorage["dayluge_links_v3"]</span>
+      </div>
+    </div>
+  </div>
 
- <!-- Mobile Tabs -->
- <div class="mobile-tabs" id="mobileTabs" role="tablist" aria-label="Column tabs">
-   <div class="tabs-row">
-     <button id="tab-1" class="tab-btn" role="tab" aria-controls="colwrap-1" aria-selected="true" data-tab="1">Col 1</button>
-     <button id="tab-2" class="tab-btn" role="tab" aria-controls="colwrap-2" aria-selected="false" data-tab="2">Col 2</button>
-     <button id="tab-3" class="tab-btn" role="tab" aria-controls="colwrap-3" aria-selected="false" data-tab="3">Col 3</button>
-   </div>
- </div>
+  <div class="bar">
+    <div class="left">
+      <input id="titleInput" type="text" placeholder="Title">
+      <input id="urlInput" type="text" placeholder="URL">
+      <select id="colorInput" title="color">
+        <option value="c-black">(black)</option>
+        <option value="c-red">red</option>
+        <option value="c-orange">orange</option>
+        <option value="c-green">green</option>
+        <option value="c-lime-green">lime</option>
+        <option value="c-blue">blue</option>
+        <option value="c-light-blue">light blue</option>
+        <option value="c-indigo">indigo</option>
+        <option value="c-violet">violet</option>
+        <option value="c-pink">pink</option>
+        <option value="c-purple">purple</option>
+      </select>
+      <button id="addBtn">Add link</button>
+    </div>
+    <div class="right">
+      <button id="toggleBtn">View Archive</button>
+      <button id="exportActiveBtn" title="Download active JSON">Export Active</button>
+      <button id="exportArchiveBtn" title="Download archive JSON">Export Archive</button>
+      <span class="meter" id="counts"></span>
+    </div>
+  </div>
 
- <div class="container" id="mainContainer">
-   <!-- Column wrappers so we can toggle them on mobile -->
-   <div id="colwrap-1" class="column"><div id="col-1"></div></div>
-   <div id="colwrap-2" class="column"><div id="col-2"></div></div>
-   <div id="colwrap-3" class="column"><div id="col-3"></div></div>
- </div>
-
- <!-- Admin Controls -->
- <div class="admin-controls" id="adminControls">
-   <h4>Admin Controls</h4>
-   <div>
-     <strong>Current Links:</strong>
-     <div id="linkCounts"></div>
-   </div>
-   <div style="margin-top: 10px;">
-     <button id="btnAdd">Add Sample Link</button>
-     <button id="btnArchive">Force Archive Old</button>
-     <button id="btnExport">Export Data</button>
-     <button id="btnClear">Clear All</button>
-   </div>
- </div>
-
- <p style="text-align:center; margin-top:40px; font-size:12px;">
-   <span id="totalLinks"></span> |
-   <a href="/admin" style="color:#666; text-decoration:none;">Admin</a> |
-   <a href="#" id="adminToggle" style="color:#666; text-decoration:none; font-size:10px;">•</a>
- </p>
+  <div class="grid" id="feed"></div>
+  <div id="emptyMsg" class="empty" style="display:none">No links yet.</div>
+</div>
 
 <script>
-// ================== CONFIG ==================
-const CONFIG = {
-  maxLinksPerColumn: 18,
-  totalMaxLinks: 54,
-  storageKey: 'dayluge_links_v3'
-};
+/** Keys **/
+const OLD_KEYS = [
+  'dayluge_links_v3',  // your old code
+  'dayluge_links_v2',
+  'dayluge_links_v1'
+];
+const ACTIVE_KEY = 'dayluge_active_v1';
+const ARCHIVE_KEY = 'dayluge_archive_v1';
+const ACTIVE_MAX = 48;
 
-// ================== DATA ==================
-const INITIAL_DATA = {
-  column1: [
-    { url: "https://www.history.com/articles/brilliant-psyops-psychological-warfare",
-      title: "7 Brilliant Acts of Psychological Warfare in History", color: "c-purple",
-      dateAdded: new Date('2025-08-24').toISOString() },
-    { url: "https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
-      title: "1910: The Year the Modern World Lost Its Mind", color: "c-blue",
-      dateAdded: new Date('2025-08-23').toISOString() },
-    { url: "https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
-      title: "\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters", color: "c-red",
-      dateAdded: new Date('2025-08-22').toISOString() },
-    { url: "https://collider.com/best-war-shows-must-watch-ranked/",
-      title: "10 Must-Watch War Shows, Ranked", color: "c-orange",
-      dateAdded: new Date('2025-08-20').toISOString() },
-    { url: "https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
-      title: "How Did Moscow Become Europe's Biggest City?", color: "c-green",
-      dateAdded: new Date('2025-08-20').toISOString() },
-    { url: "https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
-      title: "Six Tips from the Middle Ages on How to Beat the Summer Heat", color: "c-blue",
-      dateAdded: new Date('2025-08-24').toISOString() },
-    { url: "https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82",
-      title: "Twilight of the House of Lords", color: "c-pink",
-      dateAdded: new Date('2025-08-22').toISOString() },
-    { url: "https://x.com/Rainmaker1973/status/1959655344709173469",
-      title: "1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima", color: "c-orange",
-      dateAdded: new Date('2025-08-19').toISOString() },
-    { url: "https://www.youtube.com/watch?v=F4M1MlBZyI0",
-      title: "Dave Smith: \"I Was A Militant Atheist\"", color: "c-pink",
-      dateAdded: new Date('2025-08-17').toISOString() },
-    { url: "https://tv.garden/",
-      title: "Watch Global Local TV Online", color: "c-blue",
-      dateAdded: new Date('2025-08-21').toISOString() }
-  ],
-  column2: [
-    { url: "https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj",
-      title: "Ghislaine Maxwell: Trump 'Was Never Inappropriate'", color: "c-red",
-      dateAdded: new Date('2025-08-24').toISOString() },
-    { url: "https://x.com/onechancefreedm/status/1959315977830903826",
-      title: "Credit Card Delinquencies Surging", color: "c-green",
-      dateAdded: new Date('2025-08-23').toISOString() },
-    { url: "https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/",
-      title: "All-Time High in Cocaine Production", color: "c-blue",
-      dateAdded: new Date('2025-08-21').toISOString() },
-    { url: "https://x.com/GlobalMktObserv/status/1959654438332670436",
-      title: "Gold International Reserves are SURGING", color: "c-green",
-      dateAdded: new Date('2025-08-20').toISOString() },
-    { url: "https://x.com/KobeissiLetter/status/1959636646925852986",
-      title: "US Federal Debt Surging At +$21 Billion Per Day", color: "c-green",
-      dateAdded: new Date('2025-08-19').toISOString() },
-    { url: "https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/",
-      title: "The Best Performing Fund in Modern History", color: "c-green",
-      dateAdded: new Date('2025-08-23').toISOString() },
-    { url: "https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile",
-      title: "Israel Targets Yemen's Capital With Massive Strikes", color: "c-red",
-      dateAdded: new Date('2025-08-22').toISOString() },
-    { url: "https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine",
-      title: "Systemic Corruption Doesn't Give A Chance For Peace In Ukraine", color: "c-pink",
-      dateAdded: new Date('2025-08-19').toISOString() },
-    { url: "https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/",
-      title: "Going Full Bud Light", color: "c-orange",
-      dateAdded: new Date('2025-08-24').toISOString() },
-    { url: "https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/",
-      title: "The Smithsonian Has Jumped the Shark", color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString() },
-    { url: "https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
-      title: "The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"", color: "c-blue",
-      dateAdded: new Date('2025-08-17').toISOString() },
-    { url: "https://example.com",
-      title: "Diddy's Arrest Is Part of Something Bigger", color: "c-orange",
-      dateAdded: new Date('2025-08-22').toISOString() }
-  ],
-  column3: [
-    { url: "https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
-      title: "This Teacher Loves His Students", color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString() },
-    { url: "https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
-      title: "The \"Classic Part\" Little Boy Has the Right Attitude", color: "c-violet",
-      dateAdded: new Date('2025-08-20').toISOString() },
-    { url: "https://x.com/engineers_feed/status/1959628877711487203",
-      title: "Windows 95 Launch Party: Peak 90s 🤘", color: "c-pink",
-      dateAdded: new Date('2025-08-19').toISOString() },
-    { url: "https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025",
-      title: "Which New NFL Coaches Are in the Best Position to Win?", color: "c-orange",
-      dateAdded: new Date('2025-08-17').toISOString() },
-    { url: "https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
-      title: "'Holy Grail' Jordan–Bryant Card Sells for $12.9M", color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString() },
-    { url: "https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
-      title: "Cost of Attending an NFL Game +40% in 10 Years", color: "c-violet",
-      dateAdded: new Date('2025-08-23').toISOString() },
-    { url: "https://www.youtube.com/watch?v=x9cVcGQNxBw",
-      title: "They Found Giants In A Cave", color: "c-blue",
-      dateAdded: new Date('2025-08-21').toISOString() },
-    { url: "https://www.youtube.com/shorts/0Phz6wnq_GU",
-      title: "The Pyramid Power Plant Theory", color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString() }
-  ],
-  archived: []
-};
+/** Utils **/
+function loadJSON(key){ try{ const raw=localStorage.getItem(key); return raw?JSON.parse(raw):null; }catch(e){ return null; } }
+function saveJSON(key,v){ localStorage.setItem(key, JSON.stringify(v)); }
 
-// ================== MANAGER ==================
-class DayLugeManager {
-  constructor() {
-    this.data = this.loadData();
-    this.activeTab = 1; // 1..3
-    this.mobileQuery = window.matchMedia('(max-width: 640px)');
-    this.init();
-  }
+/** Normalizers **/
+function normalizeOld3Col(old){
+  // Expecting {column1, column2, column3, archived?}
+  if (!old || typeof old!=='object') return [];
+  const merged = []
+    .concat(old.column1||[], old.column2||[], old.column3||[])
+    .map(l => ({
+      title: l?.title || '(untitled)',
+      url: l?.url || '#',
+      color: l?.color || 'c-black',
+      timestamp: l?.dateAdded || l?.timestamp || new Date().toISOString()
+    }));
+  // newest first
+  merged.sort((a,b)=> new Date(b.timestamp)-new Date(a.timestamp));
+  return merged;
+}
 
-  loadData() {
-    try {
-      const stored = localStorage.getItem(CONFIG.storageKey);
-      return stored ? JSON.parse(stored) : INITIAL_DATA;
-    } catch (e) {
-      return INITIAL_DATA;
+function renderMigrationReport(foundOldKey, oldCount, activeCount, archiveCount){
+  const rep = document.getElementById('migrationReport');
+  rep.textContent = foundOldKey
+    ? `Found old storage "${foundOldKey}" with ${oldCount} visible links. Active=${activeCount} | Archive=${archiveCount}.`
+    : `No old storage found on this origin. Active=${activeCount} | Archive=${archiveCount}. If your links are on another URL, use Import.`;
+}
+
+/** Migration on this origin (non-destructive) **/
+function migrateIfNeeded(){
+  let active = loadJSON(ACTIVE_KEY);
+  let archive = loadJSON(ARCHIVE_KEY);
+  let foundKey = null;
+  if (!Array.isArray(active)) active = [];
+  if (!Array.isArray(archive)) archive = [];
+
+  if (active.length===0){
+    for (const k of OLD_KEYS){
+      const old = loadJSON(k);
+      if (old){
+        const list = normalizeOld3Col(old);
+        active = list; // exact visible links only
+        foundKey = k;
+        break;
+      }
     }
   }
 
-  saveData() {
-    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.data)); }
-    catch (e) {}
-  }
+  // Save back
+  saveJSON(ACTIVE_KEY, active);
+  saveJSON(ARCHIVE_KEY, archive);
 
-  init() {
-    this.render();
-    this.updateStats();
+  renderMigrationReport(foundKey, (active||[]).length, active.length, archive.length);
+  return {active, archive};
+}
 
-    // Attach UI listeners
-    this.bindUI();
+/** State **/
+let {active, archive} = migrateIfNeeded();
+let showingArchive = false;
 
-    // Keep responsive
-    this.mobileQuery.addEventListener?.('change', () => updateMobileVisibility(true));
-    window.addEventListener('orientationchange', () => updateMobileVisibility(true));
-    window.addEventListener('resize', () => updateMobileVisibility(true));
+const feedEl = document.getElementById('feed');
+const countsEl = document.getElementById('counts');
+const emptyMsg = document.getElementById('emptyMsg');
+const fmtTime = new Intl.DateTimeFormat(undefined,{hour:'2-digit',minute:'2-digit'});
 
-    // Initial mobile/desktop state
-    updateMobileVisibility(true);
-  }
-
-  bindUI() {
-    // Mobile tab buttons
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const n = Number(btn.dataset.tab || 1);
-        setActiveTab(n);
-      });
-      // Keyboard (optional)
-      btn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const n = Number(btn.dataset.tab || 1);
-          setActiveTab(n);
-        }
-      });
-    });
-
-    // Admin toggles
-    document.getElementById('adminToggle')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      toggleAdmin();
-    });
-    document.getElementById('btnAdd')?.addEventListener('click', addSampleLink);
-    document.getElementById('btnArchive')?.addEventListener('click', () => forceArchive());
-    document.getElementById('btnExport')?.addEventListener('click', exportData);
-    document.getElementById('btnClear')?.addEventListener('click', clearAll);
-  }
-
-  addLink(columnNum, linkData) {
-    const columnKey = `column${columnNum}`;
-    linkData.dateAdded = new Date().toISOString();
-    this.data[columnKey].unshift(linkData);
-    this.enforceColumnLimit(columnKey);
-    this.saveData();
-    this.render();
-    this.updateStats();
-  }
-
-  enforceColumnLimit(columnKey) {
-    const column = this.data[columnKey];
-    if (column.length > CONFIG.maxLinksPerColumn) {
-      const excess = column.splice(CONFIG.maxLinksPerColumn);
-      excess.forEach(link => {
-        link.archivedDate = new Date().toISOString();
-        link.originalColumn = columnKey;
-        this.data.archived.push(link);
-      });
-    }
-  }
-
-  render() {
-    for (let i = 1; i <= 3; i++) {
-      const links = this.data[`column${i}`] || [];
-      const target = document.getElementById(`col-${i}`);
-      if (!target) continue;
-      target.innerHTML = links.map(link =>
-        `<div class="link-item"><a href="${link.url}" class="${link.color || ''}" target="_blank" rel="noopener noreferrer">${link.title}</a></div>`
-      ).join('');
-    }
-    updateMobileVisibility(false);
-  }
-
-  updateStats() {
-    const totalActive =
-      (this.data.column1?.length || 0) +
-      (this.data.column2?.length || 0) +
-      (this.data.column3?.length || 0);
-    const totalArchived = this.data.archived.length;
-
-    const totalEl = document.getElementById('totalLinks');
-    if (totalEl) totalEl.textContent = `Active: ${totalActive}/${CONFIG.totalMaxLinks} | Archived: ${totalArchived}`;
-
-    const countsDiv = document.getElementById('linkCounts');
-    if (countsDiv) {
-      countsDiv.innerHTML = `
-        Col 1: ${this.data.column1.length}/${CONFIG.maxLinksPerColumn}<br>
-        Col 2: ${this.data.column2.length}/${CONFIG.maxLinksPerColumn}<br>
-        Col 3: ${this.data.column3.length}/${CONFIG.maxLinksPerColumn}<br>
-        <strong>Total: ${totalActive}/${CONFIG.totalMaxLinks}</strong>
-      `;
-    }
+/** Cap logic: keep newest 48 in Active; move any overflow to Archive (oldest active moves). **/
+function enforceActiveCap(){
+  if (active.length > ACTIVE_MAX){
+    const overflow = active.splice(ACTIVE_MAX); // these are the oldest in active
+    // Put overflow at the FRONT of archive (so archive is newest-first too)
+    // overflow is oldest-first; reverse so newest-first when unshifting
+    overflow.reverse().forEach(item => archive.unshift(item));
   }
 }
 
-// ================== GLOBAL HOOKS ==================
-let dayLugeManager;
+function render(){
+  const list = showingArchive ? archive : active;
+  feedEl.innerHTML = list.map(l => `
+    <div class="link ${l.color || 'c-black'}">
+      <a href="${l.url}" target="_blank" rel="noopener">${l.title}</a>
+      <div class="time">${fmtTime.format(new Date(l.timestamp))}</div>
+    </div>
+  `).join('');
 
-function toggleAdmin() {
-  const panel = document.getElementById('adminControls');
-  panel?.classList.toggle('show');
+  emptyMsg.style.display = list.length ? 'none' : 'block';
+
+  countsEl.textContent = showingArchive
+    ? `Archive: ${archive.length} | Active: ${active.length}/${ACTIVE_MAX}`
+    : `Active: ${active.length}/${ACTIVE_MAX} | Archive: ${archive.length}`;
+
+  document.getElementById('toggleBtn').textContent = showingArchive ? 'View Active' : 'View Archive';
 }
-function addSampleLink() { dayLugeManager.addSampleLink(); }
-function forceArchive()   { dayLugeManager.forceArchiveOld(); }
-function exportData()     { dayLugeManager.exportData(); }
-function clearAll()       { dayLugeManager.clearAll(); }
 
-function isMobile(){
-  return window.matchMedia('(max-width: 640px)').matches;
+/** Add link (newest first) **/
+function addLink(title, url, color){
+  const item = {
+    title: title || '(untitled)',
+    url: url || '#',
+    color: color || 'c-black',
+    timestamp: new Date().toISOString()
+  };
+  active.unshift(item);
+  enforceActiveCap();
+  saveJSON(ACTIVE_KEY, active);
+  saveJSON(ARCHIVE_KEY, archive);
+  showingArchive = false;
+  render();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
-function setActiveTab(n){
-  dayLugeManager.activeTab = Math.max(1, Math.min(3, Number(n) || 1));
-  updateTabsUI();
-  updateColumnVisibility();
-
-  // Scroll to the selected column wrapper (works for both mobile & desktop)
-  const wrap = document.getElementById(`colwrap-${dayLugeManager.activeTab}`);
-  if (wrap) {
-    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+/** Import helpers **/
+function importFromOldJSON(obj){
+  try{
+    const list = normalizeOld3Col(obj);
+    // Replace active exactly with this list (your request: “exact links already entered and no more”)
+    active = list;
+    saveJSON(ACTIVE_KEY, active);
+    renderMigrationReport('pasted/file import', active.length, active.length, (archive||[]).length);
+    render();
+    alert(`Imported ${active.length} links into Active.`);
+  }catch(e){
+    alert('Import failed. Check JSON format.');
   }
 }
 
-function updateTabsUI(){
-  for (let i=1;i<=3;i++){
-    const btn = document.getElementById(`tab-${i}`);
-    if (!btn) continue;
-    const active = (i === dayLugeManager.activeTab);
-    btn.classList.toggle('tab-active', active);
-    btn.setAttribute('aria-selected', active ? 'true' : 'false');
-  }
-}
-
-function updateColumnVisibility(){
-  const mobile = isMobile();
-  for (let i=1;i<=3;i++){
-    const wrap = document.getElementById(`colwrap-${i}`);
-    if (!wrap) continue;
-    if (mobile) {
-      wrap.classList.toggle('hidden', i !== dayLugeManager.activeTab);
-    } else {
-      wrap.classList.remove('hidden'); // show all on desktop
-    }
-  }
-}
-
-function updateMobileVisibility(initial){
-  updateTabsUI();
-  updateColumnVisibility();
-  if (initial && isMobile()) setActiveTab(dayLugeManager.activeTab || 1);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  dayLugeManager = new DayLugeManager();
-  // Ensure default tab selected
-  if (isMobile()) setActiveTab(1);
+/** UI wiring **/
+document.getElementById('addBtn').addEventListener('click', () => {
+  const title = document.getElementById('titleInput').value.trim();
+  const url   = document.getElementById('urlInput').value.trim();
+  const color = document.getElementById('colorInput').value || 'c-black';
+  if (!title || !url) { alert('Please enter both Title and URL'); return; }
+  addLink(title, url, color);
+  document.getElementById('titleInput').value = '';
+  document.getElementById('urlInput').value = '';
+  document.getElementById('colorInput').value = 'c-black';
 });
+
+document.getElementById('exportActiveBtn').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(active, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'dayluge-active.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('exportArchiveBtn').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(archive, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'dayluge-archive.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('toggleBtn').addEventListener('click', () => {
+  showingArchive = !showingArchive;
+  render();
+});
+
+/* Import panel controls */
+document.getElementById('hideImportBtn').addEventListener('click', ()=>{
+  document.getElementById('importPanel').style.display='none';
+});
+
+document.getElementById('showPasteBtn').addEventListener('click', ()=>{
+  const box = document.getElementById('pasteBox');
+  box.style.display = box.style.display==='none' ? 'block' : 'none';
+});
+
+document.getElementById('importPasteBtn').addEventListener('click', ()=>{
+  try{
+    const txt = document.getElementById('pasteArea').value.trim();
+    if (!txt){ alert('Paste JSON first'); return; }
+    const obj = JSON.parse(txt);
+    importFromOldJSON(obj);
+  }catch(e){
+    alert('Invalid JSON.');
+  }
+});
+
+document.getElementById('importFileBtn').addEventListener('click', ()=>{
+  const inp = document.getElementById('fileInput');
+  if (!inp.files || !inp.files[0]){ alert('Choose a JSON file first.'); return; }
+  const file = inp.files[0];
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    try{
+      const obj = JSON.parse(e.target.result);
+      importFromOldJSON(obj);
+    }catch(err){
+      alert('Invalid JSON in file.');
+    }
+  };
+  reader.readAsText(file);
+});
+
+/* Backup old 3-col storage (if present) */
+document.getElementById('backupOldBtn').addEventListener('click', ()=>{
+  let found=null;
+  for (const k of OLD_KEYS){ const v=loadJSON(k); if (v){ found=v; break; } }
+  if (!found){ alert('No old storage found on this origin.'); return; }
+  const blob = new Blob([JSON.stringify(found, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'dayluge-old-3col-backup.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+
+/** First paint **/
+render();
 </script>
 </body>
 </html>
