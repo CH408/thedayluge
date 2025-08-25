@@ -43,9 +43,10 @@
   nav a{color:#333;text-decoration:none;font-weight:bold;margin:0 12px;}
   nav a:hover{text-decoration:underline;}
 
+  /* Grid: exactly 3 columns on desktop */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(3, 1fr);
     gap:10px;
     margin-top:10px;
   }
@@ -59,7 +60,12 @@
   }
   .link a:hover{text-decoration:underline;}
 
-  @media(max-width:640px){
+  /* Responsive behavior */
+  @media(max-width:900px){
+    .grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  @media(max-width:600px){
+    .grid{grid-template-columns:1fr;}
     h1{font-size:28px;}
   }
 </style>
@@ -70,7 +76,7 @@
   <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
 
   <div class="grid">
-    <!-- EXACT TITLES WITH YOUR CHANGE APPLIED -->
+    <!-- 3 columns, fill left→right, then down -->
     <div class="link"><a class="c-green" href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank">The Best Performing Fund in Modern History</a></div>
     <div class="link"><a class="c-indigo" href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank">The Pyramid Power Plant Theory</a></div>
     <div class="link"><a class="c-red" href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
