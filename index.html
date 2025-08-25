@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The DayLuge — Keep Every Link + Import if Needed</title>
+<title>THE DAYLUGE</title>
 <style>
   :root{
     --red:#cc0000; --orange:#ff6600; --green:#009900; --lime:#32cd32;
     --blue:#3388cc; --light-blue:#000080; --indigo:#4b0082; --violet:#6600cc; --pink:#ff3399;
-    --ink:#111827; --muted:#6b7280; --bg:#f3f4f6; --paper:#fff; --rule:#e5e7eb;
-    --maxw:1400px;
+    --ink:#111827; --muted:#6b7280; --bg:#f3f4f6; --paper:#ffffff; --rule:#e5e7eb;
+    --maxw: 1400px;
   }
 
   /* Color classes */
@@ -19,83 +19,61 @@
   .c-purple{color:var(--violet)} .c-black{color:#000}
 
   *{box-sizing:border-box}
-  body{margin:0; font-family:"Courier New",monospace; background:var(--bg); color:var(--ink)}
+  body{
+    margin:0; background:#e0e0e0; color:#000;
+    font-family:"Courier New", monospace; line-height:1.4;
+  }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:20px}
-  header{text-align:center; margin-bottom:16px}
-  h1{margin:0; font-size:32px; letter-spacing:1px}
-  nav{text-align:center; margin-bottom:20px; border-bottom:1px solid var(--rule); padding-bottom:12px}
-  nav a{margin:0 12px; text-decoration:none; font-weight:bold; color:#333}
-  nav a:hover{text-decoration:underline}
+  header{ text-align:center; margin-bottom:10px }
+  h1{ margin:0; font-size:36px; letter-spacing:1px }
 
+  nav{ text-align:center; margin:6px 0 18px; padding-bottom:10px; border-bottom:1px solid var(--rule) }
+  nav a{ color:#333; text-decoration:none; font-weight:bold; margin:0 12px }
+  nav a:hover{ text-decoration:underline }
+
+  /* Toolbar */
   .bar{
-    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; justify-content:space-between; align-items:center;
+    display:flex; gap:8px; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; margin-bottom:14px;
   }
-  .bar .left, .bar .right{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
-  input[type="text"], select, textarea{
-    border:1px solid var(--rule); border-radius:6px; padding:8px 10px; font-size:14px; background:#fff;
-  }
-  textarea{ width:100%; min-height:120px; font-family:monospace }
-
+  .left,.right{display:flex; gap:6px; align-items:center; flex-wrap:wrap}
+  input[type="text"], select{ border:1px solid var(--rule); border-radius:6px; padding:8px 10px; background:#fff; }
   button{
     border:1px solid var(--rule); border-radius:6px; padding:8px 12px; background:#fff; cursor:pointer;
+    font-weight:bold;
   }
-  button:hover{background:#f2f2f2}
-  .meter{font-size:12px; color:var(--muted)}
+  button:hover{ background:#f4f4f4 }
+  .meter{ font-size:12px; color:var(--muted) }
 
-  /* Grid: row-wise flow (left→right→down), responsive columns */
+  /* Chronological grid (row-wise) */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap:16px;
   }
   .link{
     background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:10px 12px;
     font-weight:bold; font-size:18px;
   }
-  .link a{text-decoration:none; color:inherit; display:block; word-break:break-word}
-  .link a:hover{text-decoration:underline}
-  .time{font-size:12px; color:var(--muted); margin-top:4px}
+  .link a{ color:inherit; text-decoration:none; display:block; word-break:break-word }
+  .link a:hover{ text-decoration:underline }
+  .empty{ color:#9aa0a6; text-align:center; padding:40px 0 }
 
-  .empty{ color:var(--muted); text-align:center; padding:30px 0; }
-
-  .import-panel{
-    background:#fff; border:1px solid var(--rule); border-radius:10px; padding:12px; margin-bottom:14px;
+  @media (max-width:640px){
+    h1{ font-size:28px }
   }
-  .import-row{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
-  .import-note{font-size:12px; color:var(--muted)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header><h1>THE DAYLUGE</h1></header>
-  <nav><a href="/">Home</a> <a href="/archive">Archive</a></nav>
+  <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
 
-  <!-- Migration Report + Import Helpers -->
-  <div id="importPanel" class="import-panel">
-    <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:8px;">
-      <strong>Migration Report</strong>
-      <button id="hideImportBtn" title="Hide">Hide</button>
-    </div>
-    <div id="migrationReport" class="import-note">Checking old storage…</div>
-    <div class="import-row" style="margin-top:8px;">
-      <input type="file" id="fileInput" accept="application/json" />
-      <button id="importFileBtn">Import from file</button>
-      <button id="showPasteBtn">Paste JSON…</button>
-      <button id="backupOldBtn" title="Download old 3-col storage (if present)">Backup old</button>
-    </div>
-    <div id="pasteBox" style="display:none; margin-top:8px;">
-      <textarea id="pasteArea" placeholder='Paste the JSON from your old site’s localStorage["dayluge_links_v3"] here…'></textarea>
-      <div class="import-row" style="margin-top:6px;">
-        <button id="importPasteBtn">Import pasted JSON</button>
-        <span class="import-note">Tip: open the old site, DevTools → Console → copy localStorage["dayluge_links_v3"]</span>
-      </div>
-    </div>
-  </div>
-
+  <!-- Minimal add/toggle/export bar -->
   <div class="bar">
     <div class="left">
-      <input id="titleInput" type="text" placeholder="Title">
-      <input id="urlInput" type="text" placeholder="URL">
+      <input id="titleInput" type="text" placeholder="Title" />
+      <input id="urlInput"   type="text" placeholder="URL" />
       <select id="colorInput" title="color">
         <option value="c-black">(black)</option>
         <option value="c-red">red</option>
@@ -103,18 +81,18 @@
         <option value="c-green">green</option>
         <option value="c-lime-green">lime</option>
         <option value="c-blue">blue</option>
-        <option value="c-light-blue">light blue</option>
+        <option value="c-light-blue">light-blue</option>
         <option value="c-indigo">indigo</option>
         <option value="c-violet">violet</option>
         <option value="c-pink">pink</option>
         <option value="c-purple">purple</option>
       </select>
-      <button id="addBtn">Add link</button>
+      <button id="addBtn">Add</button>
     </div>
     <div class="right">
       <button id="toggleBtn">View Archive</button>
-      <button id="exportActiveBtn" title="Download active JSON">Export Active</button>
-      <button id="exportArchiveBtn" title="Download archive JSON">Export Archive</button>
+      <button id="exportActiveBtn" title="Export active JSON">Export Active</button>
+      <button id="exportArchiveBtn" title="Export archive JSON">Export Archive</button>
       <span class="meter" id="counts"></span>
     </div>
   </div>
@@ -124,118 +102,175 @@
 </div>
 
 <script>
-/** Keys **/
-const OLD_KEYS = [
-  'dayluge_links_v3',  // your old code
-  'dayluge_links_v2',
-  'dayluge_links_v1'
+/* -------------------- EXACT CURATED LINKS (seed) -------------------- */
+/* Newest first after sorting by timestamp; colors preserved exactly.  */
+const SEED_ACTIVE = [
+  /* Column 1 (Longform etc.) */
+  { url:"https://www.history.com/articles/brilliant-psyops-psychological-warfare",
+    title:"7 Brilliant Acts of Psychological Warfare in History", color:"c-purple",
+    timestamp:"2025-08-24T00:00:00.000Z" },
+  { url:"https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
+    title:"1910: The Year the Modern World Lost Its Mind", color:"c-blue",
+    timestamp:"2025-08-23T00:00:00.000Z" },
+  { url:"https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
+    title:"\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters", color:"c-red",
+    timestamp:"2025-08-22T00:00:00.000Z" },
+  { url:"https://collider.com/best-war-shows-must-watch-ranked/",
+    title:"10 Must-Watch War Shows, Ranked", color:"c-orange",
+    timestamp:"2025-08-20T00:00:00.000Z" },
+  { url:"https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
+    title:"How Did Moscow Become Europe's Biggest City?", color:"c-green",
+    timestamp:"2025-08-20T00:00:00.000Z" },
+  { url:"https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
+    title:"Six Tips from the Middle Ages on How to Beat the Summer Heat", color:"c-blue",
+    timestamp:"2025-08-24T00:00:00.000Z" },
+  { url:"https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82",
+    title:"Twilight of the House of Lords", color:"c-pink",
+    timestamp:"2025-08-22T00:00:00.000Z" },
+  { url:"https://x.com/Rainmaker1973/status/1959655344709173469",
+    title:"1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima", color:"c-orange",
+    timestamp:"2025-08-19T00:00:00.000Z" },
+  { url:"https://www.youtube.com/watch?v=F4M1MlBZyI0",
+    title:"Dave Smith: \"I Was A Militant Atheist\"", color:"c-pink",
+    timestamp:"2025-08-17T00:00:00.000Z" },
+  { url:"https://tv.garden/",
+    title:"Watch Global Local TV Online", color:"c-blue",
+    timestamp:"2025-08-21T00:00:00.000Z" },
+
+  /* Column 2 (News/Politics/Econ) */
+  { url:"https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj",
+    title:"Ghislaine Maxwell: Trump 'Was Never Inappropriate'", color:"c-red",
+    timestamp:"2025-08-24T00:00:00.000Z" },
+  { url:"https://x.com/onechancefreedm/status/1959315977830903826",
+    title:"Credit Card Delinquencies Surging", color:"c-green",
+    timestamp:"2025-08-23T00:00:00.000Z" },
+  { url:"https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/",
+    title:"All-Time High in Cocaine Production", color:"c-blue",
+    timestamp:"2025-08-21T00:00:00.000Z" },
+  { url:"https://x.com/GlobalMktObserv/status/1959654438332670436",
+    title:"Gold International Reserves are SURGING", color:"c-green",
+    timestamp:"2025-08-20T00:00:00.000Z" },
+  { url:"https://x.com/KobeissiLetter/status/1959636646925852986",
+    title:"US Federal Debt Surging At +$21 Billion Per Day", color:"c-green",
+    timestamp:"2025-08-19T00:00:00.000Z" },
+  { url:"https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/",
+    title:"The Best Performing Fund in Modern History", color:"c-green",
+    timestamp:"2025-08-23T00:00:00.000Z" },
+  { url:"https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile",
+    title:"Israel Targets Yemen's Capital With Massive Strikes", color:"c-red",
+    timestamp:"2025-08-22T00:00:00.000Z" },
+  { url:"https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine",
+    title:"Systemic Corruption Doesn't Give A Chance For Peace In Ukraine", color:"c-pink",
+    timestamp:"2025-08-19T00:00:00.000Z" },
+  { url:"https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/",
+    title:"Going Full Bud Light", color:"c-orange",
+    timestamp:"2025-08-24T00:00:00.000Z" },
+  { url:"https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/",
+    title:"The Smithsonian Has Jumped the Shark", color:"c-indigo",
+    timestamp:"2025-08-18T00:00:00.000Z" },
+  { url:"https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
+    title:"The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"", color:"c-blue",
+    timestamp:"2025-08-17T00:00:00.000Z" },
+  { url:"https://example.com",
+    title:"Diddy's Arrest Is Part of Something Bigger", color:"c-orange",
+    timestamp:"2025-08-22T00:00:00.000Z" },
+
+  /* Column 3 (Fun/Sports/Misc) */
+  { url:"https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
+    title:"This Teacher Loves His Students", color:"c-indigo",
+    timestamp:"2025-08-18T00:00:00.000Z" },
+  { url:"https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
+    title:"The \"Classic Part\" Little Boy Has the Right Attitude", color:"c-violet",
+    timestamp:"2025-08-20T00:00:00.000Z" },
+  { url:"https://x.com/engineers_feed/status/1959628877711487203",
+    title:"Windows 95 Launch Party: Peak 90s 🤘", color:"c-pink",
+    timestamp:"2025-08-19T00:00:00.000Z" },
+  { url:"https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025",
+    title:"Which New NFL Coaches Are in the Best Position to Win?", color:"c-orange",
+    timestamp:"2025-08-17T00:00:00.000Z" },
+  { url:"https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
+    title:"'Holy Grail' Jordan–Bryant Card Sells for $12.9M", color:"c-indigo",
+    timestamp:"2025-08-18T00:00:00.000Z" },
+  { url:"https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
+    title:"Cost of Attending an NFL Game +40% in 10 Years", color:"c-violet",
+    timestamp:"2025-08-23T00:00:00.000Z" },
+  { url:"https://www.youtube.com/watch?v=x9cVcGQNxBw",
+    title:"They Found Giants In A Cave", color:"c-blue",
+    timestamp:"2025-08-21T00:00:00.000Z" },
+  { url:"https://www.youtube.com/shorts/0Phz6wnq_GU",
+    title:"The Pyramid Power Plant Theory", color:"c-indigo",
+    timestamp:"2025-08-18T00:00:00.000Z" }
 ];
+
+/* -------------------- App constants & storage -------------------- */
 const ACTIVE_KEY = 'dayluge_active_v1';
 const ARCHIVE_KEY = 'dayluge_archive_v1';
 const ACTIVE_MAX = 48;
 
-/** Utils **/
-function loadJSON(key){ try{ const raw=localStorage.getItem(key); return raw?JSON.parse(raw):null; }catch(e){ return null; } }
-function saveJSON(key,v){ localStorage.setItem(key, JSON.stringify(v)); }
+const fmtTime = new Intl.DateTimeFormat(undefined,{hour:'2-digit',minute:'2-digit'});
 
-/** Normalizers **/
-function normalizeOld3Col(old){
-  // Expecting {column1, column2, column3, archived?}
-  if (!old || typeof old!=='object') return [];
-  const merged = []
-    .concat(old.column1||[], old.column2||[], old.column3||[])
-    .map(l => ({
-      title: l?.title || '(untitled)',
-      url: l?.url || '#',
-      color: l?.color || 'c-black',
-      timestamp: l?.dateAdded || l?.timestamp || new Date().toISOString()
-    }));
-  // newest first
-  merged.sort((a,b)=> new Date(b.timestamp)-new Date(a.timestamp));
-  return merged;
+function loadJSON(key){
+  try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : null; }
+  catch(e){ return null; }
 }
+function saveJSON(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
 
-function renderMigrationReport(foundOldKey, oldCount, activeCount, archiveCount){
-  const rep = document.getElementById('migrationReport');
-  rep.textContent = foundOldKey
-    ? `Found old storage "${foundOldKey}" with ${oldCount} visible links. Active=${activeCount} | Archive=${archiveCount}.`
-    : `No old storage found on this origin. Active=${activeCount} | Archive=${archiveCount}. If your links are on another URL, use Import.`;
-}
-
-/** Migration on this origin (non-destructive) **/
-function migrateIfNeeded(){
+/* Initialize: if no active list yet, seed with your curated links (sorted newest→oldest) */
+function initData(){
   let active = loadJSON(ACTIVE_KEY);
   let archive = loadJSON(ARCHIVE_KEY);
-  let foundKey = null;
-  if (!Array.isArray(active)) active = [];
-  if (!Array.isArray(archive)) archive = [];
-
-  if (active.length===0){
-    for (const k of OLD_KEYS){
-      const old = loadJSON(k);
-      if (old){
-        const list = normalizeOld3Col(old);
-        active = list; // exact visible links only
-        foundKey = k;
-        break;
-      }
-    }
+  if (!Array.isArray(active)){
+    active = [...SEED_ACTIVE].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
+    saveJSON(ACTIVE_KEY, active);
   }
-
-  // Save back
-  saveJSON(ACTIVE_KEY, active);
-  saveJSON(ARCHIVE_KEY, archive);
-
-  renderMigrationReport(foundKey, (active||[]).length, active.length, archive.length);
+  if (!Array.isArray(archive)){
+    archive = [];
+    saveJSON(ARCHIVE_KEY, archive);
+  }
   return {active, archive};
 }
 
-/** State **/
-let {active, archive} = migrateIfNeeded();
+/* -------------------- Render & interactions -------------------- */
+let {active, archive} = initData();
 let showingArchive = false;
 
 const feedEl = document.getElementById('feed');
 const countsEl = document.getElementById('counts');
 const emptyMsg = document.getElementById('emptyMsg');
-const fmtTime = new Intl.DateTimeFormat(undefined,{hour:'2-digit',minute:'2-digit'});
-
-/** Cap logic: keep newest 48 in Active; move any overflow to Archive (oldest active moves). **/
-function enforceActiveCap(){
-  if (active.length > ACTIVE_MAX){
-    const overflow = active.splice(ACTIVE_MAX); // these are the oldest in active
-    // Put overflow at the FRONT of archive (so archive is newest-first too)
-    // overflow is oldest-first; reverse so newest-first when unshifting
-    overflow.reverse().forEach(item => archive.unshift(item));
-  }
-}
 
 function render(){
   const list = showingArchive ? archive : active;
   feedEl.innerHTML = list.map(l => `
     <div class="link ${l.color || 'c-black'}">
-      <a href="${l.url}" target="_blank" rel="noopener">${l.title}</a>
-      <div class="time">${fmtTime.format(new Date(l.timestamp))}</div>
+      <a href="${l.url}" target="_blank" rel="noopener noreferrer">${l.title}</a>
     </div>
   `).join('');
-
   emptyMsg.style.display = list.length ? 'none' : 'block';
 
   countsEl.textContent = showingArchive
-    ? `Archive: ${archive.length} | Active: ${active.length}/${ACTIVE_MAX}`
-    : `Active: ${active.length}/${ACTIVE_MAX} | Archive: ${archive.length}`;
+    ? \`Archive: \${archive.length} | Active: \${active.length}/\${ACTIVE_MAX}\`
+    : \`Active: \${active.length}/\${ACTIVE_MAX} | Archive: \${archive.length}\`;
 
   document.getElementById('toggleBtn').textContent = showingArchive ? 'View Active' : 'View Archive';
 }
 
-/** Add link (newest first) **/
-function addLink(title, url, color){
+/* Keep newest 48 in active; overflow (oldest) → archive (newest-first there too) */
+function enforceActiveCap(){
+  if (active.length > ACTIVE_MAX){
+    const moved = active.splice(ACTIVE_MAX);      // oldest slice
+    moved.reverse().forEach(item => archive.unshift(item)); // keep archive newest-first
+  }
+}
+
+/* Public add function (also wired to the Add button) */
+function addLink(title, url, colorClass){
   const item = {
     title: title || '(untitled)',
     url: url || '#',
-    color: color || 'c-black',
+    color: colorClass || 'c-black',
     timestamp: new Date().toISOString()
   };
-  active.unshift(item);
+  active.unshift(item);     // newest first
   enforceActiveCap();
   saveJSON(ACTIVE_KEY, active);
   saveJSON(ARCHIVE_KEY, archive);
@@ -244,101 +279,41 @@ function addLink(title, url, color){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-/** Import helpers **/
-function importFromOldJSON(obj){
-  try{
-    const list = normalizeOld3Col(obj);
-    // Replace active exactly with this list (your request: “exact links already entered and no more”)
-    active = list;
-    saveJSON(ACTIVE_KEY, active);
-    renderMigrationReport('pasted/file import', active.length, active.length, (archive||[]).length);
-    render();
-    alert(`Imported ${active.length} links into Active.`);
-  }catch(e){
-    alert('Import failed. Check JSON format.');
-  }
-}
+/* Expose for console use */
+window.addLink = addLink;
 
-/** UI wiring **/
-document.getElementById('addBtn').addEventListener('click', () => {
+/* UI wiring */
+document.getElementById('addBtn').addEventListener('click', ()=>{
   const title = document.getElementById('titleInput').value.trim();
   const url   = document.getElementById('urlInput').value.trim();
   const color = document.getElementById('colorInput').value || 'c-black';
-  if (!title || !url) { alert('Please enter both Title and URL'); return; }
+  if (!title || !url){ alert('Please enter Title and URL'); return; }
   addLink(title, url, color);
   document.getElementById('titleInput').value = '';
   document.getElementById('urlInput').value = '';
   document.getElementById('colorInput').value = 'c-black';
 });
 
-document.getElementById('exportActiveBtn').addEventListener('click', () => {
+document.getElementById('toggleBtn').addEventListener('click', ()=>{
+  showingArchive = !showingArchive;
+  render();
+});
+
+document.getElementById('exportActiveBtn').addEventListener('click', ()=>{
   const blob = new Blob([JSON.stringify(active, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = 'dayluge-active.json'; a.click();
   URL.revokeObjectURL(url);
 });
 
-document.getElementById('exportArchiveBtn').addEventListener('click', () => {
+document.getElementById('exportArchiveBtn').addEventListener('click', ()=>{
   const blob = new Blob([JSON.stringify(archive, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href = url; a.download = 'dayluge-archive.json'; a.click();
   URL.revokeObjectURL(url);
 });
 
-document.getElementById('toggleBtn').addEventListener('click', () => {
-  showingArchive = !showingArchive;
-  render();
-});
-
-/* Import panel controls */
-document.getElementById('hideImportBtn').addEventListener('click', ()=>{
-  document.getElementById('importPanel').style.display='none';
-});
-
-document.getElementById('showPasteBtn').addEventListener('click', ()=>{
-  const box = document.getElementById('pasteBox');
-  box.style.display = box.style.display==='none' ? 'block' : 'none';
-});
-
-document.getElementById('importPasteBtn').addEventListener('click', ()=>{
-  try{
-    const txt = document.getElementById('pasteArea').value.trim();
-    if (!txt){ alert('Paste JSON first'); return; }
-    const obj = JSON.parse(txt);
-    importFromOldJSON(obj);
-  }catch(e){
-    alert('Invalid JSON.');
-  }
-});
-
-document.getElementById('importFileBtn').addEventListener('click', ()=>{
-  const inp = document.getElementById('fileInput');
-  if (!inp.files || !inp.files[0]){ alert('Choose a JSON file first.'); return; }
-  const file = inp.files[0];
-  const reader = new FileReader();
-  reader.onload = (e)=>{
-    try{
-      const obj = JSON.parse(e.target.result);
-      importFromOldJSON(obj);
-    }catch(err){
-      alert('Invalid JSON in file.');
-    }
-  };
-  reader.readAsText(file);
-});
-
-/* Backup old 3-col storage (if present) */
-document.getElementById('backupOldBtn').addEventListener('click', ()=>{
-  let found=null;
-  for (const k of OLD_KEYS){ const v=loadJSON(k); if (v){ found=v; break; } }
-  if (!found){ alert('No old storage found on this origin.'); return; }
-  const blob = new Blob([JSON.stringify(found, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'dayluge-old-3col-backup.json'; a.click();
-  URL.revokeObjectURL(url);
-});
-
-/** First paint **/
+/* First paint */
 render();
 </script>
 </body>
