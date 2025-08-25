@@ -10,17 +10,22 @@
 
 <style>
   :root{
-    /* link colors */
-    --red:#cc0000; --orange:#ff6600; --green:#009900; --lime:#32cd32;
-    --blue:#3388cc; --light-blue:#000080; --indigo:#4b0082; --violet:#6600cc; --pink:#ff3399;
+    /* Updated darker hues for green and blue */
+    --red:#cc0000; 
+    --orange:#ff6600; 
+    --green:#005f00;        /* darker green */
+    --lime:#228b22; 
+    --blue:#003366;         /* darker blue */
+    --light-blue:#000066; 
+    --indigo:#4b0082; 
+    --violet:#6600cc; 
+    --pink:#ff3399;
 
-    /* paper + ink vibe */
     --ink:#0e0d0b;
     --paper:#e6dac1;              /* darker parchment base */
     --maxw:1400px;
   }
 
-  /* color classes */
   .c-red{color:var(--red)}
   .c-orange{color:var(--orange)}
   .c-green{color:var(--green)}
@@ -36,7 +41,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html, body {height:100%}
 
-  /* EXTREMELY WEATHERED PAPER (pure CSS, no images) */
+  /* EXTREMELY WEATHERED PAPER */
   body{
     font-family:'Special Elite', monospace;
     color:var(--ink);
@@ -44,53 +49,36 @@
     position:relative;
     padding:20px;
 
-    /* heavy stains, uneven tone, deep vignette */
     background:
-      /* deep edge burns (under everything) */
       radial-gradient(1400px 1000px at -10% -10%, rgba(0,0,0,0.22), transparent 60%),
       radial-gradient(1600px 1100px at 110% 120%, rgba(0,0,0,0.24), transparent 60%),
-
-      /* big blotches */
       radial-gradient(480px 340px at 20% 28%, rgba(0,0,0,0.14), transparent 70%),
       radial-gradient(420px 300px at 78% 26%, rgba(0,0,0,0.12), transparent 72%),
       radial-gradient(360px 320px at 40% 82%, rgba(0,0,0,0.11), transparent 70%),
-
-      /* mid stains */
       radial-gradient(220px 160px at 62% 18%, rgba(0,0,0,0.10), transparent 75%),
       radial-gradient(200px 150px at 28% 62%, rgba(0,0,0,0.09), transparent 75%),
       radial-gradient(180px 140px at 70% 78%, rgba(0,0,0,0.08), transparent 75%),
-
-      /* fiber grain (stronger) */
       repeating-linear-gradient(90deg, rgba(0,0,0,0.06) 0 1px, transparent 1px 3px),
       repeating-linear-gradient(0deg,  rgba(0,0,0,0.06) 0 1px, transparent 1px 3px),
-
-      /* base parchment */
       var(--paper);
-    background-blend-mode:
-      multiply, multiply,
-      multiply, multiply, multiply,
-      multiply, multiply, multiply,
-      normal, normal,
-      normal;
+    background-blend-mode:multiply, multiply, multiply, multiply,
+                           multiply, multiply, multiply, multiply,
+                           normal, normal,
+                           normal;
   }
 
-  /* speckles + inset burn ring, all beneath content */
   body::before{
     content:"";
     position:fixed; inset:0; pointer-events:none; z-index:0;
     background:
-      /* dense speckle */
       repeating-radial-gradient(circle, rgba(0,0,0,0.07) 0 1px, transparent 1px 4px),
-      /* center haze */
       radial-gradient(900px 700px at 50% 55%, rgba(0,0,0,0.08), transparent 70%),
-      /* random smudges */
       radial-gradient(200px 150px at 15% 85%, rgba(0,0,0,0.10), transparent 70%),
       radial-gradient(180px 140px at 85% 15%, rgba(0,0,0,0.10), transparent 70%);
     mix-blend-mode:multiply;
     opacity:.65;
   }
 
-  /* thick scorch edge with inner darkening, still behind content */
   body::after{
     content:"";
     position:fixed; inset:0; pointer-events:none; z-index:0;
@@ -99,7 +87,6 @@
       inset 0 0 60px 20px rgba(0,0,0,0.25);
   }
 
-  /* content wrapper above overlays */
   .wrap{position:relative; z-index:1; max-width:var(--maxw); margin:0 auto;}
 
   header{text-align:center; margin-bottom:10px}
@@ -112,7 +99,6 @@
   nav a{color:#2d2d2d; text-decoration:none; font-weight:bold; margin:0 12px}
   nav a:hover{text-decoration:underline}
 
-  /* GRID: exactly 3 columns on desktop; 2 on tablets; 1 on phones */
   .grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
@@ -129,7 +115,6 @@
     text-decoration:none;
     word-break:break-word;
     padding:2px 0;
-    /* ink jitter */
     text-shadow:0 .2px 0 rgba(0,0,0,0.35);
   }
   .link a:hover{ text-decoration:underline }
@@ -141,8 +126,7 @@
     <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
 
     <div class="grid">
-      <!-- newest first; left→right→down -->
-
+      <!-- curated links -->
       <div class="link"><a class="c-green"  href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank" rel="noopener">The Best Performing Fund in Modern History</a></div>
       <div class="link"><a class="c-indigo" href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank" rel="noopener">The Pyramid Power Plant Theory</a></div>
       <div class="link"><a class="c-red"    href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank" rel="noopener">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
