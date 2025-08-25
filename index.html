@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THE DAYLUGE</title>
 
-<!-- Bust aggressive caches on hosts/CDNs -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
@@ -14,46 +13,55 @@
   :root{
     --red:#cc0000; --orange:#ff6600; --green:#009900; --lime:#32cd32;
     --blue:#3388cc; --light-blue:#000080; --indigo:#4b0082; --violet:#6600cc; --pink:#ff3399;
-    --ink:#111827; --muted:#6b7280; --bg:#e0e0e0; --paper:#ffffff; --rule:#e5e7eb;
-    --maxw:1400px;
+    --ink:#111827; --bg:#e0e0e0; --rule:#d1d5db; --maxw:1400px;
   }
 
-  /* Color classes */
-  .c-red{color:var(--red)} .c-orange{color:var(--orange)} .c-green{color:var(--green)}
-  .c-lime-green{color:var(--lime)} .c-blue{color:var(--blue)} .c-light-blue{color:var(--light-blue)}
-  .c-indigo{color:var(--indigo)} .c-violet{color:var(--violet)} .c-pink{color:var(--pink)}
-  .c-purple{color:var(--violet)} .c-black{color:#000}
+  .c-red{color:var(--red)}
+  .c-orange{color:var(--orange)}
+  .c-green{color:var(--green)}
+  .c-lime-green{color:var(--lime)}
+  .c-blue{color:var(--blue)}
+  .c-light-blue{color:var(--light-blue)}
+  .c-indigo{color:var(--indigo)}
+  .c-violet{color:var(--violet)}
+  .c-pink{color:var(--pink)}
+  .c-purple{color:var(--violet)}
+  .c-black{color:#000}
 
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;margin:0;padding:0}
   body{
-    margin:0; background:var(--bg); color:#000;
-    font-family:"Courier New", Courier, monospace; line-height:1.4;
+    background:var(--bg);
+    font-family:"Courier New", monospace;
+    line-height:1.4;
+    color:#000;
+    padding:20px;
   }
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:20px}
-  header{text-align:center; margin-bottom:10px}
-  h1{margin:0; font-size:36px; letter-spacing:1px}
-  nav{text-align:center; margin:6px 0 18px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
-  nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px}
-  nav a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;}
+  header{text-align:center;margin-bottom:10px;}
+  h1{font-size:36px;letter-spacing:1px;}
+  nav{text-align:center;margin:6px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--rule);}
+  nav a{color:#333;text-decoration:none;font-weight:bold;margin:0 12px;}
+  nav a:hover{text-decoration:underline;}
 
-  /* Grid: row-wise flow (left→right→down), responsive columns */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-    gap:16px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:10px;
+    margin-top:10px;
   }
-  .link{
-    background:var(--paper);
-    border:1px solid var(--rule);
-    border-radius:8px;
-    padding:10px 12px;
-    font-weight:bold;
+  .link a{
+    text-decoration:none;
+    display:block;
     font-size:18px;
+    font-weight:bold;
+    word-break:break-word;
+    padding:4px 0;
   }
-  .link a{color:inherit; text-decoration:none; display:block; word-break:break-word}
-  .link a:hover{text-decoration:underline}
+  .link a:hover{text-decoration:underline;}
 
-  @media (max-width:640px){ h1{font-size:28px} }
+  @media(max-width:640px){
+    h1{font-size:28px;}
+  }
 </style>
 </head>
 <body>
@@ -62,43 +70,36 @@
   <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
 
   <div class="grid">
-    <!-- EXACT CURATED LINKS (no JS, no placeholders) -->
-
-    <!-- (Former Column 1 items) -->
-    <div class="link c-purple"><a href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" target="_blank" rel="noopener">7 Brilliant Acts of Psychological Warfare in History</a></div>
-    <div class="link c-blue"><a href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" target="_blank" rel="noopener">1910: The Year the Modern World Lost Its Mind</a></div>
-    <div class="link c-red"><a href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank" rel="noopener">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
-    <div class="link c-orange"><a href="https://collider.com/best-war-shows-must-watch-ranked/" target="_blank" rel="noopener">10 Must-Watch War Shows, Ranked</a></div>
-    <div class="link c-green"><a href="https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird" target="_blank" rel="noopener">How Did Moscow Become Europe's Biggest City?</a></div>
-    <div class="link c-blue"><a href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" target="_blank" rel="noopener">Six Tips from the Middle Ages on How to Beat the Summer Heat</a></div>
-    <div class="link c-pink"><a href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82" target="_blank" rel="noopener">Twilight of the House of Lords</a></div>
-    <div class="link c-orange"><a href="https://x.com/Rainmaker1973/status/1959655344709173469" target="_blank" rel="noopener">1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima</a></div>
-    <div class="link c-pink"><a href="https://www.youtube.com/watch?v=F4M1MlBZyI0" target="_blank" rel="noopener">Dave Smith: "I Was A Militant Atheist"</a></div>
-    <div class="link c-blue"><a href="https://tv.garden/" target="_blank" rel="noopener">Watch Global Local TV Online</a></div>
-
-    <!-- (Former Column 2 items) -->
-    <div class="link c-red"><a href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" target="_blank" rel="noopener">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a></div>
-    <div class="link c-green"><a href="https://x.com/onechancefreedm/status/1959315977830903826" target="_blank" rel="noopener">Credit Card Delinquencies Surging</a></div>
-    <div class="link c-blue"><a href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/" target="_blank" rel="noopener">All-Time High in Cocaine Production</a></div>
-    <div class="link c-green"><a href="https://x.com/GlobalMktObserv/status/1959654438332670436" target="_blank" rel="noopener">Gold International Reserves are SURGING</a></div>
-    <div class="link c-green"><a href="https://x.com/KobeissiLetter/status/1959636646925852986" target="_blank" rel="noopener">US Federal Debt Surging At +$21 Billion Per Day</a></div>
-    <div class="link c-green"><a href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank" rel="noopener">The Best Performing Fund in Modern History</a></div>
-    <div class="link c-red"><a href="https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile" target="_blank" rel="noopener">Israel Targets Yemen's Capital With Massive Strikes</a></div>
-    <div class="link c-pink"><a href="https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine" target="_blank" rel="noopener">Systemic Corruption Doesn't Give A Chance For Peace In Ukraine</a></div>
-    <div class="link c-orange"><a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" target="_blank" rel="noopener">Going Full Bud Light</a></div>
-    <div class="link c-indigo"><a href="https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/" target="_blank" rel="noopener">The Smithsonian Has Jumped the Shark</a></div>
-    <div class="link c-blue"><a href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" target="_blank" rel="noopener">The Vegas Shooting Is A Layered Onion of "Max Conspiracy"</a></div>
-    <div class="link c-orange"><a href="https://example.com" target="_blank" rel="noopener">Diddy's Arrest Is Part of Something Bigger</a></div>
-
-    <!-- (Former Column 3 items) -->
-    <div class="link c-indigo"><a href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" target="_blank" rel="noopener">This Teacher Loves His Students</a></div>
-    <div class="link c-violet"><a href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" target="_blank" rel="noopener">The "Classic Part" Little Boy Has the Right Attitude</a></div>
-    <div class="link c-pink"><a href="https://x.com/engineers_feed/status/1959628877711487203" target="_blank" rel="noopener">Windows 95 Launch Party: Peak 90s 🤘</a></div>
-    <div class="link c-orange"><a href="https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025" target="_blank" rel="noopener">Which New NFL Coaches Are in the Best Position to Win?</a></div>
-    <div class="link c-indigo"><a href="https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m" target="_blank" rel="noopener">'Holy Grail' Jordan–Bryant Card Sells for $12.9M</a></div>
-    <div class="link c-violet"><a href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" target="_blank" rel="noopener">Cost of Attending an NFL Game +40% in 10 Years</a></div>
-    <div class="link c-blue"><a href="https://www.youtube.com/watch?v=x9cVcGQNxBw" target="_blank" rel="noopener">They Found Giants In A Cave</a></div>
-    <div class="link c-indigo"><a href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank" rel="noopener">The Pyramid Power Plant Theory</a></div>
+    <!-- EXACT TITLES WITH YOUR CHANGE APPLIED -->
+    <div class="link"><a class="c-green" href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank">The Best Performing Fund in Modern History</a></div>
+    <div class="link"><a class="c-indigo" href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank">The Pyramid Power Plant Theory</a></div>
+    <div class="link"><a class="c-red" href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
+    <div class="link"><a class="c-blue" href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" target="_blank">The Vegas Shooting Is A Layered Onion of "Max Conspiracy"</a></div>
+    <div class="link"><a class="c-violet" href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" target="_blank">The "Classic Part" Little Boy Has the Right Attitude</a></div>
+    <div class="link"><a class="c-indigo" href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" target="_blank">This Teacher Loves His Students</a></div>
+    <div class="link"><a class="c-orange" href="https://example.com" target="_blank">Diddy's Arrest Is Part of Something Bigger</a></div>
+    <div class="link"><a class="c-pink" href="https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine" target="_blank">Systemic Corruption Doesn't Give A Chance For Peace In Ukraine</a></div>
+    <div class="link"><a class="c-blue" href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" target="_blank">1910: The Year the Modern World Lost Its Mind</a></div>
+    <div class="link"><a class="c-green" href="https://x.com/KobeissiLetter/status/1959636646925852986" target="_blank">US Federal Debt Surging At +$21 Billion Per Day</a></div>
+    <div class="link"><a class="c-red" href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" target="_blank">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a></div>
+    <div class="link"><a class="c-blue" href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/" target="_blank">An All-Time High in Cocaine Production</a></div>
+    <div class="link"><a class="c-orange" href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" target="_blank">Cracker Barrel Is Dead, And Its Stupid Woke CEO Killed It With Gay Nonsense</a></div>
+    <div class="link"><a class="c-pink" href="https://x.com/engineers_feed/status/1959628877711487203" target="_blank">Gates, Ballmer and Pals Rocking Out HARD to Windows 95</a></div>
+    <div class="link"><a class="c-orange" href="https://x.com/Rainmaker1973/status/1959655344709173469" target="_blank">1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima</a></div>
+    <div class="link"><a class="c-indigo" href="https://www.youtube.com/watch?v=x9cVcGQNxBw" target="_blank">They Found Giants In A Cave</a></div>
+    <div class="link"><a class="c-orange" href="https://collider.com/best-war-shows-must-watch-ranked/" target="_blank">10 Must-Watch War Shows, Ranked</a></div>
+    <div class="link"><a class="c-green" href="https://x.com/onechancefreedm/status/1959315977830903826" target="_blank">Credit Card Delinquencies Surging</a></div>
+    <div class="link"><a class="c-red" href="https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile" target="_blank">Israel Targets Yemen's Capital With Massive Strikes</a></div>
+    <div class="link"><a class="c-blue" href="https://tv.garden/" target="_blank">Watch Global Local TV Online</a></div>
+    <div class="link"><a class="c-purple" href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" target="_blank">7 Brilliant Acts of Psychological Warfare in History</a></div>
+    <div class="link"><a class="c-pink" href="https://www.youtube.com/watch?v=F4M1MlBZyI0" target="_blank">Dave Smith: "I Was A Militant Atheist"</a></div>
+    <div class="link"><a class="c-indigo" href="https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/" target="_blank">Smithsonian Long Overdue for Housecleaning</a></div>
+    <div class="link"><a class="c-green" href="https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird" target="_blank">Why Is Moscow So Weird?</a></div>
+    <div class="link"><a class="c-violet" href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" target="_blank">The Cost of Attending an NFL Game Has Risen 40% in 10 Years</a></div>
+    <div class="link"><a class="c-indigo" href="https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m" target="_blank">'Holy Grail' Jordan–Bryant Card Sells for $12.9M</a></div>
+    <div class="link"><a class="c-orange" href="https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025" target="_blank">Which New NFL Coaches Are in the Best Position to Win?</a></div>
+    <div class="link"><a class="c-blue" href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" target="_blank">Six Tips from the Middle Ages on How to Beat the Summer Heat</a></div>
+    <div class="link"><a class="c-green" href="https://x.com/GlobalMktObserv/status/1959654438332670436" target="_blank">Gold International Reserves Are SURGING</a></div>
   </div>
 </div>
 </body>
