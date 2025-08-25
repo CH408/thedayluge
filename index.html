@@ -1,3 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ <title>The DayLuge</title>
+ <style>
+   :root{
+     --red:#cc0000;
+     --orange:#ff6600;
+     --green:#009900;
+     --lime-green:#32cd32;
+     --blue:#3388cc;
+     --light-blue:#000080;
+     --indigo:#4b0082;
+     --violet:#6600cc;
+     --pink:#ff3399;
+   }
+
+   /* Color utilities */
+   .c-red{color:var(--red)}
+   .c-orange{color:var(--orange)}
+   .c-green{color:var(--green)}
+   .c-lime-green{color:var(--lime-green)}
+   .c-blue{color:var(--blue)}
+   .c-light-blue{color:var(--light-blue)}
+   .c-indigo{color:var(--indigo)}
+   .c-violet{color:var(--violet)}
+   .c-pink{color:var(--pink)}
+   .c-purple{color:var(--violet)}
+
+   body{
+     font-family:'Courier New', monospace;
+     background-color:#e0e0e0;
+     margin:0; padding:20px; line-height:1.4;
+     position: relative;
+   }
+
+   /* Newsprint texture */
+   body::before {
+     content: '';
+     position: fixed;
+     inset: 0;
+     background-image:
+       radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 1px),
+       radial-gradient(circle at 4px 4px, rgba(0,0,0,0.04) 1px, transparent 1px),
+       radial-gradient(circle at 7px 7px, rgba(0,0,0,0.03) 1px, transparent 1px);
+     background-size: 6px 6px, 10px 10px, 14px 14px;
+     pointer-events: none;
+     z-index: -1;
+   }
+
+   .header{ text-align:center; margin-bottom:30px; }
+   .header h1{ font-size:36px; color:#000; margin:0; font-weight:bold; }
+
+   .nav-links {
+     text-align: center;
+     margin-bottom: 12px;
+     padding: 10px 0;
+     border-bottom: 2px solid #ccc;
+   }
+   .nav-links a {
+     margin: 0 15px;
+     color: #333;
+     text-decoration: none;
+     font-weight: bold;
+     font-size: 14px;
+   }
+   .nav-links a:hover { text-decoration: underline; }
+
+   /* Mobile tabs */
+   .mobile-tabs {
+     display: none;
+     text-align: center;
+     margin: 12px auto 10px;
+     max-width: 720px;
+   }
+   .tabs-row {
+     display: grid;
+     grid-template-columns: 1fr 1fr 1fr;
+     gap: 8px;
+     padding: 0 20px;
+     box-sizing: border-box;
+   }
+   .tab-btn {
+     border: 1px solid #bbb;
+     border-radius: 6px;
+     padding: 10px 10px;
+     font-weight: bold;
+     background: #f7f7f7;
+     cursor: pointer;
+     user-select: none;
+   }
+   .tab-btn:active { transform: translateY(1px); }
+   .tab-btn:hover { background:#efefef; }
+   .tab-active {
+     background: #111827;
+     color: #fff;
+     border-color: #111827;
+   }
+
+   .container{
+     display:grid; grid-template-columns:1fr 1fr 1fr;  /* 3 columns */
+     gap:25px; width:100%; margin:0; padding:0 20px; box-sizing:border-box;
+     position: relative;
+     max-width: 1400px;
+     margin-left: auto;
+     margin-right: auto;
+   }
+
+   /* Column dividers */
+   .container::before,
+   .container::after {
+     content: '';
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     width: 1px;
+     background-color: #d0d0d0;
+     z-index: 1;
+   }
+   .container::before { left: calc(33.333% - 1px); }
+   .container::after  { left: calc(66.666% - 1px); }
+
+   .column{
+     padding:15px;
+     background-color: transparent;
+     position: relative;
+     z-index: 2;
+   }
+   .link-item{ margin-bottom:15px; font-size:18px; font-weight:bold; }
+   .link-item a{ text-decoration:none; display:block; padding:2px 0; }
+   .link-item a:hover{ text-decoration:underline; }
+
+   /* Admin panel */
+   .admin-controls {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     background: rgba(255,255,255,0.9);
+     padding: 15px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     font-size: 12px;
+     max-width: 300px;
+     display: none;
+   }
+   .admin-controls.show { display: block; }
+   .admin-controls button {
+     margin: 5px;
+     padding: 5px 10px;
+     font-size: 11px;
+     background: #f0f0f0;
+     border: 1px solid #ccc;
+     cursor: pointer;
+   }
+   .admin-controls button:hover { background: #e0e0e0; }
+
+   /* Tablet */
+   @media (max-width:900px){
+     .container{ grid-template-columns:1fr 1fr 1fr; gap:18px; }
+   }
+
+   /* Mobile: tabs & one column at a time */
+   @media (max-width:640px){
+     .mobile-tabs { display:block; }
+     .container{ grid-template-columns:1fr; gap:12px; }
+     .container::before, .container::after { display:none; }
+     .header h1{ font-size:28px; }
+   }
+
+   .hidden { display: none !important; }
+ </style>
+</head>
+<body>
+ <div class="header">
+   <h1>THE DAYLUGE</h1>
+ </div>
+
+ <div class="nav-links">
+   <a href="/">Home</a>
+   <a href="/archive">Archive</a>
+ </div>
+
+ <!-- Mobile Tabs -->
+ <div class="mobile-tabs" id="mobileTabs" role="tablist" aria-label="Column tabs">
+   <div class="tabs-row">
+     <button id="tab-1" class="tab-btn" role="tab" aria-controls="colwrap-1" aria-selected="true" data-tab="1">Col 1</button>
+     <button id="tab-2" class="tab-btn" role="tab" aria-controls="colwrap-2" aria-selected="false" data-tab="2">Col 2</button>
+     <button id="tab-3" class="tab-btn" role="tab" aria-controls="colwrap-3" aria-selected="false" data-tab="3">Col 3</button>
+   </div>
+ </div>
+
+ <div class="container" id="mainContainer">
+   <!-- Column wrappers so we can toggle them on mobile -->
+   <div id="colwrap-1" class="column"><div id="col-1"></div></div>
+   <div id="colwrap-2" class="column"><div id="col-2"></div></div>
+   <div id="colwrap-3" class="column"><div id="col-3"></div></div>
+ </div>
+
+ <!-- Admin Controls -->
+ <div class="admin-controls" id="adminControls">
+   <h4>Admin Controls</h4>
+   <div>
+     <strong>Current Links:</strong>
+     <div id="linkCounts"></div>
+   </div>
+   <div style="margin-top: 10px;">
+     <button id="btnAdd">Add Sample Link</button>
+     <button id="btnArchive">Force Archive Old</button>
+     <button id="btnExport">Export Data</button>
+     <button id="btnClear">Clear All</button>
+   </div>
+ </div>
+
+ <p style="text-align:center; margin-top:40px; font-size:12px;">
+   <span id="totalLinks"></span> |
+   <a href="/admin" style="color:#666; text-decoration:none;">Admin</a> |
+   <a href="#" id="adminToggle" style="color:#666; text-decoration:none; font-size:10px;">•</a>
+ </p>
+
 <script>
 // ================== CONFIG ==================
 const CONFIG = {
@@ -7,7 +228,105 @@ const CONFIG = {
 };
 
 // ================== DATA ==================
-const INITIAL_DATA = { /* (same as before; keep your original INITIAL_DATA block) */ };
+const INITIAL_DATA = {
+  column1: [
+    { url: "https://www.history.com/articles/brilliant-psyops-psychological-warfare",
+      title: "7 Brilliant Acts of Psychological Warfare in History", color: "c-purple",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
+      title: "1910: The Year the Modern World Lost Its Mind", color: "c-blue",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
+      title: "\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters", color: "c-red",
+      dateAdded: new Date('2025-08-22').toISOString() },
+    { url: "https://collider.com/best-war-shows-must-watch-ranked/",
+      title: "10 Must-Watch War Shows, Ranked", color: "c-orange",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
+      title: "How Did Moscow Become Europe's Biggest City?", color: "c-green",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
+      title: "Six Tips from the Middle Ages on How to Beat the Summer Heat", color: "c-blue",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82",
+      title: "Twilight of the House of Lords", color: "c-pink",
+      dateAdded: new Date('2025-08-22').toISOString() },
+    { url: "https://x.com/Rainmaker1973/status/1959655344709173469",
+      title: "1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima", color: "c-orange",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://www.youtube.com/watch?v=F4M1MlBZyI0",
+      title: "Dave Smith: \"I Was A Militant Atheist\"", color: "c-pink",
+      dateAdded: new Date('2025-08-17').toISOString() },
+    { url: "https://tv.garden/",
+      title: "Watch Global Local TV Online", color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString() }
+  ],
+  column2: [
+    { url: "https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj",
+      title: "Ghislaine Maxwell: Trump 'Was Never Inappropriate'", color: "c-red",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://x.com/onechancefreedm/status/1959315977830903826",
+      title: "Credit Card Delinquencies Surging", color: "c-green",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/",
+      title: "All-Time High in Cocaine Production", color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString() },
+    { url: "https://x.com/GlobalMktObserv/status/1959654438332670436",
+      title: "Gold International Reserves are SURGING", color: "c-green",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://x.com/KobeissiLetter/status/1959636646925852986",
+      title: "US Federal Debt Surging At +$21 Billion Per Day", color: "c-green",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/",
+      title: "The Best Performing Fund in Modern History", color: "c-green",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile",
+      title: "Israel Targets Yemen's Capital With Massive Strikes", color: "c-red",
+      dateAdded: new Date('2025-08-22').toISOString() },
+    { url: "https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine",
+      title: "Systemic Corruption Doesn't Give A Chance For Peace In Ukraine", color: "c-pink",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/",
+      title: "Going Full Bud Light", color: "c-orange",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/",
+      title: "The Smithsonian Has Jumped the Shark", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() },
+    { url: "https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
+      title: "The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"", color: "c-blue",
+      dateAdded: new Date('2025-08-17').toISOString() },
+    { url: "https://example.com",
+      title: "Diddy's Arrest Is Part of Something Bigger", color: "c-orange",
+      dateAdded: new Date('2025-08-22').toISOString() }
+  ],
+  column3: [
+    { url: "https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
+      title: "This Teacher Loves His Students", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() },
+    { url: "https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
+      title: "The \"Classic Part\" Little Boy Has the Right Attitude", color: "c-violet",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://x.com/engineers_feed/status/1959628877711487203",
+      title: "Windows 95 Launch Party: Peak 90s 🤘", color: "c-pink",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025",
+      title: "Which New NFL Coaches Are in the Best Position to Win?", color: "c-orange",
+      dateAdded: new Date('2025-08-17').toISOString() },
+    { url: "https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
+      title: "'Holy Grail' Jordan–Bryant Card Sells for $12.9M", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() },
+    { url: "https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
+      title: "Cost of Attending an NFL Game +40% in 10 Years", color: "c-violet",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://www.youtube.com/watch?v=x9cVcGQNxBw",
+      title: "They Found Giants In A Cave", color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString() },
+    { url: "https://www.youtube.com/shorts/0Phz6wnq_GU",
+      title: "The Pyramid Power Plant Theory", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() }
+  ],
+  archived: []
+};
 
 // ================== MANAGER ==================
 class DayLugeManager {
@@ -28,18 +347,52 @@ class DayLugeManager {
   }
 
   saveData() {
-    try {
-      localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.data));
-    } catch (e) {}
+    try { localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.data)); }
+    catch (e) {}
   }
 
   init() {
     this.render();
     this.updateStats();
-    this.mobileQuery.addEventListener?.('change', () => this.updateMobileVisibility());
-    window.addEventListener('orientationchange', () => this.updateMobileVisibility());
-    window.addEventListener('resize', () => this.updateMobileVisibility());
-    this.updateMobileVisibility(true);
+
+    // Attach UI listeners
+    this.bindUI();
+
+    // Keep responsive
+    this.mobileQuery.addEventListener?.('change', () => updateMobileVisibility(true));
+    window.addEventListener('orientationchange', () => updateMobileVisibility(true));
+    window.addEventListener('resize', () => updateMobileVisibility(true));
+
+    // Initial mobile/desktop state
+    updateMobileVisibility(true);
+  }
+
+  bindUI() {
+    // Mobile tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const n = Number(btn.dataset.tab || 1);
+        setActiveTab(n);
+      });
+      // Keyboard (optional)
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const n = Number(btn.dataset.tab || 1);
+          setActiveTab(n);
+        }
+      });
+    });
+
+    // Admin toggles
+    document.getElementById('adminToggle')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleAdmin();
+    });
+    document.getElementById('btnAdd')?.addEventListener('click', addSampleLink);
+    document.getElementById('btnArchive')?.addEventListener('click', () => forceArchive());
+    document.getElementById('btnExport')?.addEventListener('click', exportData);
+    document.getElementById('btnClear')?.addEventListener('click', clearAll);
   }
 
   addLink(columnNum, linkData) {
@@ -66,17 +419,14 @@ class DayLugeManager {
 
   render() {
     for (let i = 1; i <= 3; i++) {
-      const columnKey = `column${i}`;
-      const links = this.data[columnKey] || [];
+      const links = this.data[`column${i}`] || [];
       const target = document.getElementById(`col-${i}`);
       if (!target) continue;
-      let html = '';
-      links.forEach(link => {
-        html += `<div class="link-item"><a href="${link.url}" class="${link.color || ''}" target="_blank" rel="noopener noreferrer">${link.title}</a></div>`;
-      });
-      target.innerHTML = html;
+      target.innerHTML = links.map(link =>
+        `<div class="link-item"><a href="${link.url}" class="${link.color || ''}" target="_blank" rel="noopener noreferrer">${link.title}</a></div>`
+      ).join('');
     }
-    this.updateMobileVisibility();
+    updateMobileVisibility(false);
   }
 
   updateStats() {
@@ -85,8 +435,10 @@ class DayLugeManager {
       (this.data.column2?.length || 0) +
       (this.data.column3?.length || 0);
     const totalArchived = this.data.archived.length;
-    document.getElementById('totalLinks').textContent =
-      `Active: ${totalActive}/${CONFIG.totalMaxLinks} | Archived: ${totalArchived}`;
+
+    const totalEl = document.getElementById('totalLinks');
+    if (totalEl) totalEl.textContent = `Active: ${totalActive}/${CONFIG.totalMaxLinks} | Archived: ${totalArchived}`;
+
     const countsDiv = document.getElementById('linkCounts');
     if (countsDiv) {
       countsDiv.innerHTML = `
@@ -97,58 +449,6 @@ class DayLugeManager {
       `;
     }
   }
-
-  forceArchiveOld() {
-    let totalArchived = 0;
-    ['column1', 'column2', 'column3'].forEach(columnKey => {
-      const column = this.data[columnKey];
-      if (column.length > 10) {
-        const toArchive = column.splice(10);
-        toArchive.forEach(link => {
-          link.archivedDate = new Date().toISOString();
-          link.originalColumn = columnKey;
-          this.data.archived.push(link);
-        });
-        totalArchived += toArchive.length;
-      }
-    });
-    this.saveData();
-    this.render();
-    this.updateStats();
-    alert(`Archived ${totalArchived} older links`);
-  }
-
-  addSampleLink() {
-    const colors = ['c-red', 'c-orange', 'c-green', 'c-blue', 'c-indigo', 'c-violet', 'c-pink'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    const randomColumn = Math.floor(Math.random() * 3) + 1;
-    const sampleLink = {
-      url: 'https://example.com/sample-' + Date.now(),
-      title: `Sample Link Added ${new Date().toLocaleTimeString()}`,
-      color: randomColor
-    };
-    this.addLink(randomColumn, sampleLink);
-  }
-
-  exportData() {
-    const dataStr = JSON.stringify(this.data, null, 2);
-    const blob = new Blob([dataStr], {type: 'application/json'});
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'dayluge-data.json';
-    link.click();
-    URL.revokeObjectURL(url);
-  }
-
-  clearAll() {
-    if (confirm('Are you sure you want to clear all data?')) {
-      this.data = { column1: [], column2: [], column3: [], archived: [] };
-      this.saveData();
-      this.render();
-      this.updateStats();
-    }
-  }
 }
 
 // ================== GLOBAL HOOKS ==================
@@ -156,42 +456,36 @@ let dayLugeManager;
 
 function toggleAdmin() {
   const panel = document.getElementById('adminControls');
-  panel.classList.toggle('show');
+  panel?.classList.toggle('show');
 }
 function addSampleLink() { dayLugeManager.addSampleLink(); }
 function forceArchive()   { dayLugeManager.forceArchiveOld(); }
 function exportData()     { dayLugeManager.exportData(); }
 function clearAll()       { dayLugeManager.clearAll(); }
 
+function isMobile(){
+  return window.matchMedia('(max-width: 640px)').matches;
+}
+
 function setActiveTab(n){
   dayLugeManager.activeTab = Math.max(1, Math.min(3, Number(n) || 1));
   updateTabsUI();
   updateColumnVisibility();
 
-  // ✅ Scroll to the selected column (mobile only)
-  if (isMobile()) {
-    const wrap = document.getElementById(`colwrap-${dayLugeManager.activeTab}`);
-    if (wrap) {
-      wrap.scrollIntoView({behavior:'smooth', block:'start'});
-    }
+  // Scroll to the selected column wrapper (works for both mobile & desktop)
+  const wrap = document.getElementById(`colwrap-${dayLugeManager.activeTab}`);
+  if (wrap) {
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-}
-
-function isMobile(){
-  return window.matchMedia('(max-width: 640px)').matches;
 }
 
 function updateTabsUI(){
   for (let i=1;i<=3;i++){
     const btn = document.getElementById(`tab-${i}`);
     if (!btn) continue;
-    if (i === dayLugeManager.activeTab) {
-      btn.classList.add('tab-active');
-      btn.setAttribute('aria-selected','true');
-    } else {
-      btn.classList.remove('tab-active');
-      btn.setAttribute('aria-selected','false');
-    }
+    const active = (i === dayLugeManager.activeTab);
+    btn.classList.toggle('tab-active', active);
+    btn.setAttribute('aria-selected', active ? 'true' : 'false');
   }
 }
 
@@ -201,24 +495,24 @@ function updateColumnVisibility(){
     const wrap = document.getElementById(`colwrap-${i}`);
     if (!wrap) continue;
     if (mobile) {
-      if (i === dayLugeManager.activeTab) wrap.classList.remove('hidden');
-      else wrap.classList.add('hidden');
+      wrap.classList.toggle('hidden', i !== dayLugeManager.activeTab);
     } else {
-      wrap.classList.remove('hidden');
+      wrap.classList.remove('hidden'); // show all on desktop
     }
   }
 }
 
-function updateMobileVisibility(initial=false){
+function updateMobileVisibility(initial){
   updateTabsUI();
   updateColumnVisibility();
-  if (initial && isMobile()) setActiveTab(1);
+  if (initial && isMobile()) setActiveTab(dayLugeManager.activeTab || 1);
 }
-
-window.updateMobileVisibility = updateMobileVisibility;
 
 document.addEventListener('DOMContentLoaded', function() {
   dayLugeManager = new DayLugeManager();
+  // Ensure default tab selected
   if (isMobile()) setActiveTab(1);
 });
 </script>
+</body>
+</html>
