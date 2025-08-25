@@ -68,42 +68,27 @@
      font-size: 14px;
    }
 
-   .nav-links a:hover {
-     text-decoration: underline;
-   }
+   .nav-links a:hover { text-decoration: underline; }
 
    .container{
-     display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
+     display:grid; grid-template-columns:1fr 1fr 1fr;  /* 3 columns */
      gap:25px; width:100%; margin:0; padding:0 20px; box-sizing:border-box;
      position: relative;
    }
 
-   /* Column dividers */
-   .container::before {
-     content: '';
-     position: absolute;
-     top: 0;
-     bottom: 0;
-     left: calc(25% - 1px);
-     width: 1px;
-     background-color: #d0d0d0;
-     z-index: 1;
-   }
+   /* Column dividers for 3 columns: 33.333% and 66.666% */
+   .container::before,
    .container::after {
      content: '';
      position: absolute;
      top: 0;
      bottom: 0;
-     left: calc(50% - 1px);
      width: 1px;
      background-color: #d0d0d0;
      z-index: 1;
    }
-
-   /* Third column divider */
-   .container {
-     background-image: linear-gradient(to right, transparent calc(75% - 1px), #d0d0d0 calc(75% - 1px), #d0d0d0 calc(75%), transparent calc(75%));
-   }
+   .container::before { left: calc(33.333% - 1px); }
+   .container::after  { left: calc(66.666% - 1px); }
 
    .column{ 
      padding:15px; 
@@ -114,8 +99,6 @@
    .link-item{ margin-bottom:15px; font-size:18px; font-weight:bold; }
    .link-item a{ text-decoration:none; display:block; padding:2px 0; }
    .link-item a:hover{ text-decoration:underline; }
-
-
 
    /* Admin section */
    .admin-controls {
@@ -131,9 +114,7 @@
      display: none;
    }
 
-   .admin-controls.show {
-     display: block;
-   }
+   .admin-controls.show { display: block; }
 
    .admin-controls button {
      margin: 5px;
@@ -143,27 +124,19 @@
      border: 1px solid #ccc;
      cursor: pointer;
    }
-
-   .admin-controls button:hover {
-     background: #e0e0e0;
-   }
+   .admin-controls button:hover { background: #e0e0e0; }
 
    @media (max-width:768px){
      .container{ 
        grid-template-columns:1fr 1fr; 
        gap:10px;
-       background-image: linear-gradient(to right, transparent calc(50% - 1px), #d0d0d0 calc(50% - 1px), #d0d0d0 calc(50%), transparent calc(50%));
      }
-     .container::before,
-     .container::after {
-       display: none;
-     }
+     .container::before { left: calc(50% - 1px); }
+     .container::after { display:none; }
    }
    @media (max-width:480px){
-     .container{ 
-       grid-template-columns:1fr;
-       background-image: none;
-     }
+     .container{ grid-template-columns:1fr; }
+     .container::before, .container::after { display:none; }
      .header h1{ font-size:24px; }
    }
  </style>
@@ -204,218 +177,126 @@
  </p>
 
 <script>
-// Configuration
+// ================== CONFIG ==================
 const CONFIG = {
   maxLinksPerColumn: 18,
-  totalMaxLinks: 72,
-  storageKey: 'dayluge_links_v2'
+  totalMaxLinks: 54,          // 3 columns * 18
+  storageKey: 'dayluge_links_v3'
 };
 
-// Initial data structure with your current links
+// ================== DATA ==================
+// Reorganized into 3 columns per your categories:
+//
+// COLUMN 1 — Longform / Arts / Quotes / Literature / Culture / Film / TV / Music
+// COLUMN 2 — News / Politics / Geopolitics / Economics / Markets / Fiscal / Monetary
+// COLUMN 3 — Humor / Memes / Animals / Feel-good / Sports / Miscellany
 const INITIAL_DATA = {
+  // -------- COLUMN 1 --------
   column1: [
-    {
-      url: "https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj",
-      title: "Ghislaine Maxwell: Trump 'Was Never Inappropriate'",
-      color: "c-red",
-      dateAdded: new Date('2025-08-24').toISOString()
-    },
-    {
-      url: "https://x.com/onechancefreedm/status/1959315977830903826",
-      title: "Credit Card Delinquencies Surging",
-      color: "c-green",
-      dateAdded: new Date('2025-08-23').toISOString()
-    },
-    {
-      url: "https://example.com",
-      title: "Diddy's Arrest Is Part of Something Bigger",
-      color: "c-orange",
-      dateAdded: new Date('2025-08-22').toISOString()
-    },
-    {
-      url: "https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/?tpa=Y2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_source=newsletter&utm_medium=email&utm_term=https%3A%2F%2Fgeopoliticalfutures.com%2Fan-all-time-high-in-cocaine-production%2F%3Ftpa%3DY2VjMDg2MjI0Mzk0YmMzYzg0YzVmYzE3NTcwMDExMTYzYjg4NzQ&utm_content&utm_campaign=PAID%20-%20Daily%20Diges",
-      title: "All-Time High in Cocaine Production",
-      color: "c-blue",
-      dateAdded: new Date('2025-08-21').toISOString()
-    },
-    {
-      url: "https://x.com/GlobalMktObserv/status/1959654438332670436",
-      title: "Gold International Reserves are SURGING",
-      color: "c-green",
-      dateAdded: new Date('2025-08-20').toISOString()
-    },
-    {
-      url: "https://x.com/KobeissiLetter/status/1959636646925852986",
-      title: "US Federal Debt Surgng At +$21 Billion Per Day",
-      color: "c-green",
-      dateAdded: new Date('2025-08-19').toISOString()
-    },
-    {
-      url: "https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
-      title: "This Teacher Loves His Students",
-      color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString()
-    },
-    {
-      url: "https://x.com/MAstronomers/status/1959217217410621492",
-      title: "Number of Starlink Satellites Over Time",
-      color: "c-pink",
-      dateAdded: new Date('2025-08-17').toISOString()
-    }
+    { url: "https://www.history.com/articles/brilliant-psyops-psychological-warfare",
+      title: "7 Brilliant Acts of Psychological Warfare in History", color: "c-purple",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
+      title: "1910: The Year the Modern World Lost Its Mind", color: "c-blue",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
+      title: "\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters", color: "c-red",
+      dateAdded: new Date('2025-08-22').toISOString() },
+    { url: "https://collider.com/best-war-shows-must-watch-ranked/",
+      title: "10 Must-Watch War Shows, Ranked", color: "c-orange",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
+      title: "How Did Moscow Become Europe's Biggest City?", color: "c-green",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
+      title: "Six Tips from the Middle Ages on How to Beat the Summer Heat", color: "c-blue",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82",
+      title: "Twilight of the House of Lords", color: "c-pink",
+      dateAdded: new Date('2025-08-22').toISOString() },
+    { url: "https://x.com/Rainmaker1973/status/1959655344709173469",
+      title: "1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima", color: "c-orange",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://www.youtube.com/watch?v=F4M1MlBZyI0",
+      title: "Dave Smith: \"I Was A Militant Atheist\"", color: "c-pink",
+      dateAdded: new Date('2025-08-17').toISOString() },
+    { url: "https://tv.garden/",
+      title: "Watch Global Local TV Online", color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString() }
   ],
+
+  // -------- COLUMN 2 --------
   column2: [
-    {
-      url: "https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/",
-      title: "Going Full Bud Light",
-      color: "c-orange",
-      dateAdded: new Date('2025-08-24').toISOString()
-    },
-    {
-      url: "https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/?user_id=66c4bc5a5d78644b3a979610#google_vignette",
-      title: "The Best Performing Fund in Modern History",
-      color: "c-green",
-      dateAdded: new Date('2025-08-23').toISOString()
-    },
-    {
-      url: "https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile",
-      title: "Israel Targets Yemen's Capital With Massive Strikes",
-      color: "c-red",
-      dateAdded: new Date('2025-08-22').toISOString()
-    },
-    {
-      url: "https://tv.garden/",
-      title: "Watch Global Local TV Online",
-      color: "c-blue",
-      dateAdded: new Date('2025-08-21').toISOString()
-    },
-    {
-      url: "https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
-      title: "The \"Classic Part\" Little Boy Has the Right Attitude",
-      color: "c-violet",
-      dateAdded: new Date('2025-08-20').toISOString()
-    },
-    {
-      url: "https://x.com/engineers_feed/status/1959628877711487203",
-      title: "30 Years Ago Today, Gates and Balmer and Pals Rocked Out HARD To Celebrate Windows 95",
-      color: "c-pink",
-      dateAdded: new Date('2025-08-19').toISOString()
-    },
-    {
-      url: "https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/",
-      title: "The Smithsonian Has Jumped the Shark",
-      color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString()
-    },
-    {
-      url: "https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025",
-      title: "Which New NFL Coaches Are in the Best Position to Win?",
-      color: "c-orange",
-      dateAdded: new Date('2025-08-17').toISOString()
-    }
+    { url: "https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj",
+      title: "Ghislaine Maxwell: Trump 'Was Never Inappropriate'", color: "c-red",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://x.com/onechancefreedm/status/1959315977830903826",
+      title: "Credit Card Delinquencies Surging", color: "c-green",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/",
+      title: "All-Time High in Cocaine Production", color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString() },
+    { url: "https://x.com/GlobalMktObserv/status/1959654438332670436",
+      title: "Gold International Reserves are SURGING", color: "c-green",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://x.com/KobeissiLetter/status/1959636646925852986",
+      title: "US Federal Debt Surging At +$21 Billion Per Day", color: "c-green",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/",
+      title: "The Best Performing Fund in Modern History", color: "c-green",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile",
+      title: "Israel Targets Yemen's Capital With Massive Strikes", color: "c-red",
+      dateAdded: new Date('2025-08-22').toISOString() },
+    { url: "https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine",
+      title: "Systemic Corruption Doesn't Give A Chance For Peace In Ukraine", color: "c-pink",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/",
+      title: "Going Full Bud Light", color: "c-orange",
+      dateAdded: new Date('2025-08-24').toISOString() },
+    { url: "https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/",
+      title: "The Smithsonian Has Jumped the Shark", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() },
+    { url: "https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
+      title: "The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"", color: "c-blue",
+      dateAdded: new Date('2025-08-17').toISOString() },
+    { url: "https://example.com",
+      title: "Diddy's Arrest Is Part of Something Bigger", color: "c-orange",
+      dateAdded: new Date('2025-08-22').toISOString() }
   ],
+
+  // -------- COLUMN 3 --------
   column3: [
-    {
-      url: "https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
-      title: "Six Tips from the Middle Ages on How to Beat the Summer Heat",
-      color: "c-blue",
-      dateAdded: new Date('2025-08-24').toISOString()
-    },
-    {
-      url: "https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
-      title: "Cost Of Attending An NFL Game Has Risen 40% In The Last 10 Years",
-      color: "c-violet",
-      dateAdded: new Date('2025-08-23').toISOString()
-    },
-    {
-      url: "https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
-      title: "\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters",
-      color: "c-red",
-      dateAdded: new Date('2025-08-22').toISOString()
-    },
-    {
-      url: "https://www.instagram.com/reel/DBBfjV6KD1d/?igsh=MW5rbDU4bmhzenlwbw%3D%3D",
-      title: "Turkish Family Surprises Dad On His Birthday",
-      color: "c-purple",
-      dateAdded: new Date('2025-08-21').toISOString()
-    },
-    {
-      url: "https://collider.com/best-war-shows-must-watch-ranked/",
-      title: "10 Must-Watch War Shows, Ranked",
-      color: "c-orange",
-      dateAdded: new Date('2025-08-20').toISOString()
-    },
-    {
-      url: "https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine",
-      title: "Systemic Corruption Doesn't Give A Chance For Peace In Ukraine",
-      color: "c-pink",
-      dateAdded: new Date('2025-08-19').toISOString()
-    },
-    {
-      url: "https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
-      title: "'Holy Grail' Jordan-Bryant Sports Card Sells for Record $12.9M",
-      color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString()
-    },
-    {
-      url: "https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
-      title: "The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"",
-      color: "c-blue",
-      dateAdded: new Date('2025-08-17').toISOString()
-    }
+    { url: "https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
+      title: "This Teacher Loves His Students", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() },
+    { url: "https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
+      title: "The \"Classic Part\" Little Boy Has the Right Attitude", color: "c-violet",
+      dateAdded: new Date('2025-08-20').toISOString() },
+    { url: "https://x.com/engineers_feed/status/1959628877711487203",
+      title: "Windows 95 Launch Party: Peak 90s 🤘", color: "c-pink",
+      dateAdded: new Date('2025-08-19').toISOString() },
+    { url: "https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025",
+      title: "Which New NFL Coaches Are in the Best Position to Win?", color: "c-orange",
+      dateAdded: new Date('2025-08-17').toISOString() },
+    { url: "https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
+      title: "'Holy Grail' Jordan–Bryant Card Sells for $12.9M", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() },
+    { url: "https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
+      title: "Cost of Attending an NFL Game +40% in 10 Years", color: "c-violet",
+      dateAdded: new Date('2025-08-23').toISOString() },
+    { url: "https://www.youtube.com/watch?v=x9cVcGQNxBw",
+      title: "They Found Giants In A Cave", color: "c-blue",
+      dateAdded: new Date('2025-08-21').toISOString() },
+    { url: "https://www.youtube.com/shorts/0Phz6wnq_GU",
+      title: "The Pyramid Power Plant Theory", color: "c-indigo",
+      dateAdded: new Date('2025-08-18').toISOString() }
   ],
-  column4: [
-    {
-      url: "https://www.history.com/articles/brilliant-psyops-psychological-warfare",
-      title: "7 Brilliant Acts of Psychological Warfare in History",
-      color: "c-purple",
-      dateAdded: new Date('2025-08-24').toISOString()
-    },
-    {
-      url: "https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
-      title: "1910: The Year the Modern World Lost Its Mind",
-      color: "c-blue",
-      dateAdded: new Date('2025-08-23').toISOString()
-    },
-    {
-      url: "https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82",
-      title: "Twilight of the House of Lords",
-      color: "c-pink",
-      dateAdded: new Date('2025-08-22').toISOString()
-    },
-    {
-      url: "https://www.youtube.com/watch?v=x9cVcGQNxBw",
-      title: "They Found Giants In A Cave",
-      color: "c-blue",
-      dateAdded: new Date('2025-08-21').toISOString()
-    },
-    {
-      url: "https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
-      title: "How Did Moscow Become Europe's Biggest City?",
-      color: "c-green",
-      dateAdded: new Date('2025-08-20').toISOString()
-    },
-    {
-      url: "https://x.com/Rainmaker1973/status/1959655344709173469",
-      title: "1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima",
-      color: "c-orange",
-      dateAdded: new Date('2025-08-19').toISOString()
-    },
-    {
-      url: "https://www.youtube.com/shorts/0Phz6wnq_GU",
-      title: "The Pyramid Power Plant Theory",
-      color: "c-indigo",
-      dateAdded: new Date('2025-08-18').toISOString()
-    },
-    {
-      url: "https://www.youtube.com/watch?v=F4M1MlBZyI0",
-      title: "Dave Smith: \"I Was A Militant Atheist\"",
-      color: "c-pink",
-      dateAdded: new Date('2025-08-17').toISOString()
-    }
-  ],
+
   archived: []
 };
 
+// ================== MANAGER ==================
 class DayLugeManager {
   constructor() {
     this.data = this.loadData();
@@ -447,16 +328,9 @@ class DayLugeManager {
 
   addLink(columnNum, linkData) {
     const columnKey = `column${columnNum}`;
-    
-    // Add timestamp
-    linkData.dateAdded = new Date().toISOString();
-    
-    // Add to beginning (newest first)
-    this.data[columnKey].unshift(linkData);
-    
-    // Check limits and archive if needed
+    linkData.dateAdded = new Date().toISOString();       // timestamp
+    this.data[columnKey].unshift(linkData);              // newest first
     this.enforceColumnLimit(columnKey);
-    
     this.saveData();
     this.render();
     this.updateStats();
@@ -464,16 +338,13 @@ class DayLugeManager {
 
   enforceColumnLimit(columnKey) {
     const column = this.data[columnKey];
-    
     if (column.length > CONFIG.maxLinksPerColumn) {
-      // Move excess links to archive
       const excess = column.splice(CONFIG.maxLinksPerColumn);
       excess.forEach(link => {
         link.archivedDate = new Date().toISOString();
         link.originalColumn = columnKey;
         this.data.archived.push(link);
       });
-      
       console.log(`Archived ${excess.length} links from ${columnKey}`);
     }
   }
@@ -481,41 +352,36 @@ class DayLugeManager {
   render() {
     const container = document.getElementById('mainContainer');
     let html = '';
-
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 3; i++) {
       const columnKey = `column${i}`;
       const links = this.data[columnKey] || [];
-      
       html += `<div class="column">`;
-      
       links.forEach(link => {
         html += `<div class="link-item">`;
-        html += `<a href="${link.url}" class="${link.color}" target="_blank">${link.title}</a>`;
+        html += `<a href="${link.url}" class="${link.color}" target="_blank" rel="noopener noreferrer">${link.title}</a>`;
         html += `</div>`;
       });
-      
       html += `</div>`;
     }
-    
     container.innerHTML = html;
   }
 
   updateStats() {
-    const totalActive = this.data.column1.length + this.data.column2.length + 
-                       this.data.column3.length + this.data.column4.length;
+    const totalActive =
+      (this.data.column1?.length || 0) +
+      (this.data.column2?.length || 0) +
+      (this.data.column3?.length || 0);
     const totalArchived = this.data.archived.length;
-    
-    document.getElementById('totalLinks').textContent = 
+
+    document.getElementById('totalLinks').textContent =
       `Active: ${totalActive}/${CONFIG.totalMaxLinks} | Archived: ${totalArchived}`;
-    
-    // Update admin panel
+
     const countsDiv = document.getElementById('linkCounts');
     if (countsDiv) {
       countsDiv.innerHTML = `
         Col 1: ${this.data.column1.length}/${CONFIG.maxLinksPerColumn}<br>
         Col 2: ${this.data.column2.length}/${CONFIG.maxLinksPerColumn}<br>
         Col 3: ${this.data.column3.length}/${CONFIG.maxLinksPerColumn}<br>
-        Col 4: ${this.data.column4.length}/${CONFIG.maxLinksPerColumn}<br>
         <strong>Total: ${totalActive}/${CONFIG.totalMaxLinks}</strong>
       `;
     }
@@ -524,8 +390,7 @@ class DayLugeManager {
   // Admin functions
   forceArchiveOld() {
     let totalArchived = 0;
-    
-    ['column1', 'column2', 'column3', 'column4'].forEach(columnKey => {
+    ['column1', 'column2', 'column3'].forEach(columnKey => {
       const column = this.data[columnKey];
       if (column.length > 10) { // Keep only 10 newest
         const toArchive = column.splice(10);
@@ -537,25 +402,21 @@ class DayLugeManager {
         totalArchived += toArchive.length;
       }
     });
-    
     this.saveData();
     this.render();
     this.updateStats();
-    
     alert(`Archived ${totalArchived} older links`);
   }
 
   addSampleLink() {
     const colors = ['c-red', 'c-orange', 'c-green', 'c-blue', 'c-indigo', 'c-violet', 'c-pink'];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    const randomColumn = Math.floor(Math.random() * 4) + 1;
-    
+    const randomColumn = Math.floor(Math.random() * 3) + 1; // 1..3
     const sampleLink = {
       url: 'https://example.com/sample-' + Date.now(),
       title: `Sample Link Added ${new Date().toLocaleTimeString()}`,
       color: randomColor
     };
-    
     this.addLink(randomColumn, sampleLink);
   }
 
@@ -572,9 +433,7 @@ class DayLugeManager {
 
   clearAll() {
     if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
-      this.data = {
-        column1: [], column2: [], column3: [], column4: [], archived: []
-      };
+      this.data = { column1: [], column2: [], column3: [], archived: [] };
       this.saveData();
       this.render();
       this.updateStats();
@@ -582,31 +441,18 @@ class DayLugeManager {
   }
 }
 
-// Global functions for admin panel
+// ================== GLOBAL HOOKS ==================
 let dayLugeManager;
 
 function toggleAdmin() {
   const panel = document.getElementById('adminControls');
   panel.classList.toggle('show');
 }
+function addSampleLink() { dayLugeManager.addSampleLink(); }
+function forceArchive()   { dayLugeManager.forceArchiveOld(); }
+function exportData()     { dayLugeManager.exportData(); }
+function clearAll()       { dayLugeManager.clearAll(); }
 
-function addSampleLink() {
-  dayLugeManager.addSampleLink();
-}
-
-function forceArchive() {
-  dayLugeManager.forceArchiveOld();
-}
-
-function exportData() {
-  dayLugeManager.exportData();
-}
-
-function clearAll() {
-  dayLugeManager.clearAll();
-}
-
-// Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
   dayLugeManager = new DayLugeManager();
 });
