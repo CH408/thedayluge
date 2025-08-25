@@ -4,12 +4,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THE DAYLUGE</title>
+
+<!-- Bust aggressive caches on hosts/CDNs -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
 <style>
   :root{
     --red:#cc0000; --orange:#ff6600; --green:#009900; --lime:#32cd32;
     --blue:#3388cc; --light-blue:#000080; --indigo:#4b0082; --violet:#6600cc; --pink:#ff3399;
     --ink:#111827; --muted:#6b7280; --bg:#e0e0e0; --paper:#ffffff; --rule:#e5e7eb;
-    --maxw: 1400px;
+    --maxw:1400px;
   }
 
   /* Color classes */
@@ -19,7 +25,10 @@
   .c-purple{color:var(--violet)} .c-black{color:#000}
 
   *{box-sizing:border-box}
-  body{margin:0; background:var(--bg); color:#000; font-family:"Courier New", monospace; line-height:1.4}
+  body{
+    margin:0; background:var(--bg); color:#000;
+    font-family:"Courier New", Courier, monospace; line-height:1.4;
+  }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:20px}
   header{text-align:center; margin-bottom:10px}
   h1{margin:0; font-size:36px; letter-spacing:1px}
@@ -27,20 +36,22 @@
   nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px}
   nav a:hover{text-decoration:underline}
 
-  /* Toolbar */
-  .bar{display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:14px}
-  .left,.right{display:flex; gap:6px; align-items:center; flex-wrap:wrap}
-  input[type="text"], select{border:1px solid var(--rule); border-radius:6px; padding:8px 10px; background:#fff}
-  button{border:1px solid var(--rule); border-radius:6px; padding:8px 12px; background:#fff; cursor:pointer; font-weight:bold}
-  button:hover{background:#f4f4f4}
-  .meter{font-size:12px; color:var(--muted)}
-
-  /* Grid: row-wise flow */
-  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px}
-  .link{background:var(--paper); border:1px solid var(--rule); border-radius:8px; padding:10px 12px; font-weight:bold; font-size:18px}
+  /* Grid: row-wise flow (left→right→down), responsive columns */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:16px;
+  }
+  .link{
+    background:var(--paper);
+    border:1px solid var(--rule);
+    border-radius:8px;
+    padding:10px 12px;
+    font-weight:bold;
+    font-size:18px;
+  }
   .link a{color:inherit; text-decoration:none; display:block; word-break:break-word}
   .link a:hover{text-decoration:underline}
-  .empty{ color:#9aa0a6; text-align:center; padding:40px 0 }
 
   @media (max-width:640px){ h1{font-size:28px} }
 </style>
@@ -50,37 +61,10 @@
   <header><h1>THE DAYLUGE</h1></header>
   <nav><a href="/">Home</a> <a href="#">Archive</a></nav>
 
-  <!-- Add / Toggle / Export -->
-  <div class="bar">
-    <div class="left">
-      <input id="titleInput" type="text" placeholder="Title" />
-      <input id="urlInput"   type="text" placeholder="URL" />
-      <select id="colorInput" title="color">
-        <option value="c-black">(black)</option>
-        <option value="c-red">red</option>
-        <option value="c-orange">orange</option>
-        <option value="c-green">green</option>
-        <option value="c-lime-green">lime</option>
-        <option value="c-blue">blue</option>
-        <option value="c-light-blue">light-blue</option>
-        <option value="c-indigo">indigo</option>
-        <option value="c-violet">violet</option>
-        <option value="c-pink">pink</option>
-        <option value="c-purple">purple</option>
-      </select>
-      <button id="addBtn">Add</button>
-    </div>
-    <div class="right">
-      <button id="toggleBtn">View Archive</button>
-      <button id="exportActiveBtn" title="Export active JSON">Export Active</button>
-      <button id="exportArchiveBtn" title="Export archive JSON">Export Archive</button>
-      <span class="meter" id="counts"></span>
-    </div>
-  </div>
+  <div class="grid">
+    <!-- EXACT CURATED LINKS (no JS, no placeholders) -->
 
-  <!-- HARD-CODED CURATED LINKS (these always show even if JS is off) -->
-  <div class="grid" id="feed">
-    <!-- Column 1 group -->
+    <!-- (Former Column 1 items) -->
     <div class="link c-purple"><a href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" target="_blank" rel="noopener">7 Brilliant Acts of Psychological Warfare in History</a></div>
     <div class="link c-blue"><a href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" target="_blank" rel="noopener">1910: The Year the Modern World Lost Its Mind</a></div>
     <div class="link c-red"><a href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank" rel="noopener">"Kryptos" - The Unsolved Secret Code at CIA Headquarters</a></div>
@@ -92,7 +76,7 @@
     <div class="link c-pink"><a href="https://www.youtube.com/watch?v=F4M1MlBZyI0" target="_blank" rel="noopener">Dave Smith: "I Was A Militant Atheist"</a></div>
     <div class="link c-blue"><a href="https://tv.garden/" target="_blank" rel="noopener">Watch Global Local TV Online</a></div>
 
-    <!-- Column 2 group -->
+    <!-- (Former Column 2 items) -->
     <div class="link c-red"><a href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" target="_blank" rel="noopener">Ghislaine Maxwell: Trump 'Was Never Inappropriate'</a></div>
     <div class="link c-green"><a href="https://x.com/onechancefreedm/status/1959315977830903826" target="_blank" rel="noopener">Credit Card Delinquencies Surging</a></div>
     <div class="link c-blue"><a href="https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/" target="_blank" rel="noopener">All-Time High in Cocaine Production</a></div>
@@ -106,7 +90,7 @@
     <div class="link c-blue"><a href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" target="_blank" rel="noopener">The Vegas Shooting Is A Layered Onion of "Max Conspiracy"</a></div>
     <div class="link c-orange"><a href="https://example.com" target="_blank" rel="noopener">Diddy's Arrest Is Part of Something Bigger</a></div>
 
-    <!-- Column 3 group -->
+    <!-- (Former Column 3 items) -->
     <div class="link c-indigo"><a href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" target="_blank" rel="noopener">This Teacher Loves His Students</a></div>
     <div class="link c-violet"><a href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" target="_blank" rel="noopener">The "Classic Part" Little Boy Has the Right Attitude</a></div>
     <div class="link c-pink"><a href="https://x.com/engineers_feed/status/1959628877711487203" target="_blank" rel="noopener">Windows 95 Launch Party: Peak 90s 🤘</a></div>
@@ -116,134 +100,6 @@
     <div class="link c-blue"><a href="https://www.youtube.com/watch?v=x9cVcGQNxBw" target="_blank" rel="noopener">They Found Giants In A Cave</a></div>
     <div class="link c-indigo"><a href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank" rel="noopener">The Pyramid Power Plant Theory</a></div>
   </div>
-
-  <div id="emptyMsg" class="empty" style="display:none">No links yet.</div>
 </div>
-
-<script>
-/* LocalStorage keys and cap */
-const ACTIVE_KEY = 'dayluge_active_v1';
-const ARCHIVE_KEY = 'dayluge_archive_v1';
-const ACTIVE_MAX = 48;
-
-const feedEl = document.getElementById('feed');
-const emptyMsg = document.getElementById('emptyMsg');
-const countsEl = document.getElementById('counts');
-
-/* Helpers */
-function loadJSON(key){ try{ const raw=localStorage.getItem(key); return raw?JSON.parse(raw):null; }catch(e){ return null; } }
-function saveJSON(key,v){ localStorage.setItem(key, JSON.stringify(v)); }
-
-/* Parse the hardcoded DOM into an array of {title,url,color,timestamp} (timestamp set to now, order preserved) */
-function readLinksFromDOM(){
-  const items = [];
-  const nodes = feedEl.querySelectorAll('.link > a');
-  const now = Date.now();
-  let offset = 0;
-  nodes.forEach(a=>{
-    const parent = a.parentElement;
-    const colorClass = Array.from(parent.classList).find(c=>c.startsWith('c-')) || 'c-black';
-    // newer first: give earlier items slightly newer timestamps
-    items.push({
-      title: a.textContent.trim(),
-      url: a.getAttribute('href'),
-      color: colorClass,
-      timestamp: new Date(now - offset).toISOString()
-    });
-    offset += 1000; // 1s spacing so order is stable
-  });
-  return items;
-}
-
-/* Init: if no stored active list, read from DOM and store it. */
-function initData(){
-  let active = loadJSON(ACTIVE_KEY);
-  let archive = loadJSON(ARCHIVE_KEY);
-  if (!Array.isArray(active)){
-    active = readLinksFromDOM();
-    saveJSON(ACTIVE_KEY, active);
-  }
-  if (!Array.isArray(archive)){
-    archive = [];
-    saveJSON(ARCHIVE_KEY, archive);
-  }
-  return {active, archive};
-}
-
-let {active, archive} = initData();
-let showingArchive = false;
-
-/* Render from arrays into the grid (overwriting DOM) */
-function render(){
-  const list = showingArchive ? archive : active;
-  feedEl.innerHTML = list.map(l => `<div class="link ${l.color || 'c-black'}"><a href="${l.url}" target="_blank" rel="noopener">${l.title}</a></div>`).join('');
-  emptyMsg.style.display = list.length ? 'none' : 'block';
-  countsEl.textContent = showingArchive
-    ? `Archive: ${archive.length} | Active: ${active.length}/${ACTIVE_MAX}`
-    : `Active: ${active.length}/${ACTIVE_MAX} | Archive: ${archive.length}`;
-  document.getElementById('toggleBtn').textContent = showingArchive ? 'View Active' : 'View Archive';
-}
-
-/* Cap logic: keep newest 48 in active; move oldest overflow to archive (newest-first there) */
-function enforceActiveCap(){
-  if (active.length > ACTIVE_MAX){
-    const moved = active.splice(ACTIVE_MAX); // oldest slice
-    moved.reverse().forEach(item => archive.unshift(item));
-  }
-}
-
-/* Add link API + button */
-function addLink(title, url, colorClass){
-  const item = {
-    title: title || '(untitled)',
-    url: url || '#',
-    color: colorClass || 'c-black',
-    timestamp: new Date().toISOString()
-  };
-  active.unshift(item);
-  enforceActiveCap();
-  saveJSON(ACTIVE_KEY, active);
-  saveJSON(ARCHIVE_KEY, archive);
-  showingArchive = false;
-  render();
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-window.addLink = addLink; // optional console use
-
-/* UI wiring */
-document.getElementById('addBtn').addEventListener('click', ()=>{
-  const title = document.getElementById('titleInput').value.trim();
-  const url   = document.getElementById('urlInput').value.trim();
-  const color = document.getElementById('colorInput').value || 'c-black';
-  if (!title || !url){ alert('Please enter Title and URL'); return; }
-  addLink(title, url, color);
-  document.getElementById('titleInput').value = '';
-  document.getElementById('urlInput').value = '';
-  document.getElementById('colorInput').value = 'c-black';
-});
-
-document.getElementById('toggleBtn').addEventListener('click', ()=>{
-  showingArchive = !showingArchive;
-  render();
-});
-
-document.getElementById('exportActiveBtn').addEventListener('click', ()=>{
-  const blob = new Blob([JSON.stringify(active, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'dayluge-active.json'; a.click();
-  URL.revokeObjectURL(url);
-});
-
-document.getElementById('exportArchiveBtn').addEventListener('click', ()=>{
-  const blob = new Blob([JSON.stringify(archive, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url; a.download = 'dayluge-archive.json'; a.click();
-  URL.revokeObjectURL(url);
-});
-
-/* First paint: since the links are already in HTML, the user sees them immediately.
-   Now switch to array-driven rendering so future adds & archive toggles work. */
-render();
-</script>
 </body>
 </html>
