@@ -92,26 +92,47 @@
   }
   .link a:hover{text-decoration:underline;}
 
-  /* Hidden admin dot */
-  .admin-dot{
+  /* Hidden admin tab */
+  .admin-tab{
     position:fixed;
     bottom:10px;
     right:10px;
-    width:8px;
-    height:8px;
     background:var(--rule);
-    border-radius:50%;
-    opacity:0.3;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:20px 20px 0 0;
+    font-family:inherit;
+    font-size:11px;
+    text-decoration:none;
+    opacity:0.4;
     cursor:pointer;
     z-index:100;
-    transition:opacity 0.2s ease;
+    transition:all 0.2s ease;
+    border:1px solid #aaa;
   }
-  .admin-dot:hover{
-    opacity:0.7;
+  .admin-tab:hover{
+    opacity:0.8;
+    background:#999;
+    text-decoration:none;
+  }
+
+  /* Bottom archive link */
+  .archive-bottom{
+    position:fixed;
+    bottom:10px;
+    left:10px;
+    font-size:11px;
+    color:#666;
+    text-decoration:underline;
+    cursor:pointer;
+    opacity:0.5;
+  }
+  .archive-bottom:hover{
+    opacity:0.8;
+    color:#333;
   }
 
   /* Archive modal */
-  .archive-link{font-size:12px; color:#333; text-decoration:underline; cursor:pointer; margin-left:8px;}
   .archive-modal{
     display:none; position:fixed; inset:0; z-index:50; background:rgba(0,0,0,0.4);
     align-items:center; justify-content:center; padding:16px;
@@ -134,8 +155,7 @@
     <h1>THE DAYLUGE</h1>
   </header>
   <nav>
-    <a href="/">Home</a> 
-    <a id="openArchive" class="archive-link">Archive</a>
+    <a href="/">Home</a>
   </nav>
 
   <!-- Archive Modal -->
@@ -153,8 +173,9 @@
   </div>
 </div>
 
-<!-- Hidden admin dot -->
-<div class="admin-dot" onclick="window.open('/admin/', '_blank')" title="Admin"></div>
+<!-- Archive link (bottom left) and hidden admin tab (bottom right) -->
+<div class="archive-bottom" onclick="openArchiveModal()">archive</div>
+<div class="admin-tab" onclick="window.open('/admin/', '_blank')">+</div>
 
 <script>
 const MAX_ACTIVE = 48;
@@ -195,7 +216,7 @@ function displayCuratedLinks() {
     {title:"'Holy Grail' Jordan–Bryant Card Sells for $12.9M", url:"https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m", color:"c-purple", status:"active"},
     {title:"Which New NFL Coaches Are in the Best Position to Win?", url:"https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025", color:"c-violet", status:"active"},
     {title:"Six Tips from the Middle Ages on How to Beat the Summer Heat", url:"https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290", color:"c-blue", status:"active"},
-    {title:"Twilight of the House of Lords", url:"https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82", color:"c-orange", status:"active"},
+    {title:"Twilight of the House of Lords", url:"https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa-21139129&mc_eid=f42f0d2b82", color:"c-orange", status:"active"},
     {title:"Gold International Reserves are SURGING", url:"https://x.com/GlobalMktObserv/status/1959654438332670436", color:"c-green", status:"active"}
   ];
   
@@ -234,13 +255,12 @@ function renderArchive() {
   `).join('');
 }
 
-// Archive modal handlers
-document.getElementById('openArchive').addEventListener('click', (e) => {
-  e.preventDefault();
+// Archive modal function for bottom link
+function openArchiveModal() {
   renderArchive();
   document.getElementById('archiveModal').classList.add('show');
   document.getElementById('archiveModal').setAttribute('aria-hidden', 'false');
-});
+}
 
 document.getElementById('closeArchive').addEventListener('click', () => {
   document.getElementById('archiveModal').classList.remove('show');
