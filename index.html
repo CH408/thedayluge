@@ -185,42 +185,55 @@ function escapeHTML(s){
   return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); 
 }
 
-// Your exact curated links preserved
-function displayCuratedLinks() {
-  const curatedLinks = [
-    {title:"The Best Performing Fund in Modern History", url:"https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/", color:"c-green", status:"active"},
-    {title:"The Pyramid Power Plant Theory", url:"https://www.youtube.com/shorts/0Phz6wnq_GU", color:"c-pink", status:"active"},
-    {title:"\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters", url:"https://www.history.com/articles/kryptos-cia-sculpture-mystery-code", color:"c-purple", status:"active"},
-    {title:"The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"", url:"https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j", color:"c-pink", status:"active"},
-    {title:"The \"Classic Part\" Little Boy Has the Right Attitude", url:"https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D", color:"c-light-blue", status:"active"},
-    {title:"This Teacher Loves His Students", url:"https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D", color:"c-light-blue", status:"active"},
-    {title:"Diddy's Arrest Is Part of Something Bigger", url:"https://example.com", color:"c-orange", status:"active"},
-    {title:"Systemic Corruption Doesn't Give A Chance For Peace In Ukraine", url:"https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine", color:"c-orange", status:"active"},
-    {title:"1910: The Year the Modern World Lost Its Mind", url:"https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost", color:"c-purple", status:"active"},
-    {title:"US Federal Debt Surging At +$21 Billion Per Day", url:"https://x.com/KobeissiLetter/status/1959636646925852986", color:"c-green", status:"active"},
-    {title:"Ghislaine Maxwell: Trump 'Was Never Inappropriate'", url:"https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj", color:"c-red", status:"active"},
-    {title:"All-Time High in Cocaine Production", url:"https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/", color:"c-orange", status:"active"},
-    {title:"Going Full Bud Light", url:"https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/", color:"c-green", status:"active"},
-    {title:"Gates, Ballmer and Pals Rocking Out HARD to Windows 95", url:"https://x.com/engineers_feed/status/1959628877711487203", color:"c-violet", status:"active"},
-    {title:"1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima", url:"https://x.com/Rainmaker1973/status/1959655344709173469", color:"c-purple", status:"active"},
-    {title:"They Found Giants In A Cave", url:"https://www.youtube.com/watch?v=x9cVcGQNxBw", color:"c-pink", status:"active"},
-    {title:"10 Must-Watch War Shows, Ranked", url:"https://collider.com/best-war-shows-must-watch-ranked/", color:"c-blue", status:"active"},
-    {title:"Credit Card Delinquencies Surging", url:"https://x.com/onechancefreedm/status/1959315977830903826", color:"c-green", status:"active"},
-    {title:"Israel Targets Yemen's Capital With Massive Strikes", url:"https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile", color:"c-red", status:"active"},
-    {title:"Watch Global Local TV Online", url:"https://tv.garden/", color:"c-blue", status:"active"},
-    {title:"7 Brilliant Acts of Psychological Warfare in History", url:"https://www.history.com/articles/brilliant-psyops-psychological-warfare", color:"c-purple", status:"active"},
-    {title:"Dave Smith: \"I Was A Militant Atheist\"", url:"https://www.youtube.com/watch?v=F4M1MlBZyI0", color:"c-orange", status:"active"},
-    {title:"The Smithsonian Has Jumped the Shark", url:"https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/", color:"c-orange", status:"active"},
-    {title:"How Did Moscow Become Europe's Biggest City?", url:"https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird", color:"c-purple", status:"active"},
-    {title:"Cost of Attending an NFL Game +40% in 10 Years", url:"https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years", color:"c-blue", status:"active"},
-    {title:"'Holy Grail' Jordan–Bryant Card Sells for $12.9M", url:"https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m", color:"c-purple", status:"active"},
-    {title:"Which New NFL Coaches Are in the Best Position to Win?", url:"https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025", color:"c-violet", status:"active"},
-    {title:"Six Tips from the Middle Ages on How to Beat the Summer Heat", url:"https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290", color:"c-blue", status:"active"},
-    {title:"Twilight of the House of Lords", url:"https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa-21139129&mc_eid=f42f0d2b82", color:"c-orange", status:"active"},
-    {title:"Gold International Reserves are SURGING", url:"https://x.com/GlobalMktObserv/status/1959654438332670436", color:"c-green", status:"active"}
-  ];
-  
-  allLinks = curatedLinks;
+// Load links from CMS data files or fallback to curated
+async function loadCMSLinks() {
+  try {
+    // Try to fetch a simple JSON API endpoint we'll create
+    const response = await fetch('/api/links.json');
+    if (response.ok) {
+      const data = await response.json();
+      allLinks = data.links || [];
+    } else {
+      throw new Error('API not available');
+    }
+  } catch (error) {
+    console.log('Using curated links as fallback');
+    // Fallback to your curated links + the new CMS link
+    const curatedLinks = [
+      {title:"Pablo Escobar Lost $72 Million a Month to Rats and Moisture Damage", url:"https://x.com/bizhustlez/status/1960013189258887243?s=42", color:"c-indigo", status:"active"},
+      {title:"The Best Performing Fund in Modern History", url:"https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/", color:"c-green", status:"active"},
+      {title:"The Pyramid Power Plant Theory", url:"https://www.youtube.com/shorts/0Phz6wnq_GU", color:"c-pink", status:"active"},
+      {title:"\"Kryptos\" - The Unsolved Secret Code at CIA Headquarters", url:"https://www.history.com/articles/kryptos-cia-sculpture-mystery-code", color:"c-purple", status:"active"},
+      {title:"The Vegas Shooting Is A Layered Onion of \"Max Conspiracy\"", url:"https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j", color:"c-pink", status:"active"},
+      {title:"The \"Classic Part\" Little Boy Has the Right Attitude", url:"https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D", color:"c-light-blue", status:"active"},
+      {title:"This Teacher Loves His Students", url:"https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D", color:"c-light-blue", status:"active"},
+      {title:"Systemic Corruption Doesn't Give A Chance For Peace In Ukraine", url:"https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine", color:"c-orange", status:"active"},
+      {title:"1910: The Year the Modern World Lost Its Mind", url:"https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost", color:"c-purple", status:"active"},
+      {title:"US Federal Debt Surging At +$21 Billion Per Day", url:"https://x.com/KobeissiLetter/status/1959636646925852986", color:"c-green", status:"active"},
+      {title:"Ghislaine Maxwell: Trump 'Was Never Inappropriate'", url:"https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj", color:"c-red", status:"active"},
+      {title:"All-Time High in Cocaine Production", url:"https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/", color:"c-orange", status:"active"},
+      {title:"Going Full Bud Light", url:"https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/", color:"c-green", status:"active"},
+      {title:"Gates, Ballmer and Pals Rocking Out HARD to Windows 95", url:"https://x.com/engineers_feed/status/1959628877711487203", color:"c-violet", status:"active"},
+      {title:"1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima", url:"https://x.com/Rainmaker1973/status/1959655344709173469", color:"c-purple", status:"active"},
+      {title:"They Found Giants In A Cave", url:"https://www.youtube.com/watch?v=x9cVcGQNxBw", color:"c-pink", status:"active"},
+      {title:"10 Must-Watch War Shows, Ranked", url:"https://collider.com/best-war-shows-must-watch-ranked/", color:"c-blue", status:"active"},
+      {title:"Credit Card Delinquencies Surging", url:"https://x.com/onechancefreedm/status/1959315977830903826", color:"c-green", status:"active"},
+      {title:"Israel Targets Yemen's Capital With Massive Strikes", url:"https://www.zerohedge.com/geopolitical/watch-israel-targets-yemens-capital-massive-strikes-near-presidential-complex-missile", color:"c-red", status:"active"},
+      {title:"Watch Global Local TV Online", url:"https://tv.garden/", color:"c-blue", status:"active"},
+      {title:"7 Brilliant Acts of Psychological Warfare in History", url:"https://www.history.com/articles/brilliant-psyops-psychological-warfare", color:"c-purple", status:"active"},
+      {title:"Dave Smith: \"I Was A Militant Atheist\"", url:"https://www.youtube.com/watch?v=F4M1MlBZyI0", color:"c-orange", status:"active"},
+      {title:"The Smithsonian Has Jumped the Shark", url:"https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/", color:"c-orange", status:"active"},
+      {title:"How Did Moscow Become Europe's Biggest City?", url:"https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird", color:"c-purple", status:"active"},
+      {title:"Cost of Attending an NFL Game +40% in 10 Years", url:"https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years", color:"c-blue", status:"active"},
+      {title:"'Holy Grail' Jordan–Bryant Card Sells for $12.9M", url:"https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m", color:"c-purple", status:"active"},
+      {title:"Which New NFL Coaches Are in the Best Position to Win?", url:"https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025", color:"c-violet", status:"active"},
+      {title:"Six Tips from the Middle Ages on How to Beat the Summer Heat", url:"https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290", color:"c-blue", status:"active"},
+      {title:"Twilight of the House of Lords", url:"https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lines-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa-21139129&mc_eid=f42f0d2b82", color:"c-orange", status:"active"},
+      {title:"Gold International Reserves are SURGING", url:"https://x.com/GlobalMktObserv/status/1959654438332670436", color:"c-green", status:"active"}
+    ];
+    
+    allLinks = curatedLinks;
+  }
   renderGrid();
 }
 
@@ -286,7 +299,7 @@ if (window.netlifyIdentity) {
 }
 
 // Load the links when page loads
-displayCuratedLinks();
+loadCMSLinks();
 </script>
 </body>
 </html>
