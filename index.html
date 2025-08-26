@@ -23,7 +23,6 @@
 
     /* Neutral newspaper tones */
     --ink:#111; 
-    --paper:#e8e6e3;      /* light grayish paper */
     --rule:#bfbfbf;
     --maxw:1400px;
 
@@ -47,27 +46,14 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html, body {height:100%}
 
-  /* Old newspaper background */
+  /* Simple white background */
   body{
     font-family:'Special Elite', monospace;
     color:var(--ink);
     line-height:1.5;
-    background:
-      radial-gradient(circle at center, rgba(0,0,0,0.07) 0%, transparent 65%), /* subtle vignette */
-      repeating-linear-gradient(90deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px), /* vertical fibers */
-      repeating-linear-gradient(0deg, rgba(0,0,0,0.025) 0 1px, transparent 1px 3px),  /* horizontal fibers */
-      var(--paper);
-    background-blend-mode:multiply;
+    background:#fff;
     padding:20px;
     position:relative;
-  }
-  /* Fine grain texture overlay */
-  body::before{
-    content:"";
-    position:fixed; inset:0; pointer-events:none;
-    background:repeating-radial-gradient(circle, rgba(0,0,0,0.03) 0 1px, transparent 1px 3px);
-    mix-blend-mode:multiply;
-    opacity:.25;
   }
 
   .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
@@ -390,7 +376,7 @@ if(clearBtn){
   clearBtn.addEventListener('click', () => {
     if(!isAdminUnlocked()){ alert('Admin locked. Triple-tap title and enter PIN.'); return; }
     if(confirm('Clear ALL active links and archive? This cannot be undone.')){
-      store = {active:[...curatedInitial], archive:[]};  /* reseed with curated so page isn’t blank */
+      store = {active:[...curatedInitial], archive:[]};  /* reseed with curated so page isn't blank */
       saveStore(); renderGrid();
     }
   });
