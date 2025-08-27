@@ -1,52 +1,88 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 
 exports.handler = async (event, context) => {
   try {
-    const dataDir = path.join(process.cwd(), '_data');
+    const dataDir = path.join(__dirname, '../../_data');
     
     // Check if _data directory exists
-    if (!fs.existsSync(dataDir)) {
+    try {
+      await fs.access(dataDir);
+    } catch {
+      console.log('_data directory not found at', dataDir);
       return {
         statusCode: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
         body: JSON.stringify({ links: [] })
       };
     }
 
     // Read all markdown files from _data directory
-    const files = fs.readdirSync(dataDir)
-      .filter(file => file.endsWith('.md'))
-      .map(file => {
+    const files = await fs.readdir(dataDir);
+    const markdownFiles = files.filter(file => file.endsWith('.md'));
+    
+    const links = [];
+    
+    for (const file of markdownFiles) {
+      try {
         const filePath = path.join(dataDir, file);
-        const content = fs.readFileSync(filePath, 'utf8');
+        const content = await fs.readFile(filePath, 'utf8');
         
-        // Parse YAML frontmatter
+        // Parse YAML frontmatter more robustly
         const lines = content.split('\n');
-        const link = {};
+        const link = {
+          timestamp: file.replace('.md', '') // Use filename for sorting
+        };
         
-        for (let i = 0; i < lines.length; i++) {
-          const line = lines[i].trim();
-          if (line.startsWith('title:')) {
-            link.title = line.replace('title:', '').trim();
-          } else if (line.startsWith('url:')) {
-            link.url = line.replace('url:', '').trim();
-          } else if (line.startsWith('color:')) {
-            link.color = line.replace('color:', '').trim();
-          } else if (line.startsWith('status:')) {
-            link.status = line.replace('status:', '').trim();
-          } else if (line.startsWith('date:')) {
-            link.date = line.replace('date:', '').trim();
+        let inFrontMatter = false;
+        for (const line of lines) {
+          const trimmed = line.trim();
+          
+          if (trimmed === '---') {
+            inFrontMatter = !inFrontMatter;
+            continue;
+          }
+          
+          if (!inFrontMatter) continue;
+          
+          if (trimmed.includes(':')) {
+            const [key, ...valueParts] = trimmed.split(':');
+            const value = valueParts.join(':').trim();
+            
+            switch(key.trim()) {
+              case 'title':
+                link.title = value;
+                break;
+              case 'url':
+                link.url = value;
+                break;
+              case 'color':
+                link.color = value;
+                break;
+              case 'status':
+                link.status = value;
+                break;
+              case 'date':
+                link.date = value;
+                break;
+            }
           }
         }
         
-        return {
-          ...link,
-          timestamp: file.replace('.md', '') // Use filename as timestamp for sorting
-        };
-      })
-      .filter(link => link.title && link.url) // Only include valid links
-      .sort((a, b) => b.timestamp.localeCompare(a.timestamp)); // Newest first
+        // Only include valid links
+        if (link.title && link.url) {
+          links.push(link);
+        }
+      } catch (error) {
+        console.error(`Error processing file ${file}:`, error);
+      }
+    }
+
+    // Sort by timestamp (newest first)
+    links.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
 
     return {
       statusCode: 200,
@@ -54,15 +90,18 @@ exports.handler = async (event, context) => {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify({ links: files })
+      body: JSON.stringify({ links })
     };
 
   } catch (error) {
-    console.error('Error parsing links:', error);
+    console.error('Function error:', error);
     return {
       statusCode: 500,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: 'Failed to load links', links: [] })
+      body: JSON.stringify({ 
+        error: error.message, 
+        links: [] 
+      })
     };
   }
 };
