@@ -185,19 +185,19 @@ function escapeHTML(s){
   return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); 
 }
 
-// Load links from CMS data via Netlify function
-async function loadCMSLinks() {
+// Load links from JSON file or fallback to curated
+async function loadLinks() {
   try {
-    const response = await fetch('/.netlify/functions/links');
+    const response = await fetch('/links.json');
     if (response.ok) {
       const data = await response.json();
       allLinks = data.links || [];
-      console.log(`Loaded ${allLinks.length} links from CMS`);
+      console.log(`Loaded ${allLinks.length} links from JSON`);
       if (allLinks.length === 0) {
-        throw new Error('No links from API');
+        throw new Error('No links from JSON file');
       }
     } else {
-      throw new Error('API call failed');
+      throw new Error('JSON file not found');
     }
   } catch (error) {
     console.log('Using curated links as fallback');
@@ -302,7 +302,7 @@ if (window.netlifyIdentity) {
 }
 
 // Load the links when page loads
-loadCMSLinks();
+loadLinks();
 </script>
 </body>
 </html>
