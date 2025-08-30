@@ -13,24 +13,21 @@
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
   
   :root{
-    /* Link color palette - adjusted for better contrast */
+    /* Atomic color palette */
     --red:#cc0000; 
     --orange:#ff8800; 
-    --green:#00dd55;      /* lighter kelly green */
-    --lime:#228b22; 
-    --blue:#1a1a80;       /* lighter navy blue */
-    --light-blue:#33ddff; /* even lighter blue */
-    --indigo:#4b0082; 
-    --violet:#cc88ff;     /* much lighter purple */
-    --pink:#ff1493;       /* hot pink */
+    --green:#00dd55;
+    --blue:#1a1a80;
+    --light-blue:#33ddff;
+    --violet:#cc88ff;
+    --pink:#ff1493;
+    --yellow:#ffee44;
+    --brown:#8B4513;
+    --dark-green:#006400;
 
-    /* Neutral newspaper tones */
     --ink:#111; 
     --rule:#bfbfbf;
     --maxw:1400px;
-
-    --panel-bg:#ffffffee;
-    --panel-border:#cfcfcf;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -40,13 +37,72 @@
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     color:var(--ink);
     line-height:1.5;
-    background:#fff;
+    background:
+      radial-gradient(ellipse at top left, rgba(120, 0, 255, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at top right, rgba(255, 0, 150, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(0, 255, 200, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(255, 100, 0, 0.3) 0%, transparent 50%),
+      linear-gradient(135deg, #001133 0%, #000822 50%, #001144 100%);
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     min-height:100vh;
     position:relative;
+    overflow:hidden;
+  }
+
+  /* Quantum field effects */
+  body::before {
+    content: '';
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background-image: 
+      radial-gradient(1px 1px at 50px 50px, rgba(255,255,255,0.3), transparent),
+      radial-gradient(2px 2px at 150px 100px, rgba(0,255,200,0.4), transparent),
+      radial-gradient(1px 1px at 250px 150px, rgba(255,0,150,0.3), transparent),
+      radial-gradient(1px 1px at 350px 80px, rgba(120,0,255,0.4), transparent),
+      radial-gradient(2px 2px at 80px 200px, rgba(255,255,255,0.2), transparent);
+    background-repeat: repeat;
+    background-size: 400px 300px;
+    animation:quantum-drift 25s linear infinite;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        rgba(0,255,200,0.03) 1px,
+        transparent 2px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        rgba(255,0,150,0.03) 1px,
+        transparent 2px,
+        transparent 40px
+      );
+    animation:wave-interference 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes quantum-drift {
+    0% { transform: translate(0px, 0px) rotate(0deg); opacity:0.7; }
+    25% { transform: translate(-20px, -20px) rotate(90deg); opacity:1; }
+    50% { transform: translate(20px, -10px) rotate(180deg); opacity:0.6; }
+    75% { transform: translate(-10px, 20px) rotate(270deg); opacity:0.9; }
+    100% { transform: translate(0px, 0px) rotate(360deg); opacity:0.7; }
+  }
+
+  @keyframes wave-interference {
+    0%, 100% { opacity:0.5; transform:scale(1); }
+    50% { opacity:0.8; transform:scale(1.02); }
   }
 
   /* Header */
@@ -63,16 +119,18 @@
     letter-spacing:.5px; 
     font-size:42px; 
     margin-bottom:8px;
-    text-shadow:2px 2px 4px rgba(0,0,0,0.1);
+    color:#ffffff;
+    text-shadow:0 0 10px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
     font-family:'Special Elite', 'Courier New', Courier, monospace;
   }
   .header .tagline{
     font-size:14px;
-    color:#666;
+    color:#aaccff;
     font-style:italic;
+    text-shadow:0 0 5px #00ddff;
   }
 
-  /* Main wheel container */
+  /* Main atom container */
   .wheel-container{
     position:relative;
     width:500px;
@@ -80,7 +138,26 @@
     margin:0 auto;
   }
 
-  /* Center hub */
+  /* Orbital rings */
+  .orbital-ring{
+    position:absolute;
+    top:50%;
+    left:50%;
+    border:1px solid #00ddff44;
+    border-radius:50%;
+    transform:translate(-50%, -50%);
+    animation:rotate 30s linear infinite;
+  }
+  .orbital-ring-1{ width:300px; height:300px; animation-duration:25s; }
+  .orbital-ring-2{ width:400px; height:400px; animation-duration:35s; animation-direction:reverse; }
+  .orbital-ring-3{ width:480px; height:480px; animation-duration:40s; }
+
+  @keyframes rotate {
+    from { transform:translate(-50%, -50%) rotate(0deg); }
+    to { transform:translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Nucleus (center hub) */
   .wheel-center{
     position:absolute;
     top:50%;
@@ -88,36 +165,43 @@
     transform:translate(-50%, -50%);
     width:120px;
     height:120px;
-    background:var(--red);
-    color:white;
-    border:3px solid var(--ink);
+    background:radial-gradient(circle, var(--red) 0%, #aa0000 100%);
+    color:yellow;
+    border:3px solid #ffdd00;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
     transition:all 0.3s ease;
-    z-index:5;
+    z-index:15;
     text-align:center;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
-    font-size:18px;
-    font-weight:bold;
+    font-size:24px;
+    font-weight:900;
     text-transform:uppercase;
     letter-spacing:0.5px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
-  }
-  .wheel-center:hover{
-    background:#aa0000;
-    transform:translate(-50%, -50%) scale(1.05);
-    box-shadow:0 6px 16px rgba(0,0,0,0.2);
+    box-shadow:0 0 20px #ffdd0088, 0 4px 12px rgba(0,0,0,0.15);
+    animation:pulse 3s ease-in-out infinite;
   }
 
-  /* Spoke sections - 8 spokes positioned around circle */
+  @keyframes pulse {
+    0%, 100% { box-shadow:0 0 20px #ffdd0088, 0 4px 12px rgba(0,0,0,0.15); }
+    50% { box-shadow:0 0 35px #ffdd00bb, 0 6px 16px rgba(0,0,0,0.2); }
+  }
+
+  .wheel-center:hover{
+    background:radial-gradient(circle, #ff0000 0%, #cc0000 100%);
+    transform:translate(-50%, -50%) scale(1.05);
+    box-shadow:0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2);
+  }
+
+  /* Electron spokes */
   .spoke{
     position:absolute;
     width:90px;
     height:90px;
-    border:2px solid var(--ink);
+    border:2px solid #00ddff;
     border-radius:50%;
     display:flex;
     align-items:center;
@@ -127,152 +211,136 @@
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     font-weight:bold;
     text-align:center;
-    font-size:12px;
+    font-size:11px;
     line-height:1.1;
     text-transform:uppercase;
     letter-spacing:0.2px;
     background:#fff;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    box-shadow:0 0 15px rgba(0,221,255,0.3), 0 2px 8px rgba(0,0,0,0.1);
     padding:4px;
-  }
-  .spoke:hover{
-    transform:scale(1.1);
-    box-shadow:0 4px 12px rgba(0,0,0,0.2);
-    z-index:3;
+    animation:orbit 15s linear infinite;
   }
 
-  /* Position 8 spokes evenly around the circle */
+  @keyframes orbit {
+    from { box-shadow:0 0 15px rgba(0,221,255,0.3), 0 2px 8px rgba(0,0,0,0.1); }
+    50% { box-shadow:0 0 25px rgba(0,221,255,0.6), 0 4px 12px rgba(0,0,0,0.2); }
+    to { box-shadow:0 0 15px rgba(0,221,255,0.3), 0 2px 8px rgba(0,0,0,0.1); }
+  }
+
+  .spoke:hover{
+    transform:scale(1.15);
+    box-shadow:0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
+    z-index:10;
+    animation-play-state:paused;
+  }
+
+  /* Position 8 electrons around the nucleus */
   .spoke-1{ /* Opinion - top */
     top:20px;
     left:50%;
     transform:translateX(-50%);
-    background:#ff8800;
+    background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
     color:black !important;
     font-weight:900 !important;
+    border-color:#ff8800;
   }
-  .spoke-2{ /* History and Culture - top right */
+  .spoke-2{ /* History & Culture - top right */
     top:60px;
     right:60px;
-    background:#ffee44;
+    background:radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%);
     color:black !important;
     font-weight:900 !important;
+    border-color:#ffee44;
   }
-  .spoke-3{ /* Arts and Literature - right */
+  .spoke-3{ /* Arts & Literature - right */
     top:50%;
     right:20px;
     transform:translateY(-50%);
-    background:#8B4513;
+    background:radial-gradient(circle, var(--brown) 0%, #654321 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    border-color:#8B4513;
   }
   .spoke-4{ /* Science-Nature-Health - bottom right */
     bottom:60px;
     right:60px;
-    background:#00dd55;
+    background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
     color:black !important;
     font-weight:900 !important;
+    border-color:#00dd55;
   }
-  .spoke-5{ /* Sports-Leisure-Entertainment - bottom */
+  .spoke-5{ /* Sports-Leisure-Ent - bottom */
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:#1a1a80;
+    background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    border-color:#1a1a80;
   }
-  .spoke-6{ /* Take a Pause - bottom left */
+  .spoke-6{ /* Take A Pause - bottom left */
     bottom:60px;
     left:60px;
-    background:#cc88ff;
+    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
     color:black !important;
     font-weight:900 !important;
+    border-color:#cc88ff;
   }
   .spoke-7{ /* Conspiracy Corner - left */
     top:50%;
     left:20px;
     transform:translateY(-50%);
-    background:#33ddff;
+    background:radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%);
     color:black !important;
     font-weight:900 !important;
+    border-color:#33ddff;
   }
   .spoke-8{ /* MISC - top left */
     top:60px;
     left:60px;
-    background:#006400;
+    background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    border-color:#006400;
   }
 
-  /* Connecting lines from center to spokes */
+  /* Energy beams (connecting lines) */
   .wheel-line{
     position:absolute;
-    background:var(--rule);
-    height:2px;
+    background:linear-gradient(90deg, #00ddff88, #ffffff44, #00ddff88);
+    height:3px;
     transform-origin:left center;
     z-index:1;
+    box-shadow:0 0 8px #00ddff;
+    animation:energy-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes energy-pulse {
+    0%, 100% { opacity:0.6; box-shadow:0 0 8px #00ddff; }
+    50% { opacity:1; box-shadow:0 0 15px #00ddff, 0 0 25px #00ddff88; }
   }
 
   /* Lines positioning for 8 spokes */
-  .line-1{ /* to Opinion (top) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(-90deg);
-  }
-  .line-2{ /* to History (top right) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(-45deg);
-  }
-  .line-3{ /* to Arts-Literature-Culture (right) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(0deg);
-  }
-  .line-4{ /* to Science-Nature-Health (bottom right) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(45deg);
-  }
-  .line-5{ /* to Sports-Leisure-Entertainment (bottom) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(90deg);
-  }
-  .line-6{ /* to Humor-Animals-Feelgood (bottom left) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(135deg);
-  }
-  .line-7{ /* to Conspiracy Corner (left) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(180deg);
-  }
-  .line-8{ /* to Miscellaneous (top left) */
-    top:50%;
-    left:50%;
-    width:140px;
-    transform:translate(0, -50%) rotate(-135deg);
-  }
+  .line-1{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(-90deg); }
+  .line-2{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(-45deg); }
+  .line-3{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(0deg); }
+  .line-4{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(45deg); }
+  .line-5{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(90deg); }
+  .line-6{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(135deg); }
+  .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(180deg); }
+  .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(-135deg); }
 
-  /* Random button below wheel */
+  /* Random button with atomic styling */
   .random-button{
-    margin-top:30px;
-    background:var(--pink);
+    margin-top:40px;
+    background:linear-gradient(45deg, var(--pink) 0%, #ff0080 100%);
     color:white;
-    border:none;
-    padding:12px 24px;
-    border-radius:25px;
+    border:2px solid #ff1493;
+    padding:14px 28px;
+    border-radius:30px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     font-size:14px;
     font-weight:bold;
@@ -280,40 +348,54 @@
     letter-spacing:0.5px;
     cursor:pointer;
     transition:all 0.3s ease;
-    box-shadow:0 3px 8px rgba(0,0,0,0.15);
+    box-shadow:0 0 20px #ff149388, 0 4px 12px rgba(0,0,0,0.3);
+    text-shadow:0 0 5px #ffffff;
   }
   .random-button:hover{
-    background:#ff0080;
-    transform:translateY(-2px);
-    box-shadow:0 5px 12px rgba(0,0,0,0.2);
+    background:linear-gradient(45deg, #ff0080 0%, var(--pink) 100%);
+    transform:translateY(-3px);
+    box-shadow:0 0 35px #ff1493bb, 0 8px 20px rgba(0,0,0,0.4);
+    animation:button-pulse 0.5s ease-in-out;
   }
 
-  /* Instructions */
+  @keyframes button-pulse {
+    0%, 100% { transform:translateY(-3px) scale(1); }
+    50% { transform:translateY(-3px) scale(1.05); }
+  }
+
+  /* Instructions with sci-fi styling */
   .instructions{
     position:absolute;
-    bottom:40px;
+    bottom:50px;
     left:50%;
     transform:translateX(-50%);
     text-align:center;
-    color:#666;
+    color:#aaccff;
     font-size:12px;
-    max-width:350px;
+    max-width:400px;
+    text-shadow:0 0 5px #00ddff;
+    background:rgba(0,20,40,0.7);
+    padding:10px 15px;
+    border-radius:10px;
+    border:1px solid #00ddff44;
   }
 
-  /* Archive link */
+  /* Archive link with glow */
   .archive-bottom{
     position:fixed;
-    bottom:10px;
-    left:10px;
+    bottom:15px;
+    left:15px;
     font-size:11px;
-    color:#666;
+    color:#aaccff;
     text-decoration:underline;
     cursor:pointer;
-    opacity:0.5;
+    opacity:0.7;
+    text-shadow:0 0 5px #00ddff;
   }
   .archive-bottom:hover{
-    opacity:0.8;
-    color:#333;
+    opacity:1;
+    color:#ffffff;
+    text-shadow:0 0 10px #00ddff;
   }
 
   /* Responsive adjustments */
@@ -325,12 +407,12 @@
     .wheel-center{
       width:100px;
       height:100px;
-      font-size:16px;
+      font-size:18px;
     }
     .spoke{
       width:70px;
       height:70px;
-      font-size:10px;
+      font-size:9px;
     }
     .header h1{
       font-size:32px;
@@ -338,21 +420,29 @@
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:120px;
     }
+    .orbital-ring-1{ width:250px; height:250px; }
+    .orbital-ring-2{ width:320px; height:320px; }
+    .orbital-ring-3{ width:380px; height:380px; }
   }
 
-  /* Loading and transition effects */
+  /* Loading animation */
   .wheel-container{
-    animation:fadeIn 1s ease-in;
+    animation:atomize 2s ease-in;
   }
-  @keyframes fadeIn{
-    from{opacity:0; transform:scale(0.9);}
-    to{opacity:1; transform:scale(1);}
+  @keyframes atomize{
+    from{opacity:0; transform:scale(0.5) rotate(-180deg);}
+    to{opacity:1; transform:scale(1) rotate(0deg);}
   }
 
-  /* Hover effect for the whole wheel */
+  /* Hover effect for the atom */
   .wheel-container:hover .wheel-line{
-    background:var(--ink);
-    transition:background 0.3s ease;
+    background:linear-gradient(90deg, #00ddffbb, #ffffffff, #00ddffbb);
+    box-shadow:0 0 20px #00ddff;
+    transition:all 0.3s ease;
+  }
+  .wheel-container:hover .orbital-ring{
+    border-color:#00ddffaa;
+    box-shadow:0 0 15px #00ddff55;
   }
 </style>
 </head>
@@ -360,12 +450,16 @@
   <!-- Header -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
-    <div class="tagline">Navigate the News</div>
   </div>
 
-  <!-- Main Wheel -->
+  <!-- Main Atom Structure -->
   <div class="wheel-container">
-    <!-- Connecting lines -->
+    <!-- Orbital rings -->
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
+    <div class="orbital-ring orbital-ring-3"></div>
+
+    <!-- Energy beams -->
     <div class="wheel-line line-1"></div>
     <div class="wheel-line line-2"></div>
     <div class="wheel-line line-3"></div>
@@ -375,33 +469,28 @@
     <div class="wheel-line line-7"></div>
     <div class="wheel-line line-8"></div>
 
-    <!-- Center hub -->
+    <!-- Nucleus -->
     <div class="wheel-center" onclick="goToNewsHub()">
       NEWS
     </div>
 
-    <!-- 8 Category spokes -->
+    <!-- Electrons (category spokes) -->
     <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
-    <div class="spoke spoke-2" onclick="goToCategory('history')">History</div>
-    <div class="spoke spoke-3" onclick="goToCategory('arts-literature-culture')">Arts<br>Literature<br>Culture</div>
-    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science<br>Nature<br>Health</div>
-    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports<br>Leisure<br>Entertainment</div>
-    <div class="spoke spoke-6" onclick="goToCategory('humor-animals-feelgood')">Humor<br>Animals<br>Feel-Good</div>
+    <div class="spoke spoke-2" onclick="goToCategory('history-culture')">History<br>&<br>Culture</div>
+    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts<br>&<br>Literature</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,<br>Nature<br>& Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,<br>Leisure<br>& Ent</div>
+    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take<br>A<br>Pause</div>
     <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy<br>Corner</div>
-    <div class="spoke spoke-8" onclick="goToCategory('miscellaneous')">Miscellaneous</div>
+    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>
   </div>
 
-  <!-- Random button -->
+  <!-- Quantum random button -->
   <button class="random-button" onclick="goToRandomArticle()">
-    🎲 SURPRISE ME!
+    ⚛️ QUANTUM LEAP!
   </button>
 
-  <!-- Instructions -->
-  <div class="instructions">
-    Click the center hub for all news, select a category spoke, or hit "Surprise Me!" for a random article
-  </div>
-
-  <!-- Archive link (preserved from original) -->
+  <!-- Archive link -->
   <div class="archive-bottom" onclick="openArchive()">archive</div>
 
 <script>
@@ -413,13 +502,13 @@ function goToNewsHub() {
 function goToCategory(category) {
   const categoryPages = {
     'opinion': '/opinion.html',
-    'history': '/history.html',
-    'arts-literature-culture': '/arts-literature-culture.html',
+    'history-culture': '/history-culture.html',
+    'arts-literature': '/arts-literature.html',
     'science-nature-health': '/science-nature-health.html', 
     'sports-leisure-ent': '/sports-leisure-ent.html',
-    'humor-animals-feelgood': '/humor-animals-feelgood.html',
+    'take-a-pause': '/take-a-pause.html',
     'conspiracy-corner': '/conspiracy-corner.html',
-    'miscellaneous': '/miscellaneous.html'
+    'misc': '/misc.html'
   };
   
   if (categoryPages[category]) {
@@ -453,12 +542,11 @@ async function goToRandomArticle() {
         alert('No links available for random selection!');
       }
     } else {
-      // Fallback if links.txt doesn't exist
-      alert('Random feature coming soon! Add some links to your links.txt file first.');
+      alert('Quantum leap feature coming soon! Add some links to your links.txt file first.');
     }
   } catch (error) {
     console.log('Error loading links for random selection:', error);
-    alert('Random feature coming soon!');
+    alert('Quantum leap feature coming soon!');
   }
 }
 
@@ -466,15 +554,31 @@ function openArchive() {
   alert('Archive feature - you can implement this however you\'d like!');
 }
 
-// Add some interactive feedback
+// Add atomic interactions
 document.addEventListener('DOMContentLoaded', function() {
-  const spokes = document.querySelectorAll('.spoke, .wheel-center');
+  const spokes = document.querySelectorAll('.spoke');
+  const center = document.querySelector('.wheel-center');
+  
   spokes.forEach(spoke => {
     spoke.addEventListener('mouseenter', function() {
-      this.style.transform += ' rotateZ(5deg)';
+      // Pause the orbital animation on hover
+      this.style.animationPlayState = 'paused';
     });
     spoke.addEventListener('mouseleave', function() {
-      this.style.transform = this.style.transform.replace(' rotateZ(5deg)', '');
+      // Resume orbital animation
+      this.style.animationPlayState = 'running';
+    });
+  });
+  
+  // Add nuclear reaction effect on center hover
+  center.addEventListener('mouseenter', function() {
+    spokes.forEach(spoke => {
+      spoke.style.animationDuration = '3s';
+    });
+  });
+  center.addEventListener('mouseleave', function() {
+    spokes.forEach(spoke => {
+      spoke.style.animationDuration = '15s';
     });
   });
 });
