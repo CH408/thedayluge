@@ -75,8 +75,8 @@
   /* Main wheel container */
   .wheel-container{
     position:relative;
-    width:400px;
-    height:400px;
+    width:500px;
+    height:500px;
     margin:0 auto;
   }
 
@@ -112,7 +112,7 @@
     box-shadow:0 6px 16px rgba(0,0,0,0.2);
   }
 
-  /* Spoke sections - 6 spokes positioned around circle */
+  /* Spoke sections - 8 spokes positioned around circle */
   .spoke{
     position:absolute;
     width:90px;
@@ -141,25 +141,25 @@
     z-index:3;
   }
 
-  /* Position 8 spokes evenly around the circle (45 degrees apart) */
+  /* Position 8 spokes evenly around the circle */
   .spoke-1{ /* Opinion - top */
-    top:10px;
+    top:20px;
     left:50%;
     transform:translateX(-50%);
-    background:var(--orange);
+    background:#ff8800;
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-2{ /* History - top right */
-    top:45px;
-    right:10px;
+  .spoke-2{ /* History and Culture - top right */
+    top:60px;
+    right:60px;
     background:#ffee44;
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-3{ /* Arts-Literature-Culture - right */
+  .spoke-3{ /* Arts and Literature - right */
     top:50%;
-    right:10px;
+    right:20px;
     transform:translateY(-50%);
     background:#8B4513;
     color:white !important;
@@ -167,39 +167,39 @@
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-4{ /* Science-Nature-Health - bottom right */
-    bottom:45px;
-    right:10px;
-    background:var(--green);
+    bottom:60px;
+    right:60px;
+    background:#00dd55;
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-5{ /* Sports-Leisure-Entertainment - bottom */
-    bottom:10px;
+    bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:var(--blue);
+    background:#1a1a80;
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-6{ /* Humor-Animals-Feelgood - bottom left */
-    bottom:45px;
-    left:10px;
-    background:var(--violet);
+  .spoke-6{ /* Take a Pause - bottom left */
+    bottom:60px;
+    left:60px;
+    background:#cc88ff;
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-7{ /* Conspiracy Corner - left */
     top:50%;
-    left:10px;
+    left:20px;
     transform:translateY(-50%);
-    background:var(--light-blue);
+    background:#33ddff;
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-8{ /* Miscellaneous - top left */
-    top:45px;
-    left:10px;
+  .spoke-8{ /* MISC - top left */
+    top:60px;
+    left:60px;
     background:#006400;
     color:white !important;
     font-weight:900 !important;
@@ -219,49 +219,49 @@
   .line-1{ /* to Opinion (top) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(-90deg);
   }
   .line-2{ /* to History (top right) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(-45deg);
   }
   .line-3{ /* to Arts-Literature-Culture (right) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(0deg);
   }
   .line-4{ /* to Science-Nature-Health (bottom right) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(45deg);
   }
   .line-5{ /* to Sports-Leisure-Entertainment (bottom) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(90deg);
   }
   .line-6{ /* to Humor-Animals-Feelgood (bottom left) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(135deg);
   }
   .line-7{ /* to Conspiracy Corner (left) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(180deg);
   }
   .line-8{ /* to Miscellaneous (top left) */
     top:50%;
     left:50%;
-    width:120px;
+    width:140px;
     transform:translate(0, -50%) rotate(-135deg);
   }
 
@@ -273,7 +273,7 @@
     border:none;
     padding:12px 24px;
     border-radius:25px;
-    font-family:'Special Elite', monospace;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
     font-size:14px;
     font-weight:bold;
     text-transform:uppercase;
@@ -317,26 +317,26 @@
   }
 
   /* Responsive adjustments */
-  @media(max-width:500px){
+  @media(max-width:600px){
     .wheel-container{
-      width:320px;
-      height:320px;
+      width:400px;
+      height:400px;
     }
     .wheel-center{
       width:100px;
       height:100px;
-      font-size:12px;
+      font-size:16px;
     }
     .spoke{
       width:70px;
       height:70px;
-      font-size:9px;
+      font-size:10px;
     }
     .header h1{
       font-size:32px;
     }
-    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6{
-      width:95px;
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
+      width:120px;
     }
   }
 
@@ -372,24 +372,28 @@
     <div class="wheel-line line-4"></div>
     <div class="wheel-line line-5"></div>
     <div class="wheel-line line-6"></div>
+    <div class="wheel-line line-7"></div>
+    <div class="wheel-line line-8"></div>
 
     <!-- Center hub -->
     <div class="wheel-center" onclick="goToNewsHub()">
       NEWS
     </div>
 
-    <!-- 6 Category spokes -->
+    <!-- 8 Category spokes -->
     <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
-    <div class="spoke spoke-2" onclick="goToCategory('arts-lit-history-culture')">Arts<br>Lit<br>History<br>Culture</div>
-    <div class="spoke spoke-3" onclick="goToCategory('science-nature-health')">Science<br>Nature<br>Health</div>
-    <div class="spoke spoke-4" onclick="goToCategory('sports-leisure-ent')">Sports<br>Leisure<br>Entertain</div>
-    <div class="spoke spoke-5" onclick="goToCategory('humor-animals-feelgood')">Humor<br>Animals<br>Feel-Good</div>
-    <div class="spoke spoke-6" onclick="goToCategory('conspiracy-corner')">Conspiracy<br>Corner</div>
+    <div class="spoke spoke-2" onclick="goToCategory('history')">History</div>
+    <div class="spoke spoke-3" onclick="goToCategory('arts-literature-culture')">Arts<br>Literature<br>Culture</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science<br>Nature<br>Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports<br>Leisure<br>Entertainment</div>
+    <div class="spoke spoke-6" onclick="goToCategory('humor-animals-feelgood')">Humor<br>Animals<br>Feel-Good</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy<br>Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('miscellaneous')">Miscellaneous</div>
   </div>
 
   <!-- Random button -->
   <button class="random-button" onclick="goToRandomArticle()">
-    🎲 Surprise Me!
+    🎲 SURPRISE ME!
   </button>
 
   <!-- Instructions -->
