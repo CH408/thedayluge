@@ -141,31 +141,40 @@
     z-index:3;
   }
 
-  /* Position 6 spokes evenly around the circle */
+  /* Position 8 spokes evenly around the circle (45 degrees apart) */
   .spoke-1{ /* Opinion - top */
-    top:20px;
+    top:10px;
     left:50%;
     transform:translateX(-50%);
     background:var(--orange);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-2{ /* Arts/Lit/History/Culture - top right */
-    top:80px;
-    right:30px;
+  .spoke-2{ /* History - top right */
+    top:45px;
+    right:10px;
     background:#ffee44;
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-3{ /* Science-Nature-Health - bottom right */
-    bottom:80px;
-    right:30px;
+  .spoke-3{ /* Arts-Literature-Culture - right */
+    top:50%;
+    right:10px;
+    transform:translateY(-50%);
+    background:#8B4513;
+    color:white !important;
+    font-weight:900 !important;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+  }
+  .spoke-4{ /* Science-Nature-Health - bottom right */
+    bottom:45px;
+    right:10px;
     background:var(--green);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-4{ /* Sports/Leisure/Entertainment - bottom */
-    bottom:20px;
+  .spoke-5{ /* Sports-Leisure-Entertainment - bottom */
+    bottom:10px;
     left:50%;
     transform:translateX(-50%);
     background:var(--blue);
@@ -173,19 +182,28 @@
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-5{ /* Humor/Animals/Feelgood - bottom left */
-    bottom:80px;
-    left:30px;
+  .spoke-6{ /* Humor-Animals-Feelgood - bottom left */
+    bottom:45px;
+    left:10px;
     background:var(--violet);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-6{ /* Conspiracy Corner - top left */
-    top:80px;
-    left:30px;
+  .spoke-7{ /* Conspiracy Corner - left */
+    top:50%;
+    left:10px;
+    transform:translateY(-50%);
     background:var(--light-blue);
     color:black !important;
     font-weight:900 !important;
+  }
+  .spoke-8{ /* Miscellaneous - top left */
+    top:45px;
+    left:10px;
+    background:#006400;
+    color:white !important;
+    font-weight:900 !important;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
 
   /* Connecting lines from center to spokes */
@@ -197,42 +215,54 @@
     z-index:1;
   }
 
-  /* Lines positioning for 6 spokes */
+  /* Lines positioning for 8 spokes */
   .line-1{ /* to Opinion (top) */
     top:50%;
     left:50%;
     width:120px;
     transform:translate(0, -50%) rotate(-90deg);
   }
-  .line-2{ /* to Arts-Lit-Culture (top right) */
+  .line-2{ /* to History (top right) */
     top:50%;
     left:50%;
     width:120px;
-    transform:translate(0, -50%) rotate(-30deg);
+    transform:translate(0, -50%) rotate(-45deg);
   }
-  .line-3{ /* to Sports-Leisure-Entertainment (bottom right) */
+  .line-3{ /* to Arts-Literature-Culture (right) */
     top:50%;
     left:50%;
     width:120px;
-    transform:translate(0, -50%) rotate(30deg);
+    transform:translate(0, -50%) rotate(0deg);
   }
-  .line-4{ /* to History-Philosophy (bottom) */
+  .line-4{ /* to Science-Nature-Health (bottom right) */
+    top:50%;
+    left:50%;
+    width:120px;
+    transform:translate(0, -50%) rotate(45deg);
+  }
+  .line-5{ /* to Sports-Leisure-Entertainment (bottom) */
     top:50%;
     left:50%;
     width:120px;
     transform:translate(0, -50%) rotate(90deg);
   }
-  .line-5{ /* to Science-Nature (bottom left) */
+  .line-6{ /* to Humor-Animals-Feelgood (bottom left) */
     top:50%;
     left:50%;
     width:120px;
-    transform:translate(0, -50%) rotate(150deg);
+    transform:translate(0, -50%) rotate(135deg);
   }
-  .line-6{ /* to Humor-Animals-Feelgood (top left) */
+  .line-7{ /* to Conspiracy Corner (left) */
     top:50%;
     left:50%;
     width:120px;
-    transform:translate(0, -50%) rotate(-150deg);
+    transform:translate(0, -50%) rotate(180deg);
+  }
+  .line-8{ /* to Miscellaneous (top left) */
+    top:50%;
+    left:50%;
+    width:120px;
+    transform:translate(0, -50%) rotate(-135deg);
   }
 
   /* Random button below wheel */
@@ -379,11 +409,13 @@ function goToNewsHub() {
 function goToCategory(category) {
   const categoryPages = {
     'opinion': '/opinion.html',
-    'arts-lit-history-culture': '/arts-lit-history-culture.html',
+    'history': '/history.html',
+    'arts-literature-culture': '/arts-literature-culture.html',
     'science-nature-health': '/science-nature-health.html', 
     'sports-leisure-ent': '/sports-leisure-ent.html',
     'humor-animals-feelgood': '/humor-animals-feelgood.html',
-    'conspiracy-corner': '/conspiracy-corner.html'
+    'conspiracy-corner': '/conspiracy-corner.html',
+    'miscellaneous': '/miscellaneous.html'
   };
   
   if (categoryPages[category]) {
