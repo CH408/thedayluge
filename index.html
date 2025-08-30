@@ -30,66 +30,235 @@
     --panel-border:#cfcfcf;
   }
 
-  /* Color classes for links */
-  .c-red{color:var(--red)}
-  .c-orange{color:var(--orange)}
-  .c-green{color:var(--green)}
-  .c-lime-green{color:var(--lime)}
-  .c-blue{color:var(--blue)}
-  .c-light-blue{color:var(--light-blue)}
-  .c-indigo{color:var(--indigo)}
-  .c-violet{color:var(--violet)}
-  .c-pink{color:var(--pink)}
-  .c-purple{color:var(--violet)}
-  .c-black{color:#000}
-
   *{box-sizing:border-box;margin:0;padding:0}
-  html, body {height:100%}
+  html, body {height:100%; overflow-x:hidden;}
 
-  /* Simple white background */
   body{
     font-family:'Special Elite', monospace;
     color:var(--ink);
     line-height:1.5;
     background:#fff;
-    padding:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
     position:relative;
   }
 
-  .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
-
-  header{text-align:center; margin-bottom:10px;}
-  h1{text-transform:uppercase; letter-spacing:.5px; font-size:36px; cursor:pointer;}
-
-  nav{
-    text-align:center; margin:8px 0 18px; padding-bottom:10px;
-    border-bottom:1px dashed var(--rule);
+  /* Header */
+  .header{
+    position:absolute;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    z-index:10;
   }
-  nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px;}
-  nav a:hover{text-decoration:underline;}
-
-  /* 3-column layout on desktop; 2 on tablet; 1 on mobile */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px 18px;
-    margin-top:10px;
+  .header h1{
+    text-transform:uppercase; 
+    letter-spacing:.5px; 
+    font-size:42px; 
+    margin-bottom:8px;
+    text-shadow:2px 2px 4px rgba(0,0,0,0.1);
   }
-  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:600px){.grid{grid-template-columns:1fr;} h1{font-size:28px;}}
+  .header .tagline{
+    font-size:14px;
+    color:#666;
+    font-style:italic;
+  }
 
-  .link a{
-    display:block;
-    font-size:20px;
+  /* Main wheel container */
+  .wheel-container{
+    position:relative;
+    width:400px;
+    height:400px;
+    margin:0 auto;
+  }
+
+  /* Center hub */
+  .wheel-center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:120px;
+    height:120px;
+    background:#fff;
+    border:3px solid var(--ink);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    z-index:5;
+    text-align:center;
+    font-size:14px;
     font-weight:bold;
-    text-decoration:none;
-    word-break:break-word;
-    padding:2px 0;
-    text-shadow:0 .2px 0 rgba(0,0,0,0.35);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
   }
-  .link a:hover{text-decoration:underline;}
+  .wheel-center:hover{
+    background:#f8f8f8;
+    transform:translate(-50%, -50%) scale(1.05);
+    box-shadow:0 6px 16px rgba(0,0,0,0.2);
+  }
 
-  /* Bottom archive link */
+  /* Spoke sections */
+  .spoke{
+    position:absolute;
+    width:80px;
+    height:80px;
+    border:2px solid var(--ink);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-weight:bold;
+    text-align:center;
+    font-size:11px;
+    line-height:1.2;
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+    background:#fff;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  .spoke:hover{
+    transform:scale(1.1);
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    z-index:3;
+  }
+
+  /* Position spokes around the wheel */
+  .spoke:nth-child(2){ /* Arts & Literature - top */
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--violet);
+    color:white;
+  }
+  .spoke:nth-child(3){ /* Sports - top right */
+    top:60px;
+    right:40px;
+    background:var(--green);
+    color:white;
+  }
+  .spoke:nth-child(4){ /* Technology - right */
+    top:50%;
+    right:20px;
+    transform:translateY(-50%);
+    background:var(--blue);
+    color:white;
+  }
+  .spoke:nth-child(5){ /* Politics - bottom right */
+    bottom:60px;
+    right:40px;
+    background:var(--red);
+    color:white;
+  }
+  .spoke:nth-child(6){ /* Business - bottom */
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--orange);
+    color:white;
+  }
+  .spoke:nth-child(7){ /* World - bottom left */
+    bottom:60px;
+    left:40px;
+    background:var(--indigo);
+    color:white;
+  }
+  .spoke:nth-child(8){ /* Science - left */
+    top:50%;
+    left:20px;
+    transform:translateY(-50%);
+    background:var(--lime);
+    color:white;
+  }
+  .spoke:nth-child(9){ /* Culture - top left */
+    top:60px;
+    left:40px;
+    background:var(--pink);
+    color:white;
+  }
+
+  /* Connecting lines from center to spokes */
+  .wheel-line{
+    position:absolute;
+    background:var(--rule);
+    height:2px;
+    transform-origin:left center;
+    z-index:1;
+  }
+
+  /* Lines positioning */
+  .line-1{ /* to Arts & Literature */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(-90deg);
+  }
+  .line-2{ /* to Sports */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(-45deg);
+  }
+  .line-3{ /* to Technology */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(0deg);
+  }
+  .line-4{ /* to Politics */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(45deg);
+  }
+  .line-5{ /* to Business */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(90deg);
+  }
+  .line-6{ /* to World */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(135deg);
+  }
+  .line-7{ /* to Science */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(180deg);
+  }
+  .line-8{ /* to Culture */
+    top:50%;
+    left:50%;
+    width:100px;
+    transform:translate(0, -50%) rotate(-135deg);
+  }
+
+  /* Instructions */
+  .instructions{
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    color:#666;
+    font-size:12px;
+    max-width:300px;
+  }
+
+  /* Archive link */
   .archive-bottom{
     position:fixed;
     bottom:10px;
@@ -105,128 +274,132 @@
     color:#333;
   }
 
-  /* Archive modal */
-  .archive-modal{
-    display:none; position:fixed; inset:0; z-index:50; background:rgba(0,0,0,0.4);
-    align-items:center; justify-content:center; padding:16px;
+  /* Responsive adjustments */
+  @media(max-width:500px){
+    .wheel-container{
+      width:320px;
+      height:320px;
+    }
+    .wheel-center{
+      width:100px;
+      height:100px;
+      font-size:12px;
+    }
+    .spoke{
+      width:65px;
+      height:65px;
+      font-size:10px;
+    }
+    .header h1{
+      font-size:32px;
+    }
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
+      width:80px;
+    }
   }
-  .archive-modal.show{display:flex;}
-  .archive-card{
-    background:#fff; border-radius:10px; padding:16px; max-width:800px; width:100%;
-    max-height:80vh; overflow:auto; border:1px solid #ddd; box-shadow:0 10px 26px rgba(0,0,0,0.25);
-  }
-  .archive-card h3{margin-bottom:10px;}
-  .archive-list .link a{font-size:16px;}
-  .archive-close{float:right; cursor:pointer; font-weight:bold;}
 
-  .loading{text-align:center; color:#666; margin:40px 0;}
+  /* Loading and transition effects */
+  .wheel-container{
+    animation:fadeIn 1s ease-in;
+  }
+  @keyframes fadeIn{
+    from{opacity:0; transform:scale(0.9);}
+    to{opacity:1; transform:scale(1);}
+  }
+
+  /* Hover effect for the whole wheel */
+  .wheel-container:hover .wheel-line{
+    background:var(--ink);
+    transition:background 0.3s ease;
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
+  <!-- Header -->
+  <div class="header">
     <h1>THE DAYLUGE</h1>
-  </header>
-  <nav>
-    <a href="/">Home</a>
-  </nav>
+    <div class="tagline">Navigate the News</div>
+  </div>
 
-  <!-- Archive Modal -->
-  <div id="archiveModal" class="archive-modal" aria-hidden="true">
-    <div class="archive-card">
-      <span id="closeArchive" class="archive-close">✕</span>
-      <h3>Archive</h3>
-      <div id="archiveList" class="archive-list">
-        <p style="color:#555;">Archive feature coming soon.</p>
-      </div>
+  <!-- Main Wheel -->
+  <div class="wheel-container">
+    <!-- Connecting lines -->
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-line line-4"></div>
+    <div class="wheel-line line-5"></div>
+    <div class="wheel-line line-6"></div>
+    <div class="wheel-line line-7"></div>
+    <div class="wheel-line line-8"></div>
+
+    <!-- Center hub -->
+    <div class="wheel-center" onclick="goToNewsHub()">
+      All<br>News
     </div>
+
+    <!-- Category spokes -->
+    <div class="spoke" onclick="goToCategory('arts')">Arts &<br>Literature</div>
+    <div class="spoke" onclick="goToCategory('sports')">Sports</div>
+    <div class="spoke" onclick="goToCategory('tech')">Technology</div>
+    <div class="spoke" onclick="goToCategory('politics')">Politics</div>
+    <div class="spoke" onclick="goToCategory('business')">Business</div>
+    <div class="spoke" onclick="goToCategory('world')">World</div>
+    <div class="spoke" onclick="goToCategory('science')">Science</div>
+    <div class="spoke" onclick="goToCategory('culture')">Culture</div>
   </div>
 
-  <!-- Grid of links -->
-  <div id="grid" class="grid">
-    <div class="loading">Loading links...</div>
+  <!-- Instructions -->
+  <div class="instructions">
+    Click the center hub for all news, or select a category spoke to explore specific topics
   </div>
-</div>
 
-<!-- Archive link (bottom left) -->
-<div class="archive-bottom" onclick="openArchiveModal()">archive</div>
+  <!-- Archive link (preserved from original) -->
+  <div class="archive-bottom" onclick="openArchive()">archive</div>
 
 <script>
-const MAX_ACTIVE = 48;
-let allLinks = [];
-
-function escapeHTML(s){ 
-  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); 
+// Navigation functions
+function goToNewsHub() {
+  // This will be your general news page (like your current grid layout)
+  window.location.href = '/news.html';
 }
 
-// Load links from simple text file
-async function loadLinks() {
-  try {
-    const response = await fetch('/links.txt');
-    if (response.ok) {
-      const text = await response.text();
-      const lines = text.split('\n').filter(line => line.trim());
-      
-      allLinks = lines.map(line => {
-        const parts = line.split('|');
-        if (parts.length === 3) {
-          return {
-            title: parts[0].trim(),
-            url: parts[1].trim(),
-            color: parts[2].trim(),
-            status: 'active'
-          };
-        }
-        return null;
-      }).filter(link => link !== null);
-      
-      console.log(`Loaded ${allLinks.length} links from text file`);
-    } else {
-      throw new Error('Could not load links.txt');
-    }
-  } catch (error) {
-    console.log('Error loading links, using fallback');
-    // Fallback if file doesn't exist yet
-    allLinks = [
-      {title:"Pablo Escobar Lost $72 Million a Month to Rats and Moisture Damage", url:"https://x.com/bizhustlez/status/1960013189258887243?s=42", color:"c-indigo", status:"active"}
-    ];
-  }
-  renderGrid();
-}
-
-function renderGrid() {
-  const gridEl = document.getElementById('grid');
-  const activeLinks = allLinks.filter(link => link.status === 'active').slice(0, MAX_ACTIVE);
+function goToCategory(category) {
+  // Navigate to category-specific pages
+  const categoryPages = {
+    'arts': '/arts-literature.html',
+    'sports': '/sports.html', 
+    'tech': '/technology.html',
+    'politics': '/politics.html',
+    'business': '/business.html',
+    'world': '/world.html',
+    'science': '/science.html',
+    'culture': '/culture.html'
+  };
   
-  gridEl.innerHTML = activeLinks.map(link => `
-    <div class="link">
-      <a class="${link.color || 'c-black'}" href="${link.url}" target="_blank" rel="noopener">
-        ${escapeHTML(link.title)}
-      </a>
-    </div>
-  `).join('');
-}
-
-// Archive modal function
-function openArchiveModal() {
-  document.getElementById('archiveModal').classList.add('show');
-  document.getElementById('archiveModal').setAttribute('aria-hidden', 'false');
-}
-
-document.getElementById('closeArchive').addEventListener('click', () => {
-  document.getElementById('archiveModal').classList.remove('show');
-  document.getElementById('archiveModal').setAttribute('aria-hidden', 'true');
-});
-
-document.getElementById('archiveModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('archiveModal')) {
-    document.getElementById('archiveModal').classList.remove('show');
-    document.getElementById('archiveModal').setAttribute('aria-hidden', 'true');
+  if (categoryPages[category]) {
+    window.location.href = categoryPages[category];
   }
-});
+}
 
-// Load the links when page loads
-loadLinks();
+function openArchive() {
+  // You can implement your archive modal here or link to an archive page
+  alert('Archive feature - you can implement this however you\'d like!');
+}
+
+// Add some interactive feedback
+document.addEventListener('DOMContentLoaded', function() {
+  // Add click sound effect or other enhancements
+  const spokes = document.querySelectorAll('.spoke, .wheel-center');
+  spokes.forEach(spoke => {
+    spoke.addEventListener('mouseenter', function() {
+      this.style.transform += ' rotateZ(5deg)';
+    });
+    spoke.addEventListener('mouseleave', function() {
+      this.style.transform = this.style.transform.replace(' rotateZ(5deg)', '');
+    });
+  });
+});
 </script>
 </body>
 </html>
