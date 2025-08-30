@@ -6,20 +6,23 @@
 <title>THE DAYLUGE</title>
 
 <!-- Vintage typewriter font -->
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
+  /* Force font loading */
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+  
   :root{
-    /* Link color palette (darker blue/green) */
+    /* Link color palette - adjusted for better contrast */
     --red:#cc0000; 
-    --orange:#ff6600; 
-    --green:#005f00;      /* darker green */
+    --orange:#ff8800; 
+    --green:#00dd55;      /* lighter kelly green */
     --lime:#228b22; 
-    --blue:#003366;       /* darker blue */
-    --light-blue:#000066; 
+    --blue:#1a1a80;       /* lighter navy blue */
+    --light-blue:#33ddff; /* even lighter blue */
     --indigo:#4b0082; 
-    --violet:#6600cc; 
-    --pink:#ff3399;
+    --violet:#cc88ff;     /* much lighter purple */
+    --pink:#ff1493;       /* hot pink */
 
     /* Neutral newspaper tones */
     --ink:#111; 
@@ -34,7 +37,7 @@
   html, body {height:100%; overflow-x:hidden;}
 
   body{
-    font-family:'Special Elite', monospace;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
     color:var(--ink);
     line-height:1.5;
     background:#fff;
@@ -61,6 +64,7 @@
     font-size:42px; 
     margin-bottom:8px;
     text-shadow:2px 2px 4px rgba(0,0,0,0.1);
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
   }
   .header .tagline{
     font-size:14px;
@@ -84,7 +88,8 @@
     transform:translate(-50%, -50%);
     width:120px;
     height:120px;
-    background:#fff;
+    background:var(--red);
+    color:white;
     border:3px solid var(--ink);
     border-radius:50%;
     display:flex;
@@ -94,23 +99,24 @@
     transition:all 0.3s ease;
     z-index:5;
     text-align:center;
-    font-size:14px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:18px;
     font-weight:bold;
     text-transform:uppercase;
     letter-spacing:0.5px;
     box-shadow:0 4px 12px rgba(0,0,0,0.15);
   }
   .wheel-center:hover{
-    background:#f8f8f8;
+    background:#aa0000;
     transform:translate(-50%, -50%) scale(1.05);
     box-shadow:0 6px 16px rgba(0,0,0,0.2);
   }
 
-  /* Spoke sections */
+  /* Spoke sections - 6 spokes positioned around circle */
   .spoke{
     position:absolute;
-    width:80px;
-    height:80px;
+    width:90px;
+    height:90px;
     border:2px solid var(--ink);
     border-radius:50%;
     display:flex;
@@ -118,14 +124,16 @@
     justify-content:center;
     cursor:pointer;
     transition:all 0.3s ease;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
     font-weight:bold;
     text-align:center;
-    font-size:11px;
-    line-height:1.2;
+    font-size:12px;
+    line-height:1.1;
     text-transform:uppercase;
-    letter-spacing:0.3px;
+    letter-spacing:0.2px;
     background:#fff;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    padding:4px;
   }
   .spoke:hover{
     transform:scale(1.1);
@@ -133,58 +141,51 @@
     z-index:3;
   }
 
-  /* Position spokes around the wheel */
-  .spoke:nth-child(2){ /* Arts & Literature - top */
+  /* Position 6 spokes evenly around the circle */
+  .spoke-1{ /* Opinion - top */
     top:20px;
     left:50%;
     transform:translateX(-50%);
-    background:var(--violet);
-    color:white;
+    background:var(--orange);
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke:nth-child(3){ /* Sports - top right */
-    top:60px;
-    right:40px;
+  .spoke-2{ /* Arts/Lit/History/Culture - top right */
+    top:80px;
+    right:30px;
+    background:#ffee44;
+    color:black !important;
+    font-weight:900 !important;
+  }
+  .spoke-3{ /* Science-Nature-Health - bottom right */
+    bottom:80px;
+    right:30px;
     background:var(--green);
-    color:white;
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke:nth-child(4){ /* Technology - right */
-    top:50%;
-    right:20px;
-    transform:translateY(-50%);
-    background:var(--blue);
-    color:white;
-  }
-  .spoke:nth-child(5){ /* Politics - bottom right */
-    bottom:60px;
-    right:40px;
-    background:var(--red);
-    color:white;
-  }
-  .spoke:nth-child(6){ /* Business - bottom */
+  .spoke-4{ /* Sports/Leisure/Entertainment - bottom */
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:var(--orange);
-    color:white;
+    background:var(--blue);
+    color:white !important;
+    font-weight:900 !important;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke:nth-child(7){ /* World - bottom left */
-    bottom:60px;
-    left:40px;
-    background:var(--indigo);
-    color:white;
+  .spoke-5{ /* Humor/Animals/Feelgood - bottom left */
+    bottom:80px;
+    left:30px;
+    background:var(--violet);
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke:nth-child(8){ /* Science - left */
-    top:50%;
-    left:20px;
-    transform:translateY(-50%);
-    background:var(--lime);
-    color:white;
-  }
-  .spoke:nth-child(9){ /* Culture - top left */
-    top:60px;
-    left:40px;
-    background:var(--pink);
-    color:white;
+  .spoke-6{ /* Conspiracy Corner - top left */
+    top:80px;
+    left:30px;
+    background:var(--light-blue);
+    color:black !important;
+    font-weight:900 !important;
   }
 
   /* Connecting lines from center to spokes */
@@ -196,54 +197,65 @@
     z-index:1;
   }
 
-  /* Lines positioning */
-  .line-1{ /* to Arts & Literature */
+  /* Lines positioning for 6 spokes */
+  .line-1{ /* to Opinion (top) */
     top:50%;
     left:50%;
-    width:100px;
+    width:120px;
     transform:translate(0, -50%) rotate(-90deg);
   }
-  .line-2{ /* to Sports */
+  .line-2{ /* to Arts-Lit-Culture (top right) */
     top:50%;
     left:50%;
-    width:100px;
-    transform:translate(0, -50%) rotate(-45deg);
+    width:120px;
+    transform:translate(0, -50%) rotate(-30deg);
   }
-  .line-3{ /* to Technology */
+  .line-3{ /* to Sports-Leisure-Entertainment (bottom right) */
     top:50%;
     left:50%;
-    width:100px;
-    transform:translate(0, -50%) rotate(0deg);
+    width:120px;
+    transform:translate(0, -50%) rotate(30deg);
   }
-  .line-4{ /* to Politics */
+  .line-4{ /* to History-Philosophy (bottom) */
     top:50%;
     left:50%;
-    width:100px;
-    transform:translate(0, -50%) rotate(45deg);
-  }
-  .line-5{ /* to Business */
-    top:50%;
-    left:50%;
-    width:100px;
+    width:120px;
     transform:translate(0, -50%) rotate(90deg);
   }
-  .line-6{ /* to World */
+  .line-5{ /* to Science-Nature (bottom left) */
     top:50%;
     left:50%;
-    width:100px;
-    transform:translate(0, -50%) rotate(135deg);
+    width:120px;
+    transform:translate(0, -50%) rotate(150deg);
   }
-  .line-7{ /* to Science */
+  .line-6{ /* to Humor-Animals-Feelgood (top left) */
     top:50%;
     left:50%;
-    width:100px;
-    transform:translate(0, -50%) rotate(180deg);
+    width:120px;
+    transform:translate(0, -50%) rotate(-150deg);
   }
-  .line-8{ /* to Culture */
-    top:50%;
-    left:50%;
-    width:100px;
-    transform:translate(0, -50%) rotate(-135deg);
+
+  /* Random button below wheel */
+  .random-button{
+    margin-top:30px;
+    background:var(--pink);
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:25px;
+    font-family:'Special Elite', monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    box-shadow:0 3px 8px rgba(0,0,0,0.15);
+  }
+  .random-button:hover{
+    background:#ff0080;
+    transform:translateY(-2px);
+    box-shadow:0 5px 12px rgba(0,0,0,0.2);
   }
 
   /* Instructions */
@@ -255,7 +267,7 @@
     text-align:center;
     color:#666;
     font-size:12px;
-    max-width:300px;
+    max-width:350px;
   }
 
   /* Archive link */
@@ -286,15 +298,15 @@
       font-size:12px;
     }
     .spoke{
-      width:65px;
-      height:65px;
-      font-size:10px;
+      width:70px;
+      height:70px;
+      font-size:9px;
     }
     .header h1{
       font-size:32px;
     }
-    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width:80px;
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6{
+      width:95px;
     }
   }
 
@@ -330,28 +342,29 @@
     <div class="wheel-line line-4"></div>
     <div class="wheel-line line-5"></div>
     <div class="wheel-line line-6"></div>
-    <div class="wheel-line line-7"></div>
-    <div class="wheel-line line-8"></div>
 
     <!-- Center hub -->
     <div class="wheel-center" onclick="goToNewsHub()">
-      All<br>News
+      NEWS
     </div>
 
-    <!-- Category spokes -->
-    <div class="spoke" onclick="goToCategory('arts')">Arts &<br>Literature</div>
-    <div class="spoke" onclick="goToCategory('sports')">Sports</div>
-    <div class="spoke" onclick="goToCategory('tech')">Technology</div>
-    <div class="spoke" onclick="goToCategory('politics')">Politics</div>
-    <div class="spoke" onclick="goToCategory('business')">Business</div>
-    <div class="spoke" onclick="goToCategory('world')">World</div>
-    <div class="spoke" onclick="goToCategory('science')">Science</div>
-    <div class="spoke" onclick="goToCategory('culture')">Culture</div>
+    <!-- 6 Category spokes -->
+    <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
+    <div class="spoke spoke-2" onclick="goToCategory('arts-lit-history-culture')">Arts<br>Lit<br>History<br>Culture</div>
+    <div class="spoke spoke-3" onclick="goToCategory('science-nature-health')">Science<br>Nature<br>Health</div>
+    <div class="spoke spoke-4" onclick="goToCategory('sports-leisure-ent')">Sports<br>Leisure<br>Entertain</div>
+    <div class="spoke spoke-5" onclick="goToCategory('humor-animals-feelgood')">Humor<br>Animals<br>Feel-Good</div>
+    <div class="spoke spoke-6" onclick="goToCategory('conspiracy-corner')">Conspiracy<br>Corner</div>
   </div>
+
+  <!-- Random button -->
+  <button class="random-button" onclick="goToRandomArticle()">
+    🎲 Surprise Me!
+  </button>
 
   <!-- Instructions -->
   <div class="instructions">
-    Click the center hub for all news, or select a category spoke to explore specific topics
+    Click the center hub for all news, select a category spoke, or hit "Surprise Me!" for a random article
   </div>
 
   <!-- Archive link (preserved from original) -->
@@ -360,21 +373,17 @@
 <script>
 // Navigation functions
 function goToNewsHub() {
-  // This will be your general news page (like your current grid layout)
   window.location.href = '/news.html';
 }
 
 function goToCategory(category) {
-  // Navigate to category-specific pages
   const categoryPages = {
-    'arts': '/arts-literature.html',
-    'sports': '/sports.html', 
-    'tech': '/technology.html',
-    'politics': '/politics.html',
-    'business': '/business.html',
-    'world': '/world.html',
-    'science': '/science.html',
-    'culture': '/culture.html'
+    'opinion': '/opinion.html',
+    'arts-lit-history-culture': '/arts-lit-history-culture.html',
+    'science-nature-health': '/science-nature-health.html', 
+    'sports-leisure-ent': '/sports-leisure-ent.html',
+    'humor-animals-feelgood': '/humor-animals-feelgood.html',
+    'conspiracy-corner': '/conspiracy-corner.html'
   };
   
   if (categoryPages[category]) {
@@ -382,14 +391,47 @@ function goToCategory(category) {
   }
 }
 
+// Random article function
+async function goToRandomArticle() {
+  try {
+    const response = await fetch('/links.txt');
+    if (response.ok) {
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim());
+      
+      const links = lines.map(line => {
+        const parts = line.split('|');
+        if (parts.length >= 2) {
+          return {
+            title: parts[0].trim(),
+            url: parts[1].trim()
+          };
+        }
+        return null;
+      }).filter(link => link !== null);
+      
+      if (links.length > 0) {
+        const randomLink = links[Math.floor(Math.random() * links.length)];
+        window.open(randomLink.url, '_blank');
+      } else {
+        alert('No links available for random selection!');
+      }
+    } else {
+      // Fallback if links.txt doesn't exist
+      alert('Random feature coming soon! Add some links to your links.txt file first.');
+    }
+  } catch (error) {
+    console.log('Error loading links for random selection:', error);
+    alert('Random feature coming soon!');
+  }
+}
+
 function openArchive() {
-  // You can implement your archive modal here or link to an archive page
   alert('Archive feature - you can implement this however you\'d like!');
 }
 
 // Add some interactive feedback
 document.addEventListener('DOMContentLoaded', function() {
-  // Add click sound effect or other enhancements
   const spokes = document.querySelectorAll('.spoke, .wheel-center');
   spokes.forEach(spoke => {
     spoke.addEventListener('mouseenter', function() {
