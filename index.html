@@ -38,11 +38,10 @@
     color:var(--ink);
     line-height:1.5;
     background:
-      radial-gradient(ellipse at top left, rgba(120, 0, 255, 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse at top right, rgba(255, 0, 150, 0.2) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom left, rgba(0, 255, 200, 0.2) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom right, rgba(255, 100, 0, 0.3) 0%, transparent 50%),
-      linear-gradient(135deg, #001133 0%, #000822 50%, #001144 100%);
+      radial-gradient(circle at 20% 30%, rgba(0, 100, 200, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(100, 255, 100, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 70% 80%, rgba(255, 200, 0, 0.1) 0%, transparent 40%),
+      linear-gradient(135deg, #0a1428 0%, #051020 50%, #0f1a2e 100%);
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -52,20 +51,31 @@
     overflow:hidden;
   }
 
-  /* Quantum field effects */
+  /* Scientific laboratory effects */
   body::before {
     content: '';
     position:absolute;
     top:0; left:0; right:0; bottom:0;
     background-image: 
-      radial-gradient(1px 1px at 50px 50px, rgba(255,255,255,0.3), transparent),
-      radial-gradient(2px 2px at 150px 100px, rgba(0,255,200,0.4), transparent),
-      radial-gradient(1px 1px at 250px 150px, rgba(255,0,150,0.3), transparent),
-      radial-gradient(1px 1px at 350px 80px, rgba(120,0,255,0.4), transparent),
-      radial-gradient(2px 2px at 80px 200px, rgba(255,255,255,0.2), transparent);
+      /* DNA helixes */
+      conic-gradient(from 0deg at 15% 25%, transparent 0deg, rgba(0,255,150,0.2) 45deg, transparent 90deg),
+      conic-gradient(from 90deg at 85% 15%, transparent 0deg, rgba(255,150,0,0.2) 45deg, transparent 90deg),
+      /* Molecular structures */
+      radial-gradient(circle 3px at 60px 40px, rgba(255,255,255,0.4), transparent),
+      radial-gradient(circle 2px at 180px 90px, rgba(0,200,255,0.5), transparent),
+      radial-gradient(circle 2px at 320px 60px, rgba(255,100,200,0.4), transparent),
+      radial-gradient(circle 3px at 120px 160px, rgba(100,255,100,0.4), transparent),
+      /* Circuit patterns */
+      repeating-linear-gradient(
+        45deg,
+        transparent 0px,
+        rgba(0,255,200,0.1) 1px,
+        transparent 2px,
+        transparent 80px
+      );
     background-repeat: repeat;
-    background-size: 400px 300px;
-    animation:quantum-drift 25s linear infinite;
+    background-size: 400px 300px, 500px 400px, 100px 100px, 100px 100px, 100px 100px, 100px 100px, 200px 200px;
+    animation:lab-drift 30s linear infinite;
     pointer-events: none;
   }
 
@@ -74,35 +84,36 @@
     position:absolute;
     top:0; left:0; right:0; bottom:0;
     background:
+      /* Periodic table grid */
       repeating-linear-gradient(
         0deg,
         transparent 0px,
-        rgba(0,255,200,0.03) 1px,
+        rgba(0,150,255,0.05) 1px,
         transparent 2px,
-        transparent 40px
+        transparent 60px
       ),
       repeating-linear-gradient(
         90deg,
         transparent 0px,
-        rgba(255,0,150,0.03) 1px,
+        rgba(150,255,0,0.05) 1px,
         transparent 2px,
-        transparent 40px
+        transparent 60px
       );
-    animation:wave-interference 15s ease-in-out infinite;
+    animation:scientific-pulse 20s ease-in-out infinite;
     pointer-events: none;
   }
 
-  @keyframes quantum-drift {
-    0% { transform: translate(0px, 0px) rotate(0deg); opacity:0.7; }
-    25% { transform: translate(-20px, -20px) rotate(90deg); opacity:1; }
-    50% { transform: translate(20px, -10px) rotate(180deg); opacity:0.6; }
-    75% { transform: translate(-10px, 20px) rotate(270deg); opacity:0.9; }
-    100% { transform: translate(0px, 0px) rotate(360deg); opacity:0.7; }
+  @keyframes lab-drift {
+    0% { transform: translate(0px, 0px) rotate(0deg); opacity:0.6; }
+    25% { transform: translate(-15px, -25px) rotate(90deg); opacity:0.8; }
+    50% { transform: translate(25px, -15px) rotate(180deg); opacity:0.5; }
+    75% { transform: translate(-20px, 25px) rotate(270deg); opacity:0.9; }
+    100% { transform: translate(0px, 0px) rotate(360deg); opacity:0.6; }
   }
 
-  @keyframes wave-interference {
-    0%, 100% { opacity:0.5; transform:scale(1); }
-    50% { opacity:0.8; transform:scale(1.02); }
+  @keyframes scientific-pulse {
+    0%, 100% { opacity:0.3; transform:scale(1); }
+    50% { opacity:0.7; transform:scale(1.01); }
   }
 
   /* Header */
@@ -487,7 +498,7 @@
 
   <!-- Quantum random button -->
   <button class="random-button" onclick="goToRandomArticle()">
-    ⚛️ QUANTUM LEAP!
+    ⚛️ SURPRISE ME!
   </button>
 
   <!-- Archive link -->
