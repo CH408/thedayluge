@@ -748,17 +748,27 @@ document.addEventListener('DOMContentLoaded', function() {
   // Loading animation
   const loadingOverlay = document.getElementById('loading-overlay');
 
-  function showLoader(callback) {
+  async function showLoader(callback) {
+    // Prevent default link behavior
+    event.preventDefault();
     // Hide main content
     document.querySelectorAll('body > *:not(#loading-overlay):not(#password-overlay)').forEach(el => {
       el.style.display = 'none';
     });
     // Show loader
     loadingOverlay.classList.add('active');
-    // Execute callback after 1.5s (enough time to see the animation)
-    setTimeout(() => {
-      callback();
-    }, 1500);
+    // Execute callback after 1.5s
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      await callback();
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // Hide loader on error
+      loadingOverlay.classList.remove('active');
+      document.querySelectorAll('body > *:not(#loading-overlay):not(#password-overlay)').forEach(el => {
+        el.style.display = '';
+      });
+    }
   }
 
   // Particle effect
@@ -840,10 +850,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (categoryPages[category]) {
       window.location.href = categoryPages[category];
+    } else {
+      throw new Error(`Invalid category: ${category}`);
     }
   }
 
-  // Random article function
   async function goToRandomArticle() {
     try {
       const response = await fetch('/links.txt');
