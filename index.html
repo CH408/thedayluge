@@ -62,7 +62,7 @@
     --spoke-8-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     /* Title glow colors */
     --blue-glow: #00ddff;
-    --green-glow: #00ff00;
+    --purple-glow: #cc88ff;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0 }
@@ -96,7 +96,7 @@
   }
 
   @keyframes fade-in {
-    to { opacity: 0.7; }
+    to { opacity: 0.8; }
   }
 
   /* Energy field effects */
@@ -159,8 +159,326 @@
       transform: scale(1);
     }
     50% { 
-      color: var(--green-glow);
-      text-shadow: 0 0 50px var(--green-glow), 0 0 75px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      color: var(--purple-glow);
+      text-shadow: 0 0 50px var(--purple-glow), 0 0 75px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      transform: scale(1.05);
+    }
+    100% { 
+      color: #ffffff;
+      text-shadow: 0 0 20px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      transform: scale(1);
+    }
+  }
+
+  /* Main atom container */
+  .wheel-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    z-index: 5;
+  }
+
+  /* Orbital rings */
+  .orbital-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid #00ddff44;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 30s linear infinite;
+  }
+  .orbital-ring-1 { width: 300px; height: 300px; animation-duration: 25s; }
+  .orbital-ring-2 { width: 400px; height: 400px; animation-duration: 35s; animation-direction: reverse; }
+  .orbital-ring-3 { width: 480px; height: 480px; animation-duration: 40s; }
+
+  @keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Nucleus (center hub) */
+  .wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
+    color: yellow;
+    border: 2px solid #ffdd00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 15;
+    text-align: center;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.15);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { 
+      box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.15);
+      border-color: #ffdd00;
+    }
+    50% { 
+      box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
+      border-color: #ffff00;
+      transform: translate(-50%, -50%) scale(1.02);
+    }
+  }
+
+  .wheel-center:hover, .wheel-center:focus {
+    background: radial-gradient(circle, #ff0000 0%, #cc0000 100%);
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2), 0 0 10px #00ddff88;
+  }
+
+  /* Electron spokes */
+  .spoke {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border: 2px solid #ffdd00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-weight: 900;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    box-shadow: 0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
+    padding: 4px;
+    animation: electron-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes electron-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
+      border-color: #ffdd00;
+    }
+    50% { 
+      box-shadow: 0 0 40px rgba(255,221,0,0.8), 0 4px 15px rgba(255,221,0,0.3);
+      border-color: #ffff00;
+    }
+  }
+
+  .spoke:hover, .spoke:focus {
+    transform: scale(1.15);
+    box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2), 0 0 10px #00ddff88;
+    z-index: 10;
+    animation-play-state: paused;
+  }
+
+  /* Consolidated spoke styles */
+  .spoke-1 { top: 20px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, var(--spoke-1-bg) 20%, var(--spoke-1-dark) 100%); color: var(--spoke-1-text); text-shadow: var(--spoke-1-shadow); }
+  .spoke-2 { top: 60px; right: 60px; background: radial-gradient(circle, var(--spoke-2-bg) 20%, var(--spoke-2-dark) 100%); color: var(--spoke-2-text); text-shadow: var(--spoke-2-shadow); }
+  .spoke-3 { top: 50%; right: 20px; transform: translateY(-50%); background: radial-gradient(circle, var(--spoke-3-bg) 20%, var(--spoke-3-dark) 100%); color: var(--spoke-3-text); text-shadow: var(--spoke-3-shadow); }
+  .spoke-4 { bottom: 60px; right: 60px; background: radial-gradient(circle, var(--spoke-4-bg) 20%, var(--spoke-4-dark) 100%); color: var(--spoke-4-text); text-shadow: var(--spoke-4-shadow); }
+  .spoke-5 { bottom: 20px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, var(--spoke-5-bg) 20%, var(--spoke-5-dark) 100%); color: var(--spoke-5-text); text-shadow: var(--spoke-5-shadow); }
+  .spoke-6 { bottom: 60px; left: 60px; background: radial-gradient(circle, var(--spoke-6-bg) 20%, var(--spoke-6-dark) 100%); color: var(--spoke-6-text); text-shadow: var(--spoke-6-shadow); }
+  .spoke-7 { top: 50%; left: 20px; transform: translateY(-50%); background: radial-gradient(circle, var(--spoke-7-bg) 20%, var(--spoke-7-dark) 100%); color: var(--spoke-7-text); text-shadow: var(--spoke-7-shadow); }
+  .spoke-8 { top: 60px; left: 60px; background: radial-gradient(circle, var(--spoke-8-bg) 20%, var(--spoke-8-dark) 100%); color: var(--spoke-8-text); text-shadow: var(--spoke-8-shadow); }
+
+  /* Energy beams (connecting lines) */
+  .wheel-line {
+    position: absolute;
+    background: linear-gradient(90deg, #00ddff88, #ffffff44, #00ddff88);
+    height: 3px;
+    transform-origin: left center;
+    z-index: 1;
+    box-shadow: 0 0 8px #00ddff;
+    animation: energy-pulse-line 2s ease-in-out infinite;
+  }
+
+  @keyframes energy-pulse-line {
+    0%, 100% { opacity: 0.6; box-shadow: 0 0 8px #00ddff; }
+    Namaste, friend! Let's make those particles pop and get that title pulsing through a cosmic blue-to-purple spectrum. Here's the plan: we'll bump up the particle size and opacity to make them more noticeable but keep them subtle to maintain that clean atomic vibe. For the title, we'll swap the green for a smooth transition through blue (`#00ddff`) to purple (`#cc88ff`) shades, keeping the glow intense and the pulse lively. Everything else—accessibility, spoke colors, animations—stays untouched to preserve the magic. Below is the updated `index.html` with these tweaks.
+
+---
+
+### Updated `index.html` with Larger Particles and Blue-to-Purple Title Pulse
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE DAYLUGE</title>
+
+<!-- Vintage typewriter font -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  /* Force font loading */
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+  
+  :root {
+    /* Atomic color palette */
+    --red: #cc0000; 
+    --orange: #ff8800; 
+    --green: #00dd55;
+    --blue: #1a1a80;
+    --light-blue: #33ddff;
+    --violet: #cc88ff;
+    --pink: #ff1493;
+    --yellow: #ffee44;
+    --brown: #8B4513;
+    --dark-green: #006400;
+    --ink: #111; 
+    --rule: #bfbfbf;
+    --maxw: 1400px;
+    /* Spoke-specific colors and text settings */
+    --spoke-1-bg: var(--orange);
+    --spoke-1-dark: #cc6600;
+    --spoke-1-text: #000000;
+    --spoke-1-shadow: none;
+    --spoke-2-bg: var(--yellow);
+    --spoke-2-dark: #ddcc00;
+    --spoke-2-text: #000000;
+    --spoke-2-shadow: none;
+    --spoke-3-bg: var(--brown);
+    --spoke-3-dark: #654321;
+    --spoke-3-text: #f5f5f5;
+    --spoke-3-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    --spoke-4-bg: var(--green);
+    --spoke-4-dark: #00aa33;
+    --spoke-4-text: #000000;
+    --spoke-4-shadow: none;
+    --spoke-5-bg: var(--blue);
+    --spoke-5-dark: #001166;
+    --spoke-5-text: #e0e0e0;
+    --spoke-5-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    --spoke-6-bg: var(--violet);
+    --spoke-6-dark: #9966dd;
+    --spoke-6-text: #000000;
+    --spoke-6-shadow: none;
+    --spoke-7-bg: var(--light-blue);
+    --spoke-7-dark: #00aadd;
+    --spoke-7-text: #000000;
+    --spoke-7-shadow: none;
+    --spoke-8-bg: var(--dark-green);
+    --spoke-8-dark: #004400;
+    --spoke-8-text: #e0e0e0;
+    --spoke-8-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    /* Title glow colors */
+    --blue-glow: #00ddff;
+    --purple-glow: #cc88ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  html, body { height: 100%; overflow-x: hidden; }
+
+  body {
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    color: var(--ink);
+    line-height: 1.5;
+    background: #0a1428;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Particle canvas */
+  #particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    animation: fade-in 2s ease-in forwards;
+  }
+
+  @keyframes fade-in {
+    to { opacity: 0.8; }
+  }
+
+  /* Energy field effects */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, rgba(0,150,255,0.1) 0%, transparent 70%);
+    animation: energy-pulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background:
+      linear-gradient(0deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(90deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
+    animation: edge-glow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes energy-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes edge-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Header */
+  .header {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+  .header h1 {
+    text-transform: uppercase; 
+    letter-spacing: .5px; 
+    font-size: 42px; 
+    margin-bottom: 8px;
+    color: #ffffff;
+    text-shadow: 0 0 20px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    animation: title-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes title-pulse {
+    0% { 
+      color: #ffffff;
+      text-shadow: 0 0 20px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      transform: scale(1);
+    }
+    50% { 
+      color: var(--purple-glow);
+      text-shadow: 0 0 50px var(--purple-glow), 0 0 75px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
       transform: scale(1.05);
     }
     100% { 
@@ -417,7 +735,7 @@
       animation-duration: 10s;
     }
     #particle-canvas {
-      opacity: 0.5; /* Reduce particle visibility on mobile */
+      opacity: 0.6; /* Slightly reduced particle visibility on mobile */
     }
   }
 
@@ -525,7 +843,7 @@ document.addEventListener('DOMContentLoaded', function() {
   canvas.height = window.innerHeight;
 
   const particles = [];
-  const particleCount = 30; // Sparse for minimal clutter
+  const particleCount = 30; // Keep sparse to avoid clutter
   const wheelContainer = document.querySelector('.wheel-container');
   const rect = wheelContainer.getBoundingClientRect();
 
@@ -533,10 +851,10 @@ document.addEventListener('DOMContentLoaded', function() {
     return {
       x: rect.left + rect.width / 2 + (Math.random() - 0.5) * rect.width,
       y: rect.top + rect.height / 2 + (Math.random() - 0.5) * rect.height,
-      radius: Math.random() * 2 + 1,
+      radius: Math.random() * 4 + 2, // Increased size (2-6px)
       vx: (Math.random() - 0.5) * 2,
       vy: (Math.random() - 0.5) * 2,
-      opacity: Math.random() * 0.3 + 0.2
+      opacity: Math.random() * 0.4 + 0.4 // Increased opacity (0.4-0.8)
     };
   }
 
@@ -559,8 +877,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Keep particles within wheel-container bounds
       if (particle.x < rect.left || particle.x > rect.left + rect.width) particle.vx *= -1;
       if (particle.y < rect.top || particle.y > rect.top + rect.height) particle.vy *= -1;
-      if (particle.opacity < 0.2) particle.opacity = 0.2;
-      if (particle.opacity > 0.5) particle.opacity = 0.5;
+      if (particle.opacity < 0.4) particle.opacity = 0.4;
+      if (particle.opacity > 0.8) particle.opacity = 0.8;
     });
     requestAnimationFrame(animateParticles);
   }
@@ -571,6 +889,11 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    const newRect = wheelContainer.getBoundingClientRect();
+    particles.forEach(particle => {
+      particle.x = newRect.left + newRect.width / 2 + (Math.random() - 0.5) * newRect.width;
+      particle.y = newRect.top + newRect.height / 2 + (Math.random() - 0.5) * newRect.height;
+    });
   });
 
   // Navigation functions
