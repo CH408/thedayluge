@@ -84,6 +84,80 @@
     overflow: hidden;
   }
 
+  /* Password prompt overlay */
+  #password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a1428;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  #password-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #password-overlay h2 {
+    color: var(--bright-purple-glow);
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 24px;
+    text-shadow: 0 0 10px var(--bright-purple-glow);
+    margin-bottom: 20px;
+  }
+
+  #password-input {
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    background: #1a2a44;
+    color: var(--light-cyan-glow);
+    border: 2px solid var(--bright-cyan-blue-glow);
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+    text-align: center;
+  }
+
+  #password-input:focus {
+    box-shadow: 0 0 10px var(--bright-cyan-blue-glow);
+  }
+
+  #password-submit {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, var(--bright-purple-glow), var(--light-purple-blue-glow));
+    color: #ffffff;
+    border: 2px solid var(--bright-cyan-blue-glow);
+    border-radius: 5px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #password-submit:hover, #password-submit:focus {
+    background: linear-gradient(45deg, var(--light-purple-blue-glow), var(--bright-purple-glow));
+    box-shadow: 0 0 15px var(--bright-cyan-blue-glow);
+  }
+
+  #password-error {
+    color: var(--pink);
+    font-size: 14px;
+    margin-top: 10px;
+    text-shadow: 0 0 5px var(--pink);
+    display: none;
+  }
+
   /* Particle canvas */
   #particle-canvas {
     position: absolute;
@@ -479,6 +553,14 @@
 </style>
 </head>
 <body>
+  <!-- Password prompt overlay -->
+  <div id="password-overlay">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" aria-label="Password input" placeholder="Password">
+    <button id="password-submit" aria-label="Submit password">Submit</button>
+    <p id="password-error">Incorrect password, please try again.</p>
+  </div>
+
   <!-- Particle canvas -->
   <canvas id="particle-canvas"></canvas>
 
@@ -529,8 +611,48 @@
   <div class="archive-bottom" onclick="openArchive()" aria-label="Go to archive" role="button" tabindex="0">archive</div>
 
 <script>
-// Particle effect
+// Password protection
 document.addEventListener('DOMContentLoaded', function() {
+  const correctPassword = 'dayluge2025'; // Change this to your desired password
+  const overlay = document.getElementById('password-overlay');
+  const passwordInput = document.getElementById('password-input');
+  const submitButton = document.getElementById('password-submit');
+  const errorMessage = document.getElementById('password-error');
+
+  // Hide main content initially
+  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+    el.style.display = 'none';
+  });
+
+  // Handle password submission
+  function checkPassword() {
+    if (passwordInput.value === correctPassword) {
+      overlay.classList.add('hidden');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+          el.style.display = '';
+        });
+      }, 500); // Match the transition duration
+    } else {
+      errorMessage.style.display = 'block';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  // Submit on button click
+  submitButton.addEventListener('click', checkPassword);
+
+  // Submit on Enter key
+  passwordInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      checkPassword();
+    }
+  });
+
+  // Particle effect
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
