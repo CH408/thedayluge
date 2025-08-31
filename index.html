@@ -204,7 +204,6 @@
     line-height:1.1;
     text-transform:uppercase;
     letter-spacing:0.2px;
-    background:#fff;
     box-shadow:0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
     padding:4px;
     animation:electron-pulse 2s ease-in-out infinite;
@@ -228,69 +227,69 @@
     animation-play-state:paused;
   }
 
-  /* Position 8 electrons around the nucleus */
+  /* Position 8 electrons around the nucleus with improved contrast */
   .spoke-1{ /* Opinion - top */
     top:20px;
     left:50%;
     transform:translateX(-50%);
-    background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--orange) 20%, #cc6600 100%);
+    color:#000000 !important;
     font-weight:900 !important;
   }
   .spoke-2{ /* History & Culture - top right */
     top:60px;
     right:60px;
-    background:radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--yellow) 20%, #ddcc00 100%);
+    color:#000000 !important;
     font-weight:900 !important;
   }
   .spoke-3{ /* Arts & Literature - right */
     top:50%;
     right:20px;
     transform:translateY(-50%);
-    background:radial-gradient(circle, var(--brown) 0%, #654321 100%);
-    color:white !important;
+    background:radial-gradient(circle, var(--brown) 20%, #654321 100%);
+    color:#f5f5f5 !important; /* Lighter gray for better contrast */
     font-weight:900 !important;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    text-shadow:1px 1px 1px rgba(0,0,0,0.5); /* Reduced opacity */
   }
   .spoke-4{ /* Science-Nature-Health - bottom right */
     bottom:60px;
     right:60px;
-    background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--green) 20%, #00aa33 100%);
+    color:#000000 !important;
     font-weight:900 !important;
   }
   .spoke-5{ /* Sports-Leisure-Ent - bottom */
     bottom:20px;
     left:50%;
     transform:translateX(-50%);
-    background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
-    color:white !important;
+    background:radial-gradient(circle, var(--blue) 20%, #001166 100%);
+    color:#e0e0e0 !important; /* Lighter gray for better contrast */
     font-weight:900 !important;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    text-shadow:1px 1px 1px rgba(0,0,0,0.5); /* Reduced opacity */
   }
   .spoke-6{ /* Take A Pause - bottom left */
     bottom:60px;
     left:60px;
-    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--violet) 20%, #9966dd 100%);
+    color:#000000 !important;
     font-weight:900 !important;
   }
   .spoke-7{ /* Conspiracy Corner - left */
     top:50%;
     left:20px;
     transform:translateY(-50%);
-    background:radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--light-blue) 20%, #00aadd 100%);
+    color:#000000 !important;
     font-weight:900 !important;
   }
   .spoke-8{ /* MISC - top left */
     top:60px;
     left:60px;
-    background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
-    color:white !important;
+    background:radial-gradient(circle, var(--dark-green) 20%, #004400 100%);
+    color:#e0e0e0 !important; /* Lighter gray for better contrast */
     font-weight:900 !important;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    text-shadow:1px 1px 1px rgba(0,0,0,0.5); /* Reduced opacity */
   }
 
   /* Energy beams (connecting lines) */
@@ -572,16 +571,13 @@ document.addEventListener('DOMContentLoaded', function() {
   
   spokes.forEach(spoke => {
     spoke.addEventListener('mouseenter', function() {
-      // Pause the orbital animation on hover
       this.style.animationPlayState = 'paused';
     });
     spoke.addEventListener('mouseleave', function() {
-      // Resume orbital animation
       this.style.animationPlayState = 'running';
     });
   });
   
-  // Add nuclear reaction effect on center hover
   center.addEventListener('mouseenter', function() {
     spokes.forEach(spoke => {
       spoke.style.animationDuration = '3s';
@@ -596,5 +592,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
-
