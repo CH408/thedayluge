@@ -60,9 +60,9 @@
     --spoke-8-dark: #004400;
     --spoke-8-text: #e0e0e0;
     --spoke-8-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    /* Green glow for title */
+    /* Title glow colors */
+    --blue-glow: #00ddff;
     --green-glow: #00ff00;
-    --green-glow-light: #66ff66;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0 }
@@ -80,6 +80,23 @@
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+  }
+
+  /* Particle canvas */
+  #particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    animation: fade-in 2s ease-in forwards;
+  }
+
+  @keyframes fade-in {
+    to { opacity: 0.7; }
   }
 
   /* Energy field effects */
@@ -130,19 +147,26 @@
     font-size: 42px; 
     margin-bottom: 8px;
     color: #ffffff;
-    text-shadow: 0 0 15px var(--green-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 0 0 20px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     animation: title-pulse 3s ease-in-out infinite;
   }
 
   @keyframes title-pulse {
-    0%, 100% { 
+    0% { 
       color: #ffffff;
-      text-shadow: 0 0 15px var(--green-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      text-shadow: 0 0 20px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      transform: scale(1);
     }
     50% { 
-      color: var(--green-glow-light);
-      text-shadow: 0 0 30px var(--green-glow), 0 0 45px var(--green-glow-light), 2px 2px 4px rgba(0,0,0,0.8);
+      color: var(--green-glow);
+      text-shadow: 0 0 50px var(--green-glow), 0 0 75px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      transform: scale(1.05);
+    }
+    100% { 
+      color: #ffffff;
+      text-shadow: 0 0 20px var(--blue-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      transform: scale(1);
     }
   }
 
@@ -152,6 +176,7 @@
     width: 500px;
     height: 500px;
     margin: 0 auto;
+    z-index: 5;
   }
 
   /* Orbital rings */
@@ -391,6 +416,9 @@
     body::before, body::after {
       animation-duration: 10s;
     }
+    #particle-canvas {
+      opacity: 0.5; /* Reduce particle visibility on mobile */
+    }
   }
 
   /* Extra small mobile phones */
@@ -439,6 +467,9 @@
 </style>
 </head>
 <body>
+  <!-- Particle canvas -->
+  <canvas id="particle-canvas"></canvas>
+
   <!-- Header -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
@@ -486,74 +517,128 @@
   <div class="archive-bottom" onclick="openArchive()" aria-label="Go to archive" role="button" tabindex="0">archive</div>
 
 <script>
-// Navigation functions
-function goToNewsHub() {
-  window.location.href = '/news.html';
-}
-
-function goToCategory(category) {
-  const categoryPages = {
-    'opinion': '/opinion.html',
-    'history-philosophy-culture': '/history-philosophy-culture.html',
-    'arts-literature': '/arts-literature.html',
-    'science-nature-health': '/science-nature-health.html', 
-    'sports-leisure-ent': '/sports-leisure-ent.html',
-    'take-a-pause': '/take-a-pause.html',
-    'conspiracy-corner': '/conspiracy-corner.html',
-    'misc': '/misc.html'
-  };
-  
-  if (categoryPages[category]) {
-    window.location.href = categoryPages[category];
-  }
-}
-
-// Random article function
-async function goToRandomArticle() {
-  try {
-    const response = await fetch('/links.txt');
-    if (response.ok) {
-      const text = await response.text();
-      const lines = text.split('\n').filter(line => line.trim());
-      
-      const links = lines.map(line => {
-        const parts = line.split('|');
-        if (parts.length >= 2) {
-          return {
-            title: parts[0].trim(),
-            url: parts[1].trim()
-          };
-        }
-        return null;
-      }).filter(link => link !== null);
-      
-      if (links.length > 0) {
-        const randomLink = links[Math.floor(Math.random() * links.length)];
-        window.open(randomLink.url, '_blank');
-      } else {
-        alert('No links available for random selection!');
-      }
-    } else {
-      alert('Surprise feature coming soon! Add some links to your links.txt file first.');
-    }
-  } catch (error) {
-    console.log('Error loading links for random selection:', error);
-    alert('Surprise feature coming soon!');
-  }
-}
-
-function openArchive() {
-  alert('Archive feature - you can implement this however you\'d like!');
-}
-
-// Add atomic interactions and keyboard support
+// Particle effect
 document.addEventListener('DOMContentLoaded', function() {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+  const particleCount = 30; // Sparse for minimal clutter
+  const wheelContainer = document.querySelector('.wheel-container');
+  const rect = wheelContainer.getBoundingClientRect();
+
+  function createParticle() {
+    return {
+      x: rect.left + rect.width / 2 + (Math.random() - 0.5) * rect.width,
+      y: rect.top + rect.height / 2 + (Math.random() - 0.5) * rect.height,
+      radius: Math.random() * 2 + 1,
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2,
+      opacity: Math.random() * 0.3 + 0.2
+    };
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(createParticle());
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(particle => {
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0, 221, 255, ${particle.opacity})`;
+      ctx.fill();
+
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+      particle.opacity += (Math.random() - 0.5) * 0.01;
+
+      // Keep particles within wheel-container bounds
+      if (particle.x < rect.left || particle.x > rect.left + rect.width) particle.vx *= -1;
+      if (particle.y < rect.top || particle.y > rect.top + rect.height) particle.vy *= -1;
+      if (particle.opacity < 0.2) particle.opacity = 0.2;
+      if (particle.opacity > 0.5) particle.opacity = 0.5;
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  animateParticles();
+
+  // Resize canvas on window resize
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  // Navigation functions
+  function goToNewsHub() {
+    window.location.href = '/news.html';
+  }
+
+  function goToCategory(category) {
+    const categoryPages = {
+      'opinion': '/opinion.html',
+      'history-philosophy-culture': '/history-philosophy-culture.html',
+      'arts-literature': '/arts-literature.html',
+      'science-nature-health': '/science-nature-health.html', 
+      'sports-leisure-ent': '/sports-leisure-ent.html',
+      'take-a-pause': '/take-a-pause.html',
+      'conspiracy-corner': '/conspiracy-corner.html',
+      'misc': '/misc.html'
+    };
+    
+    if (categoryPages[category]) {
+      window.location.href = categoryPages[category];
+    }
+  }
+
+  // Random article function
+  async function goToRandomArticle() {
+    try {
+      const response = await fetch('/links.txt');
+      if (response.ok) {
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return {
+              title: parts[0].trim(),
+              url: parts[1].trim()
+            };
+          }
+          return null;
+        }).filter(link => link !== null);
+        
+        if (links.length > 0) {
+          const randomLink = links[Math.floor(Math.random() * links.length)];
+          window.open(randomLink.url, '_blank');
+        } else {
+          alert('No links available for random selection!');
+        }
+      } else {
+        alert('Surprise feature coming soon! Add some links to your links.txt file first.');
+      }
+    } catch (error) {
+      console.log('Error loading links for random selection:', error);
+      alert('Surprise feature coming soon!');
+    }
+  }
+
+  function openArchive() {
+    alert('Archive feature - you can implement this however you\'d like!');
+  }
+
+  // Add atomic interactions and keyboard support
   const spokes = document.querySelectorAll('.spoke');
   const center = document.querySelector('.wheel-center');
   const randomButton = document.querySelector('.random-button');
   const archiveLink = document.querySelector('.archive-bottom');
   
-  // Mouse interactions
   spokes.forEach(spoke => {
     spoke.addEventListener('mouseenter', function() {
       this.style.animationPlayState = 'paused';
