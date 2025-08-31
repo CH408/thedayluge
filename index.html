@@ -60,6 +60,9 @@
     --spoke-8-dark: #004400;
     --spoke-8-text: #e0e0e0;
     --spoke-8-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    /* Green glow for title */
+    --green-glow: #00ff00;
+    --green-glow-light: #66ff66;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0 }
@@ -127,7 +130,7 @@
     font-size: 42px; 
     margin-bottom: 8px;
     color: #ffffff;
-    text-shadow: 0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 0 0 15px var(--green-glow), 2px 2px 4px rgba(0,0,0,0.8);
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     animation: title-pulse 3s ease-in-out infinite;
   }
@@ -135,11 +138,11 @@
   @keyframes title-pulse {
     0%, 100% { 
       color: #ffffff;
-      text-shadow: 0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+      text-shadow: 0 0 15px var(--green-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
     50% { 
-      color: #66ddff;
-      text-shadow: 0 0 30px #00ddff, 0 0 45px #66ddff, 2px 2px 4px rgba(0,0,0,0.8);
+      color: var(--green-glow-light);
+      text-shadow: 0 0 30px var(--green-glow), 0 0 45px var(--green-glow-light), 2px 2px 4px rgba(0,0,0,0.8);
     }
   }
 
@@ -210,10 +213,10 @@
     }
   }
 
-  .wheel-center:hover {
+  .wheel-center:hover, .wheel-center:focus {
     background: radial-gradient(circle, #ff0000 0%, #cc0000 100%);
     transform: translate(-50%, -50%) scale(1.05);
-    box-shadow: 0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2), 0 0 10px #00ddff88;
   }
 
   /* Electron spokes */
@@ -251,9 +254,9 @@
     }
   }
 
-  .spoke:hover {
+  .spoke:hover, .spoke:focus {
     transform: scale(1.15);
-    box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2), 0 0 10px #00ddff88;
     z-index: 10;
     animation-play-state: paused;
   }
@@ -312,10 +315,10 @@
     box-shadow: 0 0 20px #ff149388, 0 4px 12px rgba(0,0,0,0.3);
     text-shadow: 0 0 5px #ffffff;
   }
-  .random-button:hover {
+  .random-button:hover, .random-button:focus {
     background: linear-gradient(45deg, #ff0080 0%, var(--pink) 100%);
     transform: translateY(-3px);
-    box-shadow: 0 0 35px #ff1493bb, 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 0 35px #ff1493bb, 0 8px 20px rgba(0,0,0,0.4), 0 0 10px #00ddff88;
     animation: button-pulse 0.5s ease-in-out;
   }
 
@@ -336,10 +339,10 @@
     opacity: 0.7;
     text-shadow: 0 0 5px #00ddff;
   }
-  .archive-bottom:hover {
+  .archive-bottom:hover, .archive-bottom:focus {
     opacity: 1;
     color: #ffffff;
-    text-shadow: 0 0 10px #00ddff;
+    text-shadow: 0 0 10px #00ddff, 0 0 15px #00ddff88;
   }
 
   /* Responsive adjustments for mobile optimization */
@@ -381,6 +384,9 @@
     }
     .orbital-ring {
       animation-duration: 60s;
+    }
+    .wheel-center:focus, .spoke:focus, .random-button:focus, .archive-bottom:focus {
+      box-shadow: 0 0 10px #00ddff88; /* Subtle focus for mobile */
     }
     body::before, body::after {
       animation-duration: 10s;
@@ -439,7 +445,7 @@
   </div>
 
   <!-- Main Atom Structure -->
-  <div class="wheel-container">
+  <div class="wheel-container" role="navigation" aria-label="Main navigation">
     <!-- Orbital rings -->
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
@@ -456,28 +462,28 @@
     <div class="wheel-line line-8"></div>
 
     <!-- Nucleus -->
-    <div class="wheel-center" onclick="goToNewsHub()">
+    <div class="wheel-center" onclick="goToNewsHub()" aria-label="Go to News Hub" role="button" tabindex="0">
       NEWS
     </div>
 
     <!-- Electrons (category spokes) -->
-    <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
-    <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,<br>Philosophy<br>& Culture</div>
-    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts<br>&<br>Literature</div>
-    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,<br>Nature<br>& Health</div>
-    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,<br>Leisure<br>& Ent</div>
-    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take<br>A<br>Pause</div>
-    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy<br>Corner</div>
-    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>
+    <div class="spoke spoke-1" onclick="goToCategory('opinion')" aria-label="Go to Opinion category" role="button" tabindex="0">Opinion</div>
+    <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')" aria-label="Go to History, Philosophy & Culture category" role="button" tabindex="0">History,<br>Philosophy<br>& Culture</div>
+    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')" aria-label="Go to Arts & Literature category" role="button" tabindex="0">Arts<br>&<br>Literature</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')" aria-label="Go to Science, Nature & Health category" role="button" tabindex="0">Science,<br>Nature<br>& Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')" aria-label="Go to Sports, Leisure & Entertainment category" role="button" tabindex="0">Sports,<br>Leisure<br>& Ent</div>
+    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')" aria-label="Go to Take a Pause category" role="button" tabindex="0">Take<br>A<br>Pause</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')" aria-label="Go to Conspiracy Corner category" role="button" tabindex="0">Conspiracy<br>Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('misc')" aria-label="Go to Miscellaneous category" role="button" tabindex="0">MISC</div>
   </div>
 
   <!-- Quantum random button -->
-  <button class="random-button" onclick="goToRandomArticle()">
+  <button class="random-button" onclick="goToRandomArticle()" aria-label="Go to a random article" role="button" tabindex="0">
     ⚛️ SURPRISE ME!
   </button>
 
   <!-- Archive link -->
-  <div class="archive-bottom" onclick="openArchive()">archive</div>
+  <div class="archive-bottom" onclick="openArchive()" aria-label="Go to archive" role="button" tabindex="0">archive</div>
 
 <script>
 // Navigation functions
@@ -540,17 +546,26 @@ function openArchive() {
   alert('Archive feature - you can implement this however you\'d like!');
 }
 
-// Add atomic interactions
+// Add atomic interactions and keyboard support
 document.addEventListener('DOMContentLoaded', function() {
   const spokes = document.querySelectorAll('.spoke');
   const center = document.querySelector('.wheel-center');
+  const randomButton = document.querySelector('.random-button');
+  const archiveLink = document.querySelector('.archive-bottom');
   
+  // Mouse interactions
   spokes.forEach(spoke => {
     spoke.addEventListener('mouseenter', function() {
       this.style.animationPlayState = 'paused';
     });
     spoke.addEventListener('mouseleave', function() {
       this.style.animationPlayState = 'running';
+    });
+    spoke.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        this.click();
+      }
     });
   });
   
@@ -563,6 +578,26 @@ document.addEventListener('DOMContentLoaded', function() {
     spokes.forEach(spoke => {
       spoke.style.animationDuration = '15s';
     });
+  });
+  center.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.click();
+    }
+  });
+
+  randomButton.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.click();
+    }
+  });
+
+  archiveLink.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.click();
+    }
   });
 });
 </script>
