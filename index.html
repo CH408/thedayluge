@@ -657,11 +657,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function goToNewsHub() {
     console.log('Navigating to News Hub');
+    alert('Navigating to News Hub');
     window.location.href = './news.html';
   }
 
   function goToCategory(category) {
-    console.log('Navigating to category:', category);
+    console.log('Attempting to navigate to category:', category);
+    alert('Navigating to ' + category);
     const categoryPages = {
       'opinion': './opinion.html',
       'history-philosophy-culture': './history-philosophy-culture.html',
@@ -674,15 +676,17 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     if (categoryPages[category]) {
+      console.log('Navigating to:', categoryPages[category]);
       window.location.href = categoryPages[category];
     } else {
       console.error('Invalid category:', category);
-      alert('Category not found!');
+      alert('Category not found: ' + category);
     }
   }
 
   async function goToRandomArticle() {
     console.log('Navigating to Random Article');
+    alert('Navigating to Random Article');
     try {
       const response = await fetch('./links.txt');
       if (response.ok) {
@@ -698,6 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (links.length > 0) {
           const randomLink = links[Math.floor(Math.random() * links.length)];
+          console.log('Opening random link:', randomLink.url);
           window.open(randomLink.url, '_blank');
         } else {
           alert('No links available for random selection!');
@@ -713,6 +718,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function openArchive() {
     console.log('Navigating to Archive');
+    alert('Navigating to Archive');
     alert('Archive feature - you can implement this however you\'d like!');
   }
 
@@ -723,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   spokes.forEach(spoke => {
     spoke.addEventListener('click', function() {
-      console.log('Spoke clicked:', this.textContent);
+      console.log('Spoke clicked:', this.textContent.trim());
     });
     spoke.addEventListener('mouseenter', function() {
       this.style.animationPlayState = 'paused';
@@ -734,7 +740,7 @@ document.addEventListener('DOMContentLoaded', function() {
     spoke.addEventListener('keydown', function(event) {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        console.log('Keyboard navigation on spoke:', this.textContent);
+        console.log('Keyboard navigation on spoke:', this.textContent.trim());
         this.click();
       }
     });
