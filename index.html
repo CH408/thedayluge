@@ -9,11 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
-  /* Force font loading */
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
   
   :root {
-    /* Atomic color palette */
     --red: #cc0000; 
     --orange: #ff8800; 
     --green: #00dd55;
@@ -27,7 +25,6 @@
     --ink: #111; 
     --rule: #bfbfbf;
     --maxw: 1400px;
-    /* Spoke-specific colors and text settings */
     --spoke-1-bg: var(--orange);
     --spoke-1-dark: #cc6600;
     --spoke-1-text: #000000;
@@ -60,11 +57,10 @@
     --spoke-8-dark: #004400;
     --spoke-8-text: #e0e0e0;
     --spoke-8-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    /* Title glow colors */
-    --bright-purple-glow: #cc88ff; /* Bright purple */
-    --light-purple-blue-glow: #aa99ff; /* Light purple-blue */
-    --bright-cyan-blue-glow: #66bbff; /* Bright cyan-blue */
-    --light-cyan-glow: #88ccff; /* Light cyan */
+    --bright-purple-glow: #cc88ff;
+    --light-purple-blue-glow: #aa99ff;
+    --bright-cyan-blue-glow: #66bbff;
+    --light-cyan-glow: #88ccff;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0 }
@@ -84,7 +80,6 @@
     overflow: hidden;
   }
 
-  /* Password prompt overlay */
   #password-overlay {
     position: fixed;
     top: 0;
@@ -108,7 +103,6 @@
 
   #password-overlay h2 {
     color: var(--bright-purple-glow);
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-size: 24px;
     text-shadow: 0 0 10px var(--bright-purple-glow);
     margin-bottom: 20px;
@@ -158,7 +152,6 @@
     display: none;
   }
 
-  /* Particle canvas */
   #particle-canvas {
     position: absolute;
     top: 0;
@@ -175,7 +168,6 @@
     to { opacity: 0.8; }
   }
 
-  /* Energy field effects */
   body::before {
     content: '';
     position: absolute;
@@ -208,7 +200,6 @@
     50% { opacity: 0.8; }
   }
 
-  /* Header */
   .header {
     position: absolute;
     top: 30px;
@@ -256,7 +247,6 @@
     }
   }
 
-  /* Main atom container */
   .wheel-container {
     position: relative;
     width: 500px;
@@ -265,7 +255,6 @@
     z-index: 5;
   }
 
-  /* Orbital rings */
   .orbital-ring {
     position: absolute;
     top: 50%;
@@ -284,7 +273,6 @@
     to { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
-  /* Nucleus (center hub) */
   .wheel-center {
     position: absolute;
     top: 50%;
@@ -330,7 +318,6 @@
     box-shadow: 0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2), 0 0 10px #00ddff88;
   }
 
-  /* Electron spokes */
   .spoke {
     position: absolute;
     width: 90px;
@@ -352,6 +339,7 @@
     box-shadow: 0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
     padding: 4px;
     animation: electron-pulse 2s ease-in-out infinite;
+    z-index: 10;
   }
 
   @keyframes electron-pulse {
@@ -368,11 +356,10 @@
   .spoke:hover, .spoke:focus {
     transform: scale(1.15);
     box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2), 0 0 10px #00ddff88;
-    z-index: 10;
+    z-index: 12;
     animation-play-state: paused;
   }
 
-  /* Consolidated spoke styles */
   .spoke-1 { top: 20px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, var(--spoke-1-bg) 20%, var(--spoke-1-dark) 100%); color: var(--spoke-1-text); text-shadow: var(--spoke-1-shadow); }
   .spoke-2 { top: 60px; right: 60px; background: radial-gradient(circle, var(--spoke-2-bg) 20%, var(--spoke-2-dark) 100%); color: var(--spoke-2-text); text-shadow: var(--spoke-2-shadow); }
   .spoke-3 { top: 50%; right: 20px; transform: translateY(-50%); background: radial-gradient(circle, var(--spoke-3-bg) 20%, var(--spoke-3-dark) 100%); color: var(--spoke-3-text); text-shadow: var(--spoke-3-shadow); }
@@ -382,7 +369,6 @@
   .spoke-7 { top: 50%; left: 20px; transform: translateY(-50%); background: radial-gradient(circle, var(--spoke-7-bg) 20%, var(--spoke-7-dark) 100%); color: var(--spoke-7-text); text-shadow: var(--spoke-7-shadow); }
   .spoke-8 { top: 60px; left: 60px; background: radial-gradient(circle, var(--spoke-8-bg) 20%, var(--spoke-8-dark) 100%); color: var(--spoke-8-text); text-shadow: var(--spoke-8-shadow); }
 
-  /* Energy beams (connecting lines) */
   .wheel-line {
     position: absolute;
     background: linear-gradient(90deg, #00ddff88, #ffffff44, #00ddff88);
@@ -398,7 +384,6 @@
     50% { opacity: 1; box-shadow: 0 0 15px #00ddff, 0 0 25px #00ddff88; }
   }
 
-  /* Lines positioning for 8 spokes */
   .line-1 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(-90deg); }
   .line-2 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(-45deg); }
   .line-3 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(0deg); }
@@ -408,7 +393,6 @@
   .line-7 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(180deg); }
   .line-8 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(-135deg); }
 
-  /* Random button with atomic styling */
   .random-button {
     margin-top: 40px;
     background: linear-gradient(45deg, var(--pink) 0%, #ff0080 100%);
@@ -438,7 +422,6 @@
     50% { transform: translateY(-3px) scale(1.05); }
   }
 
-  /* Archive link with glow */
   .archive-bottom {
     position: fixed;
     bottom: 15px;
@@ -456,7 +439,6 @@
     text-shadow: 0 0 10px #00ddff, 0 0 15px #00ddff88;
   }
 
-  /* Responsive adjustments for mobile optimization */
   @media (max-width: 600px) {
     .wheel-container {
       width: 380px;
@@ -488,25 +470,15 @@
       padding: 12px 20px;
       font-size: 13px;
     }
-    /* Simplify animations on mobile for better performance */
-    .spoke {
-      animation: none;
-    }
-    .orbital-ring {
-      animation-duration: 60s;
-    }
+    .spoke { animation: none; }
+    .orbital-ring { animation-duration: 60s; }
     .wheel-center:focus, .spoke:focus, .random-button:focus, .archive-bottom:focus {
-      box-shadow: 0 0 10px #00ddff88; /* Subtle focus for mobile */
+      box-shadow: 0 0 10px #00ddff88;
     }
-    body::before, body::after {
-      animation-duration: 10s;
-    }
-    #particle-canvas {
-      opacity: 0.6; /* Slightly reduced particle visibility on mobile */
-    }
+    body::before, body::after { animation-duration: 10s; }
+    #particle-canvas { opacity: 0.6; }
   }
 
-  /* Extra small mobile phones */
   @media (max-width: 400px) {
     .wheel-container {
       width: 320px;
@@ -522,15 +494,12 @@
       height: 65px;
       font-size: 9px;
     }
-    .header h1 {
-      font-size: 28px;
-    }
+    .header h1 { font-size: 28px; }
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8 {
       width: 90px;
     }
   }
 
-  /* Loading animation for wheel container */
   .wheel-container {
     animation: atomize 2s ease-in;
   }
@@ -539,7 +508,6 @@
     to { opacity: 1; transform: scale(1) rotate(0deg); }
   }
 
-  /* Hover effect for the atom */
   .wheel-container:hover .wheel-line {
     background: linear-gradient(90deg, #00ddffbb, #ffffffff, #00ddffbb);
     box-shadow: 0 0 20px #00ddff;
@@ -552,7 +520,6 @@
 </style>
 </head>
 <body>
-  <!-- Password prompt overlay -->
   <div id="password-overlay">
     <h2>Enter Password</h2>
     <input type="password" id="password-input" aria-label="Password input" placeholder="Password">
@@ -560,22 +527,16 @@
     <p id="password-error">Incorrect password, please try again.</p>
   </div>
 
-  <!-- Particle canvas -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Header -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
   </div>
 
-  <!-- Main Atom Structure -->
   <div class="wheel-container" role="navigation" aria-label="Main navigation">
-    <!-- Orbital rings -->
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
     <div class="orbital-ring orbital-ring-3"></div>
-
-    <!-- Energy beams -->
     <div class="wheel-line line-1"></div>
     <div class="wheel-line line-2"></div>
     <div class="wheel-line line-3"></div>
@@ -584,13 +545,7 @@
     <div class="wheel-line line-6"></div>
     <div class="wheel-line line-7"></div>
     <div class="wheel-line line-8"></div>
-
-    <!-- Nucleus -->
-    <div class="wheel-center" onclick="goToNewsHub()" aria-label="Go to News Hub" role="button" tabindex="0">
-      NEWS
-    </div>
-
-    <!-- Electrons (category spokes) -->
+    <div class="wheel-center" onclick="goToNewsHub()" aria-label="Go to News Hub" role="button" tabindex="0">NEWS</div>
     <div class="spoke spoke-1" onclick="goToCategory('opinion')" aria-label="Go to Opinion category" role="button" tabindex="0">Opinion</div>
     <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')" aria-label="Go to History, Philosophy & Culture category" role="button" tabindex="0">History,<br>Philosophy<br>& Culture</div>
     <div class="spoke spoke-3" onclick="goToCategory('arts-literature')" aria-label="Go to Arts & Literature category" role="button" tabindex="0">Arts<br>&<br>Literature</div>
@@ -601,29 +556,24 @@
     <div class="spoke spoke-8" onclick="goToCategory('misc')" aria-label="Go to Miscellaneous category" role="button" tabindex="0">MISC</div>
   </div>
 
-  <!-- Quantum random button -->
   <button class="random-button" onclick="goToRandomArticle()" aria-label="Go to a random article" role="button" tabindex="0">
     ⚛️ SURPRISE ME!
   </button>
 
-  <!-- Archive link -->
   <div class="archive-bottom" onclick="openArchive()" aria-label="Go to archive" role="button" tabindex="0">archive</div>
 
 <script>
-// Password protection
 document.addEventListener('DOMContentLoaded', function() {
-  const correctPassword = 'dayluge2025'; // Change this to your desired password
+  const correctPassword = 'dayluge2025';
   const overlay = document.getElementById('password-overlay');
   const passwordInput = document.getElementById('password-input');
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
 
-  // Hide main content initially
   document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
     el.style.display = 'none';
   });
 
-  // Handle password submission
   function checkPassword() {
     if (passwordInput.value === correctPassword) {
       overlay.classList.add('hidden');
@@ -632,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
           el.style.display = '';
         });
-      }, 500); // Match the transition duration
+      }, 500);
     } else {
       errorMessage.style.display = 'block';
       passwordInput.value = '';
@@ -640,10 +590,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Submit on button click
   submitButton.addEventListener('click', checkPassword);
-
-  // Submit on Enter key
   passwordInput.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -651,14 +598,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Particle effect
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
   const particles = [];
-  const particleCount = 30; // Keep sparse to avoid clutter
+  const particleCount = 30;
   const wheelContainer = document.querySelector('.wheel-container');
   const rect = wheelContainer.getBoundingClientRect();
 
@@ -666,10 +612,10 @@ document.addEventListener('DOMContentLoaded', function() {
     return {
       x: rect.left + rect.width / 2 + (Math.random() - 0.5) * rect.width,
       y: rect.top + rect.height / 2 + (Math.random() - 0.5) * rect.height,
-      radius: Math.random() * 1.5 + 0.5, // Smaller size (0.5-2px)
+      radius: Math.random() * 1.5 + 0.5,
       vx: (Math.random() - 0.5) * 2,
       vy: (Math.random() - 0.5) * 2,
-      opacity: 0.8 // Fixed high opacity for sharpness
+      opacity: 0.8
     };
   }
 
@@ -682,16 +628,15 @@ document.addEventListener('DOMContentLoaded', function() {
     particles.forEach(particle => {
       ctx.beginPath();
       ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#00ddff'; // Solid cyan for sharper look
-      ctx.shadowBlur = 5; // Subtle glow for sharpness
+      ctx.fillStyle = '#00ddff';
+      ctx.shadowBlur = 5;
       ctx.shadowColor = '#00ddff';
       ctx.fill();
-      ctx.shadowBlur = 0; // Reset shadow to avoid affecting other drawings
+      ctx.shadowBlur = 0;
 
       particle.x += particle.vx;
       particle.y += particle.vy;
 
-      // Keep particles within wheel-container bounds
       if (particle.x < rect.left || particle.x > rect.left + rect.width) particle.vx *= -1;
       if (particle.y < rect.top || particle.y > rect.top + rect.height) particle.vy *= -1;
     });
@@ -700,7 +645,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   animateParticles();
 
-  // Resize canvas on window resize
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -711,45 +655,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Navigation functions
   function goToNewsHub() {
-    window.location.href = '/news.html';
+    console.log('Navigating to News Hub');
+    window.location.href = './news.html';
   }
 
   function goToCategory(category) {
+    console.log('Navigating to category:', category);
     const categoryPages = {
-      'opinion': '/opinion.html',
-      'history-philosophy-culture': '/history-philosophy-culture.html',
-      'arts-literature': '/arts-literature.html',
-      'science-nature-health': '/science-nature-health.html', 
-      'sports-leisure-ent': '/sports-leisure-ent.html',
-      'take-a-pause': '/take-a-pause.html',
-      'conspiracy-corner': '/conspiracy-corner.html',
-      'misc': '/misc.html'
+      'opinion': './opinion.html',
+      'history-philosophy-culture': './history-philosophy-culture.html',
+      'arts-literature': './arts-literature.html',
+      'science-nature-health': './science-nature-health.html',
+      'sports-leisure-ent': './sports-leisure-ent.html',
+      'take-a-pause': './take-a-pause.html',
+      'conspiracy-corner': './conspiracy-corner.html',
+      'misc': './misc.html'
     };
     
     if (categoryPages[category]) {
       window.location.href = categoryPages[category];
     } else {
-      console.error(`Invalid category: ${category}`);
+      console.error('Invalid category:', category);
       alert('Category not found!');
     }
   }
 
   async function goToRandomArticle() {
+    console.log('Navigating to Random Article');
     try {
-      const response = await fetch('/links.txt');
+      const response = await fetch('./links.txt');
       if (response.ok) {
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
-        
         const links = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 2) {
-            return {
-              title: parts[0].trim(),
-              url: parts[1].trim()
-            };
+            return { title: parts[0].trim(), url: parts[1].trim() };
           }
           return null;
         }).filter(link => link !== null);
@@ -764,22 +706,25 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Surprise feature coming soon! Add some links to your links.txt file first.');
       }
     } catch (error) {
-      console.error('Error loading links for random selection:', error);
+      console.error('Error loading links:', error);
       alert('Surprise feature coming soon!');
     }
   }
 
   function openArchive() {
+    console.log('Navigating to Archive');
     alert('Archive feature - you can implement this however you\'d like!');
   }
 
-  // Add atomic interactions and keyboard support
   const spokes = document.querySelectorAll('.spoke');
   const center = document.querySelector('.wheel-center');
   const randomButton = document.querySelector('.random-button');
   const archiveLink = document.querySelector('.archive-bottom');
   
   spokes.forEach(spoke => {
+    spoke.addEventListener('click', function() {
+      console.log('Spoke clicked:', this.textContent);
+    });
     spoke.addEventListener('mouseenter', function() {
       this.style.animationPlayState = 'paused';
     });
@@ -789,6 +734,7 @@ document.addEventListener('DOMContentLoaded', function() {
     spoke.addEventListener('keydown', function(event) {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
+        console.log('Keyboard navigation on spoke:', this.textContent);
         this.click();
       }
     });
@@ -807,6 +753,7 @@ document.addEventListener('DOMContentLoaded', function() {
   center.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
+      console.log('Keyboard navigation on News Hub');
       this.click();
     }
   });
@@ -814,6 +761,7 @@ document.addEventListener('DOMContentLoaded', function() {
   randomButton.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
+      console.log('Keyboard navigation on Random Button');
       this.click();
     }
   });
@@ -821,6 +769,7 @@ document.addEventListener('DOMContentLoaded', function() {
   archiveLink.addEventListener('keydown', function(event) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
+      console.log('Keyboard navigation on Archive');
       this.click();
     }
   });
