@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arts & Literature - THE DAYLUGE</title>
+
+<!-- Vintage typewriter font -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  /* Force font loading */
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+  
+  :root{
+    /* Atomic color palette */
+    --red:#cc0000; 
+    --orange:#ff8800; 
+    --green:#00dd55;
+    --blue:#1a1a80;
+    --light-blue:#33ddff;
+    --violet:#cc88ff;
+    --pink:#ff1493;
+    --yellow:#ffee44;
+    --brown:#8B4513;
+    --dark-green:#006400;
+
+    --ink:#111; 
+    --rule:#bfbfbf;
+    --maxw:1200px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html, body {height:100%;}
+
+  body{
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    color:var(--ink);
+    line-height:1.5;
+    background:#0a1428;
+    padding:20px;
+    position:relative;
+    min-height:100vh;
+  }
+
+  /* Simple energy field effects */
+  body::before {
+    content: '';
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:
+      radial-gradient(circle at center, rgba(0,150,255,0.05) 0%, transparent 70%);
+    animation:energy-pulse 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes energy-pulse {
+    0%, 100% { opacity:0.3; }
+    50% { opacity:0.6; }
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
+
+  /* Header */
+  header{text-align:center; margin-bottom:30px;}
+  h1{
+    text-transform:uppercase; 
+    letter-spacing:.5px; 
+    font-size:36px; 
+    color:#ffffff;
+    text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    animation:title-pulse 3s ease-in-out infinite;
+    margin-bottom:15px;
+  }
+
+  @keyframes title-pulse {
+    0%, 100% { 
+      color:#ffffff;
+      text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% { 
+      color:#66ddff;
+      text-shadow:0 0 30px #00ddff, 0 0 45px #66ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+  }
+
+  .category-title{
+    color:#D2B48C;
+    font-size:24px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:900;
+    letter-spacing:1px;
+    text-decoration:underline;
+    text-underline-offset:8px;
+    text-decoration-color:#D2B48C;
+  }
+
+  /* Back to Home button - bottom right corner */
+  .back-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:transparent;
+    color:#aaccff;
+    padding:8px 16px;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    border:1px solid rgba(255,221,0,0.3);
+    box-shadow:0 0 5px rgba(210,180,140,0.1);
+    transition:all 0.3s ease;
+    z-index:20;
+    text-shadow:0 0 5px #00ddff;
+    opacity:0.7;
+  }
+  .back-btn:hover{
+    background:rgba(255,255,255,0.1);
+    box-shadow:0 0 15px rgba(210,180,140,0.3);
+    transform:scale(1.05);
+    color:#ffffff;
+    opacity:1;
+  }
+
+  /* Links grid */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
+    gap:12px;
+    margin-top:30px;
+  }
+
+  .link{
+    background:transparent;
+    border:none;
+    border-radius:15px;
+    padding:12px 20px;
+    transition:all 0.3s ease;
+    margin-bottom:5px;
+  }
+
+  .link:hover{
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 0 20px rgba(210,180,140,0.3);
+  }
+
+  .link a{
+    display:block;
+    font-size:18px;
+    font-weight:bold;
+    text-decoration:none;
+    color:#ffffff;
+    word-break:break-word;
+    text-shadow:0 0 10px rgba(210,180,140,0.5);
+    border-bottom:1px solid rgba(210,180,140,0.3);
+    padding-bottom:6px;
+    line-height:1.3;
+  }
+  .link a:hover{
+    color:#D2B48C;
+    text-decoration:underline;
+    text-shadow:0 0 15px rgba(210,180,140,0.8);
+  }
+
+  /* Random button */
+  .random-button{
+    margin:40px auto;
+    display:block;
+    background:linear-gradient(45deg, var(--brown) 0%, #654321 100%);
+    color:white;
+    border:2px solid #D2B48C;
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    box-shadow:0 0 15px rgba(210,180,140,0.3);
+    text-shadow:0 0 5px #ffffff;
+  }
+  .random-button:hover{
+    background:linear-gradient(45deg, #654321 0%, var(--brown) 100%);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(210,180,140,0.5), 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  /* Responsive */
+  @media(max-width:600px){
+    .grid{
+      grid-template-columns:1fr;
+    }
+    h1{font-size:28px;}
+    .category-title{font-size:20px;}
+    .link{padding:10px 15px;}
+    .link a{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+<a href="/" class="back-btn">← Back to Home Page</a>
+
+<div class="wrap">
+  <header>
+    <h1>THE DAYLUGE</h1>
+    <div class="category-title">Arts & Literature</div>
+  </header>
+
+  <!-- Arts & Literature Links Grid -->
+  <div class="grid">
+    <div class="link">
+      <a href="https://www.readthegreatbooks.com/" target="_blank">
+        Read the Great Books
+      </a>
+    </div>
+  </div>
+
+  <!-- Category Random Button -->
+  <button class="random-button" onclick="goToRandomArts()">
+    🎭 Random Arts!
+  </button>
+</div>
+
+<script>
+// Random arts & literature article function
+function goToRandomArts() {
+  const artsLinks = [
+    "https://www.readthegreatbooks.com/"
+  ];
+  
+  const randomLink = artsLinks[Math.floor(Math.random() * artsLinks.length)];
+  window.open(randomLink, '_blank');
+}
+</script>
+</body>
+</html>
