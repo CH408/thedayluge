@@ -59,13 +59,10 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out;
   }
 
   #password-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
+    display: none;
   }
 
   #password-overlay h2 {
@@ -152,4 +149,482 @@
     50% { opacity: 0.8; }
   }
 
-  /*
+  /* Header */
+  .header {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+  .header h1 {
+    text-transform: uppercase; 
+    letter-spacing: .5px; 
+    font-size: 42px; 
+    margin-bottom: 8px;
+    color: var(--bright-purple-glow);
+    text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    animation: title-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes title-pulse {
+    0%, 100% { 
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% { 
+      color: var(--light-cyan-glow);
+      text-shadow: 0 0 30px var(--light-cyan-glow), 0 0 45px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+  }
+
+  /* Main atom container */
+  .wheel-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    z-index: 5;
+  }
+
+  /* Orbital rings */
+  .orbital-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid #00ddff44;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 30s linear infinite;
+  }
+  .orbital-ring-1 { width: 300px; height: 300px; animation-duration: 25s; }
+  .orbital-ring-2 { width: 400px; height: 400px; animation-duration: 35s; animation-direction: reverse; }
+  .orbital-ring-3 { width: 480px; height: 480px; animation-duration: 40s; }
+
+  @keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Nucleus (center hub) */
+  .wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
+    color: yellow;
+    border: 2px solid #ffdd00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 15;
+    text-align: center;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.15);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { 
+      box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.15);
+      border-color: #ffdd00;
+    }
+    50% { 
+      box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
+      border-color: #ffff00;
+      transform: translate(-50%, -50%) scale(1.02);
+    }
+  }
+
+  .wheel-center:hover {
+    background: radial-gradient(circle, #ff0000 0%, #cc0000 100%);
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2);
+  }
+
+  /* Electron spokes */
+  .spoke {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border: 2px solid #ffdd00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-weight: 900;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    box-shadow: 0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
+    padding: 4px;
+    animation: electron-pulse 2s ease-in-out infinite;
+    z-index: 10;
+  }
+
+  @keyframes electron-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
+      border-color: #ffdd00;
+    }
+    50% { 
+      box-shadow: 0 0 40px rgba(255,221,0,0.8), 0 4px 15px rgba(255,221,0,0.3);
+      border-color: #ffff00;
+    }
+  }
+
+  .spoke:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 10;
+    animation-play-state: paused;
+  }
+
+  .spoke-1 { top: 20px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, var(--orange) 0%, #cc6600 100%); color: black; }
+  .spoke-2 { top: 60px; right: 60px; background: radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%); color: black; }
+  .spoke-3 { top: 50%; right: 20px; transform: translateY(-50%); background: radial-gradient(circle, var(--brown) 0%, #654321 100%); color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+  .spoke-4 { bottom: 60px; right: 60px; background: radial-gradient(circle, var(--green) 0%, #00aa33 100%); color: black; }
+  .spoke-5 { bottom: 20px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, var(--blue) 0%, #001166 100%); color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+  .spoke-6 { bottom: 60px; left: 60px; background: radial-gradient(circle, var(--violet) 0%, #9966dd 100%); color: black; }
+  .spoke-7 { top: 50%; left: 20px; transform: translateY(-50%); background: radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%); color: black; }
+  .spoke-8 { top: 60px; left: 60px; background: radial-gradient(circle, var(--dark-green) 0%, #004400 100%); color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+
+  /* Energy beams (connecting lines) */
+  .wheel-line {
+    position: absolute;
+    background: linear-gradient(90deg, #00ddff88, #ffffff44, #00ddff88);
+    height: 3px;
+    transform-origin: left center;
+    z-index: 1;
+    box-shadow: 0 0 8px #00ddff;
+    animation: energy-pulse-line 2s ease-in-out infinite;
+  }
+
+  @keyframes energy-pulse-line {
+    0%, 100% { opacity: 0.6; box-shadow: 0 0 8px #00ddff; }
+    50% { opacity: 1; box-shadow: 0 0 15px #00ddff, 0 0 25px #00ddff88; }
+  }
+
+  .line-1 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(-90deg); }
+  .line-2 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(-45deg); }
+  .line-3 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(0deg); }
+  .line-4 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(45deg); }
+  .line-5 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(90deg); }
+  .line-6 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(135deg); }
+  .line-7 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(180deg); }
+  .line-8 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(-135deg); }
+
+  /* Random button with atomic styling */
+  .random-button {
+    margin-top: 40px;
+    background: linear-gradient(45deg, var(--pink) 0%, #ff0080 100%);
+    color: white;
+    border: 2px solid #ff1493;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px #ff149388, 0 4px 12px rgba(0,0,0,0.3);
+    text-shadow: 0 0 5px #ffffff;
+  }
+  .random-button:hover {
+    background: linear-gradient(45deg, #ff0080 0%, var(--pink) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px #ff1493bb, 0 8px 20px rgba(0,0,0,0.4);
+    animation: button-pulse 0.5s ease-in-out;
+  }
+
+  @keyframes button-pulse {
+    0%, 100% { transform: translateY(-3px) scale(1); }
+    50% { transform: translateY(-3px) scale(1.05); }
+  }
+
+  /* Archive link with glow */
+  .archive-bottom {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    font-size: 11px;
+    color: #aaccff;
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 0.7;
+    text-shadow: 0 0 5px #00ddff;
+  }
+  .archive-bottom:hover {
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ddff;
+  }
+
+  /* Responsive adjustments for mobile optimization */
+  @media (max-width: 600px) {
+    .wheel-container {
+      width: 380px;
+      height: 380px;
+    }
+    .wheel-center {
+      width: 110px;
+      height: 110px;
+      font-size: 18px;
+    }
+    .spoke {
+      width: 80px;
+      height: 80px;
+      font-size: 10px;
+      border-width: 2px;
+    }
+    .header h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8 {
+      width: 110px;
+    }
+    .orbital-ring-1 { width: 240px; height: 240px; }
+    .orbital-ring-2 { width: 300px; height: 300px; }
+    .orbital-ring-3 { width: 360px; height: 360px; }
+    .random-button {
+      margin-top: 25px;
+      padding: 12px 20px;
+      font-size: 13px;
+    }
+    .spoke { animation: none; }
+    .orbital-ring { animation-duration: 60s; }
+    body::before, body::after { animation-duration: 10s; }
+  }
+
+  @media (max-width: 400px) {
+    .wheel-container {
+      width: 320px;
+      height: 320px;
+    }
+    .wheel-center {
+      width: 90px;
+      height: 90px;
+      font-size: 16px;
+    }
+    .spoke {
+      width: 65px;
+      height: 65px;
+      font-size: 9px;
+    }
+    .header h1 { font-size: 28px; }
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8 {
+      width: 90px;
+    }
+  }
+
+  .wheel-container {
+    animation: atomize 2s ease-in;
+  }
+  @keyframes atomize {
+    from { opacity: 0; transform: scale(0.5) rotate(-180deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .wheel-container:hover .wheel-line {
+    background: linear-gradient(90deg, #00ddffbb, #ffffffff, #00ddffbb);
+    box-shadow: 0 0 20px #00ddff;
+    transition: all 0.3s ease;
+  }
+  .wheel-container:hover .orbital-ring {
+    border-color: #00ddffaa;
+    box-shadow: 0 0 15px #00ddff55;
+  }
+</style>
+</head>
+<body>
+  <!-- Password Overlay -->
+  <div id="password-overlay">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" placeholder="Password">
+    <button id="password-submit">Submit</button>
+    <p id="password-error">Incorrect password, please try again.</p>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>THE DAYLUGE</h1>
+  </div>
+
+  <!-- Main Atom Structure -->
+  <div class="wheel-container">
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
+    <div class="orbital-ring orbital-ring-3"></div>
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-line line-4"></div>
+    <div class="wheel-line line-5"></div>
+    <div class="wheel-line line-6"></div>
+    <div class="wheel-line line-7"></div>
+    <div class="wheel-line line-8"></div>
+    <div class="wheel-center" onclick="goToNewsHub()">NEWS</div>
+    <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
+    <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,<br>Philosophy<br>& Culture</div>
+    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts<br>&<br>Literature</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,<br>Nature<br>& Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,<br>Leisure<br>& Ent</div>
+    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take<br>A<br>Pause</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy<br>Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>
+  </div>
+
+  <!-- Quantum random button -->
+  <button class="random-button" onclick="goToRandomArticle()">
+    ⚛️ SURPRISE ME!
+  </button>
+
+  <!-- Archive link -->
+  <div class="archive-bottom" onclick="openArchive()">archive</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Page loaded, initializing password overlay...');
+  const correctPassword = 'dayluge2025';
+  const overlay = document.getElementById('password-overlay');
+  const passwordInput = document.getElementById('password-input');
+  const submitButton = document.getElementById('password-submit');
+  const errorMessage = document.getElementById('password-error');
+
+  // Hide content except overlay
+  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+    el.style.visibility = 'hidden';
+  });
+
+  function checkPassword() {
+    console.log('Checking password:', passwordInput.value);
+    if (passwordInput.value === correctPassword) {
+      console.log('Password correct, hiding overlay');
+      overlay.classList.add('hidden');
+      document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+        el.style.visibility = 'visible';
+      });
+    } else {
+      console.log('Incorrect password');
+      errorMessage.style.display = 'block';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  submitButton.addEventListener('click', checkPassword);
+  passwordInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log('Enter key pressed, checking password');
+      checkPassword();
+    }
+  });
+
+  // Navigation functions
+  function goToNewsHub() {
+    console.log('Navigating to News Hub');
+    window.location.href = '/news.html';
+  }
+
+  function goToCategory(category) {
+    console.log('Navigating to category:', category);
+    const categoryPages = {
+      'opinion': '/opinion.html',
+      'history-philosophy-culture': '/history-philosophy-culture.html',
+      'arts-literature': '/arts-literature.html',
+      'science-nature-health': '/science-nature-health.html',
+      'sports-leisure-ent': '/sports-leisure-ent.html',
+      'take-a-pause': '/take-a-pause.html',
+      'conspiracy-corner': '/conspiracy-corner.html',
+      'misc': '/misc.html'
+    };
+    
+    if (categoryPages[category]) {
+      window.location.href = categoryPages[category];
+    }
+  }
+
+  async function goToRandomArticle() {
+    console.log('Navigating to Random Article');
+    try {
+      const response = await fetch('/links.txt');
+      if (response.ok) {
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        
+        if (links.length > 0) {
+          const randomLink = links[Math.floor(Math.random() * links.length)];
+          console.log('Opening random link:', randomLink.url);
+          window.open(randomLink.url, '_blank');
+        } else {
+          alert('No links available for random selection!');
+        }
+      } else {
+        alert('Surprise feature coming soon! Add some links to your links.txt file first.');
+      }
+    } catch (error) {
+      console.log('Error loading links for random selection:', error);
+      alert('Surprise feature coming soon!');
+    }
+  }
+
+  function openArchive() {
+    console.log('Navigating to Archive');
+    alert('Archive feature - you can implement this however you\'d like!');
+  }
+
+  // Add atomic interactions
+  const spokes = document.querySelectorAll('.spoke');
+  const center = document.querySelector('.wheel-center');
+  
+  spokes.forEach(spoke => {
+    spoke.addEventListener('mouseenter', function() {
+      this.style.animationPlayState = 'paused';
+    });
+    spoke.addEventListener('mouseleave', function() {
+      this.style.animationPlayState = 'running';
+    });
+  });
+  
+  center.addEventListener('mouseenter', function() {
+    spokes.forEach(spoke => {
+      spoke.style.animationDuration = '3s';
+    });
+  });
+  center.addEventListener('mouseleave', function() {
+    spokes.forEach(spoke => {
+      spoke.style.animationDuration = '15s';
+    });
+  });
+});
+</script>
+</body>
+</html>
