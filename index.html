@@ -28,6 +28,8 @@
     --ink:#111; 
     --rule:#bfbfbf;
     --maxw:1400px;
+    --bright-purple-glow: #cc88ff;
+    --light-cyan-glow: #88ccff;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -45,6 +47,76 @@
     min-height:100vh;
     position:relative;
     overflow:hidden;
+  }
+
+  #password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a1428;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  #password-overlay.hidden {
+    display: none;
+    pointer-events: none; /* Prevent click interference */
+  }
+
+  #password-overlay h2 {
+    color: var(--bright-purple-glow);
+    font-size: 24px;
+    text-shadow: 0 0 10px var(--bright-purple-glow);
+    margin-bottom: 20px;
+  }
+
+  #password-input {
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    background: #1a2a44;
+    color: var(--light-cyan-glow);
+    border: 2px solid var(--light-cyan-glow);
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+    text-align: center;
+  }
+
+  #password-input:focus {
+    box-shadow: 0 0 10px var(--light-cyan-glow);
+  }
+
+  #password-submit {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, var(--bright-purple-glow), var(--light-cyan-glow));
+    color: #ffffff;
+    border: 2px solid var(--light-cyan-glow);
+    border-radius: 5px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #password-submit:hover, #password-submit:focus {
+    background: linear-gradient(45deg, var(--light-cyan-glow), var(--bright-purple-glow));
+    box-shadow: 0 0 15px var(--light-cyan-glow);
+  }
+
+  #password-error {
+    color: var(--pink);
+    font-size: 14px;
+    margin-top: 10px;
+    text-shadow: 0 0 5px var(--pink);
+    display: none;
   }
 
   /* Energy field effects */
@@ -458,6 +530,14 @@
 </style>
 </head>
 <body>
+  <!-- Password Overlay -->
+  <div id="password-overlay">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" placeholder="Password">
+    <button id="password-submit">Submit</button>
+    <p id="password-error">Incorrect password, please try again.</p>
+  </div>
+
   <!-- Header -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
@@ -505,6 +585,45 @@
   <div class="archive-bottom" onclick="openArchive()">archive</div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Page loaded, initializing password overlay...');
+  const correctPassword = 'dayluge2025';
+  const overlay = document.getElementById('password-overlay');
+  const passwordInput = document.getElementById('password-input');
+  const submitButton = document.getElementById('password-submit');
+  const errorMessage = document.getElementById('password-error');
+
+  // Hide content except overlay
+  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+    el.style.visibility = 'hidden';
+  });
+
+  function checkPassword() {
+    console.log('Checking password:', passwordInput.value);
+    if (passwordInput.value === correctPassword) {
+      console.log('Password correct, hiding overlay');
+      overlay.classList.add('hidden');
+      document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+        el.style.visibility = 'visible';
+      });
+    } else {
+      console.log('Incorrect password');
+      errorMessage.style.display = 'block';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  submitButton.addEventListener('click', checkPassword);
+  passwordInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log('Enter key pressed, checking password');
+      checkPassword();
+    }
+  });
+});
+
 // Navigation functions
 function goToNewsHub() {
   console.log('Navigating to News Hub');
@@ -571,28 +690,26 @@ function openArchive() {
 }
 
 // Add atomic interactions
-document.addEventListener('DOMContentLoaded', function() {
-  const spokes = document.querySelectorAll('.spoke');
-  const center = document.querySelector('.wheel-center');
-  
+const spokes = document.querySelectorAll('.spoke');
+const center = document.querySelector('.wheel-center');
+
+spokes.forEach(spoke => {
+  spoke.addEventListener('mouseenter', function() {
+    this.style.animationPlayState = 'paused';
+  });
+  spoke.addEventListener('mouseleave', function() {
+    this.style.animationPlayState = 'running';
+  });
+});
+
+center.addEventListener('mouseenter', function() {
   spokes.forEach(spoke => {
-    spoke.addEventListener('mouseenter', function() {
-      this.style.animationPlayState = 'paused';
-    });
-    spoke.addEventListener('mouseleave', function() {
-      this.style.animationPlayState = 'running';
-    });
+    spoke.style.animationDuration = '3s';
   });
-  
-  center.addEventListener('mouseenter', function() {
-    spokes.forEach(spoke => {
-      spoke.style.animationDuration = '3s';
-    });
-  });
-  center.addEventListener('mouseleave', function() {
-    spokes.forEach(spoke => {
-      spoke.style.animationDuration = '15s';
-    });
+});
+center.addEventListener('mouseleave', function() {
+  spokes.forEach(spoke => {
+    spoke.style.animationDuration = '15s';
   });
 });
 </script>
