@@ -60,7 +60,7 @@
     --spoke-8-dark: #004400;
     --spoke-8-text: #e0e0e0;
     --spoke-8-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    /* Title and loader glow colors */
+    /* Title glow colors */
     --bright-purple-glow: #cc88ff; /* Bright purple */
     --light-purple-blue-glow: #aa99ff; /* Light purple-blue */
     --bright-cyan-blue-glow: #66bbff; /* Bright cyan-blue */
@@ -156,73 +156,6 @@
     margin-top: 10px;
     text-shadow: 0 0 5px var(--pink);
     display: none;
-  }
-
-  /* Loading animation overlay */
-  #loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a1428;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease-in-out;
-  }
-
-  #loading-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .loader-atom {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    animation: spin 1.5s linear infinite;
-  }
-
-  .loader-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 2px solid var(--bright-cyan-blue-glow);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0.7;
-  }
-
-  .loader-ring-1 { width: 80px; height: 80px; animation: spin 1s linear infinite; }
-  .loader-ring-2 { width: 120px; height: 120px; animation: spin 1.2s linear infinite reverse; }
-  .loader-ring-3 { width: 150px; height: 150px; animation: spin 0.8s linear infinite; }
-
-  .loader-nucleus {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    background: radial-gradient(circle, var(--bright-purple-glow) 0%, var(--light-purple-blue-glow) 100%);
-    border: 2px solid var(--light-cyan-glow);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px var(--bright-cyan-blue-glow), 0 0 40px var(--light-cyan-glow);
-    animation: pulse-nucleus 1s ease-in-out infinite;
-  }
-
-  @keyframes spin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  @keyframes pulse-nucleus {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px var(--bright-cyan-blue-glow); }
-    50% { transform: translate(-50%, -50%) scale(1.2); box-shadow: 0 0 40px var(--light-cyan-glow); }
   }
 
   /* Particle canvas */
@@ -555,15 +488,6 @@
       padding: 12px 20px;
       font-size: 13px;
     }
-    .loader-atom {
-      width: 120px;
-      height: 120px;
-    }
-    .loader-ring-1 { width: 60px; height: 60px; }
-    .loader-ring-2 { width: 90px; height: 90px; }
-    .loader-ring-3 { width: 110px; height: 110px; }
-    .loader-nucleus { width: 30px; height: 30px; }
-    
     /* Simplify animations on mobile for better performance */
     .spoke {
       animation: none;
@@ -577,14 +501,9 @@
     body::before, body::after {
       animation-duration: 10s;
     }
-    .loader-atom {
-      width: 120px;
-      height: 120px;
+    #particle-canvas {
+      opacity: 0.6; /* Slightly reduced particle visibility on mobile */
     }
-    .loader-ring-1 { width: 60px; height: 60px; }
-    .loader-ring-2 { width: 90px; height: 90px; }
-    .loader-ring-3 { width: 110px; height: 110px; }
-    .loader-nucleus { width: 30px; height: 30px; }
   }
 
   /* Extra small mobile phones */
@@ -609,14 +528,6 @@
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8 {
       width: 90px;
     }
-    .loader-atom {
-      width: 100px;
-      height: 100px;
-    }
-    .loader-ring-1 { width: 50px; height: 50px; }
-    .loader-ring-2 { width: 75px; height: 75px; }
-    .loader-ring-3 { width: 90px; height: 90px; }
-    .loader-nucleus { width: 25px; height: 25px; }
   }
 
   /* Loading animation for wheel container */
@@ -649,16 +560,6 @@
     <p id="password-error">Incorrect password, please try again.</p>
   </div>
 
-  <!-- Loading animation overlay -->
-  <div id="loading-overlay" aria-hidden="true">
-    <div class="loader-atom">
-      <div class="loader-ring loader-ring-1"></div>
-      <div class="loader-ring loader-ring-2"></div>
-      <div class="loader-ring loader-ring-3"></div>
-      <div class="loader-nucleus"></div>
-    </div>
-  </div>
-
   <!-- Particle canvas -->
   <canvas id="particle-canvas"></canvas>
 
@@ -685,23 +586,23 @@
     <div class="wheel-line line-8"></div>
 
     <!-- Nucleus -->
-    <div class="wheel-center" onclick="showLoader(goToNewsHub)" aria-label="Go to News Hub" role="button" tabindex="0">
+    <div class="wheel-center" onclick="goToNewsHub()" aria-label="Go to News Hub" role="button" tabindex="0">
       NEWS
     </div>
 
     <!-- Electrons (category spokes) -->
-    <div class="spoke spoke-1" onclick="showLoader(function() { goToCategory('opinion'); })" aria-label="Go to Opinion category" role="button" tabindex="0">Opinion</div>
-    <div class="spoke spoke-2" onclick="showLoader(function() { goToCategory('history-philosophy-culture'); })" aria-label="Go to History, Philosophy & Culture category" role="button" tabindex="0">History,<br>Philosophy<br>& Culture</div>
-    <div class="spoke spoke-3" onclick="showLoader(function() { goToCategory('arts-literature'); })" aria-label="Go to Arts & Literature category" role="button" tabindex="0">Arts<br>&<br>Literature</div>
-    <div class="spoke spoke-4" onclick="showLoader(function() { goToCategory('science-nature-health'); })" aria-label="Go to Science, Nature & Health category" role="button" tabindex="0">Science,<br>Nature<br>& Health</div>
-    <div class="spoke spoke-5" onclick="showLoader(function() { goToCategory('sports-leisure-ent'); })" aria-label="Go to Sports, Leisure & Entertainment category" role="button" tabindex="0">Sports,<br>Leisure<br>& Ent</div>
-    <div class="spoke spoke-6" onclick="showLoader(function() { goToCategory('take-a-pause'); })" aria-label="Go to Take a Pause category" role="button" tabindex="0">Take<br>A<br>Pause</div>
-    <div class="spoke spoke-7" onclick="showLoader(function() { goToCategory('conspiracy-corner'); })" aria-label="Go to Conspiracy Corner category" role="button" tabindex="0">Conspiracy<br>Corner</div>
-    <div class="spoke spoke-8" onclick="showLoader(function() { goToCategory('misc'); })" aria-label="Go to Miscellaneous category" role="button" tabindex="0">MISC</div>
+    <div class="spoke spoke-1" onclick="goToCategory('opinion')" aria-label="Go to Opinion category" role="button" tabindex="0">Opinion</div>
+    <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')" aria-label="Go to History, Philosophy & Culture category" role="button" tabindex="0">History,<br>Philosophy<br>& Culture</div>
+    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')" aria-label="Go to Arts & Literature category" role="button" tabindex="0">Arts<br>&<br>Literature</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')" aria-label="Go to Science, Nature & Health category" role="button" tabindex="0">Science,<br>Nature<br>& Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')" aria-label="Go to Sports, Leisure & Entertainment category" role="button" tabindex="0">Sports,<br>Leisure<br>& Ent</div>
+    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')" aria-label="Go to Take a Pause category" role="button" tabindex="0">Take<br>A<br>Pause</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')" aria-label="Go to Conspiracy Corner category" role="button" tabindex="0">Conspiracy<br>Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('misc')" aria-label="Go to Miscellaneous category" role="button" tabindex="0">MISC</div>
   </div>
 
   <!-- Quantum random button -->
-  <button class="random-button" onclick="showLoader(goToRandomArticle)" aria-label="Go to a random article" role="button" tabindex="0">
+  <button class="random-button" onclick="goToRandomArticle()" aria-label="Go to a random article" role="button" tabindex="0">
     ⚛️ SURPRISE ME!
   </button>
 
@@ -749,22 +650,6 @@ document.addEventListener('DOMContentLoaded', function() {
       checkPassword();
     }
   });
-
-  // Loading animation
-  const loadingOverlay = document.getElementById('loading-overlay');
-
-  function showLoader(callback) {
-    // Hide main content
-    document.querySelectorAll('body > *:not(#loading-overlay):not(#password-overlay)').forEach(el => {
-      el.style.display = 'none';
-    });
-    // Show loader
-    loadingOverlay.classList.add('active');
-    // Execute callback after 1.5s
-    setTimeout(() => {
-      callback();
-    }, 1500);
-  }
 
   // Particle effect
   const canvas = document.getElementById('particle-canvas');
