@@ -577,9 +577,14 @@
     body::before, body::after {
       animation-duration: 10s;
     }
-    #particle-canvas {
-      opacity: 0.6; /* Slightly reduced particle visibility on mobile */
+    .loader-atom {
+      width: 120px;
+      height: 120px;
     }
+    .loader-ring-1 { width: 60px; height: 60px; }
+    .loader-ring-2 { width: 90px; height: 90px; }
+    .loader-ring-3 { width: 110px; height: 110px; }
+    .loader-nucleus { width: 30px; height: 30px; }
   }
 
   /* Extra small mobile phones */
@@ -685,14 +690,14 @@
     </div>
 
     <!-- Electrons (category spokes) -->
-    <div class="spoke spoke-1" onclick="showLoader(() => goToCategory('opinion'))" aria-label="Go to Opinion category" role="button" tabindex="0">Opinion</div>
-    <div class="spoke spoke-2" onclick="showLoader(() => goToCategory('history-philosophy-culture'))" aria-label="Go to History, Philosophy & Culture category" role="button" tabindex="0">History,<br>Philosophy<br>& Culture</div>
-    <div class="spoke spoke-3" onclick="showLoader(() => goToCategory('arts-literature'))" aria-label="Go to Arts & Literature category" role="button" tabindex="0">Arts<br>&<br>Literature</div>
-    <div class="spoke spoke-4" onclick="showLoader(() => goToCategory('science-nature-health'))" aria-label="Go to Science, Nature & Health category" role="button" tabindex="0">Science,<br>Nature<br>& Health</div>
-    <div class="spoke spoke-5" onclick="showLoader(() => goToCategory('sports-leisure-ent'))" aria-label="Go to Sports, Leisure & Entertainment category" role="button" tabindex="0">Sports,<br>Leisure<br>& Ent</div>
-    <div class="spoke spoke-6" onclick="showLoader(() => goToCategory('take-a-pause'))" aria-label="Go to Take a Pause category" role="button" tabindex="0">Take<br>A<br>Pause</div>
-    <div class="spoke spoke-7" onclick="showLoader(() => goToCategory('conspiracy-corner'))" aria-label="Go to Conspiracy Corner category" role="button" tabindex="0">Conspiracy<br>Corner</div>
-    <div class="spoke spoke-8" onclick="showLoader(() => goToCategory('misc'))" aria-label="Go to Miscellaneous category" role="button" tabindex="0">MISC</div>
+    <div class="spoke spoke-1" onclick="showLoader(function() { goToCategory('opinion'); })" aria-label="Go to Opinion category" role="button" tabindex="0">Opinion</div>
+    <div class="spoke spoke-2" onclick="showLoader(function() { goToCategory('history-philosophy-culture'); })" aria-label="Go to History, Philosophy & Culture category" role="button" tabindex="0">History,<br>Philosophy<br>& Culture</div>
+    <div class="spoke spoke-3" onclick="showLoader(function() { goToCategory('arts-literature'); })" aria-label="Go to Arts & Literature category" role="button" tabindex="0">Arts<br>&<br>Literature</div>
+    <div class="spoke spoke-4" onclick="showLoader(function() { goToCategory('science-nature-health'); })" aria-label="Go to Science, Nature & Health category" role="button" tabindex="0">Science,<br>Nature<br>& Health</div>
+    <div class="spoke spoke-5" onclick="showLoader(function() { goToCategory('sports-leisure-ent'); })" aria-label="Go to Sports, Leisure & Entertainment category" role="button" tabindex="0">Sports,<br>Leisure<br>& Ent</div>
+    <div class="spoke spoke-6" onclick="showLoader(function() { goToCategory('take-a-pause'); })" aria-label="Go to Take a Pause category" role="button" tabindex="0">Take<br>A<br>Pause</div>
+    <div class="spoke spoke-7" onclick="showLoader(function() { goToCategory('conspiracy-corner'); })" aria-label="Go to Conspiracy Corner category" role="button" tabindex="0">Conspiracy<br>Corner</div>
+    <div class="spoke spoke-8" onclick="showLoader(function() { goToCategory('misc'); })" aria-label="Go to Miscellaneous category" role="button" tabindex="0">MISC</div>
   </div>
 
   <!-- Quantum random button -->
@@ -748,9 +753,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Loading animation
   const loadingOverlay = document.getElementById('loading-overlay');
 
-  async function showLoader(callback) {
-    // Prevent default link behavior
-    event.preventDefault();
+  function showLoader(callback) {
     // Hide main content
     document.querySelectorAll('body > *:not(#loading-overlay):not(#password-overlay)').forEach(el => {
       el.style.display = 'none';
@@ -758,17 +761,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show loader
     loadingOverlay.classList.add('active');
     // Execute callback after 1.5s
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      await callback();
-    } catch (error) {
-      console.error('Navigation error:', error);
-      // Hide loader on error
-      loadingOverlay.classList.remove('active');
-      document.querySelectorAll('body > *:not(#loading-overlay):not(#password-overlay)').forEach(el => {
-        el.style.display = '';
-      });
-    }
+    setTimeout(() => {
+      callback();
+    }, 1500);
   }
 
   // Particle effect
@@ -851,7 +846,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (categoryPages[category]) {
       window.location.href = categoryPages[category];
     } else {
-      throw new Error(`Invalid category: ${category}`);
+      console.error(`Invalid category: ${category}`);
+      alert('Category not found!');
     }
   }
 
@@ -883,7 +879,7 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Surprise feature coming soon! Add some links to your links.txt file first.');
       }
     } catch (error) {
-      console.log('Error loading links for random selection:', error);
+      console.error('Error loading links for random selection:', error);
       alert('Surprise feature coming soon!');
     }
   }
