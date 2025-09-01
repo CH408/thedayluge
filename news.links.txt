@@ -1,0 +1,12 @@
+Latest Breaking News from Reuters|https://www.reuters.com
+Associated Press - Top Stories|https://apnews.com
+BBC World News Headlines|https://www.bbc.com/news
+National Public Radio News|https://www.npr.org/sections/news/
+Al Jazeera International News|https://www.aljazeera.com
+Axios - Smart Brevity News|https://www.axios.com
+Politico - Politics & Policy|https://www.politico.com
+Wall Street Journal Headlines|https://www.wsj.com
+Financial Times Global News|https://www.ft.com
+The Economist Weekly Brief|https://www.economist.com
+Hacker News - Tech & Startup News|https://news.ycombinator.com
+The Drudge Report|https://www.drudgereport.com
