@@ -211,27 +211,8 @@
   </header>
 
   <!-- Conspiracy Corner Links Grid -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.youtube.com/shorts/0Phz6wnq_GU" target="_blank">
-        The Pyramid Power Plant Theory
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.history.com/articles/kryptos-cia-sculpture-mystery-code" target="_blank">
-        "Kryptos" - The Unsolved Secret Code at CIA Headquarters
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j" target="_blank">
-        The Vegas Shooting Is A Layered Onion of "Max Conspiracy"
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.youtube.com/watch?v=x9cVcGQNxBw" target="_blank">
-        They Found Giants In A Cave
-      </a>
-    </div>
+  <div class="grid" id="conspiracy-grid">
+    <!-- Links will be loaded dynamically from conspiracy-corner-links.txt -->
   </div>
 
   <!-- Category Random Button -->
@@ -241,18 +222,78 @@
 </div>
 
 <script>
-// Random conspiracy corner article function
-function goToRandomConspiracy() {
-  const conspiracyLinks = [
-    "https://www.youtube.com/shorts/0Phz6wnq_GU",
-    "https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
-    "https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
-    "https://www.youtube.com/watch?v=x9cVcGQNxBw"
-  ];
-  
-  const randomLink = conspiracyLinks[Math.floor(Math.random() * conspiracyLinks.length)];
-  window.open(randomLink, '_blank');
+// Load conspiracy links from external file
+async function loadConspiracyLinks() {
+  try {
+    const response = await fetch('conspiracy-corner-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load conspiracy-corner-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Populate the grid
+    const grid = document.getElementById('conspiracy-grid');
+    if (grid && links.length > 0) {
+      grid.innerHTML = links.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error loading conspiracy links:', error);
+  }
 }
+
+// Random conspiracy corner article function
+async function goToRandomConspiracy() {
+  try {
+    const response = await fetch('conspiracy-corner-links.txt');
+    if (!response.ok) {
+      console.log('Could not load conspiracy-corner-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    if (links.length > 0) {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadConspiracyLinks);
 </script>
 </body>
 </html>
