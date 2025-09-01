@@ -211,42 +211,8 @@
   </header>
 
   <!-- Sports, Leisure & Entertainment Links Grid -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.espn.com/fantasy/football/story/_/id/45940705/greatest-fantasy-football-players-30-years?utm_source=join1440&utm_medium=email&utm_placement=newsletter&user_id=66c4bc5a5d78644b3a979610" target="_blank">
-        The 300 Best Fantasy Football Players of the Past 30 years
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.instagram.com/p/DNSuh_7Nz27/" target="_blank">
-        Tyson's First Fight After Prison Was the Place To Be
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://collider.com/best-war-shows-must-watch-ranked/" target="_blank">
-        10 Must-Watch War Shows, Ranked
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://tv.garden/" target="_blank">
-        Watch Global Local TV Online
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years" target="_blank">
-        Cost of Attending an NFL Game +40% in 10 Years
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m" target="_blank">
-        'Holy Grail' Jordan–Bryant Card Sells for $12.9M
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025" target="_blank">
-        Which New NFL Coaches Are in the Best Position to Win?
-      </a>
-    </div>
+  <div class="grid" id="sports-grid">
+    <!-- Links will be loaded dynamically from sports-leisure-ent-links.txt -->
   </div>
 
   <!-- Category Random Button -->
@@ -256,21 +222,78 @@
 </div>
 
 <script>
-// Random sports/leisure/entertainment article function
-function goToRandomSports() {
-  const sportsLinks = [
-    "https://www.espn.com/fantasy/football/story/_/id/45940705/greatest-fantasy-football-players-30-years?utm_source=join1440&utm_medium=email&utm_placement=newsletter&user_id=66c4bc5a5d78644b3a979610",
-    "https://www.instagram.com/p/DNSuh_7Nz27/",
-    "https://collider.com/best-war-shows-must-watch-ranked/",
-    "https://tv.garden/",
-    "https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
-    "https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
-    "https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025"
-  ];
-  
-  const randomLink = sportsLinks[Math.floor(Math.random() * sportsLinks.length)];
-  window.open(randomLink, '_blank');
+// Load sports links from external file
+async function loadSportsLinks() {
+  try {
+    const response = await fetch('sports-leisure-ent-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load sports-leisure-ent-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Populate the grid
+    const grid = document.getElementById('sports-grid');
+    if (grid && links.length > 0) {
+      grid.innerHTML = links.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error loading sports links:', error);
+  }
 }
+
+// Random sports/leisure/entertainment article function
+async function goToRandomSports() {
+  try {
+    const response = await fetch('sports-leisure-ent-links.txt');
+    if (!response.ok) {
+      console.log('Could not load sports-leisure-ent-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    if (links.length > 0) {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadSportsLinks);
 </script>
 </body>
 </html>
