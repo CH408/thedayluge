@@ -211,12 +211,8 @@
   </header>
 
   <!-- Arts & Literature Links Grid -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.readthegreatbooks.com/" target="_blank">
-        Read the Great Books
-      </a>
-    </div>
+  <div class="grid" id="arts-grid">
+    <!-- Links will be loaded dynamically from arts-literature-links.txt -->
   </div>
 
   <!-- Category Random Button -->
@@ -226,15 +222,78 @@
 </div>
 
 <script>
-// Random arts & literature article function
-function goToRandomArts() {
-  const artsLinks = [
-    "https://www.readthegreatbooks.com/"
-  ];
-  
-  const randomLink = artsLinks[Math.floor(Math.random() * artsLinks.length)];
-  window.open(randomLink, '_blank');
+// Load arts & literature links from external file
+async function loadArtsLinks() {
+  try {
+    const response = await fetch('arts-literature-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load arts-literature-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Populate the grid
+    const grid = document.getElementById('arts-grid');
+    if (grid && links.length > 0) {
+      grid.innerHTML = links.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error loading arts & literature links:', error);
+  }
 }
+
+// Random arts & literature article function
+async function goToRandomArts() {
+  try {
+    const response = await fetch('arts-literature-links.txt');
+    if (!response.ok) {
+      console.log('Could not load arts-literature-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    if (links.length > 0) {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadArtsLinks);
 </script>
 </body>
 </html>
