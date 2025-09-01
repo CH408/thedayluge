@@ -211,47 +211,8 @@
   </header>
 
   <!-- History, Philosophy, & Culture Links Grid -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost" target="_blank">
-        1910: The Year the Modern World Lost Its Mind
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://x.com/Rainmaker1973/status/1959655344709173469" target="_blank">
-        1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.history.com/articles/brilliant-psyops-psychological-warfare" target="_blank">
-        7 Brilliant Acts of Psychological Warfare in History
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.youtube.com/watch?v=F4M1MlBZyI0" target="_blank">
-        Dave Smith: "I Was A Militant Atheist"
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird" target="_blank">
-        How Did Moscow Become Europe's Biggest City?
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290" target="_blank">
-        Six Tips from the Middle Ages on How to Beat the Summer Heat
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa-21139129&mc_eid=f42f0d2b82" target="_blank">
-        Twilight of the House of Lords
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/" target="_blank">
-        The Best Performing Fund in Modern History
-      </a>
-    </div>
+  <div class="grid" id="history-grid">
+    <!-- Links will be loaded dynamically from history-philosophy-culture-links.txt -->
   </div>
 
   <!-- Category Random Button -->
@@ -261,22 +222,78 @@
 </div>
 
 <script>
-// Random history/philosophy/culture article function
-function goToRandomHistory() {
-  const historyLinks = [
-    "https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
-    "https://x.com/Rainmaker1973/status/1959655344709173469",
-    "https://www.history.com/articles/brilliant-psyops-psychological-warfare",
-    "https://www.youtube.com/watch?v=F4M1MlBZyI0",
-    "https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
-    "https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
-    "https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-Crisis_DAILYRSS_EMAIL&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa-21139129&mc_eid=f42f0d2b82",
-    "https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/"
-  ];
-  
-  const randomLink = historyLinks[Math.floor(Math.random() * historyLinks.length)];
-  window.open(randomLink, '_blank');
+// Load history links from external file
+async function loadHistoryLinks() {
+  try {
+    const response = await fetch('history-philosophy-culture-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load history-philosophy-culture-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Populate the grid
+    const grid = document.getElementById('history-grid');
+    if (grid && links.length > 0) {
+      grid.innerHTML = links.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error loading history links:', error);
+  }
 }
+
+// Random history/philosophy/culture article function
+async function goToRandomHistory() {
+  try {
+    const response = await fetch('history-philosophy-culture-links.txt');
+    if (!response.ok) {
+      console.log('Could not load history-philosophy-culture-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    if (links.length > 0) {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadHistoryLinks);
 </script>
 </body>
 </html>
