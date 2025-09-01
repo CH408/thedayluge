@@ -227,67 +227,8 @@
   </header>
 
   <!-- News Links Grid -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.reuters.com" target="_blank">
-        Latest Breaking News from Reuters
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://apnews.com" target="_blank">
-        Associated Press - Top Stories
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.bbc.com/news" target="_blank">
-        BBC World News Headlines
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.npr.org/sections/news/" target="_blank">
-        National Public Radio News
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.aljazeera.com" target="_blank">
-        Al Jazeera International News
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.axios.com" target="_blank">
-        Axios - Smart Brevity News
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.politico.com" target="_blank">
-        Politico - Politics & Policy
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.wsj.com" target="_blank">
-        Wall Street Journal Headlines
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.ft.com" target="_blank">
-        Financial Times Global News
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.economist.com" target="_blank">
-        The Economist Weekly Brief
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://news.ycombinator.com" target="_blank">
-        Hacker News - Tech & Startup News
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.drudgereport.com" target="_blank">
-        The Drudge Report
-      </a>
-    </div>
+  <div class="grid" id="news-grid">
+    <!-- Links will be loaded dynamically from news-links.txt -->
   </div>
 
   <!-- Category Random Button -->
@@ -297,26 +238,88 @@
 </div>
 
 <script>
-// Random news article function
-function goToRandomNews() {
-  const newsLinks = [
-    "https://www.reuters.com",
-    "https://apnews.com",
-    "https://www.bbc.com/news",
-    "https://www.npr.org/sections/news/",
-    "https://www.aljazeera.com",
-    "https://www.axios.com",
-    "https://www.politico.com",
-    "https://www.wsj.com",
-    "https://www.ft.com",
-    "https://www.economist.com",
-    "https://news.ycombinator.com",
-    "https://www.drudgereport.com"
-  ];
-  
-  const randomLink = newsLinks[Math.floor(Math.random() * newsLinks.length)];
-  window.open(randomLink, '_blank');
+// Load news links from external file
+async function loadNewsLinks() {
+  try {
+    console.log('Attempting to load news-links.txt...');
+    const response = await fetch('news-links.txt');
+    console.log('Response status:', response.status);
+    
+    if (!response.ok) {
+      console.error('Failed to load news-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    console.log('File content loaded:', text.substring(0, 100) + '...');
+    const lines = text.split('\n').filter(line => line.trim());
+    console.log('Number of lines found:', lines.length);
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    console.log('Number of valid links parsed:', links.length);
+    
+    // Populate the grid
+    const grid = document.getElementById('news-grid');
+    if (grid && links.length > 0) {
+      grid.innerHTML = links.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+      console.log('Links successfully populated in grid');
+    } else {
+      console.error('Grid element not found or no links available');
+    }
+    
+  } catch (error) {
+    console.error('Error loading news links:', error);
+  }
 }
+
+// Random news article function
+async function goToRandomNews() {
+  try {
+    const response = await fetch('news-links.txt');
+    if (!response.ok) {
+      console.log('Could not load news-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    if (links.length > 0) {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadNewsLinks);
 </script>
 </body>
 </html>
