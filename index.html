@@ -22,7 +22,7 @@
     --pink:#ff3399;
     --ink:#111; 
     --rule:#bfbfbf;
-    --maxw:1200px; /* Adjusted to match other files */
+    --maxw:1200px;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -32,10 +32,13 @@
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     color:var(--ink);
     line-height:1.5;
-    background:#0a1428; /* Changed to match other category pages */
+    background:#0a1428;
     padding:20px;
     position:relative;
     min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
   }
 
   /* Simple energy field effects */
@@ -54,70 +57,123 @@
     50% { opacity:0.6; }
   }
 
-  .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    position:relative;
+    z-index:1;
+    text-align:center;
+  }
 
-  /* Header */
-  header{text-align:center; margin-bottom:30px;}
-  h1{
-    text-transform:uppercase; 
-    letter-spacing:.5px; 
-    font-size:36px; 
-    color:#ffffff;
-    text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+  /* Header with spoke-style navigation */
+  header{
+    position:relative;
+    margin-bottom:50px;
+  }
+  .hub{
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    font-size:48px;
+    color:var(--red);
+    text-shadow:0 0 20px rgba(204, 0, 0, 0.8), 2px 2px 4px rgba(0,0,0,0.8);
     animation:title-pulse 3s ease-in-out infinite;
-    margin-bottom:15px;
+    margin-bottom:30px;
+    position:relative;
+    z-index:2;
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:50%;
+    background:linear-gradient(45deg, #ff3333, var(--red));
+    text-decoration:none;
+  }
+  .hub:hover{
+    transform:scale(1.1);
+    color:#ff6666;
+    text-shadow:0 0 30px rgba(255, 51, 51, 0.9);
   }
 
   @keyframes title-pulse {
     0%, 100% { 
-      color:#ffffff;
-      text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+      color:var(--red);
+      text-shadow:0 0 20px rgba(204, 0, 0, 0.8), 2px 2px 4px rgba(0,0,0,0.8);
     }
     50% { 
-      color:#66ddff;
-      text-shadow:0 0 30px #00ddff, 0 0 45px #66ddff, 2px 2px 4px rgba(0,0,0,0.8);
+      color:#ff3333;
+      text-shadow:0 0 30px rgba(255, 51, 51, 0.9), 0 0 45px rgba(255, 51, 51, 0.6), 2px 2px 4px rgba(0,0,0,0.8);
     }
   }
+
+  /* Radial navigation (spoke-style) */
+  .spoke-nav {
+    position:relative;
+    width:300px;
+    height:300px;
+    margin:0 auto;
+  }
+  .spoke-nav a {
+    position:absolute;
+    text-decoration:none;
+    font-weight:bold;
+    color:#ffffff;
+    transform-origin:50% 150px;
+    text-shadow:0 0 5px #00ddff;
+    transition:all 0.3s ease;
+  }
+  .spoke-nav a:hover {
+    transform:scale(1.1);
+    color:#66ddff;
+    text-shadow:0 0 10px #00ddff;
+  }
+
+  /* Positioning each spoke (8 categories, 45 degrees apart) */
+  .spoke-nav a:nth-child(1) { transform:rotate(0deg) translateY(-150px); } /* History, Philosophy & Culture */
+  .spoke-nav a:nth-child(2) { transform:rotate(45deg) translateY(-150px); } /* Arts & Literature */
+  .spoke-nav a:nth-child(3) { transform:rotate(90deg) translateY(-150px); } /* Science, Nature & Health */
+  .spoke-nav a:nth-child(4) { transform:rotate(135deg) translateY(-150px); } /* Sports, Leisure & Entertainment */
+  .spoke-nav a:nth-child(5) { transform:rotate(180deg) translateY(-150px); } /* Take A Pause */
+  .spoke-nav a:nth-child(6) { transform:rotate(225deg) translateY(-150px); } /* Conspiracy Corner */
+  .spoke-nav a:nth-child(7) { transform:rotate(270deg) translateY(-150px); } /* MISC */
+  .spoke-nav a:nth-child(8) { transform:rotate(315deg) translateY(-150px); } /* Opinion */
 
   /* Links grid (3-column layout on desktop; 2 on tablet; 1 on mobile) */
   .grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:12px; /* Adjusted to match other files */
-    margin-top:30px; /* Adjusted to match other files */
+    gap:12px;
+    margin-top:30px;
   }
   @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:600px){.grid{grid-template-columns:1fr;} h1{font-size:28px;}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr;} .hub{font-size:36px;} .spoke-nav {width:200px; height:200px;} .spoke-nav a {transform-origin:50% 100px; transform:rotate(calc(45deg * (n - 1))) translateY(-100px);}}
 
   .link{
     background:transparent;
     border:none;
-    border-radius:15px; /* Added to match other files */
-    padding:12px 20px; /* Adjusted to match other files */
-    transition:all 0.3s ease; /* Added to match other files */
-    margin-bottom:5px; /* Added to match other files */
+    border-radius:15px;
+    padding:12px 20px;
+    transition:all 0.3s ease;
+    margin-bottom:5px;
   }
 
   .link:hover{
-    transform:translateY(-5px) scale(1.02); /* Added to match other files */
-    box-shadow:0 0 20px rgba(0,221,255,0.3); /* Default shadow, can adjust per category color */
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 0 20px rgba(0,221,255,0.3);
   }
 
   .link a{
     display:block;
-    font-size:18px; /* Adjusted to match other files */
+    font-size:18px;
     font-weight:bold;
     text-decoration:none;
     color:#ffffff;
     word-break:break-word;
-    text-shadow:0 0 10px rgba(0,221,255,0.5); /* Default shadow, can adjust */
-    border-bottom:1px solid rgba(0,221,255,0.3); /* Default border, can adjust */
-    padding-bottom:6px; /* Added to match other files */
+    text-shadow:0 0 10px rgba(0,221,255,0.5);
+    border-bottom:1px solid rgba(0,221,255,0.3);
+    padding-bottom:6px;
     line-height:1.3;
   }
   .link a:hover{
     text-decoration:underline;
-    text-shadow:0 0 15px rgba(0,221,255,0.8); /* Default hover shadow, can adjust */
+    text-shadow:0 0 15px rgba(0,221,255,0.8);
   }
 
   /* Back to Home button - bottom right corner */
@@ -134,7 +190,7 @@
     font-weight:bold;
     text-transform:uppercase;
     border:1px solid rgba(255,221,0,0.3);
-    box-shadow:0 0 5px rgba(0,221,255,0.1); /* Default shadow */
+    box-shadow:0 0 5px rgba(0,221,255,0.1);
     transition:all 0.3s ease;
     z-index:20;
     text-shadow:0 0 5px #00ddff;
@@ -177,7 +233,17 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>THE DAYLUGE</h1>
+    <a href="/" class="hub">news</a>
+    <div class="spoke-nav">
+      <a href="/history-philosophy-culture.html">History, Philosophy & Culture</a>
+      <a href="/arts-literature.html">Arts & Literature</a>
+      <a href="/science-nature-health.html">Science, Nature & Health</a>
+      <a href="/sports-leisure-ent.html">Sports, Leisure & Entertainment</a>
+      <a href="/take-a-pause.html">Take A Pause</a>
+      <a href="/conspiracy-corner.html">Conspiracy Corner</a>
+      <a href="/misc.html">MISC</a>
+      <a href="/opinion.html">Opinion</a>
+    </div>
   </header>
 
   <!-- Grid of news links -->
@@ -270,7 +336,7 @@ async function loadLinks() {
     "https://www.youtube.com/watch?v=x9cVcGQNxBw",
     // MISC
     "https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/",
-    // Opinion (placeholder, add actual links as needed)
+    // Opinion
     "https://www.nytimes.com/section/opinion"
   ];
 
