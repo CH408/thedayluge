@@ -1,232 +1,363 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THE DAYLUGE</title>
 
-<!-- Vintage typewriter font -->
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+<!-- Vintage typewriter font for thematic consistency -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    /* Link color palette (darker blue/green) */
-    --red:#cc0000; 
-    --orange:#ff6600; 
-    --green:#005f00;      /* darker green */
-    --lime:#228b22; 
-    --blue:#003366;       /* darker blue */
-    --light-blue:#000066; 
-    --indigo:#4b0082; 
-    --violet:#6600cc; 
-    --pink:#ff3399;
-
-    /* Neutral newspaper tones */
-    --ink:#111; 
-    --rule:#bfbfbf;
-    --maxw:1400px;
-
-    --panel-bg:#ffffffee;
-    --panel-border:#cfcfcf;
+  :root {
+    /* Atomic color palette based on our thread */
+    --red: #cc0000;          /* News hub */
+    --orange: #ff6600;       /* Arts & Literature */
+    --green: #005f00;        /* Science, Nature & Health */
+    --lime: #228b22;         /* Sports, Leisure & Entertainment */
+    --blue: #003366;         /* Take A Pause */
+    --light-blue: #000066;   /* Conspiracy Corner */
+    --indigo: #4b0082;       /* MISC */
+    --violet: #6600cc;       /* Opinion */
+    --pink: #ff3399;         /* History, Philosophy & Culture (adjusted for variety) */
+    --ink: #111;
+    --rule: #bfbfbf;
+    --maxw: 1200px;
+    --shadow-light: rgba(0, 221, 255, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.8);
   }
 
-  /* Color classes for links */
-  .c-red{color:var(--red)}
-  .c-orange{color:var(--orange)}
-  .c-green{color:var(--green)}
-  .c-lime-green{color:var(--lime)}
-  .c-blue{color:var(--blue)}
-  .c-light-blue{color:var(--light-blue)}
-  .c-indigo{color:var(--indigo)}
-  .c-violet{color:var(--violet)}
-  .c-pink{color:var(--pink)}
-  .c-purple{color:var(--violet)}
-  .c-black{color:#000}
-
-  *{box-sizing:border-box;margin:0;padding:0}
-  html, body {height:100%}
-
-  /* Simple white background */
-  body{
-    font-family:'Special Elite', monospace;
-    color:var(--ink);
-    line-height:1.5;
-    background:#fff;
-    padding:20px;
-    position:relative;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body {
+    height: 100%;
   }
 
-  .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
-
-  header{text-align:center; margin-bottom:10px;}
-  h1{text-transform:uppercase; letter-spacing:.5px; font-size:36px; cursor:pointer;}
-
-  nav{
-    text-align:center; margin:8px 0 18px; padding-bottom:10px;
-    border-bottom:1px dashed var(--rule);
-  }
-  nav a{color:#333; text-decoration:none; font-weight:bold; margin:0 12px;}
-  nav a:hover{text-decoration:underline;}
-
-  /* 3-column layout on desktop; 2 on tablet; 1 on mobile */
-  .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px 18px;
-    margin-top:10px;
-  }
-  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:600px){.grid{grid-template-columns:1fr;} h1{font-size:28px;}}
-
-  .link a{
-    display:block;
-    font-size:20px;
-    font-weight:bold;
-    text-decoration:none;
-    word-break:break-word;
-    padding:2px 0;
-    text-shadow:0 .2px 0 rgba(0,0,0,0.35);
-  }
-  .link a:hover{text-decoration:underline;}
-
-  /* Bottom archive link */
-  .archive-bottom{
-    position:fixed;
-    bottom:10px;
-    left:10px;
-    font-size:11px;
-    color:#666;
-    text-decoration:underline;
-    cursor:pointer;
-    opacity:0.5;
-  }
-  .archive-bottom:hover{
-    opacity:0.8;
-    color:#333;
+  body {
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    color: var(--ink);
+    line-height: 1.5;
+    background: #0a1428;
+    padding: 20px;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  /* Archive modal */
-  .archive-modal{
-    display:none; position:fixed; inset:0; z-index:50; background:rgba(0,0,0,0.4);
-    align-items:center; justify-content:center; padding:16px;
+  /* Energy field effect for immersive background */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(0, 150, 255, 0.05) 0%, transparent 70%);
+    animation: energy-pulse 8s ease-in-out infinite;
+    pointer-events: none;
   }
-  .archive-modal.show{display:flex;}
-  .archive-card{
-    background:#fff; border-radius:10px; padding:16px; max-width:800px; width:100%;
-    max-height:80vh; overflow:auto; border:1px solid #ddd; box-shadow:0 10px 26px rgba(0,0,0,0.25);
-  }
-  .archive-card h3{margin-bottom:10px;}
-  .archive-list .link a{font-size:16px;}
-  .archive-close{float:right; cursor:pointer; font-weight:bold;}
 
-  .loading{text-align:center; color:#666; margin:40px 0;}
+  @keyframes energy-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  /* Header with 8-spoked atom-pattern hub */
+  header {
+    position: relative;
+    margin-bottom: 50px;
+  }
+  .hub {
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-size: 48px;
+    color: var(--red);
+    text-shadow: 0 0 20px rgba(204, 0, 0, 0.8), 2px 2px 4px var(--shadow-dark);
+    animation: title-pulse 3s ease-in-out infinite;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff3333, var(--red));
+    text-decoration: none;
+  }
+  .hub:hover {
+    transform: scale(1.1);
+    color: #ff6666;
+    text-shadow: 0 0 30px rgba(255, 51, 51, 0.9);
+  }
+
+  @keyframes title-pulse {
+    0%, 100% { 
+      color: var(--red);
+      text-shadow: 0 0 20px rgba(204, 0, 0, 0.8), 2px 2px 4px var(--shadow-dark);
+    }
+    50% { 
+      color: #ff3333;
+      text-shadow: 0 0 30px rgba(255, 51, 51, 0.9), 0 0 45px rgba(255, 51, 51, 0.6), 2px 2px 4px var(--shadow-dark);
+    }
+  }
+
+  /* Radial navigation for 8 spokes */
+  .spoke-nav {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  .spoke-nav a {
+    position: absolute;
+    text-decoration: none;
+    font-weight: bold;
+    color: #ffffff;
+    transform-origin: 50% 150px;
+    text-shadow: 0 0 5px #00ddff;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  .spoke-nav a:hover {
+    transform: scale(1.1);
+    color: #66ddff;
+    text-shadow: 0 0 10px #00ddff;
+  }
+
+  /* Assign colors to each spoke based on our thread */
+  .spoke-nav a:nth-child(1) { color: var(--pink); transform: rotate(0deg) translateY(-150px); } /* History, Philosophy & Culture */
+  .spoke-nav a:nth-child(2) { color: var(--orange); transform: rotate(45deg) translateY(-150px); } /* Arts & Literature */
+  .spoke-nav a:nth-child(3) { color: var(--green); transform: rotate(90deg) translateY(-150px); } /* Science, Nature & Health */
+  .spoke-nav a:nth-child(4) { color: var(--lime); transform: rotate(135deg) translateY(-150px); } /* Sports, Leisure & Entertainment */
+  .spoke-nav a:nth-child(5) { color: var(--blue); transform: rotate(180deg) translateY(-150px); } /* Take A Pause */
+  .spoke-nav a:nth-child(6) { color: var(--light-blue); transform: rotate(225deg) translateY(-150px); } /* Conspiracy Corner */
+  .spoke-nav a:nth-child(7) { color: var(--indigo); transform: rotate(270deg) translateY(-150px); } /* MISC */
+  .spoke-nav a:nth-child(8) { color: var(--violet); transform: rotate(315deg) translateY(-150px); } /* Opinion */
+
+  /* Responsive adjustments for spokes */
+  @media (max-width: 600px) {
+    .hub { font-size: 36px; padding: 8px 16px; }
+    .spoke-nav { width: 200px; height: 200px; }
+    .spoke-nav a { transform-origin: 50% 100px; }
+    .spoke-nav a:nth-child(n) { transform: rotate(calc(45deg * (n - 1))) translateY(-100px); font-size: 14px; }
+  }
+
+  /* News grid layout */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 30px;
+    max-width: 100%;
+  }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .link {
+    background: transparent;
+    border: none;
+    border-radius: 15px;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+  }
+
+  .link:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 20px var(--shadow-light);
+  }
+
+  .link a {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ffffff;
+    word-break: break-word;
+    text-shadow: 0 0 10px rgba(0, 221, 255, 0.5);
+    border-bottom: 1px solid rgba(0, 221, 255, 0.3);
+    padding-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .link a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 15px rgba(0, 221, 255, 0.8);
+  }
+
+  /* Back to Home button */
+  .back-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: transparent;
+    color: #aaccff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 221, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 221, 255, 0.1);
+    transition: all 0.3s ease;
+    z-index: 20;
+    text-shadow: 0 0 5px #00ddff;
+    opacity: 0.7;
+  }
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 221, 255, 0.3);
+    transform: scale(1.05);
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  /* Random button for surprise links */
+  .random-button {
+    margin: 40px auto;
+    display: block;
+    background: linear-gradient(45deg, var(--light-blue) 0%, #00aadd 100%);
+    color: black;
+    border: 2px solid #33ddff;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 221, 255, 0.3);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  }
+  .random-button:hover {
+    background: linear-gradient(45deg, #00aadd 0%, var(--light-blue) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 221, 255, 0.5), 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>THE DAYLUGE</h1>
-  </header>
-  <nav>
-    <a href="/">Home</a>
-  </nav>
-
-  <!-- Archive Modal -->
-  <div id="archiveModal" class="archive-modal" aria-hidden="true">
-    <div class="archive-card">
-      <span id="closeArchive" class="archive-close">✕</span>
-      <h3>Archive</h3>
-      <div id="archiveList" class="archive-list">
-        <p style="color:#555;">Archive feature coming soon.</p>
-      </div>
+    <a href="/" class="hub">news</a>
+    <div class="spoke-nav">
+      <a href="/history-philosophy-culture.html">History, Philosophy & Culture</a>
+      <a href="/arts-literature.html">Arts & Literature</a>
+      <a href="/science-nature-health.html">Science, Nature & Health</a>
+      <a href="/sports-leisure-ent.html">Sports, Leisure & Entertainment</a>
+      <a href="/take-a-pause.html">Take A Pause</a>
+      <a href="/conspiracy-corner.html">Conspiracy Corner</a>
+      <a href="/misc.html">MISC</a>
+      <a href="/opinion.html">Opinion</a>
     </div>
+  </header>
+
+  <!-- Grid of news links -->
+  <div id="grid" class="grid">
+    <!-- Links will be populated by script -->
   </div>
 
-  <!-- Grid of links -->
-  <div id="grid" class="grid">
-    <div class="loading">Loading links...</div>
-  </div>
+  <!-- Random Button -->
+  <button class="random-button" onclick="goToRandomNews()">
+    ⚛️ SURPRISE ME!
+  </button>
+
+  <!-- Back to Home button -->
+  <a href="/" class="back-btn">← Back to Home Page</a>
 </div>
 
-<!-- Archive link (bottom left) -->
-<div class="archive-bottom" onclick="openArchiveModal()">archive</div>
-
 <script>
-const MAX_ACTIVE = 48;
-let allLinks = [];
+  const MAX_ACTIVE = 48;
+  let allLinks = [];
 
-function escapeHTML(s){ 
-  return String(s).replace(/[&<>"']/g, m => ({'&':'&','<':'<','>':'>','"':'"',"'":'''}[m])); 
-}
+  function escapeHTML(s) { 
+    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); 
+  }
 
-// Load links from simple text file
-async function loadLinks() {
-  try {
-    const response = await fetch('/links.txt');
-    if (response.ok) {
-      const text = await response.text();
-      const lines = text.split('\n').filter(line => line.trim());
-      
-      allLinks = lines.map(line => {
-        const parts = line.split('|');
-        if (parts.length === 3) {
-          return {
-            title: parts[0].trim(),
-            url: parts[1].trim(),
-            color: parts[2].trim(),
-            status: 'active'
-          };
-        }
-        return null;
-      }).filter(link => link !== null);
-      
-      console.log(`Loaded ${allLinks.length} links from text file`);
-    } else {
-      throw new Error('Could not load links.txt');
+  // Load links from simple text file
+  async function loadLinks() {
+    try {
+      const response = await fetch('/links.txt');
+      if (response.ok) {
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        
+        allLinks = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length === 3) {
+            return {
+              title: parts[0].trim(),
+              url: parts[1].trim(),
+              color: parts[2].trim(),
+              status: 'active'
+            };
+          }
+          return null;
+        }).filter(link => link !== null);
+        
+        console.log(`Loaded ${allLinks.length} links from text file`);
+      } else {
+        throw new Error('Could not load links.txt');
+      }
+    } catch (error) {
+      console.log('Error loading links, using fallback');
+      allLinks = [
+        {title:"Pablo Escobar Lost $72 Million a Month to Rats and Moisture Damage", url:"https://x.com/bizhustlez/status/1960013189258887243?s=42", color:"c-indigo", status:"active"}
+      ];
     }
-  } catch (error) {
-    console.log('Error loading links, using fallback');
-    // Fallback if file doesn't exist yet
-    allLinks = [
-      {title:"Pablo Escobar Lost $72 Million a Month to Rats and Moisture Damage", url:"https://x.com/bizhustlez/status/1960013189258887243?s=42", color:"c-indigo", status:"active"}
-    ];
+    renderGrid();
   }
-  renderGrid();
-}
 
-function renderGrid() {
-  const gridEl = document.getElementById('grid');
-  const activeLinks = allLinks.filter(link => link.status === 'active').slice(0, MAX_ACTIVE);
-  
-  gridEl.innerHTML = activeLinks.map(link => `
-    <div class="link">
-      <a class="${link.color || 'c-black'}" href="${link.url}" target="_blank" rel="noopener">
-        ${escapeHTML(link.title)}
-      </a>
-    </div>
-  `).join('');
-}
-
-// Archive modal function
-function openArchiveModal() {
-  document.getElementById('archiveModal').classList.add('show');
-  document.getElementById('archiveModal').setAttribute('aria-hidden', 'false');
-}
-
-document.getElementById('closeArchive').addEventListener('click', () => {
-  document.getElementById('archiveModal').classList.remove('show');
-  document.getElementById('archiveModal').setAttribute('aria-hidden', 'true');
-});
-
-document.getElementById('archiveModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('archiveModal')) {
-    document.getElementById('archiveModal').classList.remove('show');
-    document.getElementById('archiveModal').setAttribute('aria-hidden', 'true');
+  function renderGrid() {
+    const gridEl = document.getElementById('grid');
+    const activeLinks = allLinks.filter(link => link.status === 'active').slice(0, MAX_ACTIVE);
+    
+    if (activeLinks.length === 0) {
+      gridEl.innerHTML = '<div class="link"><a class="c-black">No news links available. Check back later!</a></div>';
+    } else {
+      gridEl.innerHTML = activeLinks.map(link => `
+        <div class="link">
+          <a class="${link.color || 'c-black'}" href="${link.url}" target="_blank" rel="noopener">
+            ${escapeHTML(link.title)}
+          </a>
+        </div>
+      `).join('');
+    }
   }
-});
 
-// Load the links when page loads
-loadLinks();
+  // Random news article function
+  function goToRandomNews() {
+    const activeLinks = allLinks.filter(link => link.status === 'active');
+    if (activeLinks.length > 0) {
+      const randomLink = activeLinks[Math.floor(Math.random() * activeLinks.length)].url;
+      window.open(randomLink, '_blank');
+    } else {
+      alert("No news links available to surprise you with!");
+    }
+  }
+
+  // Initialize page load
+  loadLinks();
 </script>
 </body>
 </html>
-
