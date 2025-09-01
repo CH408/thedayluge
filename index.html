@@ -3,54 +3,311 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Opinion - THE DAYLUGE</title>
+<title>THE DAYLUGE</title>
 
 <!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
-  /* [Insert the same CSS from conspiracy-corner.html, adjusting colors to a theme like violet (#6600cc)] */
   :root{
     /* Atomic color palette */
     --red:#cc0000; 
-    --orange:#ff8800; 
-    --green:#00dd55;
-    --blue:#1a1a80;
-    --light-blue:#33ddff;
-    --violet:#6600cc; /* Opinion theme */
-    --pink:#ff1493;
-    --yellow:#ffee44;
-    --brown:#8B4513;
-    --dark-green:#006400;
+    --orange:#ff6600; 
+    --green:#005f00;      
+    --lime:#228b22; 
+    --blue:#003366;       
+    --light-blue:#000066; 
+    --indigo:#4b0082; 
+    --violet:#6600cc; 
+    --pink:#ff3399;
     --ink:#111; 
     --rule:#bfbfbf;
-    --maxw:1200px;
+    --maxw:1200px; /* Adjusted to match other files */
   }
-  /* [Copy remaining CSS from conspiracy-corner.html, replacing --light-blue with --violet where applicable, e.g., .category-title, .link a:hover, etc.] */
-  .category-title{ color:var(--violet); text-decoration-color:var(--violet); }
-  .link:hover{ box-shadow:0 0 20px rgba(102,0,204,0.3); } /* Violet shadow */
-  .link a{ text-shadow:0 0 10px rgba(102,0,204,0.5); border-bottom:1px solid rgba(102,0,204,0.3); }
-  .link a:hover{ color:var(--violet); text-shadow:0 0 15px rgba(102,0,204,0.8); }
-  .back-btn{ box-shadow:0 0 5px rgba(102,0,204,0.1); }
-  .back-btn:hover{ box-shadow:0 0 15px rgba(102,0,204,0.3); }
-  .random-button{ background:linear-gradient(45deg, var(--violet) 0%, #8800ff 100%); }
-  .random-button:hover{ background:linear-gradient(45deg, #8800ff 0%, var(--violet) 100%); box-shadow:0 0 25px rgba(102,0,204,0.5); }
-  /* [Rest of CSS remains the same] */
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html, body {height:100%;}
+
+  body{
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    color:var(--ink);
+    line-height:1.5;
+    background:#0a1428; /* Changed to match other category pages */
+    padding:20px;
+    position:relative;
+    min-height:100vh;
+  }
+
+  /* Simple energy field effects */
+  body::before {
+    content: '';
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:
+      radial-gradient(circle at center, rgba(0,150,255,0.05) 0%, transparent 70%);
+    animation:energy-pulse 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes energy-pulse {
+    0%, 100% { opacity:0.3; }
+    50% { opacity:0.6; }
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
+
+  /* Header */
+  header{text-align:center; margin-bottom:30px;}
+  h1{
+    text-transform:uppercase; 
+    letter-spacing:.5px; 
+    font-size:36px; 
+    color:#ffffff;
+    text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    animation:title-pulse 3s ease-in-out infinite;
+    margin-bottom:15px;
+  }
+
+  @keyframes title-pulse {
+    0%, 100% { 
+      color:#ffffff;
+      text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% { 
+      color:#66ddff;
+      text-shadow:0 0 30px #00ddff, 0 0 45px #66ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+  }
+
+  /* Links grid (3-column layout on desktop; 2 on tablet; 1 on mobile) */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px; /* Adjusted to match other files */
+    margin-top:30px; /* Adjusted to match other files */
+  }
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.grid{grid-template-columns:1fr;} h1{font-size:28px;}}
+
+  .link{
+    background:transparent;
+    border:none;
+    border-radius:15px; /* Added to match other files */
+    padding:12px 20px; /* Adjusted to match other files */
+    transition:all 0.3s ease; /* Added to match other files */
+    margin-bottom:5px; /* Added to match other files */
+  }
+
+  .link:hover{
+    transform:translateY(-5px) scale(1.02); /* Added to match other files */
+    box-shadow:0 0 20px rgba(0,221,255,0.3); /* Default shadow, can adjust per category color */
+  }
+
+  .link a{
+    display:block;
+    font-size:18px; /* Adjusted to match other files */
+    font-weight:bold;
+    text-decoration:none;
+    color:#ffffff;
+    word-break:break-word;
+    text-shadow:0 0 10px rgba(0,221,255,0.5); /* Default shadow, can adjust */
+    border-bottom:1px solid rgba(0,221,255,0.3); /* Default border, can adjust */
+    padding-bottom:6px; /* Added to match other files */
+    line-height:1.3;
+  }
+  .link a:hover{
+    text-decoration:underline;
+    text-shadow:0 0 15px rgba(0,221,255,0.8); /* Default hover shadow, can adjust */
+  }
+
+  /* Back to Home button - bottom right corner */
+  .back-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:transparent;
+    color:#aaccff;
+    padding:8px 16px;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    border:1px solid rgba(255,221,0,0.3);
+    box-shadow:0 0 5px rgba(0,221,255,0.1); /* Default shadow */
+    transition:all 0.3s ease;
+    z-index:20;
+    text-shadow:0 0 5px #00ddff;
+    opacity:0.7;
+  }
+  .back-btn:hover{
+    background:rgba(255,255,255,0.1);
+    box-shadow:0 0 15px rgba(0,221,255,0.3);
+    transform:scale(1.05);
+    color:#ffffff;
+    opacity:1;
+  }
+
+  /* Random button */
+  .random-button{
+    margin:40px auto;
+    display:block;
+    background:linear-gradient(45deg, var(--light-blue) 0%, #00aadd 100%);
+    color:black;
+    border:2px solid #33ddff;
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    box-shadow:0 0 15px rgba(0,221,255,0.3);
+    text-shadow:0 0 3px rgba(0,0,0,0.5);
+  }
+  .random-button:hover{
+    background:linear-gradient(45deg, #00aadd 0%, var(--light-blue) 100%);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(0,221,255,0.5), 0 8px 20px rgba(0,0,0,0.4);
+  }
 </style>
 </head>
 <body>
-<a href="/" class="back-btn">← Back to Home Page</a>
 <div class="wrap">
   <header>
     <h1>THE DAYLUGE</h1>
-    <div class="category-title">Opinion</div>
   </header>
-  <div class="grid">
-    <!-- Add opinion links here, e.g., -->
-    <div class="link"><a href="https://www.nytimes.com/section/opinion" target="_blank">NY Times Opinion</a></div>
-    <!-- Add more as needed -->
+
+  <!-- Grid of news links -->
+  <div id="grid" class="grid">
+    <!-- Links will be populated by script -->
   </div>
-  <button class="random-button" onclick="goToRandomOpinion()">⚛️ SURPRISE ME!</button>
+
+  <!-- Random Button -->
+  <button class="random-button" onclick="goToRandomNews()">
+    ⚛️ SURPRISE ME!
+  </button>
+
+  <!-- Back to Home button -->
+  <a href="/" class="back-btn">← Back to Home Page</a>
 </div>
+
 <script>
-function goTo
+const MAX_ACTIVE = 48;
+let allLinks = [];
+
+function escapeHTML(s) { 
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); 
+}
+
+// Load links from simple text file
+async function loadLinks() {
+  try {
+    const response = await fetch('/links.txt');
+    if (response.ok) {
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim());
+      
+      allLinks = lines.map(line => {
+        const parts = line.split('|');
+        if (parts.length === 3) {
+          return {
+            title: parts[0].trim(),
+            url: parts[1].trim(),
+            color: parts[2].trim(),
+            status: 'active'
+          };
+        }
+        return null;
+      }).filter(link => link !== null);
+      
+      console.log(`Loaded ${allLinks.length} links from text file`);
+    } else {
+      throw new Error('Could not load links.txt');
+    }
+  } catch (error) {
+    console.log('Error loading links, using fallback');
+    // Fallback if file doesn't exist yet
+    allLinks = [
+      {title:"Pablo Escobar Lost $72 Million a Month to Rats and Moisture Damage", url:"https://x.com/bizhustlez/status/1960013189258887243?s=42", color:"c-indigo", status:"active"}
+    ];
+  }
+  // Filter out links already categorized
+  const categorizedLinks = [
+    // History, Philosophy & Culture
+    "https://www.derekthompson.org/p/1910-the-year-the-modern-world-lost",
+    "https://x.com/Rainmaker1973/status/1959655344709173469",
+    "https://www.history.com/articles/brilliant-psyops-psychological-warfare",
+    "https://www.youtube.com/watch?v=F4M1MlBZyI0",
+    "https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird",
+    "https://theconversation.com/six-tips-from-the-middle-ages-on-how-to-beat-the-summer-heat-263290",
+    "https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords",
+    "https://www.visualcapitalist.com/growth-of-100-invested-in-jim-simons-medallion-fund/",
+    // Arts & Literature
+    "https://www.readthegreatbooks.com/",
+    // Science, Nature & Health
+    "https://www.the-scientist.com/why-were-dinosaurs-so-big-73254",
+    "https://www.sciencealert.com/the-dna-of-great-white-sharks-defies-explanation-heres-why",
+    // Sports, Leisure & Entertainment
+    "https://www.espn.com/fantasy/football/story/_/id/45940705/greatest-fantasy-football-players-30-years?utm_source=join1440&utm_medium=email&utm_placement=newsletter&user_id=66c4bc5a5d78644b3a979610",
+    "https://www.instagram.com/p/DNSuh_7Nz27/",
+    "https://collider.com/best-war-shows-must-watch-ranked/",
+    "https://tv.garden/",
+    "https://www.zerohedge.com/markets/cost-attending-nfl-game-has-risen-40-last-10-years",
+    "https://www.espn.com/nba/story/_/id/46061949/holy-grail-jordan-bryant-sports-card-sells-record-129m",
+    "https://www.espn.com/nfl/story/_/id/46039656/nfl-new-head-coaches-outlooks-predictions-2025",
+    // Take A Pause
+    "https://www.instagram.com/reel/DNejdmEME7K/?l=1",
+    "https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
+    "https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
+    "https://x.com/engineers_feed/status/1959628877711487203",
+    // Conspiracy Corner
+    "https://www.youtube.com/shorts/0Phz6wnq_GU",
+    "https://www.history.com/articles/kryptos-cia-sculpture-mystery-code",
+    "https://youtu.be/HdllGyweF7c?si=qX95ftQDHqHYKE_j",
+    "https://www.youtube.com/watch?v=x9cVcGQNxBw",
+    // MISC
+    "https://geopoliticalfutures.com/an-all-time-high-in-cocaine-production/",
+    // Opinion (placeholder, add actual links as needed)
+    "https://www.nytimes.com/section/opinion"
+  ];
+
+  allLinks = allLinks.filter(link => !categorizedLinks.includes(link.url));
+  renderGrid();
+}
+
+function renderGrid() {
+  const gridEl = document.getElementById('grid');
+  const activeLinks = allLinks.filter(link => link.status === 'active').slice(0, MAX_ACTIVE);
+  
+  if (activeLinks.length === 0) {
+    gridEl.innerHTML = '<div class="link"><a class="c-black">No news links available. Check back later!</a></div>';
+  } else {
+    gridEl.innerHTML = activeLinks.map(link => `
+      <div class="link">
+        <a class="${link.color || 'c-black'}" href="${link.url}" target="_blank" rel="noopener">
+          ${escapeHTML(link.title)}
+        </a>
+      </div>
+    `).join('');
+  }
+}
+
+// Random news article function
+function goToRandomNews() {
+  const activeLinks = allLinks.filter(link => link.status === 'active');
+  if (activeLinks.length > 0) {
+    const randomLink = activeLinks[Math.floor(Math.random() * activeLinks.length)].url;
+    window.open(randomLink, '_blank');
+  } else {
+    alert("No news links available to surprise you with!");
+  }
+}
+
+// Load the links when page loads
+loadLinks();
+</script>
+</body>
+</html>
