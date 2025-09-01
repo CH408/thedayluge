@@ -211,27 +211,8 @@
   </header>
 
   <!-- Take A Pause Links Grid -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.instagram.com/reel/DNejdmEME7K/?l=1" target="_blank">
-        The Joy of Running
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D" target="_blank">
-        The "Classic Part" Little Boy Has the Right Attitude
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D" target="_blank">
-        This Teacher Loves His Students
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://x.com/engineers_feed/status/1959628877711487203" target="_blank">
-        Gates, Ballmer and Pals Rocking Out HARD to Windows 95
-      </a>
-    </div>
+  <div class="grid" id="pause-grid">
+    <!-- Links will be loaded dynamically from take-a-pause-links.txt -->
   </div>
 
   <!-- Category Random Button -->
@@ -241,18 +222,78 @@
 </div>
 
 <script>
-// Random take a pause article function
-function goToRandomPause() {
-  const pauseLinks = [
-    "https://www.instagram.com/reel/DNejdmEME7K/?l=1",
-    "https://www.instagram.com/reel/C0XBYjXRPGY/?igsh=MWVxNG56cDF3a2Jzcg%3D%3D",
-    "https://www.instagram.com/reel/DLflv5zOUGA/?igsh=MTUwdDV0M3VobmFtYw%3D%3D",
-    "https://x.com/engineers_feed/status/1959628877711487203"
-  ];
-  
-  const randomLink = pauseLinks[Math.floor(Math.random() * pauseLinks.length)];
-  window.open(randomLink, '_blank');
+// Load take a pause links from external file
+async function loadPauseLinks() {
+  try {
+    const response = await fetch('take-a-pause-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load take-a-pause-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Populate the grid
+    const grid = document.getElementById('pause-grid');
+    if (grid && links.length > 0) {
+      grid.innerHTML = links.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error loading take a pause links:', error);
+  }
 }
+
+// Random take a pause article function
+async function goToRandomPause() {
+  try {
+    const response = await fetch('take-a-pause-links.txt');
+    if (!response.ok) {
+      console.log('Could not load take-a-pause-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    if (links.length > 0) {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadPauseLinks);
 </script>
 </body>
 </html>
