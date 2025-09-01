@@ -210,28 +210,9 @@
     <div class="category-title">Opinion</div>
   </header>
 
-  <!-- Opinion Links Grid (Exact links from old file) -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine" target="_blank">
-        Systemic Corruption Doesn't Give A Chance For Peace In Ukraine
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj" target="_blank">
-        Ghislaine Maxwell: Trump 'Was Never Inappropriate'
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/" target="_blank">
-        Going Full Bud Light
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/" target="_blank">
-        The Smithsonian Has Jumped the Shark
-      </a>
-    </div>
+  <!-- Opinion Links Grid -->
+  <div class="grid" id="opinion-grid">
+    <!-- Links will be loaded dynamically from opinion-links.txt -->
   </div>
 
   <!-- Category Random Button -->
@@ -241,18 +222,78 @@
 </div>
 
 <script>
-// Random opinion article function (using exact links from old file)
-function goToRandomOpinion() {
-  const opinionLinks = [
-    "https://www.zerohedge.com/geopolitical/systemic-corruption-doesnt-give-chance-peace-ukraine",
-    "https://www.zerohedge.com/political/ghislaine-maxwell-says-father-was-intelligence-asset-trump-was-never-inappropriate-doj",
-    "https://thefederalist.com/2025/08/21/cracker-barrel-is-dead-and-its-stupid-woke-ceo-killed-it-with-gay-nonsense/",
-    "https://www.washingtonexaminer.com/opinion/editorials/3777258/smithsonian-long-overdue-for-housecleaning/"
-  ];
-  
-  const randomLink = opinionLinks[Math.floor(Math.random() * opinionLinks.length)];
-  window.open(randomLink, '_blank');
+// Load opinion links from external file
+async function loadOpinionLinks() {
+  try {
+    const response = await fetch('opinion-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load opinion-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Populate the grid
+    const grid = document.getElementById('opinion-grid');
+    if (grid && links.length > 0) {
+      grid.innerHTML = links.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error loading opinion links:', error);
+  }
 }
+
+// Random opinion article function
+async function goToRandomOpinion() {
+  try {
+    const response = await fetch('opinion-links.txt');
+    if (!response.ok) {
+      console.log('Could not load opinion-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    if (links.length > 0) {
+      const randomLink = links[Math.floor(Math.random() * links.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadOpinionLinks);
 </script>
 </body>
 </html>
