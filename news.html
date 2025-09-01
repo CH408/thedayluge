@@ -3,437 +3,320 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>THE DAYLUGE</title>
+<title>News - THE DAYLUGE</title>
 
-<!-- Vintage typewriter font for thematic consistency -->
+<!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
-  :root {
-    /* Atomic color palette based on our thread discussions */
-    --red: #cc0000;          /* News hub */
-    --orange: #ff6600;       /* Arts & Literature */
-    --green: #005f00;        /* Science, Nature & Health */
-    --lime: #228b22;         /* Sports, Leisure & Entertainment */
-    --blue: #003366;         /* Take A Pause */
-    --light-blue: #000066;   /* Conspiracy Corner */
-    --indigo: #4b0082;       /* MISC */
-    --violet: #6600cc;       /* Opinion */
-    --pink: #ff3399;         /* History, Philosophy & Culture */
-    --ink: #111;
-    --rule: #bfbfbf;
-    --maxw: 1200px;
-    --shadow-light: rgba(0, 221, 255, 0.3);
-    --shadow-dark: rgba(0, 0, 0, 0.8);
+  /* Force font loading */
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+  
+  :root{
+    /* Atomic color palette */
+    --red:#cc0000; 
+    --orange:#ff8800; 
+    --green:#00dd55;
+    --blue:#1a1a80;
+    --light-blue:#33ddff;
+    --violet:#cc88ff;
+    --pink:#ff1493;
+    --yellow:#ffee44;
+    --brown:#8B4513;
+    --dark-green:#006400;
+    --ink:#111; 
+    --rule:#bfbfbf;
+    --maxw:1200px;
+    --bright-red:#ff0000;
+    --news-red:#ff3333;
   }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  html, body {
-    height: 100%;
+  *{box-sizing:border-box;margin:0;padding:0}
+  html, body {height:100%;}
+
+  body{
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    color:var(--ink);
+    line-height:1.5;
+    background:#0a1428;
+    padding:20px;
+    position:relative;
+    min-height:100vh;
   }
 
-  body {
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    color: var(--ink);
-    line-height: 1.5;
-    background: #0a1428;
-    padding: 20px;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Energy field effect to enhance visual appeal */
+  /* Simple energy field effects with red theme */
   body::before {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, rgba(0, 150, 255, 0.05) 0%, transparent 70%);
-    animation: energy-pulse 8s ease-in-out infinite;
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:
+      radial-gradient(circle at center, rgba(255,0,0,0.08) 0%, transparent 70%);
+    animation:energy-pulse 8s ease-in-out infinite;
     pointer-events: none;
   }
 
   @keyframes energy-pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
+    0%, 100% { opacity:0.3; }
+    50% { opacity:0.6; }
   }
 
-  .wrap {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-    text-align: center;
-  }
+  .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
 
-  /* Header section with 8-spoked atom-pattern hub */
-  header {
-    position: relative;
-    margin-bottom: 50px;
-  }
-  .hub {
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    font-size: 48px;
-    color: var(--red);
-    text-shadow: 0 0 20px rgba(204, 0, 0, 0.8), 2px 2px 4px var(--shadow-dark);
-    animation: title-pulse 3s ease-in-out infinite;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 2;
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, #ff3333, var(--red));
-    text-decoration: none;
-  }
-  .hub:hover {
-    transform: scale(1.1);
-    color: #ff6666;
-    text-shadow: 0 0 30px rgba(255, 51, 51, 0.9);
+  /* Header */
+  header{text-align:center; margin-bottom:30px;}
+  h1{
+    text-transform:uppercase; 
+    letter-spacing:.5px; 
+    font-size:36px; 
+    color:#ffffff;
+    text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    animation:title-pulse 3s ease-in-out infinite;
+    margin-bottom:15px;
   }
 
   @keyframes title-pulse {
     0%, 100% { 
-      color: var(--red);
-      text-shadow: 0 0 20px rgba(204, 0, 0, 0.8), 2px 2px 4px var(--shadow-dark);
+      color:#ffffff;
+      text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
     }
     50% { 
-      color: #ff3333;
-      text-shadow: 0 0 30px rgba(255, 51, 51, 0.9), 0 0 45px rgba(255, 51, 51, 0.6), 2px 2px 4px var(--shadow-dark);
+      color:#66ddff;
+      text-shadow:0 0 30px #00ddff, 0 0 45px #66ddff, 2px 2px 4px rgba(0,0,0,0.8);
     }
   }
 
-  /* Radial navigation for 8 spokes with category colors */
-  .spoke-nav {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-  }
-  .spoke-nav a {
-    position: absolute;
-    text-decoration: none;
-    font-weight: bold;
-    color: #ffffff;
-    transform-origin: 50% 150px;
-    text-shadow: 0 0 5px #00ddff;
-    transition: all 0.3s ease;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  .spoke-nav a:hover {
-    transform: scale(1.1);
-    color: #66ddff;
-    text-shadow: 0 0 10px #00ddff;
+  .category-title{
+    color:var(--bright-red);
+    font-size:28px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+    text-align:center;
+    font-weight:900;
+    letter-spacing:1px;
+    text-decoration:underline;
+    text-underline-offset:8px;
+    text-decoration-color:var(--bright-red);
+    text-shadow:0 0 10px rgba(255,0,0,0.5);
+    animation:news-pulse 2s ease-in-out infinite;
   }
 
-  /* Assign colors and positions to each spoke */
-  .spoke-nav a:nth-child(1) { color: var(--pink); transform: rotate(0deg) translateY(-150px); } /* History, Philosophy & Culture */
-  .spoke-nav a:nth-child(2) { color: var(--orange); transform: rotate(45deg) translateY(-150px); } /* Arts & Literature */
-  .spoke-nav a:nth-child(3) { color: var(--green); transform: rotate(90deg) translateY(-150px); } /* Science, Nature & Health */
-  .spoke-nav a:nth-child(4) { color: var(--lime); transform: rotate(135deg) translateY(-150px); } /* Sports, Leisure & Entertainment */
-  .spoke-nav a:nth-child(5) { color: var(--blue); transform: rotate(180deg) translateY(-150px); } /* Take A Pause */
-  .spoke-nav a:nth-child(6) { color: var(--light-blue); transform: rotate(225deg) translateY(-150px); } /* Conspiracy Corner */
-  .spoke-nav a:nth-child(7) { color: var(--indigo); transform: rotate(270deg) translateY(-150px); } /* MISC */
-  .spoke-nav a:nth-child(8) { color: var(--violet); transform: rotate(315deg) translateY(-150px); } /* Opinion */
-
-  /* Responsive design for smaller screens */
-  @media (max-width: 600px) {
-    .hub { font-size: 36px; padding: 8px 16px; }
-    .spoke-nav { width: 200px; height: 200px; }
-    .spoke-nav a { transform-origin: 50% 100px; font-size: 14px; }
-    .spoke-nav a:nth-child(n) { transform: rotate(calc(45deg * (n - 1))) translateY(-100px); }
+  @keyframes news-pulse {
+    0%, 100% { 
+      color:var(--bright-red);
+      text-shadow:0 0 10px rgba(255,0,0,0.5);
+    }
+    50% { 
+      color:var(--news-red);
+      text-shadow:0 0 20px rgba(255,0,0,0.8), 0 0 30px rgba(255,51,51,0.6);
+    }
   }
 
-  /* News grid layout for dynamic content */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 30px;
-    max-width: 100%;
+  /* Back to Home button - bottom right corner */
+  .back-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:transparent;
+    color:#aaccff;
+    padding:8px 16px;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    border:1px solid rgba(255,0,0,0.3);
+    box-shadow:0 0 5px rgba(255,0,0,0.1);
+    transition:all 0.3s ease;
+    z-index:20;
+    text-shadow:0 0 5px #00ddff;
+    opacity:0.7;
   }
-  @media (max-width: 900px) {
-    .grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-
-  .link {
-    background: transparent;
-    border: none;
-    border-radius: 15px;
-    padding: 12px 20px;
-    transition: all 0.3s ease;
-    margin-bottom: 5px;
-  }
-
-  .link:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 0 20px var(--shadow-light);
-  }
-
-  .link a {
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #ffffff;
-    word-break: break-word;
-    text-shadow: 0 0 10px rgba(0, 221, 255, 0.5);
-    border-bottom: 1px solid rgba(0, 221, 255, 0.3);
-    padding-bottom: 6px;
-    line-height: 1.3;
+  .back-btn:hover{
+    background:rgba(255,0,0,0.1);
+    box-shadow:0 0 15px rgba(255,0,0,0.3);
+    transform:scale(1.05);
+    color:#ffffff;
+    opacity:1;
+    border-color:rgba(255,0,0,0.5);
   }
 
-  .link a:hover {
-    text-decoration: underline;
-    text-shadow: 0 0 15px rgba(0, 221, 255, 0.8);
+  /* Links grid */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
+    gap:12px;
+    margin-top:30px;
   }
 
-  /* Backup link styling for robustness */
-  .link a.backup {
-    font-size: 17px;
-    color: #ccddff;
-    border-bottom: 1px solid rgba(0, 150, 255, 0.4);
-  }
-  .link a.backup:hover {
-    color: #99bbff;
-    text-shadow: 0 0 12px rgba(0, 150, 255, 0.7);
+  .link{
+    background:transparent;
+    border:none;
+    border-radius:15px;
+    padding:12px 20px;
+    transition:all 0.3s ease;
+    margin-bottom:5px;
   }
 
-  /* Back to Home button */
-  .back-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: transparent;
-    color: #aaccff;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: 1px solid rgba(255, 221, 0, 0.3);
-    box-shadow: 0 0 5px rgba(0, 221, 255, 0.1);
-    transition: all 0.3s ease;
-    z-index: 20;
-    text-shadow: 0 0 5px #00ddff;
-    opacity: 0.7;
-  }
-  .back-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 15px rgba(0, 221, 255, 0.3);
-    transform: scale(1.05);
-    color: #ffffff;
-    opacity: 1;
+  .link:hover{
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 0 20px rgba(255,0,0,0.3);
   }
 
-  /* Alternative back button styling */
-  .back-btn.alt {
-    left: 20px;
-    right: auto;
-    border-color: rgba(255, 165, 0, 0.3);
-    box-shadow: 0 0 5px rgba(255, 165, 0, 0.1);
+  .link a{
+    display:block;
+    font-size:18px;
+    font-weight:bold;
+    text-decoration:none;
+    color:#ffffff;
+    word-break:break-word;
+    text-shadow:0 0 10px rgba(255,0,0,0.5);
+    border-bottom:1px solid rgba(255,0,0,0.3);
+    padding-bottom:6px;
+    line-height:1.3;
   }
-  .back-btn.alt:hover {
-    background: rgba(255, 165, 0, 0.1);
-    box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
-  }
-
-  /* Random button for surprise links */
-  .random-button {
-    margin: 40px auto;
-    display: block;
-    background: linear-gradient(45deg, var(--light-blue) 0%, #00aadd 100%);
-    color: black;
-    border: 2px solid #33ddff;
-    padding: 14px 28px;
-    border-radius: 30px;
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 221, 255, 0.3);
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  }
-  .random-button:hover {
-    background: linear-gradient(45deg, #00aadd 0%, var(--light-blue) 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(0, 221, 255, 0.5), 0 8px 20px rgba(0, 0, 0, 0.4);
+  .link a:hover{
+    color:var(--bright-red);
+    text-decoration:underline;
+    text-shadow:0 0 15px rgba(255,0,0,0.8);
   }
 
-  /* Backup random button styling */
-  .random-button.alt {
-    margin: 30px auto;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 13px;
-    border-color: #00ccff;
+  /* Random button with red theme */
+  .random-button{
+    margin:40px auto;
+    display:block;
+    background:linear-gradient(45deg, var(--red) 0%, #aa0000 100%);
+    color:#ffffff;
+    border:2px solid #ff0000;
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    box-shadow:0 0 15px rgba(255,0,0,0.3);
+    text-shadow:0 0 5px rgba(0,0,0,0.8);
   }
-  .random-button.alt:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(0, 204, 255, 0.4);
+  .random-button:hover{
+    background:linear-gradient(45deg, #ff0000 0%, var(--red) 100%);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(255,0,0,0.5), 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  /* Responsive */
+  @media(max-width:600px){
+    .grid{
+      grid-template-columns:1fr;
+    }
+    h1{font-size:28px;}
+    .category-title{font-size:24px;}
+    .link{padding:10px 15px;}
+    .link a{font-size:16px;}
   }
 </style>
 </head>
 <body>
+<a href="/" class="back-btn">← Back to Home Page</a>
+
 <div class="wrap">
   <header>
-    <a href="/" class="hub">news</a>
-    <div class="spoke-nav">
-      <a href="/history-philosophy-culture.html">History, Philosophy & Culture</a>
-      <a href="/arts-literature.html">Arts & Literature</a>
-      <a href="/science-nature-health.html">Science, Nature & Health</a>
-      <a href="/sports-leisure-ent.html">Sports, Leisure & Entertainment</a>
-      <a href="/take-a-pause.html">Take A Pause</a>
-      <a href="/conspiracy-corner.html">Conspiracy Corner</a>
-      <a href="/misc.html">MISC</a>
-      <a href="/opinion.html">Opinion</a>
-    </div>
+    <h1>THE DAYLUGE</h1>
+    <div class="category-title">News</div>
   </header>
 
-  <!-- Grid of news links loaded from news.html -->
-  <div id="grid" class="grid">
-    <!-- Links will be populated by script -->
+  <!-- News Links Grid -->
+  <div class="grid">
+    <div class="link">
+      <a href="https://www.reuters.com" target="_blank">
+        Latest Breaking News from Reuters
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://apnews.com" target="_blank">
+        Associated Press - Top Stories
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.bbc.com/news" target="_blank">
+        BBC World News Headlines
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.npr.org/sections/news/" target="_blank">
+        National Public Radio News
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.aljazeera.com" target="_blank">
+        Al Jazeera International News
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.axios.com" target="_blank">
+        Axios - Smart Brevity News
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.politico.com" target="_blank">
+        Politico - Politics & Policy
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.wsj.com" target="_blank">
+        Wall Street Journal Headlines
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.ft.com" target="_blank">
+        Financial Times Global News
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.economist.com" target="_blank">
+        The Economist Weekly Brief
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://news.ycombinator.com" target="_blank">
+        Hacker News - Tech & Startup News
+      </a>
+    </div>
+    <div class="link">
+      <a href="https://www.drudgereport.com" target="_blank">
+        The Drudge Report
+      </a>
+    </div>
   </div>
 
-  <!-- Random Button -->
+  <!-- Category Random Button -->
   <button class="random-button" onclick="goToRandomNews()">
     ⚛️ SURPRISE ME!
   </button>
-
-  <!-- Back to Home button -->
-  <a href="/" class="back-btn">← Back to Home Page</a>
 </div>
 
 <script>
-  const MAX_ACTIVE = 48;
-  let allLinks = [];
-
-  function escapeHTML(s) { 
-    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); 
-  }
-
-  // Load links from news.html instead of links.txt
-  async function loadLinks() {
-    try {
-      const response = await fetch('/news.html');
-      if (response.ok) {
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        const links = doc.querySelectorAll('a');
-        
-        allLinks = Array.from(links).map(link => {
-          const title = link.textContent.trim();
-          const url = link.getAttribute('href');
-          const color = link.getAttribute('data-color') || 'c-black'; // Assume data-color attribute for consistency
-          return { title, url, color, status: 'active' };
-        }).filter(link => link.title && link.url);
-        
-        console.log(`Loaded ${allLinks.length} links from news.html`);
-      } else {
-        throw new Error('Could not load news.html');
-      }
-    } catch (error) {
-      console.log('Error loading news.html, using fallback');
-      allLinks = [
-        {title:"Pablo Escobar Lost $72 Million a Month to Rats and Moisture Damage", url:"https://x.com/bizhustlez/status/1960013189258887243?s=42", color:"c-indigo", status:"active"}
-      ];
-    }
-    renderGrid();
-  }
-
-  // Backup function to load links from news.html
-  async function loadLinksBackup() {
-    try {
-      const response = await fetch('/news.html');
-      if (response.ok) {
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        const links = doc.querySelectorAll('a');
-        allLinks = Array.from(links).map(link => {
-          const title = link.textContent.trim();
-          const url = link.getAttribute('href');
-          const color = link.getAttribute('data-color') || 'c-black';
-          return { title, url, color, status: 'active' };
-        }).filter(link => link.title && link.url);
-        console.log(`Backup loaded ${allLinks.length} links from news.html`);
-      }
-    } catch (error) {
-      console.error('Backup load failed', error);
-    }
-    renderGrid();
-  }
-
-  function renderGrid() {
-    const gridEl = document.getElementById('grid');
-    const activeLinks = allLinks.filter(link => link.status === 'active').slice(0, MAX_ACTIVE);
-    
-    if (activeLinks.length === 0) {
-      gridEl.innerHTML = '<div class="link"><a class="c-black">No news links available. Check back later!</a></div>';
-    } else {
-      gridEl.innerHTML = activeLinks.map(link => `
-        <div class="link">
-          <a class="${link.color || 'c-black'}" href="${link.url}" target="_blank" rel="noopener">
-            ${escapeHTML(link.title)}
-          </a>
-        </div>
-      `).join('');
-    }
-  }
-
-  // Backup renderGrid function
-  function renderGridBackup() {
-    const gridEl = document.getElementById('grid');
-    const activeLinks = allLinks.filter(link => link.status === 'active').slice(0, MAX_ACTIVE);
-    if (activeLinks.length === 0) {
-      gridEl.innerHTML = '<div class="link"><a>No links available</a></div>';
-    } else {
-      gridEl.innerHTML = activeLinks.map(link => `<div class="link"><a href="${link.url}">${link.title}</a></div>`).join('');
-    }
-  }
-
-  // Random news article function
-  function goToRandomNews() {
-    const activeLinks = allLinks.filter(link => link.status === 'active');
-    if (activeLinks.length > 0) {
-      const randomLink = activeLinks[Math.floor(Math.random() * activeLinks.length)].url;
-      window.open(randomLink, '_blank');
-    } else {
-      alert("No news links available to surprise you with!");
-    }
-  }
-
-  // Backup random function
-  function goToRandomNewsBackup() {
-    const activeLinks = allLinks.filter(link => link.status === 'active');
-    if (activeLinks.length > 0) {
-      const randomIndex = Math.floor(Math.random() * activeLinks.length);
-      window.open(activeLinks[randomIndex].url, '_blank');
-    }
-  }
-
-  // Initialize page with both load functions for redundancy
-  loadLinks();
-  loadLinksBackup();
+// Random news article function
+function goToRandomNews() {
+  const newsLinks = [
+    "https://www.reuters.com",
+    "https://apnews.com",
+    "https://www.bbc.com/news",
+    "https://www.npr.org/sections/news/",
+    "https://www.aljazeera.com",
+    "https://www.axios.com",
+    "https://www.politico.com",
+    "https://www.wsj.com",
+    "https://www.ft.com",
+    "https://www.economist.com",
+    "https://news.ycombinator.com",
+    "https://www.drudgereport.com"
+  ];
+  
+  const randomLink = newsLinks[Math.floor(Math.random() * newsLinks.length)];
+  window.open(randomLink, '_blank');
+}
 </script>
 </body>
 </html>
