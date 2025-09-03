@@ -33,7 +33,7 @@
     --light-cyan-glow: #33ddff;
   }
 
-  *{box-sizing:borderbox;margin:0;padding:0}
+  *{box-sizing:border-box;margin:0;padding:0}
   html, body {height:100%; overflow-x:hidden;}
 
   body{
@@ -169,7 +169,7 @@
     font-size:42px; 
     margin-bottom:8px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
-    animation:title-pulse 8s ease-in-out infinite; /* Increased to 8s */
+    animation:title-pulse 8s ease-in-out infinite;
   }
 
   @keyframes title-pulse {
@@ -721,7 +721,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Page loaded, initializing password overlay...');
-  const correctPassword = 'dayluge2025';
+  const correctPassword = '5813'; // Changed from 'dayluge2025'
   const overlay = document.getElementById('password-overlay');
   const passwordInput = document.getElementById('password-input');
   const submitButton = document.getElementById('password-submit');
