@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +24,7 @@
     --brown:#8B4513;
     --dark-green:#006400;
     --bright-blue:#00b7eb; /* For title animation */
+
     --ink:#111; 
     --rule:#bfbfbf;
     --maxw:1400px;
@@ -49,7 +49,166 @@
     overflow:hidden;
   }
 
-  /* ... (Password overlay and other existing styles remain unchanged until .wheel-container) ... */
+  #password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a1428;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  #password-overlay.hidden {
+    display: none;
+    pointer-events: none; /* Prevent click interference */
+  }
+
+  #password-overlay h2 {
+    color: var(--bright-purple-glow);
+    font-size: 24px;
+    text-shadow: 0 0 10px var(--bright-purple-glow);
+    margin-bottom: 20px;
+  }
+
+  #password-input {
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    background: #1a2a44;
+    color: var(--light-cyan-glow);
+    border: 2px solid var(--light-cyan-glow);
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+    text-align: center;
+  }
+
+  #password-input:focus {
+    box-shadow: 0 0 10px var(--light-cyan-glow);
+  }
+
+  #password-submit {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, var(--bright-purple-glow), var(--light-cyan-glow));
+    color: #ffffff;
+    border: 2px solid var(--light-cyan-glow);
+    border-radius: 5px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #password-submit:hover, #password-submit:focus {
+    background: linear-gradient(45deg, var(--light-cyan-glow), var(--bright-purple-glow));
+    box-shadow: 0 0 15px var(--light-cyan-glow);
+  }
+
+  #password-error {
+    color: var(--pink);
+    font-size: 14px;
+    margin-top: 10px;
+    text-shadow: 0 0 5px var(--pink);
+    display: none;
+  }
+
+  /* Energy field effects */
+  body::before {
+    content: '';
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:
+      radial-gradient(circle at center, rgba(0,150,255,0.1) 0%, transparent 70%);
+    animation:energy-pulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  body::after {
+    content: '';
+    position:absolute;
+    top:-2px; left:-2px; right:-2px; bottom:-2px;
+    background:
+      linear-gradient(0deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(90deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
+    animation:edge-glow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes energy-pulse {
+    0%, 100% { opacity:0.5; }
+    50% { opacity:1; }
+  }
+
+  @keyframes edge-glow {
+    0%, 100% { opacity:0.4; }
+    50% { opacity:0.8; }
+  }
+
+  /* Header */
+  .header{
+    position:absolute;
+    top:50px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    z-index:10;
+  }
+  .header h1{
+    text-transform:uppercase; 
+    letter-spacing:.5px; 
+    font-size:42px; 
+    margin-bottom:8px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    animation:title-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes title-pulse {
+    0% { 
+      color: var(--bright-purple-glow); /* #cc88ff */
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    12.5% { 
+      color: #8080ff; /* Intermediate: purple to cyan */
+      text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    25% { 
+      color: var(--light-cyan-glow); /* #33ddff */
+      text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    37.5% { 
+      color: #6688cc; /* Intermediate: cyan to pink */
+      text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% { 
+      color: var(--pink); /* #ff1493 */
+      text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    62.5% { 
+      color: #cc4499; /* Intermediate: pink to bright blue */
+      text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    75% { 
+      color: var(--bright-blue); /* #00b7eb */
+      text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    87.5% { 
+      color: #6688cc; /* Intermediate: bright blue to purple */
+      text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    100% { 
+      color: var(--bright-purple-glow); /* #cc88ff */
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+  }
 
   /* Main atom container */
   .wheel-container{
@@ -169,104 +328,140 @@
     animation-play-state:paused;
   }
 
-  /* Swirl animation for clicked circle */
-  .swirl {
-    animation: swirl 1s ease-in-out forwards;
-  }
-
-  @keyframes swirl {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg) translateX(140px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg) translateX(140px) rotate(-360deg);
-    }
-  }
-
-  /* Nucleus swirl animation (shorter radius since it's at the center) */
-  .wheel-center.swirl {
-    animation: swirl-center 1s ease-in-out forwards;
-  }
-
-  @keyframes swirl-center {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-
-  /* Position spokes using transform for animation compatibility */
+  /* Position 8 electrons around the nucleus */
   .spoke-1{ /* Opinion - 0° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(0deg) translateX(140px) rotate(0deg);
+    left:390px;
+    top:205px;
     background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-2{ /* History & Culture - 45° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(45deg) translateX(140px) rotate(-45deg);
+    left:336px;
+    top:336px;
     background:radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-3{ /* Arts & Literature - 90° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(90deg) translateX(140px) rotate(-90deg);
+    left:205px;
+    bottom:20px;
     background:radial-gradient(circle, var(--brown) 0%, #654321 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-4{ /* Science-Nature-Health - 135° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(135deg) translateX(140px) rotate(-135deg);
+    left:74px;
+    bottom:64px;
     background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-5{ /* Sports-Leisure-Ent - 180° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(180deg) translateX(140px) rotate(-180deg);
+    left:20px;
+    top:205px;
     background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-6{ /* Take A Pause - 225° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(225deg) translateX(140px) rotate(-225deg);
+    left:74px;
+    top:74px;
     background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-7{ /* Conspiracy Corner - 270° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(270deg) translateX(140px) rotate(-270deg);
+    left:205px;
+    top:20px;
     background:radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-8{ /* MISC - 315° */
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(315deg) translateX(140px) rotate(-315deg);
+    left:336px;
+    top:74px;
     background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
 
-  /* ... (Energy beams and other styles remain unchanged) ... */
+  /* Energy beams (connecting lines) */
+  .wheel-line{
+    position:absolute;
+    background:linear-gradient(90deg, #00ddff88, #ffffff44, #00ddff88);
+    height:3px;
+    transform-origin:left center;
+    z-index:1;
+    box-shadow:0 0 8px #00ddff;
+    animation:energy-pulse-line 2s ease-in-out infinite;
+  }
+
+  @keyframes energy-pulse-line {
+    0%, 100% { opacity:0.6; box-shadow:0 0 8px #00ddff; }
+    50% { opacity:1; box-shadow:0 0 15px #00ddff, 0 0 25px #00ddff88; }
+  }
+
+  /* Lines positioning for 8 spokes */
+  .line-1{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(0deg); }
+  .line-2{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(45deg); }
+  .line-3{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(90deg); }
+  .line-4{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(135deg); }
+  .line-5{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(180deg); }
+  .line-6{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(225deg); }
+  .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
+  .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
+
+  /* Random button with atomic styling */
+  .random-button{
+    margin-top:40px;
+    background:linear-gradient(45deg, var(--pink) 0%, #ff0080 100%);
+    color:white;
+    border:2px solid #ff1493;
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    box-shadow:0 0 20px #ff149388, 0 4px 12px rgba(0,0,0,0.3);
+    text-shadow:0 0 5px #ffffff;
+  }
+  .random-button:hover{
+    background:linear-gradient(45deg, #ff0080 0%, var(--pink) 100%);
+    transform:translateY(-3px);
+    box-shadow:0 0 35px #ff1493bb, 0 8px 20px rgba(0,0,0,0.4);
+    animation:button-pulse 0.5s ease-in-out;
+  }
+
+  @keyframes button-pulse {
+    0%, 100% { transform:translateY(-3px) scale(1); }
+    50% { transform:translateY(-3px) scale(1.05); }
+  }
+
+  /* Archive link with glow */
+  .archive-bottom{
+    position:fixed;
+    bottom:15px;
+    left:15px;
+    font-size:11px;
+    color:#aaccff;
+    text-decoration:underline;
+    cursor:pointer;
+    opacity:0.7;
+    text-shadow:0 0 5px #00ddff;
+  }
+  .archive-bottom:hover{
+    opacity:1;
+    color:#ffffff;
+    text-shadow:0 0 10px #00ddff;
+  }
 
   /* Responsive adjustments for mobile optimization */
   @media(max-width:600px){
@@ -285,21 +480,59 @@
       font-size:10px;
       border-width:2px;
     }
-    .spoke-1{ transform: translate(-50%, -50%) rotate(0deg) translateX(105px) rotate(0deg); }
-    .spoke-2{ transform: translate(-50%, -50%) rotate(45deg) translateX(105px) rotate(-45deg); }
-    .spoke-3{ transform: translate(-50%, -50%) rotate(90deg) translateX(105px) rotate(-90deg); }
-    .spoke-4{ transform: translate(-50%, -50%) rotate(135deg) translateX(105px) rotate(-135deg); }
-    .spoke-5{ transform: translate(-50%, -50%) rotate(180deg) translateX(105px) rotate(-180deg); }
-    .spoke-6{ transform: translate(-50%, -50%) rotate(225deg) translateX(105px) rotate(-225deg); }
-    .spoke-7{ transform: translate(-50%, -50%) rotate(270deg) translateX(105px) rotate(-270deg); }
-    .spoke-8{ transform: translate(-50%, -50%) rotate(315deg) translateX(105px) rotate(-315deg); }
     .header h1{
       font-size:32px;
       margin-bottom:20px;
     }
+    @keyframes title-pulse {
+      0% { 
+        color: var(--bright-purple-glow); /* #cc88ff */
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% { 
+        color: #8080ff; /* Intermediate: purple to cyan */
+        text-shadow: 0 0 11px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% { 
+        color: var(--light-cyan-glow); /* #33ddff */
+        text-shadow: 0 0 12px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% { 
+        color: #6688cc; /* Intermediate: cyan to pink */
+        text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% { 
+        color: var(--pink); /* #ff1493 */
+        text-shadow: 0 0 14px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% { 
+        color: #cc4499; /* Intermediate: pink to bright blue */
+        text-shadow: 0 0 13px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% { 
+        color: var(--bright-blue); /* #00b7eb */
+        text-shadow: 0 0 12px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% { 
+        color: #6688cc; /* Intermediate: bright blue to purple */
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% { 
+        color: var(--bright-purple-glow); /* #cc88ff */
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+    }
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:105px;
     }
+    .spoke-1{ left:295px; top:150px; }
+    .spoke-2{ left:255px; top:255px; }
+    .spoke-3{ left:150px; bottom:15px; }
+    .spoke-4{ left:45px; bottom:50px; }
+    .spoke-5{ left:15px; top:150px; }
+    .spoke-6{ left:45px; top:50px; }
+    .spoke-7{ left:150px; top:15px; }
+    .spoke-8{ left:255px; top:50px; }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
@@ -308,6 +541,8 @@
       padding:12px 20px;
       font-size:13px;
     }
+    
+    /* Simplify animations on mobile for better performance */
     .spoke{
       animation:none;
     }
@@ -316,18 +551,6 @@
     }
     body::before, body::after{
       animation-duration:10s;
-    }
-    /* Adjust swirl animation for mobile */
-    .swirl {
-      animation: swirl-mobile 1s ease-in-out forwards;
-    }
-    @keyframes swirl-mobile {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(105px) rotate(0deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(105px) rotate(-360deg);
-      }
     }
   }
 
@@ -347,61 +570,200 @@
       height:65px;
       font-size:9px;
     }
-    .spoke-1{ transform: translate(-50%, -50%) rotate(0deg) translateX(85px) rotate(0deg); }
-    .spoke-2{ transform: translate(-50%, -50%) rotate(45deg) translateX(85px) rotate(-45deg); }
-    .spoke-3{ transform: translate(-50%, -50%) rotate(90deg) translateX(85px) rotate(-90deg); }
-    .spoke-4{ transform: translate(-50%, -50%) rotate(135deg) translateX(85px) rotate(-135deg); }
-    .spoke-5{ transform: translate(-50%, -50%) rotate(180deg) translateX(85px) rotate(-180deg); }
-    .spoke-6{ transform: translate(-50%, -50%) rotate(225deg) translateX(85px) rotate(-225deg); }
-    .spoke-7{ transform: translate(-50%, -50%) rotate(270deg) translateX(85px) rotate(-270deg); }
-    .spoke-8{ transform: translate(-50%, -50%) rotate(315deg) translateX(85px) rotate(-315deg); }
     .header h1{
       font-size:28px;
+    }
+    @keyframes title-pulse {
+      0% { 
+        color: var(--bright-purple-glow); /* #cc88ff */
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% { 
+        color: #8080ff; /* Intermediate: purple to cyan */
+        text-shadow: 0 0 9px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% { 
+        color: var(--light-cyan-glow); /* #33ddff */
+        text-shadow: 0 0 10px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% { 
+        color: #6688cc; /* Intermediate: cyan to pink */
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% { 
+        color: var(--pink); /* #ff1493 */
+        text-shadow: 0 0 12px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% { 
+        color: #cc4499; /* Intermediate: pink to bright blue */
+        text-shadow: 0 0 11px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% { 
+        color: var(--bright-blue); /* #00b7eb */
+        text-shadow: 0 0 10px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% { 
+        color: #6688cc; /* Intermediate: bright blue to purple */
+        text-shadow: 0 0 9px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% { 
+        color: var(--bright-purple-glow); /* #cc88ff */
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
     }
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:85px;
     }
+    .spoke-1{ left:245px; top:127.5px; }
+    .spoke-2{ left:215px; top:215px; }
+    .spoke-3{ left:127.5px; bottom:12.5px; }
+    .spoke-4{ left:40px; bottom:40px; }
+    .spoke-5{ left:12.5px; top:127.5px; }
+    .spoke-6{ left:40px; top:40px; }
+    .spoke-7{ left:127.5px; top:12.5px; }
+    .spoke-8{ left:215px; top:40px; }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
-    /* Adjust swirl animation for extra small screens */
-    .swirl {
-      animation: swirl-mobile 1s ease-in-out forwards;
-    }
-    @keyframes swirl-mobile {
-      0% {
-        transform: translate(-50%, -50%) rotate(0deg) translateX(85px) rotate(0deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) rotate(360deg) translateX(85px) rotate(-360deg);
-      }
-    }
   }
 
-  /* ... (Remaining styles like .random-button, .archive-bottom, etc., remain unchanged) ... */
+  /* Loading animation */
+  .wheel-container{
+    animation:atomize 2s ease-in;
+  }
+  @keyframes atomize{
+    from{opacity:0; transform:scale(0.5) rotate(-180deg);}
+    to{opacity:1; transform:scale(1) rotate(0deg);}
+  }
+
+  /* Hover effect for the atom */
+  .wheel-container:hover .wheel-line{
+    background:linear-gradient(90deg, #00ddffbb, #ffffffff, #00ddffbb);
+    box-shadow:0 0 20px #00ddff;
+    transition:all 0.3s ease;
+  }
+  .wheel-container:hover .orbital-ring{
+    border-color:#00ddffaa;
+    box-shadow:0 0 15px #00ddff55;
+  }
+
+  /* Particle canvas */
+  #particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Below content (z-index: 5+) */
+    pointer-events: none; /* Allow clicks to pass through */
+  }
 </style>
 </head>
 <body>
-  <!-- ... (HTML structure remains unchanged) ... -->
+  <!-- Password Overlay -->
+  <div id="password-overlay">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" placeholder="Password">
+    <button id="password-submit">Submit</button>
+    <p id="password-error">Incorrect password, please try again.</p>
+  </div>
 
-  <!-- Nucleus -->
-  <div class="wheel-center" onclick="triggerSwirl(this, goToNewsHub)">TRENDING<br>NEWS</div>
+  <!-- Header -->
+  <div class="header">
+    <h1>THE DAYLUGE</h1>
+  </div>
 
-  <!-- Electrons (category spokes) -->
-  <div class="spoke spoke-1" onclick="triggerSwirl(this, () => goToCategory('opinion'))">Opinion</div>
-  <div class="spoke spoke-2" onclick="triggerSwirl(this, () => goToCategory('history-philosophy-culture'))">History,<br>Philosophy<br>& Culture</div>
-  <div class="spoke spoke-3" onclick="triggerSwirl(this, () => goToCategory('arts-literature'))">Arts<br>&<br>Literature</div>
-  <div class="spoke spoke-4" onclick="triggerSwirl(this, () => goToCategory('science-nature-health'))">Science,<br>Nature<br>& Health</div>
-  <div class="spoke spoke-5" onclick="triggerSwirl(this, () => goToCategory('sports-leisure-ent'))">Sports,<br>Leisure<br>& Ent</div>
-  <div class="spoke spoke-6" onclick="triggerSwirl(this, () => goToCategory('take-a-pause'))">Take<br>A<br>Pause</div>
-  <div class="spoke spoke-7" onclick="triggerSwirl(this, () => goToCategory('conspiracy-corner'))">Conspiracy<br>Corner</div>
-  <div class="spoke spoke-8" onclick="triggerSwirl(this, () => goToCategory('misc'))">MISC</div>
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>  <!-- Main Atom Structure -->
+  <div class="wheel-container">
+    <!-- Orbital rings -->
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
+    <div class="orbital-ring orbital-ring-3"></div>
 
-  <!-- ... (Rest of HTML remains unchanged) ... -->
+<!-- Energy beams -->
+<div class="wheel-line line-1"></div>
+<div class="wheel-line line-2"></div>
+<div class="wheel-line line-3"></div>
+<div class="wheel-line line-4"></div>
+<div class="wheel-line line-5"></div>
+<div class="wheel-line line-6"></div>
+<div class="wheel-line line-7"></div>
+<div class="wheel-line line-8"></div>
+
+<!-- Nucleus -->
+<div class="wheel-center" onclick="goToNewsHub()">
+  TRENDING
+NEWS
+</div>
+
+<!-- Electrons (category spokes) -->
+<div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
+<div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,
+Philosophy
+& Culture</div>
+<div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts
+&
+Literature</div>
+<div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,
+Nature
+& Health</div>
+<div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,
+Leisure
+& Ent</div>
+<div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take
+A
+Pause</div>
+<div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
+Corner</div>
+<div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>  </div>
+
+  <!-- Quantum random button -->
+  <button class="random-button" onclick="goToRandomArticle()">
+     SURPRISE ME!
+  </button>
+
+  <!-- Archive link -->
+  <div class="archive-bottom" onclick="openArchive()">archive</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // ... (Password overlay and particle effect code remains unchanged) ...
+  console.log('Page loaded, initializing password overlay...');
+  const correctPassword = '5813'; // Changed from 'dayluge2025'
+  const overlay = document.getElementById('password-overlay');
+  const passwordInput = document.getElementById('password-input');
+  const submitButton = document.getElementById('password-submit');
+  const errorMessage = document.getElementById('password-error');
+
+  // Hide content except overlay
+  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+    el.style.visibility = 'hidden';
+  });
+
+  function checkPassword() {
+    console.log('Checking password:', passwordInput.value);
+    if (passwordInput.value === correctPassword) {
+      console.log('Password correct, hiding overlay');
+      overlay.classList.add('hidden');
+      document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+        el.style.visibility = 'visible';
+      });
+    } else {
+      console.log('Incorrect password');
+      errorMessage.style.display = 'block';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  submitButton.addEventListener('click', checkPassword);
+  passwordInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log('Enter key pressed, checking password');
+      checkPassword();
+    }
+  });
 
   // Particle effect
   const canvas = document.getElementById('particle-canvas');
@@ -416,10 +778,10 @@ document.addEventListener('DOMContentLoaded', function() {
     constructor() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 2 + 1;
-      this.speedX = Math.random() * 1.5 - 0.75;
+      this.size = Math.random() * 2 + 1; // Smaller for subtlety
+      this.speedX = Math.random() * 1.5 - 0.75; // Slower movement
       this.speedY = Math.random() * 1.5 - 0.75;
-      this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff'];
+      this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff']; // Scientific palette
       this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
     update() {
@@ -433,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowBlur = 8;
+      ctx.shadowBlur = 8; // Subtler glow
       ctx.shadowColor = this.color;
     }
   }
@@ -459,19 +821,9 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    init();
+    init(); // Reinitialize particles on resize
   });
 });
-
-// Swirl animation trigger
-function triggerSwirl(element, callback) {
-  console.log('Triggering swirl animation for:', element);
-  element.classList.add('swirl');
-  element.addEventListener('animationend', () => {
-    element.classList.remove('swirl');
-    callback();
-  }, { once: true });
-}
 
 // Navigation functions
 function goToNewsHub() {
@@ -498,7 +850,45 @@ function goToCategory(category) {
   }
 }
 
-// ... (goToRandomArticle and openArchive functions remain unchanged) ...
+// Random article function
+async function goToRandomArticle() {
+  console.log('Navigating to Random Article');
+  try {
+    const response = await fetch('/links.txt');
+    if (response.ok) {
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim());
+      
+      const links = lines.map(line => {
+        const parts = line.split('|');
+        if (parts.length >= 2) {
+          return {
+            title: parts[0].trim(),
+            url: parts[1].trim()
+          };
+        }
+        return null;
+      }).filter(link => link !== null);
+      
+      if (links.length > 0) {
+        const randomLink = links[Math.floor(Math.random() * links.length)];
+        console.log('Opening random link:', randomLink.url);
+        window.open(randomLink.url, '_blank');
+      } else {
+        console.log('No links available for random selection');
+      }
+    } else {
+      console.log('Failed to fetch links.txt');
+    }
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+function openArchive() {
+  console.log('Navigating to Archive');
+  alert('Archive feature - you can implement this however you\'d like!');
+}
 
 // Add atomic interactions
 const spokes = document.querySelectorAll('.spoke');
@@ -526,3 +916,4 @@ center.addEventListener('mouseleave', function() {
 </script>
 </body>
 </html>
+
