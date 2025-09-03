@@ -29,7 +29,7 @@
     --rule:#bfbfbf;
     --maxw:1400px;
     --bright-purple-glow: #cc88ff;
-    --light-cyan-glow: #88ccff;
+    --light-cyan-glow: #33ddff;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -156,7 +156,7 @@
   /* Header */
   .header{
     position:absolute;
-    top:30px;
+    top:50px;
     left:50%;
     transform:translateX(-50%);
     text-align:center;
@@ -218,8 +218,8 @@
     top:50%;
     left:50%;
     transform:translate(-50%, -50%);
-    width:120px;
-    height:120px;
+    width:150px;
+    height:150px;
     background:radial-gradient(circle, var(--red) 0%, #aa0000 100%);
     color:yellow;
     border:2px solid #ffdd00;
@@ -232,10 +232,11 @@
     z-index:15;
     text-align:center;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
-    font-size:24px;
+    font-size:20px;
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:0.5px;
+    line-height:1.2;
     box-shadow:0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.15);
     animation:pulse 3s ease-in-out infinite;
   }
@@ -303,7 +304,7 @@
 
   /* Position 8 electrons around the nucleus */
   .spoke-1{ /* Opinion - top */
-    top:20px;
+    top:40px;
     left:50%;
     transform:translateX(-50%);
     background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
@@ -447,9 +448,9 @@
       height:380px;
     }
     .wheel-center{
-      width:110px;
-      height:110px;
-      font-size:18px;
+      width:120px;
+      height:120px;
+      font-size:16px;
     }
     .spoke{
       width:80px;
@@ -492,9 +493,9 @@
       height:320px;
     }
     .wheel-center{
-      width:90px;
-      height:90px;
-      font-size:16px;
+      width:100px;
+      height:100px;
+      font-size:14px;
     }
     .spoke{
       width:65px;
@@ -577,7 +578,7 @@
 
     <!-- Nucleus -->
     <div class="wheel-center" onclick="goToNewsHub()">
-      NEWS
+      TRENDING<br>NEWS
     </div>
 
     <!-- Electrons (category spokes) -->
