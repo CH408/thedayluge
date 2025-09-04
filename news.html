@@ -9,10 +9,12 @@
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --bright-red: #ff0000;
+      --news-red: #ff3333;
       --orange: #ff8800;
       --green: #00dd55;
       --light-cyan-glow: #33ddff;
       --pink: #ff1493;
+      --bright-purple-glow: #cc88ff;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -185,7 +187,7 @@
     </div>
   </div>
   <script>
-    // Particle effect (red-hued)
+    // Particle effect (blues, bright reds, purples)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -196,10 +198,10 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
+        this.size = Math.random() * 1 + 0.5; // Smaller: 0.5–1.5px
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#ff0000', '#ff3333', '#ffffff'][Math.floor(Math.random() * 3)];
+        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
       }
       update() {
         this.x += this.speedX;
