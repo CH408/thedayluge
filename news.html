@@ -105,6 +105,11 @@
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
+    .headline a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+    }
     .back-btn {
       position: fixed;
       bottom: 20px; right: 20px;
@@ -141,56 +146,77 @@
     </header>
     <div class="block">
       <div class="block-title global">Global News</div>
-      <ul class="headlines global">
-        <li class="headline">Headline 1</li>
-        <li class="headline">Headline 2</li>
-        <li class="headline">Headline 3</li>
-        <li class="headline">Headline 4</li>
-        <li class="headline">Headline 5</li>
-      </ul>
+      <ul class="headlines global" id="global-news"></ul>
     </div>
     <div class="block">
       <div class="block-title us">US News</div>
-      <ul class="headlines us">
-        <li class="headline">Headline 1</li>
-        <li class="headline">Headline 2</li>
-        <li class="headline">Headline 3</li>
-        <li class="headline">Headline 4</li>
-        <li class="headline">Headline 5</li>
-      </ul>
+      <ul class="headlines us" id="us-news"></ul>
     </div>
     <div class="block">
       <div class="block-title economy">Economy & Markets News</div>
-      <ul class="headlines economy">
-        <li class="headline">Headline 1</li>
-        <li class="headline">Headline 2</li>
-        <li class="headline">Headline 3</li>
-        <li class="headline">Headline 4</li>
-        <li class="headline">Headline 5</li>
-      </ul>
+      <ul class="headlines economy" id="economy-news"></ul>
     </div>
     <div class="block">
       <div class="block-title sports">Sports News</div>
-      <ul class="headlines sports">
-        <li class="headline">Headline 1</li>
-        <li class="headline">Headline 2</li>
-        <li class="headline">Headline 3</li>
-        <li class="headline">Headline 4</li>
-        <li class="headline">Headline 5</li>
-      </ul>
+      <ul class="headlines sports" id="sports-news"></ul>
     </div>
     <div class="block">
       <div class="block-title popculture">Pop Culture & Entertainment News</div>
-      <ul class="headlines popculture">
-        <li class="headline">Headline 1</li>
-        <li class="headline">Headline 2</li>
-        <li class="headline">Headline 3</li>
-        <li class="headline">Headline 4</li>
-        <li class="headline">Headline 5</li>
-      </ul>
+      <ul class="headlines popculture" id="popculture-news"></ul>
     </div>
   </div>
   <script>
+    // Load news links from .txt files
+    const txtFiles = [
+      { id: 'global-news', file: 'global-news.txt' },
+      { id: 'us-news', file: 'us-news.txt' },
+      { id: 'economy-news', file: 'economy-news.txt' },
+      { id: 'sports-news', file: 'sports-news.txt' },
+      { id: 'popculture-news', file: 'popculture-news.txt' }
+    ];
+
+    async function loadNewsLinks() {
+      const archiveLinks = [];
+      for (const { id, file } of txtFiles) {
+        try {
+          const response = await fetch(file);
+          if (!response.ok) {
+            console.error(`Failed to load ${file}: ${response.status}`);
+            continue;
+          }
+          const text = await response.text();
+          const lines = text.split('\n').filter(line => line.trim());
+          const links = lines.map(line => {
+            const [title, url] = line.split('|').map(s => s.trim());
+            return { title, url };
+          }).filter(link => link.title && link.url);
+
+          // Display links 1–5 (indices 0–4)
+          const displayLinks = links.slice(0, 5);
+          const grid = document.getElementById(id);
+          if (grid) {
+            grid.innerHTML = displayLinks.map(link => `
+              <li class="headline">
+                <a href="${link.url}" target="_blank">${link.title}</a>
+              </li>
+            `).join('');
+          }
+
+          // Flag links 6+ (index 5+) for archiving
+          const toArchive = links.slice(5);
+          if (toArchive.length > 0) {
+            archiveLinks.push(...toArchive.map(link => `${link.title}|${link.url}`));
+          }
+        } catch (error) {
+          console.error(`Error loading ${file}:`, error);
+        }
+      }
+      // Log links to archive (server-side needed for news-archive.txt)
+      if (archiveLinks.length > 0) {
+        console.log('Links to archive in news-archive.txt:', archiveLinks);
+      }
+    }
+
     // Particle effect (blues, bright reds, purples, larger size)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
@@ -202,7 +228,7 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1; // Reverted to 1–3px
+        this.size = Math.random() * 2 + 1; // 1–3px
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
         this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
@@ -243,6 +269,9 @@
       canvas.height = window.innerHeight;
       init();
     });
+
+    // Load links on page load
+    document.addEventListener('DOMContentLoaded', loadNewsLinks);
   </script>
 </body>
 </html>
