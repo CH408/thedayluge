@@ -17,6 +17,11 @@
       --bright-purple-glow: #cc88ff;
       --ink: #111;
       --maxw: 1200px;
+      --headline-red: #ff3333;
+      --headline-orange: #ffaa33;
+      --headline-green: #33ff66;
+      --headline-cyan: #66ccff;
+      --headline-pink: #ff66b2;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -92,11 +97,11 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .headlines.global .headline { color: var(--bright-red); }
-    .headlines.us .headline { color: var(--orange); }
-    .headlines.economy .headline { color: var(--green); }
-    .headlines.sports .headline { color: var(--light-cyan-glow); }
-    .headlines.popculture .headline { color: var(--pink); }
+    .headlines.global .headline { color: var(--headline-red); }
+    .headlines.us .headline { color: var(--headline-orange); }
+    .headlines.economy .headline { color: var(--headline-green); }
+    .headlines.sports .headline { color: var(--headline-cyan); }
+    .headlines.popculture .headline { color: var(--headline-pink); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -268,7 +273,7 @@
       }
     });
 
-    // Particle effect (blues, bright reds, purples, larger size)
+    // Particle effect with comet tails
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -283,6 +288,7 @@
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
         this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25; // 25% chance for comet tail
       }
       update() {
         this.x += this.speedX;
@@ -297,6 +303,22 @@
         ctx.fill();
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
+
+        // Draw comet tail for some particles
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33'); // Semi-transparent
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
       }
     }
     function init() {
