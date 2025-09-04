@@ -52,19 +52,7 @@
       z-index: 1;
       pointer-events: none;
     }
-    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; }
-    header { text-align: center; margin-bottom: 20px; }
-    h1 {
-      text-transform: uppercase;
-      font-size: 28px;
-      color: #ffffff;
-      text-shadow: 0 0 15px var(--light-cyan-glow);
-      animation: title-pulse 3s ease-in-out infinite;
-    }
-    @keyframes title-pulse {
-      0%, 100% { text-shadow: 0 0 15px var(--light-cyan-glow); }
-      50% { text-shadow: 0 0 30px var(--light-cyan-glow), 0 0 45px #66ddff; }
-    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
     .block {
       margin-bottom: 20px;
     }
@@ -107,6 +95,8 @@
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
     .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
     .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -124,25 +114,6 @@
     .headline a.pulse {
       transform: scale(1.05);
       text-shadow: 0 0 15px var(--bright-red);
-    }
-    .random-button {
-      margin: 20px auto;
-      display: block;
-      background: linear-gradient(45deg, #ffff00, #ffcc00);
-      color: var(--bright-red);
-      border: 2px solid #ffff00;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,255,0,0.3);
-      transition: all 0.3s ease;
-    }
-    .random-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255,255,0,0.5);
     }
     .back-btn {
       position: fixed;
@@ -165,10 +136,8 @@
       transform: scale(1.05);
     }
     @media (max-width: 600px) {
-      h1 { font-size: 24px; }
       .block-title { font-size: 20px; }
       .headline { font-size: 14px; }
-      .random-button { font-size: 12px; padding: 10px 20px; }
     }
   </style>
 </head>
@@ -176,9 +145,6 @@
   <a href="/" class="back-btn">← Back to Home Page</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <header>
-      <h1>THE DAYLUGE</h1>
-    </header>
     <div class="block">
       <div class="block-title global">Global News</div>
       <ul class="headlines global" id="global-news"></ul>
@@ -199,7 +165,6 @@
       <div class="block-title popculture">Pop Culture & Entertainment News</div>
       <ul class="headlines popculture" id="popculture-news"></ul>
     </div>
-    <button class="random-button" onclick="goToRandomNews()">⚛️ SURPRISE ME!</button>
   </div>
   <script>
     // Load news links from .txt files
@@ -227,8 +192,8 @@
             return { title, url };
           }).filter(link => link.title && link.url);
 
-          // Display links 1–5 (indices 0–4)
-          const displayLinks = links.slice(0, 5);
+          // Display links 1–7 (indices 0–6)
+          const displayLinks = links.slice(0, 7);
           const grid = document.getElementById(id);
           if (grid) {
             grid.innerHTML = displayLinks.map(link => `
@@ -238,8 +203,8 @@
             `).join('');
           }
 
-          // Flag links 6+ (index 5+) for archiving
-          const toArchive = links.slice(5);
+          // Flag links 8+ (index 7+) for archiving
+          const toArchive = links.slice(7);
           if (toArchive.length > 0) {
             archiveLinks.push(...toArchive.map(link => `${link.title}|${link.url}`));
           }
@@ -250,15 +215,6 @@
       // Log links to archive (server-side needed for news-archive.txt)
       if (archiveLinks.length > 0) {
         console.log('Links to archive in news-archive.txt:', archiveLinks);
-      }
-    }
-
-    function goToRandomNews() {
-      const allLinks = document.querySelectorAll('.headline a');
-      const urls = Array.from(allLinks).map(link => link.href);
-      if (urls.length > 0) {
-        const randomLink = urls[Math.floor(Math.random() * urls.length)];
-        window.open(randomLink, '_blank');
       }
     }
 
