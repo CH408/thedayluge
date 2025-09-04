@@ -116,6 +116,29 @@
       text-decoration: underline;
       text-shadow: 0 0 10px var(--bright-red);
     }
+    .headline a.pulse {
+      transform: scale(1.05);
+      text-shadow: 0 0 15px var(--bright-red);
+    }
+    .random-button {
+      margin: 20px auto;
+      display: block;
+      background: linear-gradient(45deg, var(--bright-red), var(--news-red));
+      color: #ffffff;
+      border: 2px solid var(--bright-red);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+    .random-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,0,0,0.5);
+    }
     .back-btn {
       position: fixed;
       bottom: 20px; right: 20px;
@@ -140,6 +163,7 @@
       h1 { font-size: 24px; }
       .block-title { font-size: 20px; }
       .headline { font-size: 14px; }
+      .random-button { font-size: 12px; padding: 10px 20px; }
     }
   </style>
 </head>
@@ -170,6 +194,7 @@
       <div class="block-title popculture">Pop Culture & Entertainment News</div>
       <ul class="headlines popculture" id="popculture-news"></ul>
     </div>
+    <button class="random-button" onclick="goToRandomNews()">⚛️ SURPRISE ME!</button>
   </div>
   <script>
     // Load news links from .txt files
@@ -222,6 +247,26 @@
         console.log('Links to archive in news-archive.txt:', archiveLinks);
       }
     }
+
+    function goToRandomNews() {
+      const allLinks = document.querySelectorAll('.headline a');
+      const urls = Array.from(allLinks).map(link => link.href);
+      if (urls.length > 0) {
+        const randomLink = urls[Math.floor(Math.random() * urls.length)];
+        window.open(randomLink, '_blank');
+      }
+    }
+
+    // Click effect for headlines
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('.headline a');
+      if (link) {
+        link.classList.add('pulse');
+        setTimeout(() => {
+          link.classList.remove('pulse');
+        }, 300);
+      }
+    });
 
     // Particle effect (blues, bright reds, purples, larger size)
     const canvas = document.getElementById('particle-canvas');
