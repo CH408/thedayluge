@@ -87,12 +87,16 @@
     .headlines { list-style: none; }
     .headline {
       font-size: 16px;
-      color: #ffffff;
       margin-bottom: 5px;
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
+    .headlines.global .headline { color: var(--bright-red); }
+    .headlines.us .headline { color: var(--orange); }
+    .headlines.economy .headline { color: var(--green); }
+    .headlines.sports .headline { color: var(--light-cyan-glow); }
+    .headlines.popculture .headline { color: var(--pink); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -137,7 +141,7 @@
     </header>
     <div class="block">
       <div class="block-title global">Global News</div>
-      <ul class="headlines">
+      <ul class="headlines global">
         <li class="headline">Headline 1</li>
         <li class="headline">Headline 2</li>
         <li class="headline">Headline 3</li>
@@ -147,7 +151,7 @@
     </div>
     <div class="block">
       <div class="block-title us">US News</div>
-      <ul class="headlines">
+      <ul class="headlines us">
         <li class="headline">Headline 1</li>
         <li class="headline">Headline 2</li>
         <li class="headline">Headline 3</li>
@@ -157,7 +161,7 @@
     </div>
     <div class="block">
       <div class="block-title economy">Economy & Markets News</div>
-      <ul class="headlines">
+      <ul class="headlines economy">
         <li class="headline">Headline 1</li>
         <li class="headline">Headline 2</li>
         <li class="headline">Headline 3</li>
@@ -167,7 +171,7 @@
     </div>
     <div class="block">
       <div class="block-title sports">Sports News</div>
-      <ul class="headlines">
+      <ul class="headlines sports">
         <li class="headline">Headline 1</li>
         <li class="headline">Headline 2</li>
         <li class="headline">Headline 3</li>
@@ -177,7 +181,7 @@
     </div>
     <div class="block">
       <div class="block-title popculture">Pop Culture & Entertainment News</div>
-      <ul class="headlines">
+      <ul class="headlines popculture">
         <li class="headline">Headline 1</li>
         <li class="headline">Headline 2</li>
         <li class="headline">Headline 3</li>
@@ -187,7 +191,7 @@
     </div>
   </div>
   <script>
-    // Particle effect (blues, bright reds, purples)
+    // Particle effect (blues, bright reds, purples, larger size)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -198,7 +202,7 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1 + 0.5; // Smaller: 0.5–1.5px
+        this.size = Math.random() * 2 + 1; // Reverted to 1–3px
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
         this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
