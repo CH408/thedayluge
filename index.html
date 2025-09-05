@@ -857,34 +857,42 @@ function goToCategory(category) {
 async function goToRandomArticle() {
   console.log('Navigating to Random Article');
   try {
-    const response = await fetch('/links.txt');
-    if (response.ok) {
+    const categories = [
+      'arts-literature-links',
+      'conspiracy-corner-links',
+      'history-philosophy-culture-links',
+      'misc-links',
+      'opinion-links',
+      'science-nature-health-links',
+      'sports-leisure-ent-links',
+      'take-a-pause-links'
+    ];
+    const allLinks = [];
+    for (const category of categories) {
+      const response = await fetch(`/${category}.txt`);
+      if (!response.ok) {
+        console.warn(`Failed to fetch ${category}.txt`);
+        continue;
+      }
       const text = await response.text();
       const lines = text.split('\n').filter(line => line.trim());
-      
       const links = lines.map(line => {
         const parts = line.split('|');
-        if (parts.length >= 2) {
-          return {
-            title: parts[0].trim(),
-            url: parts[1].trim()
-          };
-        }
-        return null;
+        return parts.length >= 2 ? { title: parts[0].trim(), url: parts[1].trim() } : null;
       }).filter(link => link !== null);
-      
-      if (links.length > 0) {
-        const randomLink = links[Math.floor(Math.random() * links.length)];
-        console.log('Opening random link:', randomLink.url);
-        window.open(randomLink.url, '_blank');
-      } else {
-        console.log('No links available for random selection');
-      }
+      allLinks.push(...links);
+    }
+    if (allLinks.length > 0) {
+      const randomLink = allLinks[Math.floor(Math.random() * allLinks.length)];
+      console.log('Opening random link:', randomLink.url);
+      window.open(randomLink.url, '_blank');
     } else {
-      console.log('Failed to fetch links.txt');
+      console.log('No links available across all category files');
+      alert('No articles available at the moment.');
     }
   } catch (error) {
-    console.error('Error loading links for random selection:', error);
+    console.error('Error loading category files:', error);
+    alert('Unable to load random article. Please try again later.');
   }
 }
 
