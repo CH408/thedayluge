@@ -288,6 +288,9 @@
   /* Electron spokes */
   .spoke{
     position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px);
     width:90px;
     height:90px;
     border:2px solid #ffdd00;
@@ -322,7 +325,7 @@
   }
 
   .spoke:hover{
-    transform:scale(1.15);
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px) scale(1.15);
     box-shadow:0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
     z-index:10;
     animation-play-state:paused;
@@ -330,59 +333,51 @@
 
   /* Position 8 electrons around the nucleus */
   .spoke-1{ /* Opinion - 0° */
-    left:390px;
-    top:205px;
+    --angle: 0deg;
     background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-2{ /* History & Culture - 45° */
-    left:336px;
-    top:336px;
+    --angle: 45deg;
     background:radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-3{ /* Arts & Literature - 90° */
-    left:205px;
-    bottom:20px;
+    --angle: 90deg;
     background:radial-gradient(circle, var(--brown) 0%, #654321 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-4{ /* Science-Nature-Health - 135° */
-    left:74px;
-    bottom:64px;
+    --angle: 135deg;
     background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-5{ /* Sports-Leisure-Ent - 180° */
-    left:20px;
-    top:205px;
+    --angle: 180deg;
     background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-6{ /* Take A Pause - 225° */
-    left:74px;
-    top:74px;
+    --angle: 225deg;
     background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-7{ /* Conspiracy Corner - 270° */
-    left:205px;
-    top:20px;
+    --angle: 270deg;
     background:radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%);
     color:black !important;
     font-weight:900 !important;
   }
   .spoke-8{ /* MISC - 315° */
-    left:336px;
-    top:74px;
+    --angle: 315deg;
     background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
     color:white !important;
     font-weight:900 !important;
@@ -475,10 +470,14 @@
       font-size:16px;
     }
     .spoke{
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(105px);
       width:80px;
       height:80px;
       font-size:10px;
       border-width:2px;
+    }
+    .spoke:hover{
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(105px) scale(1.15);
     }
     .header h1{
       font-size:32px;
@@ -525,14 +524,6 @@
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:105px;
     }
-    .spoke-1{ left:295px; top:150px; }
-    .spoke-2{ left:255px; top:255px; }
-    .spoke-3{ left:150px; bottom:15px; }
-    .spoke-4{ left:45px; bottom:50px; }
-    .spoke-5{ left:15px; top:150px; }
-    .spoke-6{ left:45px; top:50px; }
-    .spoke-7{ left:150px; top:15px; }
-    .spoke-8{ left:255px; top:50px; }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
@@ -566,9 +557,13 @@
       font-size:14px;
     }
     .spoke{
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(85px);
       width:65px;
       height:65px;
       font-size:9px;
+    }
+    .spoke:hover{
+      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(85px) scale(1.15);
     }
     .header h1{
       font-size:28px;
@@ -614,14 +609,6 @@
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:85px;
     }
-    .spoke-1{ left:245px; top:127.5px; }
-    .spoke-2{ left:215px; top:215px; }
-    .spoke-3{ left:127.5px; bottom:12.5px; }
-    .spoke-4{ left:40px; bottom:40px; }
-    .spoke-5{ left:12.5px; top:127.5px; }
-    .spoke-6{ left:40px; top:40px; }
-    .spoke-7{ left:127.5px; top:12.5px; }
-    .spoke-8{ left:215px; top:40px; }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
