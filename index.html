@@ -801,7 +801,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function init() {
-    for (let i = 0; i < numberOfParticles; i++) {
+    const isMobile = window.innerWidth <= 600;
+    const particleCount = isMobile ? 20 : 50; // Fewer particles on mobile
+    particlesArray.length = 0; // Clear existing particles
+    for (let i = 0; i < particleCount; i++) {
       particlesArray.push(new Particle());
     }
   }
@@ -916,4 +919,3 @@ center.addEventListener('mouseleave', function() {
 </script>
 </body>
 </html>
-
