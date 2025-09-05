@@ -331,6 +331,11 @@
     animation-play-state:paused;
   }
 
+  .spoke-text {
+    display: inline-block;
+    transform: rotate(calc(-1 * var(--angle)));
+  }
+
   /* Position 8 electrons around the nucleus */
   .spoke-1{ /* Opinion - 0° */
     --angle: 0deg;
@@ -479,6 +484,9 @@
     .spoke:hover{
       transform: translate(-50%, -50%) rotate(var(--angle)) translateX(105px) scale(1.15);
     }
+    .spoke-text {
+      transform: rotate(calc(-1 * var(--angle)));
+    }
     .header h1{
       font-size:32px;
       margin-bottom:20px;
@@ -564,6 +572,9 @@
     }
     .spoke:hover{
       transform: translate(-50%, -50%) rotate(var(--angle)) translateX(85px) scale(1.15);
+    }
+    .spoke-text {
+      transform: rotate(calc(-1 * var(--angle)));
     }
     .header h1{
       font-size:28px;
@@ -685,25 +696,15 @@ NEWS
 </div>
 
 <!-- Electrons (category spokes) -->
-<div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
-<div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,
-Philosophy
-& Culture</div>
-<div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts
-&
-Literature</div>
-<div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,
-Nature
-& Health</div>
-<div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,
-Leisure
-& Ent</div>
-<div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take
-A
-Pause</div>
-<div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
-Corner</div>
-<div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>  </div>
+<div class="spoke spoke-1" onclick="goToCategory('opinion')"><span class="spoke-text">Opinion</span></div>
+<div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')"><span class="spoke-text">History,<br>Philosophy<br>& Culture</span></div>
+<div class="spoke spoke-3" onclick="goToCategory('arts-literature')"><span class="spoke-text">Arts<br>&<br>Literature</span></div>
+<div class="spoke spoke-4" onclick="goToCategory('science-nature-health')"><span class="spoke-text">Science,<br>Nature<br>& Health</span></div>
+<div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')"><span class="spoke-text">Sports,<br>Leisure<br>& Ent</span></div>
+<div class="spoke spoke-6" onclick="goToCategory('take-a-pause')"><span class="spoke-text">Take<br>A<br>Pause</span></div>
+<div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')"><span class="spoke-text">Conspiracy<br>Corner</span></div>
+<div class="spoke spoke-8" onclick="goToCategory('misc')"><span class="spoke-text">MISC</span></div>
+  </div>
 
   <!-- Quantum random button -->
   <button class="random-button" onclick="goToRandomArticle()">
