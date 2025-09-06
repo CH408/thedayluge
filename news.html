@@ -8,8 +8,16 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
+      --light-red-glow: #ff3333;
+      --headline-red: #ff6666;
+      --light-orange-glow: #ff8833;
+      --headline-orange: #ffaa66;
+      --light-green-glow: #33ff66;
+      --headline-green: #66ff99;
       --light-cyan-glow: #33ddff;
       --headline-cyan: #66ccff;
+      --light-pink-glow: #ff66cc;
+      --headline-pink: #ff99cc;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -43,15 +51,48 @@
       pointer-events: none;
     }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .section-title {
+    .block-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
-      margin-bottom: 10px;
-      animation: block-title-pulse 8s ease-in-out infinite;
     }
-    @keyframes block-title-pulse {
+    .title-container {
+      display: flex;
+      align-items: center;
+      max-width: 800px; /* Limits width to ~2/3 of 1200px desktop view */
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .global-news-title { color: var(--light-red-glow); animation: block-title-pulse-red 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-red {
+      0% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .us-news-title { color: var(--light-orange-glow); animation: block-title-pulse-orange 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-orange {
+      0% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .economy-news-title { color: var(--light-green-glow); animation: block-title-pulse-green 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-green {
+      0% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .sports-news-title { color: var(--light-cyan-glow); animation: block-title-pulse-cyan 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-cyan {
       0% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
       12.5% { text-shadow: 0 0 16px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
       25% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
@@ -59,21 +100,28 @@
       75% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    #sports-title { color: #ff0000; } /* Red for Sports */
-    #general-title { color: #33ddff; } /* Light Cyan for General */
-    #business-title { color: #ffcc00; } /* Gold for Business */
-    #technology-title { color: #00ff00; } /* Green for Technology */
-    #entertainment-title { color: #ff00ff; } /* Magenta for Entertainment */
-    #health-title { color: #00ffff; } /* Cyan for Health */
-    .headlines { list-style: none; }
+    .popculture-news-title { color: var(--light-pink-glow); animation: block-title-pulse-pink 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-pink {
+      0% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .headlines { list-style: none; max-width: 800px; }
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
-      color: var(--headline-cyan);
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
+    .global-news-links .headline { color: var(--headline-red); }
+    .us-news-links .headline { color: var(--headline-orange); }
+    .economy-news-links .headline { color: var(--headline-green); }
+    .sports-news-links .headline { color: var(--headline-cyan); }
+    .popculture-news-links .headline { color: var(--headline-pink); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -88,63 +136,84 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .headline a:hover {
-      color: var(--light-cyan-glow);
-      text-decoration: underline;
-      text-shadow: 0 0 10px var(--light-cyan-glow);
-    }
-    .go-deeper-btn {
+    .global-news-links .headline a:hover { color: var(--light-red-glow); text-shadow: 0 0 10px var(--light-red-glow); }
+    .us-news-links .headline a:hover { color: var(--light-orange-glow); text-shadow: 0 0 10px var(--light-orange-glow); }
+    .economy-news-links .headline a:hover { color: var(--light-green-glow); text-shadow: 0 0 10px var(--light-green-glow); }
+    .sports-news-links .headline a:hover { color: var(--light-cyan-glow); text-shadow: 0 0 10px var(--light-cyan-glow); }
+    .popculture-news-links .headline a:hover { color: var(--light-pink-glow); text-shadow: 0 0 10px var(--light-pink-glow); }
+    .go-deeper {
       display: inline-block;
-      margin-top: 10px;
       background: transparent;
-      color: #33ddff;
+      color: inherit;
       padding: 8px 16px;
+      border: 1px solid;
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px #33ddff;
       transition: all 0.3s ease;
     }
-    .go-deeper-btn:hover {
-      background: rgba(51,221,255,0.1);
-      box-shadow: 0 0 15px rgba(51,221,255,0.3);
+    .global-news .go-deeper { border-color: var(--light-red-glow); color: var(--light-red-glow); text-shadow: 0 0 5px var(--light-red-glow); }
+    .us-news .go-deeper { border-color: var(--light-orange-glow); color: var(--light-orange-glow); text-shadow: 0 0 5px var(--light-orange-glow); }
+    .economy-news .go-deeper { border-color: var(--light-green-glow); color: var(--light-green-glow); text-shadow: 0 0 5px var(--light-green-glow); }
+    .sports-news .go-deeper { border-color: var(--light-cyan-glow); color: var(--light-cyan-glow); text-shadow: 0 0 5px var(--light-cyan-glow); }
+    .popculture-news .go-deeper { border-color: var(--light-pink-glow); color: var(--light-pink-glow); text-shadow: 0 0 5px var(--light-pink-glow); }
+    .go-deeper:hover {
+      background: rgba(255,255,255,0.1);
       transform: scale(1.05);
     }
-    #sports-archive-btn { border: 1px solid #ff0000; } /* Red border for Sports */
-    #general-archive-btn { border: 1px solid #33ddff; } /* Light Cyan border for General */
-    #business-archive-btn { border: 1px solid #ffcc00; } /* Gold border for Business */
-    #technology-archive-btn { border: 1px solid #00ff00; } /* Green border for Technology */
-    #entertainment-archive-btn { border: 1px solid #ff00ff; } /* Magenta border for Entertainment */
-    #health-archive-btn { border: 1px solid #00ffff; } /* Cyan border for Health */
+    .global-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,51,51,0.3); }
+    .us-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,136,51,0.3); }
+    .economy-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,255,102,0.3); }
+    .sports-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,221,255,0.3); }
+    .popculture-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,102,204,0.3); }
     @media (max-width: 600px) {
-      .section-title { font-size: 16px; }
+      .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
+      .go-deeper { font-size: 10px; padding: 6px 12px; margin-left: 10px; }
+      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
   </style>
 </head>
 <body>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="section-title" id="sports-title">Sports News</div>
-    <ul class="headlines" id="sports-links"></ul>
-    <a href="/sports-news-archive.html" class="go-deeper-btn" id="sports-archive-btn">Go Deeper →</a>
-    <div class="section-title" id="general-title">General News</div>
-    <ul class="headlines" id="general-links"></ul>
-    <a href="/general-news-archive.html" class="go-deeper-btn" id="general-archive-btn">Go Deeper →</a>
-    <div class="section-title" id="business-title">Business News</div>
-    <ul class="headlines" id="business-links"></ul>
-    <a href="/business-news-archive.html" class="go-deeper-btn" id="business-archive-btn">Go Deeper →</a>
-    <div class="section-title" id="technology-title">Technology News</div>
-    <ul class="headlines" id="technology-links"></ul>
-    <a href="/technology-news-archive.html" class="go-deeper-btn" id="technology-archive-btn">Go Deeper →</a>
-    <div class="section-title" id="entertainment-title">Entertainment News</div>
-    <ul class="headlines" id="entertainment-links"></ul>
-    <a href="/entertainment-news-archive.html" class="go-deeper-btn" id="entertainment-archive-btn">Go Deeper →</a>
-    <div class="section-title" id="health-title">Health News</div>
-    <ul class="headlines" id="health-links"></ul>
-    <a href="/health-news-archive.html" class="go-deeper-btn" id="health-archive-btn">Go Deeper →</a>
+    <div class="global-news">
+      <div class="title-container">
+        <div class="block-title global-news-title">Global News</div>
+        <a href="/global-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
+      <ul class="headlines global-news-links" id="global-news-links"></ul>
+    </div>
+    <div class="us-news">
+      <div class="title-container">
+        <div class="block-title us-news-title">US News</div>
+        <a href="/us-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
+      <ul class="headlines us-news-links" id="us-news-links"></ul>
+    </div>
+    <div class="economy-news">
+      <div class="title-container">
+        <div class="block-title economy-news-title">Economy & Markets</div>
+        <a href="/economy-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
+      <ul class="headlines economy-news-links" id="economy-news-links"></ul>
+    </div>
+    <div class="sports-news">
+      <div class="title-container">
+        <div class="block-title sports-news-title">Sports News</div>
+        <a href="/sports-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
+      <ul class="headlines sports-news-links" id="sports-news-links"></ul>
+    </div>
+    <div class="popculture-news">
+      <div class="title-container">
+        <div class="block-title popculture-news-title">Pop Culture & Entertainment</div>
+        <a href="/popculture-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
+      <ul class="headlines popculture-news-links" id="popculture-news-links"></ul>
+    </div>
   </div>
   <script>
     // Particle effect
@@ -215,7 +284,7 @@
       init();
     });
 
-    // Load sections
+    // Load section links
     async function loadSection(file, gridId, archiveFile) {
       try {
         const response = await fetch(file);
@@ -240,13 +309,13 @@
         
         if (links.length > 5) {
           const archiveLinks = links.slice(5);
-          console.log(`Archiving to ${archiveFile}:`, archiveLinks);
+          console.log(`Archiving to ${archiveFile}:`, archiveLinks); // Debug: Log links to archive
           const archiveResponse = await fetch('/.netlify/functions/archive', {
             method: 'POST',
             body: JSON.stringify({ file: archiveFile, links: archiveLinks.map(link => `${link.title}|${link.url}`) })
           });
           const archiveResult = await archiveResponse.json();
-          console.log(`Archive response for ${archiveFile}:`, archiveResult);
+          console.log(`Archive response for ${archiveFile}:`, archiveResult); // Debug: Log archive result
         }
       } catch (error) {
         console.error(`Error loading ${file}:`, error);
@@ -254,12 +323,11 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadSection('sports-news.txt', 'sports-links', 'sports-news-archive.txt');
-      loadSection('general-news.txt', 'general-links', 'general-news-archive.txt');
-      loadSection('business-news.txt', 'business-links', 'business-news-archive.txt');
-      loadSection('technology-news.txt', 'technology-links', 'technology-news-archive.txt');
-      loadSection('entertainment-news.txt', 'entertainment-links', 'entertainment-news-archive.txt');
-      loadSection('health-news.txt', 'health-links', 'health-news-archive.txt');
+      loadSection('global-news.txt', 'global-news-links', 'global-news-archive.txt');
+      loadSection('us-news.txt', 'us-news-links', 'us-news-archive.txt');
+      loadSection('economy-mkts-news.txt', 'economy-news-links', 'economy-news-archive.txt');
+      loadSection('sports-news.txt', 'sports-news-links', 'sports-news-archive.txt');
+      loadSection('popculture-news.txt', 'popculture-news-links', 'popculture-news-archive.txt');
     });
   </script>
 </body>
