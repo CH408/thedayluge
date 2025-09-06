@@ -1,4 +1,3 @@
-// netlify/functions/manage-links.js
 const fs = require('fs').promises;
 const path = require('path');
 
@@ -6,34 +5,42 @@ exports.handler = async function(event, context) {
   try {
     const { sourceFile, archiveFile, links } = JSON.parse(event.body);
     
-    // Assuming .txt files are in the project root
-    const sourcePath = path.join(__dirname, '../../', sourceFile);
-    const archivePath = path.join(__dirname, '../../', archiveFile);
+    // Use /tmp for temporary storage
+    const sourcePath = path.join('/tmp', sourceFile);
+    const archivePath = path.join('/tmp', archiveFile);
     
-    // Keep the 5 newest links (assuming newest are at the top)
+    // Keep the 5 newest links (assuming newest at top)
     const newestLinks = links.slice(0, 5);
-    const oldestLink = links.length > 5 ? links[links.length - 1] : null;
+    const oldestLinks = links.length > 5 ? links.slice(5) : [];
     
-    // Update source file with the 5 newest links
-    const sourceContent = newestLinks.map(link => `${link.title}|${link.url}`).join('\n');
-    await fs.writeFile(sourcePath, sourceContent + '\n');
+    // Update source file in /tmp
+    const sourceContent = newestLinks.map(link => `${link.title}|${link.url}`).join('\n') + '\n';
+    await fs.writeFile(sourcePath, sourceContent);
     
-    // If there's an oldest link, append it to the archive file
-    if (oldestLink) {
+    // Append oldest links to archive in /tmp
+    if (oldestLinks.length > 0) {
       let archiveContent = '';
       try {
         archiveContent = await fs.readFile(archivePath, 'utf8');
       } catch (error) {
-        if (error.code !== 'ENOENT') throw error; // Ignore if archive file doesn't exist yet
+        if (error.code !== 'ENOENT') throw error;
       }
       const archiveLines = archiveContent.split('\n').filter(line => line.trim());
-      archiveLines.unshift(`${oldestLink.title}|${oldestLink.url}`); // Add oldest link to top
+      oldestLinks.forEach(link => {
+        archiveLines.unshift(`${link.title}|${link.url}`);
+      });
       await fs.writeFile(archivePath, archiveLines.join('\n') + '\n');
     }
     
+    // Log the archived links for debugging
+    console.log(`Archived to ${archivePath}:`, oldestLinks);
+    
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: `Successfully updated ${sourceFile} and archived to ${archiveFile}` })
+      body: JSON.stringify({ 
+        message: `Updated ${sourceFile} and archived to ${archiveFile} in /tmp`,
+        archivedLinks: oldestLinks
+      })
     };
   } catch (error) {
     console.error('Error in manage-links:', error);
