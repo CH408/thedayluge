@@ -288,9 +288,6 @@
   /* Electron spokes */
   .spoke{
     position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px);
     width:90px;
     height:90px;
     border:2px solid #ffdd00;
@@ -325,64 +322,59 @@
   }
 
   .spoke:hover{
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px) scale(1.15);
+    transform: scale(1.15);
     box-shadow:0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
     z-index:10;
     animation-play-state:paused;
   }
 
-  .spoke-text {
-    display: inline-block;
-    transform: rotate(calc(-1 * var(--angle)));
-  }
-
   /* Position 8 electrons around the nucleus */
-  .spoke-1{ /* Opinion - 0° */
-    --angle: 0deg;
+  .spoke-1{ /* Opinion */
+    left:355px; top:205px;
     background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-2{ /* History & Culture - 45° */
-    --angle: 45deg;
+  .spoke-2{ /* History & Culture */
+    left:320px; top:110px;
     background:radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-3{ /* Arts & Literature - 90° */
-    --angle: 90deg;
+  .spoke-3{ /* Arts & Literature */
+    left:250px; top:75px; /* Adjusted from bottom to top */
     background:radial-gradient(circle, var(--brown) 0%, #654321 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-4{ /* Science-Nature-Health - 135° */
-    --angle: 135deg;
+  .spoke-4{ /* Science-Nature-Health */
+    left:180px; top:110px;
     background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-5{ /* Sports-Leisure-Ent - 180° */
-    --angle: 180deg;
+  .spoke-5{ /* Sports-Leisure-Ent */
+    left:145px; top:205px;
     background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
     color:white !important;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-6{ /* Take A Pause - 225° */
-    --angle: 225deg;
+  .spoke-6{ /* Take A Pause */
+    left:180px; top:300px;
     background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-7{ /* Conspiracy Corner - 270° */
-    --angle: 270deg;
+  .spoke-7{ /* Conspiracy Corner */
+    left:250px; bottom:75px; /* Using bottom as in original */
     background:radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-8{ /* MISC - 315° */
-    --angle: 315deg;
+  .spoke-8{ /* MISC */
+    left:320px; top:300px;
     background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
     color:white !important;
     font-weight:900 !important;
@@ -475,18 +467,22 @@
       font-size:16px;
     }
     .spoke{
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(125px);
       width:80px;
       height:80px;
       font-size:10px;
       border-width:2px;
     }
     .spoke:hover{
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(125px) scale(1.15);
+      transform: scale(1.15);
     }
-    .spoke-text {
-      transform: rotate(calc(-1 * var(--angle)));
-    }
+    .spoke-1{ left:295px; top:150px; }
+    .spoke-2{ left:260px; top:85px; }
+    .spoke-3{ top:50px; left:190px; }
+    .spoke-4{ left:120px; top:85px; }
+    .spoke-5{ left:85px; top:150px; }
+    .spoke-6{ left:120px; top:215px; }
+    .spoke-7{ bottom:50px; left:190px; }
+    .spoke-8{ left:260px; top:215px; }
     .header h1{
       font-size:32px;
       margin-bottom:20px;
@@ -530,7 +526,7 @@
       }
     }
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width:105px;
+      width:125px;
     }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
@@ -565,17 +561,21 @@
       font-size:14px;
     }
     .spoke{
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(100px);
       width:65px;
       height:65px;
       font-size:9px;
     }
     .spoke:hover{
-      transform: translate(-50%, -50%) rotate(var(--angle)) translateX(100px) scale(1.15);
+      transform: scale(1.15);
     }
-    .spoke-text {
-      transform: rotate(calc(-1 * var(--angle)));
-    }
+    .spoke-1{ left:255px; top:135px; }
+    .spoke-2{ left:225px; top:80px; }
+    .spoke-3{ top:45px; left:160px; }
+    .spoke-4{ left:95px; top:80px; }
+    .spoke-5{ left:65px; top:135px; }
+    .spoke-6{ left:95px; top:190px; }
+    .spoke-7{ bottom:45px; left:160px; }
+    .spoke-8{ left:225px; top:190px; }
     .header h1{
       font-size:28px;
     }
@@ -618,7 +618,7 @@
       }
     }
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width:85px;
+      width:100px;
     }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
@@ -672,43 +672,44 @@
   </div>
 
   <!-- Particle Canvas -->
-  <canvas id="particle-canvas"></canvas>  <!-- Main Atom Structure -->
+  <canvas id="particle-canvas"></canvas>
+  <!-- Main Atom Structure -->
   <div class="wheel-container">
     <!-- Orbital rings -->
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
     <div class="orbital-ring orbital-ring-3"></div>
 
-<!-- Energy beams -->
-<div class="wheel-line line-1"></div>
-<div class="wheel-line line-2"></div>
-<div class="wheel-line line-3"></div>
-<div class="wheel-line line-4"></div>
-<div class="wheel-line line-5"></div>
-<div class="wheel-line line-6"></div>
-<div class="wheel-line line-7"></div>
-<div class="wheel-line line-8"></div>
+    <!-- Energy beams -->
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-line line-4"></div>
+    <div class="wheel-line line-5"></div>
+    <div class="wheel-line line-6"></div>
+    <div class="wheel-line line-7"></div>
+    <div class="wheel-line line-8"></div>
 
-<!-- Nucleus -->
-<div class="wheel-center" onclick="goToNewsHub()">
-  TRENDING
-NEWS
-</div>
+    <!-- Nucleus -->
+    <div class="wheel-center" onclick="goToNewsHub()">
+      TRENDING
+      NEWS
+    </div>
 
-<!-- Electrons (category spokes) -->
-<div class="spoke spoke-1" onclick="goToCategory('opinion')"><span class="spoke-text">Opinion</span></div>
-<div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')"><span class="spoke-text">History,<br>Philosophy<br>& Culture</span></div>
-<div class="spoke spoke-3" onclick="goToCategory('arts-literature')"><span class="spoke-text">Arts<br>&<br>Literature</span></div>
-<div class="spoke spoke-4" onclick="goToCategory('science-nature-health')"><span class="spoke-text">Science,<br>Nature<br>& Health</span></div>
-<div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')"><span class="spoke-text">Sports,<br>Leisure<br>& Ent</span></div>
-<div class="spoke spoke-6" onclick="goToCategory('take-a-pause')"><span class="spoke-text">Take<br>A<br>Pause</span></div>
-<div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')"><span class="spoke-text">Conspiracy<br>Corner</span></div>
-<div class="spoke spoke-8" onclick="goToCategory('misc')"><span class="spoke-text">MISC</span></div>
+    <!-- Electrons (category spokes) -->
+    <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
+    <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,<br>Philosophy<br>& Culture</div>
+    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts<br>&<br>Literature</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,<br>Nature<br>& Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,<br>Leisure<br>& Ent</div>
+    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take<br>A<br>Pause</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy<br>Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>
   </div>
 
   <!-- Quantum random button -->
   <button class="random-button" onclick="goToRandomArticle()">
-     SURPRISE ME!
+    SURPRISE ME!
   </button>
 
   <!-- Archive link -->
