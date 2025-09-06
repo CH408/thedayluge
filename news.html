@@ -56,12 +56,17 @@
     .block {
       margin-bottom: 20px;
     }
+    .block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
     .block-title {
-      font-size: 18px; /* Reduced from 22px */
+      font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
-      text-align: left; /* Changed from center */
-      margin-bottom: 10px;
+      text-align: left;
       animation: block-title-pulse 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse {
@@ -77,6 +82,24 @@
     .block-title.economy { color: var(--green); }
     .block-title.sports { color: var(--light-cyan-glow); }
     .block-title.popculture { color: var(--pink); }
+    .go-deeper-btn {
+      background: transparent;
+      color: var(--light-cyan-glow);
+      padding: 6px 12px;
+      border: 1px solid var(--bright-red);
+      border-radius: 15px;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--light-cyan-glow);
+      transition: all 0.3s ease;
+    }
+    .go-deeper-btn:hover {
+      background: rgba(255,0,0,0.1);
+      box-shadow: 0 0 10px rgba(255,0,0,0.3);
+      transform: scale(1.05);
+    }
     .headlines { list-style: none; }
     .headline {
       font-size: 16px;
@@ -95,8 +118,6 @@
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
     .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
     .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -136,8 +157,9 @@
       transform: scale(1.05);
     }
     @media (max-width: 600px) {
-      .block-title { font-size: 16px; } /* Reduced from 20px */
+      .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
+      .go-deeper-btn { font-size: 9px; padding: 5px 10px; }
     }
   </style>
 </head>
@@ -146,39 +168,54 @@
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="block">
-      <div class="block-title global">Global News</div>
+      <div class="block-header">
+        <div class="block-title global">Global News</div>
+        <a href="/global-news-archive" class="go-deeper-btn">Go Deeper</a>
+      </div>
       <ul class="headlines global" id="global-news"></ul>
     </div>
     <div class="block">
-      <div class="block-title us">US News</div>
+      <div class="block-header">
+        <div class="block-title us">US News</div>
+        <a href="/us-news-archive" class="go-deeper-btn">Go Deeper</a>
+      </div>
       <ul class="headlines us" id="us-news"></ul>
     </div>
     <div class="block">
-      <div class="block-title economy">Economy & Markets News</div>
+      <div class="block-header">
+        <div class="block-title economy">Economy & Markets News</div>
+        <a href="/economy-news-archive" class="go-deeper-btn">Go Deeper</a>
+      </div>
       <ul class="headlines economy" id="economy-news"></ul>
     </div>
     <div class="block">
-      <div class="block-title sports">Sports News</div>
+      <div class="block-header">
+        <div class="block-title sports">Sports News</div>
+        <a href="/sports-news-archive" class="go-deeper-btn">Go Deeper</a>
+      </div>
       <ul class="headlines sports" id="sports-news"></ul>
     </div>
     <div class="block">
-      <div class="block-title popculture">Pop Culture & Entertainment News</div>
+      <div class="block-header">
+        <div class="block-title popculture">Pop Culture & Entertainment News</div>
+        <a href="/popculture-news-archive" class="go-deeper-btn">Go Deeper</a>
+      </div>
       <ul class="headlines popculture" id="popculture-news"></ul>
     </div>
   </div>
   <script>
     // Load news links from .txt files
     const txtFiles = [
-      { id: 'global-news', file: 'global-news.txt' },
-      { id: 'us-news', file: 'us-news.txt' },
-      { id: 'economy-news', file: 'economy-mkts-news.txt' },
-      { id: 'sports-news', file: 'sports-news.txt' },
-      { id: 'popculture-news', file: 'popculture-news.txt' }
+      { id: 'global-news', file: 'global-news.txt', archive: 'global-news-archive.txt' },
+      { id: 'us-news', file: 'us-news.txt', archive: 'us-news-archive.txt' },
+      { id: 'economy-news', file: 'economy-mkts-news.txt', archive: 'economy-news-archive.txt' },
+      { id: 'sports-news', file: 'sports-news.txt', archive: 'sports-news-archive.txt' },
+      { id: 'popculture-news', file: 'popculture-news.txt', archive: 'popculture-news-archive.txt' }
     ];
 
     async function loadNewsLinks() {
-      const archiveLinks = [];
-      for (const { id, file } of txtFiles) {
+      const archiveByCategory = {};
+      for (const { id, file, archive } of txtFiles) {
         try {
           const response = await fetch(file);
           if (!response.ok) {
@@ -192,8 +229,8 @@
             return { title, url };
           }).filter(link => link.title && link.url);
 
-          // Display links 1–7 (indices 0–6)
-          const displayLinks = links.slice(0, 7);
+          // Display top 5 links (indices 0–4)
+          const displayLinks = links.slice(0, 5);
           const grid = document.getElementById(id);
           if (grid) {
             grid.innerHTML = displayLinks.map(link => `
@@ -203,18 +240,22 @@
             `).join('');
           }
 
-          // Flag links 8+ (index 7+) for archiving
-          const toArchive = links.slice(7);
+          // Flag links 6+ (index 5+) for section-specific archiving
+          const toArchive = links.slice(5);
           if (toArchive.length > 0) {
-            archiveLinks.push(...toArchive.map(link => `${link.title}|${link.url}`));
+            archiveByCategory[archive] = toArchive.map(link => `${link.title}|${link.url}`);
           }
         } catch (error) {
           console.error(`Error loading ${file}:`, error);
         }
       }
-      // Log links to archive (server-side needed for news-archive.txt)
-      if (archiveLinks.length > 0) {
-        console.log('Links to archive in news-archive.txt:', archiveLinks);
+      // Log links to archive by category (server-side needed for writing to archive files)
+      for (const [archiveFile, links] of Object.entries(archiveByCategory)) {
+        if (links.length > 0) {
+          console.log(`Links to archive in ${archiveFile}:`, links);
+          // TODO: Send to server-side endpoint to append to archiveFile
+          // Example: await fetch('/archive', { method: 'POST', body: JSON.stringify({ file: archiveFile, links }) });
+        }
       }
     }
 
