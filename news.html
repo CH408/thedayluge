@@ -217,14 +217,14 @@
         }
         
         if (links.length > 5) {
-          const archiveLinks = [links[5]]; // Only send the 6th (oldest) headline
-          console.log(`Archiving to ${archiveFile}:`, archiveLinks); // Debug: Log links to archive
+          const archiveLinks = links.slice(5);
+          console.log(`Archiving to ${archiveFile}:`, archiveLinks);
           const archiveResponse = await fetch('/.netlify/functions/archive', {
             method: 'POST',
             body: JSON.stringify({ file: archiveFile, links: archiveLinks.map(link => `${link.title}|${link.url}`) })
           });
           const archiveResult = await archiveResponse.json();
-          console.log(`Archive response for ${archiveFile}:`, archiveResult); // Debug: Log archive result
+          console.log(`Archive response for ${archiveFile}:`, archiveResult);
         }
       } catch (error) {
         console.error(`Error loading ${file}:`, error);
