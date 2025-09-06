@@ -307,7 +307,7 @@
     });
 
     // Load section links
-    async function loadSection(file, gridId, archiveFile) {
+    async function loadSection(file, gridId) {
       try {
         const response = await fetch(file);
         if (!response.ok) throw new Error(`Failed to load ${file}`);
@@ -334,11 +334,11 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadSection('global-news.txt', 'global-news-links', 'global-news-archive.txt');
-      loadSection('us-news.txt', 'us-news-links', 'us-news-archive.txt');
-      loadSection('economy-mkts-news.txt', 'economy-news-links', 'economy-news-archive.txt');
-      loadSection('sports-news.txt', 'sports-news-links', 'sports-news-archive.txt');
-      loadSection('popculture-news.txt', 'popculture-news-links', 'popculture-news-archive.txt');
+      loadSection('global-news.txt', 'global-news-links');
+      loadSection('us-news.txt', 'us-news-links');
+      loadSection('economy-mkts-news.txt', 'economy-news-links');
+      loadSection('sports-news.txt', 'sports-news-links');
+      loadSection('popculture-news.txt', 'popculture-news-links');
     });
   </script>
 </body>
