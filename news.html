@@ -58,7 +58,6 @@
     }
     .block-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
@@ -94,6 +93,7 @@
       text-decoration: none;
       text-shadow: 0 0 5px var(--light-cyan-glow);
       transition: all 0.3s ease;
+      margin-left: 20px; /* Positions button closer to title */
     }
     .go-deeper-btn:hover {
       background: rgba(255,0,0,0.1);
@@ -159,7 +159,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper-btn { font-size: 9px; padding: 5px 10px; }
+      .go-deeper-btn { font-size: 9px; padding: 5px 10px; margin-left: 10px; }
     }
   </style>
 </head>
