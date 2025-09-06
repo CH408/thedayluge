@@ -1,7 +1,7 @@
 [build]
   functions = "netlify/functions"
   publish = "."
-  included_files = ["sports-news.txt", "sports-news-archive.txt", "*.txt"]
+  included_files = ["sports-news.txt", "*.txt"]
 
 [[redirects]]
   from = "/sports-news-archive"
