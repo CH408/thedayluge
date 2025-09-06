@@ -48,7 +48,6 @@
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
-      color: var(--light-cyan-glow);
       margin-bottom: 10px;
       animation: block-title-pulse 8s ease-in-out infinite;
     }
@@ -60,6 +59,12 @@
       75% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
+    #sports-title { color: #ff0000; } /* Red for Sports */
+    #general-title { color: #33ddff; } /* Light Cyan for General */
+    #business-title { color: #ffcc00; } /* Gold for Business */
+    #technology-title { color: #00ff00; } /* Green for Technology */
+    #entertainment-title { color: #ff00ff; } /* Magenta for Entertainment */
+    #health-title { color: #00ffff; } /* Cyan for Health */
     .headlines { list-style: none; }
     .headline {
       font-size: 16px;
@@ -94,7 +99,6 @@
       background: transparent;
       color: #33ddff;
       padding: 8px 16px;
-      border: 1px solid var(--light-cyan-glow);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
@@ -108,6 +112,12 @@
       box-shadow: 0 0 15px rgba(51,221,255,0.3);
       transform: scale(1.05);
     }
+    #sports-archive-btn { border: 1px solid #ff0000; } /* Red border for Sports */
+    #general-archive-btn { border: 1px solid #33ddff; } /* Light Cyan border for General */
+    #business-archive-btn { border: 1px solid #ffcc00; } /* Gold border for Business */
+    #technology-archive-btn { border: 1px solid #00ff00; } /* Green border for Technology */
+    #entertainment-archive-btn { border: 1px solid #ff00ff; } /* Magenta border for Entertainment */
+    #health-archive-btn { border: 1px solid #00ffff; } /* Cyan border for Health */
     @media (max-width: 600px) {
       .section-title { font-size: 16px; }
       .headline { font-size: 14px; }
