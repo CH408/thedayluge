@@ -8,20 +8,18 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --bright-red: #ff0000;
-      --news-red: #ff3333;
-      --orange: #ff8800;
-      --green: #00dd55;
+      --light-red-glow: #ff3333;
+      --headline-red: #ff6666;
+      --light-orange-glow: #ff8833;
+      --headline-orange: #ffaa66;
+      --light-green-glow: #33ff66;
+      --headline-green: #66ff99;
       --light-cyan-glow: #33ddff;
-      --pink: #ff1493;
-      --bright-purple-glow: #cc88ff;
+      --headline-cyan: #66ccff;
+      --light-pink-glow: #ff66cc;
+      --headline-pink: #ff99cc;
       --ink: #111;
       --maxw: 1200px;
-      --headline-red: #ff3333;
-      --headline-orange: #ffaa33;
-      --headline-green: #33ff66;
-      --headline-cyan: #66ccff;
-      --headline-pink: #ff66b2;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -39,7 +37,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(255,0,0,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -53,57 +51,57 @@
       pointer-events: none;
     }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .block {
-      margin-bottom: 20px;
-    }
-    .block-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
     .block-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
-      animation: block-title-pulse 8s ease-in-out infinite;
+      margin-bottom: 10px;
     }
-    @keyframes block-title-pulse {
-      0% { text-shadow: 0 0 15px currentColor, 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px currentColor, 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px currentColor, 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px currentColor, 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px currentColor, 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px currentColor, 2px 2px 4px rgba(0,0,0,0.8); }
+    .global-news-title { color: var(--light-red-glow); animation: block-title-pulse-red 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-red {
+      0% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .block-title.global { color: var(--bright-red); }
-    .block-title.us { color: var(--orange); }
-    .block-title.economy { color: var(--green); }
-    .block-title.sports { color: var(--light-cyan-glow); }
-    .block-title.popculture { color: var(--pink); }
-    .go-deeper-btn {
-      background: transparent;
-      color: #fff;
-      padding: 6px 12px;
-      border: 1px solid;
-      border-radius: 15px;
-      font-size: 10px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 2px var(--light-cyan-glow);
-      transition: all 0.3s ease;
-      margin-left: 20px;
+    .us-news-title { color: var(--light-orange-glow); animation: block-title-pulse-orange 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-orange {
+      0% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .go-deeper-btn.global { border-color: var(--bright-red); }
-    .go-deeper-btn.us { border-color: var(--orange); }
-    .go-deeper-btn.economy { border-color: var(--green); }
-    .go-deeper-btn.sports { border-color: var(--light-cyan-glow); }
-    .go-deeper-btn.popculture { border-color: var(--pink); }
-    .go-deeper-btn:hover {
-      background: rgba(255,0,0,0.1);
-      box-shadow: 0 0 10px rgba(255,0,0,0.3);
-      transform: scale(1.05);
+    .economy-news-title { color: var(--light-green-glow); animation: block-title-pulse-green 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-green {
+      0% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .sports-news-title { color: var(--light-cyan-glow); animation: block-title-pulse-cyan 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-cyan {
+      0% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .popculture-news-title { color: var(--light-pink-glow); animation: block-title-pulse-pink 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-pink {
+      0% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; }
     .headline {
@@ -113,11 +111,11 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .headlines.global .headline { color: var(--headline-red); }
-    .headlines.us .headline { color: var(--headline-orange); }
-    .headlines.economy .headline { color: var(--headline-green); }
-    .headlines.sports .headline { color: var(--headline-cyan); }
-    .headlines.popculture .headline { color: var(--headline-pink); }
+    .global-news-links .headline { color: var(--headline-red); }
+    .us-news-links .headline { color: var(--headline-orange); }
+    .economy-news-links .headline { color: var(--headline-green); }
+    .sports-news-links .headline { color: var(--headline-cyan); }
+    .popculture-news-links .headline { color: var(--headline-pink); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -132,163 +130,77 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .headline a:hover {
-      color: var(--bright-red);
-      text-decoration: underline;
-      text-shadow: 0 0 10px var(--bright-red);
-    }
-    .headline a.pulse {
-      transform: scale(1.05);
-      text-shadow: 0 0 15px var(--bright-red);
-    }
-    .back-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
+    .global-news-links .headline a:hover { color: var(--light-red-glow); text-shadow: 0 0 10px var(--light-red-glow); }
+    .us-news-links .headline a:hover { color: var(--light-orange-glow); text-shadow: 0 0 10px var(--light-orange-glow); }
+    .economy-news-links .headline a:hover { color: var(--light-green-glow); text-shadow: 0 0 10px var(--light-green-glow); }
+    .sports-news-links .headline a:hover { color: var(--light-cyan-glow); text-shadow: 0 0 10px var(--light-cyan-glow); }
+    .popculture-news-links .headline a:hover { color: var(--light-pink-glow); text-shadow: 0 0 10px var(--light-pink-glow); }
+    .go-deeper {
+      display: inline-block;
+      margin-top: 10px;
       background: transparent;
-      color: var(--light-cyan-glow);
+      color: inherit;
       padding: 8px 16px;
-      border: 1px solid var(--bright-red);
+      border: 1px solid;
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px var(--light-cyan-glow);
       transition: all 0.3s ease;
     }
-    .back-btn:hover {
-      background: rgba(255,0,0,0.1);
-      box-shadow: 0 0 15px rgba(255,0,0,0.3);
+    .global-news .go-deeper { border-color: var(--light-red-glow); color: var(--light-red-glow); text-shadow: 0 0 5px var(--light-red-glow); }
+    .us-news .go-deeper { border-color: var(--light-orange-glow); color: var(--light-orange-glow); text-shadow: 0 0 5px var(--light-orange-glow); }
+    .economy-news .go-deeper { border-color: var(--light-green-glow); color: var(--light-green-glow); text-shadow: 0 0 5px var(--light-green-glow); }
+    .sports-news .go-deeper { border-color: var(--light-cyan-glow); color: var(--light-cyan-glow); text-shadow: 0 0 5px var(--light-cyan-glow); }
+    .popculture-news .go-deeper { border-color: var(--light-pink-glow); color: var(--light-pink-glow); text-shadow: 0 0 5px var(--light-pink-glow); }
+    .go-deeper:hover {
+      background: rgba(255,255,255,0.1);
       transform: scale(1.05);
     }
+    .global-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,51,51,0.3); }
+    .us-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,136,51,0.3); }
+    .economy-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,255,102,0.3); }
+    .sports-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,221,255,0.3); }
+    .popculture-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,102,204,0.3); }
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper-btn { font-size: 9px; padding: 5px 10px; margin-left: 10px; }
+      .go-deeper { font-size: 10px; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
-  <a href="/" class="back-btn">← Back to Home Page</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="block">
-      <div class="block-header">
-        <div class="block-title global">Global News</div>
-        <a href="/global-news-archive.html" class="go-deeper-btn global">Go Deeper</a>
-      </div>
-      <ul class="headlines global" id="global-news"></ul>
+    <div class="global-news">
+      <div class="block-title global-news-title">Global News</div>
+      <ul class="headlines global-news-links" id="global-news-links"></ul>
+      <a href="/global-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
-    <div class="block">
-      <div class="block-header">
-        <div class="block-title us">US News</div>
-        <a href="/us-news-archive.html" class="go-deeper-btn us">Go Deeper</a>
-      </div>
-      <ul class="headlines us" id="us-news"></ul>
+    <div class="us-news">
+      <div class="block-title us-news-title">US News</div>
+      <ul class="headlines us-news-links" id="us-news-links"></ul>
+      <a href="/us-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
-    <div class="block">
-      <div class="block-header">
-        <div class="block-title economy">Economy & Markets News</div>
-        <a href="/economy-news-archive.html" class="go-deeper-btn economy">Go Deeper</a>
-      </div>
-      <ul class="headlines economy" id="economy-news"></ul>
+    <div class="economy-news">
+      <div class="block-title economy-news-title">Economy & Markets</div>
+      <ul class="headlines economy-news-links" id="economy-news-links"></ul>
+      <a href="/economy-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
-    <div class="block">
-      <div class="block-header">
-        <div class="block-title sports">Sports News</div>
-        <a href="/sports-news-archive.html" class="go-deeper-btn sports">Go Deeper</a>
-      </div>
-      <ul class="headlines sports" id="sports-news"></ul>
+    <div class="sports-news">
+      <div class="block-title sports-news-title">Sports News</div>
+      <ul class="headlines sports-news-links" id="sports-news-links"></ul>
+      <a href="/sports-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
-    <div class="block">
-      <div class="block-header">
-        <div class="block-title popculture">Pop Culture & Entertainment News</div>
-        <a href="/popculture-news-archive.html" class="go-deeper-btn popculture">Go Deeper</a>
-      </div>
-      <ul class="headlines popculture" id="popculture-news"></ul>
+    <div class="popculture-news">
+      <div class="block-title popculture-news-title">Pop Culture & Entertainment</div>
+      <ul class="headlines popculture-news-links" id="popculture-news-links"></ul>
+      <a href="/popculture-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
   </div>
   <script>
-    // Load news links from .txt files
-    const txtFiles = [
-      { id: 'global-news', file: 'global-news.txt', archive: 'global-news-archive.txt', archivePage: 'global-news-archive.html' },
-      { id: 'us-news', file: 'us-news.txt', archive: 'us-news-archive.txt', archivePage: 'us-news-archive.html' },
-      { id: 'economy-news', file: 'economy-mkts-news.txt', archive: 'economy-news-archive.txt', archivePage: 'economy-news-archive.html' },
-      { id: 'sports-news', file: 'sports-news.txt', archive: 'sports-news-archive.txt', archivePage: 'sports-news-archive.html' },
-      { id: 'popculture-news', file: 'popculture-news.txt', archive: 'popculture-news-archive.txt', archivePage: 'popculture-news-archive.html' }
-    ];
-
-    async function loadNewsLinks() {
-      const archiveByCategory = {};
-      for (const { id, file, archive } of txtFiles) {
-        try {
-          const response = await fetch(file);
-          if (!response.ok) {
-            console.error(`Failed to load ${file}: ${response.status}`);
-            continue;
-          }
-          const text = await response.text();
-          const lines = text.split('\n').filter(line => line.trim());
-          const links = lines.map(line => {
-            const [title, url] = line.split('|').map(s => s.trim());
-            return { title, url };
-          }).filter(link => link.title && link.url);
-
-          // Display top 5 links (indices 0–4)
-          const displayLinks = links.slice(0, 5);
-          const grid = document.getElementById(id);
-          if (grid) {
-            grid.innerHTML = displayLinks.map(link => `
-              <li class="headline">
-                <a href="${link.url}" target="_blank">${link.title}</a>
-              </li>
-            `).join('');
-          }
-
-          // Flag the 6th link (index 5) for archiving
-          const toArchive = links.slice(5, 6); // Only the 6th link
-          if (toArchive.length > 0) {
-            archiveByCategory[archive] = toArchive.map(link => `${link.title}|${link.url}`);
-          }
-        } catch (error) {
-          console.error(`Error loading ${file}:`, error);
-        }
-      }
-
-      // Send links to archive to server-side endpoint
-      for (const [archiveFile, links] of Object.entries(archiveByCategory)) {
-        if (links.length > 0) {
-          console.log(`Archiving to ${archiveFile}:`, links);
-          try {
-            const response = await fetch('/.netlify/functions/archive', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ file: archiveFile, links })
-            });
-            if (!response.ok) {
-              console.error(`Failed to archive to ${archiveFile}: ${response.status}`);
-            } else {
-              console.log(`Successfully archived to ${archiveFile}`);
-            }
-          } catch (error) {
-            console.error(`Error archiving to ${archiveFile}:`, error);
-          }
-        }
-      }
-    }
-
-    // Click effect for headlines
-    document.addEventListener('click', (event) => {
-      const link = event.target.closest('.headline a');
-      if (link) {
-        link.classList.add('pulse');
-        setTimeout(() => {
-          link.classList.remove('pulse');
-        }, 300);
-      }
-    });
-
-    // Particle effect with comet tails
+    // Particle effect
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -356,8 +268,46 @@
       init();
     });
 
-    // Load links on page load
-    document.addEventListener('DOMContentLoaded', loadNewsLinks);
+    // Load section links
+    async function loadSection(file, gridId, archiveFile) {
+      try {
+        const response = await fetch(file);
+        if (!response.ok) throw new Error(`Failed to load ${file}`);
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const [title, url] = line.split('|').map(s => s.trim());
+          return { title, url };
+        }).filter(link => link.title && link.url);
+        
+        const grid = document.getElementById(gridId);
+        if (grid) {
+          grid.innerHTML = links.slice(0, 5).map(link => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+        }
+        
+        if (links.length > 5) {
+          const archiveLinks = links.slice(5);
+          await fetch('/.netlify/functions/archive', {
+            method: 'POST',
+            body: JSON.stringify({ file: archiveFile, links: archiveLinks.map(link => `${link.title}|${link.url}`) })
+          });
+        }
+      } catch (error) {
+        console.error(`Error loading ${file}:`, error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSection('global-news.txt', 'global-news-links', 'global-news-archive.txt');
+      loadSection('us-news.txt', 'us-news-links', 'us-news-archive.txt');
+      loadSection('economy-mkts-news.txt', 'economy-news-links', 'economy-news-archive.txt');
+      loadSection('sports-news.txt', 'sports-news-links', 'sports-news-archive.txt');
+      loadSection('popculture-news.txt', 'popculture-news-links', 'popculture-news-archive.txt');
+    });
   </script>
 </body>
 </html>
