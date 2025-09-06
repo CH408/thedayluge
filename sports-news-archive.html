@@ -90,7 +90,7 @@
     }
     .back-btn {
       position: fixed;
-      bottom: 20px; right: 20px;
+      bottom: 50px; right: 20px;
       background: transparent;
       color: #33ddff;
       padding: 8px 16px;
@@ -108,14 +108,36 @@
       box-shadow: 0 0 15px rgba(51,221,255,0.3);
       transform: scale(1.05);
     }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: transparent;
+      color: #ffffff;
+      padding: 8px 16px;
+      border: 1px solid #ffffff;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px #ffffff;
+      transition: all 0.3s ease;
+    }
+    .home-btn:hover {
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
+      .back-btn, .home-btn { font-size: 10px; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
   <a href="/news.html" class="back-btn">← Back to News</a>
+  <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="archive-title">Sports News Archive</div>
@@ -136,7 +158,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.color = ['#33ddff', '#66ccff', '#00aacc', '#0088aa', '#99eeff', '#ccffff'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       update() {
