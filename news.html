@@ -206,7 +206,6 @@
         <a href="/sports-news-archive.html" class="go-deeper">Go Deeper</a>
       </div>
       <ul class="headlines sports-news-links" id="sports-news-links"></ul>
-      <div id="archived-sports-links" style="color: var(--headline-cyan); margin-top: 10px; font-size: 14px;"></div>
     </div>
     <div class="popculture-news">
       <div class="title-container">
@@ -306,36 +305,6 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
-        }
-        
-        // Call Netlify function to manage links and archive oldest
-        if (links.length > 5 && gridId === 'sports-news-links') {
-          console.log(`More than 5 links in ${file}, calling archive function`);
-          const archiveResponse = await fetch('/.netlify/functions/manage-links', {
-            method: 'POST',
-            body: JSON.stringify({
-              sourceFile: file,
-              archiveFile: archiveFile,
-              links: links
-            })
-          });
-          const archiveResult = await archiveResponse.json();
-          console.log(`Archive response for ${archiveFile}:`, archiveResult);
-          
-          // Display archived links for testing
-          if (archiveResult.archivedLinks && archiveResult.archivedLinks.length > 0) {
-            const archivedGrid = document.getElementById('archived-sports-links');
-            if (archivedGrid) {
-              archivedGrid.innerHTML = `
-                <div>Archived Links (Temporary):</div>
-                <ul>${archiveResult.archivedLinks.map(link => `
-                  <li style="margin-bottom: 5px;">
-                    <a href="${link.url}" target="_blank" style="color: var(--headline-cyan); text-decoration: none;">${link.title}</a>
-                  </li>
-                `).join('')}</ul>
-              `;
-            }
-          }
         }
       } catch (error) {
         console.error(`Error processing ${file}:`, error);
