@@ -1,13 +1,16 @@
 [build]
   functions = "netlify/functions"
   publish = "."
+  included_files = ["sports-news.txt", "sports-news-archive.txt", "*.txt"]
 
 [[redirects]]
   from = "/sports-news-archive"
   to = "/sports-news-archive.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/sports-news-archive/*"
   to = "/sports-news-archive.html"
   status = 200
+  force = true
