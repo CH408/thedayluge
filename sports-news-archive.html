@@ -190,37 +190,41 @@
       init();
     });
 
-    // Load archive links
+    // Load archive links directly from sports-news.txt
     async function loadArchiveLinks() {
       try {
-        console.log('Fetching sports-news-archive.txt'); // Debug: Log fetch attempt
-        const response = await fetch('sports-news-archive.txt');
-        console.log('Fetch response:', response); // Debug: Log response
+        console.log('Fetching sports-news.txt for archive');
+        const response = await fetch('sports-news.txt');
+        console.log('Fetch response:', response);
         if (!response.ok) {
-          console.error(`Failed to load sports-news-archive.txt: ${response.status}`); // Debug: Log failure
+          console.error(`Failed to load sports-news.txt: ${response.status}`);
           return;
         }
         const text = await response.text();
-        console.log('Fetched text:', text); // Debug: Log raw text
+        console.log('Fetched text:', text);
         const lines = text.split('\n').filter(line => line.trim());
-        console.log('Parsed lines:', lines); // Debug: Log parsed lines
+        console.log('Parsed lines:', lines);
         const links = lines.map(line => {
           const [title, url] = line.split('|').map(s => s.trim());
           return { title, url };
         }).filter(link => link.title && link.url);
-        console.log('Processed links:', links); // Debug: Log processed links
+        console.log('Processed links:', links);
+
+        // Take links beyond the 5th (oldest links)
+        const archivedLinks = links.length > 5 ? links.slice(5) : [];
+        console.log('Archived links:', archivedLinks);
 
         const grid = document.getElementById('archive-links');
         if (grid) {
-          grid.innerHTML = links.map(link => `
-            <li class="headline">
+          grid.innerHTML = archivedLinks.map((link, index) => `
+            <li class="headline" style="animation-delay: ${index * 0.2}s;">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
-          console.log('Rendered links to DOM:', links); // Debug: Log rendered links
+          console.log('Rendered archived links to DOM:', archivedLinks);
         }
       } catch (error) {
-        console.error('Error loading archive links:', error); // Debug: Log error
+        console.error('Error loading archive links:', error);
       }
     }
 
