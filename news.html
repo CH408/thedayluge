@@ -60,7 +60,7 @@
     .title-container {
       display: flex;
       align-items: center;
-      max-width: 800px; /* Limits width to ~2/3 of 1200px desktop view */
+      max-width: 800px;
       justify-content: space-between;
       margin-bottom: 10px;
     }
@@ -296,7 +296,7 @@
           return { title, url };
         }).filter(link => link.title && link.url);
         
-        console.log(`Loaded ${file}:`, links); // Debug: Log loaded links
+        console.log(`Loaded ${file}:`, links);
         
         const grid = document.getElementById(gridId);
         if (grid) {
@@ -307,18 +307,22 @@
           `).join('');
         }
         
+        // Call Netlify function to manage links and archive oldest
         if (links.length > 5) {
-          const archiveLinks = links.slice(5);
-          console.log(`Archiving to ${archiveFile}:`, archiveLinks); // Debug: Log links to archive
-          const archiveResponse = await fetch('/.netlify/functions/archive', {
+          console.log(`More than 5 links in ${file}, calling archive function`);
+          const archiveResponse = await fetch('/.netlify/functions/manage-links', {
             method: 'POST',
-            body: JSON.stringify({ file: archiveFile, links: archiveLinks.map(link => `${link.title}|${link.url}`) })
+            body: JSON.stringify({
+              sourceFile: file,
+              archiveFile: archiveFile,
+              links: links
+            })
           });
           const archiveResult = await archiveResponse.json();
-          console.log(`Archive response for ${archiveFile}:`, archiveResult); // Debug: Log archive result
+          console.log(`Archive response for ${archiveFile}:`, archiveResult);
         }
       } catch (error) {
-        console.error(`Error loading ${file}:`, error);
+        console.error(`Error processing ${file}:`, error);
       }
     }
 
