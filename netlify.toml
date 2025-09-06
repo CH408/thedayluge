@@ -1,18 +1,13 @@
 [build]
-  # Directory where Netlify looks for serverless functions (archive.js, links.js)
   functions = "netlify/functions"
-  # Directory where Netlify publishes the site (root, since news.html and archive pages are in the root)
   publish = "."
 
 [functions]
-  # Use esbuild for bundling Node.js functions
   node_bundler = "esbuild"
-  # Ensure compatibility with fs.promises in archive.js
   node_version = "18"
 
-# Optional: Redirects for clean URLs, but only for unmatched paths
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false  # Allows actual files (e.g., news.html, .txt files) to take precedence
+  force = false
