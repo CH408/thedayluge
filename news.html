@@ -83,18 +83,23 @@
     .block-title.popculture { color: var(--pink); }
     .go-deeper-btn {
       background: transparent;
-      color: var(--light-cyan-glow);
+      color: #fff; /* White text */
       padding: 6px 12px;
-      border: 1px solid var(--bright-red);
+      border: 1px solid; /* Border color set by section-specific class */
       border-radius: 15px;
       font-size: 10px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px var(--light-cyan-glow);
+      text-shadow: 0 0 2px var(--light-cyan-glow); /* Reduced glow */
       transition: all 0.3s ease;
-      margin-left: 20px; /* Positions button closer to title */
+      margin-left: 20px;
     }
+    .go-deeper-btn.global { border-color: var(--bright-red); }
+    .go-deeper-btn.us { border-color: var(--orange); }
+    .go-deeper-btn.economy { border-color: var(--green); }
+    .go-deeper-btn.sports { border-color: var(--light-cyan-glow); }
+    .go-deeper-btn.popculture { border-color: var(--pink); }
     .go-deeper-btn:hover {
       background: rgba(255,0,0,0.1);
       box-shadow: 0 0 10px rgba(255,0,0,0.3);
@@ -170,35 +175,35 @@
     <div class="block">
       <div class="block-header">
         <div class="block-title global">Global News</div>
-        <a href="/global-news-archive" class="go-deeper-btn">Go Deeper</a>
+        <a href="/global-news-archive" class="go-deeper-btn global">Go Deeper</a>
       </div>
       <ul class="headlines global" id="global-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title us">US News</div>
-        <a href="/us-news-archive" class="go-deeper-btn">Go Deeper</a>
+        <a href="/us-news-archive" class="go-deeper-btn us">Go Deeper</a>
       </div>
       <ul class="headlines us" id="us-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title economy">Economy & Markets News</div>
-        <a href="/economy-news-archive" class="go-deeper-btn">Go Deeper</a>
+        <a href="/economy-news-archive" class="go-deeper-btn economy">Go Deeper</a>
       </div>
       <ul class="headlines economy" id="economy-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title sports">Sports News</div>
-        <a href="/sports-news-archive" class="go-deeper-btn">Go Deeper</a>
+        <a href="/sports-news-archive" class="go-deeper-btn sports">Go Deeper</a>
       </div>
       <ul class="headlines sports" id="sports-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title popculture">Pop Culture & Entertainment News</div>
-        <a href="/popculture-news-archive" class="go-deeper-btn">Go Deeper</a>
+        <a href="/popculture-news-archive" class="go-deeper-btn popculture">Go Deeper</a>
       </div>
       <ul class="headlines popculture" id="popculture-news"></ul>
     </div>
