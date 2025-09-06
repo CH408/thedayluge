@@ -1,7 +1,7 @@
 [build]
   functions = "netlify/functions"
   publish = "."
-  included_files = ["sports-news.txt", "sports-news-archive.txt", "*.txt"]
+  included_files = ["sports-news.txt", "global-news.txt", "us-news.txt", "economy-mkts-news.txt", "popculture-news.txt", "*.txt"]
 
 [[redirects]]
   from = "/sports-news-archive"
@@ -12,5 +12,53 @@
 [[redirects]]
   from = "/sports-news-archive/*"
   to = "/sports-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/global-news-archive"
+  to = "/global-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/global-news-archive/*"
+  to = "/global-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/us-news-archive"
+  to = "/us-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/us-news-archive/*"
+  to = "/us-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/economy-news-archive"
+  to = "/economy-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/economy-news-archive/*"
+  to = "/economy-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/popculture-news-archive"
+  to = "/popculture-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/popculture-news-archive/*"
+  to = "/popculture-news-archive.html"
   status = 200
   force = true
