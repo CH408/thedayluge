@@ -83,15 +83,15 @@
     .block-title.popculture { color: var(--pink); }
     .go-deeper-btn {
       background: transparent;
-      color: #fff; /* White text */
+      color: #fff;
       padding: 6px 12px;
-      border: 1px solid; /* Border color set by section-specific class */
+      border: 1px solid;
       border-radius: 15px;
       font-size: 10px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 2px var(--light-cyan-glow); /* Reduced glow */
+      text-shadow: 0 0 2px var(--light-cyan-glow);
       transition: all 0.3s ease;
       margin-left: 20px;
     }
@@ -175,35 +175,35 @@
     <div class="block">
       <div class="block-header">
         <div class="block-title global">Global News</div>
-        <a href="/global-news-archive" class="go-deeper-btn global">Go Deeper</a>
+        <a href="/global-news-archive.html" class="go-deeper-btn global">Go Deeper</a>
       </div>
       <ul class="headlines global" id="global-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title us">US News</div>
-        <a href="/us-news-archive" class="go-deeper-btn us">Go Deeper</a>
+        <a href="/us-news-archive.html" class="go-deeper-btn us">Go Deeper</a>
       </div>
       <ul class="headlines us" id="us-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title economy">Economy & Markets News</div>
-        <a href="/economy-news-archive" class="go-deeper-btn economy">Go Deeper</a>
+        <a href="/economy-news-archive.html" class="go-deeper-btn economy">Go Deeper</a>
       </div>
       <ul class="headlines economy" id="economy-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title sports">Sports News</div>
-        <a href="/sports-news-archive" class="go-deeper-btn sports">Go Deeper</a>
+        <a href="/sports-news-archive.html" class="go-deeper-btn sports">Go Deeper</a>
       </div>
       <ul class="headlines sports" id="sports-news"></ul>
     </div>
     <div class="block">
       <div class="block-header">
         <div class="block-title popculture">Pop Culture & Entertainment News</div>
-        <a href="/popculture-news-archive" class="go-deeper-btn popculture">Go Deeper</a>
+        <a href="/popculture-news-archive.html" class="go-deeper-btn popculture">Go Deeper</a>
       </div>
       <ul class="headlines popculture" id="popculture-news"></ul>
     </div>
@@ -211,11 +211,11 @@
   <script>
     // Load news links from .txt files
     const txtFiles = [
-      { id: 'global-news', file: 'global-news.txt', archive: 'global-news-archive.txt' },
-      { id: 'us-news', file: 'us-news.txt', archive: 'us-news-archive.txt' },
-      { id: 'economy-news', file: 'economy-mkts-news.txt', archive: 'economy-news-archive.txt' },
-      { id: 'sports-news', file: 'sports-news.txt', archive: 'sports-news-archive.txt' },
-      { id: 'popculture-news', file: 'popculture-news.txt', archive: 'popculture-news-archive.txt' }
+      { id: 'global-news', file: 'global-news.txt', archive: 'global-news-archive.txt', archivePage: 'global-news-archive.html' },
+      { id: 'us-news', file: 'us-news.txt', archive: 'us-news-archive.txt', archivePage: 'us-news-archive.html' },
+      { id: 'economy-news', file: 'economy-mkts-news.txt', archive: 'economy-news-archive.txt', archivePage: 'economy-news-archive.html' },
+      { id: 'sports-news', file: 'sports-news.txt', archive: 'sports-news-archive.txt', archivePage: 'sports-news-archive.html' },
+      { id: 'popculture-news', file: 'popculture-news.txt', archive: 'popculture-news-archive.txt', archivePage: 'popculture-news-archive.html' }
     ];
 
     async function loadNewsLinks() {
@@ -245,8 +245,8 @@
             `).join('');
           }
 
-          // Flag links 6+ (index 5+) for section-specific archiving
-          const toArchive = links.slice(5);
+          // Flag the 6th link (index 5) for archiving
+          const toArchive = links.slice(5, 6); // Only the 6th link
           if (toArchive.length > 0) {
             archiveByCategory[archive] = toArchive.map(link => `${link.title}|${link.url}`);
           }
@@ -254,12 +254,25 @@
           console.error(`Error loading ${file}:`, error);
         }
       }
-      // Log links to archive by category (server-side needed for writing to archive files)
+
+      // Send links to archive to server-side endpoint
       for (const [archiveFile, links] of Object.entries(archiveByCategory)) {
         if (links.length > 0) {
-          console.log(`Links to archive in ${archiveFile}:`, links);
-          // TODO: Send to server-side endpoint to append to archiveFile
-          // Example: await fetch('/archive', { method: 'POST', body: JSON.stringify({ file: archiveFile, links }) });
+          console.log(`Archiving to ${archiveFile}:`, links);
+          try {
+            const response = await fetch('/.netlify/functions/archive', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ file: archiveFile, links })
+            });
+            if (!response.ok) {
+              console.error(`Failed to archive to ${archiveFile}: ${response.status}`);
+            } else {
+              console.log(`Successfully archived to ${archiveFile}`);
+            }
+          } catch (error) {
+            console.error(`Error archiving to ${archiveFile}:`, error);
+          }
         }
       }
     }
@@ -286,11 +299,11 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1; // 1–3px
+        this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
         this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
-        this.hasTail = Math.random() < 0.25; // 25% chance for comet tail
+        this.hasTail = Math.random() < 0.25;
       }
       update() {
         this.x += this.speedX;
@@ -305,14 +318,12 @@
         ctx.fill();
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
-
-        // Draw comet tail for some particles
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
             this.x - this.speedX * 10, this.y - this.speedY * 10
           );
-          gradient.addColorStop(0, this.color + '33'); // Semi-transparent
+          gradient.addColorStop(0, this.color + '33');
           gradient.addColorStop(1, 'transparent');
           ctx.beginPath();
           ctx.moveTo(this.x, this.y);
