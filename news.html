@@ -60,6 +60,7 @@
     .title-container {
       display: flex;
       align-items: center;
+      max-width: 800px; /* Limits width to ~2/3 of 1200px desktop view */
       justify-content: space-between;
       margin-bottom: 10px;
     }
@@ -108,7 +109,7 @@
       75% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .headlines { list-style: none; }
+    .headlines { list-style: none; max-width: 800px; }
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
@@ -170,9 +171,8 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper { font-size: 10px; padding: 6px 12px; }
-      .title-container { flex-direction: column; align-items: flex-start; }
-      .go-deeper { margin-top: 5px; }
+      .go-deeper { font-size: 10px; padding: 6px 12px; margin-left: 10px; }
+      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
   </style>
 </head>
