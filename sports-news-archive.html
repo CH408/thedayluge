@@ -193,17 +193,22 @@
     // Load archive links
     async function loadArchiveLinks() {
       try {
+        console.log('Fetching sports-news-archive.txt'); // Debug: Log fetch attempt
         const response = await fetch('sports-news-archive.txt');
+        console.log('Fetch response:', response); // Debug: Log response
         if (!response.ok) {
-          console.error(`Failed to load sports-news-archive.txt: ${response.status}`);
+          console.error(`Failed to load sports-news-archive.txt: ${response.status}`); // Debug: Log failure
           return;
         }
         const text = await response.text();
+        console.log('Fetched text:', text); // Debug: Log raw text
         const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines); // Debug: Log parsed lines
         const links = lines.map(line => {
           const [title, url] = line.split('|').map(s => s.trim());
           return { title, url };
         }).filter(link => link.title && link.url);
+        console.log('Processed links:', links); // Debug: Log processed links
 
         const grid = document.getElementById('archive-links');
         if (grid) {
@@ -212,9 +217,10 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          console.log('Rendered links to DOM:', links); // Debug: Log rendered links
         }
       } catch (error) {
-        console.error('Error loading archive links:', error);
+        console.error('Error loading archive links:', error); // Debug: Log error
       }
     }
 
