@@ -1,0 +1,13 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[[redirects]]
+  from = "/sports-news-archive"
+  to = "/sports-news-archive.html"
+  status = 200
+
+[[redirects]]
+  from = "/sports-news-archive/*"
+  to = "/sports-news-archive.html"
+  status = 200
