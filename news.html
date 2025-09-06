@@ -56,6 +56,11 @@
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
+    }
+    .title-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin-bottom: 10px;
     }
     .global-news-title { color: var(--light-red-glow); animation: block-title-pulse-red 8s ease-in-out infinite; }
@@ -137,7 +142,6 @@
     .popculture-news-links .headline a:hover { color: var(--light-pink-glow); text-shadow: 0 0 10px var(--light-pink-glow); }
     .go-deeper {
       display: inline-block;
-      margin-top: 10px;
       background: transparent;
       color: inherit;
       padding: 8px 16px;
@@ -167,6 +171,8 @@
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
       .go-deeper { font-size: 10px; padding: 6px 12px; }
+      .title-container { flex-direction: column; align-items: flex-start; }
+      .go-deeper { margin-top: 5px; }
     }
   </style>
 </head>
@@ -174,29 +180,39 @@
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="global-news">
-      <div class="block-title global-news-title">Global News</div>
+      <div class="title-container">
+        <div class="block-title global-news-title">Global News</div>
+        <a href="/global-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
       <ul class="headlines global-news-links" id="global-news-links"></ul>
-      <a href="/global-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
     <div class="us-news">
-      <div class="block-title us-news-title">US News</div>
+      <div class="title-container">
+        <div class="block-title us-news-title">US News</div>
+        <a href="/us-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
       <ul class="headlines us-news-links" id="us-news-links"></ul>
-      <a href="/us-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
     <div class="economy-news">
-      <div class="block-title economy-news-title">Economy & Markets</div>
+      <div class="title-container">
+        <div class="block-title economy-news-title">Economy & Markets</div>
+        <a href="/economy-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
       <ul class="headlines economy-news-links" id="economy-news-links"></ul>
-      <a href="/economy-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
     <div class="sports-news">
-      <div class="block-title sports-news-title">Sports News</div>
+      <div class="title-container">
+        <div class="block-title sports-news-title">Sports News</div>
+        <a href="/sports-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
       <ul class="headlines sports-news-links" id="sports-news-links"></ul>
-      <a href="/sports-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
     <div class="popculture-news">
-      <div class="block-title popculture-news-title">Pop Culture & Entertainment</div>
+      <div class="title-container">
+        <div class="block-title popculture-news-title">Pop Culture & Entertainment</div>
+        <a href="/popculture-news-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
       <ul class="headlines popculture-news-links" id="popculture-news-links"></ul>
-      <a href="/popculture-news-archive.html" class="go-deeper">Go Deeper</a>
     </div>
   </div>
   <script>
@@ -280,6 +296,8 @@
           return { title, url };
         }).filter(link => link.title && link.url);
         
+        console.log(`Loaded ${file}:`, links); // Debug: Log loaded links
+        
         const grid = document.getElementById(gridId);
         if (grid) {
           grid.innerHTML = links.slice(0, 5).map(link => `
@@ -291,10 +309,13 @@
         
         if (links.length > 5) {
           const archiveLinks = links.slice(5);
-          await fetch('/.netlify/functions/archive', {
+          console.log(`Archiving to ${archiveFile}:`, archiveLinks); // Debug: Log links to archive
+          const archiveResponse = await fetch('/.netlify/functions/archive', {
             method: 'POST',
             body: JSON.stringify({ file: archiveFile, links: archiveLinks.map(link => `${link.title}|${link.url}`) })
           });
+          const archiveResult = await archiveResponse.json();
+          console.log(`Archive response for ${archiveFile}:`, archiveResult); // Debug: Log archive result
         }
       } catch (error) {
         console.error(`Error loading ${file}:`, error);
