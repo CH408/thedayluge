@@ -32,21 +32,20 @@ exports.handler = async function(event, context) {
       await fs.writeFile(archivePath, archiveLines.join('\n') + '\n');
     }
     
-    // Log the archived links for debugging
-    console.log(`Archived to ${archivePath}:`, oldestLinks);
-    
+    // Return archived links for debugging
     return {
       statusCode: 200,
       body: JSON.stringify({ 
-        message: `Updated ${sourceFile} and archived to ${archiveFile} in /tmp`,
-        archivedLinks: oldestLinks
+        message: `Processed ${sourceFile} and archived to ${archiveFile} in /tmp`,
+        archivedLinks: oldestLinks,
+        newestLinks: newestLinks
       })
     };
   } catch (error) {
     console.error('Error in manage-links:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to manage links' })
+      body: JSON.stringify({ error: 'Failed to manage links', details: error.message })
     };
   }
 };
