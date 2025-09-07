@@ -84,7 +84,7 @@
   }
 
   .category-title{
-    color:#D2B48C; /* Tan color from old file */
+    color:#D2B48C; /* Tan color from original file */
     font-size:24px;
     text-transform:uppercase;
     margin-bottom:20px;
@@ -110,7 +110,7 @@
     font-weight:bold;
     text-transform:uppercase;
     border:1px solid rgba(255,221,0,0.3);
-    box-shadow:0 0 5px rgba(210,180,140,0.1); /* Adjusted to match tan theme */
+    box-shadow:0 0 5px rgba(210,180,140,0.1);
     transition:all 0.3s ease;
     z-index:20;
     text-shadow:0 0 5px #00ddff;
@@ -124,12 +124,15 @@
     opacity:1;
   }
 
-  /* Links grid */
+  /* Links grid - CONVERTED TO 1-COLUMN */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
-    gap:12px;
+    grid-template-columns:1fr;
+    gap:5px;
     margin-top:30px;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
   }
 
   .link{
@@ -155,8 +158,8 @@
     word-break:break-word;
     text-shadow:0 0 10px rgba(210,180,140,0.5);
     border-bottom:1px solid rgba(210,180,140,0.3);
-    padding-bottom:6px;
-    line-height:1.3;
+    padding-bottom:8px;
+    line-height:1.4;
   }
   .link a:hover{
     color:#D2B48C;
@@ -164,13 +167,20 @@
     text-shadow:0 0 15px rgba(210,180,140,0.8);
   }
 
+  /* Button container for side-by-side buttons */
+  .button-container{
+    margin:40px auto;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+
   /* Random button */
   .random-button{
-    margin:40px auto;
-    display:block;
-    background:linear-gradient(45deg, var(--brown) 0%, #654321 100%); /* Brown gradient from old file */
+    background:linear-gradient(45deg, var(--brown) 0%, #654321 100%);
     color:white;
-    border:2px solid #D2B48C; /* Tan border */
+    border:2px solid #D2B48C;
     padding:14px 28px;
     border-radius:30px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
@@ -189,15 +199,46 @@
     box-shadow:0 0 25px rgba(210,180,140,0.5), 0 8px 20px rgba(0,0,0,0.4);
   }
 
+  /* Go Deeper button */
+  .go-deeper-button{
+    background:transparent;
+    color:#D2B48C;
+    border:2px solid #D2B48C;
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    text-shadow:0 0 5px rgba(210,180,140,0.5);
+    text-decoration:none;
+    display:inline-block;
+  }
+  .go-deeper-button:hover{
+    background:rgba(210,180,140,0.1);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(210,180,140,0.3);
+    color:#ffffff;
+  }
+
   /* Responsive */
   @media(max-width:600px){
-    .grid{
-      grid-template-columns:1fr;
-    }
     h1{font-size:28px;}
     .category-title{font-size:20px;}
-    .link{padding:10px 15px;}
+    .link{padding:12px 20px;}
     .link a{font-size:16px;}
+    .button-container{
+      flex-direction:column;
+      align-items:center;
+      gap:15px;
+    }
+    .random-button, .go-deeper-button{
+      padding:12px 24px;
+      font-size:13px;
+    }
   }
 </style>
 </head>
@@ -212,17 +253,22 @@
 
   <!-- Arts & Literature Links Grid -->
   <div class="grid" id="arts-grid">
-    <!-- Links will be loaded dynamically from arts-literature-links.txt -->
+    <!-- Links will be loaded dynamically from arts-literature-links.txt (first 36 only) -->
   </div>
 
-  <!-- Category Random Button -->
-  <button class="random-button" onclick="goToRandomArts()">
-    ⚛️ SURPRISE ME!
-  </button>
+  <!-- Button Container -->
+  <div class="button-container">
+    <button class="random-button" onclick="goToRandomArts()">
+      ⚛️ SURPRISE ME!
+    </button>
+    <a href="/arts-literature-archive.html" class="go-deeper-button">
+      📚 GO DEEPER
+    </a>
+  </div>
 </div>
 
 <script>
-// Load arts & literature links from external file
+// Load arts & literature links from external file (limit to first 36)
 async function loadArtsLinks() {
   try {
     const response = await fetch('arts-literature-links.txt');
@@ -245,10 +291,13 @@ async function loadArtsLinks() {
       return null;
     }).filter(link => link !== null);
     
+    // Only show first 36 links (the rest go to archive)
+    const displayLinks = links.slice(0, 36);
+    
     // Populate the grid
     const grid = document.getElementById('arts-grid');
-    if (grid && links.length > 0) {
-      grid.innerHTML = links.map(link => `
+    if (grid && displayLinks.length > 0) {
+      grid.innerHTML = displayLinks.map(link => `
         <div class="link">
           <a href="${link.url}" target="_blank">
             ${link.title}
@@ -256,6 +305,8 @@ async function loadArtsLinks() {
         </div>
       `).join('');
     }
+    
+    console.log(`Showing ${displayLinks.length} arts & literature links (${links.length - displayLinks.length} moved to archive)`);
     
   } catch (error) {
     console.error('Error loading arts & literature links:', error);
@@ -282,8 +333,10 @@ async function goToRandomArts() {
       return null;
     }).filter(link => link !== null);
     
-    if (links.length > 0) {
-      const randomLink = links[Math.floor(Math.random() * links.length)];
+    // Random from first 36 links only (current page links)
+    const currentLinks = links.slice(0, 36);
+    if (currentLinks.length > 0) {
+      const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
       window.open(randomLink, '_blank');
     }
     
