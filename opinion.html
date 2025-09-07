@@ -251,7 +251,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 5); // Limit to 5 for consistency with first file
+        const displayLinks = links.slice(0, 36); // Display 36 links
         const grid = document.getElementById('opinion-news-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -283,7 +283,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 5); // Limit to 5 for consistency
+        const currentLinks = links.slice(0, 36); // Select from 36 links
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
