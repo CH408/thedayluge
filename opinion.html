@@ -124,19 +124,22 @@
     opacity:1;
   }
 
-  /* Links grid */
+  /* Links grid - CONVERTED TO 1-COLUMN */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
-    gap:12px;
+    grid-template-columns:1fr;
+    gap:15px;
     margin-top:30px;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
   }
 
   .link{
     background:transparent;
     border:none;
     border-radius:15px;
-    padding:12px 20px;
+    padding:15px 25px;
     transition:all 0.3s ease;
     margin-bottom:5px;
   }
@@ -155,8 +158,8 @@
     word-break:break-word;
     text-shadow:0 0 10px rgba(255,136,0,0.5);
     border-bottom:1px solid rgba(255,136,0,0.3);
-    padding-bottom:6px;
-    line-height:1.3;
+    padding-bottom:8px;
+    line-height:1.4;
   }
   .link a:hover{
     color:var(--orange);
@@ -164,10 +167,17 @@
     text-shadow:0 0 15px rgba(255,136,0,0.8);
   }
 
+  /* Button container for side-by-side buttons */
+  .button-container{
+    margin:40px auto;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+
   /* Random button */
   .random-button{
-    margin:40px auto;
-    display:block;
     background:linear-gradient(45deg, var(--orange) 0%, #ff6600 100%);
     color:white;
     border:2px solid #ffdd00;
@@ -189,15 +199,46 @@
     box-shadow:0 0 25px rgba(255,136,0,0.5), 0 8px 20px rgba(0,0,0,0.4);
   }
 
+  /* Go Deeper button */
+  .go-deeper-button{
+    background:transparent;
+    color:var(--orange);
+    border:2px solid var(--orange);
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    text-shadow:0 0 5px rgba(255,136,0,0.5);
+    text-decoration:none;
+    display:inline-block;
+  }
+  .go-deeper-button:hover{
+    background:rgba(255,136,0,0.1);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(255,136,0,0.3);
+    color:#ffffff;
+  }
+
   /* Responsive */
   @media(max-width:600px){
-    .grid{
-      grid-template-columns:1fr;
-    }
     h1{font-size:28px;}
     .category-title{font-size:22px; padding:12px 20px;}
     .link{padding:15px;}
     .link a{font-size:16px;}
+    .button-container{
+      flex-direction:column;
+      align-items:center;
+      gap:15px;
+    }
+    .random-button, .go-deeper-button{
+      padding:12px 24px;
+      font-size:13px;
+    }
   }
 </style>
 </head>
@@ -212,17 +253,22 @@
 
   <!-- Opinion Links Grid -->
   <div class="grid" id="opinion-grid">
-    <!-- Links will be loaded dynamically from opinion-links.txt -->
+    <!-- Links will be loaded dynamically from opinion-links.txt (first 36 only) -->
   </div>
 
-  <!-- Category Random Button -->
-  <button class="random-button" onclick="goToRandomOpinion()">
-    ⚛️ SURPRISE ME!
-  </button>
+  <!-- Button Container -->
+  <div class="button-container">
+    <button class="random-button" onclick="goToRandomOpinion()">
+      ⚛️ SURPRISE ME!
+    </button>
+    <a href="/opinion-archive.html" class="go-deeper-button">
+      📚 GO DEEPER
+    </a>
+  </div>
 </div>
 
 <script>
-// Load opinion links from external file
+// Load opinion links from external file (limit to first 36)
 async function loadOpinionLinks() {
   try {
     const response = await fetch('opinion-links.txt');
@@ -245,10 +291,13 @@ async function loadOpinionLinks() {
       return null;
     }).filter(link => link !== null);
     
+    // Only show first 36 links (the rest go to archive)
+    const displayLinks = links.slice(0, 36);
+    
     // Populate the grid
     const grid = document.getElementById('opinion-grid');
-    if (grid && links.length > 0) {
-      grid.innerHTML = links.map(link => `
+    if (grid && displayLinks.length > 0) {
+      grid.innerHTML = displayLinks.map(link => `
         <div class="link">
           <a href="${link.url}" target="_blank">
             ${link.title}
@@ -256,6 +305,8 @@ async function loadOpinionLinks() {
         </div>
       `).join('');
     }
+    
+    console.log(`Showing ${displayLinks.length} opinion links (${links.length - displayLinks.length} moved to archive)`);
     
   } catch (error) {
     console.error('Error loading opinion links:', error);
@@ -282,8 +333,10 @@ async function goToRandomOpinion() {
       return null;
     }).filter(link => link !== null);
     
-    if (links.length > 0) {
-      const randomLink = links[Math.floor(Math.random() * links.length)];
+    // Random from first 36 links only (current page links)
+    const currentLinks = links.slice(0, 36);
+    if (currentLinks.length > 0) {
+      const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
       window.open(randomLink, '_blank');
     }
     
