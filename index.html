@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THE DAYLUGE</title>
@@ -23,7 +25,6 @@
     --brown:#8B4513;
     --dark-green:#006400;
     --bright-blue:#00b7eb; /* For title animation */
-
     --ink:#111; 
     --rule:#bfbfbf;
     --maxw:1400px;
@@ -130,7 +131,6 @@
   }
 
   body::after {
-    content: '';
     position:absolute;
     top:-2px; left:-2px; right:-2px; bottom:-2px;
     background:
@@ -389,19 +389,76 @@
   }
 
   /* Energy beams (connecting lines) */
-  .wheel-line{
-    position:absolute;
-    background:linear-gradient(90deg, #00ddff88, #ffffff44, #00ddff88);
-    height:3px;
-    transform-origin:left center;
-    z-index:1;
-    box-shadow:0 0 8px #00ddff;
-    animation:energy-pulse-line 2s ease-in-out infinite;
+  .wheel-line {
+    position: absolute;
+    background: linear-gradient(
+      90deg,
+      var(--light-cyan-glow) 0%,
+      #ffffff 50%,
+      var(--bright-purple-glow) 100%
+    );
+    height: 3px;
+    transform-origin: left center;
+    z-index: 1;
+    box-shadow: 0 0 8px var(--light-cyan-glow), 0 0 15px var(--light-cyan-glow);
+    animation: energy-pulse-line 2.5s ease-in-out infinite, color-shift 6s ease-in-out infinite;
   }
 
+  /* Enhanced pulse and glow animation */
   @keyframes energy-pulse-line {
-    0%, 100% { opacity:0.6; box-shadow:0 0 8px #00ddff; }
-    50% { opacity:1; box-shadow:0 0 15px #00ddff, 0 0 25px #00ddff88; }
+    0%, 100% {
+      height: 3px;
+      opacity: 0.6;
+      box-shadow: 0 0 8px var(--light-cyan-glow), 0 0 15px var(--light-cyan-glow);
+    }
+    50% {
+      height: 4px;
+      opacity: 1;
+      box-shadow: 0 0 20px var(--light-cyan-glow), 0 0 30px var(--bright-purple-glow);
+    }
+  }
+
+  /* Color shift animation for dynamic effect */
+  @keyframes color-shift {
+    0%, 100% {
+      background: linear-gradient(
+        90deg,
+        var(--light-cyan-glow) 0%,
+        #ffffff 50%,
+        var(--bright-purple-glow) 100%
+      );
+      box-shadow: 0 0 8px var(--light-cyan-glow), 0 0 15px var(--light-cyan-glow);
+    }
+    33% {
+      background: linear-gradient(
+        90deg,
+        var(--pink) 0%,
+        #ffffff 50%,
+        var(--bright-blue) 100%
+      );
+      box-shadow: 0 0 8px var(--pink), 0 0 15px var(--bright-blue);
+    }
+    66% {
+      background: linear-gradient(
+        90deg,
+        var(--bright-purple-glow) 0%,
+        #ffffff 50%,
+        var(--light-cyan-glow) 100%
+      );
+      box-shadow: 0 0 8px var(--bright-purple-glow), 0 0 15px var(--light-cyan-glow);
+    }
+  }
+
+  /* Hover effect for wheel-container */
+  .wheel-container:hover .wheel-line {
+    background: linear-gradient(
+      90deg,
+      var(--light-cyan-glow) 0%,
+      #ffffff 50%,
+      var(--pink) 100%
+    );
+    box-shadow: 0 0 25px var(--light-cyan-glow), 0 0 35px var(--pink);
+    animation: energy-pulse-line 1.5s ease-in-out infinite, color-shift 4s ease-in-out infinite;
   }
 
   /* Lines positioning for 8 spokes */
@@ -551,6 +608,33 @@
     body::before, body::after{
       animation-duration:10s;
     }
+    /* Mobile optimization for wheel-line */
+    .wheel-line {
+      animation: energy-pulse-line 3s ease-in-out infinite; /* Slower animation */
+      box-shadow: 0 0 5px var(--light-cyan-glow); /* Reduced glow */
+    }
+    @keyframes energy-pulse-line {
+      0%, 100% {
+        height: 2.5px;
+        opacity: 0.7;
+        box-shadow: 0 0 5px var(--light-cyan-glow);
+      }
+      50% {
+        height: 3.5px;
+        opacity: 1;
+        box-shadow: 0 0 12px var(--light-cyan-glow), 0 0 20px var(--bright-purple-glow);
+      }
+    }
+    /* Disable color-shift on mobile for performance */
+    .wheel-line {
+      animation: energy-pulse-line 3s ease-in-out infinite;
+      background: linear-gradient(
+        90deg,
+        var(--light-cyan-glow) 0%,
+        #ffffff 50%,
+        var(--bright-purple-glow) 100%
+      );
+    }
   }
 
   /* Extra small mobile phones */
@@ -636,11 +720,6 @@
   }
 
   /* Hover effect for the atom */
-  .wheel-container:hover .wheel-line{
-    background:linear-gradient(90deg, #00ddffbb, #ffffffff, #00ddffbb);
-    box-shadow:0 0 20px #00ddff;
-    transition:all 0.3s ease;
-  }
   .wheel-container:hover .orbital-ring{
     border-color:#00ddffaa;
     box-shadow:0 0 15px #00ddff55;
@@ -678,46 +757,49 @@
     <!-- Orbital rings -->
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
-    <div class="orbital-ring orbital-ring-3"></div><!-- Energy beams -->
-<div class="wheel-line line-1"></div>
-<div class="wheel-line line-2"></div>
-<div class="wheel-line line-3"></div>
-<div class="wheel-line line-4"></div>
-<div class="wheel-line line-5"></div>
-<div class="wheel-line line-6"></div>
-<div class="wheel-line line-7"></div>
-<div class="wheel-line line-8"></div>
+    <div class="orbital-ring orbital-ring-3"></div>
 
-<!-- Nucleus -->
-<div class="wheel-center" onclick="goToNewsHub()">
-  TRENDING
-NEWS
-</div>
+    <!-- Energy beams -->
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-line line-4"></div>
+    <div class="wheel-line line-5"></div>
+    <div class="wheel-line line-6"></div>
+    <div class="wheel-line line-7"></div>
+    <div class="wheel-line line-8"></div>
 
-<!-- Electrons (category spokes) -->
-<div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
-<div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,
-Philosophy
-& Culture</div>
-<div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts
-&
-Literature</div>
-<div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,
-Nature
-& Health</div>
-<div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,
-Leisure
-& Ent</div>
-<div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take
-A
-Pause</div>
-<div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
-Corner</div>
-<div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>  </div>
+    <!-- Nucleus -->
+    <div class="wheel-center" onclick="goToNewsHub()">
+      TRENDING
+      NEWS
+    </div>
+
+    <!-- Electrons (category spokes) -->
+    <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
+    <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,
+      Philosophy
+      & Culture</div>
+    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts
+      &
+      Literature</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,
+      Nature
+      & Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,
+      Leisure
+      & Ent</div>
+    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take
+      A
+      Pause</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
+      Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>
+  </div>
 
   <!-- Quantum random button -->
   <button class="random-button" onclick="goToRandomArticle()">
-     SURPRISE ME!
+    SURPRISE ME!
   </button>
 
   <!-- Archive link -->
@@ -913,4 +995,3 @@ center.addEventListener('mouseleave', function() {
 </script>
 </body>
 </html>
-
