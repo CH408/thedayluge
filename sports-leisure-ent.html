@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sports, Leisure & Entertainment - THE DAYLUGE</title>
+<title>Science, Nature & Health - THE DAYLUGE</title>
 
 <!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     --red:#cc0000; 
     --orange:#ff8800; 
     --green:#00dd55;
-    --blue:#4DA8DA; /* Brighter blue with turquoise hint (replacing #4682B4) */
+    --blue:#1a1a80;
     --light-blue:#33ddff;
     --violet:#cc88ff;
     --pink:#ff1493;
@@ -84,7 +84,7 @@
   }
 
   .category-title{
-    color:#4DA8DA; /* Brighter blue-turquoise */
+    color:var(--green);
     font-size:24px;
     text-transform:uppercase;
     margin-bottom:20px;
@@ -93,7 +93,7 @@
     letter-spacing:1px;
     text-decoration:underline;
     text-underline-offset:8px;
-    text-decoration-color:#4DA8DA;
+    text-decoration-color:var(--green);
   }
 
   /* Back to Home button - bottom right corner */
@@ -110,7 +110,7 @@
     font-weight:bold;
     text-transform:uppercase;
     border:1px solid rgba(255,221,0,0.3);
-    box-shadow:0 0 5px rgba(77,168,218,0.1); /* Adjusted to match new blue-turquoise */
+    box-shadow:0 0 5px rgba(0,221,85,0.1);
     transition:all 0.3s ease;
     z-index:20;
     text-shadow:0 0 5px #00ddff;
@@ -118,18 +118,21 @@
   }
   .back-btn:hover{
     background:rgba(255,255,255,0.1);
-    box-shadow:0 0 15px rgba(77,168,218,0.3);
+    box-shadow:0 0 15px rgba(0,221,85,0.3);
     transform:scale(1.05);
     color:#ffffff;
     opacity:1;
   }
 
-  /* Links grid */
+  /* Links grid - CONVERTED TO 1-COLUMN */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
-    gap:12px;
+    grid-template-columns:1fr;
+    gap:5px;
     margin-top:30px;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
   }
 
   .link{
@@ -143,7 +146,7 @@
 
   .link:hover{
     transform:translateY(-5px) scale(1.02);
-    box-shadow:0 0 20px rgba(77,168,218,0.3);
+    box-shadow:0 0 20px rgba(0,221,85,0.3);
   }
 
   .link a{
@@ -153,24 +156,31 @@
     text-decoration:none;
     color:#ffffff;
     word-break:break-word;
-    text-shadow:0 0 10px rgba(77,168,218,0.5);
-    border-bottom:1px solid rgba(77,168,218,0.3);
-    padding-bottom:6px;
-    line-height:1.3;
+    text-shadow:0 0 10px rgba(0,221,85,0.5);
+    border-bottom:1px solid rgba(0,221,85,0.3);
+    padding-bottom:8px;
+    line-height:1.4;
   }
   .link a:hover{
-    color:#4DA8DA;
+    color:var(--green);
     text-decoration:underline;
-    text-shadow:0 0 15px rgba(77,168,218,0.8);
+    text-shadow:0 0 15px rgba(0,221,85,0.8);
+  }
+
+  /* Button container for side-by-side buttons */
+  .button-container{
+    margin:40px auto;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
   }
 
   /* Random button */
   .random-button{
-    margin:40px auto;
-    display:block;
-    background:linear-gradient(45deg, var(--blue) 0%, #3D8BBA 100%); /* Adjusted gradient with brighter blue */
-    color:white;
-    border:2px solid #4DA8DA; /* New blue-turquoise border */
+    background:linear-gradient(45deg, var(--green) 0%, #00aa33 100%);
+    color:black;
+    border:2px solid #00dd55;
     padding:14px 28px;
     border-radius:30px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
@@ -180,24 +190,55 @@
     letter-spacing:0.5px;
     cursor:pointer;
     transition:all 0.3s ease;
-    box-shadow:0 0 15px rgba(77,168,218,0.3);
-    text-shadow:0 0 5px #ffffff;
+    box-shadow:0 0 15px rgba(0,221,85,0.3);
+    text-shadow:0 0 3px rgba(0,0,0,0.5);
   }
   .random-button:hover{
-    background:linear-gradient(45deg, #3D8BBA 0%, var(--blue) 100%);
+    background:linear-gradient(45deg, #00aa33 0%, var(--green) 100%);
     transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(77,168,218,0.5), 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow:0 0 25px rgba(0,221,85,0.5), 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  /* Go Deeper button */
+  .go-deeper-button{
+    background:transparent;
+    color:var(--green);
+    border:2px solid var(--green);
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    text-shadow:0 0 5px rgba(0,221,85,0.5);
+    text-decoration:none;
+    display:inline-block;
+  }
+  .go-deeper-button:hover{
+    background:rgba(0,221,85,0.1);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(0,221,85,0.3);
+    color:#ffffff;
   }
 
   /* Responsive */
   @media(max-width:600px){
-    .grid{
-      grid-template-columns:1fr;
-    }
     h1{font-size:28px;}
     .category-title{font-size:20px;}
-    .link{padding:10px 15px;}
+    .link{padding:12px 20px;}
     .link a{font-size:16px;}
+    .button-container{
+      flex-direction:column;
+      align-items:center;
+      gap:15px;
+    }
+    .random-button, .go-deeper-button{
+      padding:12px 24px;
+      font-size:13px;
+    }
   }
 </style>
 </head>
@@ -207,27 +248,32 @@
 <div class="wrap">
   <header>
     <h1>THE DAYLUGE</h1>
-    <div class="category-title">Sports, Leisure & Entertainment</div>
+    <div class="category-title">Science, Nature & Health</div>
   </header>
 
-  <!-- Sports, Leisure & Entertainment Links Grid -->
-  <div class="grid" id="sports-grid">
-    <!-- Links will be loaded dynamically from sports-leisure-ent-links.txt -->
+  <!-- Science, Nature & Health Links Grid -->
+  <div class="grid" id="science-grid">
+    <!-- Links will be loaded dynamically from science-nature-health-links.txt (first 36 only) -->
   </div>
 
-  <!-- Category Random Button -->
-  <button class="random-button" onclick="goToRandomSports()">
-    ⚛️ SURPRISE ME!
-  </button>
+  <!-- Button Container -->
+  <div class="button-container">
+    <button class="random-button" onclick="goToRandomScience()">
+      ⚛️ SURPRISE ME!
+    </button>
+    <a href="/science-nature-health-archive.html" class="go-deeper-button">
+      📚 GO DEEPER
+    </a>
+  </div>
 </div>
 
 <script>
-// Load sports links from external file
-async function loadSportsLinks() {
+// Load science/nature/health links from external file (limit to first 36)
+async function loadScienceLinks() {
   try {
-    const response = await fetch('sports-leisure-ent-links.txt');
+    const response = await fetch('science-nature-health-links.txt');
     if (!response.ok) {
-      console.error('Failed to load sports-leisure-ent-links.txt:', response.status);
+      console.error('Failed to load science-nature-health-links.txt:', response.status);
       return;
     }
     
@@ -245,10 +291,13 @@ async function loadSportsLinks() {
       return null;
     }).filter(link => link !== null);
     
+    // Only show first 36 links (the rest go to archive)
+    const displayLinks = links.slice(0, 36);
+    
     // Populate the grid
-    const grid = document.getElementById('sports-grid');
-    if (grid && links.length > 0) {
-      grid.innerHTML = links.map(link => `
+    const grid = document.getElementById('science-grid');
+    if (grid && displayLinks.length > 0) {
+      grid.innerHTML = displayLinks.map(link => `
         <div class="link">
           <a href="${link.url}" target="_blank">
             ${link.title}
@@ -257,17 +306,19 @@ async function loadSportsLinks() {
       `).join('');
     }
     
+    console.log(`Showing ${displayLinks.length} science/nature/health links (${links.length - displayLinks.length} moved to archive)`);
+    
   } catch (error) {
-    console.error('Error loading sports links:', error);
+    console.error('Error loading science/nature/health links:', error);
   }
 }
 
-// Random sports/leisure/entertainment article function
-async function goToRandomSports() {
+// Random science/nature/health article function
+async function goToRandomScience() {
   try {
-    const response = await fetch('sports-leisure-ent-links.txt');
+    const response = await fetch('science-nature-health-links.txt');
     if (!response.ok) {
-      console.log('Could not load sports-leisure-ent-links.txt for random selection');
+      console.log('Could not load science-nature-health-links.txt for random selection');
       return;
     }
     
@@ -282,8 +333,10 @@ async function goToRandomSports() {
       return null;
     }).filter(link => link !== null);
     
-    if (links.length > 0) {
-      const randomLink = links[Math.floor(Math.random() * links.length)];
+    // Random from first 36 links only (current page links)
+    const currentLinks = links.slice(0, 36);
+    if (currentLinks.length > 0) {
+      const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
       window.open(randomLink, '_blank');
     }
     
@@ -293,7 +346,7 @@ async function goToRandomSports() {
 }
 
 // Load links when page loads
-document.addEventListener('DOMContentLoaded', loadSportsLinks);
+document.addEventListener('DOMContentLoaded', loadScienceLinks);
 </script>
 </body>
 </html>
