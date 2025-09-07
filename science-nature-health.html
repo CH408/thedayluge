@@ -124,12 +124,15 @@
     opacity:1;
   }
 
-  /* Links grid */
+  /* Links grid - CONVERTED TO 1-COLUMN */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
-    gap:12px;
+    grid-template-columns:1fr;
+    gap:5px;
     margin-top:30px;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
   }
 
   .link{
@@ -155,8 +158,8 @@
     word-break:break-word;
     text-shadow:0 0 10px rgba(0,221,85,0.5);
     border-bottom:1px solid rgba(0,221,85,0.3);
-    padding-bottom:6px;
-    line-height:1.3;
+    padding-bottom:8px;
+    line-height:1.4;
   }
   .link a:hover{
     color:var(--green);
@@ -164,10 +167,17 @@
     text-shadow:0 0 15px rgba(0,221,85,0.8);
   }
 
+  /* Button container for side-by-side buttons */
+  .button-container{
+    margin:40px auto;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+
   /* Random button */
   .random-button{
-    margin:40px auto;
-    display:block;
     background:linear-gradient(45deg, var(--green) 0%, #00aa33 100%);
     color:black;
     border:2px solid #00dd55;
@@ -189,15 +199,46 @@
     box-shadow:0 0 25px rgba(0,221,85,0.5), 0 8px 20px rgba(0,0,0,0.4);
   }
 
+  /* Go Deeper button */
+  .go-deeper-button{
+    background:transparent;
+    color:var(--green);
+    border:2px solid var(--green);
+    padding:14px 28px;
+    border-radius:30px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:14px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    text-shadow:0 0 5px rgba(0,221,85,0.5);
+    text-decoration:none;
+    display:inline-block;
+  }
+  .go-deeper-button:hover{
+    background:rgba(0,221,85,0.1);
+    transform:translateY(-3px);
+    box-shadow:0 0 25px rgba(0,221,85,0.3);
+    color:#ffffff;
+  }
+
   /* Responsive */
   @media(max-width:600px){
-    .grid{
-      grid-template-columns:1fr;
-    }
     h1{font-size:28px;}
     .category-title{font-size:20px;}
-    .link{padding:10px 15px;}
+    .link{padding:12px 20px;}
     .link a{font-size:16px;}
+    .button-container{
+      flex-direction:column;
+      align-items:center;
+      gap:15px;
+    }
+    .random-button, .go-deeper-button{
+      padding:12px 24px;
+      font-size:13px;
+    }
   }
 </style>
 </head>
@@ -211,36 +252,101 @@
   </header>
 
   <!-- Science, Nature & Health Links Grid -->
-  <div class="grid">
-    <div class="link">
-      <a href="https://www.the-scientist.com/why-were-dinosaurs-so-big-73254" target="_blank">
-        Why Were Dinosaurs So Huge?
-      </a>
-    </div>
-    <div class="link">
-      <a href="https://www.sciencealert.com/the-dna-of-great-white-sharks-defies-explanation-heres-why" target="_blank">
-        The Genes of Great White Sharks Defy Scientific Explanation
-      </a>
-    </div>
+  <div class="grid" id="science-grid">
+    <!-- Links will be loaded dynamically from science-nature-health-links.txt (first 36 only) -->
   </div>
 
-  <!-- Category Random Button -->
-  <button class="random-button" onclick="goToRandomScience()">
-    ⚛️ SURPRISE ME!
-  </button>
+  <!-- Button Container -->
+  <div class="button-container">
+    <button class="random-button" onclick="goToRandomScience()">
+      ⚛️ SURPRISE ME!
+    </button>
+    <a href="/science-nature-health-archive.html" class="go-deeper-button">
+      📚 GO DEEPER
+    </a>
+  </div>
 </div>
 
 <script>
-// Random science/nature/health article function
-function goToRandomScience() {
-  const scienceLinks = [
-    "https://www.the-scientist.com/why-were-dinosaurs-so-big-73254",
-    "https://www.sciencealert.com/the-dna-of-great-white-sharks-defies-explanation-heres-why"
-  ];
-  
-  const randomLink = scienceLinks[Math.floor(Math.random() * scienceLinks.length)];
-  window.open(randomLink, '_blank');
+// Load science/nature/health links from external file (limit to first 36)
+async function loadScienceLinks() {
+  try {
+    const response = await fetch('science-nature-health-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load science-nature-health-links.txt:', response.status);
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return {
+          title: parts[0].trim(),
+          url: parts[1].trim()
+        };
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Only show first 36 links (the rest go to archive)
+    const displayLinks = links.slice(0, 36);
+    
+    // Populate the grid
+    const grid = document.getElementById('science-grid');
+    if (grid && displayLinks.length > 0) {
+      grid.innerHTML = displayLinks.map(link => `
+        <div class="link">
+          <a href="${link.url}" target="_blank">
+            ${link.title}
+          </a>
+        </div>
+      `).join('');
+    }
+    
+    console.log(`Showing ${displayLinks.length} science/nature/health links (${links.length - displayLinks.length} moved to archive)`);
+    
+  } catch (error) {
+    console.error('Error loading science/nature/health links:', error);
+  }
 }
+
+// Random science/nature/health article function
+async function goToRandomScience() {
+  try {
+    const response = await fetch('science-nature-health-links.txt');
+    if (!response.ok) {
+      console.log('Could not load science-nature-health-links.txt for random selection');
+      return;
+    }
+    
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return parts[1].trim();
+      }
+      return null;
+    }).filter(link => link !== null);
+    
+    // Random from first 36 links only (current page links)
+    const currentLinks = links.slice(0, 36);
+    if (currentLinks.length > 0) {
+      const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+      window.open(randomLink, '_blank');
+    }
+    
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+// Load links when page loads
+document.addEventListener('DOMContentLoaded', loadScienceLinks);
 </script>
 </body>
 </html>
