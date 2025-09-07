@@ -393,97 +393,56 @@
     position: absolute;
     background: linear-gradient(
       to right,
-      var(--light-cyan-glow) 0%,
-      #ffffff 10%,
-      var(--light-cyan-glow) 20%,
-      var(--bright-purple-glow) 100%
+      rgba(51, 221, 255, 0.3) 0%, /* Dim --light-cyan-glow */
+      #ffffff 5%, /* Bright pulse */
+      rgba(51, 221, 255, 0.3) 7%, /* Dim --light-cyan-glow */
+      rgba(51, 221, 255, 0.3) 100%
     );
-    background-size: 200% 100%;
+    background-size: 400% 100%;
     height: 3px;
     transform-origin: left center;
     z-index: 1;
-    box-shadow: 0 0 8px var(--light-cyan-glow), 0 0 15px var(--light-cyan-glow);
-    animation: 
-      energy-pulse-line 2.5s ease-in-out infinite,
-      traveling-pulse 5s ease-in-out infinite,
-      color-shift 6s ease-in-out infinite;
-  }
-
-  /* Thickness and glow pulse */
-  @keyframes energy-pulse-line {
-    0%, 100% {
-      height: 3px;
-      opacity: 0.6;
-      box-shadow: 0 0 8px var(--light-cyan-glow), 0 0 15px var(--light-cyan-glow);
-    }
-    50% {
-      height: 4px;
-      opacity: 1;
-      box-shadow: 0 0 20px var(--light-cyan-glow), 0 0 30px var(--bright-purple-glow);
-    }
+    box-shadow: 0 0 8px var(--light-cyan-glow);
+    animation: traveling-pulse 6s ease-in-out infinite;
   }
 
   /* Traveling pulse effect */
   @keyframes traveling-pulse {
     0% {
       background-position: 0% 0;
+      box-shadow: 0 0 8px var(--light-cyan-glow);
     }
     50% {
-      background-position: 100% 0;
+      background-position: 200% 0;
+      box-shadow: 0 0 20px var(--light-cyan-glow), 0 0 30px var(--bright-purple-glow);
     }
     100% {
       background-position: 0% 0;
+      box-shadow: 0 0 8px var(--light-cyan-glow);
     }
   }
 
-  /* Color shift animation */
-  @keyframes color-shift {
-    0%, 100% {
-      background: linear-gradient(
-        to right,
-        var(--light-cyan-glow) 0%,
-        #ffffff 10%,
-        var(--light-cyan-glow) 20%,
-        var(--bright-purple-glow) 100%
-      );
-      box-shadow: 0 0 8px var(--light-cyan-glow), 0 0 15px var(--light-cyan-glow);
-    }
-    33% {
-      background: linear-gradient(
-        to right,
-        var(--pink) 0%,
-        #ffffff 10%,
-        var(--pink) 20%,
-        var(--bright-blue) 100%
-      );
-      box-shadow: 0 0 8px var(--pink), 0 0 15px var(--bright-blue);
-    }
-    66% {
-      background: linear-gradient(
-        to right,
-        var(--bright-purple-glow) 0%,
-        #ffffff 10%,
-        var(--bright-purple-glow) 20%,
-        var(--light-cyan-glow) 100%
-      );
-      box-shadow: 0 0 8px var(--bright-purple-glow), 0 0 15px var(--light-cyan-glow);
-    }
-  }
+  /* Staggered delays for each spoke */
+  .line-1 { animation-delay: 0s; }
+  .line-2 { animation-delay: 0.75s; }
+  .line-3 { animation-delay: 1.5s; }
+  .line-4 { animation-delay: 2.25s; }
+  .line-5 { animation-delay: 3s; }
+  .line-6 { animation-delay: 3.75s; }
+  .line-7 { animation-delay: 4.5s; }
+  .line-8 { animation-delay: 5.25s; }
 
   /* Hover effect for wheel-container */
   .wheel-container:hover .wheel-line {
     background: linear-gradient(
       to right,
-      var(--light-cyan-glow) 0%,
-      #ffffff 10%,
-      var(--light-cyan-glow) 20%,
-      var(--pink) 100%
+      rgba(255, 20, 147, 0.3) 0%, /* Dim --pink */
+      #ffffff 5%, /* Bright pulse */
+      rgba(255, 20, 147, 0.3) 7%, /* Dim --pink */
+      rgba(255, 20, 147, 0.3) 100%
     );
-    box-shadow: 0 0 25px var(--light-cyan-glow), 0 0 35px var(--pink);
-    animation: 
-      energy-pulse-line 1.5s ease-in-out infinite,
-      traveling-pulse 3s ease-in-out infinite,
-      color-shift 4s ease-in-out infinite;
+    box-shadow: 0 0 20px var(--pink), 0 0 30px var(--pink);
+    animation: traveling-pulse 4s ease-in-out infinite;
   }
 
   /* Lines positioning for 8 spokes */
@@ -635,31 +594,15 @@
     }
     /* Mobile optimization for wheel-line */
     .wheel-line {
-      animation: energy-pulse-line 3s ease-in-out infinite; /* Slower animation */
-      box-shadow: 0 0 5px var(--light-cyan-glow); /* Reduced glow */
+      animation: none; /* Disable animation for performance */
       background: linear-gradient(
         to right,
-        var(--light-cyan-glow) 0%,
-        #ffffff 10%,
-        var(--light-cyan-glow) 20%,
-        var(--bright-purple-glow) 100%
+        rgba(51, 221, 255, 0.3) 0%,
+        #ffffff 5%,
+        rgba(51, 221, 255, 0.3) 7%,
+        rgba(51, 221, 255, 0.3) 100%
       );
-    }
-    @keyframes energy-pulse-line {
-      0%, 100% {
-        height: 2.5px;
-        opacity: 0.7;
-        box-shadow: 0 0 5px var(--light-cyan-glow);
-      }
-      50% {
-        height: 3.5px;
-        opacity: 1;
-        box-shadow: 0 0 12px var(--light-cyan-glow), 0 0 20px var(--bright-purple-glow);
-      }
-    }
-    /* Disable traveling-pulse and color-shift on mobile */
-    .wheel-line {
-      animation: energy-pulse-line 3s ease-in-out infinite;
+      box-shadow: 0 0 5px var(--light-cyan-glow);
     }
   }
 
@@ -760,6 +703,21 @@
     height: 100%;
     z-index: 1; /* Below content (z-index: 5+) */
     pointer-events: none; /* Allow clicks to pass through */
+  }
+
+  /* Accessibility for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .wheel-line {
+      animation: none;
+      background: linear-gradient(
+        to right,
+        rgba(51, 221, 255, 0.3) 0%,
+        #ffffff 5%,
+        rgba(51, 221, 255, 0.3) 7%,
+        rgba(51, 221, 255, 0.3) 100%
+      );
+      box-shadow: 0 0 5px var(--light-cyan-glow);
+    }
   }
 </style>
 </head>
