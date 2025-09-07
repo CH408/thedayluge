@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --light-yellow-glow: #ffee44;
-      --headline-yellow: #ffef99;
+      --light-orange-glow: #ff8800;
+      --headline-orange: #ffaa66;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -57,16 +57,16 @@
       text-align: left;
     }
     .opinion-news-title {
-      color: var(--light-yellow-glow);
-      animation: block-title-pulse-yellow 8s ease-in-out infinite;
+      color: var(--light-orange-glow);
+      animation: block-title-pulse-orange 8s ease-in-out infinite;
     }
-    @keyframes block-title-pulse-yellow {
-      0% { text-shadow: 0 0 15px var(--light-yellow-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-yellow-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-yellow-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-yellow-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-yellow-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-yellow-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    @keyframes block-title-pulse-orange {
+      0% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; max-width: 800px; }
     .headline {
@@ -76,7 +76,7 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .opinion-news-links .headline { color: var(--headline-yellow); }
+    .opinion-news-links .headline { color: var(--headline-orange); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -92,27 +92,27 @@
       transition: all 0.3s ease;
     }
     .opinion-news-links .headline a:hover {
-      color: var(--light-yellow-glow);
-      text-shadow: 0 0 10px var(--light-yellow-glow);
+      color: var(--light-orange-glow);
+      text-shadow: 0 0 10px var(--light-orange-glow);
     }
     .go-deeper, .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--light-yellow-glow);
+      color: var(--light-orange-glow);
       padding: 8px 16px;
-      border: 1px solid var(--light-yellow-glow);
+      border: 1px solid var(--light-orange-glow);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--light-yellow-glow);
+      text-shadow: 0 0 5px var(--light-orange-glow);
     }
     .go-deeper:hover, .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255,238,68,0.3);
+      box-shadow: 0 0 15px rgba(255,136,0,0.3);
     }
     .button-container {
       margin: 20px auto;
