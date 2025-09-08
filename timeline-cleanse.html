@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Take A Pause - THE DAYLUGE</title>
+  <title>Timeline Cleanse - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -29,7 +29,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(255,102,204,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -56,7 +56,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .pause-news-title {
+    .timeline-cleanse-title {
       color: var(--light-pink-glow);
       animation: block-title-pulse-pink 8s ease-in-out infinite;
     }
@@ -76,7 +76,7 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .pause-news-links .headline { color: var(--headline-pink); }
+    .timeline-cleanse-links .headline { color: var(--headline-pink); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -122,7 +122,7 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .pause-news-links .headline a:hover {
+    .timeline-cleanse-links .headline a:hover {
       color: var(--light-pink-glow);
       text-shadow: 0 0 10px var(--light-pink-glow);
     }
@@ -185,15 +185,15 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="pause-news">
+    <div class="timeline-cleanse">
       <div class="title-container">
-        <div class="block-title pause-news-title">Take A Pause</div>
-        <a href="/take-a-pause-archive.html" class="go-deeper">Go Deeper</a>
+        <div class="block-title timeline-cleanse-title">Timeline Cleanse</div>
+        <a href="/timeline-cleanse-archive.html" class="go-deeper">Go Deeper</a>
       </div>
-      <ul class="headlines pause-news-links" id="pause-news-links"></ul>
+      <ul class="headlines timeline-cleanse-links" id="timeline-cleanse-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomPause()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomTimeline()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -211,7 +211,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.color = ['#ff66cc', '#ff99cc', '#cc3399', '#ff3399', '#ff99ff', '#cc66cc'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       update() {
@@ -265,12 +265,12 @@
       init();
     });
 
-    // Load pause links
-    async function loadPauseLinks() {
+    // Load timeline cleanse links
+    async function loadTimelineLinks() {
       try {
-        const response = await fetch('take-a-pause-links.txt');
+        const response = await fetch('timeline-cleanse-links.txt');
         if (!response.ok) {
-          console.error('Failed to load take-a-pause-links.txt:', response.status);
+          console.error('Failed to load timeline-cleanse-links.txt:', response.status);
           return;
         }
         const text = await response.text();
@@ -282,8 +282,8 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 36); // Changed to 36 to match Opinion page
-        const grid = document.getElementById('pause-news-links');
+        const displayLinks = links.slice(0, 36);
+        const grid = document.getElementById('timeline-cleanse-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
             <li class="headline">
@@ -291,18 +291,18 @@
             </li>
           `).join('');
         }
-        console.log(`Showing ${displayLinks.length} take a pause links (${links.length - displayLinks.length} moved to archive)`);
+        console.log(`Showing ${displayLinks.length} timeline cleanse links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading take a pause links:', error);
+        console.error('Error loading timeline cleanse links:', error);
       }
     }
 
-    // Random pause article
-    async function goToRandomPause() {
+    // Random timeline cleanse article
+    async function goToRandomTimeline() {
       try {
-        const response = await fetch('take-a-pause-links.txt');
+        const response = await fetch('timeline-cleanse-links.txt');
         if (!response.ok) {
-          console.log('Could not load take-a-pause-links.txt for random selection');
+          console.log('Could not load timeline-cleanse-links.txt for random selection');
           return;
         }
         const text = await response.text();
@@ -314,7 +314,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 36); // Changed to 36 to match Opinion page
+        const currentLinks = links.slice(0, 36);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
@@ -324,7 +324,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadPauseLinks);
+    document.addEventListener('DOMContentLoaded', loadTimelineLinks);
   </script>
 </body>
 </html>
