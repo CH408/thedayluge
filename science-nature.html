@@ -147,7 +147,7 @@
     }
     .button-container {
       margin: 20px auto;
-      display: flex;
+      display: flexfreedom
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
@@ -230,4 +230,101 @@
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
-            this.x - this.speed...
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    init();
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Load science links
+    async function loadScienceLinks() {
+      try {
+        const response = await fetch('science-nature-links.txt');
+        if (!response.ok) {
+          console.error('Failed to load science-nature-links.txt:', response.status);
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        const displayLinks = links.slice(0, 36);
+        const grid = document.getElementById('science-news-links');
+        if (grid && displayLinks.length > 0) {
+          grid.innerHTML = displayLinks.map(link => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+        }
+        console.log(`Showing ${displayLinks.length} science/nature links (${links.length - displayLinks.length} moved to archive)`);
+      } catch (error) {
+        console.error('Error loading science/nature links:', error);
+      }
+    }
+
+    // Random science article
+    async function goToRandomScience() {
+      try {
+        const response = await fetch('science-nature-links.txt');
+        if (!response.ok) {
+          console.log('Could not load science-nature-links.txt for random selection');
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const currentLinks = links.slice(0, 36);
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+          window.open(randomLink, '_blank');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadScienceLinks);
+  </script>
+</body>
+</html>
