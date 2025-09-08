@@ -328,64 +328,64 @@
   }
 
   /* Position 8 electrons around the nucleus */
-  .spoke-1 { /* Opinion - 0° */
-    left: 390px;
-    top: 205px;
-    background: radial-gradient(circle, #FF8800 0%, #CC6B00 100%);
-    color: #663300 !important;
-    font-weight: 900 !important;
+  .spoke-1{ /* Opinion - 0° */
+    left:390px;
+    top:205px;
+    background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke-2 { /* History, Philosophy & Culture - 45° */
-    left: 336px;
-    top: 336px;
-    background: radial-gradient(circle, #FFD400 0%, #CCA300 100%);
-    color: #3C2005 !important;
-    font-weight: 900 !important;
+  .spoke-2{ /* History & Culture - 45° */
+    left:336px;
+    top:336px;
+    background:radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%);
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke-3 { /* Arts & Literature - 90° */
-    left: 205px;
-    bottom: 20px;
-    background: radial-gradient(circle, #8B4513 0%, #654321 100%);
-    color: #1C0F05 !important;
-    font-weight: 900 !important;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  .spoke-3{ /* Arts & Literature - 90° */
+    left:205px;
+    bottom:20px;
+    background:radial-gradient(circle, var(--brown) 0%, #654321 100%);
+    color:white !important;
+    font-weight:900 !important;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-4 { /* Science & Nature - 135° */
-    left: 74px;
-    bottom: 64px;
-    background: radial-gradient(circle, #00dd55 0%, #00aa33 100%);
-    color: #BFFF00 !important;
-    font-weight: 900 !important;
+  .spoke-4{ /* Science-Nature-Health - 135° */
+    left:74px;
+    bottom:64px;
+    background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke-5 { /* Leisure, Entertainment & Pop Culture - 180° */
-    left: 20px;
-    top: 205px;
-    background: radial-gradient(circle, #000080 0%, #000066 100%);
-    color: #40E0D0 !important;
-    font-weight: 900 !important;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  .spoke-5{ /* Sports-Leisure-Ent - 180° */
+    left:20px;
+    top:205px;
+    background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
+    color:white !important;
+    font-weight:900 !important;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-6 { /* Take A Pause - 225° */
-    left: 74px;
-    top: 74px;
-    background: radial-gradient(circle, #FFB6C1 0%, #CC8E99 100%);
-    color: #800080 !important;
-    font-weight: 900 !important;
+  .spoke-6{ /* Take A Pause - 225° */
+    left:74px;
+    top:74px;
+    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke-7 { /* Conspiracy Corner - 270° */
-    left: 205px;
-    top: 20px;
-    background: radial-gradient(circle, #00FFC3 0%, #00CC9C 100%);
-    color: #000080 !important;
-    font-weight: 900 !important;
+  .spoke-7{ /* Conspiracy Corner - 270° */
+    left:205px;
+    top:20px;
+    background:radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%);
+    color:black !important;
+    font-weight:900 !important;
   }
-  .spoke-8 { /* MISCELLANY - 315° */
-    left: 336px;
-    top: 74px;
-    background: radial-gradient(circle, #47AD49 0%, #398A3B 100%);
-    color: #013220 !important;
-    font-weight: 900 !important;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  .spoke-8{ /* MISC - 315° */
+    left:336px;
+    top:74px;
+    background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
+    color:white !important;
+    font-weight:900 !important;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
 
   /* Enhanced Energy beams with bidirectional pulsing */
@@ -854,18 +854,18 @@
     <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts
       &
       Literature</div>
-    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science
-      &
-      Nature</div>
-    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Leisure,
-      Entertainment
-      & Pop Culture</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,
+      Nature
+      & Health</div>
+    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,
+      Leisure
+      & Ent</div>
     <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take
       A
       Pause</div>
     <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
       Corner</div>
-    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISCELLANY</div>
+    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>
   </div>
 
   <!-- Quantum random button -->
@@ -1066,3 +1066,4 @@ center.addEventListener('mouseleave', function() {
 </script>
 </body>
 </html>
+
