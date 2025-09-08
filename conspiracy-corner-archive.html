@@ -84,7 +84,7 @@
   }
 
   .category-title{
-    color: #cc88ff; /* Changed from var(--light-blue) to match second page's purple */
+    color: #cc88ff; /* Changed to match second page's purple */
     font-size: 24px;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -180,8 +180,8 @@
   /* Back to Category button */
   .back-to-category-button{
     background:transparent;
-    color:var(--light-blue);
-    border:2px solid var(--light-blue);
+    color:#cc88ff; /* Changed to match second page's purple */
+    border:2px solid #cc88ff; /* Updated border to purple */
     padding:14px 28px;
     border-radius:30px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
@@ -191,22 +191,22 @@
     letter-spacing:0.5px;
     cursor:pointer;
     transition:all 0.3s ease;
-    text-shadow:0 0 5px rgba(51,221,255,0.5);
+    text-shadow:0 0 5px #cc88ff; /* Updated to purple glow */
     text-decoration:none;
-    display:inline-block;
+    display:inline Physique du rôle-block;
   }
   .back-to-category-button:hover{
-    background:rgba(51,221,255,0.1);
+    background:rgba(204,136,255,0.1); /* Updated to purple-tinted background */
     transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(51,221,255,0.3);
+    box-shadow:0 0 25px rgba(204,136,255,0.3); /* Updated to purple shadow */
     color:#ffffff;
   }
 
   /* Random button */
   .random-button{
-    background:linear-gradient(45deg, var(--light-blue) 0%, #00aadd 100%);
+    background:linear-gradient(45deg, #cc88ff 0%, #aa66cc 100%); /* Updated gradient to purple shades */
     color:black;
-    border:2px solid #33ddff;
+    border:2px solid #cc88ff; /* Updated border to purple */
     padding:14px 28px;
     border-radius:30px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
@@ -216,13 +216,13 @@
     letter-spacing:0.5px;
     cursor:pointer;
     transition:all 0.3s ease;
-    box-shadow:0 0 15px rgba(51,221,255,0.3);
+    box-shadow:0 0 15px rgba(204,136,255,0.3); /* Updated to purple shadow */
     text-shadow:0 0 3px rgba(0,0,0,0.5);
   }
   .random-button:hover{
-    background:linear-gradient(45deg, #00aadd 0%, var(--light-blue) 100%);
+    background:linear-gradient(45deg, #aa66cc 0%, #cc88ff 100%); /* Updated gradient to purple shades */
     transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(51,221,255,0.5), 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow:0 0 25px rgba(204,136,255,0.5), 0 8px 20px rgba(0,0,0,0.4); /* Updated to purple shadow */
   }
 
   /* Responsive */
