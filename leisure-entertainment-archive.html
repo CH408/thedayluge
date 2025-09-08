@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Leisure & Entertainment Archive - THE DAYLUGE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* Same styles as leisure-entertainment.html */
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+    :root {
+      --light-cyan-glow: #33ddff;
+      --headline-cyan: #66ccff;
+      --ink: #111;
+      --maxw: 1200px;
+    }
+    /* Rest of styles identical to leisure-entertainment.html */
+  </style>
+</head>
+<body>
+  <a href="/" class="home-btn">← Home</a>
+  <canvas id="particle-canvas"></canvas>
+  <div class="wrap">
+    <div class="leisure-entertainment">
+      <div class="title-container">
+        <div class="block-title leisure-entertainment-title">Leisure & Entertainment</div>
+        <a href="/leisure-entertainment.html" class="go-deeper">Back to Leisure & Entertainment</a>
+      </div>
+      <ul class="headlines leisure-entertainment-links" id="leisure-entertainment-links"></ul>
+    </div>
+    <div class="button-container">
+      <button class="random-button" onclick="goToRandomLeisure()">⚛️ SURPRISE ME!</button>
+    </div>
+  </div>
+  <script>
+    // Particle effect (identical to leisure-entertainment.html)
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 50;
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    init();
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Load leisure & entertainment archive links
+    async function loadLeisureLinks() {
+      try {
+        const response = await fetch('leisure-entertainment-links.txt');
+        if (!response.ok) {
+          console.error('Failed to load leisure-entertainment-links.txt:', response.status);
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        const displayLinks = links.slice(36);
+        const grid = document.getElementById('leisure-entertainment-links');
+        if (grid && displayLinks.length > 0) {
+          grid.innerHTML = displayLinks.map(link => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+        }
+        console.log(`Showing ${displayLinks.length} leisure/entertainment archive links`);
+      } catch (error) {
+        console.error('Error loading leisure/entertainment archive links:', error);
+      }
+    }
+
+    // Random leisure & entertainment article
+    async function goToRandomLeisure() {
+      try {
+        const response = await fetch('leisure-entertainment-links.txt');
+        if (!response.ok) {
+          console.log('Could not load leisure-entertainment-links.txt for random selection');
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const archiveLinks = links.slice(36);
+        if (archiveLinks.length > 0) {
+          const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
+          window.open(randomLink, '_blank');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadLeisureLinks);
+  </script>
+</body>
+</html>
