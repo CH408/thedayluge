@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MISC - THE DAYLUGE</title>
+  <title>Miscellany - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -29,7 +29,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(0,204,0,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -56,7 +56,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .misc-news-title {
+    .miscellany-title {
       color: var(--light-green-glow);
       animation: block-title-pulse-green 8s ease-in-out infinite;
     }
@@ -76,12 +76,43 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .misc-news-links .headline { color: var(--headline-green); }
+    .miscellany-links .headline { color: var(--headline-green); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
     .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
     .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
+    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
+    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
+    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
+    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
+    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
+    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
+    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
+    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
+    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
+    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
+    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
+    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
+    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
+    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
+    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
+    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
+    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
+    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
+    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
+    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
+    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
+    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
+    .headlines .headline:nth-child(31) { animation-delay: 6.0s; }
+    .headlines .headline:nth-child(32) { animation-delay: 6.2s; }
+    .headlines .headline:nth-child(33) { animation-delay: 6.4s; }
+    .headlines .headline:nth-child(34) { animation-delay: 6.6s; }
+    .headlines .headline:nth-child(35) { animation-delay: 6.8s; }
+    .headlines .headline:nth-child(36) { animation-delay: 7.0s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -91,7 +122,7 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .misc-news-links .headline a:hover {
+    .miscellany-links .headline a:hover {
       color: var(--light-green-glow);
       text-shadow: 0 0 10px var(--light-green-glow);
     }
@@ -154,15 +185,15 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="misc-news">
+    <div class="miscellany">
       <div class="title-container">
-        <div class="block-title misc-news-title">MISC</div>
-        <a href="/misc-archive.html" class="go-deeper">Go Deeper</a>
+        <div class="block-title miscellany-title">Miscellany</div>
+        <a href="/miscellany-archive.html" class="go-deeper">Go Deeper</a>
       </div>
-      <ul class="headlines misc-news-links" id="misc-news-links"></ul>
+      <ul class="headlines miscellany-links" id="miscellany-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomMisc()">SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomMiscellany()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -180,7 +211,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.color = ['#00cc00', '#33ff33', '#00ff00', '#33cc33', '#66ff66', '#009900'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       update() {
@@ -234,12 +265,12 @@
       init();
     });
 
-    // Load misc links
-    async function loadMiscLinks() {
+    // Load miscellany links
+    async function loadMiscellanyLinks() {
       try {
-        const response = await fetch('misc-links.txt');
+        const response = await fetch('miscellany-links.txt');
         if (!response.ok) {
-          console.error('Failed to load misc-links.txt:', response.status);
+          console.error('Failed to load miscellany-links.txt:', response.status);
           return;
         }
         const text = await response.text();
@@ -250,9 +281,9 @@
             return { title: parts[0].trim(), url: parts[1].trim() };
           }
           return null;
-        }).filter(Boolean);
-        const displayLinks = links.slice(0, 5); // Limit to 5 for consistency with first file
-        const grid = document.getElementById('misc-news-links');
+        }).filter(link => link !== null);
+        const displayLinks = links.slice(0, 36);
+        const grid = document.getElementById('miscellany-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
             <li class="headline">
@@ -260,18 +291,18 @@
             </li>
           `).join('');
         }
-        console.log(`Showing ${displayLinks.length} misc links (${links.length - displayLinks.length} moved to archive)`);
+        console.log(`Showing ${displayLinks.length} miscellany links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading misc links:', error);
+        console.error('Error loading miscellany links:', error);
       }
     }
 
-    // Random misc article
-    async function goToRandomMisc() {
+    // Random miscellany article
+    async function goToRandomMiscellany() {
       try {
-        const response = await fetch('misc-links.txt');
+        const response = await fetch('miscellany-links.txt');
         if (!response.ok) {
-          console.log('Could not load misc-links.txt for random selection');
+          console.log('Could not load miscellany-links.txt for random selection');
           return;
         }
         const text = await response.text();
@@ -282,8 +313,8 @@
             return parts[1].trim();
           }
           return null;
-        }).filter(Boolean);
-        const currentLinks = links.slice(0, 5); // Limit to 5 for consistency
+        }).filter(link => link !== null);
+        const currentLinks = links.slice(0, 36);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
@@ -293,7 +324,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadMiscLinks);
+    document.addEventListener('DOMContentLoaded', loadMiscellanyLinks);
   </script>
 </body>
 </html>
