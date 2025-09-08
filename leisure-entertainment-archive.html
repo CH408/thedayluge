@@ -6,7 +6,6 @@
   <title>Leisure & Entertainment Archive - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* Same styles as leisure-entertainment.html */
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --light-cyan-glow: #33ddff;
@@ -14,26 +13,198 @@
       --ink: #111;
       --maxw: 1200px;
     }
-    /* Rest of styles identical to leisure-entertainment.html */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      color: var(--ink);
+      line-height: 1.3;
+      background: #0a1428;
+      padding: 10px;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
+      animation: energy-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+    }
+    #particle-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
+    .archive-title {
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-align: left;
+      color: var(--light-cyan-glow);
+      margin-bottom: 10px;
+      animation: block-title-pulse 8s ease-in-out infinite;
+    }
+    @keyframes block-title-pulse {
+      0% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .headlines { list-style: none; }
+    .headline {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: var(--headline-cyan);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .headlines .headline:nth-child(1) { animation-delay: 0s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
+    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
+    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
+    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
+    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
+    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
+    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
+    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
+    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
+    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
+    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
+    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
+    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
+    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
+    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
+    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
+    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
+    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
+    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
+    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
+    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
+    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
+    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
+    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
+    .headlines .headline:nth-child(31) { animation-delay: 6.0s; }
+    .headlines .headline:nth-child(32) { animation-delay: 6.2s; }
+    .headlines .headline:nth-child(33) { animation-delay: 6.4s; }
+    .headlines .headline:nth-child(34) { animation-delay: 6.6s; }
+    .headlines .headline:nth-child(35) { animation-delay: 6.8s; }
+    .headlines .headline:nth-child(36) { animation-delay: 7.0s; }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .headline a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .headline a:hover {
+      color: var(--light-cyan-glow);
+      text-decoration: underline;
+      text-shadow: 0 0 10px var(--light-cyan-glow);
+    }
+    .back-btn {
+      position: fixed;
+      bottom: 50px; right: 20px;
+      background: transparent;
+      color: var(--light-cyan-glow);
+      padding: 8px 16px;
+      border: 1px solid var(--light-cyan-glow);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--light-cyan-glow);
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: rgba(51,221,255,0.1);
+      box-shadow: 0 0 15px rgba(51,221,255,0.3);
+      transform: scale(1.05);
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: transparent;
+      color: #ffffff;
+      padding: 8px 16px;
+      border: 1px solid #ffffff;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px #ffffff;
+      transition: all 0.3s ease;
+    }
+    .home-btn:hover {
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .random-button {
+      display: inline-block;
+      background: transparent;
+      color: var(--light-cyan-glow);
+      padding: 8px 16px;
+      border: 1px solid var(--light-cyan-glow);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--light-cyan-glow);
+    }
+    .random-button:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(51,221,255,0.3);
+    }
+    @media (max-width: 600px) {
+      .archive-title { font-size: 16px; }
+      .headline { font-size: 14px; }
+      .back-btn, .home-btn, .random-button { font-size: 10px; padding: 6px 12px; }
+    }
   </style>
 </head>
 <body>
+  <a href="/leisure-entertainment.html" class="back-btn">← Back to Leisure & Entertainment</a>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="leisure-entertainment">
-      <div class="title-container">
-        <div class="block-title leisure-entertainment-title">Leisure & Entertainment</div>
-        <a href="/leisure-entertainment.html" class="go-deeper">Back to Leisure & Entertainment</a>
-      </div>
-      <ul class="headlines leisure-entertainment-links" id="leisure-entertainment-links"></ul>
-    </div>
+    <div class="archive-title">Leisure & Entertainment Archive</div>
+    <ul class="headlines" id="archive-links"></ul>
     <div class="button-container">
       <button class="random-button" onclick="goToRandomLeisure()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
-    // Particle effect (identical to leisure-entertainment.html)
+    // Particle effect
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -47,7 +218,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.color = ['#33ddff', '#6688cc', '#00aadd', '#99eeff', '#ccffff', '#aaccff'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       update() {
@@ -101,41 +272,48 @@
       init();
     });
 
-    // Load leisure & entertainment archive links
-    async function loadLeisureLinks() {
+    // Load archive links
+    async function loadArchiveLinks() {
       try {
+        console.log('Fetching leisure-entertainment-links.txt for archive');
         const response = await fetch('leisure-entertainment-links.txt');
+        console.log('Fetch response:', response);
         if (!response.ok) {
-          console.error('Failed to load leisure-entertainment-links.txt:', response.status);
+          console.error(`Failed to load leisure-entertainment-links.txt: ${response.status}`);
           return;
         }
         const text = await response.text();
+        console.log('Fetched text:', text);
         const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines);
         const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
-          }
-          return null;
-        }).filter(link => link !== null);
-        const displayLinks = links.slice(36);
-        const grid = document.getElementById('leisure-entertainment-links');
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
+          const [title, url] = line.split('|').map(s => s.trim());
+          return { title, url };
+        }).filter(link => link.title && link.url);
+        console.log('Processed links:', links);
+
+        // Take links beyond the 36th
+        const archivedLinks = links.length > 36 ? links.slice(36) : [];
+        console.log('Archived links:', archivedLinks);
+
+        const grid = document.getElementById('archive-links');
+        if (grid) {
+          grid.innerHTML = archivedLinks.map((link, index) => `
+            <li class="headline" style="animation-delay: ${index * 0.2}s;">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          console.log('Rendered archived links to DOM:', archivedLinks);
         }
-        console.log(`Showing ${displayLinks.length} leisure/entertainment archive links`);
       } catch (error) {
-        console.error('Error loading leisure/entertainment archive links:', error);
+        console.error('Error loading archive links:', error);
       }
     }
 
     // Random leisure & entertainment article
     async function goToRandomLeisure() {
       try {
+        console.log('Fetching leisure-entertainment-links.txt for random selection');
         const response = await fetch('leisure-entertainment-links.txt');
         if (!response.ok) {
           console.log('Could not load leisure-entertainment-links.txt for random selection');
@@ -153,14 +331,17 @@
         const archiveLinks = links.slice(36);
         if (archiveLinks.length > 0) {
           const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
+          console.log('Opening random archive link:', randomLink);
           window.open(randomLink, '_blank');
+        } else {
+          console.log('No archive links available for random selection');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadLeisureLinks);
+    document.addEventListener('DOMContentLoaded', loadArchiveLinks);
   </script>
 </body>
 </html>
