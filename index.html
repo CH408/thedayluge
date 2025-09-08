@@ -350,14 +350,14 @@
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-4{ /* Science-Nature-Health - 135° */
+  .spoke-4{ /* Science & Nature - 135° */
     left:74px;
     bottom:64px;
     background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-5{ /* Sports-Leisure-Ent - 180° */
+  .spoke-5{ /* Leisure & Entertainment - 180° */
     left:20px;
     top:205px;
     background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
@@ -365,7 +365,7 @@
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-6{ /* Take A Pause - 225° */
+  .spoke-6{ /* Timeline Cleanse - 225° */
     left:74px;
     top:74px;
     background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
@@ -379,7 +379,7 @@
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-8{ /* MISC - 315° */
+  .spoke-8{ /* Miscellany - 315° */
     left:336px;
     top:74px;
     background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
@@ -854,18 +854,17 @@
     <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts
       &
       Literature</div>
-    <div class="spoke spoke-4" onclick="goToCategory('science-nature-health')">Science,
-      Nature
-      & Health</div>
-    <div class="spoke spoke-5" onclick="goToCategory('sports-leisure-ent')">Sports,
-      Leisure
-      & Ent</div>
-    <div class="spoke spoke-6" onclick="goToCategory('take-a-pause')">Take
-      A
-      Pause</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature')">Science
+      &
+      Nature</div>
+    <div class="spoke spoke-5" onclick="goToCategory('leisure-entertainment')">Leisure
+      &
+      Entertainment</div>
+    <div class="spoke spoke-6" onclick="goToCategory('timeline-cleanse')">Timeline
+      Cleanse</div>
     <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
       Corner</div>
-    <div class="spoke spoke-8" onclick="goToCategory('misc')">MISC</div>
+    <div class="spoke spoke-8" onclick="goToCategory('miscellany')">Miscellany</div>
   </div>
 
   <!-- Quantum random button -->
@@ -987,11 +986,11 @@ function goToCategory(category) {
     'opinion': '/opinion.html',
     'history-philosophy-culture': '/history-philosophy-culture.html',
     'arts-literature': '/arts-literature.html',
-    'science-nature-health': '/science-nature-health.html', 
-    'sports-leisure-ent': '/sports-leisure-ent.html',
-    'take-a-pause': '/take-a-pause.html',
+    'science-nature': '/science-nature.html',
+    'leisure-entertainment': '/leisure-entertainment.html',
+    'timeline-cleanse': '/timeline-cleanse.html',
     'conspiracy-corner': '/conspiracy-corner.html',
-    'misc': '/misc.html'
+    'miscellany': '/miscellany.html'
   };
   
   if (categoryPages[category]) {
@@ -1066,4 +1065,3 @@ center.addEventListener('mouseleave', function() {
 </script>
 </body>
 </html>
-
