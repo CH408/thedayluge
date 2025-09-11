@@ -70,7 +70,7 @@
     }
     .conspiracy-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       margin-bottom: 20px;
     }
@@ -289,9 +289,9 @@
       // Render sections in grid
       const grid = document.getElementById('conspiracy-grid');
       if (grid) {
-        const columns = [[], [], [], []]; // Four columns
+        const columns = [[], [], []]; // Three columns
         topics.forEach((topic, index) => {
-          const columnIndex = Math.floor(index / 3); // Distribute 12 topics across 4 columns (3 per column)
+          const columnIndex = Math.floor(index / 4); // Distribute 12 topics across 3 columns (4 per column)
           const sectionLinks = groupedLinks[topic];
           const sectionHtml = `
             <div class="conspiracy-section">
