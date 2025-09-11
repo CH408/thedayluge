@@ -48,7 +48,7 @@
       align-items: center;
       max-width: 800px;
       justify-content: space-between;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
     .block-title {
       font-size: 18px;
@@ -68,63 +68,54 @@
       75% { text-shadow: 0 0 17px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .headlines { list-style: none; max-width: 800px; }
-    .headline {
+    .conspiracy-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .conspiracy-section {
+      background: rgba(255,255,255,0.05);
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid rgba(204,136,255,0.2);
+    }
+    .section-title {
       font-size: 16px;
+      color: var(--light-violet-glow);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-shadow: 0 0 5px var(--light-violet-glow);
+    }
+    .headlines {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .headline {
+      font-size: 14px;
       margin-bottom: 5px;
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .conspiracy-news-links .headline { color: var(--headline-violet); }
-    .headlines .headline:nth-child(1) { animation-delay: 0s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
-    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
-    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
-    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
-    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
-    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
-    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
-    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
-    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
-    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
-    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
-    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
-    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
-    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
-    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
-    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
-    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
-    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
-    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
-    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
-    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
-    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
-    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
-    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
-    .headlines .headline:nth-child(31) { animation-delay: 6.0s; }
-    .headlines .headline:nth-child(32) { animation-delay: 6.2s; }
-    .headlines .headline:nth-child(33) { animation-delay: 6.4s; }
-    .headlines .headline:nth-child(34) { animation-delay: 6.6s; }
-    .headlines .headline:nth-child(35) { animation-delay: 6.8s; }
-    .headlines .headline:nth-child(36) { animation-delay: 7.0s; }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
     .headline a {
-      color: inherit;
+      color: var(--headline-violet);
       text-decoration: none;
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .conspiracy-news-links .headline a:hover {
+    .headline a:hover {
       color: var(--light-violet-glow);
       text-shadow: 0 0 10px var(--light-violet-glow);
+    }
+    .headlines .headline:nth-child(1) { animation-delay: 0s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
     }
     .go-deeper, .random-button {
       display: inline-block;
@@ -172,12 +163,21 @@
       box-shadow: 0 0 15px rgba(255,255,255,0.3);
       transform: scale(1.05);
     }
+    @media (max-width: 900px) {
+      .conspiracy-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
     @media (max-width: 600px) {
+      .conspiracy-grid {
+        grid-template-columns: 1fr;
+      }
       .block-title { font-size: 16px; }
-      .headline { font-size: 14px; }
+      .section-title { font-size: 14px; }
+      .headline { font-size: 13px; }
       .go-deeper, .random-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
-      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .title-container { flex-direction: row; align-items: center; }
     }
   </style>
 </head>
@@ -190,14 +190,14 @@
         <div class="block-title conspiracy-news-title">Conspiracy Corner</div>
         <a href="/conspiracy-corner-archive.html" class="go-deeper">Go Deeper</a>
       </div>
-      <ul class="headlines conspiracy-news-links" id="conspiracy-news-links"></ul>
+      <div class="conspiracy-grid" id="conspiracy-grid"></div>
     </div>
     <div class="button-container">
       <button class="random-button" onclick="goToRandomConspiracy()">SURPRISE ME!</button>
     </div>
   </div>
   <script>
-    // Particle effect
+    // Particle effect (unchanged)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -277,23 +277,67 @@
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
+          if (parts.length >= 3) {
+            return { title: parts[0].trim(), url: parts[1].trim(), topic: parts[2].trim() };
           }
           return null;
         }).filter(link => link !== null);
 
-        // Split links: first 36 for display, rest for archive
-        const displayLinks = links.slice(0, 36);
-        const archiveLinks = links.slice(36);
+        // Define 12 conspiracy topics
+        const topics = [
+          'UFO Sightings', 'Government Cover-Ups', 'Secret Societies', 'Cryptids',
+          'Time Travel', 'Flat Earth', 'Moon Landing Hoax', 'Chemtrails',
+          'Big Pharma', 'Area 51', 'Ancient Civilizations', 'Mind Control'
+        ];
 
-        // Render display links
-        const grid = document.getElementById('conspiracy-news-links');
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
+        // Group links by topic
+        const groupedLinks = {};
+        topics.forEach(topic => groupedLinks[topic] = []);
+        links.forEach(link => {
+          if (groupedLinks[link.topic]) {
+            groupedLinks[link.topic].push(link);
+          }
+        });
+
+        // Prepare display and archive links
+        const displayLinks = [];
+        const archiveLinks = [];
+        topics.forEach(topic => {
+          // Get up to 4 most recent links per topic
+          const topicLinks = groupedLinks[topic].slice(0, 4);
+          displayLinks.push(...topicLinks);
+          // Archive remaining links
+          const olderLinks = groupedLinks[topic].slice(4);
+          archiveLinks.push(...olderLinks);
+        });
+
+        // Render sections in grid
+        const grid = document.getElementById('conspiracy-grid');
+        if (grid) {
+          const columns = [[], [], [], []]; // Four columns
+          topics.forEach((topic, index) => {
+            const columnIndex = Math.floor(index / 3); // Distribute 12 topics across 4 columns (3 per column)
+            const sectionLinks = groupedLinks[topic].slice(0, 4);
+            const sectionHtml = `
+              <div class="conspiracy-section">
+                <div class="section-title">${topic}</div>
+                <ul class="headlines">
+                  ${sectionLinks.length > 0 ? sectionLinks.map(link => `
+                    <li class="headline">
+                      <a href="${link.url}" target="_blank">${link.title}</a>
+                    </li>
+                  `).join('') : '<li class="headline">No links available</li>'}
+                </ul>
+              </div>
+            `;
+            columns[columnIndex].push(sectionHtml);
+          });
+
+          // Render columns
+          grid.innerHTML = columns.map(column => `
+            <div class="column">
+              ${column.join('')}
+            </div>
           `).join('');
         }
 
@@ -308,16 +352,16 @@
             if (!archiveResponse.ok) {
               console.error('Failed to archive links:', archiveResponse.status);
             } else {
-              console.log(`Archived ${archiveLinks.length} links (37 and older)`);
+              console.log(`Archived ${archiveLinks.length} links`);
             }
           } catch (error) {
             console.error('Error sending links to archive:', error);
           }
         }
 
-        console.log(`Showing ${displayLinks.length} conspiracy corner links (${archiveLinks.length} moved to archive)`);
+        console.log(`Showing ${displayLinks.length} links across ${topics.length} topics (${archiveLinks.length} archived)`);
       } catch (error) {
-        console.error('Error loading conspiracy corner links:', error);
+        console.error('Error loading conspiracy links:', error);
       }
     }
 
@@ -333,15 +377,33 @@
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
+          if (parts.length >= 3) {
+            return { title: parts[0].trim(), url: parts[1].trim(), topic: parts[2].trim() };
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 36); // Select from first 36 links
-        if (currentLinks.length > 0) {
-          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-          window.open(randomLink, '_blank');
+
+        // Group by topic and select up to 4 most recent per topic
+        const topics = [
+          'UFO Sightings', 'Government Cover-Ups', 'Secret Societies', 'Cryptids',
+          'Time Travel', 'Flat Earth', 'Moon Landing Hoax', 'Chemtrails',
+          'Big Pharma', 'Area 51', 'Ancient Civilizations', 'Mind Control'
+        ];
+        const groupedLinks = {};
+        topics.forEach(topic => groupedLinks[topic] = []);
+        links.forEach(link => {
+          if (groupedLinks[link.topic]) {
+            groupedLinks[link.topic].push(link);
+          }
+        });
+        const displayLinks = [];
+        topics.forEach(topic => {
+          displayLinks.push(...groupedLinks[topic].slice(0, 4));
+        });
+
+        if (displayLinks.length > 0) {
+          const randomLink = displayLinks[Math.floor(Math.random() * displayLinks.length)];
+          window.open(randomLink.url, '_blank');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
