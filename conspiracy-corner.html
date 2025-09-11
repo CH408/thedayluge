@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --light-aqua-glow: #66e6ff; /* Aqua blue glow */
-      --headline-turquoise: #99f0ff; /* Lighter turquoise for headlines */
+      --light-aqua-glow: #66e6ff;
+      --headline-turquoise: #99f0ff;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -70,7 +70,7 @@
     }
     .conspiracy-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       margin-bottom: 20px;
     }
@@ -187,7 +187,6 @@
     <div class="conspiracy-news">
       <div class="title-container">
         <div class="block-title conspiracy-news-title">Conspiracy Corner</div>
-        <a href="/conspiracy-corner-archive.html" class="go-deeper">Go Deeper</a>
       </div>
       <div class="conspiracy-grid" id="conspiracy-grid"></div>
     </div>
@@ -196,7 +195,7 @@
     </div>
   </div>
   <script>
-    // Particle effect (unchanged)
+    // Particle effect
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -266,7 +265,6 @@
 
     // Load conspiracy links from text file
     async function loadConspiracyLinks() {
-      // Define 12 conspiracy topics
       const topics = [
         'Moon Landing Hoax',
         'Roswell Incident',
@@ -282,7 +280,6 @@
         'MK Ultra Exposed'
       ];
 
-      // Fetch links from conspiracy-corner-links.txt
       let groupedLinks = {};
       topics.forEach(topic => groupedLinks[topic] = []);
       try {
@@ -292,39 +289,37 @@
         const lines = text.trim().split('\n');
         const allLinks = lines
           .map(line => {
-            const [title, url, topic] = line.split('|').map(item => item.trim());
-            return { title, url, topic };
+            const [title, url, topic, date] = line.split('|').map(item => item.trim());
+            return { title, url, topic, date: date ? new Date(date) : new Date() };
           })
           .filter(link => link.title && link.url && link.topic && topics.includes(link.topic));
 
-        // Group links by topic
         allLinks.forEach(link => {
           if (groupedLinks[link.topic]) {
             groupedLinks[link.topic].push(link);
           }
         });
 
-        // Sort links by title (as a proxy for recency; update if you have timestamps)
         Object.keys(groupedLinks).forEach(topic => {
-          groupedLinks[topic].sort((a, b) => b.title.localeCompare(a.title)); // Reverse for newest first
+          groupedLinks[topic].sort((a, b) => b.date - a.date);
         });
 
-        // Split into display (3 most recent) and archive links
         const displayLinks = [];
-        const archiveLinks = [];
+        const archiveLinksByTopic = {};
         topics.forEach(topic => {
-          const links = groupedLinks[topic].slice(0, 3); // Take up to 3 most recent
-          displayLinks.push(...links);
-          archiveLinks.push(...groupedLinks[topic].slice(3)); // Archive the rest
+          archiveLinksByTopic[topic] = groupedLinks[topic].slice(3);
+          displayLinks.push(...groupedLinks[topic].slice(0, 3));
         });
 
-        // Render sections in grid
+        localStorage.setItem('archiveLinksByTopic', JSON.stringify(archiveLinksByTopic));
+
         const grid = document.getElementById('conspiracy-grid');
         if (grid) {
-          const columns = [[], [], []]; // Three columns
+          const columns = [[], [], []];
           topics.forEach((topic, index) => {
-            const columnIndex = Math.floor(index / 4); // Distribute 12 topics across 3 columns (4 per column)
-            const sectionLinks = groupedLinks[topic].slice(0, 3); // Up to 3 links
+            const columnIndex = Math.floor(index / 4);
+            const sectionLinks = groupedLinks[topic].slice(0, 3);
+            const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             const sectionHtml = `
               <div class="conspiracy-section">
                 <div class="section-title">${topic}</div>
@@ -335,12 +330,12 @@
                     </li>
                   `).join('') : '<li class="headline">No links available</li>'}
                 </ul>
+                ${archiveLinksByTopic[topic].length > 0 ? `<a href="/conspiracy-corner/${urlSlug}.html" class="go-deeper">View ${topic} Archive</a>` : ''}
               </div>
             `;
             columns[columnIndex].push(sectionHtml);
           });
 
-          // Render columns
           grid.innerHTML = columns.map(column => `
             <div class="column">
               ${column.join('')}
@@ -348,32 +343,31 @@
           `).join('');
         }
 
-        // Log archived links (replace with actual archiving logic if needed)
         console.log(`Showing ${displayLinks.length} links across ${topics.length} topics`);
-        if (archiveLinks.length > 0) {
-          console.log('Archived links:', archiveLinks);
-          // Example: Send archiveLinks to /archive-links endpoint
-          // await fetch('/archive-links', { method: 'POST', body: JSON.stringify(archiveLinks) });
-        }
+        console.log('Archived links by topic:', archiveLinksByTopic);
       } catch (error) {
         console.error('Error loading conspiracy links:', error);
-        // Fallback to placeholder links
         topics.forEach(topic => {
           const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
           groupedLinks[topic] = [
-            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic },
-            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic },
-            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic }
+            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic, date: new Date() },
+            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic, date: new Date() },
+            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic, date: new Date() }
           ];
         });
         const displayLinks = [];
-        topics.forEach(topic => displayLinks.push(...groupedLinks[topic]));
+        const archiveLinksByTopic = {};
+        topics.forEach(topic => {
+          archiveLinksByTopic[topic] = [];
+          displayLinks.push(...groupedLinks[topic]);
+        });
         const grid = document.getElementById('conspiracy-grid');
         if (grid) {
           const columns = [[], [], []];
           topics.forEach((topic, index) => {
             const columnIndex = Math.floor(index / 4);
             const sectionLinks = groupedLinks[topic];
+            const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             const sectionHtml = `
               <div class="conspiracy-section">
                 <div class="section-title">${topic}</div>
@@ -384,6 +378,7 @@
                     </li>
                   `).join('')}
                 </ul>
+                <a href="/conspiracy-corner/${urlSlug}.html" class="go-deeper">View ${topic} Archive</a>
               </div>
             `;
             columns[columnIndex].push(sectionHtml);
@@ -398,7 +393,6 @@
       }
     }
 
-    // Random conspiracy article
     async function goToRandomConspiracy() {
       try {
         const response = await fetch('/conspiracy-corner-links.txt');
@@ -407,12 +401,11 @@
         const lines = text.trim().split('\n');
         const displayLinks = lines
           .map(line => {
-            const [title, url, topic] = line.split('|').map(item => item.trim());
-            return { title, url, topic };
+            const [title, url, topic, date] = line.split('|').map(item => item.trim());
+            return { title, url, topic, date: date ? new Date(date) : new Date() };
           })
           .filter(link => link.title && link.url && link.topic);
 
-        // Group and limit to 3 most recent per topic
         const groupedLinks = {};
         const topics = [
           'Moon Landing Hoax',
@@ -435,8 +428,8 @@
           }
         });
         Object.keys(groupedLinks).forEach(topic => {
-          groupedLinks[topic].sort((a, b) => b.title.localeCompare(a.title)); // Reverse for newest first
-          groupedLinks[topic] = groupedLinks[topic].slice(0, 3); // Limit to 3
+          groupedLinks[topic].sort((a, b) => b.date - a.date);
+          groupedLinks[topic] = groupedLinks[topic].slice(0, 3);
         });
 
         const allDisplayLinks = [];
@@ -447,7 +440,6 @@
         }
       } catch (error) {
         console.error('Error loading random conspiracy link:', error);
-        // Fallback to placeholder links
         const topics = [
           'Moon Landing Hoax',
           'Roswell Incident',
@@ -466,9 +458,9 @@
         topics.forEach(topic => {
           const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
           displayLinks.push(
-            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic },
-            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic },
-            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic }
+            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic, date: new Date() },
+            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic, date: new Date() },
+            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic, date: new Date() }
           );
         });
         if (displayLinks.length > 0) {
