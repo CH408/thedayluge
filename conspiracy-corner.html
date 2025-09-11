@@ -277,7 +277,7 @@
         'False Flag Operations',
         'Ancient Bloodline Secrets',
         'Erased Ancient Truths',
-        'MK Ultra Exposed'
+        'Miscellaneous'
       ];
 
       let groupedLinks = {};
@@ -290,13 +290,18 @@
         const allLinks = lines
           .map(line => {
             const [title, url, topic, date] = line.split('|').map(item => item.trim());
-            return { title, url, topic, date: date ? new Date(date) : new Date() };
+            // Map 'MK Ultra Exposed' to 'Miscellaneous' for existing links
+            const normalizedTopic = topic === 'MK Ultra Exposed' ? 'Miscellaneous' : topic;
+            return { title, url, topic: normalizedTopic, date: date ? new Date(date) : new Date() };
           })
-          .filter(link => link.title && link.url && link.topic && topics.includes(link.topic));
+          .filter(link => link.title && link.url && link.topic);
 
         allLinks.forEach(link => {
           if (groupedLinks[link.topic]) {
             groupedLinks[link.topic].push(link);
+          } else {
+            // Any unrecognized topics also go to Miscellaneous
+            groupedLinks['Miscellaneous'].push(link);
           }
         });
 
@@ -317,7 +322,7 @@
         if (grid) {
           const columns = [[], [], []];
           topics.forEach((topic, index) => {
-            const columnIndex = Math.floor(index / 4);
+            const columnIndex = Math.floor(index / 4); // Distribute 12 topics across 3 columns
             const sectionLinks = groupedLinks[topic].slice(0, 3);
             const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             const sectionHtml = `
@@ -402,7 +407,8 @@
         const displayLinks = lines
           .map(line => {
             const [title, url, topic, date] = line.split('|').map(item => item.trim());
-            return { title, url, topic, date: date ? new Date(date) : new Date() };
+            const normalizedTopic = topic === 'MK Ultra Exposed' ? 'Miscellaneous' : topic;
+            return { title, url, topic: normalizedTopic, date: date ? new Date(date) : new Date() };
           })
           .filter(link => link.title && link.url && link.topic);
 
@@ -419,12 +425,14 @@
           'False Flag Operations',
           'Ancient Bloodline Secrets',
           'Erased Ancient Truths',
-          'MK Ultra Exposed'
+          'Miscellaneous'
         ];
         topics.forEach(topic => groupedLinks[topic] = []);
         displayLinks.forEach(link => {
           if (groupedLinks[link.topic]) {
             groupedLinks[link.topic].push(link);
+          } else {
+            groupedLinks['Miscellaneous'].push(link);
           }
         });
         Object.keys(groupedLinks).forEach(topic => {
@@ -452,7 +460,7 @@
           'False Flag Operations',
           'Ancient Bloodline Secrets',
           'Erased Ancient Truths',
-          'MK Ultra Exposed'
+          'Miscellaneous'
         ];
         const displayLinks = [];
         topics.forEach(topic => {
