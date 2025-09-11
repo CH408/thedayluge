@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --light-violet-glow: #e6aaff; /* Lighter, pinkish-purple glow */
-      --headline-violet: #f0bbff; /* Lighter, pinkish-purple for headlines */
+      --light-violet-glow: #ff99cc; /* Brighter, more pink glow */
+      --headline-violet: #ffccdd; /* Brighter, more pink for headlines */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -291,15 +291,15 @@
         'Central Bank Digital Currencies'
       ];
 
-      // Generate placeholder links (4 per topic)
+      // Generate placeholder links (4 per topic, simple titles)
       const groupedLinks = {};
       topics.forEach(topic => {
         const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         groupedLinks[topic] = [
-          { title: `${topic} Article 1`, url: `https://example.com/${urlSlug}/1`, topic },
-          { title: `${topic} Article 2`, url: `https://example.com/${urlSlug}/2`, topic },
-          { title: `${topic} Article 3`, url: `https://example.com/${urlSlug}/3`, topic },
-          { title: `${topic} Article 4`, url: `https://example.com/${urlSlug}/4`, topic }
+          { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic },
+          { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic },
+          { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic },
+          { title: `Link 4`, url: `https://example.com/${urlSlug}/4`, topic }
         ];
       });
 
@@ -370,10 +370,10 @@
       topics.forEach(topic => {
         const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         displayLinks.push(
-          { title: `${topic} Article 1`, url: `https://example.com/${urlSlug}/1`, topic },
-          { title: `${topic} Article 2`, url: `https://example.com/${urlSlug}/2`, topic },
-          { title: `${topic} Article 3`, url: `https://example.com/${urlSlug}/3`, topic },
-          { title: `${topic} Article 4`, url: `https://example.com/${urlSlug}/4`, topic }
+          { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic },
+          { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic },
+          { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic },
+          { title: `Link 4`, url: `https://example.com/${urlSlug}/4`, topic }
         );
       });
 
