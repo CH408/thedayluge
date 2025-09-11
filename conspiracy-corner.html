@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --light-violet-glow: #ff99cc; /* Brighter, pink glow */
-      --headline-violet: #ffccdd; /* Brighter, pink for headlines */
+      --light-aqua-glow: #66e6ff; /* Aqua blue glow */
+      --headline-turquoise: #99f0ff; /* Lighter turquoise for headlines */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -57,16 +57,16 @@
       text-align: left;
     }
     .conspiracy-news-title {
-      color: var(--light-violet-glow);
-      animation: block-title-pulse-violet 8s ease-in-out infinite;
+      color: var(--light-aqua-glow);
+      animation: block-title-pulse-aqua 8s ease-in-out infinite;
     }
-    @keyframes block-title-pulse-violet {
-      0% { text-shadow: 0 0 15px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-violet-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    @keyframes block-title-pulse-aqua {
+      0% { text-shadow: 0 0 15px var(--light-aqua-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--light-aqua-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-aqua-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--light-aqua-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--light-aqua-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--light-aqua-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .conspiracy-grid {
       display: grid;
@@ -78,15 +78,15 @@
       background: rgba(255,255,255,0.05);
       padding: 15px;
       border-radius: 5px;
-      border: 1px solid rgba(204,136,255,0.2);
+      border: 1px solid rgba(102,230,255,0.2); /* Adjusted to match aqua theme */
     }
     .section-title {
       font-size: 16px;
-      color: var(--light-violet-glow);
+      color: var(--light-aqua-glow);
       margin-bottom: 10px;
       text-transform: uppercase;
       font-weight: bold;
-      text-shadow: 0 0 5px var(--light-violet-glow);
+      text-shadow: 0 0 5px var(--light-aqua-glow);
     }
     .headlines {
       list-style: none;
@@ -101,14 +101,14 @@
       animation: fadeIn 0.5s ease forwards;
     }
     .headline a {
-      color: var(--headline-violet);
+      color: var(--headline-turquoise);
       text-decoration: none;
       font-weight: bold;
       transition: all 0.3s ease;
     }
     .headline a:hover {
-      color: var(--light-violet-glow);
-      text-shadow: 0 0 10px var(--light-violet-glow);
+      color: var(--light-aqua-glow);
+      text-shadow: 0 0 10px var(--light-aqua-glow);
     }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
@@ -119,21 +119,21 @@
     .go-deeper, .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--light-violet-glow);
+      color: var(--light-aqua-glow);
       padding: 8px 16px;
-      border: 1px solid var(--light-violet-glow);
+      border: 1px solid var(--light-aqua-glow);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--light-violet-glow);
+      text-shadow: 0 0 5px var(--light-aqua-glow);
     }
     .go-deeper:hover, .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(204,136,255,0.3);
+      box-shadow: 0 0 15px rgba(102,230,255,0.3); /* Adjusted to match aqua theme */
     }
     .button-container {
       margin: 20px auto;
