@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --light-violet-glow: #cc88ff;
-      --headline-violet: #dd99ff;
+      --light-violet-glow: #e6aaff; /* Lighter, pinkish-purple glow */
+      --headline-violet: #f0bbff; /* Lighter, pinkish-purple for headlines */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -70,7 +70,7 @@
     }
     .conspiracy-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
       margin-bottom: 20px;
     }
@@ -267,17 +267,39 @@
 
     // Load conspiracy links with placeholders
     function loadConspiracyLinks() {
-      // Define 12 conspiracy topics
-      const topics = Array.from({ length: 12 }, (_, i) => `Conspiracy ${i + 1}`);
+      // Define 20 conspiracy topics
+      const topics = [
+        'Moon Landing Hoax',
+        'Chemtrails Conspiracy',
+        'Roswell Incident',
+        'Elite Retreats Exposed',
+        'Antarctic Mysteries',
+        'Egyptian Pyramid Secrets',
+        'Government-Alien Pacts',
+        'JFK Assassination Truths',
+        'Area 51 Secrets',
+        'Reptilian Rulers',
+        'Disease Cure Suppression',
+        'All Things Covid',
+        'Epstein\'s Web',
+        'False Flag Operations',
+        'USA\'s Hidden Underground Cities',
+        'Titanic Conspiracy',
+        'Ancient Bloodline Secrets',
+        'Erased Ancient Truths',
+        'MK Ultra Exposed',
+        'Central Bank Digital Currencies'
+      ];
 
       // Generate placeholder links (4 per topic)
       const groupedLinks = {};
       topics.forEach(topic => {
+        const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         groupedLinks[topic] = [
-          { title: `${topic} Article 1`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/1`, topic },
-          { title: `${topic} Article 2`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/2`, topic },
-          { title: `${topic} Article 3`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/3`, topic },
-          { title: `${topic} Article 4`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/4`, topic }
+          { title: `${topic} Article 1`, url: `https://example.com/${urlSlug}/1`, topic },
+          { title: `${topic} Article 2`, url: `https://example.com/${urlSlug}/2`, topic },
+          { title: `${topic} Article 3`, url: `https://example.com/${urlSlug}/3`, topic },
+          { title: `${topic} Article 4`, url: `https://example.com/${urlSlug}/4`, topic }
         ];
       });
 
@@ -289,9 +311,9 @@
       // Render sections in grid
       const grid = document.getElementById('conspiracy-grid');
       if (grid) {
-        const columns = [[], [], []]; // Three columns
+        const columns = [[], [], [], []]; // Four columns
         topics.forEach((topic, index) => {
-          const columnIndex = Math.floor(index / 4); // Distribute 12 topics across 3 columns (4 per column)
+          const columnIndex = Math.floor(index / 5); // Distribute 20 topics across 4 columns (5 per column)
           const sectionLinks = groupedLinks[topic];
           const sectionHtml = `
             <div class="conspiracy-section">
@@ -322,14 +344,36 @@
     // Random conspiracy article
     function goToRandomConspiracy() {
       // Generate placeholder links for random selection
-      const topics = Array.from({ length: 12 }, (_, i) => `Conspiracy ${i + 1}`);
+      const topics = [
+        'Moon Landing Hoax',
+        'Chemtrails Conspiracy',
+        'Roswell Incident',
+        'Elite Retreats Exposed',
+        'Antarctic Mysteries',
+        'Egyptian Pyramid Secrets',
+        'Government-Alien Pacts',
+        'JFK Assassination Truths',
+        'Area 51 Secrets',
+        'Reptilian Rulers',
+        'Disease Cure Suppression',
+        'All Things Covid',
+        'Epstein\'s Web',
+        'False Flag Operations',
+        'USA\'s Hidden Underground Cities',
+        'Titanic Conspiracy',
+        'Ancient Bloodline Secrets',
+        'Erased Ancient Truths',
+        'MK Ultra Exposed',
+        'Central Bank Digital Currencies'
+      ];
       const displayLinks = [];
       topics.forEach(topic => {
+        const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         displayLinks.push(
-          { title: `${topic} Article 1`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/1`, topic },
-          { title: `${topic} Article 2`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/2`, topic },
-          { title: `${topic} Article 3`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/3`, topic },
-          { title: `${topic} Article 4`, url: `https://example.com/${topic.toLowerCase().replace(' ', '-')}/4`, topic }
+          { title: `${topic} Article 1`, url: `https://example.com/${urlSlug}/1`, topic },
+          { title: `${topic} Article 2`, url: `https://example.com/${urlSlug}/2`, topic },
+          { title: `${topic} Article 3`, url: `https://example.com/${urlSlug}/3`, topic },
+          { title: `${topic} Article 4`, url: `https://example.com/${urlSlug}/4`, topic }
         );
       });
 
