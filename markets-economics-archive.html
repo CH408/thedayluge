@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>History, Philosophy & Culture Archive - THE DAYLUGE</title>
+<title>Markets & Economics Archive - THE DAYLUGE</title>
 
 <!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
@@ -248,32 +248,32 @@
 <div class="wrap">
   <header>
     <h1>THE DAYLUGE</h1>
-    <div class="category-title">History, Philosophy & Culture Archive</div>
+    <div class="category-title">Markets & Economics Archive</div>
   </header>
 
-  <!-- History, Philosophy & Culture Archive Links Grid -->
-  <div class="grid" id="history-archive-grid">
-    <!-- Links will be loaded dynamically from history-philosophy-culture-links.txt (starting from link 37) -->
+  <!-- Markets & Economics Archive Links Grid -->
+  <div class="grid" id="markets-archive-grid">
+    <!-- Links will be loaded dynamically from markets-economics-links.txt (starting from link 37) -->
   </div>
 
   <!-- Button Container -->
   <div class="button-container">
-    <a href="/history-philosophy-culture.html" class="back-to-category-button">
-      ← Back to History, Philosophy & Culture
+    <a href="/markets-economics.html" class="back-to-category-button">
+      ← Back to Markets & Economics
     </a>
-    <button class="random-button" onclick="goToRandomHistoryArchive()">
+    <button class="random-button" onclick="goToRandomMarketsArchive()">
       SURPRISE ME!
     </button>
   </div>
 </div>
 
 <script>
-// Load history/philosophy/culture archive links from external file (starting from link 37)
-async function loadHistoryArchiveLinks() {
+// Load markets/economics archive links from external file (starting from link 37)
+async function loadMarketsArchiveLinks() {
   try {
-    const response = await fetch('history-philosophy-culture-links.txt');
+    const response = await fetch('markets-economics-links.txt');
     if (!response.ok) {
-      console.error('Failed to load history-philosophy-culture-links.txt:', response.status);
+      console.error('Failed to load markets-economics-links.txt:', response.status);
       return;
     }
     
@@ -295,7 +295,7 @@ async function loadHistoryArchiveLinks() {
     const archiveLinks = links.slice(36);
     
     // Populate the grid
-    const grid = document.getElementById('history-archive-grid');
+    const grid = document.getElementById('markets-archive-grid');
     if (grid && archiveLinks.length > 0) {
       grid.innerHTML = archiveLinks.map(link => `
         <div class="link">
@@ -308,23 +308,23 @@ async function loadHistoryArchiveLinks() {
       grid.innerHTML = '<div style="text-align:center; color:#aaccff; font-style:italic; padding:40px;">No archived links yet.</div>';
     }
     
-    console.log(`Showing ${archiveLinks.length} archived history/philosophy/culture links`);
+    console.log(`Showing ${archiveLinks.length} archived markets/economics links`);
     
   } catch (error) {
-    console.error('Error loading history/philosophy/culture archive links:', error);
-    const grid = document.getElementById('history-archive-grid');
+    console.error('Error loading markets/economics archive links:', error);
+    const grid = document.getElementById('markets-archive-grid');
     if (grid) {
       grid.innerHTML = '<div style="text-align:center; color:#ff6666; font-style:italic; padding:40px;">Error loading archive links.</div>';
     }
   }
 }
 
-// Random history/philosophy/culture archive article function
-async function goToRandomHistoryArchive() {
+// Random markets/economics archive article function
+async function goToRandomMarketsArchive() {
   try {
-    const response = await fetch('history-philosophy-culture-links.txt');
+    const response = await fetch('markets-economics-links.txt');
     if (!response.ok) {
-      console.log('Could not load history-philosophy-culture-links.txt for random selection');
+      console.log('Could not load markets-economics-links.txt for random selection');
       return;
     }
     
@@ -352,7 +352,7 @@ async function goToRandomHistoryArchive() {
 }
 
 // Load links when page loads
-document.addEventListener('DOMContentLoaded', loadHistoryArchiveLinks);
+document.addEventListener('DOMContentLoaded', loadMarketsArchiveLinks);
 </script>
 </body>
 </html>
