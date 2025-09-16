@@ -10,6 +10,7 @@
     :root {
       --gold: #d4af37; /* Matches History spoke background */
       --gold-dark: #b8860b; /* Matches History spoke gradient */
+      --gold-light: #f0d064; /* Lighter gold for better contrast */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -29,7 +30,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%); /* Updated to gold */
+      background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -57,13 +58,13 @@
       text-align: left;
     }
     .history-title {
-      color: var(--gold); /* Updated to gold */
+      color: var(--gold);
       animation: block-title-pulse-gold 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse-gold {
       0% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
       12.5% { text-shadow: 0 0 16px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--gold), 2 sy: 0 0 0 5px var(--gold); }
       50% { text-shadow: 0 0 20px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
       75% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
@@ -75,7 +76,7 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: #333333; /* Matches History spoke text color */
+      color: var(--gold); /* Changed to gold for readability */
     }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
@@ -123,15 +124,15 @@
       transition: all 0.3s ease;
     }
     .history-links .headline a:hover {
-      color: var(--gold); /* Updated to gold */
-      text-shadow: 0 0 10px var(--gold);
+      color: var(--gold-light); /* Lighter gold for hover effect */
+      text-shadow: 0 0 10px var(--gold-light);
     }
     .go-deeper, .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--gold); /* Updated to gold */
+      color: var(--gold);
       padding: 8px 16px;
-      border: 1px solid var(--gold); /* Updated to gold */
+      border: 1px solid var(--gold);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
@@ -143,7 +144,7 @@
     .go-deeper:hover, .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(212,175,55,0.3); /* Updated to gold */
+      box-shadow: 0 0 15px rgba(212,175,55,0.3);
     }
     .button-container {
       margin: 20px auto;
@@ -211,7 +212,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#d4af37', '#b8860b', '#e6c14d', '#c69b2f', '#f0d064', '#a67c00'][Math.floor(Math.random() * 6)]; /* Updated to gold palette */
+        this.color = ['#d4af37', '#b8860b', '#f0d064', '#c69b2f', '#e6c14d', '#a67c00'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       update() {
