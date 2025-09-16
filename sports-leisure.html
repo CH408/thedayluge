@@ -8,9 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --turquoise: #40E0D0;
-      --headline-turquoise: #30C0B0;
-      --navy-blue: #000080;
+      --orange: #ff8c00; /* Matches Sports & Leisure spoke background */
+      --orange-dark: #e07b00; /* Matches Sports & Leisure spoke gradient */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -30,7 +29,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(255,140,0,0.1) 0%, transparent 70%); /* Updated to orange */
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -58,16 +57,16 @@
       text-align: left;
     }
     .sports-news-title {
-      color: var(--turquoise);
-      animation: block-title-pulse-turquoise 8s ease-in-out infinite;
+      color: var(--orange); /* Changed to orange */
+      animation: block-title-pulse-orange 8s ease-in-out infinite;
     }
-    @keyframes block-title-pulse-turquoise {
-      0% { text-shadow: 0 0 15px var(--turquoise), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--turquoise), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--turquoise), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--turquoise), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--turquoise), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--turquoise), 2px 2px 4px rgba(0,0,0,0.8); }
+    @keyframes block-title-pulse-orange {
+      0% { text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; max-width: 800px; }
     .headline {
@@ -76,8 +75,8 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
+      color: var(--orange); /* Changed to orange */
     }
-    .sports-news-links .headline { color: var(--navy-blue); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -124,27 +123,27 @@
       transition: all 0.3s ease;
     }
     .sports-news-links .headline a:hover {
-      color: var(--turquoise);
-      text-shadow: 0 0 10px var(--turquoise);
+      color: var(--orange-dark); /* Darker orange for hover */
+      text-shadow: 0 0 10px var(--orange-dark);
     }
     .go-deeper, .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--turquoise);
+      color: var(--orange); /* Changed to orange */
       padding: 8px 16px;
-      border: 1px solid var(--turquoise);
+      border: 1px solid var(--orange); /* Changed to orange */
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--turquoise);
+      text-shadow: 0 0 5px var(--orange);
     }
     .go-deeper:hover, .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(64,224,208,0.3);
+      box-shadow: 0 0 15px rgba(255,140,0,0.3); /* Orange shadow */
     }
     .button-container {
       margin: 20px auto;
@@ -194,7 +193,7 @@
       <ul class="headlines sports-news-links" id="sports-news-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomSports()">SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomSports()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -212,7 +211,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.color = ['#ff8c00', '#e07b00', '#ffa040', '#d26900', '#ffbc80', '#c95f00'][Math.floor(Math.random() * 6)]; /* Orange palette */
         this.hasTail = Math.random() < 0.25;
       }
       update() {
