@@ -188,7 +188,7 @@
       text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
     12.5% { 
-      color:pitbull: #8080ff;
+      color: #8080ff;
       text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
     }
     25% { 
@@ -554,10 +554,10 @@
   .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
   .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
 
-  /* Random button with pulsing title effect and yellow comet */
+  /* Random button with pulsing title effect, yellow comet, and shimmering yellow background */
   .random-button {
     margin-top: 40px;
-    background: transparent; /* Remove gradient for cleaner pulsing effect */
+    background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
     color: var(--bright-purple-glow); /* Initial color matches title */
     border: 2px solid var(--yellow); /* Yellow border for visibility */
     padding: 14px 28px;
@@ -570,7 +570,7 @@
     cursor: pointer;
     position: relative; /* For positioning the comet */
     overflow: hidden; /* Contain the comet within button bounds */
-    animation: title-pulse 8s ease-in-out infinite; /* Same pulse as title */
+    animation: title-pulse 8s ease-in-out infinite, shimmer 3s ease-in-out infinite; /* Pulse text and shimmer background */
     box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
@@ -599,6 +599,19 @@
     }
     100% {
       transform: translate(-50%, -50%) translateY(-20px) rotate(360deg);
+    }
+  }
+
+  /* Shimmering background animation */
+  @keyframes shimmer {
+    0% {
+      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
+    }
+    50% {
+      background: radial-gradient(circle at 70% 70%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
+    }
+    100% {
+      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
     }
   }
 
