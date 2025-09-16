@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Arts & Literature Archive - THE DAYLUGE</title>
+<title>Sports & Leisure Archive - THE DAYLUGE</title>
 
 <!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
@@ -22,7 +22,9 @@
     --violet:#cc88ff;
     --pink:#ff1493;
     --yellow:#ffee44;
-    --brown:#8B4513;
+    --turquoise:#40E0D0; /* Updated to turquoise */
+    --dark-turquoise:#30C0B0; /* Darker turquoise for gradient */
+    --navy-blue:#000080; /* Navy blue for text */
     --dark-green:#006400;
     --ink:#111; 
     --rule:#bfbfbf;
@@ -84,7 +86,7 @@
   }
 
   .category-title{
-    color:#D2B48C; /* Tan color from original file */
+    color:var(--turquoise);
     font-size:24px;
     text-transform:uppercase;
     margin-bottom:20px;
@@ -93,7 +95,7 @@
     letter-spacing:1px;
     text-decoration:underline;
     text-underline-offset:8px;
-    text-decoration-color:#D2B48C;
+    text-decoration-color:var(--turquoise);
   }
 
   /* Back to Home button - bottom right corner */
@@ -109,8 +111,8 @@
     font-size:12px;
     font-weight:bold;
     text-transform:uppercase;
-    border:1px solid rgba(255,221,0,0.3);
-    box-shadow:0 0 5px rgba(210,180,140,0.1);
+    border:1px solid rgba(64,224,208,0.3);
+    box-shadow:0 0 5px rgba(64,224,208,0.1);
     transition:all 0.3s ease;
     z-index:20;
     text-shadow:0 0 5px #00ddff;
@@ -118,7 +120,7 @@
   }
   .back-btn:hover{
     background:rgba(255,255,255,0.1);
-    box-shadow:0 0 15px rgba(210,180,140,0.3);
+    box-shadow:0 0 15px rgba(64,224,208,0.3);
     transform:scale(1.05);
     color:#ffffff;
     opacity:1;
@@ -146,7 +148,7 @@
 
   .link:hover{
     transform:translateY(-5px) scale(1.02);
-    box-shadow:0 0 20px rgba(210,180,140,0.3);
+    box-shadow:0 0 20px rgba(64,224,208,0.3);
   }
 
   .link a{
@@ -154,17 +156,17 @@
     font-size:18px;
     font-weight:bold;
     text-decoration:none;
-    color:#ffffff;
+    color:var(--navy-blue);
     word-break:break-word;
-    text-shadow:0 0 10px rgba(210,180,140,0.5);
-    border-bottom:1px solid rgba(210,180,140,0.3);
+    text-shadow:0 0 10px rgba(64,224,208,0.5);
+    border-bottom:1px solid rgba(64,224,208,0.3);
     padding-bottom:8px;
     line-height:1.4;
   }
   .link a:hover{
-    color:#D2B48C;
+    color:var(--turquoise);
     text-decoration:underline;
-    text-shadow:0 0 15px rgba(210,180,140,0.8);
+    text-shadow:0 0 15px rgba(64,224,208,0.8);
   }
 
   /* Button container */
@@ -179,8 +181,8 @@
   /* Back to Category button */
   .back-to-category-button{
     background:transparent;
-    color:#D2B48C;
-    border:2px solid #D2B48C;
+    color:var(--turquoise);
+    border:2px solid var(--turquoise);
     padding:14px 28px;
     border-radius:30px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
@@ -190,22 +192,22 @@
     letter-spacing:0.5px;
     cursor:pointer;
     transition:all 0.3s ease;
-    text-shadow:0 0 5px rgba(210,180,140,0.5);
+    text-shadow:0 0 5px rgba(64,224,208,0.5);
     text-decoration:none;
     display:inline-block;
   }
   .back-to-category-button:hover{
-    background:rgba(210,180,140,0.1);
+    background:rgba(64,224,208,0.1);
     transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(210,180,140,0.3);
+    box-shadow:0 0 25px rgba(64,224,208,0.3);
     color:#ffffff;
   }
 
   /* Random button */
   .random-button{
-    background:linear-gradient(45deg, var(--brown) 0%, #654321 100%);
+    background:linear-gradient(45deg, var(--turquoise) 0%, var(--dark-turquoise) 100%);
     color:white;
-    border:2px solid #D2B48C;
+    border:2px solid var(--turquoise);
     padding:14px 28px;
     border-radius:30px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
@@ -215,13 +217,13 @@
     letter-spacing:0.5px;
     cursor:pointer;
     transition:all 0.3s ease;
-    box-shadow:0 0 15px rgba(210,180,140,0.3);
+    box-shadow:0 0 15px rgba(64,224,208,0.3);
     text-shadow:0 0 5px #ffffff;
   }
   .random-button:hover{
-    background:linear-gradient(45deg, #654321 0%, var(--brown) 100%);
+    background:linear-gradient(45deg, var(--dark-turquoise) 0%, var(--turquoise) 100%);
     transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(210,180,140,0.5), 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow:0 0 25px rgba(64,224,208,0.5), 0 8px 20px rgba(0,0,0,0.4);
   }
 
   /* Responsive */
@@ -248,32 +250,32 @@
 <div class="wrap">
   <header>
     <h1>THE DAYLUGE</h1>
-    <div class="category-title">Arts & Literature Archive</div>
+    <div class="category-title">Sports & Leisure Archive</div>
   </header>
 
-  <!-- Arts & Literature Archive Links Grid -->
-  <div class="grid" id="arts-archive-grid">
-    <!-- Links will be loaded dynamically from arts-literature-links.txt (starting from link 37) -->
+  <!-- Sports & Leisure Archive Links Grid -->
+  <div class="grid" id="sports-archive-grid">
+    <!-- Links will be loaded dynamically from sports-leisure-links.txt (starting from link 37) -->
   </div>
 
   <!-- Button Container -->
   <div class="button-container">
-    <a href="/arts-literature.html" class="back-to-category-button">
-      ← Back to Arts & Literature
+    <a href="/sports-leisure.html" class="back-to-category-button">
+      ← Back to Sports & Leisure
     </a>
-    <button class="random-button" onclick="goToRandomArtsArchive()">
+    <button class="random-button" onclick="goToRandomSportsArchive()">
       SURPRISE ME!
     </button>
   </div>
 </div>
 
 <script>
-// Load arts & literature archive links from external file (starting from link 37)
-async function loadArtsArchiveLinks() {
+// Load sports & leisure archive links from external file (starting from link 37)
+async function loadSportsArchiveLinks() {
   try {
-    const response = await fetch('arts-literature-links.txt');
+    const response = await fetch('sports-leisure-links.txt');
     if (!response.ok) {
-      console.error('Failed to load arts-literature-links.txt:', response.status);
+      console.error('Failed to load sports-leisure-links.txt:', response.status);
       return;
     }
     
@@ -295,7 +297,7 @@ async function loadArtsArchiveLinks() {
     const archiveLinks = links.slice(36);
     
     // Populate the grid
-    const grid = document.getElementById('arts-archive-grid');
+    const grid = document.getElementById('sports-archive-grid');
     if (grid && archiveLinks.length > 0) {
       grid.innerHTML = archiveLinks.map(link => `
         <div class="link">
@@ -308,23 +310,23 @@ async function loadArtsArchiveLinks() {
       grid.innerHTML = '<div style="text-align:center; color:#aaccff; font-style:italic; padding:40px;">No archived links yet.</div>';
     }
     
-    console.log(`Showing ${archiveLinks.length} archived arts & literature links`);
+    console.log(`Showing ${archiveLinks.length} archived sports & leisure links`);
     
   } catch (error) {
-    console.error('Error loading arts & literature archive links:', error);
-    const grid = document.getElementById('arts-archive-grid');
+    console.error('Error loading sports & leisure archive links:', error);
+    const grid = document.getElementById('sports-archive-grid');
     if (grid) {
       grid.innerHTML = '<div style="text-align:center; color:#ff6666; font-style:italic; padding:40px;">Error loading archive links.</div>';
     }
   }
 }
 
-// Random arts & literature archive article function
-async function goToRandomArtsArchive() {
+// Random sports & leisure archive article function
+async function goToRandomSportsArchive() {
   try {
-    const response = await fetch('arts-literature-links.txt');
+    const response = await fetch('sports-leisure-links.txt');
     if (!response.ok) {
-      console.log('Could not load arts-literature-links.txt for random selection');
+      console.log('Could not load sports-leisure-links.txt for random selection');
       return;
     }
     
@@ -352,7 +354,7 @@ async function goToRandomArtsArchive() {
 }
 
 // Load links when page loads
-document.addEventListener('DOMContentLoaded', loadArtsArchiveLinks);
+document.addEventListener('DOMContentLoaded', loadSportsArchiveLinks);
 </script>
 </body>
 </html>
