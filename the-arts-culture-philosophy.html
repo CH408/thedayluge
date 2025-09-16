@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Leisure & Entertainment - THE DAYLUGE</title>
+  <title>The Arts, Culture & Philosophy - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -56,7 +56,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .leisure-entertainment-title {
+    .the-arts-culture-philosophy-title {
       color: var(--light-cyan-glow);
       animation: block-title-pulse-cyan 8s ease-in-out infinite;
     }
@@ -76,7 +76,7 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .leisure-entertainment-links .headline { color: var(--headline-cyan); }
+    .the-arts-culture-philosophy-links .headline { color: var(--headline-cyan); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -122,7 +122,7 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .leisure-entertainment-links .headline a:hover {
+    .the-arts-culture-philosophy-links .headline a:hover {
       color: var(--light-cyan-glow);
       text-shadow: 0 0 10px var(--light-cyan-glow);
     }
@@ -185,15 +185,15 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="leisure-entertainment">
+    <div class="the-arts-culture-philosophy">
       <div class="title-container">
-        <div class="block-title leisure-entertainment-title">Leisure & Entertainment</div>
-        <a href="/leisure-entertainment-archive.html" class="go-deeper">Go Deeper</a>
+        <div class="block-title the-arts-culture-philosophy-title">The Arts, Culture & Philosophy</div>
+        <a href="/the-arts-culture-philosophy-archive.html" class="go-deeper">Go Deeper</a>
       </div>
-      <ul class="headlines leisure-entertainment-links" id="leisure-entertainment-links"></ul>
+      <ul class="headlines the-arts-culture-philosophy-links" id="the-arts-culture-philosophy-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomLeisure()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomArtsCulturePhilosophy()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -265,12 +265,12 @@
       init();
     });
 
-    // Load leisure & entertainment links
-    async function loadLeisureLinks() {
+    // Load the arts, culture & philosophy links
+    async function loadArtsCulturePhilosophyLinks() {
       try {
-        const response = await fetch('leisure-entertainment-links.txt');
+        const response = await fetch('the-arts-culture-philosophy-links.txt');
         if (!response.ok) {
-          console.error('Failed to load leisure-entertainment-links.txt:', response.status);
+          console.error('Failed to load the-arts-culture-philosophy-links.txt:', response.status);
           return;
         }
         const text = await response.text();
@@ -283,7 +283,7 @@
           return null;
         }).filter(link => link !== null);
         const displayLinks = links.slice(0, 36);
-        const grid = document.getElementById('leisure-entertainment-links');
+        const grid = document.getElementById('the-arts-culture-philosophy-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
             <li class="headline">
@@ -291,18 +291,18 @@
             </li>
           `).join('');
         }
-        console.log(`Showing ${displayLinks.length} leisure/entertainment links (${links.length - displayLinks.length} moved to archive)`);
+        console.log(`Showing ${displayLinks.length} arts/culture/philosophy links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading leisure/entertainment links:', error);
+        console.error('Error loading arts/culture/philosophy links:', error);
       }
     }
 
-    // Random leisure & entertainment article
-    async function goToRandomLeisure() {
+    // Random arts, culture & philosophy article
+    async function goToRandomArtsCulturePhilosophy() {
       try {
-        const response = await fetch('leisure-entertainment-links.txt');
+        const response = await fetch('the-arts-culture-philosophy-links.txt');
         if (!response.ok) {
-          console.log('Could not load leisure-entertainment-links.txt for random selection');
+          console.log('Could not load the-arts-culture-philosophy-links.txt for random selection');
           return;
         }
         const text = await response.text();
@@ -324,7 +324,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadLeisureLinks);
+    document.addEventListener('DOMContentLoaded', loadArtsCulturePhilosophyLinks);
   </script>
 </body>
 </html>
