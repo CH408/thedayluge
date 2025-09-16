@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Miscellany Archive - THE DAYLUGE</title>
+  <title>History Archive - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -193,14 +193,14 @@
   </style>
 </head>
 <body>
-  <a href="/miscellany.html" class="back-btn">← Back to Miscellany</a>
+  <a href="/history.html" class="back-btn">← Back to History</a>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title">Miscellany Archive</div>
+    <div class="archive-title">History Archive</div>
     <ul class="headlines" id="archive-links"></ul>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomMiscellany()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomHistory()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -275,11 +275,11 @@
     // Load archive links
     async function loadArchiveLinks() {
       try {
-        console.log('Fetching miscellany-links.txt for archive');
-        const response = await fetch('miscellany-links.txt');
+        console.log('Fetching history-links.txt for archive');
+        const response = await fetch('history-links.txt');
         console.log('Fetch response:', response);
         if (!response.ok) {
-          console.error(`Failed to load miscellany-links.txt: ${response.status}`);
+          console.error(`Failed to load history-links.txt: ${response.status}`);
           return;
         }
         const text = await response.text();
@@ -310,13 +310,13 @@
       }
     }
 
-    // Random miscellany article
-    async function goToRandomMiscellany() {
+    // Random history article
+    async function goToRandomHistory() {
       try {
-        console.log('Fetching miscellany-links.txt for random selection');
-        const response = await fetch('miscellany-links.txt');
+        console.log('Fetching history-links.txt for random selection');
+        const response = await fetch('history-links.txt');
         if (!response.ok) {
-          console.log('Could not load miscellany-links.txt for random selection');
+          console.log('Could not load history-links.txt for random selection');
           return;
         }
         const text = await response.text();
