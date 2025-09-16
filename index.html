@@ -803,7 +803,7 @@
         var(--light-cyan-glow) 5%,
         var(--light-cyan-glow) 100%
       );
-      box-shadow: 0 0 10px var(--light-highlighlow);
+      box-shadow: 0 0 10px var(--light-cyan-glow);
     }
     .wheel-line::before, .wheel-line::after {
       animation: none;
@@ -889,14 +889,25 @@ document.addEventListener('DOMContentLoaded', function() {
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
 
-  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
-    el.style.visibility = 'hidden';
-  });
+  // Check if already authenticated
+  if (localStorage.getItem('isAuthenticated') === 'true') {
+    console.log('User is already authenticated, hiding overlay');
+    overlay.classList.add('hidden');
+    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+      el.style.visibility = 'visible';
+    });
+  } else {
+    console.log('User not authenticated, showing password overlay');
+    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+      el.style.visibility = 'hidden';
+    });
+  }
 
   function checkPassword() {
     console.log('Checking password:', passwordInput.value);
     if (passwordInput.value === correctPassword) {
-      console.log('Password correct, hiding overlay');
+      console.log('Password correct, setting authentication and hiding overlay');
+      localStorage.setItem('isAuthenticated', 'true');
       overlay.classList.add('hidden');
       document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
         el.style.visibility = 'visible';
@@ -954,6 +965,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function init() {
+    particlesArray.length = 0; // Clear array
     for (let i = 0; i < numberOfParticles; i++) {
       particlesArray.push(new Particle());
     }
@@ -984,7 +996,7 @@ function goToNewsHub() {
 }
 
 function goToCategory(category) {
-  console.log('Navigating to category:', category);
+  console.log('Attempting to navigate to category:', category);
   const categoryPages = {
     'politics': '/politics.html',
     'markets-economics': '/markets-economics.html',
@@ -999,6 +1011,9 @@ function goToCategory(category) {
   if (categoryPages[category]) {
     console.log('Navigating to:', categoryPages[category]);
     window.location.href = categoryPages[category];
+  } else {
+    console.error('Category not found:', category);
+    alert('Category page not found. Please try again later.');
   }
 }
 
@@ -1016,7 +1031,7 @@ async function goToRandomArticle() {
         }
         return null;
       }).filter(link => link !== null);
-      const currentLinks = links.slice(0, 8); // Limit to last 8 links
+      const currentLinks = links.slice(0, 8);
       if (currentLinks.length > 0) {
         const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
         console.log('Opening random link:', randomLink.url);
@@ -1026,7 +1041,7 @@ async function goToRandomArticle() {
         alert('No articles available to display. Please try again later.');
       }
     } else {
-      console.log('Failed to fetch surprise-me-links.txt');
+      console.log('Failed to fetch surprise-me-links.txt:', response.status);
       alert('Failed to load articles. Please try again later.');
     }
   } catch (error) {
