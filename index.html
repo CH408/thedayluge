@@ -1031,7 +1031,7 @@ async function goToRandomArticle() {
         }
         return null;
       }).filter(link => link !== null);
-      const currentLinks = links.slice(0, 8);
+      const currentLinks = links.slice(0, 18);
       if (currentLinks.length > 0) {
         const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
         console.log('Opening random link:', randomLink.url);
