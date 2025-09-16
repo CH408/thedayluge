@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Opinion Archive - THE DAYLUGE</title>
+<title>Politics Archive - THE DAYLUGE</title>
 
 <!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
@@ -258,32 +258,32 @@
 <div class="wrap">
   <header>
     <h1>THE DAYLUGE</h1>
-    <div class="category-title">Opinion Archive</div>
+    <div class="category-title">Politics Archive</div>
   </header>
 
-  <!-- Opinion Archive Links Grid -->
-  <div class="grid" id="opinion-archive-grid">
-    <!-- Links will be loaded dynamically from opinion-links.txt (starting from link 37) -->
+  <!-- Politics Archive Links Grid -->
+  <div class="grid" id="politics-archive-grid">
+    <!-- Links will be loaded dynamically from politics-links.txt (starting from link 37) -->
   </div>
 
   <!-- Button Container -->
   <div class="button-container">
-    <a href="/opinion.html" class="back-to-category-button">
-      ← Back to Opinion
+    <a href="/politics.html" class="back-to-category-button">
+      ← Back to Politics
     </a>
-    <button class="random-button" onclick="goToRandomOpinionArchive()">
+    <button class="random-button" onclick="goToRandomPoliticsArchive()">
       SURPRISE ME!
     </button>
   </div>
 </div>
 
 <script>
-// Load opinion archive links from external file (starting from link 37)
-async function loadOpinionArchiveLinks() {
+// Load politics archive links from external file (starting from link 37)
+async function loadPoliticsArchiveLinks() {
   try {
-    const response = await fetch('opinion-links.txt');
+    const response = await fetch('politics-links.txt');
     if (!response.ok) {
-      console.error('Failed to load opinion-links.txt:', response.status);
+      console.error('Failed to load politics-links.txt:', response.status);
       return;
     }
     
@@ -305,7 +305,7 @@ async function loadOpinionArchiveLinks() {
     const archiveLinks = links.slice(36);
     
     // Populate the grid
-    const grid = document.getElementById('opinion-archive-grid');
+    const grid = document.getElementById('politics-archive-grid');
     if (grid && archiveLinks.length > 0) {
       grid.innerHTML = archiveLinks.map(link => `
         <div class="link">
@@ -318,23 +318,23 @@ async function loadOpinionArchiveLinks() {
       grid.innerHTML = '<div style="text-align:center; color:#aaccff; font-style:italic; padding:40px;">No archived links yet.</div>';
     }
     
-    console.log(`Showing ${archiveLinks.length} archived opinion links`);
+    console.log(`Showing ${archiveLinks.length} archived politics links`);
     
   } catch (error) {
-    console.error('Error loading opinion archive links:', error);
-    const grid = document.getElementById('opinion-archive-grid');
+    console.error('Error loading politics archive links:', error);
+    const grid = document.getElementById('politics-archive-grid');
     if (grid) {
       grid.innerHTML = '<div style="text-align:center; color:#ff6666; font-style:italic; padding:40px;">Error loading archive links.</div>';
     }
   }
 }
 
-// Random opinion archive article function
-async function goToRandomOpinionArchive() {
+// Random politics archive article function
+async function goToRandomPoliticsArchive() {
   try {
-    const response = await fetch('opinion-links.txt');
+    const response = await fetch('politics-links.txt');
     if (!response.ok) {
-      console.log('Could not load opinion-links.txt for random selection');
+      console.log('Could not load politics-links.txt for random selection');
       return;
     }
     
@@ -362,7 +362,7 @@ async function goToRandomOpinionArchive() {
 }
 
 // Load links when page loads
-document.addEventListener('DOMContentLoaded', loadOpinionArchiveLinks);
+document.addEventListener('DOMContentLoaded', loadPoliticsArchiveLinks);
 </script>
 </body>
 </html>
