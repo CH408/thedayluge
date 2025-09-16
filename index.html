@@ -554,12 +554,12 @@
   .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
   .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
 
-  /* Random button with yellow-orange shimmering background and bright dark red text */
+  /* Random button with solid yellow background, bright red text, and glowing edge effect */
   .random-button {
     margin-top: 40px;
-    background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, var(--orange) 100%);
-    color: var(--red); /* Bright dark red text */
-    border: 2px solid var(--yellow); /* Yellow border for visibility */
+    background: var(--yellow); /* Solid bright yellow */
+    color: var(--red); /* Solid bright red */
+    border: 2px solid var(--yellow); /* Yellow border */
     padding: 14px 28px;
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
@@ -568,51 +568,41 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
-    position: relative; /* For positioning the comet */
-    overflow: hidden; /* Contain the comet within button bounds */
-    animation: shimmer 3s ease-in-out infinite; /* Shimmer background only */
+    position: relative; /* For edge effect */
     box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Enhance text visibility */
   }
 
-  /* Yellow-orange comet effect */
+  /* Glowing edge effect */
   .random-button::before {
     content: '';
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background: radial-gradient(circle, var(--yellow) 0%, var(--orange) 100%);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: comet-orbit 1.5s linear infinite;
-    box-shadow: 0 0 15px var(--yellow), 0 0 25px var(--yellow);
-    z-index: -1; /* Ensure comet is behind text */
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 32px; /* Match button's border-radius + border width */
+    background: linear-gradient(45deg, var(--yellow), var(--orange), var(--yellow));
+    z-index: -1;
+    animation: edge-glow 3s ease-in-out infinite;
+    opacity: 0.5;
   }
 
-  /* Comet orbit animation */
-  @keyframes comet-orbit {
+  /* Edge glow animation */
+  @keyframes edge-glow {
     0% {
-      transform: translate(-50%, -50%) translateY(-20px) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) translateY(-20px) rotate(360deg);
-    }
-  }
-
-  /* Shimmering background animation between yellow and orange */
-  @keyframes shimmer {
-    0% {
-      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, var(--orange) 100%);
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--orange);
+      opacity: 0.5;
     }
     50% {
-      background: radial-gradient(circle at 70% 70%, var(--orange) 0%, var(--yellow) 100%);
+      box-shadow: 0 0 20px var(--orange), 0 0 40px var(--yellow);
+      opacity: 0.8;
     }
     100% {
-      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, var(--orange) 100%);
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--orange);
+      opacity: 0.5;
     }
   }
 
@@ -719,16 +709,24 @@
       text-shadow: 1.5px 1.5px 3px rgba(0,0,0,0.8); /* Slightly smaller shadow for mobile */
     }
     .random-button::before {
-      width: 8px;
-      height: 8px;
-      animation: comet-orbit 1.2s linear infinite; /* Slightly faster on mobile */
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px; /* Adjusted for smaller padding */
     }
-    @keyframes comet-orbit {
+    @keyframes edge-glow {
       0% {
-        transform: translate(-50%, -50%) translateY(-18px) rotate(0deg);
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--orange);
+        opacity: 0.5;
+      }
+      50% {
+        box-shadow: 0 0 15px var(--orange), 0 0 30px var(--yellow);
+        opacity: 0.8;
       }
       100% {
-        transform: translate(-50%, -50%) translateY(-18px) rotate(360deg);
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--orange);
+        opacity: 0.5;
       }
     }
     .spoke{
@@ -821,19 +819,27 @@
     .random-button{
       padding:10px 18px;
       font-size:12px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8); /* Even smaller shadow for smaller screens */
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8); /* Smaller shadow for smaller screens */
     }
     .random-button::before {
-      width: 6px;
-      height: 6px;
-      animation: comet-orbit 1s linear infinite; /* Even faster for smaller screens */
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px; /* Adjusted for smaller padding */
     }
-    @keyframes comet-orbit {
+    @keyframes edge-glow {
       0% {
-        transform: translate(-50%, -50%) translateY(-16px) rotate(0deg);
+        box-shadow: 0 0 6px var(--yellow), 0 0 12px var(--orange);
+        opacity: 0.5;
+      }
+      50% {
+        box-shadow: 0 0 12px var(--orange), 0 0 25px var(--yellow);
+        opacity: 0.8;
       }
       100% {
-        transform: translate(-50%, -50%) translateY(-16px) rotate(360deg);
+        box-shadow: 0 0 6px var(--yellow), 0 0 12px var(--orange);
+        opacity: 0.5;
       }
     }
   }
@@ -876,6 +882,11 @@
     }
     .wheel-line::before, .wheel-line::after {
       animation: none;
+    }
+    .random-button::before {
+      animation: none;
+      box-shadow: 0 0 10px var(--yellow);
+      opacity: 0.5;
     }
   }
 </style>
