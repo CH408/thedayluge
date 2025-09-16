@@ -328,7 +328,7 @@
   }
 
   /* Position 8 electrons around the nucleus */
-  .spoke-1{ /* Opinion - 0° */
+  .spoke-1{ /* Politics - 0° */
     left:390px;
     top:205px;
     background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
@@ -847,7 +847,7 @@
     </div>
 
     <!-- Electrons (category spokes) -->
-    <div class="spoke spoke-1" onclick="goToCategory('opinion')">Opinion</div>
+    <div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
     <div class="spoke spoke-2" onclick="goToCategory('history-philosophy-culture')">History,
       Philosophy
       & Culture</div>
@@ -983,7 +983,7 @@ function goToNewsHub() {
 function goToCategory(category) {
   console.log('Navigating to category:', category);
   const categoryPages = {
-    'opinion': '/opinion.html',
+    'politics': '/politics.html',
     'history-philosophy-culture': '/history-philosophy-culture.html',
     'arts-literature': '/arts-literature.html',
     'science-nature': '/science-nature.html',
