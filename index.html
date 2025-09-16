@@ -24,13 +24,24 @@
     --yellow:#ffee44;
     --brown:#8B4513;
     --dark-green:#006400;
-    --turquoise:#40E0D0; /* For Sports & Leisure */
+    --turquoise:#40E0D0; /* For Sports & Leisure (updated to orange below) */
     --bright-blue:#00b7eb; /* For title animation */
     --ink:#111; 
     --rule:#bfbfbf;
     --maxw:1400px;
     --bright-purple-glow: #cc88ff;
     --light-cyan-glow: #33ddff;
+    /* New colors for updated spokes */
+    --aqua-blueish-green: #00cc99; /* For Conspiracy Corner */
+    --aqua-blueish-green-dark: #009977;
+    --gold: #d4af37; /* For History */
+    --gold-dark: #b8860b;
+    --marble-white: #f5f5f5; /* For Politics marble effect */
+    --marble-gray: #d3d3d3;
+    --bright-dark-green: #00aa33; /* For Markets & Economics */
+    --bright-dark-green-dark: #008822;
+    --dodgers-blue: #1e90ff; /* For Science, Nature & Technology */
+    --dodgers-blue-dark: #0066cc;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -116,7 +127,7 @@
     color: var(--pink);
     font-size: 14px;
     margin-top: 10px;
-    text-shadow: 0 0 5px var(---pink);
+    text-shadow: 0 0 5px var(--pink);
     display: none;
   }
 
@@ -290,7 +301,7 @@
     position:absolute;
     width:90px;
     height:90px;
-    border:2px solid #ffdd00;
+    border:2px solid #ffdd00; /* Retain yellow border */
     border-radius:50%;
     display:flex;
     align-items:center;
@@ -298,13 +309,12 @@
     cursor:pointer;
     transition:all 0.3s ease;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
-    font-weight:bold;
+    font-weight:900; /* Default weight, adjusted for specific spokes */
     text-align:center;
-    font-size:11px;
+    font-size:13px; /* Increased from 11px to maximize size while fitting */
     line-height:1.1;
     text-transform:uppercase;
     letter-spacing:0.2px;
-    background:#fff;
     box-shadow:0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
     padding:4px;
     animation:electron-pulse 2s ease-in-out infinite;
@@ -332,59 +342,67 @@
   .spoke-1{ /* Politics - 0° */
     left:390px;
     top:205px;
-    background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
-    color:black !important;
+    background:linear-gradient(135deg, var(--marble-white) 0%, var(--marble-gray) 50%, var(--marble-white) 100%); /* Marble-like effect */
+    color:#333333 !important; /* Dark gray for contrast */
+    font-size:14px; /* Slightly larger for shorter text */
     font-weight:900 !important;
   }
   .spoke-2{ /* Markets & Economics - 45° */
     left:336px;
     top:336px;
-    background:radial-gradient(circle, var(--yellow) 0%, #ddcc00 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--bright-dark-green) 0%, var(--bright-dark-green-dark) 100%);
+    color:#ffffff !important; /* White for contrast */
+    font-size:13px; /* Max size for longer text */
     font-weight:900 !important;
   }
   .spoke-3{ /* Sports & Leisure - 90° */
     left:205px;
     bottom:20px;
-    background:radial-gradient(circle, var(--turquoise) 0%, #30C0B0 100%);
-    color:#000080 !important; /* Navy blue font */
-    font-weight:900 !important;
+    background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
+    color:#000080 !important; /* Retain navy blue font */
+    font-size:14px; /* Slightly larger for shorter text */
+    font-weight:700 !important; /* Reduced weight for clarity */
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-4{ /* Science, Nature & Technology - 135° */
     left:74px;
     bottom:64px;
-    background:radial-gradient(circle, var(--green) 0%, #00aa33 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--dodgers-blue) 0%, var(--dodgers-blue-dark) 100%);
+    color:#ffffff !important; /* White for contrast */
+    font-size:13px; /* Max size for longer text */
     font-weight:900 !important;
   }
   .spoke-5{ /* The Arts, Culture & Philosophy - 180° */
     left:20px;
     top:205px;
-    background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
-    color:white !important;
+    background:radial-gradient(circle, var(--blue) 0%, #001166 100%); /* Unchanged */
+    color:white !important; /* Unchanged */
+    font-size:13px; /* Max size for longer text */
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-6{ /* Debunked - 225° */
     left:74px;
     top:74px;
-    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%); /* Unchanged */
+    color:black !important; /* Unchanged */
+    font-size:14px; /* Slightly larger for shorter text */
     font-weight:900 !important;
   }
   .spoke-7{ /* Conspiracy Corner - 270° */
     left:205px;
     top:20px;
-    background:radial-gradient(circle, var(--light-blue) 0%, #00aadd 100%);
-    color:black !important;
+    background:radial-gradient(circle, var(--aqua-blueish-green) 0%, var(--aqua-blueish-green-dark) 100%);
+    color:#ffffff !important; /* White for contrast */
+    font-size:13px; /* Max size for longer text */
     font-weight:900 !important;
   }
   .spoke-8{ /* History - 315° */
     left:336px;
     top:74px;
-    background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
-    color:white !important;
+    background:radial-gradient(circle, var(--gold) 0%, var(--gold-dark) 100%);
+    color:black !important; /* Specified black */
+    font-size:14px; /* Slightly larger for shorter text */
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
@@ -607,9 +625,17 @@
     .spoke{
       width:80px;
       height:80px;
-      font-size:10px;
+      font-size:11px; /* Scaled down from 13px */
       border-width:2px;
     }
+    .spoke-1{ left:295px; top:150px; font-size:12px; } /* Politics */
+    .spoke-2{ left:255px; top:255px; font-size:11px; } /* Markets & Economics */
+    .spoke-3{ left:150px; bottom:15px; font-size:12px; } /* Sports & Leisure */
+    .spoke-4{ left:45px; bottom:50px; font-size:11px; } /* Science, Nature & Technology */
+    .spoke-5{ left:15px; top:150px; font-size:11px; } /* The Arts, Culture & Philosophy */
+    .spoke-6{ left:45px; top:50px; font-size:12px; } /* Debunked */
+    .spoke-7{ left:150px; top:15px; font-size:11px; } /* Conspiracy Corner */
+    .spoke-8{ left:255px; top:50px; font-size:12px; } /* History */
     .header h1{
       font-size:32px;
       margin-bottom:20px;
@@ -655,14 +681,6 @@
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:105px;
     }
-    .spoke-1{ left:295px; top:150px; }
-    .spoke-2{ left:255px; top:255px; }
-    .spoke-3{ left:150px; bottom:15px; }
-    .spoke-4{ left:45px; bottom:50px; }
-    .spoke-5{ left:15px; top:150px; }
-    .spoke-6{ left:45px; top:50px; }
-    .spoke-7{ left:150px; top:15px; }
-    .spoke-8{ left:255px; top:50px; }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
@@ -705,8 +723,16 @@
     .spoke{
       width:65px;
       height:65px;
-      font-size:9px;
+      font-size:10px; /* Scaled down from 11px */
     }
+    .spoke-1{ left:245px; top:127.5px; font-size:11px; } /* Politics */
+    .spoke-2{ left:215px; top:215px; font-size:10px; } /* Markets & Economics */
+    .spoke-3{ left:127.5px; bottom:12.5px; font-size:11px; } /* Sports & Leisure */
+    .spoke-4{ left:40px; bottom:40px; font-size:10px; } /* Science, Nature & Technology */
+    .spoke-5{ left:12.5px; top:127.5px; font-size:10px; } /* The Arts, Culture & Philosophy */
+    .spoke-6{ left:40px; top:40px; font-size:11px; } /* Debunked */
+    .spoke-7{ left:127.5px; top:12.5px; font-size:10px; } /* Conspiracy Corner */
+    .spoke-8{ left:215px; top:40px; font-size:11px; } /* History */
     .header h1{
       font-size:28px;
     }
@@ -751,14 +777,6 @@
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:85px;
     }
-    .spoke-1{ left:245px; top:127.5px; }
-    .spoke-2{ left:215px; top:215px; }
-    .spoke-3{ left:127.5px; bottom:12.5px; }
-    .spoke-4{ left:40px; bottom:40px; }
-    .spoke-5{ left:12.5px; top:127.5px; }
-    .spoke-6{ left:40px; top:40px; }
-    .spoke-7{ left:127.5px; top:12.5px; }
-    .spoke-8{ left:215px; top:40px; }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
