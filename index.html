@@ -21,7 +21,7 @@
     --light-blue:#33ddff;
     --violet:#cc88ff;
     --pink:#ff1493;
-    --yellow:#ffee44;
+    --yellow:#ffff00; /* Changed to bright yellow */
     --brown:#8B4513;
     --dark-green:#006400;
     --turquoise:#40E0D0; /* Unused after Sports & Leisure update */
@@ -557,9 +557,9 @@
   /* Random button with solid yellow background and bright red text */
   .random-button {
     margin-top: 40px;
-    background: #ffff00; /* Solid bright yellow */
-    color: #ff0000; /* Bright red */
-    border: 2px solid #ffff00; /* Yellow border */
+    background: var(--yellow); /* Solid yellow */
+    color: var(--red); /* Bright red */
+    border: 2px solid var(--yellow); /* Yellow border */
     padding: 14px 28px;
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
@@ -569,10 +569,10 @@
     letter-spacing: 0.5px;
     cursor: pointer;
     position: relative; /* For edge effect */
-    box-shadow: 0 0 20px #ffff00, 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Enhance text visibility */
+    text-shadow: none; /* Remove text shadow */
   }
 
   /* Glowing edge effect */
@@ -584,7 +584,7 @@
     right: -4px;
     bottom: -4px;
     border-radius: 32px; /* Match button's border-radius + border width */
-    background: linear-gradient(45deg, #ffff00, var(--orange), #ffff00);
+    background: linear-gradient(45deg, var(--yellow), var(--yellow), var(--yellow));
     z-index: -1;
     animation: edge-glow 3s ease-in-out infinite;
     opacity: 0.5;
@@ -593,15 +593,15 @@
   /* Edge glow animation */
   @keyframes edge-glow {
     0% {
-      box-shadow: 0 0 10px #ffff00, 0 0 20px var(--orange);
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
       opacity: 0.5;
     }
     50% {
-      box-shadow: 0 0 20px var(--orange), 0 0 40px #ffff00;
+      box-shadow: 0 0 20px var(--yellow), 0 0 40px var(--yellow);
       opacity: 0.8;
     }
     100% {
-      box-shadow: 0 0 10px #ffff00, 0 0 20px var(--orange);
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
       opacity: 0.5;
     }
   }
@@ -609,7 +609,7 @@
   /* Hover effect */
   .random-button:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 35px #ffff00, 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
   }
 
   /* Archive link with glow */
@@ -706,7 +706,7 @@
       margin-top:25px;
       padding:12px 20px;
       font-size:13px;
-      text-shadow: 1.5px 1.5px 3px rgba(0,0,0,0.8); /* Slightly smaller shadow for mobile */
+      text-shadow: none;
     }
     .random-button::before {
       top: -3px;
@@ -717,15 +717,15 @@
     }
     @keyframes edge-glow {
       0% {
-        box-shadow: 0 0 8px #ffff00, 0 0 15px var(--orange);
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
         opacity: 0.5;
       }
       50% {
-        box-shadow: 0 0 15px var(--orange), 0 0 30px #ffff00;
+        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
         opacity: 0.8;
       }
       100% {
-        box-shadow: 0 0 8px #ffff00, 0 0 15px var(--orange);
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
         opacity: 0.5;
       }
     }
@@ -819,7 +819,7 @@
     .random-button{
       padding:10px 18px;
       font-size:12px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8); /* Smaller shadow for smaller screens */
+      text-shadow: none;
     }
     .random-button::before {
       top: -3px;
@@ -830,15 +830,15 @@
     }
     @keyframes edge-glow {
       0% {
-        box-shadow: 0 0 6px #ffff00, 0 0 12px var(--orange);
+        box-shadow: 0 0 6px var(--yellow), 0 0 12px var(--yellow);
         opacity: 0.5;
       }
       50% {
-        box-shadow: 0 0 12px var(--orange), 0 0 25px #ffff00;
+        box-shadow: 0 0 12px var(--yellow), 0 0 25px var(--yellow);
         opacity: 0.8;
       }
       100% {
-        box-shadow: 0 0 6px #ffff00, 0 0 12px var(--orange);
+        box-shadow: 0 0 6px var(--yellow), 0 0 12px var(--yellow);
         opacity: 0.5;
       }
     }
@@ -885,7 +885,7 @@
     }
     .random-button::before {
       animation: none;
-      box-shadow: 0 0 10px #ffff00;
+      box-shadow: 0 0 10px var(--yellow);
       opacity: 0.5;
     }
   }
