@@ -554,11 +554,11 @@
   .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
   .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
 
-  /* Random button with pulsing title effect, yellow comet, and yellow-orange shimmering background */
+  /* Random button with yellow-orange shimmering background and bright dark red text */
   .random-button {
     margin-top: 40px;
     background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, var(--orange) 100%);
-    color: var(--bright-purple-glow); /* Initial color matches title */
+    color: var(--red); /* Bright dark red text */
     border: 2px solid var(--yellow); /* Yellow border for visibility */
     padding: 14px 28px;
     border-radius: 30px;
@@ -570,14 +570,14 @@
     cursor: pointer;
     position: relative; /* For positioning the comet */
     overflow: hidden; /* Contain the comet within button bounds */
-    animation: title-pulse 8s ease-in-out infinite, shimmer 3s ease-in-out infinite; /* Pulse text and shimmer background */
+    animation: shimmer 3s ease-in-out infinite; /* Shimmer background only */
     box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Enhance text visibility */
   }
 
-  /* Yellow comet effect */
+  /* Yellow-orange comet effect */
   .random-button::before {
     content: '';
     position: absolute;
