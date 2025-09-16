@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Opinion - THE DAYLUGE</title>
+  <title>Politics - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -56,7 +56,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .opinion-news-title {
+    .politics-news-title {
       color: var(--light-orange-glow);
       animation: block-title-pulse-orange 8s ease-in-out infinite;
     }
@@ -76,7 +76,7 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .opinion-news-links .headline { color: var(--headline-orange); }
+    .politics-news-links .headline { color: var(--headline-orange); }
     /* Apply animation delay to all headlines dynamically */
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
@@ -123,7 +123,7 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .opinion-news-links .headline a:hover {
+    .politics-news-links .headline a:hover {
       color: var(--light-orange-glow);
       text-shadow: 0 0 10px var(--light-orange-glow);
     }
@@ -186,15 +186,15 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="opinion-news">
+    <div class="politics-news">
       <div class="title-container">
-        <div class="block-title opinion-news-title">Opinion</div>
-        <a href="/opinion-archive.html" class="go-deeper">Go Deeper</a>
+        <div class="block-title politics-news-title">Politics</div>
+        <a href="/politics-archive.html" class="go-deeper">Go Deeper</a>
       </div>
-      <ul class="headlines opinion-news-links" id="opinion-news-links"></ul>
+      <ul class="headlines politics-news-links" id="politics-news-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomOpinion()">SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -266,12 +266,12 @@
       init();
     });
 
-    // Load opinion links
-    async function loadOpinionLinks() {
+    // Load politics links
+    async function loadPoliticsLinks() {
       try {
-        const response = await fetch('opinion-links.txt');
+        const response = await fetch('politics-links.txt');
         if (!response.ok) {
-          console.error('Failed to load opinion-links.txt:', response.status);
+          console.error('Failed to load politics-links.txt:', response.status);
           return;
         }
         const text = await response.text();
@@ -284,7 +284,7 @@
           return null;
         }).filter(link => link !== null);
         const displayLinks = links.slice(0, 36); // Display 36 links
-        const grid = document.getElementById('opinion-news-links');
+        const grid = document.getElementById('politics-news-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
             <li class="headline">
@@ -292,18 +292,18 @@
             </li>
           `).join('');
         }
-        console.log(`Showing ${displayLinks.length} opinion links (${links.length - displayLinks.length} moved to archive)`);
+        console.log(`Showing ${displayLinks.length} politics links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading opinion links:', error);
+        console.error('Error loading politics links:', error);
       }
     }
 
-    // Random opinion article
-    async function goToRandomOpinion() {
+    // Random politics article
+    async function goToRandomPolitics() {
       try {
-        const response = await fetch('opinion-links.txt');
+        const response = await fetch('politics-links.txt');
         if (!response.ok) {
-          console.log('Could not load opinion-links.txt for random selection');
+          console.log('Could not load politics-links.txt for random selection');
           return;
         }
         const text = await response.text();
@@ -325,7 +325,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadOpinionLinks);
+    document.addEventListener('DOMContentLoaded', loadPoliticsLinks);
   </script>
 </body>
 </html>
