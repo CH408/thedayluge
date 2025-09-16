@@ -1005,38 +1005,9 @@ function goToCategory(category) {
   }
 }
 
-async function goToRandomArticle() {
-  console.log('Navigating to Random Article');
-  try {
-    const response = await fetch('/links.txt');
-    if (response.ok) {
-      const text = await response.text();
-      const lines = text.split('\n').filter(line => line.trim());
-      
-      const links = lines.map(line => {
-        const parts = line.split('|');
-        if (parts.length >= 2) {
-          return {
-            title: parts[0].trim(),
-            url: parts[1].trim()
-          };
-        }
-        return null;
-      }).filter(link => link !== null);
-      
-      if (links.length > 0) {
-        const randomLink = links[Math.floor(Math.random() * links.length)];
-        console.log('Opening random link:', randomLink.url);
-        window.open(randomLink.url, '_blank');
-      } else {
-        console.log('No links available for random selection');
-      }
-    } else {
-      console.log('Failed to fetch links.txt');
-    }
-  } catch (error) {
-    console.error('Error loading links for random selection:', error);
-  }
+function goToRandomArticle() {
+  console.log('Navigating to Surprise Me page');
+  window.location.href = '/surprise-me.html';
 }
 
 function openArchive() {
