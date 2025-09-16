@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Miscellany - THE DAYLUGE</title>
+  <title>History - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -56,7 +56,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .miscellany-title {
+    .history-title {
       color: var(--light-green-glow);
       animation: block-title-pulse-green 8s ease-in-out infinite;
     }
@@ -76,7 +76,7 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    .miscellany-links .headline { color: var(--headline-green); }
+    .history-links .headline { color: var(--headline-green); }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -122,7 +122,7 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .miscellany-links .headline a:hover {
+    .history-links .headline a:hover {
       color: var(--light-green-glow);
       text-shadow: 0 0 10px var(--light-green-glow);
     }
@@ -185,15 +185,15 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="miscellany">
+    <div class="history">
       <div class="title-container">
-        <div class="block-title miscellany-title">Miscellany</div>
-        <a href="/miscellany-archive.html" class="go-deeper">Go Deeper</a>
+        <div class="block-title history-title">History</div>
+        <a href="/history-archive.html" class="go-deeper">Go Deeper</a>
       </div>
-      <ul class="headlines miscellany-links" id="miscellany-links"></ul>
+      <ul class="headlines history-links" id="history-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomMiscellany()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomHistory()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -265,12 +265,12 @@
       init();
     });
 
-    // Load miscellany links
-    async function loadMiscellanyLinks() {
+    // Load history links
+    async function loadHistoryLinks() {
       try {
-        const response = await fetch('miscellany-links.txt');
+        const response = await fetch('history-links.txt');
         if (!response.ok) {
-          console.error('Failed to load miscellany-links.txt:', response.status);
+          console.error('Failed to load history-links.txt:', response.status);
           return;
         }
         const text = await response.text();
@@ -283,7 +283,7 @@
           return null;
         }).filter(link => link !== null);
         const displayLinks = links.slice(0, 36);
-        const grid = document.getElementById('miscellany-links');
+        const grid = document.getElementById('history-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
             <li class="headline">
@@ -291,18 +291,18 @@
             </li>
           `).join('');
         }
-        console.log(`Showing ${displayLinks.length} miscellany links (${links.length - displayLinks.length} moved to archive)`);
+        console.log(`Showing ${displayLinks.length} history links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading miscellany links:', error);
+        console.error('Error loading history links:', error);
       }
     }
 
-    // Random miscellany article
-    async function goToRandomMiscellany() {
+    // Random history article
+    async function goToRandomHistory() {
       try {
-        const response = await fetch('miscellany-links.txt');
+        const response = await fetch('history-links.txt');
         if (!response.ok) {
-          console.log('Could not load miscellany-links.txt for random selection');
+          console.log('Could not load history-links.txt for random selection');
           return;
         }
         const text = await response.text();
@@ -324,7 +324,7 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadMiscellanyLinks);
+    document.addEventListener('DOMContentLoaded', loadHistoryLinks);
   </script>
 </body>
 </html>
