@@ -379,7 +379,7 @@
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-8{ /* Miscellany - 315° */
+  .spoke-8{ /* History - 315° */
     left:336px;
     top:74px;
     background:radial-gradient(circle, var(--dark-green) 0%, #004400 100%);
@@ -864,7 +864,7 @@
       Cleanse</div>
     <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
       Corner</div>
-    <div class="spoke spoke-8" onclick="goToCategory('miscellany')">Miscellany</div>
+    <div class="spoke spoke-8" onclick="goToCategory('history')">History</div>
   </div>
 
   <!-- Quantum random button -->
@@ -878,7 +878,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Page loaded, initializing password overlay...');
-  const correctPassword = '5813'; // Changed from 'dayluge2025'
+  const correctPassword = '5813';
   const overlay = document.getElementById('password-overlay');
   const passwordInput = document.getElementById('password-input');
   const submitButton = document.getElementById('password-submit');
@@ -990,7 +990,7 @@ function goToCategory(category) {
     'leisure-entertainment': '/leisure-entertainment.html',
     'timeline-cleanse': '/timeline-cleanse.html',
     'conspiracy-corner': '/conspiracy-corner.html',
-    'miscellany': '/miscellany.html'
+    'history': '/history.html'
   };
   
   if (categoryPages[category]) {
