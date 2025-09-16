@@ -554,10 +554,10 @@
   .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
   .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
 
-  /* Random button with pulsing title effect, yellow comet, and shimmering yellow background */
+  /* Random button with pulsing title effect, yellow comet, and yellow-orange shimmering background */
   .random-button {
     margin-top: 40px;
-    background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
+    background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, var(--orange) 50%, transparent 100%);
     color: var(--bright-purple-glow); /* Initial color matches title */
     border: 2px solid var(--yellow); /* Yellow border for visibility */
     padding: 14px 28px;
@@ -574,6 +574,7 @@
     box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Enhance text visibility */
   }
 
   /* Yellow comet effect */
@@ -589,7 +590,7 @@
     transform: translate(-50%, -50%);
     animation: comet-orbit 1.5s linear infinite;
     box-shadow: 0 0 15px var(--yellow), 0 0 25px var(--yellow);
-    z-index: -1; /* Behind button text */
+    z-index: -1; /* Ensure comet is behind text */
   }
 
   /* Comet orbit animation */
@@ -602,16 +603,16 @@
     }
   }
 
-  /* Shimmering background animation */
+  /* Shimmering background animation between yellow and orange */
   @keyframes shimmer {
     0% {
-      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
+      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, var(--orange) 50%, transparent 100%);
     }
     50% {
-      background: radial-gradient(circle at 70% 70%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
+      background: radial-gradient(circle at 70% 70%, var(--orange) 0%, var(--yellow) 50%, transparent 100%);
     }
     100% {
-      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, #ffcc00 50%, transparent 100%);
+      background: radial-gradient(circle at 30% 30%, var(--yellow) 0%, var(--orange) 50%, transparent 100%);
     }
   }
 
@@ -655,7 +656,7 @@
       height:80px;
       font-size:11px;
     }
-    .spoke-1{ left:295px; top:150px; font-size:12px; }
+    .spoke-1{ left:295px; top:150 px; font-size:12px; }
     .spoke-2{ left:255px; top:255px; font-size:11px; }
     .spoke-3{ left:150px; bottom:15px; font-size:12px; font-weight:900 !important; }
     .spoke-4{ left:45px; bottom:50px; font-size:11px; }
@@ -715,6 +716,7 @@
       margin-top:25px;
       padding:12px 20px;
       font-size:13px;
+      text-shadow: 1.5px 1.5px 3px rgba(0,0,0,0.8); /* Slightly smaller shadow for mobile */
     }
     .random-button::before {
       width: 8px;
@@ -819,6 +821,7 @@
     .random-button{
       padding:10px 18px;
       font-size:12px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8); /* Even smaller shadow for smaller screens */
     }
     .random-button::before {
       width: 6px;
