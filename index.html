@@ -24,7 +24,7 @@
     --yellow:#ffee44;
     --brown:#8B4513;
     --dark-green:#006400;
-    --turquoise:#40E0D0; /* For Sports & Leisure (updated to orange below) */
+    --turquoise:#40E0D0; /* Unused after Sports & Leisure update */
     --bright-blue:#00b7eb; /* For title animation */
     --ink:#111; 
     --rule:#bfbfbf;
@@ -77,7 +77,7 @@
 
   #password-overlay.hidden {
     display: none;
-    pointer-events: none; /* Prevent click interference */
+    pointer-events: none;
   }
 
   #password-overlay h2 {
@@ -184,39 +184,39 @@
 
   @keyframes title-pulse {
     0% { 
-      color: var(--bright-purple-glow); /* #cc88ff */
+      color: var(--bright-purple-glow);
       text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
     12.5% { 
-      color: #8080ff; /* Intermediate: purple to cyan */
+      color: #8080ff;
       text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
     }
     25% { 
-      color: var(--light-cyan-glow); /* #33ddff */
+      color: var(--light-cyan-glow);
       text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
     37.5% { 
-      color: #6688cc; /* Intermediate: cyan to pink */
+      color: #6688cc;
       text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
     50% { 
-      color: var(--pink); /* #ff1493 */
+      color: var(--pink);
       text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
     }
     62.5% { 
-      color: #cc4499; /* Intermediate: pink to bright blue */
+      color: #cc4499;
       text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
     }
     75% { 
-      color: var(--bright-blue); /* #00b7eb */
+      color: var(--bright-blue);
       text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
     }
     87.5% { 
-      color: #6688cc; /* Intermediate: bright blue to purple */
+      color: #6688cc;
       text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
     100% { 
-      color: var(--bright-purple-glow); /* #cc88ff */
+      color: var(--bright-purple-glow);
       text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
   }
@@ -301,7 +301,7 @@
     position:absolute;
     width:90px;
     height:90px;
-    border:2px solid #ffdd00; /* Retain yellow border */
+    border:2px solid #ffdd00;
     border-radius:50%;
     display:flex;
     align-items:center;
@@ -309,9 +309,9 @@
     cursor:pointer;
     transition:all 0.3s ease;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
-    font-weight:900; /* Default weight, adjusted for specific spokes */
+    font-weight:900;
     text-align:center;
-    font-size:13px; /* Increased from 11px to maximize size while fitting */
+    font-size:13px;
     line-height:1.1;
     text-transform:uppercase;
     letter-spacing:0.2px;
@@ -342,69 +342,70 @@
   .spoke-1{ /* Politics - 0° */
     left:390px;
     top:205px;
-    background:linear-gradient(135deg, var(--marble-white) 0%, var(--marble-gray) 50%, var(--marble-white) 100%); /* Marble-like effect */
-    color:#333333 !important; /* Dark gray for contrast */
-    font-size:14px; /* Slightly larger for shorter text */
+    background:linear-gradient(135deg, var(--marble-white) 0%, var(--marble-gray) 50%, var(--marble-white) 100%);
+    color:#333333 !important;
+    font-size:14px;
     font-weight:900 !important;
   }
   .spoke-2{ /* Markets & Economics - 45° */
     left:336px;
     top:336px;
     background:radial-gradient(circle, var(--bright-dark-green) 0%, var(--bright-dark-green-dark) 100%);
-    color:#ffffff !important; /* White for contrast */
-    font-size:13px; /* Max size for longer text */
+    color:#ffffff !important;
+    font-size:13px;
     font-weight:900 !important;
   }
   .spoke-3{ /* Sports & Leisure - 90° */
     left:205px;
     bottom:20px;
     background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
-    color:#000080 !important; /* Retain navy blue font */
-    font-size:14px; /* Slightly larger for shorter text */
-    font-weight:700 !important; /* Reduced weight for clarity */
-    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    color:#000080 !important;
+    font-size:14px;
+    font-weight:700 !important;
+    text-shadow:0 0 2px rgba(0,0,0,0.5);
   }
   .spoke-4{ /* Science, Nature & Technology - 135° */
     left:74px;
     bottom:64px;
     background:radial-gradient(circle, var(--dodgers-blue) 0%, var(--dodgers-blue-dark) 100%);
-    color:#ffffff !important; /* White for contrast */
-    font-size:13px; /* Max size for longer text */
+    color:#ffffff !important;
+    font-size:13px;
     font-weight:900 !important;
   }
   .spoke-5{ /* The Arts, Culture & Philosophy - 180° */
     left:20px;
     top:205px;
-    background:radial-gradient(circle, var(--blue) 0%, #001166 100%); /* Unchanged */
-    color:white !important; /* Unchanged */
-    font-size:13px; /* Max size for longer text */
+    background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
+    color:white !important;
+    font-size:13px;
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-6{ /* Debunked - 225° */
     left:74px;
     top:74px;
-    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%); /* Unchanged */
-    color:black !important; /* Unchanged */
-    font-size:14px; /* Slightly larger for shorter text */
+    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
+    color:black !important;
+    font-size:14px;
     font-weight:900 !important;
   }
   .spoke-7{ /* Conspiracy Corner - 270° */
     left:205px;
     top:20px;
     background:radial-gradient(circle, var(--aqua-blueish-green) 0%, var(--aqua-blueish-green-dark) 100%);
-    color:#ffffff !important; /* White for contrast */
-    font-size:13px; /* Max size for longer text */
-    font-weight:900 !important;
+    color:#000000 !important;
+    font-size:13px;
+    font-weight:700 !important;
+    text-shadow:0 0 2px rgba(0,0,0,0.5);
   }
   .spoke-8{ /* History - 315° */
     left:336px;
     top:74px;
     background:radial-gradient(circle, var(--gold) 0%, var(--gold-dark) 100%);
-    color:black !important; /* Specified black */
-    font-size:14px; /* Slightly larger for shorter text */
-    font-weight:900 !important;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+    color:black !important;
+    font-size:14px;
+    font-weight:700 !important;
+    text-shadow:0 0 2px rgba(0,0,0,0.5);
   }
 
   /* Enhanced Energy beams with bidirectional pulsing */
@@ -427,7 +428,6 @@
     animation: organic-pulse 4s ease-in-out infinite;
   }
 
-  /* Create multiple pulse layers for more complex effect */
   .wheel-line::before {
     content: '';
     position: absolute;
@@ -461,7 +461,6 @@
     animation: traveling-pulse-reverse 3.5s ease-in-out infinite 1.5s;
   }
 
-  /* Organic base pulse for the entire line */
   @keyframes organic-pulse {
     0% { 
       opacity: 0.6;
@@ -490,7 +489,6 @@
     }
   }
 
-  /* Forward traveling pulse */
   @keyframes traveling-pulse-forward {
     0% { 
       --pulse-position: 0%;
@@ -510,7 +508,6 @@
     }
   }
 
-  /* Reverse traveling pulse */
   @keyframes traveling-pulse-reverse {
     0% { 
       --pulse-position-reverse: 100%;
@@ -530,7 +527,6 @@
     }
   }
 
-  /* Staggered delays for each spoke */
   .line-1 { animation-delay: 0s; }
   .line-2 { animation-delay: 0.5s; }
   .line-3 { animation-delay: 1s; }
@@ -540,7 +536,6 @@
   .line-7 { animation-delay: 3s; }
   .line-8 { animation-delay: 3.5s; }
 
-  /* Enhanced hover effect for wheel-container */
   .wheel-container:hover .wheel-line {
     animation: organic-pulse 2s ease-in-out infinite;
   }
@@ -553,7 +548,6 @@
     animation: traveling-pulse-reverse 2s ease-in-out infinite 0.5s;
   }
 
-  /* Lines positioning for 8 spokes */
   .line-1{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(0deg); }
   .line-2{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(45deg); }
   .line-3{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(90deg); }
@@ -625,56 +619,55 @@
     .spoke{
       width:80px;
       height:80px;
-      font-size:11px; /* Scaled down from 13px */
-      border-width:2px;
+      font-size:11px;
     }
-    .spoke-1{ left:295px; top:150px; font-size:12px; } /* Politics */
-    .spoke-2{ left:255px; top:255px; font-size:11px; } /* Markets & Economics */
-    .spoke-3{ left:150px; bottom:15px; font-size:12px; } /* Sports & Leisure */
-    .spoke-4{ left:45px; bottom:50px; font-size:11px; } /* Science, Nature & Technology */
-    .spoke-5{ left:15px; top:150px; font-size:11px; } /* The Arts, Culture & Philosophy */
-    .spoke-6{ left:45px; top:50px; font-size:12px; } /* Debunked */
-    .spoke-7{ left:150px; top:15px; font-size:11px; } /* Conspiracy Corner */
-    .spoke-8{ left:255px; top:50px; font-size:12px; } /* History */
+    .spoke-1{ left:295px; top:150px; font-size:12px; }
+    .spoke-2{ left:255px; top:255px; font-size:11px; }
+    .spoke-3{ left:150px; bottom:15px; font-size:12px; font-weight:700 !important; text-shadow:0 0 2px rgba(0,0,0,0.5); }
+    .spoke-4{ left:45px; bottom:50px; font-size:11px; }
+    .spoke-5{ left:15px; top:150px; font-size:11px; }
+    .spoke-6{ left:45px; top:50px; font-size:12px; }
+    .spoke-7{ left:150px; top:15px; font-size:11px; font-weight:700 !important; text-shadow:0 0 2px rgba(0,0,0,0.5); }
+    .spoke-8{ left:255px; top:50px; font-size:12px; font-weight:700 !important; text-shadow:0 0 2px rgba(0,0,0,0.5); }
     .header h1{
       font-size:32px;
       margin-bottom:20px;
     }
     @keyframes title-pulse {
       0% { 
-        color: var(--bright-purple-glow); /* #cc88ff */
+        color: var(--bright-purple-glow);
         text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
       12.5% { 
-        color: #8080ff; /* Intermediate: purple to cyan */
+        color: #8080ff;
         text-shadow: 0 0 11px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
       }
       25% { 
-        color: var(--light-cyan-glow); /* #33ddff */
+        color: var(--light-cyan-glow);
         text-shadow: 0 0 12px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
       37.5% { 
-        color: #6688cc; /* Intermediate: cyan to pink */
+        color: #6688cc;
         text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
       50% { 
-        color: var(--pink); /* #ff1493 */
+        color: var(--pink);
         text-shadow: 0 0 14px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
       }
       62.5% { 
-        color: #cc4499; /* Intermediate: pink to bright blue */
+        color: #cc4499;
         text-shadow: 0 0 13px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
       }
       75% { 
-        color: var(--bright-blue); /* #00b7eb */
+        color: var(--bright-blue);
         text-shadow: 0 0 12px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
       }
       87.5% { 
-        color: #6688cc; /* Intermediate: bright blue to purple */
+        color: #6688cc;
         text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
       100% { 
-        color: var(--bright-purple-glow); /* #cc88ff */
+        color: var(--bright-purple-glow);
         text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
     }
@@ -690,7 +683,6 @@
       font-size:13px;
     }
     
-    /* Simplify animations on mobile for better performance */
     .spoke{
       animation:none;
     }
@@ -700,7 +692,6 @@
     body::before, body::after{
       animation-duration:10s;
     }
-    /* Mobile optimization for wheel-line */
     .wheel-line {
       animation: organic-pulse 6s ease-in-out infinite;
     }
@@ -709,7 +700,6 @@
     }
   }
 
-  /* Extra small mobile phones */
   @media(max-width:400px){
     .wheel-container{
       width:320px;
@@ -723,54 +713,54 @@
     .spoke{
       width:65px;
       height:65px;
-      font-size:10px; /* Scaled down from 11px */
+      font-size:10px;
     }
-    .spoke-1{ left:245px; top:127.5px; font-size:11px; } /* Politics */
-    .spoke-2{ left:215px; top:215px; font-size:10px; } /* Markets & Economics */
-    .spoke-3{ left:127.5px; bottom:12.5px; font-size:11px; } /* Sports & Leisure */
-    .spoke-4{ left:40px; bottom:40px; font-size:10px; } /* Science, Nature & Technology */
-    .spoke-5{ left:12.5px; top:127.5px; font-size:10px; } /* The Arts, Culture & Philosophy */
-    .spoke-6{ left:40px; top:40px; font-size:11px; } /* Debunked */
-    .spoke-7{ left:127.5px; top:12.5px; font-size:10px; } /* Conspiracy Corner */
-    .spoke-8{ left:215px; top:40px; font-size:11px; } /* History */
+    .spoke-1{ left:245px; top:127.5px; font-size:11px; }
+    .spoke-2{ left:215px; top:215px; font-size:10px; }
+    .spoke-3{ left:127.5px; bottom:12.5px; font-size:11px; font-weight:700 !important; text-shadow:0 0 2px rgba(0,0,0,0.5); }
+    .spoke-4{ left:40px; bottom:40px; font-size:10px; }
+    .spoke-5{ left:12.5px; top:127.5px; font-size:10px; }
+    .spoke-6{ left:40px; top:40px; font-size:11px; }
+    .spoke-7{ left:127.5px; top:12.5px; font-size:10px; font-weight:700 !important; text-shadow:0 0 2px rgba(0,0,0,0.5); }
+    .spoke-8{ left:215px; top:40px; font-size:11px; font-weight:700 !important; text-shadow:0 0 2px rgba(0,0,0,0.5); }
     .header h1{
       font-size:28px;
     }
     @keyframes title-pulse {
       0% { 
-        color: var(--bright-purple-glow); /* #cc88ff */
+        color: var(--bright-purple-glow);
         text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
       12.5% { 
-        color: #8080ff; /* Intermediate: purple to cyan */
+        color: #8080ff;
         text-shadow: 0 0 9px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
       }
       25% { 
-        color: var(--light-cyan-glow); /* #33ddff */
+        color: var(--light-cyan-glow);
         text-shadow: 0 0 10px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
       37.5% { 
-        color: #6688cc; /* Intermediate: cyan to pink */
+        color: #6688cc;
         text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
       50% { 
-        color: var(--pink); /* #ff1493 */
+        color: var(--pink);
         text-shadow: 0 0 12px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
       }
       62.5% { 
-        color: #cc4499; /* Intermediate: pink to bright blue */
+        color: #cc4499;
         text-shadow: 0 0 11px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
       }
       75% { 
-        color: var(--bright-blue); /* #00b7eb */
+        color: var(--bright-blue);
         text-shadow: 0 0 10px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
       }
       87.5% { 
-        color: #6688cc; /* Intermediate: bright blue to purple */
+        color: #6688cc;
         text-shadow: 0 0 9px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
       100% { 
-        color: var(--bright-purple-glow); /* #cc88ff */
+        color: var(--bright-purple-glow);
         text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
     }
@@ -791,24 +781,21 @@
     to{opacity:1; transform:scale(1) rotate(0deg);}
   }
 
-  /* Hover effect for the atom */
   .wheel-container:hover .orbital-ring{
     border-color:#00ddffaa;
     box-shadow:0 0 15px #00ddff55;
   }
 
-  /* Particle canvas */
   #particle-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Below content (z-index: 5+) */
-    pointer-events: none; /* Allow clicks to pass through */
+    z-index: 1;
+    pointer-events: none;
   }
 
-  /* Accessibility for reduced motion */
   @media (prefers-reduced-motion: reduce) {
     .wheel-line {
       animation: none;
@@ -905,7 +892,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
 
-  // Hide content except overlay
   document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
     el.style.visibility = 'hidden';
   });
@@ -948,10 +934,10 @@ document.addEventListener('DOMContentLoaded', function() {
     constructor() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 2 + 1; // Smaller for subtlety
-      this.speedX = Math.random() * 1.5 - 0.75; // Slower movement
+      this.size = Math.random() * 2 + 1;
+      this.speedX = Math.random() * 1.5 - 0.75;
       this.speedY = Math.random() * 1.5 - 0.75;
-      this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff']; // Scientific palette
+      this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff'];
       this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
     update() {
@@ -965,7 +951,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
-      ctx.shadowBlur = 8; // Subtler glow
+      ctx.shadowBlur = 8;
       ctx.shadowColor = this.color;
     }
   }
@@ -991,11 +977,10 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    init(); // Reinitialize particles on resize
+    init();
   });
 });
 
-// Navigation functions
 function goToNewsHub() {
   console.log('Navigating to News Hub');
   window.location.href = '/news.html';
@@ -1020,7 +1005,6 @@ function goToCategory(category) {
   }
 }
 
-// Random article function
 async function goToRandomArticle() {
   console.log('Navigating to Random Article');
   try {
@@ -1060,7 +1044,6 @@ function openArchive() {
   alert('Archive feature - you can implement this however you\'d like!');
 }
 
-// Add atomic interactions
 const spokes = document.querySelectorAll('.spoke');
 const center = document.querySelector('.wheel-center');
 
