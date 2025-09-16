@@ -8,8 +8,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --light-orange-glow: #ff8800;
-      --headline-orange: #ffaa66;
+      --light-orange-glow: #ff8800; /* Retained for title and buttons */
+      --marble-white: #f5f5f5; /* Matches Politics spoke background */
+      --marble-gray: #d3d3d3; /* Matches Politics spoke gradient */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -29,7 +30,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(245,245,245,0.1) 0%, transparent 70%); /* Updated to marble-white */
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -75,9 +76,8 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
+      color: var(--marble-white); /* Changed to off-white for readability */
     }
-    .politics-news-links .headline { color: var(--headline-orange); }
-    /* Apply animation delay to all headlines dynamically */
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
@@ -124,8 +124,8 @@
       transition: all 0.3s ease;
     }
     .politics-news-links .headline a:hover {
-      color: var(--light-orange-glow);
-      text-shadow: 0 0 10px var(--light-orange-glow);
+      color: var(--marble-gray); /* Slightly darker for hover contrast */
+      text-shadow: 0 0 10px var(--marble-gray);
     }
     .go-deeper, .random-button {
       display: inline-block;
@@ -212,7 +212,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
+        this.color = ['#f5f5f5', '#d3d3d3', '#e8e8e8', '#cccccc', '#ffffff', '#e0e0e0'][Math.floor(Math.random() * 6)]; /* Updated to marble-white/gray palette */
         this.hasTail = Math.random() < 0.25;
       }
       update() {
@@ -283,7 +283,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 36); // Display 36 links
+        const displayLinks = links.slice(0, 36);
         const grid = document.getElementById('politics-news-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -315,7 +315,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 36); // Select from 36 links
+        const currentLinks = links.slice(0, 36);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
