@@ -24,6 +24,7 @@
     --yellow:#ffee44;
     --brown:#8B4513;
     --dark-green:#006400;
+    --turquoise:#40E0D0; /* Added for Sports & Leisure */
     --bright-blue:#00b7eb; /* For title animation */
     --ink:#111; 
     --rule:#bfbfbf;
@@ -342,11 +343,11 @@
     color:black !important;
     font-weight:900 !important;
   }
-  .spoke-3{ /* Arts & Literature - 90° */
+  .spoke-3{ /* Sports & Leisure - 90° */
     left:205px;
     bottom:20px;
-    background:radial-gradient(circle, var(--brown) 0%, #654321 100%);
-    color:white !important;
+    background:radial-gradient(circle, var(--turquoise) 0%, #30C0B0 100%);
+    color:#000080 !important; /* Navy blue font */
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
@@ -851,9 +852,9 @@
     <div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
       &
       Economics</div>
-    <div class="spoke spoke-3" onclick="goToCategory('arts-literature')">Arts
+    <div class="spoke spoke-3" onclick="goToCategory('sports-leisure')">Sports
       &
-      Literature</div>
+      Leisure</div>
     <div class="spoke spoke-4" onclick="goToCategory('science-nature')">Science
       &
       Nature</div>
@@ -985,7 +986,7 @@ function goToCategory(category) {
   const categoryPages = {
     'politics': '/politics.html',
     'markets-economics': '/markets-economics.html',
-    'arts-literature': '/arts-literature.html',
+    'sports-leisure': '/sports-leisure.html',
     'science-nature': '/science-nature.html',
     'leisure-entertainment': '/leisure-entertainment.html',
     'timeline-cleanse': '/timeline-cleanse.html',
