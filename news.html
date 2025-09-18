@@ -182,6 +182,9 @@
       text-decoration: none;
       text-shadow: 0 0 5px #ffffff;
       transition: all 0.3s ease;
+      z-index: 10; /* Ensure button is above other elements */
+      cursor: pointer; /* Indicate clickability */
+      touch-action: manipulation; /* Improve touch responsiveness */
     }
     .home-btn:hover {
       background: rgba(255,255,255,0.1);
@@ -192,8 +195,13 @@
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
       .go-deeper { font-size: 10px; padding: 6px 12px; margin-left: 10px; }
-      .home-btn { font-size: 10px; padding: 6px 12px; }
-      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .home-btn {
+        font-size: 12px;
+        padding: 10px 16px; /* Larger tap target for mobile */
+        bottom: 30px; /* Move up to avoid edge issues */
+        right: 15px;
+        line-height: 1.5; /* Improve readability */
+      }
     }
   </style>
 </head>
@@ -304,6 +312,13 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
+    });
+
+    // Enhance home button touch interaction
+    document.querySelector('.home-btn').addEventListener('touchstart', function(e) {
+      e.preventDefault(); // Prevent default to avoid conflicts
+      console.log('Home button touched'); // Debug log
+      window.location.href = this.href; // Navigate to the href
     });
 
     // Load section links
