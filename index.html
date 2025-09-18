@@ -1,360 +1,1162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>News - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --light-red-glow: #ff3333;
-      --headline-red: #ff6666;
-      --light-orange-glow: #ff8833;
-      --headline-orange: #ffaa66;
-      --light-green-glow: #33ff66;
-      --headline-green: #66ff99;
-      --light-cyan-glow: #33ddff;
-      --headline-cyan: #66ccff;
-      --light-pink-glow: #ff66cc;
-      --headline-pink: #ff99cc;
-      --ink: #111;
-      --maxw: 1200px;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE DAYLUGE</title>
+
+<!-- Vintage typewriter font -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  /* Force font loading */
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+  
+  :root{
+    /* Atomic color palette */
+    --red:#cc0000; 
+    --orange:#ff8800; 
+    --green:#00dd55;
+    --blue:#1a1a80;
+    --light-blue:#33ddff;
+    --violet:#cc88ff;
+    --pink:#ff1493;
+    --yellow:#ffdd00; /* Even less bright yellow */
+    --brown:#8B4513;
+    --dark-green:#006400;
+    --turquoise:#40E0D0; /* Unused after Sports & Leisure update */
+    --bright-blue:#00b7eb; /* For title animation */
+    --ink:#111; 
+    --rule:#bfbfbf;
+    --maxw:1400px;
+    --bright-purple-glow: #cc88ff;
+    --light-cyan-glow: #33ddff;
+    /* New colors for updated spokes */
+    --aqua-blueish-green: #00cc99; /* For Conspiracy Corner */
+    --aqua-blueish-green-dark: #009977;
+    --gold: #d4af37; /* For History */
+    --gold-dark: #b8860b;
+    --marble-white: #f5f5f5; /* For Politics marble effect */
+    --marble-gray: #d3d3d3;
+    --bright-dark-green: #00aa33; /* For Markets & Economics */
+    --bright-dark-green-dark: #008822;
+    --dodgers-blue: #1e90ff; /* For Science, Nature & Technology */
+    --dodgers-blue-dark: #0066cc;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html, body {height:100%; overflow-x:hidden;}
+
+  body{
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    color:var(--ink);
+    line-height:1.5;
+    background:#0a1428;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+  }
+
+  #password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a1428;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  #password-overlay.hidden {
+    display: none;
+    pointer-events: none;
+  }
+
+  #password-overlay h2 {
+    color: var(--bright-purple-glow);
+    font-size: 24px;
+    text-shadow: 0 0 10px var(--bright-purple-glow);
+    margin-bottom: 20px;
+  }
+
+  #password-input {
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    background: #1a2a44;
+    color: var(--light-cyan-glow);
+    border: 2px solid var(--light-cyan-glow);
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+    text-align: center;
+  }
+
+  #password-input:focus {
+    box-shadow: 0 0 10px var(--light-cyan-glow);
+  }
+
+  #password-submit {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, var(--bright-purple-glow), var(--light-cyan-glow));
+    color: #ffffff;
+    border: 2px solid var(--light-cyan-glow);
+    border-radius: 5px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #password-submit:hover, #password-submit:focus {
+    background: linear-gradient(45deg, var(--light-cyan-glow), var(--bright-purple-glow));
+    box-shadow: 0 0 15px var(--light-cyan-glow);
+  }
+
+  #password-error {
+    color: var(--pink);
+    font-size: 14px;
+    margin-top: 10px;
+    text-shadow: 0 0 5px var(--pink);
+    display: none;
+  }
+
+  /* Energy field effects */
+  body::before {
+    content: '';
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:
+      radial-gradient(circle at center, rgba(0,150,255,0.1) 0%, transparent 70%);
+    animation:energy-pulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  body::after {
+    position:absolute;
+    top:-2px; left:-2px; right:-2px; bottom:-2px;
+    background:
+      linear-gradient(0deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(90deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
+    animation:edge-glow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes energy-pulse {
+    0%, 100% { opacity:0.5; }
+    50% { opacity:1; }
+  }
+
+  @keyframes edge-glow {
+    0%, 100% { opacity:0.4; }
+    50% { opacity:0.8; }
+  }
+
+  /* Header */
+  .header{
+    position:absolute;
+    top:50px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    z-index:10;
+  }
+  .header h1{
+    text-transform:uppercase; 
+    letter-spacing:.5px; 
+    font-size:42px; 
+    margin-bottom:8px;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    animation:title-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes title-pulse {
+    0% { 
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--ink);
-      line-height: 1.3;
-      background: #0a1428;
-      padding: 10px;
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
+    12.5% { 
+      color: #8080ff;
+      text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
+    25% { 
+      color: var(--light-cyan-glow);
+      text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+    37.5% { 
+      color: #6688cc;
+      text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    #particle-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
+    50% { 
+      color: var(--pink);
+      text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .block-title {
-      font-size: 18px;
-      text-transform: uppercase;
-      font-weight: 900;
-      text-align: left;
+    62.5% { 
+      color: #cc4499;
+      text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    .title-container {
-      display: flex;
-      align-items: center;
-      max-width: 800px;
-      justify-content: space-between;
-      margin-bottom: 10px;
+    75% { 
+      color: var(--bright-blue);
+      text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    .global-news-title { color: var(--light-red-glow); animation: block-title-pulse-red 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-red {
-      0% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    87.5% { 
+      color: #6688cc;
+      text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    .us-news-title { color: var(--light-orange-glow); animation: block-title-pulse-orange 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-orange {
-      0% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-orange-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    100% { 
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    .economy-news-title { color: var(--light-green-glow); animation: block-title-pulse-green 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-green {
-      0% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+  }
+
+  /* Main atom container */
+  .wheel-container{
+    position:relative;
+    width:500px;
+    height:500px;
+    margin:0 auto;
+    z-index:5;
+  }
+
+  /* Orbital rings */
+  .orbital-ring{
+    position:absolute;
+    top:50%;
+    left:50%;
+    border:1px solid #00ddff44;
+    border-radius:50%;
+    transform:translate(-50%, -50%);
+    animation:rotate 30s linear infinite;
+  }
+  .orbital-ring-1{ width:300px; height:300px; animation-duration:25s; }
+  .orbital-ring-2{ width:400px; height:400px; animation-duration:35s; animation-direction:reverse; }
+  .orbital-ring-3{ width:480px; height:480px; animation-duration:40s; }
+
+  @keyframes rotate {
+    from { transform:translate(-50%, -50%) rotate(0deg); }
+    to { transform:translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Nucleus (center hub) */
+  .wheel-center{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:150px;
+    height:150px;
+    background:radial-gradient(circle, var(--red) 0%, #aa0000 100%);
+    color:yellow;
+    border:2px solid #ffdd00;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    z-index:15;
+    text-align:center;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-size:20px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    line-height:1.2;
+    box-shadow:0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+    animation:pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { 
+      box-shadow:0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+      border-color:#ffdd00;
     }
-    .sports-news-title { color: var(--light-cyan-glow); animation: block-title-pulse-cyan 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-cyan {
-      0% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    50% { 
+      box-shadow:0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
+      border-color:#ffff00;
+      transform:translate(-50%, -50%) scale(1.02);
     }
-    .popculture-news-title { color: var(--light-pink-glow); animation: block-title-pulse-pink 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-pink {
-      0% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+  }
+
+  .wheel-center:hover{
+    background:radial-gradient(circle, #ff0000 0%, #cc0000 100%);
+    transform:translate(-50%, -50%) scale(1.05);
+    box-shadow:0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2);
+  }
+
+  /* Electron spokes */
+  .spoke{
+    position:absolute;
+    width:90px;
+    height:90px;
+    border:2px solid #ffdd00;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-family:'Special Elite', 'Courier New', Courier, monospace;
+    font-weight:900;
+    text-align:center;
+    font-size:13px;
+    line-height:1.1;
+    text-transform:uppercase;
+    letter-spacing:0.2px;
+    box-shadow:0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
+    padding:4px;
+    animation:electron-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes electron-pulse {
+    0%, 100% { 
+      box-shadow:0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
+      border-color:#ffdd00;
     }
-    .headlines { list-style: none; max-width: 800px; }
-    .headline {
-      font-size: 16px;
-      margin-bottom: 5px;
+    50% { 
+      box-shadow:0 0 40px rgba(255,221,0,0.8), 0 4px 15px rgba(255,221,0,0.3);
+      border-color:#ffff00;
+    }
+  }
+
+  .spoke:hover{
+    transform:scale(1.15);
+    box-shadow:0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
+    z-index:10;
+    animation-play-state:paused;
+  }
+
+  /* Position 8 electrons around the nucleus */
+  .spoke-1{ /* Politics - 0° */
+    left:390px;
+    top:205px;
+    background:linear-gradient(135deg, var(--marble-white) 0%, var(--marble-gray) 50%, var(--marble-white) 100%);
+    color:#333333 !important;
+    font-size:14px;
+    font-weight:900 !important;
+  }
+  .spoke-2{ /* Markets & Economics - 45° */
+    left:336px;
+    top:336px;
+    background:radial-gradient(circle, var(--bright-dark-green) 0%, var(--bright-dark-green-dark) 100%);
+    color:#ffffff !important;
+    font-size:13px;
+    font-weight:900 !important;
+  }
+  .spoke-3{ /* Sports & Leisure - 90° */
+    left:205px;
+    bottom:20px;
+    background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
+    color:#333333 !important;
+    font-size:14px;
+    font-weight:900 !important;
+  }
+  .spoke-4{ /* Science, Nature & Technology - 135° */
+    left:74px;
+    bottom:64px;
+    background:radial-gradient(circle, var(--dodgers-blue) 0%, var(--dodgers-blue-dark) 100%);
+    color:#ffffff !important;
+    font-size:13px;
+    font-weight:900 !important;
+  }
+  .spoke-5{ /* The Arts, Culture & Philosophy - 180° */
+    left:20px;
+    top:205px;
+    background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
+    color:white !important;
+    font-size:13px;
+    font-weight:900 !important;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
+  }
+  .spoke-6{ /* Debunked - 225° */
+    left:74px;
+    top:74px;
+    background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
+    color:black !important;
+    font-size:14px;
+    font-weight:900 !important;
+  }
+  .spoke-7{ /* Conspiracy Corner - 270° */
+    left:205px;
+    top:20px;
+    background:radial-gradient(circle, var(--aqua-blueish-green) 0%, var(--aqua-blueish-green-dark) 100%);
+    color:#333333 !important;
+    font-size:14px;
+    font-weight:900 !important;
+  }
+  .spoke-8{ /* History - 315° */
+    left:336px;
+    top:74px;
+    background:radial-gradient(circle, var(--gold) 0%, var(--gold-dark) 100%);
+    color:#333333 !important;
+    font-size:14px;
+    font-weight:900 !important;
+  }
+
+  /* Enhanced Energy beams with bidirectional pulsing */
+  .wheel-line {
+    position: absolute;
+    background: 
+      radial-gradient(ellipse 15px 8px at center, rgba(255,255,255,0.9) 0%, transparent 70%),
+      linear-gradient(90deg, 
+        transparent 0%, 
+        var(--light-cyan-glow) 20%, 
+        rgba(255,255,255,0.8) 50%, 
+        var(--light-cyan-glow) 80%, 
+        transparent 100%
+      );
+    height: 4px;
+    transform-origin: left center;
+    z-index: 1;
+    border-radius: 2px;
+    overflow: hidden;
+    animation: organic-pulse 4s ease-in-out infinite;
+  }
+
+  .wheel-line::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    background: 
+      radial-gradient(ellipse 30px 6px at var(--pulse-position, 0%), 
+        rgba(255,255,255,0.9) 0%, 
+        var(--bright-purple-glow) 30%, 
+        transparent 70%
+      );
+    border-radius: 3px;
+    animation: traveling-pulse-forward 3s ease-in-out infinite;
+  }
+
+  .wheel-line::after {
+    content: '';
+    position: absolute;
+    top: -0.5px;
+    left: 0;
+    right: 0;
+    bottom: -0.5px;
+    background: 
+      radial-gradient(ellipse 20px 4px at var(--pulse-position-reverse, 100%), 
+        rgba(51,221,255,0.8) 0%, 
+        transparent 60%
+      );
+    border-radius: 2px;
+    animation: traveling-pulse-reverse 3.5s ease-in-out infinite 1.5s;
+  }
+
+  @keyframes organic-pulse {
+    0% { 
+      opacity: 0.6;
+      box-shadow: 0 0 8px var(--light-cyan-glow);
+      filter: brightness(0.8);
+    }
+    25% { 
+      opacity: 0.9;
+      box-shadow: 0 0 15px var(--light-cyan-glow), 0 0 25px var(--bright-purple-glow);
+      filter: brightness(1.2);
+    }
+    50% { 
+      opacity: 1;
+      box-shadow: 0 0 20px var(--bright-purple-glow), 0 0 35px var(--light-cyan-glow);
+      filter: brightness(1.4);
+    }
+    75% { 
+      opacity: 0.9;
+      box-shadow: 0 0 15px var(--light-cyan-glow), 0 0 25px var(--bright-purple-glow);
+      filter: brightness(1.2);
+    }
+    100% { 
+      opacity: 0.6;
+      box-shadow: 0 0 8px var(--light-cyan-glow);
+      filter: brightness(0.8);
+    }
+  }
+
+  @keyframes traveling-pulse-forward {
+    0% { 
+      --pulse-position: 0%;
       opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.5s ease forwards;
     }
-    .global-news-links .headline { color: var(--headline-red); }
-    .us-news-links .headline { color: var(--headline-orange); }
-    .economy-news-links .headline { color: var(--headline-green); }
-    .sports-news-links .headline { color: var(--headline-cyan); }
-    .popculture-news-links .headline { color: var(--headline-pink); }
-    .headlines .headline:nth-child(1) { animation-delay: 0s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
+    10% { 
+      --pulse-position: 10%;
+      opacity: 1;
     }
-    .headline a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
+    90% { 
+      --pulse-position: 90%;
+      opacity: 1;
     }
-    .global-news-links .headline a:hover { color: var(--light-red-glow); text-shadow: 0 0 10px var(--light-red-glow); }
-    .us-news-links .headline a:hover { color: var(--light-orange-glow); text-shadow: 0 0 10px var(--light-orange-glow); }
-    .economy-news-links .headline a:hover { color: var(--light-green-glow); text-shadow: 0 0 10px var(--light-green-glow); }
-    .sports-news-links .headline a:hover { color: var(--light-cyan-glow); text-shadow: 0 0 10px var(--light-cyan-glow); }
-    .popculture-news-links .headline a:hover { color: var(--light-pink-glow); text-shadow: 0 0 10px var(--light-pink-glow); }
-    .go-deeper {
-      display: inline-block;
-      background: transparent;
-      color: inherit;
-      padding: 8px 16px;
-      border: 1px solid;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
+    100% { 
+      --pulse-position: 100%;
+      opacity: 0;
     }
-    .global-news .go-deeper { border-color: var(--light-red-glow); color: var(--light-red-glow); text-shadow: 0 0 5px var(--light-red-glow); }
-    .us-news .go-deeper { border-color: var(--light-orange-glow); color: var(--light-orange-glow); text-shadow: 0 0 5px var(--light-orange-glow); }
-    .economy-news .go-deeper { border-color: var(--light-green-glow); color: var(--light-green-glow); text-shadow: 0 0 5px var(--light-green-glow); }
-    .sports-news .go-deeper { border-color: var(--light-cyan-glow); color: var(--light-cyan-glow); text-shadow: 0 0 5px var(--light-cyan-glow); }
-    .popculture-news .go-deeper { border-color: var(--light-pink-glow); color: var(--light-pink-glow); text-shadow: 0 0 5px var(--light-pink-glow); }
-    .go-deeper:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
+  }
+
+  @keyframes traveling-pulse-reverse {
+    0% { 
+      --pulse-position-reverse: 100%;
+      opacity: 0;
     }
-    .global-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,51,51,0.3); }
-    .us-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,136,51,0.3); }
-    .economy-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,255,102,0.3); }
-    .sports-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,221,255,0.3); }
-    .popculture-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,102,204,0.3); }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      background: transparent;
-      color: #ffffff;
-      padding: 8px 16px;
-      border: 1px solid #ffffff;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 5px #ffffff;
-      transition: all 0.3s ease;
-      z-index: 20; /* Increased to avoid overlap */
-      cursor: pointer;
-      touch-action: manipulation;
+    10% { 
+      --pulse-position-reverse: 90%;
+      opacity: 0.8;
     }
-    .home-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-      transform: scale(1.05);
+    90% { 
+      --pulse-position-reverse: 10%;
+      opacity: 0.8;
     }
-    @media (max-width: 600px) {
-      .block-title { font-size: 16px; }
-      .headline { font-size: 14px; }
-      .go-deeper { font-size: 10px; padding: 6px 12px; margin-left: 10px; }
-      .home-btn {
-        font-size: 12px;
-        padding: 10px 16px;
-        bottom: 30px;
-        right: 15px;
-        line-height: 1.5;
+    100% { 
+      --pulse-position-reverse: 0%;
+      opacity: 0;
+    }
+  }
+
+  .line-1 { animation-delay: 0s; }
+  .line-2 { animation-delay: 0.5s; }
+  .line-3 { animation-delay: 1s; }
+  .line-4 { animation-delay: 1.5s; }
+  .line-5 { animation-delay: 2s; }
+  .line-6 { animation-delay: 2.5s; }
+  .line-7 { animation-delay: 3s; }
+  .line-8 { animation-delay: 3.5s; }
+
+  .wheel-container:hover .wheel-line {
+    animation: organic-pulse 2s ease-in-out infinite;
+  }
+
+  .wheel-container:hover .wheel-line::before {
+    animation: traveling-pulse-forward 1.5s ease-in-out infinite;
+  }
+
+  .wheel-container:hover .wheel-line::after {
+    animation: traveling-pulse-reverse 2s ease-in-out infinite 0.5s;
+  }
+
+  .line-1{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(0deg); }
+  .line-2{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(45deg); }
+  .line-3{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(90deg); }
+  .line-4{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(135deg); }
+  .line-5{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(180deg); }
+  .line-6{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(225deg); }
+  .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
+  .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
+
+  /* Random button with solid yellow background and bright red text */
+  .random-button {
+    margin-top: 40px;
+    background: var(--yellow); /* Solid yellow */
+    color: var(--red); /* Bright red */
+    border: 2px solid var(--yellow); /* Yellow border */
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative; /* For edge effect */
+    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+    text-shadow: none; /* Remove text shadow */
+  }
+
+  /* Glowing edge effect */
+  .random-button::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 32px; /* Match button's border-radius + border width */
+    background: linear-gradient(45deg, var(--yellow), var(--yellow), var(--yellow));
+    z-index: -1;
+    animation: edge-glow 3s ease-in-out infinite;
+    opacity: 0.5;
+  }
+
+  /* Edge glow animation */
+  @keyframes edge-glow {
+    0% {
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+      opacity: 0.5;
+    }
+    50% {
+      box-shadow: 0 0 20px var(--yellow), 0 0 40px var(--yellow);
+      opacity: 0.8;
+    }
+    100% {
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+      opacity: 0.5;
+    }
+  }
+
+  /* Hover effect */
+  .random-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  /* Archive link with glow */
+  .archive-bottom{
+    position:fixed;
+    bottom:15px;
+    left:15px;
+    font-size:11px;
+    color:#aaccff;
+    text-decoration:underline;
+    cursor:pointer;
+    opacity:0.7;
+    text-shadow:0 0 5px #00ddff;
+  }
+  .archive-bottom:hover{
+    opacity:1;
+    color:#ffffff;
+    text-shadow:0 0 10px #00ddff;
+  }
+
+  /* Responsive adjustments for mobile optimization */
+  @media(max-width:600px){
+    .wheel-container{
+      width:380px;
+      height:380px;
+    }
+    .wheel-center{
+      width:120px;
+      height:120px;
+      font-size:16px;
+    }
+    .spoke{
+      width:80px;
+      height:80px;
+      font-size:11px;
+    }
+    .spoke-1{ left:295px; top:150px; font-size:12px; }
+    .spoke-2{ left:255px; top:255px; font-size:11px; }
+    .spoke-3{ left:150px; bottom:15px; font-size:12px; font-weight:900 !important; }
+    .spoke-4{ left:45px; bottom:50px; font-size:11px; }
+    .spoke-5{ left:15px; top:150px; font-size:11px; }
+    .spoke-6{ left:45px; top:50px; font-size:12px; }
+    .spoke-7{ left:150px; top:15px; font-size:12px; font-weight:900 !important; }
+    .spoke-8{ left:255px; top:50px; font-size:12px; font-weight:900 !important; }
+    .header h1{
+      font-size:32px;
+      margin-bottom:20px;
+    }
+    @keyframes title-pulse {
+      0% { 
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% { 
+        color: #8080ff;
+        text-shadow: 0 0 11px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% { 
+        color: var(--light-cyan-glow);
+        text-shadow: 0 0 12px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% { 
+        color: #6688cc;
+        text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% { 
+        color: var(--pink);
+        text-shadow: 0 0 14px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% { 
+        color: #cc4499;
+        text-shadow: 0 0 13px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% { 
+        color: var(--bright-blue);
+        text-shadow: 0 0 12px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% { 
+        color: #6688cc;
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% { 
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
     }
-  </style>
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
+      width:105px;
+    }
+    .orbital-ring-1{ width:240px; height:240px; }
+    .orbital-ring-2{ width:300px; height:300px; }
+    .orbital-ring-3{ width:360px; height:360px; }
+    .random-button{
+      margin-top:25px;
+      padding:12px 20px;
+      font-size:14px;
+      text-shadow: none;
+    }
+    .random-button::before {
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px; /* Adjusted for smaller padding */
+    }
+    @keyframes edge-glow {
+      0% {
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        opacity: 0.5;
+      }
+      50% {
+        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
+        opacity: 0.8;
+      }
+      100% {
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        opacity: 0.5;
+      }
+    }
+    .spoke{
+      animation:none;
+    }
+    .orbital-ring{
+      animation-duration:60s;
+    }
+    body::before, body::after{
+      animation-duration:10s;
+    }
+    .wheel-line {
+      animation: organic-pulse 6s ease-in-out infinite;
+    }
+    .wheel-line::before, .wheel-line::after {
+      animation: none;
+    }
+  }
+
+  @media(max-width:400px){
+    .wheel-container{
+      width:320px;
+      height:320px;
+    }
+    .wheel-center{
+      width:100px;
+      height:100px;
+      font-size:14px;
+    }
+    .spoke{
+      width:65px;
+      height:65px;
+      font-size:10px;
+    }
+    .spoke-1{ left:245px; top:127.5px; font-size:11px; }
+    .spoke-2{ left:215px; top:215px; font-size:10px; }
+    .spoke-3{ left:127.5px; bottom:12.5px; font-size:11px; font-weight:900 !important; }
+    .spoke-4{ left:40px; bottom:40px; font-size:10px; }
+    .spoke-5{ left:12.5px; top:127.5px; font-size:10px; }
+    .spoke-6{ left:40px; top:40px; font-size:11px; }
+    .spoke-7{ left:127.5px; top:12.5px; font-size:11px; font-weight:900 !important; }
+    .spoke-8{ left:215px; top:40px; font-size:11px; font-weight:900 !important; }
+    .header h1{
+      font-size:28px;
+    }
+    @keyframes title-pulse {
+      0% { 
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% { 
+        color: #8080ff;
+        text-shadow: 0 0 9px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% { 
+        color: var(--light-cyan-glow);
+        text-shadow: 0 0 10px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% { 
+        color: #6688cc;
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% { 
+        color: var(--pink);
+        text-shadow: 0 0 12px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% { 
+        color: #cc4499;
+        text-shadow: 0 0 11px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% { 
+        color: var(--bright-blue);
+        text-shadow: 0 0 10px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% { 
+        color: #6688cc;
+        text-shadow: 0 0 9px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% { 
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+    }
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
+      width:85px;
+    }
+    .orbital-ring-1{ width:240px; height:240px; }
+    .orbital-ring-2{ width:300px; height:300px; }
+    .orbital-ring-3{ width:360px; height:360px; }
+    .random-button{
+      padding:10px 18px;
+      font-size:13px;
+      text-shadow: none;
+    }
+    .random-button::before {
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px; /* Adjusted for smaller padding */
+    }
+    @keyframes edge-glow {
+      0% {
+        box-shadow: 0 0 6px var(--yellow), 0 0 12px var(--yellow);
+        opacity: 0.5;
+      }
+      50% {
+        box-shadow: 0 0 12px var(--yellow), 0 0 25px var(--yellow);
+        opacity: 0.8;
+      }
+      100% {
+        box-shadow: 0 0 6px var(--yellow), 0 0 12px var(--yellow);
+        opacity: 0.5;
+      }
+    }
+  }
+
+  /* Loading animation */
+  .wheel-container{
+    animation:atomize 2s ease-in;
+  }
+  @keyframes atomize{
+    from{opacity:0; transform:scale(0.5) rotate(-180deg);}
+    to{opacity:1; transform:scale(1) rotate(0deg);}
+  }
+
+  .wheel-container:hover .orbital-ring{
+    border-color:#00ddffaa;
+    box-shadow:0 0 15px #00ddff55;
+  }
+
+  #particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wheel-line {
+      animation: none;
+      background: linear-gradient(
+        to right,
+        var(--light-cyan-glow) 0%,
+        #ffffff 3%,
+        var(--light-cyan-glow) 5%,
+        var(--light-cyan-glow) 100%
+      );
+      box-shadow: 0 0 10px var(--light-cyan-glow);
+    }
+    .wheel-line::before, .wheel-line::after {
+      animation: none;
+    }
+    .random-button::before {
+      animation: none;
+      box-shadow: 0 0 10px var(--yellow);
+      opacity: 0.5;
+    }
+  }
+</style>
 </head>
 <body>
-  <a href="/" class="home-btn">← Home</a>
-  <canvas id="particle-canvas"></canvas>
-  <div class="wrap">
-    <div class="global-news">
-      <div class="title-container">
-        <div class="block-title global-news-title">Global News</div>
-        <a href="/global-news-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines global-news-links" id="global-news-links"></ul>
-    </div>
-    <div class="us-news">
-      <div class="title-container">
-        <div class="block-title us-news-title">US News</div>
-        <a href="/us-news-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines us-news-links" id="us-news-links"></ul>
-    </div>
-    <div class="economy-news">
-      <div class="title-container">
-        <div class="block-title economy-news-title">Economy & Markets</div>
-        <a href="/economy-news-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines economy-news-links" id="economy-news-links"></ul>
-    </div>
-    <div class="sports-news">
-      <div class="title-container">
-        <div class="block-title sports-news-title">Sports News</div>
-        <a href="/sports-news-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines sports-news-links" id="sports-news-links"></ul>
-    </div>
-    <div class="popculture-news">
-      <div class="title-container">
-        <div class="block-title popculture-news-title">Pop Culture & Entertainment</div>
-        <a href="/popculture-news-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines popculture-news-links" id="popculture-news-links"></ul>
-    </div>
+  <!-- Password Overlay -->
+  <div id="password-overlay">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" placeholder="Password">
+    <button id="password-submit">Submit</button>
+    <p id="password-error">Incorrect password, please try again.</p>
   </div>
-  <script>
-    // Particle effect
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
+
+  <!-- Header -->
+  <div class="header">
+    <h1>THE DAYLUGE</h1>
+  </div>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+  <!-- Main Atom Structure -->
+  <div class="wheel-container">
+    <!-- Orbital rings -->
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
+    <div class="orbital-ring orbital-ring-3"></div>
+
+    <!-- Energy beams -->
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-line line-4"></div>
+    <div class="wheel-line line-5"></div>
+    <div class="wheel-line line-6"></div>
+    <div class="wheel-line line-7"></div>
+    <div class="wheel-line line-8"></div>
+
+    <!-- Nucleus -->
+    <div class="wheel-center" onclick="goToNewsHub()">
+      TRENDING
+      NEWS
+    </div>
+
+    <!-- Electrons (category spokes) -->
+    <div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
+    <div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
+      &
+      Economics</div>
+    <div class="spoke spoke-3" onclick="goToCategory('sports-leisure')">Sports
+      &
+      Leisure</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-technology')">Science,
+      Nature
+      &
+      Technology</div>
+    <div class="spoke spoke-5" onclick="goToCategory('the-arts-culture-philosophy')">The Arts,
+      Culture
+      &
+      Philosophy</div>
+    <div class="spoke spoke-6" onclick="goToCategory('debunked')">Debunked</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
+      Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('history')">History</div>
+  </div>
+
+  <!-- Quantum random button -->
+  <button class="random-button" onclick="goToRandomArticle()">
+    SURPRISE ME!
+  </button>
+
+  <!-- Archive link -->
+  <div class="archive-bottom" onclick="openArchive()">archive</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Page loaded, initializing password overlay...');
+  const correctPassword = '5813';
+  const overlay = document.getElementById('password-overlay');
+  const passwordInput = document.getElementById('password-input');
+  const submitButton = document.getElementById('password-submit');
+  const errorMessage = document.getElementById('password-error');
+
+  // Check if already authenticated
+  if (localStorage.getItem('isAuthenticated') === 'true') {
+    console.log('User is already authenticated, hiding overlay');
+    overlay.classList.add('hidden');
+    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+      el.style.visibility = 'visible';
+    });
+  } else {
+    console.log('User not authenticated, showing password overlay');
+    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+      el.style.visibility = 'hidden';
+    });
+  }
+
+  function checkPassword() {
+    console.log('Checking password:', passwordInput.value);
+    if (passwordInput.value === correctPassword) {
+      console.log('Password correct, setting authentication and hiding overlay');
+      localStorage.setItem('isAuthenticated', 'true');
+      overlay.classList.add('hidden');
+      document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+        el.style.visibility = 'visible';
+      });
+    } else {
+      console.log('Incorrect password');
+      errorMessage.style.display = 'block';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  submitButton.addEventListener('click', checkPassword);
+  passwordInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log('Enter key pressed, checking password');
+      checkPassword();
+    }
+  });
+
+  // Particle effect
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particlesArray = [];
+  const numberOfParticles = 50;
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 1;
+      this.speedX = Math.random() * 1.5 - 0.75;
+      this.speedY = Math.random() * 1.5 - 0.75;
+      this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff'];
+      this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+      if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+    }
+    draw() {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = this.color;
+    }
+  }
+
+  function init() {
+    particlesArray.length = 0; // Clear array
+    for (let i = 0; i < numberOfParticles; i++) {
+      particlesArray.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particlesArray.length; i++) {
+      particlesArray[i].update();
+      particlesArray[i].draw();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  init();
+  animate();
+
+  window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const particlesArray = [];
-    const numberOfParticles = 50;
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1.5 - 0.75;
-        this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
-        this.hasTail = Math.random() < 0.25;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-      }
-      draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = this.color;
-        if (this.hasTail) {
-          const gradient = ctx.createLinearGradient(
-            this.x, this.y,
-            this.x - this.speedX * 10, this.y - this.speedY * 10
-          );
-          gradient.addColorStop(0, this.color + '33');
-          gradient.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.moveTo(this.x, this.y);
-          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = this.size;
-          ctx.stroke();
-        }
-      }
-    }
-    function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
-      }
-    }
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const particle of particlesArray) {
-        particle.update();
-        particle.draw();
-      }
-      requestAnimationFrame(animate);
-    }
     init();
-    animate();
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-    });
+  });
+});
 
-    // Enhance home button touch interaction
-    document.querySelector('.home-btn').addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      console.log('Home button touched');
-      window.location.href = this.href;
-    });
+function goToNewsHub() {
+  console.log('Navigating to News Hub');
+  window.location.href = '/news.html';
+}
 
-    // Load section links
-    async function loadSection(file, gridId) {
-      try {
-        const response = await fetch(file);
-        if (!response.ok) throw new Error(`Failed to load ${file}`);
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const [title, url] = line.split('|').map(s => s.trim());
-          return { title, url };
-        }).filter(link => link.title && link.url);
-        
-        console.log(`Loaded ${file}:`, links);
-        
-        const grid = document.getElementById(gridId);
-        if (grid) {
-          grid.innerHTML = links.slice(0, 5).map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
+function goToCategory(category) {
+  console.log('Attempting to navigate to category:', category);
+  const categoryPages = {
+    'politics': '/politics.html',
+    'markets-economics': '/markets-economics.html',
+    'sports-leisure': '/sports-leisure.html',
+    'science-nature-technology': '/science-nature-technology.html',
+    'the-arts-culture-philosophy': '/the-arts-culture-philosophy.html',
+    'debunked': '/debunked.html',
+    'conspiracy-corner': '/conspiracy-corner.html',
+    'history': '/history.html'
+  };
+  
+  if (categoryPages[category]) {
+    console.log('Navigating to:', categoryPages[category]);
+    window.location.href = categoryPages[category];
+  } else {
+    console.error('Category not found:', category);
+    alert('Category page not found. Please try again later.');
+  }
+}
+
+async function goToRandomArticle() {
+  console.log('Navigating to Random Article');
+  try {
+    const response = await fetch('/surprise-me-links.txt');
+    if (response.ok) {
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim());
+      const links = lines.map(line => {
+        const parts = line.split('|');
+        if (parts.length >= 2) {
+          return { title: parts[0].trim(), url: parts[1].trim() };
         }
-      } catch (error) {
-        console.error(`Error processing ${file}:`, error);
+        return null;
+      }).filter(link => link !== null);
+      const currentLinks = links.slice(0, 18);
+      if (currentLinks.length > 0) {
+        const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+        console.log('Opening random link:', randomLink.url);
+        window.open(randomLink.url, '_blank');
+      } else {
+        console.log('No links available for random selection');
+        alert('No articles available to display. Please try again later.');
       }
+    } else {
+      console.log('Failed to fetch surprise-me-links.txt:', response.status);
+      alert('Failed to load articles. Please try again later.');
     }
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+    alert('An error occurred while loading articles. Please try again later.');
+  }
+}
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadSection('global-news.txt', 'global-news-links');
-      loadSection('us-news.txt', 'us-news-links');
-      loadSection('economy-mkts-news.txt', 'economy-news-links');
-      loadSection('sports-news.txt', 'sports-news-links');
-      loadSection('popculture-news.txt', 'popculture-news-links');
-    });
-  </script>
+function openArchive() {
+  console.log('Navigating to Archive');
+  alert('Archive feature - you can implement this however you\'d like!');
+}
+
+const spokes = document.querySelectorAll('.spoke');
+const center = document.querySelector('.wheel-center');
+
+spokes.forEach(spoke => {
+  spoke.addEventListener('mouseenter', function() {
+    this.style.animationPlayState = 'paused';
+  });
+  spoke.addEventListener('mouseleave', function() {
+    this.style.animationPlayState = 'running';
+  });
+});
+
+center.addEventListener('mouseenter', function() {
+  spokes.forEach(spoke => {
+    spoke.style.animationDuration = '3s';
+  });
+});
+center.addEventListener('mouseleave', function() {
+  spokes.forEach(spoke => {
+    spoke.style.animationDuration = '15s';
+  });
+});
+</script>
 </body>
 </html>
