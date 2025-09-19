@@ -131,6 +131,21 @@
     display: none;
   }
 
+  /* Add a reset button for testing */
+  #reset-auth {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: var(--pink);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    z-index: 1001;
+  }
+
   /* Energy field effects */
   body::before {
     content: '';
@@ -900,6 +915,9 @@
     <p id="password-error">Incorrect password, please try again.</p>
   </div>
 
+  <!-- Reset button for testing (remove in production) -->
+  <button id="reset-auth" onclick="resetAuth()" style="display:none;">Reset Auth</button>
+
   <!-- Header -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
@@ -969,25 +987,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
 
-  // Check if already authenticated
-  if (localStorage.getItem('isAuthenticated') === 'true') {
-    console.log('User is already authenticated, hiding overlay');
-    overlay.classList.add('hidden');
-    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
-      el.style.visibility = 'visible';
-    });
-  } else {
-    console.log('User not authenticated, showing password overlay');
-    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
-      el.style.visibility = 'hidden';
-    });
-  }
+  // Always show password overlay first (remove localStorage check)
+  console.log('Showing password overlay');
+  overlay.classList.remove('hidden');
+  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+    el.style.visibility = 'hidden';
+  });
 
   function checkPassword() {
     console.log('Checking password:', passwordInput.value);
     if (passwordInput.value === correctPassword) {
-      console.log('Password correct, setting authentication and hiding overlay');
-      localStorage.setItem('isAuthenticated', 'true');
+      console.log('Password correct, hiding overlay');
       overlay.classList.add('hidden');
       document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
         el.style.visibility = 'visible';
@@ -1000,6 +1010,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Function to reset authentication (for testing purposes)
+  window.resetAuth = function() {
+    localStorage.removeItem('isAuthenticated');
+    overlay.classList.remove('hidden');
+    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+      el.style.visibility = 'hidden';
+    });
+    passwordInput.value = '';
+    errorMessage.style.display = 'none';
+    passwordInput.focus();
+  };
+
   submitButton.addEventListener('click', checkPassword);
   passwordInput.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
@@ -1008,6 +1030,9 @@ document.addEventListener('DOMContentLoaded', function() {
       checkPassword();
     }
   });
+
+  // Focus on password input
+  passwordInput.focus();
 
   // Particle effect
   const canvas = document.getElementById('particle-canvas');
