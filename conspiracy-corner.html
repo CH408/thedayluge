@@ -249,7 +249,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = '#00FF7F'; // Match CRT green
+        this.color = '#00FF7F';
         this.hasTail = Math.random() < 0.25;
       }
       update() {
@@ -329,9 +329,9 @@
         const lines = text.trim().split('\n');
         const allLinks = lines
           .map(line => {
-            const [title, url, topic, date] = line.split('|').map(item => item.trim());
+            const [title, url, topic] = line.split('|').map(item => item.trim());
             const normalizedTopic = topic === 'MK Ultra Exposed' ? 'Miscellaneous' : topic;
-            return { title, url, topic: normalizedTopic, date: date ? new Date(date) : new Date() };
+            return { title, url, topic: normalizedTopic };
           })
           .filter(link => link.title && link.url && link.topic);
 
@@ -341,10 +341,6 @@
           } else {
             groupedLinks['Miscellaneous'].push(link);
           }
-        });
-
-        Object.keys(groupedLinks).forEach(topic => {
-          groupedLinks[topic].sort((a, b) => b.date - a.date);
         });
 
         const displayLinks = [];
@@ -373,7 +369,7 @@
                     </li>
                   `).join('') : '<li class="headline">No links available</li>'}
                 </ul>
-                ${archiveLinksByTopic[topic].length > 0 ? `<a href="/conspiracy-corner/${urlSlug}.html" class="go-deeper">View ${topic} Archive</a>` : ''}
+                ${archiveLinksByTopic[topic].length > 0 ? `<a href="/conspiracy-corner-archive.html?topic=${urlSlug}" class="go-deeper">View ${topic} Archive</a>` : ''}
               </div>
             `;
             columns[columnIndex].push(sectionHtml);
@@ -393,9 +389,9 @@
         topics.forEach(topic => {
           const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
           groupedLinks[topic] = [
-            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic, date: new Date() },
-            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic, date: new Date() },
-            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic, date: new Date() }
+            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic },
+            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic },
+            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic }
           ];
         });
         const displayLinks = [];
@@ -421,7 +417,7 @@
                     </li>
                   `).join('')}
                 </ul>
-                <a href="/conspiracy-corner/${urlSlug}.html" class="go-deeper">View ${topic} Archive</a>
+                <a href="/conspiracy-corner-archive.html?topic=${urlSlug}" class="go-deeper">View ${topic} Archive</a>
               </div>
             `;
             columns[columnIndex].push(sectionHtml);
@@ -444,9 +440,9 @@
         const lines = text.trim().split('\n');
         const displayLinks = lines
           .map(line => {
-            const [title, url, topic, date] = line.split('|').map(item => item.trim());
+            const [title, url, topic] = line.split('|').map(item => item.trim());
             const normalizedTopic = topic === 'MK Ultra Exposed' ? 'Miscellaneous' : topic;
-            return { title, url, topic: normalizedTopic, date: date ? new Date(date) : new Date() };
+            return { title, url, topic: normalizedTopic };
           })
           .filter(link => link.title && link.url && link.topic);
 
@@ -473,13 +469,9 @@
             groupedLinks['Miscellaneous'].push(link);
           }
         });
-        Object.keys(groupedLinks).forEach(topic => {
-          groupedLinks[topic].sort((a, b) => b.date - a.date);
-          groupedLinks[topic] = groupedLinks[topic].slice(0, 3);
-        });
 
         const allDisplayLinks = [];
-        topics.forEach(topic => allDisplayLinks.push(...groupedLinks[topic]));
+        topics.forEach(topic => allDisplayLinks.push(...groupedLinks[topic].slice(0, 3)));
         if (allDisplayLinks.length > 0) {
           const randomLink = allDisplayLinks[Math.floor(Math.random() * allDisplayLinks.length)];
           window.open(randomLink.url, '_blank');
@@ -504,9 +496,9 @@
         topics.forEach(topic => {
           const urlSlug = topic.toLowerCase().replace(/[^a-z0-9]+/g, '-');
           displayLinks.push(
-            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic, date: new Date() },
-            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic, date: new Date() },
-            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic, date: new Date() }
+            { title: `Link 1`, url: `https://example.com/${urlSlug}/1`, topic },
+            { title: `Link 2`, url: `https://example.com/${urlSlug}/2`, topic },
+            { title: `Link 3`, url: `https://example.com/${urlSlug}/3`, topic }
           );
         });
         if (displayLinks.length > 0) {
