@@ -10,8 +10,7 @@
 
     :root {
       --crt-green: #00FF7F;
-      --black-bg: #1C2526;
-      --scanline-bg: url('https://www.transparenttextures.com/patterns/scanlines.png');
+      --black-bg: #000000;
     }
 
     * {
@@ -28,21 +27,11 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--crt-green);
       line-height: 1.3;
-      background: var(--black-bg) var(--scanline-bg);
-      background-blend-mode: overlay;
+      background: var(--black-bg);
       padding: 10px;
       position: relative;
       min-height: 100vh;
       overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(rgba(0,255,127,0.1) 50%, transparent 50%);
-      background-size: 100% 4px;
-      pointer-events: none;
     }
 
     #particle-canvas {
