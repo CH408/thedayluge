@@ -264,7 +264,7 @@
     font-size:11px;
     font-weight:900 !important;
   }
-  .spoke-2{ /* Roswell - 45° */
+  .spoke-2{ /* UFOs - 45° */
     left:336px;
     top:336px;
     background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -272,7 +272,7 @@
     font-size:12px;
     font-weight:900 !important;
   }
-  .spoke-3{ /* Antarctic - 90° */
+  .spoke-3{ /* Antarctica Mysteries - 90° */
     left:205px;
     bottom:20px;
     background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -280,7 +280,7 @@
     font-size:11px;
     font-weight:900 !important;
   }
-  .spoke-4{ /* Egyptian Pyramids - 135° */
+  .spoke-4{ /* The Pyramids - 135° */
     left:74px;
     bottom:64px;
     background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -288,7 +288,7 @@
     font-size:10px;
     font-weight:900 !important;
   }
-  .spoke-5{ /* JFK - 180° */
+  .spoke-5{ /* JFK Assassination - 180° */
     left:20px;
     top:205px;
     background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -297,7 +297,7 @@
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-6{ /* Vegas Shooting - 225° */
+  .spoke-6{ /* Las Vegas Shooting - 225° */
     left:74px;
     top:74px;
     background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -305,7 +305,7 @@
     font-size:11px;
     font-weight:900 !important;
   }
-  .spoke-7{ /* COVID - 270° */
+  .spoke-7{ /* Covid - 270° */
     left:205px;
     top:20px;
     background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -648,19 +648,19 @@
     </div>
 
     <!-- Conspiracy topic spokes -->
-    <div class="spoke spoke-1" onclick="goToConspiracyTopic('moon-landing-hoax')">Moon Landing Hoax</div>
-    <div class="spoke spoke-2" onclick="goToConspiracyTopic('roswell-incident')">Roswell Incident</div>
-    <div class="spoke spoke-3" onclick="goToConspiracyTopic('antarctic-mysteries')">Antarctic Mysteries</div>
-    <div class="spoke spoke-4" onclick="goToConspiracyTopic('egyptian-pyramid-secrets')">Egyptian Pyramid Secrets</div>
-    <div class="spoke spoke-5" onclick="goToConspiracyTopic('jfk-assassination-truths')">JFK Assassination Truths</div>
-    <div class="spoke spoke-6" onclick="goToConspiracyTopic('vegas-shooting')">Vegas Shooting</div>
-    <div class="spoke spoke-7" onclick="goToConspiracyTopic('all-things-covid')">All Things Covid</div>
+    <div class="spoke spoke-1" onclick="goToConspiracyTopic('moon-landing')">Moon Landing</div>
+    <div class="spoke spoke-2" onclick="goToConspiracyTopic('ufos')">UFOs</div>
+    <div class="spoke spoke-3" onclick="goToConspiracyTopic('antarctica-mysteries')">Antarctica Mysteries</div>
+    <div class="spoke spoke-4" onclick="goToConspiracyTopic('the-pyramids')">The Pyramids</div>
+    <div class="spoke spoke-5" onclick="goToConspiracyTopic('jfk-assassination')">JFK Assassination</div>
+    <div class="spoke spoke-6" onclick="goToConspiracyTopic('las-vegas-shooting')">Las Vegas Shooting</div>
+    <div class="spoke spoke-7" onclick="goToConspiracyTopic('covid')">Covid</div>
     <div class="spoke spoke-8" onclick="goToConspiracyTopic('epsteins-web')">Epstein's Web</div>
   </div>
 
   <!-- Random button -->
   <button class="random-button" onclick="goToRandomConspiracy()">
-    SURPRISE ME!
+    CONSPIRACY NEWS
   </button>
 
 <script>
@@ -678,4 +678,68 @@ document.addEventListener('DOMContentLoaded', function() {
     constructor() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 2 +
+      this.size = Math.random() * 2 + 1;
+      this.speedX = Math.random() * 0.5 - 0.25;
+      this.speedY = Math.random() * 0.5 - 0.25;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.size > 0.2) this.size -= 0.1;
+
+      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+
+    draw() {
+      ctx.fillStyle = 'rgba(0,255,127,0.6)';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function init() {
+    for (let i = 0; i < numberOfParticles; i++) {
+      particlesArray.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particlesArray.length; i++) {
+      particlesArray[i].update();
+      particlesArray[i].draw();
+      if (particlesArray[i].size <= 0.2) {
+        particlesArray.splice(i, 1);
+        i--;
+        particlesArray.push(new Particle());
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  init();
+  animate();
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  // Navigation functions (placeholders)
+  window.goToConspiracyTopic = function(topic) {
+    window.location.href = `/conspiracy/${topic}`;
+  };
+
+  window.goToRandomConspiracy = function() {
+    const topics = ['moon-landing', 'ufos', 'antarctica-mysteries', 'the-pyramids', 'jfk-assassination', 'las-vegas-shooting', 'covid', 'epsteins-web'];
+    const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+    window.location.href = `/conspiracy/${randomTopic}`;
+  };
+});
+</script>
+</body>
+</html>
