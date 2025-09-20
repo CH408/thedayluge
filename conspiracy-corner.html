@@ -225,7 +225,6 @@
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     font-weight:900;
     text-align:center;
-    font-size:11px;
     line-height:1.1;
     text-transform:uppercase;
     letter-spacing:0.2px;
@@ -256,38 +255,46 @@
     background:var(--dark-gray);
   }
 
-  /* Position 8 conspiracy topics around the nucleus (45° intervals) */
+  /* Position 8 conspiracy topics around the nucleus (45° intervals) with maximized font sizes */
   .spoke-1{ /* Moon Landing - 0° */
     left:390px;
     top:205px;
+    font-size:13px; /* Fits "Moon Landing" */
   }
   .spoke-2{ /* UFOs - 45° */
     left:336px;
     top:336px;
+    font-size:18px; /* Larger for short "UFOs" */
   }
   .spoke-3{ /* Antarctica Mysteries - 90° */
     left:205px;
     bottom:20px;
+    font-size:10px; /* Smaller for long "Antarctica Mysteries" */
   }
   .spoke-4{ /* The Pyramids - 135° */
     left:74px;
     bottom:64px;
+    font-size:12px; /* Fits "The Pyramids" */
   }
   .spoke-5{ /* JFK Assassination - 180° */
     left:20px;
     top:205px;
+    font-size:11px; /* Fits "JFK Assassination" */
   }
   .spoke-6{ /* Las Vegas Shooting - 225° */
     left:74px;
     top:74px;
+    font-size:10px; /* Fits "Las Vegas Shooting" */
   }
   .spoke-7{ /* Covid - 270° */
     left:205px;
     top:20px;
+    font-size:18px; /* Larger for short "Covid" */
   }
   .spoke-8{ /* Epstein - 315° */
     left:336px;
     top:74px;
+    font-size:15px; /* Fits "Epstein's Web" */
   }
 
   /* Enhanced Energy beams in green */
@@ -503,16 +510,15 @@
     .spoke{
       width:75px;
       height:75px;
-      font-size:10px;
     }
-    .spoke-1{ left:295px; top:150px; }
-    .spoke-2{ left:255px; top:255px; }
-    .spoke-3{ left:150px; bottom:15px; }
-    .spoke-4{ left:45px; bottom:50px; }
-    .spoke-5{ left:15px; top:150px; }
-    .spoke-6{ left:45px; top:50px; }
-    .spoke-7{ left:150px; top:15px; }
-    .spoke-8{ left:255px; top:50px; }
+    .spoke-1{ left:295px; top:150px; font-size:11px; }
+    .spoke-2{ left:255px; top:255px; font-size:15px; }
+    .spoke-3{ left:150px; bottom:15px; font-size:9px; }
+    .spoke-4{ left:45px; bottom:50px; font-size:10px; }
+    .spoke-5{ left:15px; top:150px; font-size:10px; }
+    .spoke-6{ left:45px; top:50px; font-size:9px; }
+    .spoke-7{ left:150px; top:15px; font-size:15px; }
+    .spoke-8{ left:255px; top:50px; font-size:13px; }
     .header h1{
       font-size:28px;
     }
@@ -537,16 +543,15 @@
     .spoke{
       width:65px;
       height:65px;
-      font-size:9px;
     }
-    .spoke-1{ left:245px; top:127.5px; }
-    .spoke-2{ left:215px; top:215px; }
-    .spoke-3{ left:127.5px; bottom:12.5px; }
-    .spoke-4{ left:40px; bottom:40px; }
-    .spoke-5{ left:12.5px; top:127.5px; }
-    .spoke-6{ left:40px; top:40px; }
-    .spoke-7{ left:127.5px; top:12.5px; }
-    .spoke-8{ left:215px; top:40px; }
+    .spoke-1{ left:245px; top:127.5px; font-size:10px; }
+    .spoke-2{ left:215px; top:215px; font-size:13px; }
+    .spoke-3{ left:127.5px; bottom:12.5px; font-size:8px; }
+    .spoke-4{ left:40px; bottom:40px; font-size:9px; }
+    .spoke-5{ left:12.5px; top:127.5px; font-size:9px; }
+    .spoke-6{ left:40px; top:40px; font-size:8px; }
+    .spoke-7{ left:127.5px; top:12.5px; font-size:13px; }
+    .spoke-8{ left:215px; top:40px; font-size:11px; }
     .header h1{
       font-size:24px;
     }
