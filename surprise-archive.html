@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE DAYLUGE - Surprise Archive</title>
+
+<!-- Vintage typewriter font -->
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  /* Force font loading */
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+
+  :root {
+    --red: #cc0000;
+    --yellow: #ffdd00;
+    --pink: #ff1493;
+    --bright-blue: #00b7eb;
+    --light-cyan-glow: #33ddff;
+    --bright-purple-glow: #cc88ff;
+    --ink: #111;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow-x: hidden; }
+
+  body {
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    color: var(--ink);
+    line-height: 1.5;
+    background: #0a1428;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-y: auto;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, rgba(0,150,255,0.1) 0%, transparent 70%);
+    animation: energy-pulse 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  body::after {
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background:
+      linear-gradient(0deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(90deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+      linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
+    animation: edge-glow 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes energy-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes edge-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  .header {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+
+  .header h1 {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 42px;
+    margin-bottom: 8px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    animation: title-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes title-pulse {
+    0% { 
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    12.5% { 
+      color: #8080ff;
+      text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    25% { 
+      color: var(--light-cyan-glow);
+      text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    37.5% { 
+      color: #6688cc;
+      text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% { 
+      color: var(--pink);
+      text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    62.5% { 
+      color: #cc4499;
+      text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    75% { 
+      color: var(--bright-blue);
+      text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    87.5% { 
+      color: #6688cc;
+      text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    100% { 
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+  }
+
+  .back-button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: var(--yellow);
+    color: var(--red);
+    border: 2px solid var(--light-cyan-glow);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 0 20px var(--light-cyan-glow), 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+  }
+
+  .back-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 35px var(--light-cyan-glow), 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  .archive-list {
+    max-width: 800px;
+    width: 90%;
+    margin: 120px auto 40px;
+    padding: 20px;
+    background: rgba(26, 42, 68, 0.8);
+    border: 2px solid var(--light-cyan-glow);
+    border-radius: 10px;
+    box-shadow: 0 0 20px var(--light-cyan-glow);
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .archive-list h2 {
+    color: var(--bright-purple-glow);
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--bright-purple-glow);
+  }
+
+  .archive-list ul {
+    list-style: none;
+  }
+
+  .archive-list li {
+    margin: 10px 0;
+  }
+
+  .archive-list a {
+    color: var(--light-cyan-glow);
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px var(--light-cyan-glow);
+  }
+
+  .archive-list a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    box-shadow: 0 0 15px var(--light-cyan-glow);
+    transform: translateY(-2px);
+  }
+
+  #archive-error {
+    color: var(--pink);
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 0 0 5px var(--pink);
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .archive-list {
+      margin: 100px auto 30px;
+      padding: 15px;
+    }
+    .archive-list h2 {
+      font-size: 20px;
+    }
+    .archive-list a {
+      font-size: 14px;
+      padding: 8px;
+    }
+    .back-button {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .header h1 {
+      font-size: 28px;
+    }
+    .archive-list {
+      margin: 80px auto 20px;
+      padding: 10px;
+    }
+    .archive-list h2 {
+      font-size: 18px;
+    }
+    .archive-list a {
+      font-size: 12px;
+      padding: 6px;
+    }
+    .back-button {
+      padding: 6px 12px;
+      font-size: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>SURPRISE ARCHIVE</h1>
+  </div>
+
+  <button class="back-button" onclick="goToHome()">BACK TO HOME</button>
+
+  <div class="archive-list">
+    <h2>All Surprise Articles</h2>
+    <ul id="archive-links"></ul>
+    <p id="archive-error">Failed to load articles. Please try again later.</p>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+  console.log('Loading surprise archive...');
+  const archiveLinks = document.getElementById('archive-links');
+  const errorMessage = document.getElementById('archive-error');
+
+  try {
+    const response = await fetch('/surprise-me-links.txt');
+    if (response.ok) {
+      const text = await response.text();
+      const lines = text.split('\n').filter(line => line.trim());
+      const links = lines.map(line => {
+        const parts = line.split('|');
+        if (parts.length >= 2) {
+          return { title: parts[0].trim(), url: parts[1].trim() };
+        }
+        return null;
+      }).filter(link => link !== null);
+
+      if (links.length > 0) {
+        links.forEach(link => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.textContent = link.title;
+          a.target = '_blank';
+          li.appendChild(a);
+          archiveLinks.appendChild(li);
+        });
+      } else {
+        console.log('No links available in surprise-me-links.txt');
+        errorMessage.textContent = 'No articles available to display.';
+        errorMessage.style.display = 'block';
+      }
+    } else {
+      console.log('Failed to fetch surprise-me-links.txt:', response.status);
+      errorMessage.style.display = 'block';
+    }
+  } catch (error) {
+    console.error('Error loading surprise-me-links.txt:', error);
+    errorMessage.style.display = 'block';
+  }
+});
+
+function goToHome() {
+  console.log('Navigating to Home');
+  window.location.href = '/index.html';
+}
+</script>
+</body>
+</html>
