@@ -672,13 +672,18 @@
     background: radial-gradient(circle, rgba(51, 221, 255, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     transform: translate(-50%, -50%) rotate(0deg);
-    animation: galaxy-spin 60s linear infinite;
+    animation: galaxy-spin 60s linear infinite, galaxy-pulse 6s ease-in-out infinite;
     z-index: 1;
     pointer-events: none;
+    box-shadow: 0 0 20px rgba(51, 221, 255, 0.4);
   }
   @keyframes galaxy-spin {
     from { transform: translate(-50%, -50%) rotate(0deg); }
     to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  @keyframes galaxy-pulse {
+    0%, 100% { opacity: 0.3; box-shadow: 0 0 20px rgba(51, 221, 255, 0.4); }
+    50% { opacity: 0.5; box-shadow: 0 0 30px rgba(51, 221, 255, 0.6); }
   }
 
   #comet-container {
@@ -692,18 +697,28 @@
   }
   .comet {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     background: radial-gradient(circle, var(--bright-purple-glow) 0%, transparent 70%);
-    box-shadow: 0 0 20px var(--bright-purple-glow);
-    animation: comet-streak 4s linear infinite;
+    box-shadow: 0 0 25px var(--bright-purple-glow);
+    animation: comet-streak 5s linear infinite;
     opacity: 0;
+  }
+  .comet::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to left, var(--bright-purple-glow), transparent);
+    opacity: 0.6;
   }
   @keyframes comet-streak {
     0% { opacity: 0; transform: translate(0, 0) rotate(45deg); }
-    10% { opacity: 0.9; }
-    90% { opacity: 0.9; }
-    100% { opacity: 0; transform: translate(2000px, -2000px) rotate(45deg); }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translate(2500px, -2500px) rotate(45deg); }
   }
   .comet:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
   .comet:nth-child(2) { left: 50%; top: 80%; animation-delay: 1.5s; }
@@ -724,9 +739,9 @@
     height: 20px;
     background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
     border-radius: 50%;
-    box-shadow: 0 0 15px var(--light-cyan-glow);
+    box-shadow: 0 0 20px var(--light-cyan-glow);
     animation: asteroid-drift 20s linear infinite;
-    opacity: 0.7;
+    opacity: 0.8;
   }
   @keyframes asteroid-drift {
     0% { transform: translate(0, 0); }
@@ -855,14 +870,18 @@
       height: 450px;
     }
     .comet {
-      width: 6px;
-      height: 6px;
-      box-shadow: 0 0 15px var(--bright-purple-glow);
+      width: 8px;
+      height: 8px;
+      box-shadow: 0 0 20px var(--bright-purple-glow);
+    }
+    .comet::after {
+      width: 40px;
+      height: 2px;
     }
     .asteroid {
       width: 15px;
       height: 15px;
-      box-shadow: 0 0 10px var(--light-cyan-glow);
+      box-shadow: 0 0 15px var(--light-cyan-glow);
     }
   }
 
@@ -970,14 +989,18 @@
       height: 360px;
     }
     .comet {
-      width: 4px;
-      height: 4px;
-      box-shadow: 0 0 12px var(--bright-purple-glow);
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 15px var(--bright-purple-glow);
+    }
+    .comet::after {
+      width: 30px;
+      height: 1px;
     }
     .asteroid {
       width: 12px;
       height: 12px;
-      box-shadow: 0 0 8px var(--light-cyan-glow);
+      box-shadow: 0 0 12px var(--light-cyan-glow);
     }
   }
 
@@ -1027,10 +1050,14 @@
     #galaxy {
       animation: none;
       opacity: 0.5;
+      box-shadow: 0 0 20px rgba(51, 221, 255, 0.4);
     }
     .comet {
       animation: none;
       opacity: 0.7;
+    }
+    .comet::after {
+      opacity: 0.4;
     }
     .asteroid {
       animation: none;
