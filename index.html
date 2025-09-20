@@ -663,6 +663,24 @@
     text-shadow:0 0 10px #00ddff;
   }
 
+  #galaxy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(51, 221, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: galaxy-spin 60s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @keyframes galaxy-spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
   @media(max-width:600px){
     .wheel-container{
       width:380px;
@@ -778,6 +796,10 @@
     .wheel-line::before, .wheel-line::after {
       animation: none;
     }
+    #galaxy {
+      width: 300px;
+      height: 300px;
+    }
   }
 
   @media(max-width:400px){
@@ -879,6 +901,10 @@
         opacity: 0.5;
       }
     }
+    #galaxy {
+      width: 240px;
+      height: 240px;
+    }
   }
 
   @keyframes atomize {
@@ -924,6 +950,10 @@
     #particle-canvas {
       animation: none;
     }
+    #galaxy {
+      animation: none;
+      opacity: 0.5;
+    }
   }
 </style>
 </head>
@@ -942,6 +972,7 @@
   </div>
 
   <canvas id="particle-canvas"></canvas>
+  <div id="galaxy"></div>
   <div class="wheel-container">
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
