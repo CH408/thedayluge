@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --mint-green: #33ddff; /* Matches --light-cyan-glow from index.html */
-      --mint-green-light: #66e6ff; /* Brighter variant for hover effects */
+      --mint-green: #98ffcc; /* True mint green, not blue or yellow */
+      --mint-green-light: #b3ffd9; /* Brighter variant for hover effects */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -29,7 +29,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(152,255,204,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -194,7 +194,7 @@
       this.size = Math.random() * 2 + 1;
       this.speedX = Math.random() * 1.5 - 0.75;
       this.speedY = Math.random() * 1.5 - 0.75;
-      this.color = ['#33ddff', '#66e6ff', '#1ab7ea', '#00b7eb', '#4de1ff', '#aaccff'][Math.floor(Math.random() * 6)];
+      this.color = ['#98ffcc', '#b3ffd9', '#80ffbf', '#a6ffd4', '#c0ffee', '#e6fff2'][Math.floor(Math.random() * 6)];
       this.hasTail = Math.random() < 0.25;
     }
     update() {
