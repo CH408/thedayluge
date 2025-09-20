@@ -571,8 +571,15 @@
   .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
   .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
 
-  .random-button {
+  /* Button container to align buttons side by side */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
     margin-top: 40px;
+  }
+
+  .random-button, .archive-button {
     background: var(--yellow);
     color: var(--red);
     border: 2px solid var(--yellow);
@@ -591,7 +598,11 @@
     text-shadow: none;
   }
 
-  .random-button::before {
+  .archive-button {
+    border: 2px solid var(--light-cyan-glow); /* Different border color to distinguish */
+  }
+
+  .random-button::before, .archive-button::before {
     content: '';
     position: absolute;
     top: -4px;
@@ -603,6 +614,10 @@
     z-index: -1;
     animation: edge-glow 3s ease-in-out infinite;
     opacity: 0.5;
+  }
+
+  .archive-button::before {
+    background: linear-gradient(45deg, var(--light-cyan-glow), var(--light-cyan-glow), var(--light-cyan-glow));
   }
 
   @keyframes edge-glow {
@@ -620,9 +635,13 @@
     }
   }
 
-  .random-button:hover {
+  .random-button:hover, .archive-button:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  .archive-button:hover {
+    box-shadow: 0 0 35px var(--light-cyan-glow), 0 8px 20px rgba(0,0,0,0.4);
   }
 
   .archive-bottom{
@@ -669,6 +688,22 @@
       font-size:32px;
       margin-bottom:20px;
     }
+    .button-container {
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    .random-button, .archive-button {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+    .random-button::before, .archive-button::before {
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px;
+    }
     @keyframes title-pulse {
       0% { 
         color: var(--bright-purple-glow);
@@ -713,19 +748,6 @@
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
-    .random-button{
-      margin-top:25px;
-      padding:12px 20px;
-      font-size:14px;
-      text-shadow: none;
-    }
-    .random-button::before {
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 31px;
-    }
     @keyframes edge-glow {
       0% {
         box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
@@ -827,12 +849,11 @@
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
     .orbital-ring-3{ width:360px; height:360px; }
-    .random-button{
+    .random-button, .archive-button {
       padding:10px 18px;
       font-size:13px;
-      text-shadow: none;
     }
-    .random-button::before {
+    .random-button::before, .archive-button::before {
       top: -3px;
       left: -3px;
       right: -3px;
@@ -890,7 +911,7 @@
     .wheel-line::before, .wheel-line::after {
       animation: none;
     }
-    .random-button::before {
+    .random-button::before, .archive-button::before {
       animation: none;
       box-shadow: 0 0 10px var(--yellow);
       opacity: 0.5;
@@ -950,9 +971,10 @@
     <div class="spoke spoke-8" onclick="goToCategory('history')">History</div>
   </div>
 
-  <button class="random-button" onclick="goToRandomArticle()">
-    SURPRISE ME!
-  </button>
+  <div class="button-container">
+    <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
+    <button class="archive-button" onclick="goToSurpriseArchive()">SURPRISE ME EVEN MORE!</button>
+  </div>
 
   <div class="archive-bottom" onclick="openArchive()">archive</div>
 
@@ -1124,6 +1146,11 @@ async function goToRandomArticle() {
     console.error('Error loading links for random selection:', error);
     alert('An error occurred while loading articles. Please try again later.');
   }
+}
+
+function goToSurpriseArchive() {
+  console.log('Navigating to Surprise Archive');
+  window.location.href = '/surprise-archive.html';
 }
 
 function openArchive() {
