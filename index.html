@@ -21,26 +21,25 @@
     --light-blue:#33ddff;
     --violet:#cc88ff;
     --pink:#ff1493;
-    --yellow:#ffdd00; /* Even less bright yellow */
+    --yellow:#ffdd00;
     --brown:#8B4513;
     --dark-green:#006400;
-    --turquoise:#40E0D0; /* Unused after Sports & Leisure update */
-    --bright-blue:#00b7eb; /* For title animation */
+    --turquoise:#40E0D0;
+    --bright-blue:#00b7eb;
     --ink:#111; 
     --rule:#bfbfbf;
     --maxw:1400px;
     --bright-purple-glow: #cc88ff;
     --light-cyan-glow: #33ddff;
-    /* New colors for updated spokes */
-    --aqua-blueish-green: #00cc99; /* For Conspiracy Corner */
+    --aqua-blueish-green: #00cc99;
     --aqua-blueish-green-dark: #009977;
-    --gold: #d4af37; /* For History */
+    --gold: #d4af37;
     --gold-dark: #b8860b;
-    --marble-white: #f5f5f5; /* For Politics marble effect */
+    --marble-white: #f5f5f5;
     --marble-gray: #d3d3d3;
-    --bright-dark-green: #00aa33; /* For Markets & Economics */
+    --bright-dark-green: #00aa33;
     --bright-dark-green-dark: #008822;
-    --dodgers-blue: #1e90ff; /* For Science, Nature & Technology */
+    --dodgers-blue: #1e90ff;
     --dodgers-blue-dark: #0066cc;
   }
 
@@ -131,7 +130,6 @@
     display: none;
   }
 
-  /* Add a reset button for testing */
   #reset-auth {
     position: fixed;
     top: 10px;
@@ -146,7 +144,6 @@
     z-index: 1001;
   }
 
-  /* Energy field effects */
   body::before {
     content: '';
     position:absolute;
@@ -179,7 +176,6 @@
     50% { opacity:0.8; }
   }
 
-  /* Header */
   .header{
     position:absolute;
     top:50px;
@@ -236,16 +232,15 @@
     }
   }
 
-  /* Main atom container */
   .wheel-container{
     position:relative;
     width:500px;
     height:500px;
     margin:0 auto;
     z-index:5;
+    animation: atomize 2s ease-in;
   }
 
-  /* Orbital rings */
   .orbital-ring{
     position:absolute;
     top:50%;
@@ -264,7 +259,6 @@
     to { transform:translate(-50%, -50%) rotate(360deg); }
   }
 
-  /* Nucleus (center hub) */
   .wheel-center{
     position:absolute;
     top:50%;
@@ -311,7 +305,6 @@
     box-shadow:0 0 40px #ffdd00ff, 0 6px 16px rgba(0,0,0,0.2);
   }
 
-  /* Electron spokes */
   .spoke{
     position:absolute;
     width:90px;
@@ -361,8 +354,7 @@
     border-color:#00ff00 !important;
   }
 
-  /* Position 8 electrons around the nucleus */
-  .spoke-1{ /* Politics - 0° */
+  .spoke-1{
     left:390px;
     top:205px;
     background:linear-gradient(135deg, var(--marble-white) 0%, var(--marble-gray) 50%, var(--marble-white) 100%);
@@ -370,7 +362,7 @@
     font-size:14px;
     font-weight:900 !important;
   }
-  .spoke-2{ /* Markets & Economics - 45° */
+  .spoke-2{
     left:336px;
     top:336px;
     background:radial-gradient(circle, var(--bright-dark-green) 0%, var(--bright-dark-green-dark) 100%);
@@ -378,7 +370,7 @@
     font-size:13px;
     font-weight:900 !important;
   }
-  .spoke-3{ /* Sports & Leisure - 90° */
+  .spoke-3{
     left:205px;
     bottom:20px;
     background:radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
@@ -386,7 +378,7 @@
     font-size:14px;
     font-weight:900 !important;
   }
-  .spoke-4{ /* Science, Nature & Technology - 135° */
+  .spoke-4{
     left:74px;
     bottom:64px;
     background:radial-gradient(circle, var(--dodgers-blue) 0%, var(--dodgers-blue-dark) 100%);
@@ -394,7 +386,7 @@
     font-size:13px;
     font-weight:900 !important;
   }
-  .spoke-5{ /* The Arts, Culture & Philosophy - 180° */
+  .spoke-5{
     left:20px;
     top:205px;
     background:radial-gradient(circle, var(--blue) 0%, #001166 100%);
@@ -403,7 +395,7 @@
     font-weight:900 !important;
     text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
-  .spoke-6{ /* Debunked - 225° */
+  .spoke-6{
     left:74px;
     top:74px;
     background:radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
@@ -411,7 +403,7 @@
     font-size:14px;
     font-weight:900 !important;
   }
-  .spoke-7{ /* Conspiracy Corner - 270° */
+  .spoke-7{
     left:205px;
     top:20px;
     background:radial-gradient(circle, #000000 0%, #111111 100%);
@@ -422,7 +414,7 @@
     border:2px solid #00ff00 !important;
     box-shadow:0 0 20px rgba(0,255,0,0.4), 0 2px 8px rgba(0,0,0,0.1) !important;
   }
-  .spoke-8{ /* History - 315° */
+  .spoke-8{
     left:336px;
     top:74px;
     background:radial-gradient(circle, var(--gold) 0%, var(--gold-dark) 100%);
@@ -431,7 +423,6 @@
     font-weight:900 !important;
   }
 
-  /* Enhanced Energy beams with bidirectional pulsing */
   .wheel-line {
     position: absolute;
     background: 
@@ -580,12 +571,11 @@
   .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
   .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
 
-  /* Random button with solid yellow background and bright red text */
   .random-button {
     margin-top: 40px;
-    background: var(--yellow); /* Solid yellow */
-    color: var(--red); /* Bright red */
-    border: 2px solid var(--yellow); /* Yellow border */
+    background: var(--yellow);
+    color: var(--red);
+    border: 2px solid var(--yellow);
     padding: 14px 28px;
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
@@ -594,14 +584,13 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
-    position: relative; /* For edge effect */
+    position: relative;
     box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
-    text-shadow: none; /* Remove text shadow */
+    text-shadow: none;
   }
 
-  /* Glowing edge effect */
   .random-button::before {
     content: '';
     position: absolute;
@@ -609,14 +598,13 @@
     left: -4px;
     right: -4px;
     bottom: -4px;
-    border-radius: 32px; /* Match button's border-radius + border width */
+    border-radius: 32px;
     background: linear-gradient(45deg, var(--yellow), var(--yellow), var(--yellow));
     z-index: -1;
     animation: edge-glow 3s ease-in-out infinite;
     opacity: 0.5;
   }
 
-  /* Edge glow animation */
   @keyframes edge-glow {
     0% {
       box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
@@ -632,13 +620,11 @@
     }
   }
 
-  /* Hover effect */
   .random-button:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
   }
 
-  /* Archive link with glow */
   .archive-bottom{
     position:fixed;
     bottom:15px;
@@ -656,7 +642,6 @@
     text-shadow:0 0 10px #00ddff;
   }
 
-  /* Responsive adjustments for mobile optimization */
   @media(max-width:600px){
     .wheel-container{
       width:380px;
@@ -739,7 +724,7 @@
       left: -3px;
       right: -3px;
       bottom: -3px;
-      border-radius: 31px; /* Adjusted for smaller padding */
+      border-radius: 31px;
     }
     @keyframes edge-glow {
       0% {
@@ -852,7 +837,7 @@
       left: -3px;
       right: -3px;
       bottom: -3px;
-      border-radius: 31px; /* Adjusted for smaller padding */
+      border-radius: 31px;
     }
     @keyframes edge-glow {
       0% {
@@ -870,16 +855,12 @@
     }
   }
 
-  /* Loading animation */
-  .wheel-container{
-    animation:atomize 2s ease-in;
-  }
-  @keyframes atomize{
-    from{opacity:0; transform:scale(0.5) rotate(-180deg);}
-    to{opacity:1; transform:scale(1) rotate(0deg);}
+  @keyframes atomize {
+    from { opacity: 0; transform: scale(0.5) rotate(-180deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
   }
 
-  .wheel-container:hover .orbital-ring{
+  .wheel-container:hover .orbital-ring {
     border-color:#00ddffaa;
     box-shadow:0 0 15px #00ddff55;
   }
@@ -918,32 +899,24 @@
 </style>
 </head>
 <body>
-  <!-- Password Overlay -->
-  <div id="password-overlay">
+  <div id="password-overlay" class="hidden">
     <h2>Enter Password</h2>
     <input type="password" id="password-input" placeholder="Password">
     <button id="password-submit">Submit</button>
     <p id="password-error">Incorrect password, please try again.</p>
   </div>
 
-  <!-- Reset button for testing (remove in production) -->
   <button id="reset-auth" onclick="resetAuth()" style="display:none;">Reset Auth</button>
 
-  <!-- Header -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
   </div>
 
-  <!-- Particle Canvas -->
   <canvas id="particle-canvas"></canvas>
-  <!-- Main Atom Structure -->
   <div class="wheel-container">
-    <!-- Orbital rings -->
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
     <div class="orbital-ring orbital-ring-3"></div>
-
-    <!-- Energy beams -->
     <div class="wheel-line line-1"></div>
     <div class="wheel-line line-2"></div>
     <div class="wheel-line line-3"></div>
@@ -952,14 +925,10 @@
     <div class="wheel-line line-6"></div>
     <div class="wheel-line line-7"></div>
     <div class="wheel-line line-8"></div>
-
-    <!-- Nucleus -->
     <div class="wheel-center" onclick="goToNewsHub()">
       TRENDING
       NEWS
     </div>
-
-    <!-- Electrons (category spokes) -->
     <div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
     <div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
       &
@@ -981,36 +950,34 @@
     <div class="spoke spoke-8" onclick="goToCategory('history')">History</div>
   </div>
 
-  <!-- Quantum random button -->
   <button class="random-button" onclick="goToRandomArticle()">
     SURPRISE ME!
   </button>
 
-  <!-- Archive link -->
   <div class="archive-bottom" onclick="openArchive()">archive</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('Page loaded, initializing password overlay...');
-  const correctPassword = '5813';
+  console.log('Page loaded, bypassing password overlay...');
   const overlay = document.getElementById('password-overlay');
   const passwordInput = document.getElementById('password-input');
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
 
-  // Always show password overlay first (remove localStorage check)
-  console.log('Showing password overlay');
-  overlay.classList.remove('hidden');
-  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
-    el.style.visibility = 'hidden';
+  // Ensure overlay is hidden and all content is visible
+  overlay.classList.add('hidden');
+  document.querySelectorAll('body > *').forEach(el => {
+    el.style.visibility = 'visible';
   });
 
+  // Keep password logic for testing if needed
+  const correctPassword = '5813';
   function checkPassword() {
     console.log('Checking password:', passwordInput.value);
     if (passwordInput.value === correctPassword) {
       console.log('Password correct, hiding overlay');
       overlay.classList.add('hidden');
-      document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+      document.querySelectorAll('body > *').forEach(el => {
         el.style.visibility = 'visible';
       });
     } else {
@@ -1021,7 +988,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Function to reset authentication (for testing purposes)
   window.resetAuth = function() {
     localStorage.removeItem('isAuthenticated');
     overlay.classList.remove('hidden');
@@ -1042,10 +1008,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Focus on password input
-  passwordInput.focus();
-
-  // Particle effect
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
@@ -1081,7 +1043,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function init() {
-    particlesArray.length = 0; // Clear array
+    particlesArray.length = 0;
     for (let i = 0; i < numberOfParticles; i++) {
       particlesArray.push(new Particle());
     }
