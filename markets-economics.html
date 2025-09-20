@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --bright-dark-green: #33ff77; /* Lighter, more vibrant green */
-      --bright-dark-green-dark: #22cc55; /* Lighter green for hover effects */
+      --bright-dark-green: #33ff77; /* Lighter, vibrant green */
+      --bright-dark-green-dark: #22cc55; /* Slightly darker green for hover */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -17,7 +17,7 @@
     html, body { height: 100%; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--bright-dark-green); /* Changed to lighter green for body text */
+      color: var(--ink); /* Reverted to original dark color to avoid issues */
       line-height: 1.3;
       background: #0a1428;
       padding: 10px;
@@ -29,7 +29,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,255,119,0.1) 0%, transparent 70%); /* Updated to match lighter green */
+      background: radial-gradient(circle at center, rgba(51,255,119,0.1) 0%, transparent 70%); /* Lighter green gradient */
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -57,7 +57,7 @@
       text-align: left;
     }
     .markets-news-title {
-      color: var(--bright-dark-green); /* Updated to lighter green */
+      color: var(--bright-dark-green); /* Lighter green for title */
       animation: block-title-pulse-green 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse-green {
@@ -75,7 +75,7 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--bright-dark-green); /* Updated to lighter green */
+      color: var(--bright-dark-green); /* Lighter green for headlines */
     }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
@@ -123,15 +123,15 @@
       transition: all 0.3s ease;
     }
     .markets-news-links .headline a:hover {
-      color: var(--bright-dark-green-dark); /* Updated to lighter green for hover */
+      color: var(--bright-dark-green-dark); /* Lighter green for hover */
       text-shadow: 0 0 10px var(--bright-dark-green-dark);
     }
     .go-deeper, .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--bright-dark-green); /* Updated to lighter green */
+      color: var(--bright-dark-green); /* Lighter green for buttons */
       padding: 8px 16px;
-      border: 1px solid var(--bright-dark-green); /* Updated to lighter green */
+      border: 1px solid var(--bright-dark-green); /* Lighter green border */
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
@@ -143,7 +143,7 @@
     .go-deeper:hover, .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(51,255,119,0.3); /* Updated to match lighter green */
+      box-shadow: 0 0 15px rgba(51,255,119,0.3); /* Lighter green shadow */
     }
     .button-container {
       margin: 20px auto;
@@ -156,7 +156,7 @@
       position: fixed;
       bottom: 20px; right: 20px;
       background: transparent;
-      color: #ffffff;
+      color: #ffffff; /* Kept white for contrast */
       padding: 8px 16px;
       border: 1px solid #ffffff;
       border-radius: 20px;
@@ -182,6 +182,149 @@
   </style>
 </head>
 <body>
-  <!-- The rest of your HTML and JavaScript remains unchanged -->
+  <a href="/" class="home-btn">← Home</a>
+  <canvas id="particle-canvas"></canvas>
+  <div class="wrap">
+    <div class="markets-news">
+      <div class="title-container">
+        <div class="block-title markets-news-title">Markets & Economics</div>
+        <a href="/markets-economics-archive.html" class="go-deeper">Go Deeper</a>
+      </div>
+      <ul class="headlines markets-news-links" id="markets-news-links"></ul>
+    </div>
+    <div class="button-container">
+      <button class="random-button" onclick="goToRandomMarkets()">⚛️ SURPRISE ME!</button>
+    </div>
+  </div>
+  <script>
+    // Particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 50;
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#33ff77', '#22cc55', '#66ff99', '#009933', '#99ffbb', '#00cc66'][Math.floor(Math.random() * 6)]; /* Updated to lighter greens */
+        this.hasTail = Math.random() < 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    init();
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Load markets/economics links
+    async function loadMarketsLinks() {
+      try {
+        const response = await fetch('markets-economics-links.txt');
+        if (!response.ok) {
+          console.error('Failed to load markets-economics-links.txt:', response.status);
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        const displayLinks = links.slice(0, 36);
+        const grid = document.getElementById('markets-news-links');
+        if (grid && displayLinks.length > 0) {
+          grid.innerHTML = displayLinks.map(link => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+        }
+        console.log(`Showing ${displayLinks.length} markets/economics links (${links.length - displayLinks.length} moved to archive)`);
+      } catch (error) {
+        console.error('Error loading markets/economics links:', error);
+      }
+    }
+
+    // Random markets/economics article
+    async function goToRandomMarkets() {
+      try {
+        const response = await fetch('markets-economics-links.txt');
+        if (!response.ok) {
+          console.log('Could not load markets-economics-links.txt for random selection');
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const currentLinks = links.slice(0, 36);
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+          window.open(randomLink, '_blank');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadMarketsLinks);
+  </script>
 </body>
 </html>
