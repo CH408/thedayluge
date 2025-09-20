@@ -667,9 +667,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(51, 221, 255, 0.15) 0%, transparent 70%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(51, 221, 255, 0.3) 0%, transparent 70%);
     border-radius: 50%;
     transform: translate(-50%, -50%) rotate(0deg);
     animation: galaxy-spin 60s linear infinite;
@@ -692,22 +692,48 @@
   }
   .comet {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
-    box-shadow: 0 0 15px var(--light-cyan-glow);
-    animation: comet-streak 5s linear infinite;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, var(--bright-purple-glow) 0%, transparent 70%);
+    box-shadow: 0 0 20px var(--bright-purple-glow);
+    animation: comet-streak 4s linear infinite;
     opacity: 0;
   }
   @keyframes comet-streak {
     0% { opacity: 0; transform: translate(0, 0) rotate(45deg); }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; transform: translate(1500px, -1500px) rotate(45deg); }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.9; }
+    100% { opacity: 0; transform: translate(2000px, -2000px) rotate(45deg); }
   }
   .comet:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-  .comet:nth-child(2) { left: 50%; top: 80%; animation-delay: 2s; }
-  .comet:nth-child(3) { left: 80%; top: 40%; animation-delay: 4s; }
+  .comet:nth-child(2) { left: 50%; top: 80%; animation-delay: 1.5s; }
+  .comet:nth-child(3) { left: 80%; top: 40%; animation-delay: 3s; }
+
+  #asteroid-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .asteroid {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--light-cyan-glow);
+    animation: asteroid-drift 20s linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes asteroid-drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(1000px, 500px); }
+  }
+  .asteroid:nth-child(1) { left: 20%; top: 10%; animation-delay: 0s; }
+  .asteroid:nth-child(2) { left: 70%; top: 60%; animation-delay: 10s; }
 
   @media(max-width:600px){
     .wheel-container{
@@ -825,12 +851,17 @@
       animation: none;
     }
     #galaxy {
-      width: 300px;
-      height: 300px;
+      width: 450px;
+      height: 450px;
     }
     .comet {
-      width: 3px;
-      height: 3px;
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 15px var(--bright-purple-glow);
+    }
+    .asteroid {
+      width: 15px;
+      height: 15px;
       box-shadow: 0 0 10px var(--light-cyan-glow);
     }
   }
@@ -935,12 +966,17 @@
       }
     }
     #galaxy {
-      width: 240px;
-      height: 240px;
+      width: 360px;
+      height: 360px;
     }
     .comet {
-      width: 2px;
-      height: 2px;
+      width: 4px;
+      height: 4px;
+      box-shadow: 0 0 12px var(--bright-purple-glow);
+    }
+    .asteroid {
+      width: 12px;
+      height: 12px;
       box-shadow: 0 0 8px var(--light-cyan-glow);
     }
   }
@@ -996,6 +1032,10 @@
       animation: none;
       opacity: 0.7;
     }
+    .asteroid {
+      animation: none;
+      opacity: 0.7;
+    }
   }
 </style>
 </head>
@@ -1016,6 +1056,7 @@
   <canvas id="particle-canvas"></canvas>
   <div id="galaxy"></div>
   <div id="comet-container"></div>
+  <div id="asteroid-container"></div>
   <div class="wheel-container">
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
@@ -1174,6 +1215,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const comet = document.createElement('div');
     comet.classList.add('comet');
     cometContainer.appendChild(comet);
+  }
+
+  // Initialize asteroids
+  const asteroidContainer = document.getElementById('asteroid-container');
+  for (let i = 0; i < 2; i++) {
+    const asteroid = document.createElement('div');
+    asteroid.classList.add('asteroid');
+    asteroidContainer.appendChild(asteroid);
   }
 
   init();
