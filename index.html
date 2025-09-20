@@ -348,10 +348,10 @@
 
   .spoke-7:hover{
     transform:scale(1.15);
-    box-shadow:0 0 35px rgba(0,255,0,0.8), 0 4px 12px rgba(0,255,0,0.3) !important;
+    box-shadow:0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
     z-index:10;
     animation-play-state:paused;
-    border-color:#00ff00 !important;
+    border-color:rgba(0,255,0,0.8) !important;
   }
 
   .spoke-1{
@@ -410,9 +410,9 @@
     color:#00ff00 !important;
     font-size:14px;
     font-weight:900 !important;
-    text-shadow:0 0 8px #00ff00, 0 0 15px #00ff00;
-    border:2px solid #00ff00 !important;
-    box-shadow:0 0 20px rgba(0,255,0,0.4), 0 2px 8px rgba(0,0,0,0.1) !important;
+    text-shadow:0 0 6px rgba(0,255,0,0.6), 0 0 12px rgba(0,255,0,0.4);
+    border:2px solid rgba(0,255,0,0.8) !important;
+    box-shadow:0 0 15px rgba(0,255,0,0.3), 0 2px 6px rgba(0,0,0,0.1) !important;
   }
   .spoke-8{
     left:336px;
@@ -663,7 +663,7 @@
     .spoke-4{ left:45px; bottom:50px; font-size:11px; }
     .spoke-5{ left:15px; top:150px; font-size:11px; }
     .spoke-6{ left:45px; top:50px; font-size:12px; }
-    .spoke-7{ left:150px; top:15px; font-size:12px; font-weight:900 !important; color:#00ff00 !important; text-shadow:0 0 6px #00ff00, 0 0 12px #00ff00; }
+    .spoke-7{ left:150px; top:15px; font-size:12px; font-weight:900 !important; color:#00ff00 !important; text-shadow:0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
     .spoke-8{ left:255px; top:50px; font-size:12px; font-weight:900 !important; }
     .header h1{
       font-size:32px;
@@ -778,7 +778,7 @@
     .spoke-4{ left:40px; bottom:40px; font-size:10px; }
     .spoke-5{ left:12.5px; top:127.5px; font-size:10px; }
     .spoke-6{ left:40px; top:40px; font-size:11px; }
-    .spoke-7{ left:127.5px; top:12.5px; font-size:11px; font-weight:900 !important; color:#00ff00 !important; text-shadow:0 0 6px #00ff00, 0 0 12px #00ff00; }
+    .spoke-7{ left:127.5px; top:12.5px; font-size:11px; font-weight:900 !important; color:#00ff00 !important; text-shadow:0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
     .spoke-8{ left:215px; top:40px; font-size:11px; font-weight:900 !important; }
     .header h1{
       font-size:28px;
@@ -964,13 +964,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
 
-  // Ensure overlay is hidden and all content is visible
   overlay.classList.add('hidden');
   document.querySelectorAll('body > *').forEach(el => {
     el.style.visibility = 'visible';
   });
 
-  // Keep password logic for testing if needed
   const correctPassword = '5813';
   function checkPassword() {
     console.log('Checking password:', passwordInput.value);
