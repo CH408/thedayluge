@@ -225,15 +225,16 @@
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     font-weight:900;
     text-align:center;
-    font-size:12px;
+    font-size:11px;
     line-height:1.1;
     text-transform:uppercase;
     letter-spacing:0.2px;
     box-shadow:0 0 20px rgba(0,255,127,0.4), 0 2px 8px rgba(0,0,0,0.1);
     padding:4px;
     animation:electron-pulse 2s ease-in-out infinite;
-    background:var(--black-bg);
-    color:var(--crt-green);
+    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
+    color:var(--neon-green);
+    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
 
   @keyframes electron-pulse {
@@ -259,67 +260,34 @@
   .spoke-1{ /* Moon Landing - 0° */
     left:390px;
     top:205px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--bright-green) !important;
-    font-size:11px;
-    font-weight:900 !important;
   }
   .spoke-2{ /* UFOs - 45° */
     left:336px;
     top:336px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--matrix-green) !important;
-    font-size:12px;
-    font-weight:900 !important;
   }
   .spoke-3{ /* Antarctica Mysteries - 90° */
     left:205px;
     bottom:20px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--emerald-green) !important;
-    font-size:11px;
-    font-weight:900 !important;
   }
   .spoke-4{ /* The Pyramids - 135° */
     left:74px;
     bottom:64px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--lime-green) !important;
-    font-size:10px;
-    font-weight:900 !important;
   }
   .spoke-5{ /* JFK Assassination - 180° */
     left:20px;
     top:205px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--forest-green) !important;
-    font-size:12px;
-    font-weight:900 !important;
-    text-shadow:1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-6{ /* Las Vegas Shooting - 225° */
     left:74px;
     top:74px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--neon-green) !important;
-    font-size:11px;
-    font-weight:900 !important;
   }
   .spoke-7{ /* Covid - 270° */
     left:205px;
     top:20px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--dark-green) !important;
-    font-size:13px;
-    font-weight:900 !important;
   }
   .spoke-8{ /* Epstein - 315° */
     left:336px;
     top:74px;
-    background:radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-    color:var(--crt-green) !important;
-    font-size:11px;
-    font-weight:900 !important;
   }
 
   /* Enhanced Energy beams in green */
@@ -537,14 +505,14 @@
       height:75px;
       font-size:10px;
     }
-    .spoke-1{ left:295px; top:150px; font-size:9px; }
-    .spoke-2{ left:255px; top:255px; font-size:10px; }
-    .spoke-3{ left:150px; bottom:15px; font-size:9px; }
-    .spoke-4{ left:45px; bottom:50px; font-size:9px; }
-    .spoke-5{ left:15px; top:150px; font-size:10px; }
-    .spoke-6{ left:45px; top:50px; font-size:9px; }
-    .spoke-7{ left:150px; top:15px; font-size:11px; }
-    .spoke-8{ left:255px; top:50px; font-size:9px; }
+    .spoke-1{ left:295px; top:150px; }
+    .spoke-2{ left:255px; top:255px; }
+    .spoke-3{ left:150px; bottom:15px; }
+    .spoke-4{ left:45px; bottom:50px; }
+    .spoke-5{ left:15px; top:150px; }
+    .spoke-6{ left:45px; top:50px; }
+    .spoke-7{ left:150px; top:15px; }
+    .spoke-8{ left:255px; top:50px; }
     .header h1{
       font-size:28px;
     }
