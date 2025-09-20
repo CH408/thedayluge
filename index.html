@@ -921,6 +921,9 @@
       box-shadow: 0 0 10px var(--yellow);
       opacity: 0.5;
     }
+    #particle-canvas {
+      animation: none;
+    }
   }
 </style>
 </head>
@@ -1050,20 +1053,27 @@ document.addEventListener('DOMContentLoaded', function() {
       this.speedY = Math.random() * 1.5 - 0.75;
       this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff'];
       this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+      this.twinkleSpeed = Math.random() * 0.02 + 0.01; // Random twinkle speed
+      this.twinklePhase = Math.random() * Math.PI * 2; // Random phase
+      this.opacity = 1;
     }
     update() {
       this.x += this.speedX;
       this.y += this.speedY;
       if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
       if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      this.opacity = 0.5 + 0.5 * Math.sin(this.twinklePhase); // Twinkle effect
+      this.twinklePhase += this.twinkleSpeed;
     }
     draw() {
       ctx.fillStyle = this.color;
+      ctx.globalAlpha = this.opacity; // Apply opacity
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
       ctx.shadowBlur = 8;
       ctx.shadowColor = this.color;
+      ctx.globalAlpha = 1; // Reset global alpha
     }
   }
 
