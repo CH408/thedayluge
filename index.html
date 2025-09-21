@@ -663,29 +663,6 @@
     text-shadow:0 0 10px #00ddff;
   }
 
-  #galaxy {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(51, 221, 255, 0.3) 0%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) rotate(0deg);
-    animation: galaxy-spin 60s linear infinite, galaxy-pulse 6s ease-in-out infinite;
-    z-index: 1;
-    pointer-events: none;
-    box-shadow: 0 0 20px rgba(51, 221, 255, 0.4);
-  }
-  @keyframes galaxy-spin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-  @keyframes galaxy-pulse {
-    0%, 100% { opacity: 0.3; box-shadow: 0 0 20px rgba(51, 221, 255, 0.4); }
-    50% { opacity: 0.5; box-shadow: 0 0 30px rgba(51, 221, 255, 0.6); }
-  }
-
   #comet-container {
     position: absolute;
     top: 0;
@@ -865,10 +842,6 @@
     .wheel-line::before, .wheel-line::after {
       animation: none;
     }
-    #galaxy {
-      width: 450px;
-      height: 450px;
-    }
     .comet {
       width: 8px;
       height: 8px;
@@ -984,10 +957,6 @@
         opacity: 0.5;
       }
     }
-    #galaxy {
-      width: 360px;
-      height: 360px;
-    }
     .comet {
       width: 6px;
       height: 6px;
@@ -1047,11 +1016,6 @@
     #particle-canvas {
       animation: none;
     }
-    #galaxy {
-      animation: none;
-      opacity: 0.5;
-      box-shadow: 0 0 20px rgba(51, 221, 255, 0.4);
-    }
     .comet {
       animation: none;
       opacity: 0.7;
@@ -1081,7 +1045,6 @@
   </div>
 
   <canvas id="particle-canvas"></canvas>
-  <div id="galaxy"></div>
   <div id="comet-container"></div>
   <div id="asteroid-container"></div>
   <div class="wheel-container">
