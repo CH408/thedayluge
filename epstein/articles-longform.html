@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein's Web: Articles & Longform Archive - THE DAYLUGE</title>
+  <title>Epstein's Web: Articles & Longform - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -18,7 +18,7 @@
       --dark-gray: #111111;
       --maxw: 1200px;
     }
-    * { box-sizing: border box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
@@ -61,7 +61,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .articles-longform-archive-title {
+    .articles-longform-title {
       color: var(--crt-green);
       animation: block-title-pulse-green 8s ease-in-out infinite;
     }
@@ -112,9 +112,28 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .articles-longform-archive-links .headline a:hover {
+    .articles-longform-links .headline a:hover {
       color: var(--neon-green);
       text-shadow: 0 0 10px var(--neon-green);
+    }
+    .articles-longform-archives, .random-button {
+      display: inline-block;
+      background: transparent;
+      color: var(--crt-green);
+      padding: 8px 16px;
+      border: 1px solid var(--crt-green);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--crt-green);
+    }
+    .articles-longform-archives:hover, .random-button:hover {
+      background: var(--dark-gray);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,255,127,0.3);
     }
     .button-container {
       margin: 20px auto;
@@ -147,6 +166,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
+      .articles-longform-archives, .random-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
@@ -156,14 +176,15 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="articles-longform-archive">
+    <div class="articles-longform">
       <div class="title-container">
-        <div class="block-title articles-longform-archive-title">Articles & Longform Archive</div>
+        <div class="block-title articles-longform-title">Articles & Longform</div>
+        <a href="/epstein/articles-longform-archive.html" class="articles-longform-archives">Articles & Longform Archives</a>
       </div>
-      <ul class="headlines articles-longform-archive-links" id="articles-longform-archive-links"></ul>
+      <ul class="headlines articles-longform-links" id="articles-longform-links"></ul>
     </div>
     <div class="button-container">
-      <a href="/epstein/articles-longform.html" class="home-btn">← Back to Articles & Longform</a>
+      <button class="random-button" onclick="goToRandomArticle()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -235,8 +256,8 @@
       init();
     });
 
-    // Load articles & longform archive links
-    async function loadArticlesLongformArchiveLinks() {
+    // Load articles & longform links
+    async function loadArticlesLongformLinks() {
       try {
         const response = await fetch('articles-longform-links.txt');
         if (!response.ok) {
@@ -252,24 +273,49 @@
           }
           return null;
         }).filter(link => link !== null);
-        const archiveLinks = links.slice(18); // Start from 19th link
-        const grid = document.getElementById('articles-longform-archive-links');
-        if (grid && archiveLinks.length > 0) {
-          grid.innerHTML = archiveLinks.map(link => `
+        const displayLinks = links.slice(0, 18); // Display first 18 links
+        const grid = document.getElementById('articles-longform-links');
+        if (grid && displayLinks.length > 0) {
+          grid.innerHTML = displayLinks.map(link => `
             <li class="headline">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
-        } else if (grid) {
-          grid.innerHTML = '<li class="headline">No archived articles & longform available.</li>';
         }
-        console.log(`Showing ${archiveLinks.length} archived articles & longform links`);
+        console.log(`Showing ${displayLinks.length} articles & longform links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading articles & longform archive links:', error);
+        console.error('Error loading articles & longform links:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadArticlesLongformArchiveLinks);
+    // Random article
+    async function goToRandomArticle() {
+      try {
+        const response = await fetch('articles-longform-links.txt');
+        if (!response.ok) {
+          console.log('Could not load articles-longform-links.txt for random selection');
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const currentLinks = links.slice(0, 18); // Random from first 18 links
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+          window.open(randomLink, '_blank');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadArticlesLongformLinks);
   </script>
 </body>
 </html>
