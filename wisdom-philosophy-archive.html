@@ -231,6 +231,17 @@
       .headline { font-size: 14px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .comet { width: 8px; height: 8px; box-shadow: 0 0 20px var(--bright-purple-glow); }
+      .comet::after { width: 40px; height: 2px; }
+      .asteroid { width: 15px; height: 15px; box-shadow: 0 0 15px var(--light-cyan-glow); }
+    }
+    @media (max-width: 400px) {
+      .block-title { font-size: 14px; }
+      .headline { font-size: 12px; }
+      .home-btn { font-size: 9px; padding: 5px 10px; }
+      .comet { width: 6px; height: 6px; box-shadow: 0 0 15px var(--bright-purple-glow); }
+      .comet::after { width: 30px; height: 1px; }
+      .asteroid { width: 12px; height: 12px; box-shadow: 0 0 12px var(--light-cyan-glow); }
     }
   </style>
 </head>
@@ -329,9 +340,10 @@
     // Load wisdom & philosophy archive links
     async function loadWisdomPhilosophyArchiveLinks() {
       try {
-        const response = await fetch('wisdom-philosophy-links.txt');
+        const response = await fetch('/wisdom-philosophy-links.txt');
         if (!response.ok) {
           console.error('Failed to load wisdom-philosophy-links.txt:', response.status);
+          document.getElementById('wisdom-philosophy-archive-links').innerHTML = '<li class="headline">Error loading archive links. Please try again later.</li>';
           return;
         }
         const text = await response.text();
@@ -357,6 +369,7 @@
         console.log(`Showing ${archiveLinks.length} archived wisdom & philosophy links`);
       } catch (error) {
         console.error('Error loading wisdom & philosophy archive links:', error);
+        document.getElementById('wisdom-philosophy-archive-links').innerHTML = '<li class="headline">Error loading archive links. Please try again later.</li>';
       }
     }
     document.addEventListener('DOMContentLoaded', loadWisdomPhilosophyArchiveLinks);
