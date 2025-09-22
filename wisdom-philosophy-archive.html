@@ -165,26 +165,8 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--violet); /* Changed to match spoke-6 */
+      color: var(--violet);
     }
-    .headlines .headline:nth-child(1) { animation-delay: 0s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
-    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
-    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
-    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
-    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
-    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
-    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
-    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
-    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
-    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
-    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
-    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -195,7 +177,7 @@
       transition: all 0.3s ease;
     }
     .wisdom-philosophy-archive-links .headline a:hover {
-      color: #9966dd; /* Matches darker purple from spoke-6 gradient */
+      color: #9966dd;
       text-shadow: 0 0 10px #9966dd;
     }
     .button-container {
@@ -209,23 +191,23 @@
       position: fixed;
       bottom: 20px; right: 20px;
       background: #0a1428;
-      color: var(--violet); /* Changed to match spoke-6 */
+      color: var(--violet);
       padding: 8px 16px;
-      border: 1px solid var(--violet); /* Changed to match spoke-6 */
+      border: 1px solid var(--violet);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px var(--violet); /* Changed to match spoke-6 */
+      text-shadow: 0 0 5px var(--violet);
       transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(204,136,255,0.3); /* Adjusted to purple */
+      box-shadow: 0 0 10px rgba(204,136,255,0.3);
     }
     .home-btn:hover {
       background: #1a2a44;
-      color: #9966dd; /* Matches darker purple */
+      color: #9966dd;
       border-color: #9966dd;
-      box-shadow: 0 0 15px rgba(153,102,221,0.6); /* Adjusted to darker purple */
+      box-shadow: 0 0 15px rgba(153,102,221,0.6);
       transform: scale(1.05);
       text-shadow: 0 0 5px #9966dd;
     }
@@ -366,6 +348,11 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          // Dynamically set animation delays
+          const headlines = grid.querySelectorAll('.headline');
+          headlines.forEach((headline, index) => {
+            headline.style.animationDelay = `${index * 0.2}s`;
+          });
         } else if (grid) {
           grid.innerHTML = '<li class="headline">No archived wisdom & philosophy available.</li>';
         }
