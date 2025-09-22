@@ -261,25 +261,25 @@
     top:205px;
     font-size:13px; /* Fits "Moon Landing" */
   }
-  .spoke-2{ /* UFOs - 45° */
+  .spoke-2{ /* UFOs & Aliens - 45° */
     left:336px;
     top:336px;
-    font-size:18px; /* Larger for short "UFOs" */
+    font-size:14px; /* Adjusted for "UFOs & Aliens" */
   }
-  .spoke-3{ /* Antarctica Mysteries - 90° */
+  .spoke-3{ /* Ancient Mysteries - 90° */
     left:205px;
     bottom:20px;
-    font-size:10px; /* Smaller for long "Antarctica Mysteries" */
+    font-size:10px; /* Fits "Ancient Mysteries" */
   }
-  .spoke-4{ /* The Pyramids - 135° */
+  .spoke-4{ /* The Clintons - 135° */
     left:74px;
     bottom:64px;
-    font-size:12px; /* Fits "The Pyramids" */
+    font-size:12px; /* Fits "The Clintons" */
   }
-  .spoke-5{ /* JFK Assassination - 180° */
+  .spoke-5{ /* JFK - 180° */
     left:20px;
     top:205px;
-    font-size:11px; /* Fits "JFK Assassination" */
+    font-size:14px; /* Increased for "JFK" */
   }
   .spoke-6{ /* Las Vegas Shooting - 225° */
     left:74px;
@@ -512,10 +512,10 @@
       height:75px;
     }
     .spoke-1{ left:295px; top:150px; font-size:11px; }
-    .spoke-2{ left:255px; top:255px; font-size:15px; }
+    .spoke-2{ left:255px; top:255px; font-size:12px; }
     .spoke-3{ left:150px; bottom:15px; font-size:9px; }
     .spoke-4{ left:45px; bottom:50px; font-size:10px; }
-    .spoke-5{ left:15px; top:150px; font-size:10px; }
+    .spoke-5{ left:15px; top:150px; font-size:12px; }
     .spoke-6{ left:45px; top:50px; font-size:9px; }
     .spoke-7{ left:150px; top:15px; font-size:15px; }
     .spoke-8{ left:255px; top:50px; font-size:13px; }
@@ -545,10 +545,10 @@
       height:65px;
     }
     .spoke-1{ left:245px; top:127.5px; font-size:10px; }
-    .spoke-2{ left:215px; top:215px; font-size:13px; }
+    .spoke-2{ left:215px; top:215px; font-size:11px; }
     .spoke-3{ left:127.5px; bottom:12.5px; font-size:8px; }
     .spoke-4{ left:40px; bottom:40px; font-size:9px; }
-    .spoke-5{ left:12.5px; top:127.5px; font-size:9px; }
+    .spoke-5{ left:12.5px; top:127.5px; font-size:11px; }
     .spoke-6{ left:40px; top:40px; font-size:8px; }
     .spoke-7{ left:127.5px; top:12.5px; font-size:13px; }
     .spoke-8{ left:215px; top:40px; font-size:11px; }
@@ -616,16 +616,16 @@
 
     <!-- Nucleus -->
     <div class="wheel-center" onclick="goToRandomConspiracy()">
-      RABBIT
-      HOLE
+      TRENDING
+      CONSPIRACIES
     </div>
 
     <!-- Conspiracy topic spokes -->
     <div class="spoke spoke-1" onclick="goToConspiracyTopic('moon-landing')">Moon Landing</div>
-    <div class="spoke spoke-2" onclick="goToConspiracyTopic('ufos')">UFOs</div>
-    <div class="spoke spoke-3" onclick="goToConspiracyTopic('antarctica-mysteries')">Antarctica Mysteries</div>
-    <div class="spoke spoke-4" onclick="goToConspiracyTopic('the-pyramids')">The Pyramids</div>
-    <div class="spoke spoke-5" onclick="goToConspiracyTopic('jfk-assassination')">JFK Assassination</div>
+    <div class="spoke spoke-2" onclick="goToConspiracyTopic('ufos-aliens')">UFOs & Aliens</div>
+    <div class="spoke spoke-3" onclick="goToConspiracyTopic('ancient-mysteries')">Ancient Mysteries</div>
+    <div class="spoke spoke-4" onclick="goToConspiracyTopic('the-clintons')">The Clintons</div>
+    <div class="spoke spoke-5" onclick="goToConspiracyTopic('jfk')">JFK</div>
     <div class="spoke spoke-6" onclick="goToConspiracyTopic('las-vegas-shooting')">Las Vegas Shooting</div>
     <div class="spoke spoke-7" onclick="goToConspiracyTopic('covid')">Covid</div>
     <div class="spoke spoke-8" onclick="goToConspiracyTopic('epsteins-web')">Epstein's Web</div>
@@ -708,7 +708,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   window.goToRandomConspiracy = function() {
-    const topics = ['moon-landing', 'ufos', 'antarctica-mysteries', 'the-pyramids', 'jfk-assassination', 'las-vegas-shooting', 'covid', 'epsteins-web'];
+    const topics = ['moon-landing', 'ufos-aliens', 'ancient-mysteries', 'the-clintons', 'jfk', 'las-vegas-shooting', 'covid', 'epsteins-web'];
     const randomTopic = topics[Math.floor(Math.random() * topics.length)];
     window.location.href = `/conspiracy/${randomTopic}`;
   };
