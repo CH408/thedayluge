@@ -165,7 +165,7 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--violet); /* Changed to match spoke-6 circle */
+      color: var(--violet);
     }
     .headlines .headline:nth-child(1) { animation-delay: 0s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
@@ -195,27 +195,30 @@
       transition: all 0.3s ease;
     }
     .wisdom-philosophy-links .headline a:hover {
-      color: #9966dd; /* Matches darker purple from spoke-6 gradient */
+      color: #9966dd;
       text-shadow: 0 0 10px #9966dd;
     }
     .wisdom-philosophy-archives, .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--light-cyan-glow);
+      color: var(--violet); /* Changed to match spoke-6 */
       padding: 8px 16px;
-      border: 1px solid var(--light-cyan-glow);
+      border: 1px solid var(--violet); /* Changed to match spoke-6 */
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--light-cyan-glow);
+      text-shadow: 0 0 5px var(--violet);
     }
     .wisdom-philosophy-archives:hover, .random-button:hover {
       background: #1a2a44;
+      color: #9966dd; /* Matches darker purple from spoke-6 gradient */
+      border-color: #9966dd;
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0,150,255,0.3);
+      box-shadow: 0 0 15px rgba(153, 102, 221, 0.3); /* Adjusted to purple glow */
+      text-shadow: 0 0 5px #9966dd;
     }
     .button-container {
       margin: 20px auto;
