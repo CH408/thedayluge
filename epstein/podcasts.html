@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein's Web: Podcasts - THE DAYLUGE</title>
+  <title>Epstein's Web: Podcasts Archive - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -61,7 +61,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .podcasts-title {
+    .podcasts-archive-title {
       color: var(--crt-green);
       animation: block-title-pulse-green 8s ease-in-out infinite;
     }
@@ -112,28 +112,9 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .podcasts-links .headline a:hover {
+    .podcasts-archive-links .headline a:hover {
       color: var(--neon-green);
       text-shadow: 0 0 10px var(--neon-green);
-    }
-    .podcast-archives, .random-button {
-      display: inline-block;
-      background: transparent;
-      color: var(--crt-green);
-      padding: 8px 16px;
-      border: 1px solid var(--crt-green);
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--crt-green);
-    }
-    .podcast-archives:hover, .random-button:hover {
-      background: var(--dark-gray);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0,255,127,0.3);
     }
     .button-container {
       margin: 20px auto;
@@ -166,7 +147,6 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .podcast-archives, .random-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
@@ -176,15 +156,14 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="podcasts">
+    <div class="podcasts-archive">
       <div class="title-container">
-        <div class="block-title podcasts-title">Podcasts</div>
-        <a href="/epstein/podcasts-archive.html" class="podcast-archives">Podcast Archives</a>
+        <div class="block-title podcasts-archive-title">Podcasts Archive</div>
       </div>
-      <ul class="headlines podcasts-links" id="podcasts-links"></ul>
+      <ul class="headlines podcasts-archive-links" id="podcasts-archive-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomPodcast()">⚛️ SURPRISE ME!</button>
+      <a href="/epstein/podcasts.html" class="home-btn">← Back to Podcasts</a>
     </div>
   </div>
   <script>
@@ -256,8 +235,8 @@
       init();
     });
 
-    // Load podcast links
-    async function loadPodcastLinks() {
+    // Load podcast archive links
+    async function loadPodcastArchiveLinks() {
       try {
         const response = await fetch('podcasts-links.txt');
         if (!response.ok) {
@@ -273,49 +252,24 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 18); // Display first 18 links
-        const grid = document.getElementById('podcasts-links');
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
+        const archiveLinks = links.slice(18); // Start from 19th link
+        const grid = document.getElementById('podcasts-archive-links');
+        if (grid && archiveLinks.length > 0) {
+          grid.innerHTML = archiveLinks.map(link => `
             <li class="headline">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+        } else if (grid) {
+          grid.innerHTML = '<li class="headline">No archived podcasts available.</li>';
         }
-        console.log(`Showing ${displayLinks.length} podcast links (${links.length - displayLinks.length} moved to archive)`);
+        console.log(`Showing ${archiveLinks.length} archived podcast links`);
       } catch (error) {
-        console.error('Error loading podcast links:', error);
+        console.error('Error loading podcast archive links:', error);
       }
     }
 
-    // Random podcast
-    async function goToRandomPodcast() {
-      try {
-        const response = await fetch('podcasts-links.txt');
-        if (!response.ok) {
-          console.log('Could not load podcasts-links.txt for random selection');
-          return;
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
-          }
-          return null;
-        }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 18); // Random from first 18 links
-        if (currentLinks.length > 0) {
-          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-          window.open(randomLink, '_blank');
-        }
-      } catch (error) {
-        console.error('Error loading links for random selection:', error);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadPodcastLinks);
+    document.addEventListener('DOMContentLoaded', loadPodcastArchiveLinks);
   </script>
 </body>
 </html>
