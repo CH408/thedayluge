@@ -251,6 +251,18 @@
       .wisdom-philosophy-archives, .random-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .comet { width: 8px; height: 8px; box-shadow: 0 0 20px var(--bright-purple-glow); }
+      .comet::after { width: 40px; height: 2px; }
+      .asteroid { width: 15px; height: 15px; box-shadow: 0 0 15px var(--light-cyan-glow); }
+    }
+    @media (max-width: 400px) {
+      .block-title { font-size: 14px; }
+      .headline { font-size: 12px; }
+      .wisdom-philosophy-archives, .random-button { font-size: 9px; padding: 5px 10px; }
+      .home-btn { font-size: 9px; padding: 5px 10px; }
+      .comet { width: 6px; height: 6px; box-shadow: 0 0 15px var(--bright-purple-glow); }
+      .comet::after { width: 30px; height: 1px; }
+      .asteroid { width: 12px; height: 12px; box-shadow: 0 0 12px var(--light-cyan-glow); }
     }
   </style>
 </head>
@@ -350,9 +362,10 @@
     // Load wisdom & philosophy links
     async function loadWisdomPhilosophyLinks() {
       try {
-        const response = await fetch('wisdom-philosophy-links.txt');
+        const response = await fetch('/wisdom-philosophy-links.txt');
         if (!response.ok) {
           console.error('Failed to load wisdom-philosophy-links.txt:', response.status);
+          document.getElementById('wisdom-philosophy-links').innerHTML = '<li class="headline">Error loading links. Please try again later.</li>';
           return;
         }
         const text = await response.text();
@@ -372,18 +385,21 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+        } else if (grid) {
+          grid.innerHTML = '<li class="headline">No wisdom & philosophy links available.</li>';
         }
         console.log(`Showing ${displayLinks.length} wisdom & philosophy links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error('Error loading wisdom & philosophy links:', error);
+        document.getElementById('wisdom-philosophy-links').innerHTML = '<li class="headline">Error loading links. Please try again later.</li>';
       }
     }
     // Random wisdom & philosophy link
     async function goToRandomWisdomPhilosophy() {
       try {
-        const response = await fetch('wisdom-philosophy-links.txt');
+        const response = await fetch('/wisdom-philosophy-links.txt');
         if (!response.ok) {
-          console.log('Could not load wisdom-philosophy-links.txt for random selection');
+          console.log('Could not load wisdom-philosophy-links.txt for random selection:', response.status);
           return;
         }
         const text = await response.text();
@@ -399,6 +415,8 @@
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
+        } else {
+          console.log('No links available for random selection');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
