@@ -134,7 +134,7 @@
       color: var(--neon-green);
       text-shadow: 0 0 10px var(--neon-green);
     }
-    .go-deeper, .random-button {
+    .book-movie-recs-archives, .random-button {
       display: inline-block;
       background: transparent;
       color: var(--crt-green);
@@ -148,7 +148,7 @@
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--crt-green);
     }
-    .go-deeper:hover, .random-button:hover {
+    .book-movie-recs-archives:hover, .random-button:hover {
       background: var(--dark-gray);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(0,255,127,0.3);
@@ -184,7 +184,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper, .random-button { font-size: 10px; padding: 6px 12px; }
+      .book-movie-recs-archives, .random-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
@@ -197,12 +197,12 @@
     <div class="book-movie-recs">
       <div class="title-container">
         <div class="block-title book-movie-recs-title">Book & Movie Recs</div>
-        <a href="/epstein/book-movie-recs-archive.html" class="go-deeper">Go Deeper</a>
+        <a href="/epstein/book-movie-recs-archive.html" class="book-movie-recs-archives">Book & Movie Recs Archives</a>
       </div>
       <ul class="headlines book-movie-recs-links" id="book-movie-recs-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomBookMovieRecs()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomBookMovie()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -274,7 +274,7 @@
       init();
     });
 
-    // Load book and movie recommendation links
+    // Load book & movie recs links
     async function loadBookMovieRecsLinks() {
       try {
         const response = await fetch('book-movie-recs-links.txt');
@@ -300,14 +300,14 @@
             </li>
           `).join('');
         }
-        console.log(`Showing ${displayLinks.length} book and movie recommendation links (${links.length - displayLinks.length} moved to archive)`);
+        console.log(`Showing ${displayLinks.length} book & movie recs links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading book and movie recommendation links:', error);
+        console.error('Error loading book & movie recs links:', error);
       }
     }
 
-    // Random book or movie recommendation
-    async function goToRandomBookMovieRecs() {
+    // Random book or movie
+    async function goToRandomBookMovie() {
       try {
         const response = await fetch('book-movie-recs-links.txt');
         if (!response.ok) {
