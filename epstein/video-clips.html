@@ -134,7 +134,7 @@
       color: var(--neon-green);
       text-shadow: 0 0 10px var(--neon-green);
     }
-    .go-deeper, .random-button {
+    .video-clips-archives, .random-button {
       display: inline-block;
       background: transparent;
       color: var(--crt-green);
@@ -148,7 +148,7 @@
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--crt-green);
     }
-    .go-deeper:hover, .random-button:hover {
+    .video-clips-archives:hover, .random-button:hover {
       background: var(--dark-gray);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(0,255,127,0.3);
@@ -184,7 +184,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper, .random-button { font-size: 10px; padding: 6px 12px; }
+      .video-clips-archives, .random-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
@@ -197,12 +197,12 @@
     <div class="video-clips">
       <div class="title-container">
         <div class="block-title video-clips-title">Video Clips</div>
-        <a href="/epstein/video-clips-archive.html" class="go-deeper">Go Deeper</a>
+        <a href="/epstein/video-clips-archive.html" class="video-clips-archives">Video Clips Archives</a>
       </div>
       <ul class="headlines video-clips-links" id="video-clips-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomVideoClips()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomVideoClip()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -307,7 +307,7 @@
     }
 
     // Random video clip
-    async function goToRandomVideoClips() {
+    async function goToRandomVideoClip() {
       try {
         const response = await fetch('video-clips-links.txt');
         if (!response.ok) {
