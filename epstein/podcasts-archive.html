@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein's Web: Podcasts Archive - THE DAYLUGE</title>
+  <title>Epstein's Web: Video Clips Archive - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -61,7 +61,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .podcasts-archive-title {
+    .video-clips-archive-title {
       color: var(--crt-green);
       animation: block-title-pulse-green 8s ease-in-out infinite;
     }
@@ -130,7 +130,7 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .podcasts-archive-links .headline a:hover {
+    .video-clips-archive-links .headline a:hover {
       color: var(--neon-green);
       text-shadow: 0 0 10px var(--neon-green);
     }
@@ -174,14 +174,14 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="podcasts-archive">
+    <div class="video-clips-archive">
       <div class="title-container">
-        <div class="block-title podcasts-archive-title">Podcasts Archive</div>
+        <div class="block-title video-clips-archive-title">Video Clips Archive</div>
       </div>
-      <ul class="headlines podcasts-archive-links" id="podcasts-archive-links"></ul>
+      <ul class="headlines video-clips-archive-links" id="video-clips-archive-links"></ul>
     </div>
     <div class="button-container">
-      <a href="/epstein/podcasts.html" class="home-btn">← Back to Podcasts</a>
+      <a href="/epstein/video-clips.html" class="home-btn">← Back to Video Clips</a>
     </div>
   </div>
   <script>
@@ -253,12 +253,12 @@
       init();
     });
 
-    // Load podcast archive links
-    async function loadPodcastArchiveLinks() {
+    // Load video clips archive links
+    async function loadVideoClipsArchiveLinks() {
       try {
-        const response = await fetch('podcasts-links.txt');
+        const response = await fetch('video-clips-links.txt');
         if (!response.ok) {
-          console.error('Failed to load podcasts-links.txt:', response.status);
+          console.error('Failed to load video-clips-links.txt:', response.status);
           return;
         }
         const text = await response.text();
@@ -271,7 +271,7 @@
           return null;
         }).filter(link => link !== null);
         const archiveLinks = links.slice(36); // Start from 37th link
-        const grid = document.getElementById('podcasts-archive-links');
+        const grid = document.getElementById('video-clips-archive-links');
         if (grid && archiveLinks.length > 0) {
           grid.innerHTML = archiveLinks.map(link => `
             <li class="headline">
@@ -279,15 +279,15 @@
             </li>
           `).join('');
         } else if (grid) {
-          grid.innerHTML = '<li class="headline">No archived podcasts available.</li>';
+          grid.innerHTML = '<li class="headline">No archived video clips available.</li>';
         }
-        console.log(`Showing ${archiveLinks.length} archived podcast links`);
+        console.log(`Showing ${archiveLinks.length} archived video clip links`);
       } catch (error) {
-        console.error('Error loading podcast archive links:', error);
+        console.error('Error loading video clips archive links:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadPodcastArchiveLinks);
+    document.addEventListener('DOMContentLoaded', loadVideoClipsArchiveLinks);
   </script>
 </body>
 </html>
