@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wisdom & Philosophy Archive - THE DAYLUGE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+    :root {
+      --red: #cc0000;
+      --orange: #ff8800;
+      --green: #00dd55;
+      --blue: #1a1a80;
+      --light-blue: #33ddff;
+      --violet: #cc88ff;
+      --pink: #ff1493;
+      --yellow: #ffdd00;
+      --brown: #8B4513;
+      --dark-green: #006400;
+      --turquoise: #40E0D0;
+      --bright-blue: #00b7eb;
+      --ink: #111;
+      --rule: #bfbfbf;
+      --maxw: 1400px;
+      --bright-purple-glow: #cc88ff;
+      --light-cyan-glow: #33ddff;
+      --aqua-blueish-green: #00cc99;
+      --aqua-blueish-green-dark: #009977;
+      --gold: #d4af37;
+      --gold-dark: #b8860b;
+      --marble-white: #f5f5f5;
+      --marble-gray: #d3d3d3;
+      --bright-dark-green: #00aa33;
+      --bright-dark-green-dark: #008822;
+      --dodgers-blue: #1e90ff;
+      --dodgers-blue-dark: #0066cc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      color: var(--ink);
+      line-height: 1.5;
+      background: #0a1428;
+      padding: 10px;
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(0,150,255,0.1) 0%, transparent 70%);
+      animation: energy-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.5; } 50% { opacity: 1; }
+    }
+    body::after {
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes edge-glow {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+    }
+    #particle-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    #comet-container {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .comet {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: radial-gradient(circle, var(--bright-purple-glow) 0%, transparent 70%);
+      box-shadow: 0 0 25px var(--bright-purple-glow);
+      animation: comet-streak 5s linear infinite;
+      opacity: 0;
+    }
+    .comet::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -50px;
+      width: 50px; height: 2px;
+      background: linear-gradient(to left, var(--bright-purple-glow), transparent);
+      opacity: 0.6;
+    }
+    @keyframes comet-streak {
+      0% { opacity: 0; transform: translate(0, 0) rotate(45deg); }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translate(2500px, -2500px) rotate(45deg); }
+    }
+    .comet:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+    .comet:nth-child(2) { left: 50%; top: 80%; animation-delay: 1.5s; }
+    .comet:nth-child(3) { left: 80%; top: 40%; animation-delay: 3s; }
+    #asteroid-container {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .asteroid {
+      position: absolute;
+      width: 20px; height: 20px;
+      background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--light-cyan-glow);
+      animation: asteroid-drift 20s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes asteroid-drift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(1000px, 500px); }
+    }
+    .asteroid:nth-child(1) { left: 20%; top: 10%; animation-delay: 0s; }
+    .asteroid:nth-child(2) { left: 70%; top: 60%; animation-delay: 10s; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
+    .title-container {
+      display: flex;
+      align-items: center;
+      max-width: 800px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .block-title {
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-align: left;
+      color: var(--bright-purple-glow);
+      animation: block-title-pulse 8s ease-in-out infinite;
+    }
+    @keyframes block-title-pulse {
+      0% { text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+      37.5% { text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8); }
+      62.5% { text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      87.5% { text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .headlines { list-style: none; max-width: 800px; }
+    .headline {
+      font-size: 16px;
+      margin-bottom: 5px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.5s ease forwards;
+      color: var(--light-cyan-glow);
+    }
+    .headlines .headline:nth-child(1) { animation-delay: 0s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
+    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
+    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
+    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
+    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
+    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
+    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
+    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
+    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
+    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
+    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
+    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .headline a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .wisdom-philosophy-archive-links .headline a:hover {
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 10px var(--bright-purple-glow);
+    }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: #0a1428;
+      color: var(--light-cyan-glow);
+      padding: 8px 16px;
+      border: 1px solid var(--light-cyan-glow);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--light-cyan-glow);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,150,255,0.3);
+    }
+    .home-btn:hover {
+      background: #1a2a44;
+      box-shadow: 0 0 15px rgba(0,150,255,0.6);
+      transform: scale(1.05);
+    }
+    @media (max-width: 600px) {
+      .block-title { font-size: 16px; }
+      .headline { font-size: 14px; }
+      .home-btn { font-size: 10px; padding: 6px 12px; }
+      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="home-btn">← Home</a>
+  <canvas id="particle-canvas"></canvas>
+  <div id="comet-container"></div>
+  <div id="asteroid-container"></div>
+  <div class="wrap">
+    <div class="wisdom-philosophy-archive">
+      <div class="title-container">
+        <div class="block-title">Wisdom & Philosophy Archive</div>
+      </div>
+      <ul class="headlines wisdom-philosophy-archive-links" id="wisdom-philosophy-archive-links"></ul>
+    </div>
+    <div class="button-container">
+      <a href="/wisdom-philosophy.html" class="home-btn">← Back to Wisdom & Philosophy</a>
+    </div>
+  </div>
+  <script>
+    // Particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 100;
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 1.5;
+        this.depth = Math.random();
+        this.speedX = (Math.random() * 1.5 - 0.75) * (1 - this.depth * 0.5);
+        this.speedY = (Math.random() * 1.5 - 0.75) * (1 - this.depth * 0.5);
+        this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff'];
+        this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+        this.twinklePhase = Math.random() * Math.PI * 2;
+        this.opacity = 1 - this.depth * 0.3;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+        this.opacity = (0.7 + 0.3 * Math.sin(this.twinklePhase)) * (1 - this.depth * 0.3);
+        this.twinklePhase += this.twinkleSpeed;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = this.opacity;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.globalAlpha = 1;
+      }
+    }
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    // Initialize comets
+    const cometContainer = document.getElementById('comet-container');
+    for (let i = 0; i < 3; i++) {
+      const comet = document.createElement('div');
+      comet.classList.add('comet');
+      cometContainer.appendChild(comet);
+    }
+    // Initialize asteroids
+    const asteroidContainer = document.getElementById('asteroid-container');
+    for (let i = 0; i < 2; i++) {
+      const asteroid = document.createElement('div');
+      asteroid.classList.add('asteroid');
+      asteroidContainer.appendChild(asteroid);
+    }
+    init();
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+    // Load wisdom & philosophy archive links
+    async function loadWisdomPhilosophyArchiveLinks() {
+      try {
+        const response = await fetch('wisdom-philosophy-links.txt');
+        if (!response.ok) {
+          console.error('Failed to load wisdom-philosophy-links.txt:', response.status);
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        const archiveLinks = links.slice(18);
+        const grid = document.getElementById('wisdom-philosophy-archive-links');
+        if (grid && archiveLinks.length > 0) {
+          grid.innerHTML = archiveLinks.map(link => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+        } else if (grid) {
+          grid.innerHTML = '<li class="headline">No archived wisdom & philosophy available.</li>';
+        }
+        console.log(`Showing ${archiveLinks.length} archived wisdom & philosophy links`);
+      } catch (error) {
+        console.error('Error loading wisdom & philosophy archive links:', error);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadWisdomPhilosophyArchiveLinks);
+  </script>
+</body>
+</html>
