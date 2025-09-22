@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein's Web: Video Clips Archive - THE DAYLUGE</title>
+  <title>Epstein's Web: Podcasts Archive - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -61,7 +61,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .video-clips-archive-title {
+    .podcasts-archive-title {
       color: var(--crt-green);
       animation: block-title-pulse-green 8s ease-in-out infinite;
     }
@@ -103,24 +103,6 @@
     .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
     .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
     .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
-    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
-    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
-    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
-    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
-    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
-    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
-    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
-    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
-    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
-    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
-    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
-    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
-    .headlines .headline:nth-child(31) { animation-delay: 6.0s; }
-    .headlines .headline:nth-child(32) { animation-delay: 6.2s; }
-    .headlines .headline:nth-child(33) { animation-delay: 6.4s; }
-    .headlines .headline:nth-child(34) { animation-delay: 6.6s; }
-    .headlines .headline:nth-child(35) { animation-delay: 6.8s; }
-    .headlines .headline:nth-child(36) { animation-delay: 7.0s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -130,7 +112,7 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .video-clips-archive-links .headline a:hover {
+    .podcasts-archive-links .headline a:hover {
       color: var(--neon-green);
       text-shadow: 0 0 10px var(--neon-green);
     }
@@ -174,14 +156,14 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="video-clips-archive">
+    <div class="podcasts-archive">
       <div class="title-container">
-        <div class="block-title video-clips-archive-title">Video Clips Archive</div>
+        <div class="block-title podcasts-archive-title">Podcasts Archive</div>
       </div>
-      <ul class="headlines video-clips-archive-links" id="video-clips-archive-links"></ul>
+      <ul class="headlines podcasts-archive-links" id="podcasts-archive-links"></ul>
     </div>
     <div class="button-container">
-      <a href="/epstein/video-clips.html" class="home-btn">← Back to Video Clips</a>
+      <a href="/epstein/podcasts.html" class="home-btn">← Back to Podcasts</a>
     </div>
   </div>
   <script>
@@ -253,12 +235,12 @@
       init();
     });
 
-    // Load video clips archive links
-    async function loadVideoClipsArchiveLinks() {
+    // Load podcast archive links
+    async function loadPodcastArchiveLinks() {
       try {
-        const response = await fetch('video-clips-links.txt');
+        const response = await fetch('podcasts-links.txt');
         if (!response.ok) {
-          console.error('Failed to load video-clips-links.txt:', response.status);
+          console.error('Failed to load podcasts-links.txt:', response.status);
           return;
         }
         const text = await response.text();
@@ -270,8 +252,8 @@
           }
           return null;
         }).filter(link => link !== null);
-        const archiveLinks = links.slice(36); // Start from 37th link
-        const grid = document.getElementById('video-clips-archive-links');
+        const archiveLinks = links.slice(18); // Start from 19th link
+        const grid = document.getElementById('podcasts-archive-links');
         if (grid && archiveLinks.length > 0) {
           grid.innerHTML = archiveLinks.map(link => `
             <li class="headline">
@@ -279,15 +261,15 @@
             </li>
           `).join('');
         } else if (grid) {
-          grid.innerHTML = '<li class="headline">No archived video clips available.</li>';
+          grid.innerHTML = '<li class="headline">No archived podcasts available.</li>';
         }
-        console.log(`Showing ${archiveLinks.length} archived video clip links`);
+        console.log(`Showing ${archiveLinks.length} archived podcast links`);
       } catch (error) {
-        console.error('Error loading video clips archive links:', error);
+        console.error('Error loading podcast archive links:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadVideoClipsArchiveLinks);
+    document.addEventListener('DOMContentLoaded', loadPodcastArchiveLinks);
   </script>
 </body>
 </html>
