@@ -103,24 +103,6 @@
     .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
     .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
     .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
-    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
-    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
-    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
-    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
-    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
-    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
-    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
-    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
-    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
-    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
-    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
-    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
-    .headlines .headline:nth-child(31) { animation-delay: 6.0s; }
-    .headlines .headline:nth-child(32) { animation-delay: 6.2s; }
-    .headlines .headline:nth-child(33) { animation-delay: 6.4s; }
-    .headlines .headline:nth-child(34) { animation-delay: 6.6s; }
-    .headlines .headline:nth-child(35) { animation-delay: 6.8s; }
-    .headlines .headline:nth-child(36) { animation-delay: 7.0s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -291,7 +273,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 36);
+        const displayLinks = links.slice(0, 18); // Display first 18 links
         const grid = document.getElementById('book-movie-recs-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -323,7 +305,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 36);
+        const currentLinks = links.slice(0, 18); // Random from first 18 links
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
