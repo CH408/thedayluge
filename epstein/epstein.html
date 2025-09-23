@@ -507,7 +507,7 @@
     .spoke-2{ left:280px; top:65px; font-size:13px; }
     .spoke-3{ left:280px; top:247px; font-size:11px; }
     .spoke-4{ left:152px; top:297px; font-size:11px; }
-    .spoke-5{ left:32px; top:247px; font-size:11px; }
+    .spoke-5{ left:32px; top:247px; font-size:13px; }
     .spoke-6{ left:32px; top:65px; font-size:13px; }
     .header h1{
       font-size:28px;
@@ -538,7 +538,7 @@
     .spoke-2{ left:235px; top:55px; font-size:12px; }
     .spoke-3{ left:235px; top:200px; font-size:10px; }
     .spoke-4{ left:127px; top:243px; font-size:10px; }
-    .spoke-5{ left:27px; top:200px; font-size:10px; }
+    .spoke-5{ left:27px; top:200px; font-size:12px; }
     .spoke-6{ left:27px; top:55px; font-size:12px; }
     .header h1{
       font-size:24px;
@@ -702,10 +702,59 @@ function goToEpsteinNews() {
 }
 
 function goToRandomEpstein() {
-  console.log('Going to random Epstein content');
-  const categories = ['podcasts', 'video-clips', 'articles-longform', 'primary-sources', 'book-movie-recs', 'circle-6'];
-  const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-  window.location.href = `${randomCategory}.html`;
+  console.log('Going to random Epstein content from all categories');
+  
+  // Array of all the link files from the six spokes
+  const linkFiles = [
+    'podcasts-links.txt',
+    'video-clips-links.txt', 
+    'articles-longform-links.txt',
+    'primary-sources-links.txt',
+    'book-movie-recs-links.txt',
+    'circle-6-links.txt'
+  ];
+  
+  // Pick a random file
+  const randomFile = linkFiles[Math.floor(Math.random() * linkFiles.length)];
+  
+  // Fetch and parse the random file
+  fetch(randomFile)
+    .then(response => {
+      if (!response.ok) {
+        console.log(`Could not load ${randomFile}, trying another...`);
+        // If one file fails, try a different random one
+        const otherFiles = linkFiles.filter(file => file !== randomFile);
+        const backupFile = otherFiles[Math.floor(Math.random() * otherFiles.length)];
+        return fetch(backupFile);
+      }
+      return response;
+    })
+    .then(response => response.text())
+    .then(text => {
+      const lines = text.split('\n').filter(line => line.trim());
+      const links = lines.map(line => {
+        const parts = line.split('|');
+        if (parts.length >= 2) {
+          return parts[1].trim(); // Get the URL part
+        }
+        return null;
+      }).filter(link => link !== null);
+      
+      // Take from the first 36 displayed links (not archive content)
+      const displayedLinks = links.slice(0, 36);
+      
+      if (displayedLinks.length > 0) {
+        const randomLink = displayedLinks[Math.floor(Math.random() * displayedLinks.length)];
+        window.open(randomLink, '_blank');
+      } else {
+        console.log('No links found in any category files');
+        alert('No content available. Please try again later.');
+      }
+    })
+    .catch(error => {
+      console.error('Error loading random content:', error);
+      alert('Could not load random content. Please try again later.');
+    });
 }
 </script>
 </body>
