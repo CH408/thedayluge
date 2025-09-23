@@ -628,7 +628,7 @@
     <div class="spoke spoke-5" onclick="goToConspiracyTopic('jfk')">JFK</div>
     <div class="spoke spoke-6" onclick="goToConspiracyTopic('las-vegas-shooting')">Las Vegas Shooting</div>
     <div class="spoke spoke-7" onclick="goToConspiracyTopic('covid')">Covid</div>
-    <div class="spoke spoke-8" onclick="goToConspiracyTopic('epsteins-web')">Epstein's Web</div>
+    <div class="spoke spoke-8" onclick="window.location.href='/epstein/epstein.html'">Epstein's Web</div>
   </div>
 
   <!-- Random button -->
@@ -702,13 +702,13 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.height = window.innerHeight;
   });
 
-  // Navigation functions (placeholders)
+  // Navigation functions
   window.goToConspiracyTopic = function(topic) {
     window.location.href = `/conspiracy/${topic}`;
   };
 
   window.goToRandomConspiracy = function() {
-    const topics = ['moon-landing', 'ufos-aliens', 'ancient-mysteries', 'the-clintons', 'jfk', 'las-vegas-shooting', 'covid', 'epsteins-web'];
+    const topics = ['moon-landing', 'ufos-aliens', 'ancient-mysteries', 'the-clintons', 'jfk', 'las-vegas-shooting', 'covid'];
     const randomTopic = topics[Math.floor(Math.random() * topics.length)];
     window.location.href = `/conspiracy/${randomTopic}`;
   };
