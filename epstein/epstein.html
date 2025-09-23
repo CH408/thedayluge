@@ -740,8 +740,8 @@ function goToRandomEpstein() {
         return null;
       }).filter(link => link !== null);
       
-      // Take from the first 36 displayed links (not archive content)
-      const displayedLinks = links.slice(0, 36);
+      // Take from the first 18 displayed links (not archive content)
+      const displayedLinks = links.slice(0, 18);
       
       if (displayedLinks.length > 0) {
         const randomLink = displayedLinks[Math.floor(Math.random() * displayedLinks.length)];
