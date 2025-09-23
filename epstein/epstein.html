@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Conspiracy Corner - THE DAYLUGE</title>
+<title>Epstein's Web - THE DAYLUGE</title>
 
 <!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
@@ -183,7 +183,7 @@
     z-index:15;
     text-align:center;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
-    font-size:18px;
+    font-size:16px;
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:0.5px;
@@ -210,7 +210,7 @@
     box-shadow:0 0 40px rgba(0,255,127,0.8), 0 6px 16px rgba(0,0,0,0.2);
   }
 
-  /* Conspiracy spokes */
+  /* Epstein content spokes */
   .spoke{
     position:absolute;
     width:90px;
@@ -255,46 +255,36 @@
     background:var(--dark-gray);
   }
 
-  /* Position 8 conspiracy topics around the nucleus (45° intervals) with maximized font sizes */
-  .spoke-1{ /* Moon Landing - 0° */
-    left:390px;
-    top:205px;
-    font-size:15px; /* Increased for "Moon Landing" */
-  }
-  .spoke-2{ /* UFOs & Aliens - 45° */
-    left:336px;
-    top:336px;
-    font-size:14px; /* Fits "UFOs & Aliens" */
-  }
-  .spoke-3{ /* Ancient Mysteries - 90° */
-    left:205px;
-    bottom:20px;
-    font-size:12px; /* Increased for "Ancient Mysteries" */
-  }
-  .spoke-4{ /* The Clintons - 135° */
-    left:74px;
-    bottom:64px;
-    font-size:14px; /* Increased for "The Clintons" */
-  }
-  .spoke-5{ /* JFK - 180° */
-    left:20px;
-    top:205px;
-    font-size:14px; /* Previously increased for "JFK" */
-  }
-  .spoke-6{ /* Las Vegas Shooting - 225° */
-    left:74px;
-    top:74px;
-    font-size:12px; /* Increased for "Las Vegas Shooting" */
-  }
-  .spoke-7{ /* Covid - 270° */
+  /* Position 6 content categories around the nucleus - aligned with energy beams */
+  .spoke-1{ /* Podcasts - 270° (12 o'clock) */
     left:205px;
     top:20px;
-    font-size:18px; /* Larger for short "Covid" */
+    font-size:16px;
   }
-  .spoke-8{ /* Epstein - 315° */
-    left:336px;
-    top:74px;
-    font-size:15px; /* Fits "Epstein's Web" */
+  .spoke-2{ /* Video Clips - 330° (2 o'clock) */
+    left:370px;
+    top:85px;
+    font-size:14px;
+  }
+  .spoke-3{ /* Articles Longform - 30° (4 o'clock) */
+    left:370px;
+    top:325px;
+    font-size:12px;
+  }
+  .spoke-4{ /* Primary Sources - 90° (6 o'clock) */
+    left:205px;
+    top:390px;
+    font-size:12px;
+  }
+  .spoke-5{ /* Book/Movie Recs - 150° (8 o'clock) */
+    left:40px;
+    top:325px;
+    font-size:9px;
+  }
+  .spoke-6{ /* Circle 6 (placeholder) - 210° (10 o'clock) */
+    left:40px;
+    top:85px;
+    font-size:15px;
   }
 
   /* Enhanced Energy beams in green */
@@ -311,7 +301,7 @@
       );
     height: 4px;
     transform-origin: left center;
-    z-index: 1;
+    z-index: -1;
     border-radius: 2px;
     overflow: hidden;
     animation: organic-pulse 4s ease-in-out infinite;
@@ -417,13 +407,11 @@
   }
 
   .line-1 { animation-delay: 0s; }
-  .line-2 { animation-delay: 0.5s; }
-  .line-3 { animation-delay: 1s; }
-  .line-4 { animation-delay: 1.5s; }
-  .line-5 { animation-delay: 2s; }
-  .line-6 { animation-delay: 2.5s; }
-  .line-7 { animation-delay: 3s; }
-  .line-8 { animation-delay: 3.5s; }
+  .line-2 { animation-delay: 1s; }
+  .line-3 { animation-delay: 2s; }
+  .line-4 { animation-delay: 3s; }
+  .line-5 { animation-delay: 4s; }
+  .line-6 { animation-delay: 5s; }
 
   .wheel-container:hover .wheel-line {
     animation: organic-pulse 2s ease-in-out infinite;
@@ -437,14 +425,12 @@
     animation: traveling-pulse-reverse 2s ease-in-out infinite 0.5s;
   }
 
-  .line-1{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(0deg); }
-  .line-2{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(45deg); }
-  .line-3{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(90deg); }
-  .line-4{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(135deg); }
-  .line-5{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(180deg); }
-  .line-6{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(225deg); }
-  .line-7{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(270deg); }
-  .line-8{ top:50%; left:50%; width:140px; transform:translate(0, -50%) rotate(315deg); }
+  .line-1{ top:50%; left:50%; width:195px; transform:translate(0, -50%) rotate(270deg); }
+  .line-2{ top:50%; left:50%; width:195px; transform:translate(0, -50%) rotate(330deg); }
+  .line-3{ top:50%; left:50%; width:195px; transform:translate(0, -50%) rotate(30deg); }
+  .line-4{ top:50%; left:50%; width:195px; transform:translate(0, -50%) rotate(90deg); }
+  .line-5{ top:50%; left:50%; width:195px; transform:translate(0, -50%) rotate(150deg); }
+  .line-6{ top:50%; left:50%; width:195px; transform:translate(0, -50%) rotate(210deg); }
 
   /* Random button without green glow */
   .random-button {
@@ -469,28 +455,34 @@
     background: var(--dark-gray);
   }
 
-  /* Home button in green matrix style */
-  .home-btn {
+  /* Navigation buttons */
+  .nav-buttons {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 20;
+  }
+
+  .nav-btn {
     background: var(--black-bg);
     color: var(--crt-green);
     border: 2px solid var(--crt-green);
-    padding: 10px 20px;
+    padding: 8px 16px;
     border-radius: 25px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
     transition: all 0.3s ease;
     text-shadow: 0 0 5px var(--crt-green);
     box-shadow: 0 0 10px rgba(0,255,127,0.3);
-    z-index: 20;
   }
 
-  .home-btn:hover {
+  .nav-btn:hover {
     background: var(--dark-gray);
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(0,255,127,0.6);
@@ -505,25 +497,23 @@
     .wheel-center{
       width:120px;
       height:120px;
-      font-size:14px;
+      font-size:13px;
     }
     .spoke{
       width:75px;
       height:75px;
     }
-    .spoke-1{ left:295px; top:150px; font-size:13px; }
-    .spoke-2{ left:255px; top:255px; font-size:12px; }
-    .spoke-3{ left:150px; bottom:15px; font-size:11px; }
-    .spoke-4{ left:45px; bottom:50px; font-size:12px; }
-    .spoke-5{ left:15px; top:150px; font-size:12px; }
-    .spoke-6{ left:45px; top:50px; font-size:11px; }
-    .spoke-7{ left:150px; top:15px; font-size:15px; }
-    .spoke-8{ left:255px; top:50px; font-size:13px; }
+    .spoke-1{ left:152px; top:15px; font-size:14px; }
+    .spoke-2{ left:280px; top:65px; font-size:13px; }
+    .spoke-3{ left:280px; top:247px; font-size:11px; }
+    .spoke-4{ left:152px; top:297px; font-size:11px; }
+    .spoke-5{ left:32px; top:247px; font-size:8px; }
+    .spoke-6{ left:32px; top:65px; font-size:13px; }
     .header h1{
       font-size:28px;
     }
-    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width:105px;
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6{
+      width:148px;
     }
     .orbital-ring-1{ width:240px; height:240px; }
     .orbital-ring-2{ width:300px; height:300px; }
@@ -538,25 +528,23 @@
     .wheel-center{
       width:100px;
       height:100px;
-      font-size:12px;
+      font-size:11px;
     }
     .spoke{
       width:65px;
       height:65px;
     }
-    .spoke-1{ left:245px; top:127.5px; font-size:12px; }
-    .spoke-2{ left:215px; top:215px; font-size:11px; }
-    .spoke-3{ left:127.5px; bottom:12.5px; font-size:10px; }
-    .spoke-4{ left:40px; bottom:40px; font-size:11px; }
-    .spoke-5{ left:12.5px; top:127.5px; font-size:11px; }
-    .spoke-6{ left:40px; top:40px; font-size:10px; }
-    .spoke-7{ left:127.5px; top:12.5px; font-size:13px; }
-    .spoke-8{ left:215px; top:40px; font-size:11px; }
+    .spoke-1{ left:127px; top:12px; font-size:13px; }
+    .spoke-2{ left:235px; top:55px; font-size:12px; }
+    .spoke-3{ left:235px; top:200px; font-size:10px; }
+    .spoke-4{ left:127px; top:243px; font-size:10px; }
+    .spoke-5{ left:27px; top:200px; font-size:7px; }
+    .spoke-6{ left:27px; top:55px; font-size:12px; }
     .header h1{
       font-size:24px;
     }
-    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width:85px;
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6{
+      width:125px;
     }
   }
 
@@ -588,11 +576,14 @@
 <body>
   <!-- Header -->
   <div class="header">
-    <h1>CONSPIRACY CORNER</h1>
+    <h1>EPSTEIN'S WEB</h1>
   </div>
 
-  <!-- Home Button -->
-  <a href="/" class="home-btn">← Home</a>
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <a href="/conspiracy-corner.html" class="nav-btn">← Conspiracy</a>
+    <a href="/" class="nav-btn">← Home</a>
+  </div>
 
   <!-- Particle Canvas -->
   <canvas id="particle-canvas"></canvas>
@@ -611,29 +602,25 @@
     <div class="wheel-line line-4"></div>
     <div class="wheel-line line-5"></div>
     <div class="wheel-line line-6"></div>
-    <div class="wheel-line line-7"></div>
-    <div class="wheel-line line-8"></div>
 
     <!-- Nucleus -->
-    <div class="wheel-center" onclick="goToRandomConspiracy()">
-      TRENDING
-      CONSPIRACIES
+    <div class="wheel-center" onclick="goToEpsteinNews()">
+      EPSTEIN
+      NEWS
     </div>
 
-    <!-- Conspiracy topic spokes -->
-    <div class="spoke spoke-1" onclick="goToConspiracyTopic('moon-landing')">Moon Landing</div>
-    <div class="spoke spoke-2" onclick="goToConspiracyTopic('ufos-aliens')">UFOs & Aliens</div>
-    <div class="spoke spoke-3" onclick="goToConspiracyTopic('ancient-mysteries')">Ancient Mysteries</div>
-    <div class="spoke spoke-4" onclick="goToConspiracyTopic('the-clintons')">The Clintons</div>
-    <div class="spoke spoke-5" onclick="goToConspiracyTopic('jfk')">JFK</div>
-    <div class="spoke spoke-6" onclick="goToConspiracyTopic('las-vegas-shooting')">Las Vegas Shooting</div>
-    <div class="spoke spoke-7" onclick="goToConspiracyTopic('covid')">Covid</div>
-    <div class="spoke spoke-8" onclick="window.location.href='/epstein/epstein.html'">Epstein's Web</div>
+    <!-- Content category spokes -->
+    <div class="spoke spoke-1" onclick="goToEpsteinCategory('podcasts')">Podcasts</div>
+    <div class="spoke spoke-2" onclick="goToEpsteinCategory('video-clips')">Video Clips</div>
+    <div class="spoke spoke-3" onclick="goToEpsteinCategory('articles-longform')">Articles Longform</div>
+    <div class="spoke spoke-4" onclick="goToEpsteinCategory('primary-sources')">Primary Sources</div>
+    <div class="spoke spoke-5" onclick="goToEpsteinCategory('book-movie-recs')">Book & Movie Recs</div>
+    <div class="spoke spoke-6" onclick="goToEpsteinCategory('circle-6')">Circle 6</div>
   </div>
 
   <!-- Random button -->
-  <button class="random-button" onclick="goToRandomConspiracy()">
-    CONSPIRACY NEWS
+  <button class="random-button" onclick="goToRandomEpstein()">
+    SURPRISE ME
   </button>
 
 <script>
@@ -701,18 +688,25 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
-
-  // Navigation functions
-  window.goToConspiracyTopic = function(topic) {
-    window.location.href = `/conspiracy/${topic}`;
-  };
-
-  window.goToRandomConspiracy = function() {
-    const topics = ['moon-landing', 'ufos-aliens', 'ancient-mysteries', 'the-clintons', 'jfk', 'las-vegas-shooting', 'covid'];
-    const randomTopic = topics[Math.floor(Math.random() * topics.length)];
-    window.location.href = `/conspiracy/${randomTopic}`;
-  };
 });
+
+// Navigation functions
+function goToEpsteinCategory(category) {
+  console.log('Navigating to Epstein category:', category);
+  window.location.href = `${category}.html`;
+}
+
+function goToEpsteinNews() {
+  console.log('Going to Epstein News');
+  window.location.href = 'epstein-news.html';
+}
+
+function goToRandomEpstein() {
+  console.log('Going to random Epstein content');
+  const categories = ['podcasts', 'video-clips', 'articles-longform', 'primary-sources', 'book-movie-recs', 'circle-6'];
+  const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+  window.location.href = `${randomCategory}.html`;
+}
 </script>
 </body>
 </html>
