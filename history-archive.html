@@ -61,7 +61,7 @@
       75% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .headlines { list-style: none; }
+    .headlines { list-style: none; max-width: 800px; }
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
@@ -69,6 +69,34 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
+    }
+    /* Fast animation delays - same as Arts & Literature */
+    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
+    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
+    .headlines .headline:nth-child(7) { animation-delay: 0.35s; }
+    .headlines .headline:nth-child(8) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 0.45s; }
+    .headlines .headline:nth-child(10) { animation-delay: 0.5s; }
+    .headlines .headline:nth-child(11) { animation-delay: 0.55s; }
+    .headlines .headline:nth-child(12) { animation-delay: 0.6s; }
+    .headlines .headline:nth-child(13) { animation-delay: 0.65s; }
+    .headlines .headline:nth-child(14) { animation-delay: 0.7s; }
+    .headlines .headline:nth-child(15) { animation-delay: 0.75s; }
+    .headlines .headline:nth-child(16) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(17) { animation-delay: 0.85s; }
+    .headlines .headline:nth-child(18) { animation-delay: 0.9s; }
+    .headlines .headline:nth-child(19) { animation-delay: 0.95s; }
+    .headlines .headline:nth-child(20) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(21) { animation-delay: 1.05s; }
+    .headlines .headline:nth-child(22) { animation-delay: 1.1s; }
+    .headlines .headline:nth-child(23) { animation-delay: 1.15s; }
+    .headlines .headline:nth-child(24) { animation-delay: 1.2s; }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
     }
     .headline a {
       color: inherit;
@@ -78,7 +106,6 @@
     }
     .headline a:hover {
       color: var(--gold-light);
-      text-decoration: underline;
       text-shadow: 0 0 10px var(--gold-light);
     }
     .back-btn {
@@ -98,7 +125,7 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .back-btn:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(212,175,55,0.1);
       box-shadow: 0 0 15px rgba(212,175,55,0.3);
       transform: scale(1.05);
     }
@@ -119,7 +146,7 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .home-btn:hover {
-      background: rgba(255,255,255,0.1);
+      background: rgba(212,175,55,0.1);
       box-shadow: 0 0 15px rgba(212,175,55,0.3);
       transform: scale(1.05);
     }
@@ -144,6 +171,7 @@
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--gold);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      cursor: pointer;
     }
     .random-button:hover {
       background: rgba(255,255,255,0.1);
@@ -153,7 +181,11 @@
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .back-btn, .home-btn, .random-button { font-size: 10px; padding: 6px 12px; }
+      .back-btn, .home-btn, .random-button { 
+        font-family: 'Special Elite', 'Courier New', Courier, monospace;
+        font-size: 10px; 
+        padding: 6px 12px; 
+      }
     }
   </style>
 </head>
@@ -162,10 +194,11 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title">History Archive</div>
+    <div class="archive-title">History Archive - Page 1</div>
     <ul class="headlines" id="archive-links"></ul>
     <div class="button-container">
       <button class="random-button" onclick="goToRandomHistory()">⚛️ SURPRISE ME!</button>
+      <a href="/history-archive-2.html" class="random-button">Page 2 →</a>
     </div>
   </div>
   <script>
@@ -176,6 +209,7 @@
     canvas.height = window.innerHeight;
     const particlesArray = [];
     const numberOfParticles = 50;
+    
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -186,12 +220,14 @@
         this.color = ['#d4af37', '#b8860b', '#f0d064', '#c69b2f', '#e6c14d', '#a67c00'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
+      
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
         if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
         if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
+      
       draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
@@ -199,6 +235,7 @@
         ctx.fill();
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
+        
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
@@ -215,12 +252,14 @@
         }
       }
     }
+    
     function init() {
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
     }
+    
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (const particle of particlesArray) {
@@ -229,47 +268,58 @@
       }
       requestAnimationFrame(animate);
     }
+    
     init();
     animate();
+    
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
     });
 
-    // Load archive links from the text file
+    // Load archive links from the text file (links 25-48 for page 1)
     async function loadArchiveLinks() {
       try {
+        console.log('Fetching history-links.txt for archive');
         const response = await fetch('history-links.txt');
+        console.log('Fetch response:', response);
         if (!response.ok) {
           console.error(`Failed to load history-links.txt: ${response.status}`);
           return;
         }
         const text = await response.text();
+        console.log('Fetched text:', text);
         const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines);
         const links = lines.map(line => {
           const [title, url] = line.split('|').map(s => s.trim());
           return { title, url };
         }).filter(link => link.title && link.url);
+        console.log('Processed links:', links);
 
-        // Get the links that are not displayed on the main page (after the 24th)
-        const archivedLinks = links.slice(24);
+        // Take links 25-48 (archive page 1)
+        const archivedLinks = links.length > 24 ? links.slice(24, 48) : [];
+        console.log('Archive page 1 links (25-48):', archivedLinks);
+
         const grid = document.getElementById('archive-links');
         if (grid) {
           grid.innerHTML = archivedLinks.map((link, index) => `
-            <li class="headline" style="animation-delay: ${index * 0.05}s;">
+            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          console.log('Rendered archive links to DOM:', archivedLinks);
         }
       } catch (error) {
         console.error('Error loading archive links:', error);
       }
     }
 
-    // Random history article from the archive
+    // Random history article from archive page 1
     async function goToRandomHistory() {
       try {
+        console.log('Fetching history-links.txt for random selection');
         const response = await fetch('history-links.txt');
         if (!response.ok) {
           console.log('Could not load history-links.txt for random selection');
@@ -284,11 +334,10 @@
           }
           return null;
         }).filter(link => link !== null);
-        
-        // Use the archived links for the random selection
-        const archiveLinks = links.slice(24);
+        const archiveLinks = links.slice(24, 48); // Archive page 1 links (25-48)
         if (archiveLinks.length > 0) {
           const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
+          console.log('Opening random archive link:', randomLink);
           window.open(randomLink, '_blank');
         } else {
           console.log('No archive links available for random selection');
