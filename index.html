@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>THE DAYLUGE</title>
 
-<!-- Vintage typewriter font -->
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
@@ -14,8 +13,8 @@
   
   :root{
     /* Atomic color palette */
-    --red:#cc0000; 
-    --orange:#ff8800; 
+    --red:#cc0000;  
+    --orange:#ff8800;  
     --green:#00dd55;
     --blue:#1a1a80;
     --light-blue:#33ddff;
@@ -26,7 +25,7 @@
     --dark-green:#006400;
     --turquoise:#40E0D0;
     --bright-blue:#00b7eb;
-    --ink:#111; 
+    --ink:#111;  
     --rule:#bfbfbf;
     --maxw:1400px;
     --bright-purple-glow: #cc88ff;
@@ -185,48 +184,48 @@
     z-index:10;
   }
   .header h1{
-    text-transform:uppercase; 
-    letter-spacing:.5px; 
-    font-size:42px; 
+    text-transform:uppercase;  
+    letter-spacing:.5px;  
+    font-size:42px;  
     margin-bottom:8px;
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     animation:title-pulse 8s ease-in-out infinite;
   }
 
   @keyframes title-pulse {
-    0% { 
+    0% {  
       color: var(--bright-purple-glow);
       text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    12.5% { 
+    12.5% {  
       color: #8080ff;
       text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    25% { 
+    25% {  
       color: var(--light-cyan-glow);
       text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    37.5% { 
+    37.5% {  
       color: #6688cc;
       text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    50% { 
+    50% {  
       color: var(--pink);
       text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    62.5% { 
+    62.5% {  
       color: #cc4499;
       text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    75% { 
+    75% {  
       color: var(--bright-blue);
       text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    87.5% { 
+    87.5% {  
       color: #6688cc;
       text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
-    100% { 
+    100% {  
       color: var(--bright-purple-glow);
       text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
@@ -288,11 +287,11 @@
   }
 
   @keyframes pulse {
-    0%, 100% { 
+    0%, 100% {  
       box-shadow:0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
       border-color:#ffdd00;
     }
-    50% { 
+    50% {  
       box-shadow:0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
       border-color:#ffff00;
       transform:translate(-50%, -50%) scale(1.02);
@@ -329,11 +328,11 @@
   }
 
   @keyframes electron-pulse {
-    0%, 100% { 
+    0%, 100% {  
       box-shadow:0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
       border-color:#ffdd00;
     }
-    50% { 
+    50% {  
       box-shadow:0 0 40px rgba(255,221,0,0.8), 0 4px 15px rgba(255,221,0,0.3);
       border-color:#ffff00;
     }
@@ -348,7 +347,7 @@
 
   .spoke-7:hover{
     transform:scale(1.15);
-    box-shadow:0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
+    box-shadow:0 0 25px rgba(0,255,0,0.6), 0 4-box-shadow:0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
     z-index:10;
     animation-play-state:paused;
     border-color:rgba(0,255,0,0.8) !important;
@@ -425,13 +424,13 @@
 
   .wheel-line {
     position: absolute;
-    background: 
+    background:  
       radial-gradient(ellipse 15px 8px at center, rgba(255,255,255,0.9) 0%, transparent 70%),
-      linear-gradient(90deg, 
-        transparent 0%, 
-        var(--light-cyan-glow) 20%, 
-        rgba(255,255,255,0.8) 50%, 
-        var(--light-cyan-glow) 80%, 
+      linear-gradient(90deg,  
+        transparent 0%,  
+        var(--light-cyan-glow) 20%,  
+        rgba(255,255,255,0.8) 50%,  
+        var(--light-cyan-glow) 80%,  
         transparent 100%
       );
     height: 4px;
@@ -449,10 +448,10 @@
     left: 0;
     right: 0;
     bottom: -1px;
-    background: 
-      radial-gradient(ellipse 30px 6px at var(--pulse-position, 0%), 
-        rgba(255,255,255,0.9) 0%, 
-        var(--bright-purple-glow) 30%, 
+    background:  
+      radial-gradient(ellipse 30px 6px at var(--pulse-position, 0%),  
+        rgba(255,255,255,0.9) 0%,  
+        var(--bright-purple-glow) 30%,  
         transparent 70%
       );
     border-radius: 3px;
@@ -466,9 +465,9 @@
     left: 0;
     right: 0;
     bottom: -0.5px;
-    background: 
-      radial-gradient(ellipse 20px 4px at var(--pulse-position-reverse, 100%), 
-        rgba(51,221,255,0.8) 0%, 
+    background:  
+      radial-gradient(ellipse 20px 4px at var(--pulse-position-reverse, 100%),  
+        rgba(51,221,255,0.8) 0%,  
         transparent 60%
       );
     border-radius: 2px;
@@ -476,27 +475,27 @@
   }
 
   @keyframes organic-pulse {
-    0% { 
+    0% {  
       opacity: 0.6;
       box-shadow: 0 0 8px var(--light-cyan-glow);
       filter: brightness(0.8);
     }
-    25% { 
+    25% {  
       opacity: 0.9;
       box-shadow: 0 0 15px var(--light-cyan-glow), 0 0 25px var(--bright-purple-glow);
       filter: brightness(1.2);
     }
-    50% { 
+    50% {  
       opacity: 1;
       box-shadow: 0 0 20px var(--bright-purple-glow), 0 0 35px var(--light-cyan-glow);
       filter: brightness(1.4);
     }
-    75% { 
+    75% {  
       opacity: 0.9;
       box-shadow: 0 0 15px var(--light-cyan-glow), 0 0 25px var(--bright-purple-glow);
       filter: brightness(1.2);
     }
-    100% { 
+    100% {  
       opacity: 0.6;
       box-shadow: 0 0 8px var(--light-cyan-glow);
       filter: brightness(0.8);
@@ -504,38 +503,38 @@
   }
 
   @keyframes traveling-pulse-forward {
-    0% { 
+    0% {  
       --pulse-position: 0%;
       opacity: 0;
     }
-    10% { 
+    10% {  
       --pulse-position: 10%;
       opacity: 1;
     }
-    90% { 
+    90% {  
       --pulse-position: 90%;
       opacity: 1;
     }
-    100% { 
+    100% {  
       --pulse-position: 100%;
       opacity: 0;
     }
   }
 
   @keyframes traveling-pulse-reverse {
-    0% { 
+    0% {  
       --pulse-position-reverse: 100%;
       opacity: 0;
     }
-    10% { 
+    10% {  
       --pulse-position-reverse: 90%;
       opacity: 0.8;
     }
-    90% { 
+    90% {  
       --pulse-position-reverse: 10%;
       opacity: 0.8;
     }
-    100% { 
+    100% {  
       --pulse-position-reverse: 0%;
       opacity: 0;
     }
@@ -770,39 +769,39 @@
       border-radius: 31px;
     }
     @keyframes title-pulse {
-      0% { 
+      0% {  
         color: var(--bright-purple-glow);
         text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      12.5% { 
+      12.5% {  
         color: #8080ff;
         text-shadow: 0 0 11px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      25% { 
+      25% {  
         color: var(--light-cyan-glow);
         text-shadow: 0 0 12px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      37.5% { 
+      37.5% {  
         color: #6688cc;
         text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      50% { 
+      50% {  
         color: var(--pink);
         text-shadow: 0 0 14px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      62.5% { 
+      62.5% {  
         color: #cc4499;
         text-shadow: 0 0 13px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      75% { 
+      75% {  
         color: var(--bright-blue);
         text-shadow: 0 0 12px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      87.5% { 
+      87.5% {  
         color: #6688cc;
         text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      100% { 
+      100% {  
         color: var(--bright-purple-glow);
         text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
@@ -900,39 +899,39 @@
       border-radius: 31px;
     }
     @keyframes title-pulse {
-      0% { 
+      0% {  
         color: var(--bright-purple-glow);
         text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      12.5% { 
+      12.5% {  
         color: #8080ff;
         text-shadow: 0 0 9px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      25% { 
+      25% {  
         color: var(--light-cyan-glow);
         text-shadow: 0 0 10px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      37.5% { 
+      37.5% {  
         color: #6688cc;
         text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      50% { 
+      50% {  
         color: var(--pink);
         text-shadow: 0 0 12px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      62.5% { 
+      62.5% {  
         color: #cc4499;
         text-shadow: 0 0 11px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      75% { 
+      75% {  
         color: var(--bright-blue);
         text-shadow: 0 0 10px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
       }
-      87.5% { 
+      87.5% {  
         color: #6688cc;
         text-shadow: 0 0 9px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
       }
-      100% { 
+      100% {  
         color: var(--bright-purple-glow);
         text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
@@ -1074,10 +1073,9 @@
       Nature
       &
       Technology</div>
-    <div class="spoke spoke-5" onclick="goToCategory('the-arts-culture-philosophy')">The Arts,
-      Culture
+    <div class="spoke spoke-5" onclick="goToCategory('arts-literature')">Arts
       &
-      Philosophy</div>
+      Literature</div>
     <div class="spoke spoke-6" onclick="goToCategory('wisdom-philosophy')">Wisdom
       &
       Philosophy</div>
@@ -1152,173 +1150,4 @@ document.addEventListener('DOMContentLoaded', function() {
   const numberOfParticles = 100;
 
   class Particle {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 1.5 + 1.5; // Larger stars
-      this.depth = Math.random(); // Depth factor (0 to 1)
-      this.speedX = (Math.random() * 1.5 - 0.75) * (1 - this.depth * 0.5); // Slower for deeper particles
-      this.speedY = (Math.random() * 1.5 - 0.75) * (1 - this.depth * 0.5);
-      this.colors = ['#33ddff', '#cc88ff', '#ffffff', '#aaccff'];
-      this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
-      this.twinkleSpeed = Math.random() * 0.02 + 0.01; // Random twinkle speed
-      this.twinklePhase = Math.random() * Math.PI * 2; // Random phase
-      this.opacity = 1 - this.depth * 0.3; // Brighter base opacity
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-      if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-      this.opacity = (0.7 + 0.3 * Math.sin(this.twinklePhase)) * (1 - this.depth * 0.3); // Brighter twinkle
-      this.twinklePhase += this.twinkleSpeed;
-    }
-    draw() {
-      ctx.fillStyle = this.color;
-      ctx.globalAlpha = this.opacity;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.shadowBlur = 10; // Increased glow
-      ctx.shadowColor = this.color;
-      ctx.globalAlpha = 1;
-    }
-  }
-
-  function init() {
-    particlesArray.length = 0;
-    for (let i = 0; i < numberOfParticles; i++) {
-      particlesArray.push(new Particle());
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particlesArray.length; i++) {
-      particlesArray[i].update();
-      particlesArray[i].draw();
-    }
-    requestAnimationFrame(animate);
-  }
-
-  // Initialize comets
-  const cometContainer = document.getElementById('comet-container');
-  for (let i = 0; i < 3; i++) {
-    const comet = document.createElement('div');
-    comet.classList.add('comet');
-    cometContainer.appendChild(comet);
-  }
-
-  // Initialize asteroids
-  const asteroidContainer = document.getElementById('asteroid-container');
-  for (let i = 0; i < 2; i++) {
-    const asteroid = document.createElement('div');
-    asteroid.classList.add('asteroid');
-    asteroidContainer.appendChild(asteroid);
-  }
-
-  init();
-  animate();
-
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init();
-  });
-});
-
-function goToNewsHub() {
-  console.log('Navigating to News Hub');
-  window.location.href = '/news.html';
-}
-
-function goToCategory(category) {
-  console.log('Attempting to navigate to category:', category);
-  const categoryPages = {
-    'politics': '/politics.html',
-    'markets-economics': '/markets-economics.html',
-    'sports-leisure': '/sports-leisure.html',
-    'science-nature-technology': '/science-nature-technology.html',
-    'the-arts-culture-philosophy': '/the-arts-culture-philosophy.html',
-    'wisdom-philosophy': '/wisdom-philosophy.html',
-    'conspiracy-corner': '/conspiracy-corner.html',
-    'history': '/history.html'
-  };
-  
-  if (categoryPages[category]) {
-    console.log('Navigating to:', categoryPages[category]);
-    window.location.href = categoryPages[category];
-  } else {
-    console.error('Category not found:', category);
-    alert('Category page not found. Please try again later.');
-  }
-}
-
-async function goToRandomArticle() {
-  console.log('Navigating to Random Article');
-  try {
-    const response = await fetch('/surprise-me-links.txt');
-    if (response.ok) {
-      const text = await response.text();
-      const lines = text.split('\n').filter(line => line.trim());
-      const links = lines.map(line => {
-        const parts = line.split('|');
-        if (parts.length >= 2) {
-          return { title: parts[0].trim(), url: parts[1].trim() };
-        }
-        return null;
-      }).filter(link => link !== null);
-      const currentLinks = links.slice(0, 18);
-      if (currentLinks.length > 0) {
-        const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-        console.log('Opening random link:', randomLink.url);
-        window.open(randomLink.url, '_blank');
-      } else {
-        console.log('No links available for random selection');
-        alert('No articles available to display. Please try again later.');
-      }
-    } else {
-      console.log('Failed to fetch surprise-me-links.txt:', response.status);
-      alert('Failed to load articles. Please try again later.');
-    }
-  } catch (error) {
-    console.error('Error loading links for random selection:', error);
-    alert('An error occurred while loading articles. Please try again later.');
-  }
-}
-
-function goToSurpriseArchive() {
-  console.log('Navigating to Surprise Archive');
-  window.location.href = '/surprise-archive.html';
-}
-
-function openArchive() {
-  console.log('Navigating to Archive');
-  alert('Archive feature - you can implement this however you\'d like!');
-}
-
-const spokes = document.querySelectorAll('.spoke');
-const center = document.querySelector('.wheel-center');
-
-spokes.forEach(spoke => {
-  spoke.addEventListener('mouseenter', function() {
-    this.style.animationPlayState = 'paused';
-  });
-  spoke.addEventListener('mouseleave', function() {
-    this.style.animationPlayState = 'running';
-  });
-});
-
-center.addEventListener('mouseenter', function() {
-  spokes.forEach(spoke => {
-    spoke.style.animationDuration = '3s';
-  });
-});
-center.addEventListener('mouseleave', function() {
-  spokes.forEach(spoke => {
-    spoke.style.animationDuration = '15s';
-  });
-});
-</script>
-</body>
-</html>
+    constructor
