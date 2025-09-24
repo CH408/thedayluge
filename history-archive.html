@@ -8,8 +8,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --light-green-glow: #00cc00;
-      --headline-green: #33ff33;
+      --gold: #d4af37; /* Matches History spoke background */
+      --gold-dark: #b8860b; /* Matches History spoke gradient */
+      --gold-light: #f0d064; /* Lighter gold for better contrast */
       --ink: #111;
       --maxw: 1200px;
     }
@@ -29,7 +30,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,204,0,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -48,65 +49,26 @@
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
-      color: var(--light-green-glow);
+      color: var(--gold);
       margin-bottom: 10px;
-      animation: block-title-pulse 8s ease-in-out infinite;
+      animation: block-title-pulse-gold 8s ease-in-out infinite;
     }
-    @keyframes block-title-pulse {
-      0% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
+    @keyframes block-title-pulse-gold {
+      0% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; }
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
-      color: var(--headline-green);
+      color: var(--gold);
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-    }
-    .headlines .headline:nth-child(1) { animation-delay: 0s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
-    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
-    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
-    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
-    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
-    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
-    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
-    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
-    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
-    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
-    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
-    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
-    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
-    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
-    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
-    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
-    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
-    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
-    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
-    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
-    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
-    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
-    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
-    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
-    .headlines .headline:nth-child(31) { animation-delay: 6.0s; }
-    .headlines .headline:nth-child(32) { animation-delay: 6.2s; }
-    .headlines .headline:nth-child(33) { animation-delay: 6.4s; }
-    .headlines .headline:nth-child(34) { animation-delay: 6.6s; }
-    .headlines .headline:nth-child(35) { animation-delay: 6.8s; }
-    .headlines .headline:nth-child(36) { animation-delay: 7.0s; }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
     }
     .headline a {
       color: inherit;
@@ -115,48 +77,50 @@
       transition: all 0.3s ease;
     }
     .headline a:hover {
-      color: var(--light-green-glow);
+      color: var(--gold-light);
       text-decoration: underline;
-      text-shadow: 0 0 10px var(--light-green-glow);
+      text-shadow: 0 0 10px var(--gold-light);
     }
     .back-btn {
       position: fixed;
       bottom: 50px; right: 20px;
       background: transparent;
-      color: var(--light-green-glow);
+      color: var(--gold);
       padding: 8px 16px;
-      border: 1px solid var(--light-green-glow);
+      border: 1px solid var(--gold);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px var(--light-green-glow);
+      text-shadow: 0 0 5px var(--gold);
       transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .back-btn:hover {
-      background: rgba(0,204,0,0.1);
-      box-shadow: 0 0 15px rgba(0,204,0,0.3);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(212,175,55,0.3);
       transform: scale(1.05);
     }
     .home-btn {
       position: fixed;
       bottom: 20px; right: 20px;
       background: transparent;
-      color: #ffffff;
+      color: var(--gold);
       padding: 8px 16px;
-      border: 1px solid #ffffff;
+      border: 1px solid var(--gold);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px #ffffff;
+      text-shadow: 0 0 5px var(--gold);
       transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .home-btn:hover {
       background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      box-shadow: 0 0 15px rgba(212,175,55,0.3);
       transform: scale(1.05);
     }
     .button-container {
@@ -169,21 +133,22 @@
     .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--light-green-glow);
+      color: var(--gold);
       padding: 8px 16px;
-      border: 1px solid var(--light-green-glow);
+      border: 1px solid var(--gold);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--light-green-glow);
+      text-shadow: 0 0 5px var(--gold);
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0,204,0,0.3);
+      box-shadow: 0 0 15px rgba(212,175,55,0.3);
     }
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
@@ -218,7 +183,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#00cc00', '#33ff33', '#00ff00', '#33cc33', '#66ff66', '#009900'][Math.floor(Math.random() * 6)];
+        this.color = ['#d4af37', '#b8860b', '#f0d064', '#c69b2f', '#e6c14d', '#a67c00'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       update() {
@@ -275,35 +240,25 @@
     // Load archive links
     async function loadArchiveLinks() {
       try {
-        console.log('Fetching history-links.txt for archive');
         const response = await fetch('history-links.txt');
-        console.log('Fetch response:', response);
         if (!response.ok) {
           console.error(`Failed to load history-links.txt: ${response.status}`);
           return;
         }
         const text = await response.text();
-        console.log('Fetched text:', text);
         const lines = text.split('\n').filter(line => line.trim());
-        console.log('Parsed lines:', lines);
         const links = lines.map(line => {
           const [title, url] = line.split('|').map(s => s.trim());
           return { title, url };
         }).filter(link => link.title && link.url);
-        console.log('Processed links:', links);
-
-        // Take links beyond the 36th
-        const archivedLinks = links.length > 36 ? links.slice(36) : [];
-        console.log('Archived links:', archivedLinks);
-
+        const archivedLinks = links.length > 24 ? links.slice(24) : [];
         const grid = document.getElementById('archive-links');
         if (grid) {
           grid.innerHTML = archivedLinks.map((link, index) => `
-            <li class="headline" style="animation-delay: ${index * 0.2}s;">
+            <li class="headline" style="animation-delay: ${index * 0.05}s;">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
-          console.log('Rendered archived links to DOM:', archivedLinks);
         }
       } catch (error) {
         console.error('Error loading archive links:', error);
@@ -313,7 +268,6 @@
     // Random history article
     async function goToRandomHistory() {
       try {
-        console.log('Fetching history-links.txt for random selection');
         const response = await fetch('history-links.txt');
         if (!response.ok) {
           console.log('Could not load history-links.txt for random selection');
@@ -328,10 +282,9 @@
           }
           return null;
         }).filter(link => link !== null);
-        const archiveLinks = links.slice(36);
+        const archiveLinks = links.slice(24);
         if (archiveLinks.length > 0) {
           const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
-          console.log('Opening random archive link:', randomLink);
           window.open(randomLink, '_blank');
         } else {
           console.log('No archive links available for random selection');
