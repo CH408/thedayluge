@@ -29,7 +29,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(255,140,0,0.1) 0%, transparent 70%); /* Updated to orange */
+      background: radial-gradient(circle at center, rgba(255,140,0,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -57,7 +57,7 @@
       text-align: left;
     }
     .sports-news-title {
-      color: var(--orange); /* Changed to orange */
+      color: var(--orange);
       animation: block-title-pulse-orange 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse-orange {
@@ -75,44 +75,33 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--orange); /* Changed to orange */
+      color: var(--orange);
     }
-    .headlines .headline:nth-child(1) { animation-delay: 0s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
-    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
-    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
-    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
-    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
-    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
-    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
-    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
-    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
-    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
-    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
-    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
-    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
-    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
-    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
-    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
-    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
-    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
-    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
-    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
-    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
-    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
-    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
-    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
-    .headlines .headline:nth-child(31) { animation-delay: 6.0s; }
-    .headlines .headline:nth-child(32) { animation-delay: 6.2s; }
-    .headlines .headline:nth-child(33) { animation-delay: 6.4s; }
-    .headlines .headline:nth-child(34) { animation-delay: 6.6s; }
-    .headlines .headline:nth-child(35) { animation-delay: 6.8s; }
-    .headlines .headline:nth-child(36) { animation-delay: 7.0s; }
+    /* Fast animation delays - same as Arts & Literature */
+    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
+    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
+    .headlines .headline:nth-child(7) { animation-delay: 0.35s; }
+    .headlines .headline:nth-child(8) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 0.45s; }
+    .headlines .headline:nth-child(10) { animation-delay: 0.5s; }
+    .headlines .headline:nth-child(11) { animation-delay: 0.55s; }
+    .headlines .headline:nth-child(12) { animation-delay: 0.6s; }
+    .headlines .headline:nth-child(13) { animation-delay: 0.65s; }
+    .headlines .headline:nth-child(14) { animation-delay: 0.7s; }
+    .headlines .headline:nth-child(15) { animation-delay: 0.75s; }
+    .headlines .headline:nth-child(16) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(17) { animation-delay: 0.85s; }
+    .headlines .headline:nth-child(18) { animation-delay: 0.9s; }
+    .headlines .headline:nth-child(19) { animation-delay: 0.95s; }
+    .headlines .headline:nth-child(20) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(21) { animation-delay: 1.05s; }
+    .headlines .headline:nth-child(22) { animation-delay: 1.1s; }
+    .headlines .headline:nth-child(23) { animation-delay: 1.15s; }
+    .headlines .headline:nth-child(24) { animation-delay: 1.2s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -123,27 +112,29 @@
       transition: all 0.3s ease;
     }
     .sports-news-links .headline a:hover {
-      color: var(--orange-dark); /* Darker orange for hover */
+      color: var(--orange-dark);
       text-shadow: 0 0 10px var(--orange-dark);
     }
     .go-deeper, .random-button {
       display: inline-block;
       background: transparent;
-      color: var(--orange); /* Changed to orange */
+      color: var(--orange);
       padding: 8px 16px;
-      border: 1px solid var(--orange); /* Changed to orange */
+      border: 1px solid var(--orange);
       border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--orange);
+      cursor: pointer;
     }
     .go-deeper:hover, .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255,140,0,0.3); /* Orange shadow */
+      box-shadow: 0 0 15px rgba(255,140,0,0.3);
     }
     .button-container {
       margin: 20px auto;
@@ -156,27 +147,31 @@
       position: fixed;
       bottom: 20px; right: 20px;
       background: transparent;
-      color: #ffffff;
+      color: var(--orange);
       padding: 8px 16px;
-      border: 1px solid #ffffff;
+      border: 1px solid var(--orange);
       border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px #ffffff;
+      text-shadow: 0 0 5px var(--orange);
       transition: all 0.3s ease;
     }
     .home-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      background: rgba(255,140,0,0.1);
+      box-shadow: 0 0 15px rgba(255,140,0,0.3);
       transform: scale(1.05);
     }
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper, .random-button { font-size: 10px; padding: 6px 12px; }
-      .home-btn { font-size: 10px; padding: 6px 12px; }
+      .go-deeper, .random-button, .home-btn { 
+        font-family: 'Special Elite', 'Courier New', Courier, monospace;
+        font-size: 10px; 
+        padding: 6px 12px; 
+      }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
   </style>
@@ -204,6 +199,7 @@
     canvas.height = window.innerHeight;
     const particlesArray = [];
     const numberOfParticles = 50;
+    
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -211,15 +207,17 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#ff8c00', '#e07b00', '#ffa040', '#d26900', '#ffbc80', '#c95f00'][Math.floor(Math.random() * 6)]; /* Orange palette */
+        this.color = ['#ff8c00', '#e07b00', '#ffa040', '#d26900', '#ffbc80', '#c95f00'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
+      
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
         if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
         if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
+      
       draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
@@ -243,12 +241,14 @@
         }
       }
     }
+    
     function init() {
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
     }
+    
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (const particle of particlesArray) {
@@ -257,8 +257,10 @@
       }
       requestAnimationFrame(animate);
     }
+    
     init();
     animate();
+    
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -282,7 +284,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 36);
+        const displayLinks = links.slice(0, 24); // Changed from 36 to 24
         const grid = document.getElementById('sports-news-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -314,7 +316,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 36);
+        const currentLinks = links.slice(0, 24); // Changed from 36 to 24
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
