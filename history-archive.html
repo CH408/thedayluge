@@ -237,7 +237,7 @@
       init();
     });
 
-    // Load archive links
+    // Load archive links from the text file
     async function loadArchiveLinks() {
       try {
         const response = await fetch('history-links.txt');
@@ -251,7 +251,9 @@
           const [title, url] = line.split('|').map(s => s.trim());
           return { title, url };
         }).filter(link => link.title && link.url);
-        const archivedLinks = links.length > 24 ? links.slice(24) : [];
+
+        // Get the links that are not displayed on the main page (after the 24th)
+        const archivedLinks = links.slice(24);
         const grid = document.getElementById('archive-links');
         if (grid) {
           grid.innerHTML = archivedLinks.map((link, index) => `
@@ -265,7 +267,7 @@
       }
     }
 
-    // Random history article
+    // Random history article from the archive
     async function goToRandomHistory() {
       try {
         const response = await fetch('history-links.txt');
@@ -282,6 +284,8 @@
           }
           return null;
         }).filter(link => link !== null);
+        
+        // Use the archived links for the random selection
         const archiveLinks = links.slice(24);
         if (archiveLinks.length > 0) {
           const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
