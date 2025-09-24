@@ -8,65 +8,46 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --red: #cc0000;
-      --orange: #ff8800;
-      --green: #00dd55;
-      --blue: #1a1a80;
-      --light-blue: #33ddff;
       --violet: #cc88ff;
-      --pink: #ff1493;
-      --yellow: #ffdd00;
-      --brown: #8B4513;
-      --dark-green: #006400;
-      --turquoise: #40E0D0;
-      --bright-blue: #00b7eb;
-      --ink: #111;
-      --rule: #bfbfbf;
-      --maxw: 1400px;
       --bright-purple-glow: #cc88ff;
       --light-cyan-glow: #33ddff;
-      --aqua-blueish-green: #00cc99;
-      --aqua-blueish-green-dark: #009977;
-      --gold: #d4af37;
-      --gold-dark: #b8860b;
-      --marble-white: #f5f5f5;
-      --marble-gray: #d3d3d3;
-      --bright-dark-green: #00aa33;
-      --bright-dark-green-dark: #008822;
-      --dodgers-blue: #1e90ff;
-      --dodgers-blue-dark: #0066cc;
+      --pink: #ff1493;
+      --bright-blue: #00b7eb;
+      --ink: #111;
+      --maxw: 1200px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
+    html, body { height: 100%; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--ink);
-      line-height: 1.5;
+      line-height: 1.3;
       background: #0a1428;
       padding: 10px;
       position: relative;
       min-height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
     }
     body::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,150,255,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(204,136,255,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
     @keyframes energy-pulse {
-      0%, 100% { opacity: 0.5; } 50% { opacity: 1; }
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
     }
     body::after {
+      content: '';
       position: absolute;
       top: -2px; left: -2px; right: -2px; bottom: -2px;
       background:
-        linear-gradient(0deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
+        linear-gradient(0deg, transparent 0%, rgba(204,136,255,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(204,136,255,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(204,136,255,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(204,136,255,0.3) 1%, transparent 3%);
       animation: edge-glow 4s ease-in-out infinite;
       pointer-events: none;
     }
@@ -132,19 +113,13 @@
     .asteroid:nth-child(1) { left: 20%; top: 10%; animation-delay: 0s; }
     .asteroid:nth-child(2) { left: 70%; top: 60%; animation-delay: 10s; }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .title-container {
-      display: flex;
-      align-items: center;
-      max-width: 800px;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .block-title {
+    .archive-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
       color: var(--bright-purple-glow);
+      margin-bottom: 10px;
       animation: block-title-pulse 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse {
@@ -162,11 +137,36 @@
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
+      color: var(--violet);
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--violet);
     }
+    /* Fast animation delays - same as Arts & Literature */
+    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
+    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
+    .headlines .headline:nth-child(7) { animation-delay: 0.35s; }
+    .headlines .headline:nth-child(8) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 0.45s; }
+    .headlines .headline:nth-child(10) { animation-delay: 0.5s; }
+    .headlines .headline:nth-child(11) { animation-delay: 0.55s; }
+    .headlines .headline:nth-child(12) { animation-delay: 0.6s; }
+    .headlines .headline:nth-child(13) { animation-delay: 0.65s; }
+    .headlines .headline:nth-child(14) { animation-delay: 0.7s; }
+    .headlines .headline:nth-child(15) { animation-delay: 0.75s; }
+    .headlines .headline:nth-child(16) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(17) { animation-delay: 0.85s; }
+    .headlines .headline:nth-child(18) { animation-delay: 0.9s; }
+    .headlines .headline:nth-child(19) { animation-delay: 0.95s; }
+    .headlines .headline:nth-child(20) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(21) { animation-delay: 1.05s; }
+    .headlines .headline:nth-child(22) { animation-delay: 1.1s; }
+    .headlines .headline:nth-child(23) { animation-delay: 1.15s; }
+    .headlines .headline:nth-child(24) { animation-delay: 1.2s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -176,9 +176,51 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .wisdom-philosophy-archive-links .headline a:hover {
+    .headline a:hover {
       color: #9966dd;
       text-shadow: 0 0 10px #9966dd;
+    }
+    .back-btn {
+      position: fixed;
+      bottom: 50px; right: 20px;
+      background: transparent;
+      color: var(--violet);
+      padding: 8px 16px;
+      border: 1px solid var(--violet);
+      border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--violet);
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: rgba(204,136,255,0.1);
+      box-shadow: 0 0 15px rgba(204,136,255,0.3);
+      transform: scale(1.05);
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: transparent;
+      color: var(--violet);
+      padding: 8px 16px;
+      border: 1px solid var(--violet);
+      border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--violet);
+      transition: all 0.3s ease;
+    }
+    .home-btn:hover {
+      background: rgba(204,136,255,0.1);
+      box-shadow: 0 0 15px rgba(204,136,255,0.3);
+      transform: scale(1.05);
     }
     .button-container {
       margin: 20px auto;
@@ -187,63 +229,53 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      background: #0a1428;
+    .random-button {
+      display: inline-block;
+      background: transparent;
       color: var(--violet);
       padding: 8px 16px;
       border: 1px solid var(--violet);
       border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px var(--violet);
       transition: all 0.3s ease;
-      box-shadow: 0 0 10px rgba(204,136,255,0.3);
+      text-shadow: 0 0 5px var(--violet);
+      cursor: pointer;
     }
-    .home-btn:hover {
-      background: #1a2a44;
-      color: #9966dd;
-      border-color: #9966dd;
-      box-shadow: 0 0 15px rgba(153,102,221,0.6);
+    .random-button:hover {
+      background: rgba(255,255,255,0.1);
       transform: scale(1.05);
-      text-shadow: 0 0 5px #9966dd;
+      box-shadow: 0 0 15px rgba(204,136,255,0.3);
     }
     @media (max-width: 600px) {
-      .block-title { font-size: 16px; }
+      .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .home-btn { font-size: 10px; padding: 6px 12px; }
-      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .back-btn, .home-btn, .random-button { 
+        font-family: 'Special Elite', 'Courier New', Courier, monospace;
+        font-size: 10px; 
+        padding: 6px 12px; 
+      }
       .comet { width: 8px; height: 8px; box-shadow: 0 0 20px var(--bright-purple-glow); }
       .comet::after { width: 40px; height: 2px; }
       .asteroid { width: 15px; height: 15px; box-shadow: 0 0 15px var(--light-cyan-glow); }
     }
-    @media (max-width: 400px) {
-      .block-title { font-size: 14px; }
-      .headline { font-size: 12px; }
-      .home-btn { font-size: 9px; padding: 5px 10px; }
-      .comet { width: 6px; height: 6px; box-shadow: 0 0 15px var(--bright-purple-glow); }
-      .comet::after { width: 30px; height: 1px; }
-      .asteroid { width: 12px; height: 12px; box-shadow: 0 0 12px var(--light-cyan-glow); }
-    }
   </style>
 </head>
 <body>
+  <a href="/wisdom-philosophy.html" class="back-btn">← Back to Wisdom & Philosophy</a>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div id="comet-container"></div>
   <div id="asteroid-container"></div>
   <div class="wrap">
-    <div class="wisdom-philosophy-archive">
-      <div class="title-container">
-        <div class="block-title">Wisdom & Philosophy Archive</div>
-      </div>
-      <ul class="headlines wisdom-philosophy-archive-links" id="wisdom-philosophy-archive-links"></ul>
-    </div>
+    <div class="archive-title">Wisdom & Philosophy Archive - Page 1</div>
+    <ul class="headlines" id="archive-links"></ul>
     <div class="button-container">
-      <a href="/wisdom-philosophy.html" class="home-btn">← Back to Wisdom & Philosophy</a>
+      <button class="random-button" onclick="goToRandomWisdomPhilosophy()">⚛️ SURPRISE ME!</button>
+      <a href="/wisdom-philosophy-archive-2.html" class="random-button">Page 2 →</a>
     </div>
   </div>
   <script>
@@ -254,6 +286,7 @@
     canvas.height = window.innerHeight;
     const particlesArray = [];
     const numberOfParticles = 100;
+    
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -268,6 +301,7 @@
         this.twinklePhase = Math.random() * Math.PI * 2;
         this.opacity = 1 - this.depth * 0.3;
       }
+      
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
@@ -276,6 +310,7 @@
         this.opacity = (0.7 + 0.3 * Math.sin(this.twinklePhase)) * (1 - this.depth * 0.3);
         this.twinklePhase += this.twinkleSpeed;
       }
+      
       draw() {
         ctx.fillStyle = this.color;
         ctx.globalAlpha = this.opacity;
@@ -287,12 +322,14 @@
         ctx.globalAlpha = 1;
       }
     }
+    
     function init() {
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
     }
+    
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (const particle of particlesArray) {
@@ -301,6 +338,7 @@
       }
       requestAnimationFrame(animate);
     }
+    
     // Initialize comets
     const cometContainer = document.getElementById('comet-container');
     for (let i = 0; i < 3; i++) {
@@ -308,6 +346,7 @@
       comet.classList.add('comet');
       cometContainer.appendChild(comet);
     }
+    
     // Initialize asteroids
     const asteroidContainer = document.getElementById('asteroid-container');
     for (let i = 0; i < 2; i++) {
@@ -315,20 +354,61 @@
       asteroid.classList.add('asteroid');
       asteroidContainer.appendChild(asteroid);
     }
+    
     init();
     animate();
+    
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
     });
-    // Load wisdom & philosophy archive links
-    async function loadWisdomPhilosophyArchiveLinks() {
+
+    // Load archive links (links 25-48 for page 1)
+    async function loadArchiveLinks() {
       try {
-        const response = await fetch('/wisdom-philosophy-links.txt');
+        console.log('Fetching wisdom-philosophy-links.txt for archive');
+        const response = await fetch('wisdom-philosophy-links.txt');
+        console.log('Fetch response:', response);
         if (!response.ok) {
-          console.error('Failed to load wisdom-philosophy-links.txt:', response.status);
-          document.getElementById('wisdom-philosophy-archive-links').innerHTML = '<li class="headline">Error loading archive links. Please try again later.</li>';
+          console.error(`Failed to load wisdom-philosophy-links.txt: ${response.status}`);
+          return;
+        }
+        const text = await response.text();
+        console.log('Fetched text:', text);
+        const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines);
+        const links = lines.map(line => {
+          const [title, url] = line.split('|').map(s => s.trim());
+          return { title, url };
+        }).filter(link => link.title && link.url);
+        console.log('Processed links:', links);
+
+        // Take links 25-48 (archive page 1)
+        const archivedLinks = links.length > 24 ? links.slice(24, 48) : [];
+        console.log('Archive page 1 links (25-48):', archivedLinks);
+
+        const grid = document.getElementById('archive-links');
+        if (grid) {
+          grid.innerHTML = archivedLinks.map((link, index) => `
+            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+          console.log('Rendered archive links to DOM:', archivedLinks);
+        }
+      } catch (error) {
+        console.error('Error loading archive links:', error);
+      }
+    }
+
+    // Random wisdom & philosophy article from archive page 1
+    async function goToRandomWisdomPhilosophy() {
+      try {
+        console.log('Fetching wisdom-philosophy-links.txt for random selection');
+        const response = await fetch('wisdom-philosophy-links.txt');
+        if (!response.ok) {
+          console.log('Could not load wisdom-philosophy-links.txt for random selection');
           return;
         }
         const text = await response.text();
@@ -336,33 +416,24 @@
         const links = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
+            return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
-        const archiveLinks = links.slice(18);
-        const grid = document.getElementById('wisdom-philosophy-archive-links');
-        if (grid && archiveLinks.length > 0) {
-          grid.innerHTML = archiveLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
-          // Dynamically set animation delays
-          const headlines = grid.querySelectorAll('.headline');
-          headlines.forEach((headline, index) => {
-            headline.style.animationDelay = `${index * 0.2}s`;
-          });
-        } else if (grid) {
-          grid.innerHTML = '<li class="headline">No archived wisdom & philosophy available.</li>';
+        const archiveLinks = links.slice(24, 48); // Archive page 1 links (25-48)
+        if (archiveLinks.length > 0) {
+          const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
+          console.log('Opening random archive link:', randomLink);
+          window.open(randomLink, '_blank');
+        } else {
+          console.log('No archive links available for random selection');
         }
-        console.log(`Showing ${archiveLinks.length} archived wisdom & philosophy links`);
       } catch (error) {
-        console.error('Error loading wisdom & philosophy archive links:', error);
-        document.getElementById('wisdom-philosophy-archive-links').innerHTML = '<li class="headline">Error loading archive links. Please try again later.</li>';
+        console.error('Error loading links for random selection:', error);
       }
     }
-    document.addEventListener('DOMContentLoaded', loadWisdomPhilosophyArchiveLinks);
+
+    document.addEventListener('DOMContentLoaded', loadArchiveLinks);
   </script>
 </body>
 </html>
