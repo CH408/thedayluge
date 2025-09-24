@@ -1,368 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Politics Archive - THE DAYLUGE</title>
-
-<!-- Vintage typewriter font -->
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-
-<style>
-  /* Force font loading */
-  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-  
-  :root{
-    /* Atomic color palette */
-    --red:#cc0000; 
-    --orange:#ff8800; 
-    --green:#00dd55;
-    --blue:#1a1a80;
-    --light-blue:#33ddff;
-    --violet:#cc88ff;
-    --pink:#ff1493;
-    --yellow:#ffee44;
-    --brown:#8B4513;
-    --dark-green:#006400;
-    --ink:#111; 
-    --rule:#bfbfbf;
-    --maxw:1200px;
-  }
-
-  *{box-sizing:border-box;margin:0;padding:0}
-  html, body {height:100%;}
-
-  body{
-    font-family:'Special Elite', 'Courier New', Courier, monospace;
-    color:var(--ink);
-    line-height:1.5;
-    background:#0a1428;
-    padding:20px;
-    position:relative;
-    min-height:100vh;
-  }
-
-  /* Simple energy field effects */
-  body::before {
-    content: '';
-    position:absolute;
-    top:0; left:0; right:0; bottom:0;
-    background:
-      radial-gradient(circle at center, rgba(0,150,255,0.05) 0%, transparent 70%);
-    animation:energy-pulse 8s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes energy-pulse {
-    0%, 100% { opacity:0.3; }
-    50% { opacity:0.6; }
-  }
-
-  .wrap{max-width:var(--maxw); margin:0 auto; position:relative; z-index:1;}
-
-  /* Header */
-  header{text-align:center; margin-bottom:30px;}
-  h1{
-    text-transform:uppercase; 
-    letter-spacing:.5px; 
-    font-size:36px; 
-    color:#ffffff;
-    text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
-    animation:title-pulse 3s ease-in-out infinite;
-    margin-bottom:15px;
-  }
-
-  @keyframes title-pulse {
-    0%, 100% { 
-      color:#ffffff;
-      text-shadow:0 0 15px #00ddff, 2px 2px 4px rgba(0,0,0,0.8);
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Politics Archive - THE DAYLUGE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+    :root {
+      --marble-white: #f5f5f5; /* Matches Politics spoke background */
+      --marble-gray: #d3d3d3; /* Matches Politics spoke gradient */
+      --ink: #111;
+      --maxw: 1200px;
     }
-    50% { 
-      color:#66ddff;
-      text-shadow:0 0 30px #00ddff, 0 0 45px #66ddff, 2px 2px 4px rgba(0,0,0,0.8);
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      color: var(--ink);
+      line-height: 1.3;
+      background: #0a1428;
+      padding: 10px;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-  }
-
-  .category-title{
-    color:var(--orange);
-    font-size:24px;
-    text-transform:uppercase;
-    margin-bottom:20px;
-    text-align:center;
-    font-weight:900;
-    letter-spacing:1px;
-    text-decoration:underline;
-    text-underline-offset:8px;
-    text-decoration-color:var(--orange);
-  }
-
-  .archive-subtitle{
-    color:#aaccff;
-    font-size:16px;
-    text-align:center;
-    margin-bottom:20px;
-    font-style:italic;
-    opacity:0.8;
-  }
-
-  /* Back to Home button - bottom right corner */
-  .back-btn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:transparent;
-    color:#aaccff;
-    padding:8px 16px;
-    text-decoration:none;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    text-transform:uppercase;
-    border:1px solid rgba(255,221,0,0.3);
-    box-shadow:0 0 5px rgba(255,136,0,0.1);
-    transition:all 0.3s ease;
-    z-index:20;
-    text-shadow:0 0 5px #00ddff;
-    opacity:0.7;
-  }
-  .back-btn:hover{
-    background:rgba(255,255,255,0.1);
-    box-shadow:0 0 15px rgba(255,136,0,0.3);
-    transform:scale(1.05);
-    color:#ffffff;
-    opacity:1;
-  }
-
-  /* Links grid - 1-COLUMN */
-  .grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:5px;
-    margin-top:30px;
-    max-width:800px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .link{
-    background:transparent;
-    border:none;
-    border-radius:15px;
-    padding:12px 20px;
-    transition:all 0.3s ease;
-    margin-bottom:5px;
-  }
-
-  .link:hover{
-    transform:translateY(-5px) scale(1.02);
-    box-shadow:0 0 20px rgba(255,136,0,0.3);
-  }
-
-  .link a{
-    display:block;
-    font-size:18px;
-    font-weight:bold;
-    text-decoration:none;
-    color:#ffffff;
-    word-break:break-word;
-    text-shadow:0 0 10px rgba(255,136,0,0.5);
-    border-bottom:1px solid rgba(255,136,0,0.3);
-    padding-bottom:8px;
-    line-height:1.4;
-  }
-  .link a:hover{
-    color:var(--orange);
-    text-decoration:underline;
-    text-shadow:0 0 15px rgba(255,136,0,0.8);
-  }
-
-  /* Button container */
-  .button-container{
-    margin:40px auto;
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-  }
-
-  /* Back to Category button */
-  .back-to-category-button{
-    background:transparent;
-    color:var(--orange);
-    border:2px solid var(--orange);
-    padding:14px 28px;
-    border-radius:30px;
-    font-family:'Special Elite', 'Courier New', Courier, monospace;
-    font-size:14px;
-    font-weight:bold;
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    cursor:pointer;
-    transition:all 0.3s ease;
-    text-shadow:0 0 5px rgba(255,136,0,0.5);
-    text-decoration:none;
-    display:inline-block;
-  }
-  .back-to-category-button:hover{
-    background:rgba(255,136,0,0.1);
-    transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(255,136,0,0.3);
-    color:#ffffff;
-  }
-
-  /* Random button */
-  .random-button{
-    background:linear-gradient(45deg, var(--orange) 0%, #ff6600 100%);
-    color:white;
-    border:2px solid #ffdd00;
-    padding:14px 28px;
-    border-radius:30px;
-    font-family:'Special Elite', 'Courier New', Courier, monospace;
-    font-size:14px;
-    font-weight:bold;
-    text-transform:uppercase;
-    letter-spacing:0.5px;
-    cursor:pointer;
-    transition:all 0.3s ease;
-    box-shadow:0 0 15px rgba(255,136,0,0.3);
-    text-shadow:0 0 5px #ffffff;
-  }
-  .random-button:hover{
-    background:linear-gradient(45deg, #ff6600 0%, var(--orange) 100%);
-    transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(255,136,0,0.5), 0 8px 20px rgba(0,0,0,0.4);
-  }
-
-  /* Responsive */
-  @media(max-width:600px){
-    h1{font-size:28px;}
-    .category-title{font-size:22px; padding:12px 20px;}
-    .archive-subtitle{font-size:14px;}
-    .link{padding:12px 20px;}
-    .link a{font-size:16px;}
-    .button-container{
-      flex-direction:column;
-      align-items:center;
-      gap:15px;
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(245,245,245,0.1) 0%, transparent 70%);
+      animation: energy-pulse 6s ease-in-out infinite;
+      pointer-events: none;
     }
-    .random-button, .back-to-category-button{
-      padding:12px 24px;
-      font-size:13px;
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
     }
-  }
-</style>
+    #particle-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
+    .archive-title {
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-align: left;
+      color: var(--marble-white);
+      margin-bottom: 10px;
+      animation: block-title-pulse-white 8s ease-in-out infinite;
+    }
+    @keyframes block-title-pulse-white {
+      0% { text-shadow: 0 0 15px var(--marble-white), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--marble-white), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--marble-white), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--marble-white), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--marble-white), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--marble-white), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .headlines { list-style: none; max-width: 800px; }
+    .headline {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: var(--marble-white);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.5s ease forwards;
+    }
+    /* Fast animation delays - same as Arts & Literature */
+    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
+    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
+    .headlines .headline:nth-child(7) { animation-delay: 0.35s; }
+    .headlines .headline:nth-child(8) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 0.45s; }
+    .headlines .headline:nth-child(10) { animation-delay: 0.5s; }
+    .headlines .headline:nth-child(11) { animation-delay: 0.55s; }
+    .headlines .headline:nth-child(12) { animation-delay: 0.6s; }
+    .headlines .headline:nth-child(13) { animation-delay: 0.65s; }
+    .headlines .headline:nth-child(14) { animation-delay: 0.7s; }
+    .headlines .headline:nth-child(15) { animation-delay: 0.75s; }
+    .headlines .headline:nth-child(16) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(17) { animation-delay: 0.85s; }
+    .headlines .headline:nth-child(18) { animation-delay: 0.9s; }
+    .headlines .headline:nth-child(19) { animation-delay: 0.95s; }
+    .headlines .headline:nth-child(20) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(21) { animation-delay: 1.05s; }
+    .headlines .headline:nth-child(22) { animation-delay: 1.1s; }
+    .headlines .headline:nth-child(23) { animation-delay: 1.15s; }
+    .headlines .headline:nth-child(24) { animation-delay: 1.2s; }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .headline a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .headline a:hover {
+      color: var(--marble-gray);
+      text-shadow: 0 0 10px var(--marble-gray);
+    }
+    .back-btn {
+      position: fixed;
+      bottom: 50px; right: 20px;
+      background: transparent;
+      color: var(--marble-white);
+      padding: 8px 16px;
+      border: 1px solid var(--marble-white);
+      border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--marble-white);
+      transition: all 0.3s ease;
+    }
+    .back-btn:hover {
+      background: rgba(245,245,245,0.1);
+      box-shadow: 0 0 15px rgba(245,245,245,0.3);
+      transform: scale(1.05);
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: transparent;
+      color: var(--marble-white);
+      padding: 8px 16px;
+      border: 1px solid var(--marble-white);
+      border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--marble-white);
+      transition: all 0.3s ease;
+    }
+    .home-btn:hover {
+      background: rgba(245,245,245,0.1);
+      box-shadow: 0 0 15px rgba(245,245,245,0.3);
+      transform: scale(1.05);
+    }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .random-button {
+      display: inline-block;
+      background: transparent;
+      color: var(--marble-white);
+      padding: 8px 16px;
+      border: 1px solid var(--marble-white);
+      border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--marble-white);
+      cursor: pointer;
+    }
+    .random-button:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(245,245,245,0.3);
+    }
+    @media (max-width: 600px) {
+      .archive-title { font-size: 16px; }
+      .headline { font-size: 14px; }
+      .back-btn, .home-btn, .random-button { 
+        font-family: 'Special Elite', 'Courier New', Courier, monospace;
+        font-size: 10px; 
+        padding: 6px 12px; 
+      }
+    }
+  </style>
 </head>
 <body>
-<a href="/" class="back-btn">← Back to Home Page</a>
-
-<div class="wrap">
-  <header>
-    <h1>THE DAYLUGE</h1>
-    <div class="category-title">Politics Archive</div>
-  </header>
-
-  <!-- Politics Archive Links Grid -->
-  <div class="grid" id="politics-archive-grid">
-    <!-- Links will be loaded dynamically from politics-links.txt (starting from link 37) -->
+  <a href="/politics.html" class="back-btn">← Back to Politics</a>
+  <a href="/" class="home-btn">← Home</a>
+  <canvas id="particle-canvas"></canvas>
+  <div class="wrap">
+    <div class="archive-title">Politics Archive - Page 1</div>
+    <ul class="headlines" id="archive-links"></ul>
+    <div class="button-container">
+      <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
+      <a href="/politics-archive-2.html" class="random-button">Page 2 →</a>
+    </div>
   </div>
-
-  <!-- Button Container -->
-  <div class="button-container">
-    <a href="/politics.html" class="back-to-category-button">
-      ← Back to Politics
-    </a>
-    <button class="random-button" onclick="goToRandomPoliticsArchive()">
-      SURPRISE ME!
-    </button>
-  </div>
-</div>
-
-<script>
-// Load politics archive links from external file (starting from link 37)
-async function loadPoliticsArchiveLinks() {
-  try {
-    const response = await fetch('politics-links.txt');
-    if (!response.ok) {
-      console.error('Failed to load politics-links.txt:', response.status);
-      return;
-    }
+  <script>
+    // Particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 50;
     
-    const text = await response.text();
-    const lines = text.split('\n').filter(line => line.trim());
-    
-    const links = lines.map(line => {
-      const parts = line.split('|');
-      if (parts.length >= 2) {
-        return {
-          title: parts[0].trim(),
-          url: parts[1].trim()
-        };
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#f5f5f5', '#d3d3d3', '#e8e8e8', '#cccccc', '#ffffff', '#e0e0e0'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
       }
-      return null;
-    }).filter(link => link !== null);
-    
-    // Show links starting from #37 onward
-    const archiveLinks = links.slice(36);
-    
-    // Populate the grid
-    const grid = document.getElementById('politics-archive-grid');
-    if (grid && archiveLinks.length > 0) {
-      grid.innerHTML = archiveLinks.map(link => `
-        <div class="link">
-          <a href="${link.url}" target="_blank">
-            ${link.title}
-          </a>
-        </div>
-      `).join('');
-    } else if (grid) {
-      grid.innerHTML = '<div style="text-align:center; color:#aaccff; font-style:italic; padding:40px;">No archived links yet.</div>';
-    }
-    
-    console.log(`Showing ${archiveLinks.length} archived politics links`);
-    
-  } catch (error) {
-    console.error('Error loading politics archive links:', error);
-    const grid = document.getElementById('politics-archive-grid');
-    if (grid) {
-      grid.innerHTML = '<div style="text-align:center; color:#ff6666; font-style:italic; padding:40px;">Error loading archive links.</div>';
-    }
-  }
-}
-
-// Random politics archive article function
-async function goToRandomPoliticsArchive() {
-  try {
-    const response = await fetch('politics-links.txt');
-    if (!response.ok) {
-      console.log('Could not load politics-links.txt for random selection');
-      return;
-    }
-    
-    const text = await response.text();
-    const lines = text.split('\n').filter(line => line.trim());
-    
-    const links = lines.map(line => {
-      const parts = line.split('|');
-      if (parts.length >= 2) {
-        return parts[1].trim();
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
-      return null;
-    }).filter(link => link !== null);
-    
-    // Random from archived links only (37+)
-    const archiveLinks = links.slice(36);
-    if (archiveLinks.length > 0) {
-      const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
-      window.open(randomLink, '_blank');
+      
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
     }
     
-  } catch (error) {
-    console.error('Error loading links for random selection:', error);
-  }
-}
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    
+    init();
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
 
-// Load links when page loads
-document.addEventListener('DOMContentLoaded', loadPoliticsArchiveLinks);
-</script>
+    // Load archive links (links 25-48 for page 1)
+    async function loadArchiveLinks() {
+      try {
+        console.log('Fetching politics-links.txt for archive');
+        const response = await fetch('politics-links.txt');
+        console.log('Fetch response:', response);
+        if (!response.ok) {
+          console.error(`Failed to load politics-links.txt: ${response.status}`);
+          return;
+        }
+        const text = await response.text();
+        console.log('Fetched text:', text);
+        const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines);
+        const links = lines.map(line => {
+          const [title, url] = line.split('|').map(s => s.trim());
+          return { title, url };
+        }).filter(link => link.title && link.url);
+        console.log('Processed links:', links);
+
+        // Take links 25-48 (archive page 1)
+        const archivedLinks = links.length > 24 ? links.slice(24, 48) : [];
+        console.log('Archive page 1 links (25-48):', archivedLinks);
+
+        const grid = document.getElementById('archive-links');
+        if (grid) {
+          grid.innerHTML = archivedLinks.map((link, index) => `
+            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+          console.log('Rendered archive links to DOM:', archivedLinks);
+        }
+      } catch (error) {
+        console.error('Error loading archive links:', error);
+      }
+    }
+
+    // Random politics article from archive page 1
+    async function goToRandomPolitics() {
+      try {
+        console.log('Fetching politics-links.txt for random selection');
+        const response = await fetch('politics-links.txt');
+        if (!response.ok) {
+          console.log('Could not load politics-links.txt for random selection');
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const archiveLinks = links.slice(24, 48); // Archive page 1 links (25-48)
+        if (archiveLinks.length > 0) {
+          const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
+          console.log('Opening random archive page 1 link:', randomLink);
+          window.open(randomLink, '_blank');
+        } else {
+          console.log('No archive links available for random selection');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadArchiveLinks);
+  </script>
 </body>
 </html>
