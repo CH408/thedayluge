@@ -10,33 +10,46 @@ Hemingway's Favorite Books|https://kottke.org/12/03/a-list-of-ernest-hemingways-
 Get Your "Author Trading Cards" Here!|https://mossandfog.com/author-trading-cards-to-make-your-fellow-book-lovers-cheer/
 Read the Great Books|https://www.readthegreatbooks.com/
 Dave Smith: "I Was A Militant Atheist"|https://www.youtube.com/watch?v=F4M1MlBZyI0
-Placeholder Link 1|https://example.com/placeholder1
-Placeholder Link 2|https://example.com/placeholder2
-Placeholder Link 3|https://example.com/placeholder3
-Placeholder Link 4|https://example.com/placeholder4
-Placeholder Link 5|https://example.com/placeholder5
-Placeholder Link 6|https://example.com/placeholder6
-Placeholder Link 7|https://example.com/placeholder7
-Placeholder Link 8|https://example.com/placeholder8
-Placeholder Link 9|https://example.com/placeholder9
-Placeholder Link 10|https://example.com/placeholder10
-Placeholder Link 11|https://example.com/placeholder11
-Placeholder Link 12|https://example.com/placeholder12
-Placeholder Link 13|https://example.com/placeholder13
-Placeholder Link 14|https://example.com/placeholder14
-Placeholder Link 15|https://example.com/placeholder15
-Placeholder Link 16|https://example.com/placeholder16
-Placeholder Link 17|https://example.com/placeholder17
-Placeholder Link 18|https://example.com/placeholder18
-Placeholder Link 19|https://example.com/placeholder19
-Placeholder Link 20|https://example.com/placeholder20
-Placeholder Link 21|https://example.com/placeholder21
-Placeholder Link 22|https://example.com/placeholder22
-Placeholder Link 23|https://example.com/placeholder23
-Placeholder Link 24|https://example.com/placeholder24
-Placeholder Link 25|https://example.com/placeholder25
-Placeholder Link 26|https://example.com/placeholder26
-Placeholder Link 27|https://example.com/placeholder27
-Placeholder Link 28|https://example.com/placeholder28
-Placeholder Link 29|https://example.com/placeholder29
-Placeholder Link 30|https://example.com/placeholder30
+Placeholder Title|Placeholder Link #1
+Placeholder Title|Placeholder Link #2
+Placeholder Title|Placeholder Link #3
+Placeholder Title|Placeholder Link #4
+Placeholder Title|Placeholder Link #5
+Placeholder Title|Placeholder Link #6
+Placeholder Title|Placeholder Link #7
+Placeholder Title|Placeholder Link #8
+Placeholder Title|Placeholder Link #9
+Placeholder Title|Placeholder Link #10
+Placeholder Title|Placeholder Link #11
+Placeholder Title|Placeholder Link #12
+Placeholder Title|Placeholder Link #13
+Placeholder Title|Placeholder Link #14
+Placeholder Title|Placeholder Link #15
+Placeholder Title|Placeholder Link #16
+Placeholder Title|Placeholder Link #17
+Placeholder Title|Placeholder Link #18
+Placeholder Title|Placeholder Link #19
+Placeholder Title|Placeholder Link #20
+Placeholder Title|Placeholder Link #21
+Placeholder Title|Placeholder Link #22
+Placeholder Title|Placeholder Link #23
+Placeholder Title|Placeholder Link #24
+Placeholder Title|Placeholder Link #25
+Placeholder Title|Placeholder Link #26
+Placeholder Title|Placeholder Link #27
+Placeholder Title|Placeholder Link #28
+Placeholder Title|Placeholder Link #29
+Placeholder Title|Placeholder Link #30
+Placeholder Title|Placeholder Link #31
+Placeholder Title|Placeholder Link #32
+Placeholder Title|Placeholder Link #33
+Placeholder Title|Placeholder Link #34
+Placeholder Title|Placeholder Link #35
+Placeholder Title|Placeholder Link #36
+Placeholder Title|Placeholder Link #37
+Placeholder Title|Placeholder Link #38
+Placeholder Title|Placeholder Link #39
+Placeholder Title|Placeholder Link #40
+Placeholder Title|Placeholder Link #41
+Placeholder Title|Placeholder Link #42
+Placeholder Title|Placeholder Link #43
