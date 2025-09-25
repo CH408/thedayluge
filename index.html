@@ -1259,10 +1259,35 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = 'news.html';
   };
 
-  window.goToRandomArticle = function() {
-      const categories = Object.keys(categoryMap);
-      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-      window.location.href = categoryMap[randomCategory];
+  window.goToRandomArticle = async function() {
+      try {
+          const response = await fetch('surprise-me-links.txt');
+          if (!response.ok) {
+              console.error('Failed to load surprise-me-links.txt:', response.status);
+              return;
+          }
+          const text = await response.text();
+          const lines = text.split('\n').filter(line => line.trim());
+          const links = lines.map(line => {
+              const parts = line.split('|');
+              if (parts.length >= 2) {
+                  return parts[1].trim();
+              }
+              return null;
+          }).filter(link => link !== null);
+          
+          // Use only the first 12 links
+          const surpriseLinks = links.slice(0, 12);
+          
+          if (surpriseLinks.length > 0) {
+              const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+              window.open(randomLink, '_blank');
+          } else {
+              console.error('No valid links found in surprise-me-links.txt');
+          }
+      } catch (error) {
+          console.error('Error loading surprise me links:', error);
+      }
   };
 
   window.goToSurpriseArchive = function() {
