@@ -3,11 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein's Web - THE DAYLUGE</title>
+  <title>Epstein's Web - Conspiracy Corner</title>
+
+  <!-- Vintage typewriter font -->
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+
   <style>
-    /* Core styles from conspiracy-corner.html */
+    /* Force font loading */
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+
     :root {
+      /* Green matrix color scheme */
       --crt-green: #00FF7F;
       --dark-green: #00CC66;
       --bright-green: #33FF88;
@@ -22,93 +28,205 @@
       --maxw: 1400px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
 
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--crt-green);
-      line-height: 1.3;
+      line-height: 1.5;
       background: var(--black-bg);
-      padding: 20px;
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Energy field effect */
+    /* Energy field effects in green */
     body::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
+      animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
 
-    /* Particle canvas */
-    #particle-canvas {
+    body::after {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
       pointer-events: none;
+    }
+
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes edge-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
     }
 
     /* Header */
     .header {
       position: absolute;
-      top: 20px;
+      top: 30px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
-      z-index: 5;
+      z-index: 10;
     }
+
     .header h1 {
       text-transform: uppercase;
       letter-spacing: 0.5px;
       font-size: 32px;
-      text-shadow: 0 0 15px var(--crt-green);
+      margin-bottom: 8px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      animation: title-pulse 8s ease-in-out infinite;
     }
 
-    /* Wheel container */
+    @keyframes title-pulse {
+      0% { 
+        color: var(--crt-green);
+        text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% { 
+        color: var(--bright-green);
+        text-shadow: 0 0 16px var(--bright-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% { 
+        color: var(--neon-green);
+        text-shadow: 0 0 17px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% { 
+        color: var(--lime-green);
+        text-shadow: 0 0 18px var(--lime-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% { 
+        color: var(--emerald-green);
+        text-shadow: 0 0 20px var(--emerald-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% { 
+        color: var(--forest-green);
+        text-shadow: 0 0 18px var(--forest-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% { 
+        color: var(--matrix-green);
+        text-shadow: 0 0 17px var(--matrix-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% { 
+        color: var(--dark-green);
+        text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% { 
+        color: var(--crt-green);
+        text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+    }
+
+    /* Main atom container */
     .wheel-container {
-      width: 400px;
-      height: 400px;
       position: relative;
-      margin: 80px auto 0;
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
       z-index: 5;
+      animation: atomize 2s ease-in;
     }
 
-    .wheel-center {
+    @keyframes atomize {
+      from { opacity: 0; transform: scale(0.5) rotate(-180deg); }
+      to { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    /* Orbital rings */
+    .orbital-ring {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 150px;
-      height: 150px;
-      background: var(--dark-gray);
-      border: 2px solid var(--crt-green);
+      border: 1px solid rgba(0,255,127,0.3);
       border-radius: 50%;
       transform: translate(-50%, -50%);
+      animation: rotate 30s linear infinite;
+    }
+
+    .orbital-ring-1 { width: 300px; height: 300px; animation-duration: 25s; }
+    .orbital-ring-2 { width: 400px; height: 400px; animation-duration: 35s; animation-direction: reverse; }
+
+    @keyframes rotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Central news hub */
+    .news-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
+      color: var(--crt-green);
+      border: 2px solid var(--crt-green);
+      border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-      text-transform: uppercase;
+      cursor: default;
+      transition: all 0.3s ease;
+      z-index: 15;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,255,127,0.5);
-      cursor: pointer;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      box-shadow: 0 0 30px rgba(0,255,127,0.5), 0 4px 12px rgba(0,0,0,0.8);
+      animation: pulse 3s ease-in-out infinite;
       padding: 10px;
+      overflow: hidden;
+    }
+
+    .news-hub h2 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      text-shadow: 0 0 5px var(--crt-green);
     }
 
     .news-list {
       list-style: none;
-      width: 100%;
-      max-height: 100px;
+      max-height: 140px;
       overflow-y: auto;
-      margin-top: 8px;
+      width: 100%;
+      padding: 0 10px;
     }
 
     .news-list li {
@@ -118,260 +236,417 @@
     .news-list a {
       color: var(--neon-green);
       text-decoration: none;
-      font-size: 10px;
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding: 2px 5px;
-      transition: all 0.3s ease;
+      font-size: 12px;
+      line-height: 1.3;
+      transition: color 0.3s ease;
     }
 
     .news-list a:hover {
+      color: var(--bright-green);
       text-shadow: 0 0 8px var(--bright-green);
-      transform: scale(1.02);
     }
 
-    .news-list a::after {
-      content: attr(data-title);
-      position: absolute;
-      background: var(--dark-gray);
-      border: 1px solid var(--crt-green);
-      padding: 5px;
-      z-index: 10;
-      font-size: 10px;
-      max-width: 180px;
-      color: var(--crt-green);
-      text-align: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
+    @keyframes pulse {
+      0%, 100% { 
+        box-shadow: 0 0 30px rgba(0,255,127,0.5), 0 4px 12px rgba(0,0,0,0.8);
+        border-color: var(--crt-green);
+      }
+      50% { 
+        box-shadow: 0 0 60px rgba(0,255,127,0.8), 0 8px 25px rgba(0,255,127,0.4);
+        border-color: var(--neon-green);
+        transform: translate(-50%, -50%) scale(1.02);
+      }
     }
 
-    .news-list a:hover::after {
-      visibility: visible;
-      opacity: 1;
-    }
-
+    /* Category spokes */
     .spoke {
       position: absolute;
-      width: 80px;
-      height: 80px;
-      background: var(--dark-gray);
-      border: 1px solid var(--crt-green);
+      width: 90px;
+      height: 90px;
+      border: 2px solid var(--crt-green);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-weight: 900;
       text-align: center;
-      box-shadow: 0 0 15px rgba(0,255,127,0.4);
-      text-shadow: 0 0 5px var(--crt-green);
-      cursor: default;
-      transform: translate(-50%, -50%);
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      box-shadow: 0 0 20px rgba(0,255,127,0.4), 0 2px 8px rgba(0,0,0,0.1);
+      padding: 4px;
+      animation: electron-pulse 2s ease-in-out infinite;
+      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
+      color: var(--neon-green);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
 
-    .spoke-1 { transform: translate(-50%, -50%) rotate(0deg) translate(120px); }
-    .spoke-2 { transform: translate(-50%, -50%) rotate(120deg) translate(120px); }
-    .spoke-3 { transform: translate(-50%, -50%) rotate(240deg) translate(120px); }
+    @keyframes electron-pulse {
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(0,255,127,0.4), 0 2px 8px rgba(0,0,0,0.1);
+        border-color: var(--crt-green);
+      }
+      50% { 
+        box-shadow: 0 0 40px rgba(0,255,127,0.8), 0 4px 15px rgba(0,255,127,0.3);
+        border-color: var(--neon-green);
+      }
+    }
 
+    .spoke:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 35px rgba(0,255,127,0.9), 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 10;
+      animation-play-state: paused;
+      background: var(--dark-gray);
+    }
+
+    /* Position 4 category spokes (90° intervals) */
+    .spoke-1 { /* Podcasts & Clips - 0° */
+      left: 390px;
+      top: 205px;
+      font-size: 13px;
+    }
+    .spoke-2 { /* Articles & Longform - 90° */
+      left: 205px;
+      bottom: 20px;
+      font-size: 12px;
+    }
+    .spoke-3 { /* Primary Sources - 180° */
+      left: 20px;
+      top: 205px;
+      font-size: 12px;
+    }
+    .spoke-4 { /* Memes - 270° */
+      left: 205px;
+      top: 20px;
+      font-size: 15px;
+    }
+
+    /* Energy beams */
     .wheel-line {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 120px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, var(--crt-green) 20%, var(--crt-green) 80%, transparent 100%);
+      background: 
+        radial-gradient(ellipse 15px 8px at center, rgba(0,255,127,0.9) 0%, transparent 70%),
+        linear-gradient(90deg, 
+          transparent 0%, 
+          var(--crt-green) 20%, 
+          rgba(0,255,127,0.8) 50%, 
+          var(--crt-green) 80%, 
+          transparent 100%
+        );
+      height: 4px;
       transform-origin: left center;
+      z-index: 1;
+      border-radius: 2px;
+      overflow: hidden;
+      animation: organic-pulse 4s ease-in-out infinite;
     }
 
-    .line-1 { transform: translate(0, -50%) rotate(0deg); }
-    .line-2 { transform: translate(0, -50%) rotate(120deg); }
-    .line-3 { transform: translate(0, -50%) rotate(240deg); }
+    .wheel-line::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      background: 
+        radial-gradient(ellipse 30px 6px at var(--pulse-position, 0%), 
+          rgba(0,255,127,0.9) 0%, 
+          var(--bright-green) 30%, 
+          transparent 70%
+        );
+      border-radius: 3px;
+      animation: traveling-pulse-forward 3s ease-in-out infinite;
+    }
 
-    /* Navigation buttons */
-    .nav-buttons {
+    .wheel-line::after {
+      content: '';
+      position: absolute;
+      top: -0.5px;
+      left: 0;
+      right: 0;
+      bottom: -0.5px;
+      background: 
+        radial-gradient(ellipse 20px 4px at var(--pulse-position-reverse, 100%), 
+          rgba(0,255,127,0.8) 0%, 
+          transparent 60%
+        );
+      border-radius: 2px;
+      animation: traveling-pulse-reverse 3.5s ease-in-out infinite 1.5s;
+    }
+
+    @keyframes organic-pulse {
+      0% { 
+        opacity: 0.6;
+        box-shadow: 0 0 8px var(--crt-green);
+        filter: brightness(0.8);
+      }
+      25% { 
+        opacity: 0.9;
+        box-shadow: 0 0 15px var(--crt-green), 0 0 25px var(--bright-green);
+        filter: brightness(1.2);
+      }
+      50% { 
+        opacity: 1;
+        box-shadow: 0 0 20px var(--bright-green), 0 0 35px var(--crt-green);
+        filter: brightness(1.4);
+      }
+      75% { 
+        opacity: 0.9;
+        box-shadow: 0 0 15px var(--crt-green), 0 0 25px var(--bright-green);
+        filter: brightness(1.2);
+      }
+      100% { 
+        opacity: 0.6;
+        box-shadow: 0 0 8px var(--crt-green);
+        filter: brightness(0.8);
+      }
+    }
+
+    @keyframes traveling-pulse-forward {
+      0% { 
+        --pulse-position: 0%;
+        opacity: 0;
+      }
+      10% { 
+        --pulse-position: 10%;
+        opacity: 1;
+      }
+      90% { 
+        --pulse-position: 90%;
+        opacity: 1;
+      }
+      100% { 
+        --pulse-position: 100%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes traveling-pulse-reverse {
+      0% { 
+        --pulse-position-reverse: 100%;
+        opacity: 0;
+      }
+      10% { 
+        --pulse-position-reverse: 90%;
+        opacity: 0.8;
+      }
+      90% { 
+        --pulse-position-reverse: 10%;
+        opacity: 0.8;
+      }
+      100% { 
+        --pulse-position-reverse: 0%;
+        opacity: 0;
+      }
+    }
+
+    .line-1 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(0deg); animation-delay: 0s; }
+    .line-2 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(90deg); animation-delay: 0.5s; }
+    .line-3 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(180deg); animation-delay: 1s; }
+    .line-4 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(270deg); animation-delay: 1.5s; }
+
+    .wheel-container:hover .wheel-line {
+      animation: organic-pulse 2s ease-in-out infinite;
+    }
+
+    .wheel-container:hover .wheel-line::before {
+      animation: traveling-pulse-forward 1.5s ease-in-out infinite;
+    }
+
+    .wheel-container:hover .wheel-line::after {
+      animation: traveling-pulse-reverse 2s ease-in-out infinite 0.5s;
+    }
+
+    /* Home button */
+    .home-btn {
       position: fixed;
-      bottom: 15px;
-      right: 15px;
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      z-index: 20;
-    }
-
-    .random-button, .home-btn, .conspiracy-btn {
-      background: transparent;
+      bottom: 20px;
+      right: 20px;
+      background: var(--black-bg);
       color: var(--crt-green);
-      padding: 8px 16px;
-      border: 1px solid var(--crt-green);
-      border-radius: 20px;
+      border: 2px solid var(--crt-green);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--crt-green);
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,255,127,0.3);
+      z-index: 20;
     }
 
-    .random-button:hover, .home-btn:hover, .conspiracy-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(0,255,127,0.3);
+    .home-btn:hover {
+      background: var(--dark-gray);
       transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,127,0.6);
     }
 
     /* Responsive adjustments */
     @media (max-width: 600px) {
       .wheel-container {
-        width: 300px;
-        height: 300px;
+        width: 380px;
+        height: 380px;
       }
-      .wheel-center {
-        width: 120px;
-        height: 120px;
+      .news-hub {
+        width: 160px;
+        height: 160px;
+        font-size: 12px;
+      }
+      .news-hub h2 {
         font-size: 14px;
       }
       .news-list a {
-        font-size: 9px;
+        font-size: 10px;
       }
       .spoke {
-        width: 60px;
-        height: 60px;
-        font-size: 9px;
+        width: 75px;
+        height: 75px;
       }
-      .wheel-line {
-        width: 90px;
-      }
-      .spoke-1, .spoke-2, .spoke-3 {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(90px);
-      }
+      .spoke-1 { left: 295px; top: 150px; font-size: 11px; }
+      .spoke-2 { left: 150px; bottom: 15px; font-size: 10px; }
+      .spoke-3 { left: 15px; top: 150px; font-size: 10px; }
+      .spoke-4 { left: 150px; top: 15px; font-size: 13px; }
       .header h1 {
-        font-size: 24px;
+        font-size: 28px;
       }
-      .nav-buttons {
-        gap: 8px;
-        bottom: 10px;
-        right: 10px;
+      .line-1, .line-2, .line-3, .line-4 {
+        width: 105px;
       }
-      .random-button, .home-btn, .conspiracy-btn {
-        font-size: 10px;
-        padding: 6px 12px;
-      }
+      .orbital-ring-1 { width: 240px; height: 240px; }
+      .orbital-ring-2 { width: 300px; height: 300px; }
     }
 
     @media (max-width: 400px) {
       .wheel-container {
-        width: 260px;
-        height: 260px;
+        width: 320px;
+        height: 320px;
       }
-      .wheel-center {
-        width: 100px;
-        height: 100px;
+      .news-hub {
+        width: 140px;
+        height: 140px;
+        font-size: 11px;
+      }
+      .news-hub h2 {
         font-size: 12px;
       }
       .news-list a {
-        font-size: 8px;
+        font-size: 9px;
       }
       .spoke {
-        width: 50px;
-        height: 50px;
-        font-size: 8px;
+        width: 65px;
+        height: 65px;
       }
-      .wheel-line {
-        width: 75px;
+      .spoke-1 { left: 245px; top: 127.5px; font-size: 10px; }
+      .spoke-2 { left: 127.5px; bottom: 12.5px; font-size: 9px; }
+      .spoke-3 { left: 12.5px; top: 127.5px; font-size: 9px; }
+      .spoke-4 { left: 127.5px; top: 12.5px; font-size: 11px; }
+      .header h1 {
+        font-size: 24px;
       }
-      .spoke-1, .spoke-2, .spoke-3 {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(75px);
+      .line-1, .line-2, .line-3, .line-4 {
+        width: 85px;
       }
+    }
+
+    /* Particle canvas */
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <!-- Navigation Buttons -->
-  <div class="nav-buttons">
-    <a href="/conspiracy-corner.html" class="conspiracy-btn">← Conspiracy</a>
-    <a href="/" class="home-btn">← Home</a>
-  </div>
-
-  <!-- Particle Canvas -->
-  <canvas id="particle-canvas"></canvas>
-
-  <!-- Main Content -->
+  <!-- Header -->
   <div class="header">
     <h1>EPSTEIN'S WEB</h1>
   </div>
 
+  <!-- Home Button -->
+  <a href="/" class="home-btn">← Back to Conspiracy Corner</a>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Main Atom Structure -->
   <div class="wheel-container">
+    <!-- Orbital rings -->
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
+
+    <!-- Energy beams -->
     <div class="wheel-line line-1"></div>
     <div class="wheel-line line-2"></div>
     <div class="wheel-line line-3"></div>
-    <div class="wheel-center" onclick="goToRandomEpstein()">
-      <h2>News</h2>
-      <ul class="news-list">
-        <li><a href="#" data-title="Loading...">Loading...</a></li>
-        <li><a href="#" data-title="Loading...">Loading...</a></li>
-        <li><a href="#" data-title="Loading...">Loading...</a></li>
-        <li><a href="#" data-title="Loading...">Loading...</a></li>
-        <li><a href="#" data-title="Loading...">Loading...</a></li>
-      </ul>
-    </div>
-    <div class="spoke spoke-1" style="--angle: 0deg;">Podcasts & Video</div>
-    <div class="spoke spoke-2" style="--angle: 120deg;">Articles & Longform</div>
-    <div class="spoke spoke-3" style="--angle: 240deg;">Primary Sources</div>
-  </div>
+    <div class="wheel-line line-4"></div>
 
-  <div class="nav-buttons">
-    <button class="random-button" onclick="goToRandomEpstein()">⚛️ SURPRISE ME!</button>
+    <!-- Central news hub -->
+    <div class="news-hub">
+      <h2>Latest News</h2>
+      <ul class="news-list" id="news-list"></ul>
+    </div>
+
+    <!-- Category spokes -->
+    <div class="spoke spoke-1" onclick="window.location.href='/epstein/podcasts'">Podcasts & Clips</div>
+    <div class="spoke spoke-2" onclick="window.location.href='/epstein/articles'">Articles & Longform</div>
+    <div class="spoke spoke-3" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
+    <div class="spoke spoke-4" onclick="window.location.href='/epstein/memes'">Memes</div>
   </div>
 
   <script>
-    // Particle effect
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Particle effect
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-    const particlesArray = [];
-    const numberOfParticles = 40;
+      const particlesArray = [];
+      const numberOfParticles = 60;
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.size > 0.2) this.size -= 0.1;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-      }
-      draw() {
-        ctx.fillStyle = 'rgba(0,255,127,0.6)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 1;
+          this.speedX = Math.random() * 0.5 - 0.25;
+          this.speedY = Math.random() * 0.5 - 0.25;
+        }
 
-    function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
-      }
-    }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.1;
+          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
 
-    function animate() {
-      if (!document.hidden) {
+        draw() {
+          ctx.fillStyle = 'rgba(0,255,127,0.6)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function init() {
+        for (let i = 0; i < numberOfParticles; i++) {
+          particlesArray.push(new Particle());
+        }
+      }
+
+      function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particlesArray.length; i++) {
           particlesArray[i].update();
@@ -382,74 +657,39 @@
             particlesArray.push(new Particle());
           }
         }
+        requestAnimationFrame(animate);
       }
-      requestAnimationFrame(animate);
-    }
 
-    init();
-    animate();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
       init();
-    });
+      animate();
 
-    // Load news links
-    async function loadLinks() {
-      try {
-        const fileName = 'epstein-news-links.txt';
-        const response = await fetch(fileName);
-        if (!response.ok) throw new Error(`Failed to load ${fileName}`);
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          return parts.length >= 2 ? { title: parts[0].trim(), url: parts[1].trim() } : null;
-        }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 5);
-        const newsList = document.querySelector('.news-list');
-        if (newsList) {
-          newsList.innerHTML = displayLinks.length > 0
-            ? displayLinks.map(link => `
-                <li><a href="${link.url}" target="_blank" data-title="${link.title}" aria-label="Link to ${link.title}">${link.title}</a></li>
-              `).join('')
-            : '<li><a>No content available</a></li>';
-        }
-      } catch (error) {
-        console.error(`Error loading news links:`, error);
-        const newsList = document.querySelector('.news-list');
-        if (newsList) {
-          newsList.innerHTML = '<li><a>No content available</a></li>';
-        }
-      }
-    }
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
 
-    async function goToRandomEpstein() {
-      try {
-        const fileName = 'epstein-news-links.txt';
-        const response = await fetch(fileName);
-        if (!response.ok) throw new Error(`Could not load ${fileName}`);
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          return parts.length >= 2 ? parts[1].trim() : null;
-        }).filter(link => link !== null);
-        if (links.length > 0) {
-          const randomLink = links[Math.floor(Math.random() * links.length)];
-          window.open(randomLink, '_blank');
-        } else {
-          alert('No content available. Please try again later.');
-        }
-      } catch (error) {
-        console.error('Error loading random content:', error);
-        alert('Could not load random content. Please try again later.');
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      loadLinks();
+      // Fetch and display news from epstein-news-links.txt
+      fetch('/epstein/epstein-news-links.txt')
+        .then(response => response.text())
+        .then(data => {
+          const newsList = document.getElementById('news-list');
+          const lines = data.trim().split('\n').reverse().slice(0, 5); // Get 5 most recent
+          lines.forEach(line => {
+            const [title, url] = line.split('|').map(item => item.trim());
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = url;
+            a.textContent = title;
+            a.target = '_blank';
+            li.appendChild(a);
+            newsList.appendChild(li);
+          });
+        })
+        .catch(error => {
+          console.error('Error loading news:', error);
+          const newsList = document.getElementById('news-list');
+          newsList.innerHTML = '<li>Error loading news</li>';
+        });
     });
   </script>
 </body>
