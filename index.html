@@ -12,7 +12,6 @@
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
   
   :root{
-    /* Atomic color palette */
     --red:#cc0000;  
     --orange:#ff8800;  
     --green:#00dd55;
@@ -238,8 +237,9 @@
     height: 500px;
     margin: 0 auto;
     z-index: 5;
-    animation: spin-in 1.5s ease-out 0.2s forwards;
-    -webkit-animation: spin-in 1.5s ease-out 0.2s forwards; /* Vendor prefix for Safari/Chrome */
+    animation: spin-in 1.5s ease-out 0.2s forwards !important;
+    -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
+    -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
     will-change: transform, opacity;
     transform-origin: center center;
   }
@@ -256,6 +256,12 @@
     100% { opacity: 1; transform: scale(1) rotate(1080deg); }
   }
 
+  @-moz-keyframes spin-in {
+    0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); }
+    100% { opacity: 1; transform: scale(1) rotate(1080deg); }
+  }
+
   .orbital-ring{
     position: absolute;
     top: 50%;
@@ -265,7 +271,9 @@
     transform: translate(-50%, -50%);
     animation: rotate linear infinite;
     -webkit-animation: rotate linear infinite;
+    -moz-animation: rotate linear infinite;
     will-change: transform;
+    z-index: 6; /* Above spokes */
   }
   .orbital-ring-1{ width: 300px; height: 300px; animation-duration: 10s; }
   .orbital-ring-2{ width: 400px; height: 400px; animation-duration: 12s; animation-direction: reverse; }
@@ -277,6 +285,11 @@
   }
 
   @-webkit-keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @-moz-keyframes rotate {
     from { transform: translate(-50%, -50%) rotate(0deg); }
     to { transform: translate(-50%, -50%) rotate(360deg); }
   }
@@ -350,6 +363,7 @@
     padding: 4px;
     animation: electron-pulse 1.2s ease-in-out infinite;
     will-change: transform, box-shadow;
+    z-index: 4; /* Below orbital rings */
   }
 
   @keyframes electron-pulse {
@@ -368,14 +382,14 @@
   .spoke:hover{
     transform: scale(1.15);
     box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 10;
+    z-index: 5; /* Still below orbital rings */
     animation-play-state: paused;
   }
 
   .spoke-7:hover{
     transform: scale(1.15);
     box-shadow: 0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
-    z-index: 10;
+    z-index: 5; /* Still below orbital rings */
     animation-play-state: paused;
     border-color: rgba(0,255,0,0.8) !important;
   }
@@ -757,8 +771,9 @@
     .wheel-container{
       width: 380px;
       height: 380px;
-      animation: spin-in 1.5s ease-out 0.2s forwards;
-      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards;
+      animation: spin-in 1.5s ease-out 0.2s forwards !important;
+      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
+      -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
     }
     .wheel-center{
       width: 120px;
@@ -770,6 +785,10 @@
       height: 80px;
       font-size: 11px;
       animation: electron-pulse 1.5s ease-in-out infinite;
+      z-index: 4;
+    }
+    .spoke:hover{
+      z-index: 5;
     }
     .spoke-1{ left: 295px; top: 150px; font-size: 12px; }
     .spoke-2{ left: 255px; top: 255px; font-size: 11px; }
@@ -841,6 +860,7 @@
     }
     .orbital-ring{
       animation-duration: 15s;
+      z-index: 6;
     }
     .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 12s; }
     .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 14s; animation-direction: reverse; }
@@ -885,8 +905,9 @@
     .wheel-container{
       width: 320px;
       height: 320px;
-      animation: spin-in 1.5s ease-out 0.2s forwards;
-      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards;
+      animation: spin-in 1.5s ease-out 0.2s forwards !important;
+      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
+      -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
     }
     .wheel-center{
       width: 100px;
@@ -898,6 +919,10 @@
       height: 65px;
       font-size: 10px;
       animation: electron-pulse 1.8s ease-in-out infinite;
+      z-index: 4;
+    }
+    .spoke:hover{
+      z-index: 5;
     }
     .spoke-1{ left: 245px; top: 127.5px; font-size: 11px; }
     .spoke-2{ left: 215px; top: 215px; font-size: 10px; }
@@ -968,6 +993,7 @@
     }
     .orbital-ring{
       animation-duration: 12s;
+      z-index: 6;
     }
     .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 10s; }
     .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 11s; animation-direction: reverse; }
@@ -1055,7 +1081,7 @@
       opacity: 0.7;
     }
     .wheel-container {
-      animation: none !important; /* Override any animation */
+      animation: none !important;
       transform: scale(1);
       opacity: 1;
     }
@@ -1141,11 +1167,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const errorMessage = document.getElementById('password-error');
   const wheelContainer = document.querySelector('.wheel-container');
 
+  // Debug: Check prefers-reduced-motion
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  console.log('Prefers reduced motion:', reducedMotion);
+
   // Force animation reset to ensure spin-in triggers
-  wheelContainer.style.animation = 'none';
-  setTimeout(() => {
-    wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
-  }, 10);
+  if (!reducedMotion) {
+    wheelContainer.style.animation = 'none';
+    setTimeout(() => {
+      wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
+      console.log('Spin-in animation applied to wheel-container');
+    }, 10);
+  }
 
   overlay.classList.add('hidden');
   document.querySelectorAll('body > *').forEach(el => {
@@ -1161,11 +1194,14 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('body > *').forEach(el => {
         el.style.visibility = 'visible';
       });
-      // Re-trigger animation after password overlay is hidden
-      wheelContainer.style.animation = 'none';
-      setTimeout(() => {
-        wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
-      }, 10);
+      // Re-trigger animation after password overlay
+      if (!reducedMotion) {
+        wheelContainer.style.animation = 'none';
+        setTimeout(() => {
+          wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
+          console.log('Spin-in animation re-applied after password check');
+        }, 10);
+      }
     } else {
       console.log('Incorrect password');
       errorMessage.style.display = 'block';
@@ -1185,6 +1221,7 @@ document.addEventListener('DOMContentLoaded', function() {
     passwordInput.focus();
     // Reset animation
     wheelContainer.style.animation = 'none';
+    console.log('Animation reset on auth reset');
   };
 
   submitButton.addEventListener('click', checkPassword);
