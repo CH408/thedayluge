@@ -74,8 +74,8 @@
 
     /* Wheel container */
     .wheel-container {
-      width: 500px;
-      height: 500px;
+      width: 400px;
+      height: 400px;
       position: relative;
       margin: 80px auto 0;
       z-index: 5;
@@ -85,9 +85,9 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, var(--black-bg), var(--dark-gray));
+      width: 150px;
+      height: 150px;
+      background: var(--dark-gray);
       border: 2px solid var(--crt-green);
       border-radius: 50%;
       transform: translate(-50%, -50%);
@@ -95,10 +95,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       text-transform: uppercase;
       text-align: center;
-      box-shadow: 0 0 30px rgba(0,255,127,0.5);
+      box-shadow: 0 0 20px rgba(0,255,127,0.5);
       cursor: pointer;
       padding: 10px;
     }
@@ -106,19 +106,19 @@
     .news-list {
       list-style: none;
       width: 100%;
-      max-height: 140px;
+      max-height: 100px;
       overflow-y: auto;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .news-list li {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .news-list a {
       color: var(--neon-green);
       text-decoration: none;
-      font-size: 12px;
+      font-size: 10px;
       display: block;
       white-space: nowrap;
       overflow: hidden;
@@ -128,7 +128,7 @@
     }
 
     .news-list a:hover {
-      text-shadow: 0 0 10px var(--bright-green);
+      text-shadow: 0 0 8px var(--bright-green);
       transform: scale(1.02);
     }
 
@@ -139,8 +139,8 @@
       border: 1px solid var(--crt-green);
       padding: 5px;
       z-index: 10;
-      font-size: 12px;
-      max-width: 200px;
+      font-size: 10px;
+      max-width: 180px;
       color: var(--crt-green);
       text-align: center;
       visibility: hidden;
@@ -158,35 +158,34 @@
 
     .spoke {
       position: absolute;
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       background: var(--dark-gray);
       border: 1px solid var(--crt-green);
       border-radius: 50%;
-      padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 10px;
       text-transform: uppercase;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,255,127,0.4);
+      box-shadow: 0 0 15px rgba(0,255,127,0.4);
       text-shadow: 0 0 5px var(--crt-green);
       cursor: default;
+      transform: translate(-50%, -50%);
     }
 
-    .spoke-1 { transform: translate(-50%, -50%) rotate(0deg) translate(150px); }
-    .spoke-2 { transform: translate(-50%, -50%) rotate(120deg) translate(150px); }
-    .spoke-3 { transform: translate(-50%, -50%) rotate(240deg) translate(150px); }
+    .spoke-1 { transform: translate(-50%, -50%) rotate(0deg) translate(120px); }
+    .spoke-2 { transform: translate(-50%, -50%) rotate(120deg) translate(120px); }
+    .spoke-3 { transform: translate(-50%, -50%) rotate(240deg) translate(120px); }
 
     .wheel-line {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 150px;
-      height: 4px;
-      background: radial-gradient(ellipse 15px 8px at center, rgba(0,255,127,0.9) 0%, transparent 70%),
-                  linear-gradient(90deg, transparent 0%, var(--crt-green) 20%, rgba(0,255,127,0.8) 50%, var(--crt-green) 80%, transparent 100%);
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, var(--crt-green) 20%, var(--crt-green) 80%, transparent 100%);
       transform-origin: left center;
     }
 
@@ -230,33 +229,32 @@
     /* Responsive adjustments */
     @media (max-width: 600px) {
       .wheel-container {
-        width: 380px;
-        height: 380px;
+        width: 300px;
+        height: 300px;
       }
       .wheel-center {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         font-size: 14px;
       }
       .news-list a {
-        font-size: 10px;
+        font-size: 9px;
       }
       .spoke {
-        width: 80px;
-        height: 80px;
-        font-size: 10px;
+        width: 60px;
+        height: 60px;
+        font-size: 9px;
       }
       .wheel-line {
-        width: 120px;
+        width: 90px;
       }
       .spoke-1, .spoke-2, .spoke-3 {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(90px);
       }
       .header h1 {
         font-size: 24px;
       }
       .nav-buttons {
-        flex-direction: row;
         gap: 8px;
         bottom: 10px;
         right: 10px;
@@ -269,27 +267,27 @@
 
     @media (max-width: 400px) {
       .wheel-container {
-        width: 320px;
-        height: 320px;
+        width: 260px;
+        height: 260px;
       }
       .wheel-center {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         font-size: 12px;
       }
       .news-list a {
-        font-size: 9px;
+        font-size: 8px;
       }
       .spoke {
-        width: 60px;
-        height: 60px;
-        font-size: 9px;
+        width: 50px;
+        height: 50px;
+        font-size: 8px;
       }
       .wheel-line {
-        width: 100px;
+        width: 75px;
       }
       .spoke-1, .spoke-2, .spoke-3 {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(100px);
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(75px);
       }
     }
   </style>
@@ -340,7 +338,7 @@
     canvas.height = window.innerHeight;
 
     const particlesArray = [];
-    const numberOfParticles = 40; // Reduced for performance
+    const numberOfParticles = 40;
 
     class Particle {
       constructor() {
