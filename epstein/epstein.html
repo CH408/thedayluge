@@ -6,7 +6,7 @@
   <title>Epstein's Web - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* Core styles */
+    /* Core styles from conspiracy-corner.html */
     :root {
       --crt-green: #00FF7F;
       --dark-green: #00CC66;
@@ -58,8 +58,11 @@
 
     /* Header */
     .header {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       text-align: center;
-      margin-bottom: 20px;
       z-index: 5;
     }
     .header h1 {
@@ -69,62 +72,58 @@
       text-shadow: 0 0 15px var(--crt-green);
     }
 
-    /* Atom container */
-    .atom-container {
-      width: 600px;
-      height: 600px;
+    /* Wheel container */
+    .wheel-container {
+      width: 500px;
+      height: 500px;
       position: relative;
-      margin: 0 auto;
+      margin: 80px auto 0;
       z-index: 5;
     }
 
-    .core {
+    .wheel-center {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 300px;
-      height: 400px;
-      background: var(--dark-gray);
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--black-bg), var(--dark-gray));
       border: 2px solid var(--crt-green);
-      border-radius: 10px;
+      border-radius: 50%;
       transform: translate(-50%, -50%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      box-shadow: 0 0 30px rgba(0,255,127,0.5);
-      cursor: pointer;
-    }
-
-    .core h2 {
       font-size: 18px;
       text-transform: uppercase;
-      margin-bottom: 15px;
       text-align: center;
-      text-shadow: 0 0 10px var(--crt-green);
+      box-shadow: 0 0 30px rgba(0,255,127,0.5);
+      cursor: pointer;
+      padding: 10px;
     }
 
     .news-list {
       list-style: none;
       width: 100%;
-      max-height: 300px;
+      max-height: 140px;
       overflow-y: auto;
+      margin-top: 10px;
     }
 
     .news-list li {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .news-list a {
       color: var(--neon-green);
       text-decoration: none;
-      font-size: 14px;
+      font-size: 12px;
       display: block;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding: 5px;
+      padding: 2px 5px;
       transition: all 0.3s ease;
     }
 
@@ -141,7 +140,7 @@
       padding: 5px;
       z-index: 10;
       font-size: 12px;
-      max-width: 250px;
+      max-width: 200px;
       color: var(--crt-green);
       text-align: center;
       visibility: hidden;
@@ -157,14 +156,14 @@
       opacity: 1;
     }
 
-    .proton {
+    .spoke {
       position: absolute;
       width: 100px;
       height: 100px;
+      background: var(--dark-gray);
       border: 1px solid var(--crt-green);
       border-radius: 50%;
-      background: radial-gradient(circle, var(--dark-gray), var(--black-bg));
-      transform: translate(-50%, -50%);
+      padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -172,11 +171,28 @@
       text-transform: uppercase;
       text-align: center;
       box-shadow: 0 0 20px rgba(0,255,127,0.4);
+      text-shadow: 0 0 5px var(--crt-green);
+      cursor: default;
     }
 
-    .proton-1 { transform: translate(-50%, -50%) rotate(0deg) translate(150px); }
-    .proton-2 { transform: translate(-50%, -50%) rotate(120deg) translate(150px); }
-    .proton-3 { transform: translate(-50%, -50%) rotate(240deg) translate(150px); }
+    .spoke-1 { transform: translate(-50%, -50%) rotate(0deg) translate(150px); }
+    .spoke-2 { transform: translate(-50%, -50%) rotate(120deg) translate(150px); }
+    .spoke-3 { transform: translate(-50%, -50%) rotate(240deg) translate(150px); }
+
+    .wheel-line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150px;
+      height: 4px;
+      background: radial-gradient(ellipse 15px 8px at center, rgba(0,255,127,0.9) 0%, transparent 70%),
+                  linear-gradient(90deg, transparent 0%, var(--crt-green) 20%, rgba(0,255,127,0.8) 50%, var(--crt-green) 80%, transparent 100%);
+      transform-origin: left center;
+    }
+
+    .line-1 { transform: translate(0, -50%) rotate(0deg); }
+    .line-2 { transform: translate(0, -50%) rotate(120deg); }
+    .line-3 { transform: translate(0, -50%) rotate(240deg); }
 
     /* Navigation buttons */
     .nav-buttons {
@@ -213,27 +229,27 @@
 
     /* Responsive adjustments */
     @media (max-width: 600px) {
-      .atom-container {
-        width: 400px;
-        height: 400px;
+      .wheel-container {
+        width: 380px;
+        height: 380px;
       }
-      .core {
-        width: 200px;
-        height: 300px;
-        padding: 15px;
-      }
-      .core h2 {
+      .wheel-center {
+        width: 150px;
+        height: 150px;
         font-size: 14px;
       }
       .news-list a {
-        font-size: 12px;
+        font-size: 10px;
       }
-      .proton {
+      .spoke {
         width: 80px;
         height: 80px;
         font-size: 10px;
       }
-      .proton-1, .proton-2, .proton-3 {
+      .wheel-line {
+        width: 120px;
+      }
+      .spoke-1, .spoke-2, .spoke-3 {
         transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px);
       }
       .header h1 {
@@ -252,27 +268,27 @@
     }
 
     @media (max-width: 400px) {
-      .atom-container {
-        width: 300px;
-        height: 300px;
+      .wheel-container {
+        width: 320px;
+        height: 320px;
       }
-      .core {
-        width: 160px;
-        height: 240px;
-        padding: 10px;
-      }
-      .core h2 {
+      .wheel-center {
+        width: 120px;
+        height: 120px;
         font-size: 12px;
       }
       .news-list a {
-        font-size: 10px;
+        font-size: 9px;
       }
-      .proton {
+      .spoke {
         width: 60px;
         height: 60px;
         font-size: 9px;
       }
-      .proton-1, .proton-2, .proton-3 {
+      .wheel-line {
+        width: 100px;
+      }
+      .spoke-1, .spoke-2, .spoke-3 {
         transform: translate(-50%, -50%) rotate(var(--angle)) translate(100px);
       }
     }
@@ -293,8 +309,11 @@
     <h1>EPSTEIN'S WEB</h1>
   </div>
 
-  <div class="atom-container">
-    <div class="core" onclick="goToRandomEpstein()">
+  <div class="wheel-container">
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-center" onclick="goToRandomEpstein()">
       <h2>News</h2>
       <ul class="news-list">
         <li><a href="#" data-title="Loading...">Loading...</a></li>
@@ -304,9 +323,9 @@
         <li><a href="#" data-title="Loading...">Loading...</a></li>
       </ul>
     </div>
-    <div class="proton proton-1" style="--angle: 0deg;">Podcasts & Video</div>
-    <div class="proton proton-2" style="--angle: 120deg;">Articles & Longform</div>
-    <div class="proton proton-3" style="--angle: 240deg;">Primary Sources</div>
+    <div class="spoke spoke-1" style="--angle: 0deg;">Podcasts & Video</div>
+    <div class="spoke spoke-2" style="--angle: 120deg;">Articles & Longform</div>
+    <div class="spoke spoke-3" style="--angle: 240deg;">Primary Sources</div>
   </div>
 
   <div class="nav-buttons">
