@@ -6,7 +6,7 @@
   <title>Epstein's Web - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* Existing :root variables and global styles */
+    /* Core styles from existing code */
     :root {
       --crt-green: #00FF7F;
       --dark-green: #00CC66;
@@ -87,100 +87,99 @@
       100% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
 
-    /* Hologram container */
-    .hologram {
+    /* Solar system container */
+    .solar-system {
       width: 600px;
       height: 600px;
       position: relative;
-      perspective: 1000px;
       margin: 0 auto;
       z-index: 5;
     }
 
-    .hub {
+    .star {
       position: absolute;
       top: 50%;
       left: 50%;
       width: 120px;
       height: 120px;
-      border-radius: 50%;
       background: radial-gradient(circle, var(--black-bg), var(--dark-gray));
       border: 2px solid var(--crt-green);
-      transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       text-transform: uppercase;
       text-align: center;
-      animation: float 4s ease-in-out infinite;
+      animation: pulse 3s ease-in-out infinite;
       box-shadow: 0 0 30px rgba(0,255,127,0.5);
       cursor: pointer;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) translateZ(0); }
-      50% { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) translateZ(10px); }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(0,255,127,0.5); transform: translate(-50%, -50%) scale(1); }
+      50% { box-shadow: 0 0 50px rgba(0,255,127,0.8); transform: translate(-50%, -50%) scale(1.02); }
     }
 
-    .node {
+    .planet {
       position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
+      width: 80px;
+      height: 80px;
       border: 1px solid var(--crt-green);
+      border-radius: 50%;
       background: radial-gradient(circle, var(--dark-gray), var(--black-bg));
-      transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+      transform: translate(-50%, -50%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 12px;
       text-transform: uppercase;
       text-align: center;
-      animation: node-rotate 15s linear infinite;
+      animation: orbit 20s linear infinite;
       box-shadow: 0 0 20px rgba(0,255,127,0.4);
     }
 
-    .node-1 { top: 25%; left: 25%; }
-    .node-2 { top: 25%; left: 75%; }
-    .node-3 { top: 75%; left: 25%; }
-    .node-4 { top: 75%; left: 75%; }
+    .planet-1 { transform: translate(-50%, -50%) rotate(0deg) translate(200px); animation-delay: 0s; }
+    .planet-2 { transform: translate(-50%, -50%) rotate(90deg) translate(200px); animation-delay: 5s; }
+    .planet-3 { transform: translate(-50%, -50%) rotate(180deg) translate(200px); animation-delay: 10s; }
+    .planet-4 { transform: translate(-50%, -50%) rotate(270deg) translate(200px); animation-delay: 15s; }
 
-    @keyframes node-rotate {
-      from { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) rotateZ(0deg); }
-      to { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) rotateZ(360deg); }
+    @keyframes orbit {
+      from { transform: translate(-50%, -50%) rotate(0deg) translate(200px) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg) translate(200px) rotate(-360deg); }
     }
 
-    .link-node {
+    .moon {
       position: absolute;
       width: 30px;
       height: 30px;
+      border: 1px solid var(--neon-green);
       border-radius: 50%;
-      background: var(--neon-green);
-      border: 1px solid var(--crt-green);
+      background: var(--dark-gray);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 9px;
       text-align: center;
       cursor: pointer;
-      animation: link-node-pulse 2s ease-in-out infinite;
+      animation: moon-orbit 10s linear infinite;
+      box-shadow: 0 0 10px rgba(0,255,127,0.4);
     }
 
-    /* Pentagon arrangement for link nodes */
-    .link-node:nth-child(1) { transform: rotate(0deg) translate(50px); }
-    .link-node:nth-child(2) { transform: rotate(72deg) translate(50px); }
-    .link-node:nth-child(3) { transform: rotate(144deg) translate(50px); }
-    .link-node:nth-child(4) { transform: rotate(216deg) translate(50px); }
-    .link-node:nth-child(5) { transform: rotate(288deg) translate(50px); }
+    .moon:nth-child(1) { transform: rotate(0deg) translate(50px); animation-delay: 0s; }
+    .moon:nth-child(2) { transform: rotate(72deg) translate(50px); animation-delay: 2s; }
+    .moon:nth-child(3) { transform: rotate(144deg) translate(50px); animation-delay: 4s; }
+    .moon:nth-child(4) { transform: rotate(216deg) translate(50px); animation-delay: 6s; }
+    .moon:nth-child(5) { transform: rotate(288deg) translate(50px); animation-delay: 8s; }
 
-    @keyframes link-node-pulse {
-      0%, 100% { box-shadow: 0 0 10px rgba(0,255,127,0.4); }
-      50% { box-shadow: 0 0 20px rgba(0,255,127,0.8); }
+    @keyframes moon-orbit {
+      from { transform: rotate(0deg) translate(50px) rotate(0deg); }
+      to { transform: rotate(360deg) translate(50px) rotate(-360deg); }
     }
 
-    .link-node a {
-      color: var(--black-bg);
+    .moon a {
+      color: var(--neon-green);
       text-decoration: none;
       white-space: nowrap;
       overflow: hidden;
@@ -190,7 +189,13 @@
       padding: 2px;
     }
 
-    .link-node:hover::after {
+    .moon:hover {
+      transform: scale(1.1) translate(50px);
+      box-shadow: 0 0 20px rgba(0,255,127,0.8);
+      z-index: 10;
+    }
+
+    .moon:hover::after {
       content: attr(data-title);
       position: absolute;
       background: var(--dark-gray);
@@ -204,12 +209,6 @@
       transform: translateX(-50%);
       color: var(--crt-green);
       text-align: center;
-    }
-
-    .link-node:hover {
-      transform: scale(1.1) translate(50px);
-      box-shadow: 0 0 25px rgba(0,255,127,0.9);
-      z-index: 10;
     }
 
     /* Navigation buttons */
@@ -247,27 +246,30 @@
 
     /* Responsive adjustments */
     @media (max-width: 600px) {
-      .hologram {
+      .solar-system {
         width: 400px;
         height: 400px;
       }
-      .hub {
+      .star {
         width: 80px;
         height: 80px;
         font-size: 14px;
       }
-      .node {
-        width: 70px;
-        height: 70px;
-        font-size: 12px;
+      .planet {
+        width: 60px;
+        height: 60px;
+        font-size: 10px;
       }
-      .link-node {
+      .planet-1, .planet-2, .planet-3, .planet-4 {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(150px);
+      }
+      .moon {
         width: 25px;
         height: 25px;
         font-size: 8px;
       }
-      .link-node:nth-child(1), .link-node:nth-child(2), .link-node:nth-child(3),
-      .link-node:nth-child(4), .link-node:nth-child(5) {
+      .moon:nth-child(1), .moon:nth-child(2), .moon:nth-child(3),
+      .moon:nth-child(4), .moon:nth-child(5) {
         transform: rotate(var(--angle)) translate(40px);
       }
       .header h1 {
@@ -286,27 +288,30 @@
     }
 
     @media (max-width: 400px) {
-      .hologram {
+      .solar-system {
         width: 300px;
         height: 300px;
       }
-      .hub {
+      .star {
         width: 60px;
         height: 60px;
         font-size: 12px;
       }
-      .node {
+      .planet {
         width: 50px;
         height: 50px;
-        font-size: 10px;
+        font-size: 9px;
       }
-      .link-node {
+      .planet-1, .planet-2, .planet-3, .planet-4 {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px);
+      }
+      .moon {
         width: 20px;
         height: 20px;
         font-size: 7px;
       }
-      .link-node:nth-child(1), .link-node:nth-child(2), .link-node:nth-child(3),
-      .link-node:nth-child(4), .link-node:nth-child(5) {
+      .moon:nth-child(1), .moon:nth-child(2), .moon:nth-child(3),
+      .moon:nth-child(4), .moon:nth-child(5) {
         transform: rotate(var(--angle)) translate(30px);
       }
     }
@@ -327,35 +332,35 @@
     <h1>EPSTEIN'S WEB</h1>
   </div>
 
-  <div class="hologram">
-    <div class="hub" onclick="goToRandomEpstein()">Epstein's Web</div>
-    <div class="node node-1" data-category="podcasts-video">Podcasts & Video
-      <div class="link-node" style="--angle: 0deg;"></div>
-      <div class="link-node" style="--angle: 72deg;"></div>
-      <div class="link-node" style="--angle: 144deg;"></div>
-      <div class="link-node" style="--angle: 216deg;"></div>
-      <div class="link-node" style="--angle: 288deg;"></div>
+  <div class="solar-system">
+    <div class="star" onclick="goToRandomEpstein()">Epstein's Web</div>
+    <div class="planet planet-1" data-category="podcasts-video" style="--angle: 0deg;">Podcasts & Video
+      <div class="moon" style="--angle: 0deg;"></div>
+      <div class="moon" style="--angle: 72deg;"></div>
+      <div class="moon" style="--angle: 144deg;"></div>
+      <div class="moon" style="--angle: 216deg;"></div>
+      <div class="moon" style="--angle: 288deg;"></div>
     </div>
-    <div class="node node-2" data-category="articles-longform">Articles & Longform
-      <div class="link-node" style="--angle: 0deg;"></div>
-      <div class="link-node" style="--angle: 72deg;"></div>
-      <div class="link-node" style="--angle: 144deg;"></div>
-      <div class="link-node" style="--angle: 216deg;"></div>
-      <div class="link-node" style="--angle: 288deg;"></div>
+    <div class="planet planet-2" data-category="articles-longform" style="--angle: 90deg;">Articles & Longform
+      <div class="moon" style="--angle: 0deg;"></div>
+      <div class="moon" style="--angle: 72deg;"></div>
+      <div class="moon" style="--angle: 144deg;"></div>
+      <div class="moon" style="--angle: 216deg;"></div>
+      <div class="moon" style="--angle: 288deg;"></div>
     </div>
-    <div class="node node-3" data-category="epstein-news">News
-      <div class="link-node" style="--angle: 0deg;"></div>
-      <div class="link-node" style="--angle: 72deg;"></div>
-      <div class="link-node" style="--angle: 144deg;"></div>
-      <div class="link-node" style="--angle: 216deg;"></div>
-      <div class="link-node" style="--angle: 288deg;"></div>
+    <div class="planet planet-3" data-category="epstein-news" style="--angle: 180deg;">News
+      <div class="moon" style="--angle: 0deg;"></div>
+      <div class="moon" style="--angle: 72deg;"></div>
+      <div class="moon" style="--angle: 144deg;"></div>
+      <div class="moon" style="--angle: 216deg;"></div>
+      <div class="moon" style="--angle: 288deg;"></div>
     </div>
-    <div class="node node-4" data-category="primary-sources">Primary Sources
-      <div class="link-node" style="--angle: 0deg;"></div>
-      <div class="link-node" style="--angle: 72deg;"></div>
-      <div class="link-node" style="--angle: 144deg;"></div>
-      <div class="link-node" style="--angle: 216deg;"></div>
-      <div class="link-node" style="--angle: 288deg;"></div>
+    <div class="planet planet-4" data-category="primary-sources" style="--angle: 270deg;">Primary Sources
+      <div class="moon" style="--angle: 0deg;"></div>
+      <div class="moon" style="--angle: 72deg;"></div>
+      <div class="moon" style="--angle: 144deg;"></div>
+      <div class="moon" style="--angle: 216deg;"></div>
+      <div class="moon" style="--angle: 288deg;"></div>
     </div>
   </div>
 
@@ -449,14 +454,14 @@
         const displayLinks = links.slice(0, maxLinks);
         const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
         if (container) {
-          const linkNodes = container.querySelectorAll('.link-node');
-          linkNodes.forEach((node, index) => {
+          const moons = container.querySelectorAll('.moon');
+          moons.forEach((moon, index) => {
             if (displayLinks[index]) {
-              node.innerHTML = `<a href="${displayLinks[index].url}" target="_blank">${displayLinks[index].title}</a>`;
-              node.setAttribute('data-title', displayLinks[index].title);
+              moon.innerHTML = `<a href="${displayLinks[index].url}" target="_blank" aria-label="Link to ${displayLinks[index].title}">${displayLinks[index].title}</a>`;
+              moon.setAttribute('data-title', displayLinks[index].title);
             } else {
-              node.innerHTML = '<a>No content</a>';
-              node.setAttribute('data-title', 'No content available');
+              moon.innerHTML = '<a>No content</a>';
+              moon.setAttribute('data-title', 'No content available');
             }
           });
         }
@@ -464,10 +469,10 @@
         console.error(`Error loading ${category} links:`, error);
         const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
         if (container) {
-          const linkNodes = container.querySelectorAll('.link-node');
-          linkNodes.forEach(node => {
-            node.innerHTML = '<a>No content</a>';
-            node.setAttribute('data-title', 'No content available');
+          const moons = container.querySelectorAll('.moon');
+          moons.forEach(moon => {
+            moon.innerHTML = '<a>No content</a>';
+            moon.setAttribute('data-title', 'No content available');
           });
         }
       }
@@ -503,10 +508,10 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadLinks('podcasts-video', 'node');
-      loadLinks('articles-longform', 'node');
-      loadLinks('epstein-news', 'node');
-      loadLinks('primary-sources', 'node');
+      loadLinks('podcasts-video', 'planet');
+      loadLinks('articles-longform', 'planet');
+      loadLinks('epstein-news', 'planet');
+      loadLinks('primary-sources', 'planet');
     });
   </script>
 </body>
