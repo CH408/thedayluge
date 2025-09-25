@@ -12,6 +12,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
   
   :root{
+    /* Atomic color palette */
     --red:#cc0000;  
     --orange:#ff8800;  
     --green:#00dd55;
@@ -237,32 +238,13 @@
     height: 500px;
     margin: 0 auto;
     z-index: 5;
-    visibility: visible !important;
+    animation: spin-in 1.5s ease-out forwards;
     will-change: transform, opacity;
-    transform-origin: center center;
-  }
-
-  .wheel-container.spin {
-    animation: spin-in 1.5s ease-out 0.2s forwards !important;
-    -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
-    -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
   }
 
   @keyframes spin-in {
     0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); }
-    100% { opacity: 1; transform: scale(1) rotate(1080deg); }
-  }
-
-  @-webkit-keyframes spin-in {
-    0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); }
-    100% { opacity: 1; transform: scale(1) rotate(1080deg); }
-  }
-
-  @-moz-keyframes spin-in {
-    0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); }
+    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); } /* 3 full rotations (3 * 360deg) */
     100% { opacity: 1; transform: scale(1) rotate(1080deg); }
   }
 
@@ -274,26 +256,13 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: rotate linear infinite;
-    -webkit-animation: rotate linear infinite;
-    -moz-animation: rotate linear infinite;
     will-change: transform;
-    z-index: 6;
   }
   .orbital-ring-1{ width: 300px; height: 300px; animation-duration: 10s; }
   .orbital-ring-2{ width: 400px; height: 400px; animation-duration: 12s; animation-direction: reverse; }
   .orbital-ring-3{ width: 480px; height: 480px; animation-duration: 14s; }
 
   @keyframes rotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  @-webkit-keyframes rotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  @-moz-keyframes rotate {
     from { transform: translate(-50%, -50%) rotate(0deg); }
     to { transform: translate(-50%, -50%) rotate(360deg); }
   }
@@ -366,8 +335,6 @@
     box-shadow: 0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
     padding: 4px;
     animation: electron-pulse 1.2s ease-in-out infinite;
-    will-change: transform, box-shadow;
-    z-index: 4;
   }
 
   @keyframes electron-pulse {
@@ -386,14 +353,14 @@
   .spoke:hover{
     transform: scale(1.15);
     box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 5;
+    z-index: 10;
     animation-play-state: paused;
   }
 
   .spoke-7:hover{
     transform: scale(1.15);
     box-shadow: 0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
-    z-index: 5;
+    z-index: 10;
     animation-play-state: paused;
     border-color: rgba(0,255,0,0.8) !important;
   }
@@ -484,7 +451,6 @@
     border-radius: 2px;
     overflow: hidden;
     animation: organic-pulse 2s ease-in-out infinite;
-    will-change: opacity, box-shadow, filter;
   }
 
   .wheel-line::before {
@@ -776,11 +742,6 @@
       width: 380px;
       height: 380px;
     }
-    .wheel-container.spin{
-      animation: spin-in 1.5s ease-out 0.2s forwards !important;
-      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
-      -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
-    }
     .wheel-center{
       width: 120px;
       height: 120px;
@@ -791,10 +752,6 @@
       height: 80px;
       font-size: 11px;
       animation: electron-pulse 1.5s ease-in-out infinite;
-      z-index: 4;
-    }
-    .spoke:hover{
-      z-index: 5;
     }
     .spoke-1{ left: 295px; top: 150px; font-size: 12px; }
     .spoke-2{ left: 255px; top: 255px; font-size: 11px; }
@@ -866,7 +823,6 @@
     }
     .orbital-ring{
       animation-duration: 15s;
-      z-index: 6;
     }
     .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 12s; }
     .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 14s; animation-direction: reverse; }
@@ -912,11 +868,6 @@
       width: 320px;
       height: 320px;
     }
-    .wheel-container.spin{
-      animation: spin-in 1.5s ease-out 0.2s forwards !important;
-      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
-      -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
-    }
     .wheel-center{
       width: 100px;
       height: 100px;
@@ -927,10 +878,6 @@
       height: 65px;
       font-size: 10px;
       animation: electron-pulse 1.8s ease-in-out infinite;
-      z-index: 4;
-    }
-    .spoke:hover{
-      z-index: 5;
     }
     .spoke-1{ left: 245px; top: 127.5px; font-size: 11px; }
     .spoke-2{ left: 215px; top: 215px; font-size: 10px; }
@@ -1001,7 +948,6 @@
     }
     .orbital-ring{
       animation-duration: 12s;
-      z-index: 6;
     }
     .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 10s; }
     .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 11s; animation-direction: reverse; }
@@ -1088,8 +1034,8 @@
       animation: none;
       opacity: 0.7;
     }
-    .wheel-container.spin {
-      animation: none !important;
+    .wheel-container {
+      animation: none;
       transform: scale(1);
       opacity: 1;
     }
@@ -1173,22 +1119,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const passwordInput = document.getElementById('password-input');
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
-  const wheelContainer = document.querySelector('.wheel-container');
-
-  // Debug: Check prefers-reduced-motion and computed styles
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  console.log('Prefers reduced motion:', reducedMotion);
-  console.log('Initial wheel-container animation:', getComputedStyle(wheelContainer).animationName);
-
-  // Force animation with class toggle
-  if (!reducedMotion) {
-    wheelContainer.classList.remove('spin');
-    setTimeout(() => {
-      wheelContainer.classList.add('spin');
-      console.log('Added spin class to wheel-container');
-      console.log('Post-spin animation:', getComputedStyle(wheelContainer).animationName);
-    }, 100);
-  }
 
   overlay.classList.add('hidden');
   document.querySelectorAll('body > *').forEach(el => {
@@ -1204,15 +1134,6 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('body > *').forEach(el => {
         el.style.visibility = 'visible';
       });
-      // Re-trigger animation
-      if (!reducedMotion) {
-        wheelContainer.classList.remove('spin');
-        setTimeout(() => {
-          wheelContainer.classList.add('spin');
-          console.log('Re-added spin class after password check');
-          console.log('Post-password animation:', getComputedStyle(wheelContainer).animationName);
-        }, 100);
-      }
     } else {
       console.log('Incorrect password');
       errorMessage.style.display = 'block';
@@ -1230,9 +1151,6 @@ document.addEventListener('DOMContentLoaded', function() {
     passwordInput.value = '';
     errorMessage.style.display = 'none';
     passwordInput.focus();
-    // Reset animation
-    wheelContainer.classList.remove('spin');
-    console.log('Spin class removed on auth reset');
   };
 
   submitButton.addEventListener('click', checkPassword);
@@ -1315,13 +1233,6 @@ document.addEventListener('DOMContentLoaded', function() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
-      if (!reducedMotion) {
-        wheelContainer.classList.remove('spin');
-        setTimeout(() => {
-          wheelContainer.classList.add('spin');
-          console.log('Re-added spin class on resize');
-        }, 100);
-      }
   });
 
   const categoryMap = {
