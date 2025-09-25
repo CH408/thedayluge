@@ -87,8 +87,8 @@
       100% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
 
-    /* Solar system container */
-    .solar-system {
+    /* Wheel container */
+    .wheel-container {
       width: 600px;
       height: 600px;
       position: relative;
@@ -96,7 +96,7 @@
       z-index: 5;
     }
 
-    .star {
+    .nucleus {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -122,63 +122,76 @@
       50% { box-shadow: 0 0 50px rgba(0,255,127,0.8); transform: translate(-50%, -50%) scale(1.02); }
     }
 
-    .planet {
+    .spoke {
       position: absolute;
-      width: 80px;
-      height: 80px;
-      border: 1px solid var(--crt-green);
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--dark-gray), var(--black-bg));
-      transform: translate(-50%, -50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      text-transform: uppercase;
-      text-align: center;
-      animation: orbit 20s linear infinite;
-      box-shadow: 0 0 20px rgba(0,255,127,0.4);
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 4px;
+      background: radial-gradient(ellipse 15px 8px at center, rgba(0,255,127,0.9) 0%, transparent 70%),
+                  linear-gradient(90deg, transparent 0%, var(--crt-green) 20%, rgba(0,255,127,0.8) 50%, var(--crt-green) 80%, transparent 100%);
+      transform-origin: left center;
+      animation: organic-pulse 4s ease-in-out infinite;
     }
 
-    .planet-1 { transform: translate(-50%, -50%) rotate(0deg) translate(200px); animation-delay: 0s; }
-    .planet-2 { transform: translate(-50%, -50%) rotate(90deg) translate(200px); animation-delay: 5s; }
-    .planet-3 { transform: translate(-50%, -50%) rotate(180deg) translate(200px); animation-delay: 10s; }
-    .planet-4 { transform: translate(-50%, -50%) rotate(270deg) translate(200px); animation-delay: 15s; }
+    .spoke-1 { transform: translate(0, -50%) rotate(0deg); }
+    .spoke-2 { transform: translate(0, -50%) rotate(90deg); }
+    .spoke-3 { transform: translate(0, -50%) rotate(180deg); }
+    .spoke-4 { transform: translate(0, -50%) rotate(270deg); }
 
-    @keyframes orbit {
-      from { transform: translate(-50%, -50%) rotate(0deg) translate(200px) rotate(0deg); }
-      to { transform: translate(-50%, -50%) rotate(360deg) translate(200px) rotate(-360deg); }
+    @keyframes organic-pulse {
+      0% { opacity: 0.6; box-shadow: 0 0 8px var(--crt-green); filter: brightness(0.8); }
+      25% { opacity: 0.9; box-shadow: 0 0 15px var(--crt-green); filter: brightness(1.2); }
+      50% { opacity: 1; box-shadow: 0 0 20px var(--bright-green); filter: brightness(1.4); }
+      75% { opacity: 0.9; box-shadow: 0 0 15px var(--crt-green); filter: brightness(1.2); }
+      100% { opacity: 0.6; box-shadow: 0 0 8px var(--crt-green); filter: brightness(0.8); }
     }
 
-    .moon {
+    .link-segment {
       position: absolute;
-      width: 30px;
+      width: 60px;
       height: 30px;
-      border: 1px solid var(--neon-green);
-      border-radius: 50%;
       background: var(--dark-gray);
+      border: 1px solid var(--crt-green);
+      border-radius: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 9px;
+      font-size: 10px;
       text-align: center;
+      text-transform: uppercase;
       cursor: pointer;
-      animation: moon-orbit 10s linear infinite;
+      animation: electron-pulse 2s ease-in-out infinite;
       box-shadow: 0 0 10px rgba(0,255,127,0.4);
     }
 
-    .moon:nth-child(1) { transform: rotate(0deg) translate(50px); animation-delay: 0s; }
-    .moon:nth-child(2) { transform: rotate(72deg) translate(50px); animation-delay: 2s; }
-    .moon:nth-child(3) { transform: rotate(144deg) translate(50px); animation-delay: 4s; }
-    .moon:nth-child(4) { transform: rotate(216deg) translate(50px); animation-delay: 6s; }
-    .moon:nth-child(5) { transform: rotate(288deg) translate(50px); animation-delay: 8s; }
+    .spoke-1 .link-segment:nth-child(1) { transform: translate(30px, -15px); }
+    .spoke-1 .link-segment:nth-child(2) { transform: translate(60px, -15px); }
+    .spoke-1 .link-segment:nth-child(3) { transform: translate(90px, -15px); }
+    .spoke-1 .link-segment:nth-child(4) { transform: translate(120px, -15px); }
+    .spoke-1 .link-segment:nth-child(5) { transform: translate(150px, -15px); }
+    .spoke-2 .link-segment:nth-child(1) { transform: translate(30px, -15px); }
+    .spoke-2 .link-segment:nth-child(2) { transform: translate(60px, -15px); }
+    .spoke-2 .link-segment:nth-child(3) { transform: translate(90px, -15px); }
+    .spoke-2 .link-segment:nth-child(4) { transform: translate(120px, -15px); }
+    .spoke-2 .link-segment:nth-child(5) { transform: translate(150px, -15px); }
+    .spoke-3 .link-segment:nth-child(1) { transform: translate(30px, -15px); }
+    .spoke-3 .link-segment:nth-child(2) { transform: translate(60px, -15px); }
+    .spoke-3 .link-segment:nth-child(3) { transform: translate(90px, -15px); }
+    .spoke-3 .link-segment:nth-child(4) { transform: translate(120px, -15px); }
+    .spoke-3 .link-segment:nth-child(5) { transform: translate(150px, -15px); }
+    .spoke-4 .link-segment:nth-child(1) { transform: translate(30px, -15px); }
+    .spoke-4 .link-segment:nth-child(2) { transform: translate(60px, -15px); }
+    .spoke-4 .link-segment:nth-child(3) { transform: translate(90px, -15px); }
+    .spoke-4 .link-segment:nth-child(4) { transform: translate(120px, -15px); }
+    .spoke-4 .link-segment:nth-child(5) { transform: translate(150px, -15px); }
 
-    @keyframes moon-orbit {
-      from { transform: rotate(0deg) translate(50px) rotate(0deg); }
-      to { transform: rotate(360deg) translate(50px) rotate(-360deg); }
+    @keyframes electron-pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(0,255,127,0.4); }
+      50% { box-shadow: 0 0 20px rgba(0,255,127,0.8); }
     }
 
-    .moon a {
+    .link-segment a {
       color: var(--neon-green);
       text-decoration: none;
       white-space: nowrap;
@@ -189,13 +202,13 @@
       padding: 2px;
     }
 
-    .moon:hover {
-      transform: scale(1.1) translate(50px);
+    .link-segment:hover {
+      transform: scale(1.1) translate(150px, -15px);
       box-shadow: 0 0 20px rgba(0,255,127,0.8);
       z-index: 10;
     }
 
-    .moon:hover::after {
+    .link-segment:hover::after {
       content: attr(data-title);
       position: absolute;
       background: var(--dark-gray);
@@ -246,32 +259,33 @@
 
     /* Responsive adjustments */
     @media (max-width: 600px) {
-      .solar-system {
+      .wheel-container {
         width: 400px;
         height: 400px;
       }
-      .star {
+      .nucleus {
         width: 80px;
         height: 80px;
         font-size: 14px;
       }
-      .planet {
-        width: 60px;
-        height: 60px;
-        font-size: 10px;
+      .spoke {
+        width: 150px;
       }
-      .planet-1, .planet-2, .planet-3, .planet-4 {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(150px);
-      }
-      .moon {
-        width: 25px;
+      .link-segment {
+        width: 50px;
         height: 25px;
-        font-size: 8px;
+        font-size: 9px;
       }
-      .moon:nth-child(1), .moon:nth-child(2), .moon:nth-child(3),
-      .moon:nth-child(4), .moon:nth-child(5) {
-        transform: rotate(var(--angle)) translate(40px);
-      }
+      .spoke-1 .link-segment:nth-child(1), .spoke-2 .link-segment:nth-child(1), 
+      .spoke-3 .link-segment:nth-child(1), .spoke-4 .link-segment:nth-child(1) { transform: translate(20px, -12.5px); }
+      .spoke-1 .link-segment:nth-child(2), .spoke-2 .link-segment:nth-child(2), 
+      .spoke-3 .link-segment:nth-child(2), .spoke-4 .link-segment:nth-child(2) { transform: translate(40px, -12.5px); }
+      .spoke-1 .link-segment:nth-child(3), .spoke-2 .link-segment:nth-child(3), 
+      .spoke-3 .link-segment:nth-child(3), .spoke-4 .link-segment:nth-child(3) { transform: translate(60px, -12.5px); }
+      .spoke-1 .link-segment:nth-child(4), .spoke-2 .link-segment:nth-child(4), 
+      .spoke-3 .link-segment:nth-child(4), .spoke-4 .link-segment:nth-child(4) { transform: translate(80px, -12.5px); }
+      .spoke-1 .link-segment:nth-child(5), .spoke-2 .link-segment:nth-child(5), 
+      .spoke-3 .link-segment:nth-child(5), .spoke-4 .link-segment:nth-child(5) { transform: translate(100px, -12.5px); }
       .header h1 {
         font-size: 24px;
       }
@@ -288,32 +302,33 @@
     }
 
     @media (max-width: 400px) {
-      .solar-system {
+      .wheel-container {
         width: 300px;
         height: 300px;
       }
-      .star {
+      .nucleus {
         width: 60px;
         height: 60px;
         font-size: 12px;
       }
-      .planet {
-        width: 50px;
-        height: 50px;
-        font-size: 9px;
+      .spoke {
+        width: 120px;
       }
-      .planet-1, .planet-2, .planet-3, .planet-4 {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px);
-      }
-      .moon {
-        width: 20px;
+      .link-segment {
+        width: 40px;
         height: 20px;
-        font-size: 7px;
+        font-size: 8px;
       }
-      .moon:nth-child(1), .moon:nth-child(2), .moon:nth-child(3),
-      .moon:nth-child(4), .moon:nth-child(5) {
-        transform: rotate(var(--angle)) translate(30px);
-      }
+      .spoke-1 .link-segment:nth-child(1), .spoke-2 .link-segment:nth-child(1), 
+      .spoke-3 .link-segment:nth-child(1), .spoke-4 .link-segment:nth-child(1) { transform: translate(15px, -10px); }
+      .spoke-1 .link-segment:nth-child(2), .spoke-2 .link-segment:nth-child(2), 
+      .spoke-3 .link-segment:nth-child(2), .spoke-4 .link-segment:nth-child(2) { transform: translate(30px, -10px); }
+      .spoke-1 .link-segment:nth-child(3), .spoke-2 .link-segment:nth-child(3), 
+      .spoke-3 .link-segment:nth-child(3), .spoke-4 .link-segment:nth-child(3) { transform: translate(45px, -10px); }
+      .spoke-1 .link-segment:nth-child(4), .spoke-2 .link-segment:nth-child(4), 
+      .spoke-3 .link-segment:nth-child(4), .spoke-4 .link-segment:nth-child(4) { transform: translate(60px, -10px); }
+      .spoke-1 .link-segment:nth-child(5), .spoke-2 .link-segment:nth-child(5), 
+      .spoke-3 .link-segment:nth-child(5), .spoke-4 .link-segment:nth-child(5) { transform: translate(75px, -10px); }
     }
   </style>
 </head>
@@ -332,35 +347,35 @@
     <h1>EPSTEIN'S WEB</h1>
   </div>
 
-  <div class="solar-system">
-    <div class="star" onclick="goToRandomEpstein()">Epstein's Web</div>
-    <div class="planet planet-1" data-category="podcasts-video" style="--angle: 0deg;">Podcasts & Video
-      <div class="moon" style="--angle: 0deg;"></div>
-      <div class="moon" style="--angle: 72deg;"></div>
-      <div class="moon" style="--angle: 144deg;"></div>
-      <div class="moon" style="--angle: 216deg;"></div>
-      <div class="moon" style="--angle: 288deg;"></div>
+  <div class="wheel-container">
+    <div class="nucleus" onclick="goToRandomEpstein()">Epstein's Web</div>
+    <div class="spoke spoke-1" data-category="podcasts-video">
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
     </div>
-    <div class="planet planet-2" data-category="articles-longform" style="--angle: 90deg;">Articles & Longform
-      <div class="moon" style="--angle: 0deg;"></div>
-      <div class="moon" style="--angle: 72deg;"></div>
-      <div class="moon" style="--angle: 144deg;"></div>
-      <div class="moon" style="--angle: 216deg;"></div>
-      <div class="moon" style="--angle: 288deg;"></div>
+    <div class="spoke spoke-2" data-category="articles-longform">
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
     </div>
-    <div class="planet planet-3" data-category="epstein-news" style="--angle: 180deg;">News
-      <div class="moon" style="--angle: 0deg;"></div>
-      <div class="moon" style="--angle: 72deg;"></div>
-      <div class="moon" style="--angle: 144deg;"></div>
-      <div class="moon" style="--angle: 216deg;"></div>
-      <div class="moon" style="--angle: 288deg;"></div>
+    <div class="spoke spoke-3" data-category="epstein-news">
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
     </div>
-    <div class="planet planet-4" data-category="primary-sources" style="--angle: 270deg;">Primary Sources
-      <div class="moon" style="--angle: 0deg;"></div>
-      <div class="moon" style="--angle: 72deg;"></div>
-      <div class="moon" style="--angle: 144deg;"></div>
-      <div class="moon" style="--angle: 216deg;"></div>
-      <div class="moon" style="--angle: 288deg;"></div>
+    <div class="spoke spoke-4" data-category="primary-sources">
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
+      <div class="link-segment"></div>
     </div>
   </div>
 
@@ -454,14 +469,14 @@
         const displayLinks = links.slice(0, maxLinks);
         const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
         if (container) {
-          const moons = container.querySelectorAll('.moon');
-          moons.forEach((moon, index) => {
+          const segments = container.querySelectorAll('.link-segment');
+          segments.forEach((segment, index) => {
             if (displayLinks[index]) {
-              moon.innerHTML = `<a href="${displayLinks[index].url}" target="_blank" aria-label="Link to ${displayLinks[index].title}">${displayLinks[index].title}</a>`;
-              moon.setAttribute('data-title', displayLinks[index].title);
+              segment.innerHTML = `<a href="${displayLinks[index].url}" target="_blank" aria-label="Link to ${displayLinks[index].title}">${displayLinks[index].title}</a>`;
+              segment.setAttribute('data-title', displayLinks[index].title);
             } else {
-              moon.innerHTML = '<a>No content</a>';
-              moon.setAttribute('data-title', 'No content available');
+              segment.innerHTML = '<a>No content</a>';
+              segment.setAttribute('data-title', 'No content available');
             }
           });
         }
@@ -469,10 +484,10 @@
         console.error(`Error loading ${category} links:`, error);
         const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
         if (container) {
-          const moons = container.querySelectorAll('.moon');
-          moons.forEach(moon => {
-            moon.innerHTML = '<a>No content</a>';
-            moon.setAttribute('data-title', 'No content available');
+          const segments = container.querySelectorAll('.link-segment');
+          segments.forEach(segment => {
+            segment.innerHTML = '<a>No content</a>';
+            segment.setAttribute('data-title', 'No content available');
           });
         }
       }
@@ -508,10 +523,10 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadLinks('podcasts-video', 'planet');
-      loadLinks('articles-longform', 'planet');
-      loadLinks('epstein-news', 'planet');
-      loadLinks('primary-sources', 'planet');
+      loadLinks('podcasts-video', 'spoke');
+      loadLinks('articles-longform', 'spoke');
+      loadLinks('epstein-news', 'spoke');
+      loadLinks('primary-sources', 'spoke');
     });
   </script>
 </body>
