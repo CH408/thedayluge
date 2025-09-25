@@ -4,16 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Epstein's Web - THE DAYLUGE</title>
-
-  <!-- Vintage typewriter font -->
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-
   <style>
-    /* Force font loading */
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-
+    /* Existing :root variables and global styles */
     :root {
-      /* Green matrix color scheme */
       --crt-green: #00FF7F;
       --dark-green: #00CC66;
       --bright-green: #33FF88;
@@ -40,9 +34,12 @@
       position: relative;
       min-height: 100vh;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* Energy field effect in green */
+    /* Energy field effect */
     body::before {
       content: '';
       position: absolute;
@@ -65,164 +62,168 @@
       pointer-events: none;
     }
 
-    /* Main content wrapper */
-    .wrap {
-      max-width: var(--maxw);
-      margin: 0 auto;
-      position: relative;
-      z-index: 5;
-      padding-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
     /* Header */
     .header {
       text-align: center;
       margin-bottom: 20px;
-      width: 100%;
+      z-index: 5;
     }
     .header h1 {
       text-transform: uppercase;
       letter-spacing: 0.5px;
       font-size: 32px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       animation: title-pulse 8s ease-in-out infinite;
     }
 
     @keyframes title-pulse {
-      0% { 
-        color: var(--crt-green);
-        text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      12.5% { 
-        color: var(--bright-green);
-        text-shadow: 0 0 16px var(--bright-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      25% { 
-        color: var(--neon-green);
-        text-shadow: 0 0 17px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      37.5% { 
-        color: var(--lime-green);
-        text-shadow: 0 0 18px var(--lime-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      50% { 
-        color: var(--emerald-green);
-        text-shadow: 0 0 20px var(--emerald-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      62.5% { 
-        color: var(--forest-green);
-        text-shadow: 0 0 18px var(--forest-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      75% { 
-        color: var(--matrix-green);
-        text-shadow: 0 0 17px var(--matrix-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      87.5% { 
-        color: var(--dark-green);
-        text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      100% { 
-        color: var(--crt-green);
-        text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-    }
-
-    /* Column styling */
-    .column {
-      flex: 1 1 22%;
-      min-width: 250px;
-      margin-bottom: 20px;
-    }
-
-    .title-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .block-title {
-      font-size: 18px;
-      text-transform: uppercase;
-      font-weight: 900;
-      text-align: left;
-      color: var(--crt-green);
-      animation: block-title-pulse-green 8s ease-in-out infinite;
-    }
-
-    @keyframes block-title-pulse-green {
       0% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
       12.5% { text-shadow: 0 0 16px var(--bright-green), 2px 2px 4px rgba(0,0,0,0.8); }
       25% { text-shadow: 0 0 17px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      37.5% { text-shadow: 0 0 18px var(--lime-green), 2px 2px 4px rgba(0,0,0,0.8); }
       50% { text-shadow: 0 0 20px var(--emerald-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      62.5% { text-shadow: 0 0 18px var(--forest-green), 2px 2px 4px rgba(0,0,0,0.8); }
       75% { text-shadow: 0 0 17px var(--matrix-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      87.5% { text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
 
-    .headlines {
-      list-style: none;
+    /* Hologram container */
+    .hologram {
+      width: 600px;
+      height: 600px;
+      position: relative;
+      perspective: 1000px;
+      margin: 0 auto;
+      z-index: 5;
     }
 
-    .headline {
-      font-size: 16px;
-      margin-bottom: 5px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.5s ease forwards;
-      color: var(--crt-green);
-    }
-
-    /* Animation delays for headlines */
-    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
-    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
-
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .headline a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-
-    .headlines .headline a:hover {
-      color: var(--neon-green);
-      text-shadow: 0 0 10px var(--neon-green);
-    }
-
-    .go-deeper {
-      display: inline-block;
-      background: transparent;
-      color: var(--crt-green);
-      padding: 8px 16px;
-      border: 1px solid var(--crt-green);
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
+    .hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--black-bg), var(--dark-gray));
+      border: 2px solid var(--crt-green);
+      transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
       text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--crt-green);
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      text-align: center;
+      animation: float 4s ease-in-out infinite;
+      box-shadow: 0 0 30px rgba(0,255,127,0.5);
+      cursor: pointer;
     }
 
-    .go-deeper:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0,255,127,0.3);
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) translateZ(0); }
+      50% { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) translateZ(10px); }
+    }
+
+    .node {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1px solid var(--crt-green);
+      background: radial-gradient(circle, var(--dark-gray), var(--black-bg));
+      transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      text-transform: uppercase;
+      text-align: center;
+      animation: node-rotate 15s linear infinite;
+      box-shadow: 0 0 20px rgba(0,255,127,0.4);
+    }
+
+    .node-1 { top: 25%; left: 25%; }
+    .node-2 { top: 25%; left: 75%; }
+    .node-3 { top: 75%; left: 25%; }
+    .node-4 { top: 75%; left: 75%; }
+
+    @keyframes node-rotate {
+      from { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) rotateZ(0deg); }
+      to { transform: translate(-50%, -50%) rotateX(20deg) rotateY(20deg) rotateZ(360deg); }
+    }
+
+    .link-node {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      border: 1px solid var(--crt-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      text-align: center;
+      cursor: pointer;
+      animation: link-node-pulse 2s ease-in-out infinite;
+    }
+
+    /* Pentagon arrangement for link nodes */
+    .link-node:nth-child(1) { transform: rotate(0deg) translate(50px); }
+    .link-node:nth-child(2) { transform: rotate(72deg) translate(50px); }
+    .link-node:nth-child(3) { transform: rotate(144deg) translate(50px); }
+    .link-node:nth-child(4) { transform: rotate(216deg) translate(50px); }
+    .link-node:nth-child(5) { transform: rotate(288deg) translate(50px); }
+
+    @keyframes link-node-pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(0,255,127,0.4); }
+      50% { box-shadow: 0 0 20px rgba(0,255,127,0.8); }
+    }
+
+    .link-node a {
+      color: var(--black-bg);
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      width: 100%;
+      padding: 2px;
+    }
+
+    .link-node:hover::after {
+      content: attr(data-title);
+      position: absolute;
+      background: var(--dark-gray);
+      border: 1px solid var(--crt-green);
+      padding: 5px;
+      z-index: 10;
+      font-size: 12px;
+      max-width: 200px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--crt-green);
+      text-align: center;
+    }
+
+    .link-node:hover {
+      transform: scale(1.1) translate(50px);
+      box-shadow: 0 0 25px rgba(0,255,127,0.9);
+      z-index: 10;
+    }
+
+    /* Navigation buttons */
+    .nav-buttons {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      z-index: 20;
     }
 
     .random-button, .home-btn, .conspiracy-btn {
-      display: inline-block;
       background: transparent;
       color: var(--crt-green);
       padding: 8px 16px;
@@ -235,10 +236,7 @@
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--crt-green);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    }
-
-    .random-button {
-      position: relative;
+      cursor: pointer;
     }
 
     .random-button:hover, .home-btn:hover, .conspiracy-btn:hover {
@@ -247,49 +245,70 @@
       transform: scale(1.05);
     }
 
-    .button-container {
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      width: 100%;
-    }
-
-    .nav-buttons {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 20;
-    }
-
     /* Responsive adjustments */
-    @media (max-width: 1200px) {
-      .column {
-        flex: 1 1 45%;
-        min-width: 300px;
-      }
-    }
-
     @media (max-width: 600px) {
-      .column {
-        flex: 1 1 100%;
-        min-width: 100%;
+      .hologram {
+        width: 400px;
+        height: 400px;
       }
-      .block-title { font-size: 16px; }
-      .headline { font-size: 14px; }
-      .go-deeper, .random-button, .home-btn, .conspiracy-btn {
+      .hub {
+        width: 80px;
+        height: 80px;
+        font-size: 14px;
+      }
+      .node {
+        width: 70px;
+        height: 70px;
+        font-size: 12px;
+      }
+      .link-node {
+        width: 25px;
+        height: 25px;
+        font-size: 8px;
+      }
+      .link-node:nth-child(1), .link-node:nth-child(2), .link-node:nth-child(3),
+      .link-node:nth-child(4), .link-node:nth-child(5) {
+        transform: rotate(var(--angle)) translate(40px);
+      }
+      .header h1 {
+        font-size: 24px;
+      }
+      .nav-buttons {
+        flex-direction: row;
+        gap: 8px;
+        bottom: 10px;
+        right: 10px;
+      }
+      .random-button, .home-btn, .conspiracy-btn {
         font-size: 10px;
         padding: 6px 12px;
       }
-      .header h1 { font-size: 28px; }
     }
 
     @media (max-width: 400px) {
-      .header h1 { font-size: 24px; }
+      .hologram {
+        width: 300px;
+        height: 300px;
+      }
+      .hub {
+        width: 60px;
+        height: 60px;
+        font-size: 12px;
+      }
+      .node {
+        width: 50px;
+        height: 50px;
+        font-size: 10px;
+      }
+      .link-node {
+        width: 20px;
+        height: 20px;
+        font-size: 7px;
+      }
+      .link-node:nth-child(1), .link-node:nth-child(2), .link-node:nth-child(3),
+      .link-node:nth-child(4), .link-node:nth-child(5) {
+        transform: rotate(var(--angle)) translate(30px);
+      }
     }
   </style>
 </head>
@@ -304,60 +323,55 @@
   <canvas id="particle-canvas"></canvas>
 
   <!-- Main Content -->
-  <div class="wrap">
-    <!-- Header -->
-    <div class="header">
-      <h1>EPSTEIN'S WEB</h1>
-    </div>
+  <div class="header">
+    <h1>EPSTEIN'S WEB</h1>
+  </div>
 
-    <!-- Columns -->
-    <div class="column">
-      <div class="title-container">
-        <div class="block-title">Podcasts & Video</div>
-        <a href="/podcasts-video-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines podcasts-video-links" id="podcasts-video-links"></ul>
+  <div class="hologram">
+    <div class="hub" onclick="goToRandomEpstein()">Epstein's Web</div>
+    <div class="node node-1" data-category="podcasts-video">Podcasts & Video
+      <div class="link-node" style="--angle: 0deg;"></div>
+      <div class="link-node" style="--angle: 72deg;"></div>
+      <div class="link-node" style="--angle: 144deg;"></div>
+      <div class="link-node" style="--angle: 216deg;"></div>
+      <div class="link-node" style="--angle: 288deg;"></div>
     </div>
-
-    <div class="column">
-      <div class="title-container">
-        <div class="block-title">Articles & Longform</div>
-        <a href="/articles-longform-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines articles-longform-links" id="articles-longform-links"></ul>
+    <div class="node node-2" data-category="articles-longform">Articles & Longform
+      <div class="link-node" style="--angle: 0deg;"></div>
+      <div class="link-node" style="--angle: 72deg;"></div>
+      <div class="link-node" style="--angle: 144deg;"></div>
+      <div class="link-node" style="--angle: 216deg;"></div>
+      <div class="link-node" style="--angle: 288deg;"></div>
     </div>
-
-    <div class="column">
-      <div class="title-container">
-        <div class="block-title">News</div>
-        <a href="/epstein-news-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines epstein-news-links" id="epstein-news-links"></ul>
+    <div class="node node-3" data-category="epstein-news">News
+      <div class="link-node" style="--angle: 0deg;"></div>
+      <div class="link-node" style="--angle: 72deg;"></div>
+      <div class="link-node" style="--angle: 144deg;"></div>
+      <div class="link-node" style="--angle: 216deg;"></div>
+      <div class="link-node" style="--angle: 288deg;"></div>
     </div>
-
-    <div class="column">
-      <div class="title-container">
-        <div class="block-title">Primary Sources</div>
-        <a href="/primary-sources-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines primary-sources-links" id="primary-sources-links"></ul>
-    </div>
-
-    <!-- Random Button -->
-    <div class="button-container">
-      <button class="random-button" onclick="goToRandomEpstein()">⚛️ SURPRISE ME!</button>
+    <div class="node node-4" data-category="primary-sources">Primary Sources
+      <div class="link-node" style="--angle: 0deg;"></div>
+      <div class="link-node" style="--angle: 72deg;"></div>
+      <div class="link-node" style="--angle: 144deg;"></div>
+      <div class="link-node" style="--angle: 216deg;"></div>
+      <div class="link-node" style="--angle: 288deg;"></div>
     </div>
   </div>
 
+  <div class="nav-buttons">
+    <button class="random-button" onclick="goToRandomEpstein()">⚛️ SURPRISE ME!</button>
+  </div>
+
   <script>
-    // Particle effect in green matrix style
+    // Particle effect
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     const particlesArray = [];
-    const numberOfParticles = 60;
+    const numberOfParticles = 40; // Reduced for performance
 
     class Particle {
       constructor() {
@@ -367,7 +381,6 @@
         this.speedX = Math.random() * 0.5 - 0.25;
         this.speedY = Math.random() * 0.5 - 0.25;
       }
-
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
@@ -375,7 +388,6 @@
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
       }
-
       draw() {
         ctx.fillStyle = 'rgba(0,255,127,0.6)';
         ctx.beginPath();
@@ -392,14 +404,16 @@
     }
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-        if (particlesArray[i].size <= 0.2) {
-          particlesArray.splice(i, 1);
-          i--;
-          particlesArray.push(new Particle());
+      if (!document.hidden) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+            particlesArray.splice(i, 1);
+            i--;
+            particlesArray.push(new Particle());
+          }
         }
       }
       requestAnimationFrame(animate);
@@ -415,77 +429,71 @@
     });
 
     // Load links for each category
-    async function loadLinks(category, elementId, maxLinks = 6) {
+    async function loadLinks(category, containerClass, maxLinks = 5) {
       try {
         const fileMap = {
-          'podcasts-video': 'podcasts-links.txt', // Assuming podcasts and video clips are combined
+          'podcasts-video': 'podcasts-links.txt',
           'articles-longform': 'articles-longform-links.txt',
           'epstein-news': 'epstein-news.txt',
           'primary-sources': 'primary-sources-links.txt'
         };
-        const fileName = fileMap[category] || `${category}-links.txt`;
+        const fileName = fileMap[category];
         const response = await fetch(fileName);
-        if (!response.ok) {
-          console.error(`Failed to load ${fileName}:`, response.status);
-          return;
-        }
+        if (!response.ok) throw new Error(`Failed to load ${fileName}`);
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
-          }
-          return null;
+          return parts.length >= 2 ? { title: parts[0].trim(), url: parts[1].trim() } : null;
         }).filter(link => link !== null);
         const displayLinks = links.slice(0, maxLinks);
-        const grid = document.getElementById(elementId);
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
+        const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
+        if (container) {
+          const linkNodes = container.querySelectorAll('.link-node');
+          linkNodes.forEach((node, index) => {
+            if (displayLinks[index]) {
+              node.innerHTML = `<a href="${displayLinks[index].url}" target="_blank">${displayLinks[index].title}</a>`;
+              node.setAttribute('data-title', displayLinks[index].title);
+            } else {
+              node.innerHTML = '<a>No content</a>';
+              node.setAttribute('data-title', 'No content available');
+            }
+          });
         }
-        console.log(`Showing ${displayLinks.length} links for ${category} (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error(`Error loading ${category} links:`, error);
+        const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
+        if (container) {
+          const linkNodes = container.querySelectorAll('.link-node');
+          linkNodes.forEach(node => {
+            node.innerHTML = '<a>No content</a>';
+            node.setAttribute('data-title', 'No content available');
+          });
+        }
       }
     }
 
-    // Random content selection
     async function goToRandomEpstein() {
       try {
         const linkFiles = [
           'podcasts-links.txt',
-          'video-clips-links.txt',
           'articles-longform-links.txt',
           'epstein-news.txt',
           'primary-sources-links.txt'
         ];
         const randomFile = linkFiles[Math.floor(Math.random() * linkFiles.length)];
         const response = await fetch(randomFile);
-        if (!response.ok) {
-          console.log(`Could not load ${randomFile}, trying another...`);
-          const otherFiles = linkFiles.filter(file => file !== randomFile);
-          const backupFile = otherFiles[Math.floor(Math.random() * otherFiles.length)];
-          return fetch(backupFile);
-        }
+        if (!response.ok) throw new Error(`Could not load ${randomFile}`);
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
-          }
-          return null;
+          return parts.length >= 2 ? parts[1].trim() : null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 6);
-        if (displayLinks.length > 0) {
-          const randomLink = displayLinks[Math.floor(Math.random() * displayLinks.length)];
+        if (links.length > 0) {
+          const randomLink = links[Math.floor(Math.random() * links.length)];
           window.open(randomLink, '_blank');
         } else {
-          console.log('No links found in any category files');
           alert('No content available. Please try again later.');
         }
       } catch (error) {
@@ -494,12 +502,11 @@
       }
     }
 
-    // Load all category links on page load
     document.addEventListener('DOMContentLoaded', () => {
-      loadLinks('podcasts-video', 'podcasts-video-links');
-      loadLinks('articles-longform', 'articles-longform-links');
-      loadLinks('epstein-news', 'epstein-news-links');
-      loadLinks('primary-sources', 'primary-sources-links');
+      loadLinks('podcasts-video', 'node');
+      loadLinks('articles-longform', 'node');
+      loadLinks('epstein-news', 'node');
+      loadLinks('primary-sources', 'node');
     });
   </script>
 </body>
