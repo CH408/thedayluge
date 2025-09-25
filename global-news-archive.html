@@ -259,8 +259,8 @@
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
-        if (lines.length === 0) {
-          throw new Error('No valid links found in global-news.txt');
+        if (lines.length < 6) {
+          throw new Error('Not enough links in global-news.txt to start from the 6th oldest');
         }
         const links = lines.map(line => {
           const parts = line.split('|');
@@ -301,8 +301,8 @@
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
-        if (lines.length === 0) {
-          throw new Error('No valid links found in global-news.txt');
+        if (lines.length < 6) {
+          throw new Error('Not enough links in global-news.txt for random selection from archive');
         }
         const links = lines.map(line => {
           const parts = line.split('|');
