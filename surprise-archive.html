@@ -1,7 +1,7 @@
 // Load surprise archive links (links 9-33)
   async function loadSurpriseLinks() {
     try {
-      const response = await fetch('/surprise-me-links.txt');
+      const response = await fetch('surprise-me-links.txt');
       if (!response.ok) {
         console.error('Failed to load surprise-me-links.txt:', response.status);
         document.getElementById('archive-error').style.display = 'block';
