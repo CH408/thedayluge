@@ -6,7 +6,7 @@
   <title>Epstein's Web - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* Core styles from existing code */
+    /* Core styles */
     :root {
       --crt-green: #00FF7F;
       --dark-green: #00CC66;
@@ -45,13 +45,7 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
-    }
-
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
     }
 
     /* Particle canvas */
@@ -72,19 +66,7 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       font-size: 32px;
-      animation: title-pulse 8s ease-in-out infinite;
-    }
-
-    @keyframes title-pulse {
-      0% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--bright-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      37.5% { text-shadow: 0 0 18px var(--lime-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--emerald-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      62.5% { text-shadow: 0 0 18px var(--forest-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--matrix-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      87.5% { text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      text-shadow: 0 0 15px var(--crt-green);
     }
 
     /* Atom container */
@@ -96,113 +78,62 @@
       z-index: 5;
     }
 
-    .nucleus {
+    .core {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, var(--black-bg), var(--dark-gray));
+      width: 300px;
+      height: 400px;
+      background: var(--dark-gray);
       border: 2px solid var(--crt-green);
-      border-radius: 50%;
+      border-radius: 10px;
       transform: translate(-50%, -50%);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
-      text-transform: uppercase;
-      text-align: center;
-      animation: pulse 3s ease-in-out infinite;
+      padding: 20px;
       box-shadow: 0 0 30px rgba(0,255,127,0.5);
       cursor: pointer;
     }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(0,255,127,0.5); transform: translate(-50%, -50%) scale(1); }
-      50% { box-shadow: 0 0 50px rgba(0,255,127,0.8); transform: translate(-50%, -50%) scale(1.02); }
-    }
-
-    .shell {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      border: 1px solid rgba(0,255,127,0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: shell-rotate 20s linear infinite;
-    }
-
-    .shell-1 { width: 200px; height: 200px; animation-delay: 0s; }
-    .shell-2 { width: 300px; height: 300px; animation-delay: 5s; }
-    .shell-3 { width: 400px; height: 400px; animation-delay: 10s; }
-    .shell-4 { width: 500px; height: 500px; animation-delay: 15s; }
-
-    @keyframes shell-rotate {
-      from { transform: translate(-50%, -50%) rotate(0deg); }
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    .electron {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border: 1px solid var(--neon-green);
-      border-radius: 50%;
-      background: var(--dark-gray);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 9px;
+    .core h2 {
+      font-size: 18px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
       text-align: center;
-      cursor: pointer;
-      animation: electron-orbit 10s linear infinite;
-      box-shadow: 0 0 10px rgba(0,255,127,0.4);
+      text-shadow: 0 0 10px var(--crt-green);
     }
 
-    .shell-1 .electron:nth-child(1) { transform: rotate(0deg) translate(100px); animation-delay: 0s; }
-    .shell-1 .electron:nth-child(2) { transform: rotate(72deg) translate(100px); animation-delay: 2s; }
-    .shell-1 .electron:nth-child(3) { transform: rotate(144deg) translate(100px); animation-delay: 4s; }
-    .shell-1 .electron:nth-child(4) { transform: rotate(216deg) translate(100px); animation-delay: 6s; }
-    .shell-1 .electron:nth-child(5) { transform: rotate(288deg) translate(100px); animation-delay: 8s; }
-    .shell-2 .electron:nth-child(1) { transform: rotate(0deg) translate(150px); animation-delay: 0s; }
-    .shell-2 .electron:nth-child(2) { transform: rotate(72deg) translate(150px); animation-delay: 2s; }
-    .shell-2 .electron:nth-child(3) { transform: rotate(144deg) translate(150px); animation-delay: 4s; }
-    .shell-2 .electron:nth-child(4) { transform: rotate(216deg) translate(150px); animation-delay: 6s; }
-    .shell-2 .electron:nth-child(5) { transform: rotate(288deg) translate(150px); animation-delay: 8s; }
-    .shell-3 .electron:nth-child(1) { transform: rotate(0deg) translate(200px); animation-delay: 0s; }
-    .shell-3 .electron:nth-child(2) { transform: rotate(72deg) translate(200px); animation-delay: 2s; }
-    .shell-3 .electron:nth-child(3) { transform: rotate(144deg) translate(200px); animation-delay: 4s; }
-    .shell-3 .electron:nth-child(4) { transform: rotate(216deg) translate(200px); animation-delay: 6s; }
-    .shell-3 .electron:nth-child(5) { transform: rotate(288deg) translate(200px); animation-delay: 8s; }
-    .shell-4 .electron:nth-child(1) { transform: rotate(0deg) translate(250px); animation-delay: 0s; }
-    .shell-4 .electron:nth-child(2) { transform: rotate(72deg) translate(250px); animation-delay: 2s; }
-    .shell-4 .electron:nth-child(3) { transform: rotate(144deg) translate(250px); animation-delay: 4s; }
-    .shell-4 .electron:nth-child(4) { transform: rotate(216deg) translate(250px); animation-delay: 6s; }
-    .shell-4 .electron:nth-child(5) { transform: rotate(288deg) translate(250px); animation-delay: 8s; }
-
-    @keyframes electron-orbit {
-      from { transform: rotate(0deg) translate(var(--radius)) rotate(0deg); }
-      to { transform: rotate(360deg) translate(var(--radius)) rotate(-360deg); }
+    .news-list {
+      list-style: none;
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
     }
 
-    .electron a {
+    .news-list li {
+      margin-bottom: 10px;
+    }
+
+    .news-list a {
       color: var(--neon-green);
       text-decoration: none;
+      font-size: 14px;
+      display: block;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: block;
-      width: 100%;
-      padding: 2px;
+      padding: 5px;
+      transition: all 0.3s ease;
     }
 
-    .electron:hover {
-      transform: scale(1.1) translate(var(--radius));
-      box-shadow: 0 0 20px rgba(0,255,127,0.8);
-      z-index: 10;
+    .news-list a:hover {
+      text-shadow: 0 0 10px var(--bright-green);
+      transform: scale(1.02);
     }
 
-    .electron:hover::after {
+    .news-list a::after {
       content: attr(data-title);
       position: absolute;
       background: var(--dark-gray);
@@ -210,13 +141,42 @@
       padding: 5px;
       z-index: 10;
       font-size: 12px;
-      max-width: 200px;
+      max-width: 250px;
+      color: var(--crt-green);
+      text-align: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      color: var(--crt-green);
-      text-align: center;
     }
+
+    .news-list a:hover::after {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .proton {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 1px solid var(--crt-green);
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--dark-gray), var(--black-bg));
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      text-transform: uppercase;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,255,127,0.4);
+    }
+
+    .proton-1 { transform: translate(-50%, -50%) rotate(0deg) translate(150px); }
+    .proton-2 { transform: translate(-50%, -50%) rotate(120deg) translate(150px); }
+    .proton-3 { transform: translate(-50%, -50%) rotate(240deg) translate(150px); }
 
     /* Navigation buttons */
     .nav-buttons {
@@ -257,31 +217,24 @@
         width: 400px;
         height: 400px;
       }
-      .nucleus {
-        width: 80px;
-        height: 80px;
+      .core {
+        width: 200px;
+        height: 300px;
+        padding: 15px;
+      }
+      .core h2 {
         font-size: 14px;
       }
-      .shell-1 { width: 160px; height: 160px; }
-      .shell-2 { width: 240px; height: 240px; }
-      .shell-3 { width: 320px; height: 320px; }
-      .shell-4 { width: 360px; height: 360px; }
-      .shell-1 .electron:nth-child(1), .shell-1 .electron:nth-child(2), 
-      .shell-1 .electron:nth-child(3), .shell-1 .electron:nth-child(4), 
-      .shell-1 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(80px); }
-      .shell-2 .electron:nth-child(1), .shell-2 .electron:nth-child(2), 
-      .shell-2 .electron:nth-child(3), .shell-2 .electron:nth-child(4), 
-      .shell-2 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(120px); }
-      .shell-3 .electron:nth-child(1), .shell-3 .electron:nth-child(2), 
-      .shell-3 .electron:nth-child(3), .shell-3 .electron:nth-child(4), 
-      .shell-3 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(160px); }
-      .shell-4 .electron:nth-child(1), .shell-4 .electron:nth-child(2), 
-      .shell-4 .electron:nth-child(3), .shell-4 .electron:nth-child(4), 
-      .shell-4 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(180px); }
-      .electron {
-        width: 25px;
-        height: 25px;
-        font-size: 8px;
+      .news-list a {
+        font-size: 12px;
+      }
+      .proton {
+        width: 80px;
+        height: 80px;
+        font-size: 10px;
+      }
+      .proton-1, .proton-2, .proton-3 {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(120px);
       }
       .header h1 {
         font-size: 24px;
@@ -303,31 +256,24 @@
         width: 300px;
         height: 300px;
       }
-      .nucleus {
-        width: 60px;
-        height: 60px;
+      .core {
+        width: 160px;
+        height: 240px;
+        padding: 10px;
+      }
+      .core h2 {
         font-size: 12px;
       }
-      .shell-1 { width: 120px; height: 120px; }
-      .shell-2 { width: 180px; height: 180px; }
-      .shell-3 { width: 240px; height: 240px; }
-      .shell-4 { width: 280px; height: 280px; }
-      .shell-1 .electron:nth-child(1), .shell-1 .electron:nth-child(2), 
-      .shell-1 .electron:nth-child(3), .shell-1 .electron:nth-child(4), 
-      .shell-1 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(60px); }
-      .shell-2 .electron:nth-child(1), .shell-2 .electron:nth-child(2), 
-      .shell-2 .electron:nth-child(3), .shell-2 .electron:nth-child(4), 
-      .shell-2 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(90px); }
-      .shell-3 .electron:nth-child(1), .shell-3 .electron:nth-child(2), 
-      .shell-3 .electron:nth-child(3), .shell-3 .electron:nth-child(4), 
-      .shell-3 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(120px); }
-      .shell-4 .electron:nth-child(1), .shell-4 .electron:nth-child(2), 
-      .shell-4 .electron:nth-child(3), .shell-4 .electron:nth-child(4), 
-      .shell-4 .electron:nth-child(5) { transform: rotate(var(--angle)) translate(140px); }
-      .electron {
-        width: 20px;
-        height: 20px;
-        font-size: 7px;
+      .news-list a {
+        font-size: 10px;
+      }
+      .proton {
+        width: 60px;
+        height: 60px;
+        font-size: 9px;
+      }
+      .proton-1, .proton-2, .proton-3 {
+        transform: translate(-50%, -50%) rotate(var(--angle)) translate(100px);
       }
     }
   </style>
@@ -348,35 +294,19 @@
   </div>
 
   <div class="atom-container">
-    <div class="nucleus" onclick="goToRandomEpstein()">Epstein's Web</div>
-    <div class="shell shell-1" data-category="podcasts-video">
-      <div class="electron" style="--angle: 0deg; --radius: 100px;"></div>
-      <div class="electron" style="--angle: 72deg; --radius: 100px;"></div>
-      <div class="electron" style="--angle: 144deg; --radius: 100px;"></div>
-      <div class="electron" style="--angle: 216deg; --radius: 100px;"></div>
-      <div class="electron" style="--angle: 288deg; --radius: 100px;"></div>
+    <div class="core" onclick="goToRandomEpstein()">
+      <h2>News</h2>
+      <ul class="news-list">
+        <li><a href="#" data-title="Loading...">Loading...</a></li>
+        <li><a href="#" data-title="Loading...">Loading...</a></li>
+        <li><a href="#" data-title="Loading...">Loading...</a></li>
+        <li><a href="#" data-title="Loading...">Loading...</a></li>
+        <li><a href="#" data-title="Loading...">Loading...</a></li>
+      </ul>
     </div>
-    <div class="shell shell-2" data-category="articles-longform">
-      <div class="electron" style="--angle: 0deg; --radius: 150px;"></div>
-      <div class="electron" style="--angle: 72deg; --radius: 150px;"></div>
-      <div class="electron" style="--angle: 144deg; --radius: 150px;"></div>
-      <div class="electron" style="--angle: 216deg; --radius: 150px;"></div>
-      <div class="electron" style="--angle: 288deg; --radius: 150px;"></div>
-    </div>
-    <div class="shell shell-3" data-category="epstein-news">
-      <div class="electron" style="--angle: 0deg; --radius: 200px;"></div>
-      <div class="electron" style="--angle: 72deg; --radius: 200px;"></div>
-      <div class="electron" style="--angle: 144deg; --radius: 200px;"></div>
-      <div class="electron" style="--angle: 216deg; --radius: 200px;"></div>
-      <div class="electron" style="--angle: 288deg; --radius: 200px;"></div>
-    </div>
-    <div class="shell shell-4" data-category="primary-sources">
-      <div class="electron" style="--angle: 0deg; --radius: 250px;"></div>
-      <div class="electron" style="--angle: 72deg; --radius: 250px;"></div>
-      <div class="electron" style="--angle: 144deg; --radius: 250px;"></div>
-      <div class="electron" style="--angle: 216deg; --radius: 250px;"></div>
-      <div class="electron" style="--angle: 288deg; --radius: 250px;"></div>
-    </div>
+    <div class="proton proton-1" style="--angle: 0deg;">Podcasts & Video</div>
+    <div class="proton proton-2" style="--angle: 120deg;">Articles & Longform</div>
+    <div class="proton proton-3" style="--angle: 240deg;">Primary Sources</div>
   </div>
 
   <div class="nav-buttons">
@@ -448,16 +378,10 @@
       init();
     });
 
-    // Load links for each category
-    async function loadLinks(category, containerClass, maxLinks = 5) {
+    // Load news links
+    async function loadLinks() {
       try {
-        const fileMap = {
-          'podcasts-video': 'podcasts-links.txt',
-          'articles-longform': 'articles-longform-links.txt',
-          'epstein-news': 'epstein-news.txt',
-          'primary-sources': 'primary-sources-links.txt'
-        };
-        const fileName = fileMap[category];
+        const fileName = 'epstein-news-links.txt';
         const response = await fetch(fileName);
         if (!response.ok) throw new Error(`Failed to load ${fileName}`);
         const text = await response.text();
@@ -466,44 +390,29 @@
           const parts = line.split('|');
           return parts.length >= 2 ? { title: parts[0].trim(), url: parts[1].trim() } : null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, maxLinks);
-        const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
-        if (container) {
-          const electrons = container.querySelectorAll('.electron');
-          electrons.forEach((electron, index) => {
-            if (displayLinks[index]) {
-              electron.innerHTML = `<a href="${displayLinks[index].url}" target="_blank" aria-label="Link to ${displayLinks[index].title}">${displayLinks[index].title}</a>`;
-              electron.setAttribute('data-title', displayLinks[index].title);
-            } else {
-              electron.innerHTML = '<a>No content</a>';
-              electron.setAttribute('data-title', 'No content available');
-            }
-          });
+        const displayLinks = links.slice(0, 5);
+        const newsList = document.querySelector('.news-list');
+        if (newsList) {
+          newsList.innerHTML = displayLinks.length > 0
+            ? displayLinks.map(link => `
+                <li><a href="${link.url}" target="_blank" data-title="${link.title}" aria-label="Link to ${link.title}">${link.title}</a></li>
+              `).join('')
+            : '<li><a>No content available</a></li>';
         }
       } catch (error) {
-        console.error(`Error loading ${category} links:`, error);
-        const container = document.querySelector(`.${containerClass}[data-category="${category}"]`);
-        if (container) {
-          const electrons = container.querySelectorAll('.electron');
-          electrons.forEach(electron => {
-            electron.innerHTML = '<a>No content</a>';
-            electron.setAttribute('data-title', 'No content available');
-          });
+        console.error(`Error loading news links:`, error);
+        const newsList = document.querySelector('.news-list');
+        if (newsList) {
+          newsList.innerHTML = '<li><a>No content available</a></li>';
         }
       }
     }
 
     async function goToRandomEpstein() {
       try {
-        const linkFiles = [
-          'podcasts-links.txt',
-          'articles-longform-links.txt',
-          'epstein-news.txt',
-          'primary-sources-links.txt'
-        ];
-        const randomFile = linkFiles[Math.floor(Math.random() * linkFiles.length)];
-        const response = await fetch(randomFile);
-        if (!response.ok) throw new Error(`Could not load ${randomFile}`);
+        const fileName = 'epstein-news-links.txt';
+        const response = await fetch(fileName);
+        if (!response.ok) throw new Error(`Could not load ${fileName}`);
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
@@ -523,10 +432,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadLinks('podcasts-video', 'shell');
-      loadLinks('articles-longform', 'shell');
-      loadLinks('epstein-news', 'shell');
-      loadLinks('primary-sources', 'shell');
+      loadLinks();
     });
   </script>
 </body>
