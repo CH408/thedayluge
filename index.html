@@ -237,16 +237,20 @@
     height: 500px;
     margin: 0 auto;
     z-index: 5;
-    animation: spin-in 1.5s ease-out 0.2s forwards !important;
-    -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
-    -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
+    visibility: visible !important;
     will-change: transform, opacity;
     transform-origin: center center;
   }
 
+  .wheel-container.spin {
+    animation: spin-in 1.5s ease-out 0.2s forwards !important;
+    -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
+    -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
+  }
+
   @keyframes spin-in {
     0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); } /* 3 full rotations */
+    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); }
     100% { opacity: 1; transform: scale(1) rotate(1080deg); }
   }
 
@@ -273,7 +277,7 @@
     -webkit-animation: rotate linear infinite;
     -moz-animation: rotate linear infinite;
     will-change: transform;
-    z-index: 6; /* Above spokes */
+    z-index: 6;
   }
   .orbital-ring-1{ width: 300px; height: 300px; animation-duration: 10s; }
   .orbital-ring-2{ width: 400px; height: 400px; animation-duration: 12s; animation-direction: reverse; }
@@ -363,7 +367,7 @@
     padding: 4px;
     animation: electron-pulse 1.2s ease-in-out infinite;
     will-change: transform, box-shadow;
-    z-index: 4; /* Below orbital rings */
+    z-index: 4;
   }
 
   @keyframes electron-pulse {
@@ -382,14 +386,14 @@
   .spoke:hover{
     transform: scale(1.15);
     box-shadow: 0 0 35px rgba(255,255,255,0.8), 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 5; /* Still below orbital rings */
+    z-index: 5;
     animation-play-state: paused;
   }
 
   .spoke-7:hover{
     transform: scale(1.15);
     box-shadow: 0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
-    z-index: 5; /* Still below orbital rings */
+    z-index: 5;
     animation-play-state: paused;
     border-color: rgba(0,255,0,0.8) !important;
   }
@@ -771,6 +775,8 @@
     .wheel-container{
       width: 380px;
       height: 380px;
+    }
+    .wheel-container.spin{
       animation: spin-in 1.5s ease-out 0.2s forwards !important;
       -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
       -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
@@ -905,6 +911,8 @@
     .wheel-container{
       width: 320px;
       height: 320px;
+    }
+    .wheel-container.spin{
       animation: spin-in 1.5s ease-out 0.2s forwards !important;
       -webkit-animation: spin-in 1.5s ease-out 0.2s forwards !important;
       -moz-animation: spin-in 1.5s ease-out 0.2s forwards !important;
@@ -1080,7 +1088,7 @@
       animation: none;
       opacity: 0.7;
     }
-    .wheel-container {
+    .wheel-container.spin {
       animation: none !important;
       transform: scale(1);
       opacity: 1;
@@ -1167,17 +1175,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const errorMessage = document.getElementById('password-error');
   const wheelContainer = document.querySelector('.wheel-container');
 
-  // Debug: Check prefers-reduced-motion
+  // Debug: Check prefers-reduced-motion and computed styles
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   console.log('Prefers reduced motion:', reducedMotion);
+  console.log('Initial wheel-container animation:', getComputedStyle(wheelContainer).animationName);
 
-  // Force animation reset to ensure spin-in triggers
+  // Force animation with class toggle
   if (!reducedMotion) {
-    wheelContainer.style.animation = 'none';
+    wheelContainer.classList.remove('spin');
     setTimeout(() => {
-      wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
-      console.log('Spin-in animation applied to wheel-container');
-    }, 10);
+      wheelContainer.classList.add('spin');
+      console.log('Added spin class to wheel-container');
+      console.log('Post-spin animation:', getComputedStyle(wheelContainer).animationName);
+    }, 100);
   }
 
   overlay.classList.add('hidden');
@@ -1194,13 +1204,14 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('body > *').forEach(el => {
         el.style.visibility = 'visible';
       });
-      // Re-trigger animation after password overlay
+      // Re-trigger animation
       if (!reducedMotion) {
-        wheelContainer.style.animation = 'none';
+        wheelContainer.classList.remove('spin');
         setTimeout(() => {
-          wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
-          console.log('Spin-in animation re-applied after password check');
-        }, 10);
+          wheelContainer.classList.add('spin');
+          console.log('Re-added spin class after password check');
+          console.log('Post-password animation:', getComputedStyle(wheelContainer).animationName);
+        }, 100);
       }
     } else {
       console.log('Incorrect password');
@@ -1220,8 +1231,8 @@ document.addEventListener('DOMContentLoaded', function() {
     errorMessage.style.display = 'none';
     passwordInput.focus();
     // Reset animation
-    wheelContainer.style.animation = 'none';
-    console.log('Animation reset on auth reset');
+    wheelContainer.classList.remove('spin');
+    console.log('Spin class removed on auth reset');
   };
 
   submitButton.addEventListener('click', checkPassword);
@@ -1304,6 +1315,13 @@ document.addEventListener('DOMContentLoaded', function() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
+      if (!reducedMotion) {
+        wheelContainer.classList.remove('spin');
+        setTimeout(() => {
+          wheelContainer.classList.add('spin');
+          console.log('Re-added spin class on resize');
+        }, 100);
+      }
   });
 
   const categoryMap = {
