@@ -163,6 +163,7 @@
       linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
     animation:edge-glow 4s ease-in-out infinite;
     pointer-events: none;
+    content:'';
   }
 
   @keyframes energy-pulse {
@@ -284,6 +285,7 @@
     line-height:1.2;
     box-shadow:0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
     animation:pulse 3s ease-in-out infinite;
+    text-decoration:none; /* make anchor look like button */
   }
 
   @keyframes pulse {
@@ -347,7 +349,8 @@
 
   .spoke-7:hover{
     transform:scale(1.15);
-    box-shadow:0 0 25px rgba(0,255,0,0.6), 0 4-box-shadow:0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
+    /* fixed duplicated token here */
+    box-shadow:0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2) !important;
     z-index:10;
     animation-play-state:paused;
     border-color:rgba(0,255,0,0.8) !important;
@@ -1058,10 +1061,13 @@
     <div class="wheel-line line-6"></div>
     <div class="wheel-line line-7"></div>
     <div class="wheel-line line-8"></div>
-    <div class="wheel-center" onclick="goToNewsHub()">
+
+    <!-- Changed to anchor linking directly to news.html -->
+    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
       TRENDING
       NEWS
-    </div>
+    </a>
+
     <div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
     <div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
       &
@@ -1234,9 +1240,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   };
 
+  // Center button now uses a direct <a href="./news.html">; keeping this no-op for clarity (not used)
   window.goToNewsHub = function() {
-      // Logic for the central button, if different from category links
-      window.location.href = 'news-hub.html';
+      window.location.href = 'news.html';
   };
 
   window.goToRandomArticle = function() {
