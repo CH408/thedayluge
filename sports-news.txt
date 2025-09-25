@@ -1,5 +1,5 @@
 MLB Playoff Tracker|https://www.espn.com/mlb/story/_/id/46081635/mlb-2025-playoff-tracker-clinch-scenarios-postseason-bracket-schedule
-MLB Approves Robot Umpires for 2026 as Part of Challenge System|MLB approves robot umpires for 2026 as part of challenge system
+MLB Approves Robot Umpires for 2026 as Part of Challenge System|https://www.usatoday.com/story/sports/mlb/2025/09/23/mlb-robot-umpires-abs-challenge/86310385007/
 Ryder Cup 2025 Preview|https://www.golfdigest.com/story/ryder-cup-2025-power-rankings-field-bethpage-black-rory-scottie
 NFL Week 4 Power Rankings|https://www.espn.com/nfl/story/_/id/46283631/nfl-week-4-power-rankings-poll-32-teams-2025-biggest-issues-defense
 Miami's Carson Beck Now Heisman Frontrunner|https://x.com/PolymarketSport/status/1970130462644556234
@@ -21,3 +21,35 @@ Sabalenka Defends US Open Title with Win Over Anisimova|https://www.espn.com/ten
 College Football New Top 25 Ranking after Week 2|https://bleacherreport.com/articles/25245254-clemson-falls-oklahoma-rises-brs-top-25-rankings-after-week-2
 Djokovic: Alcaraz, Sinner 'Just Too Good'|https://www.espn.com/tennis/story/_/id/46169730/defeated-djokovic-concedes-alcaraz-sinner-level-just-too-good
 The 300 Best Fantasy Football Players of the Past 30 years|https://www.espn.com/fantasy/football/story/_/id/45940705/greatest-fantasy-football-players-30-years?utm_source=join1440&utm_medium=email&utm_placement=newsletter&user_id=66c4bc5a5d78644b3a979610
+Placeholder Title 1|https://example.com/placeholder1
+Placeholder Title 2|https://example.com/placeholder2
+Placeholder Title 3|https://example.com/placeholder3
+Placeholder Title 4|https://example.com/placeholder4
+Placeholder Title 5|https://example.com/placeholder5
+Placeholder Title 6|https://example.com/placeholder6
+Placeholder Title 7|https://example.com/placeholder7
+Placeholder Title 8|https://example.com/placeholder8
+Placeholder Title 9|https://example.com/placeholder9
+Placeholder Title 10|https://example.com/placeholder10
+Placeholder Title 11|https://example.com/placeholder11
+Placeholder Title 12|https://example.com/placeholder12
+Placeholder Title 13|https://example.com/placeholder13
+Placeholder Title 14|https://example.com/placeholder14
+Placeholder Title 15|https://example.com/placeholder15
+Placeholder Title 16|https://example.com/placeholder16
+Placeholder Title 17|https://example.com/placeholder17
+Placeholder Title 18|https://example.com/placeholder18
+Placeholder Title 19|https://example.com/placeholder19
+Placeholder Title 20|https://example.com/placeholder20
+Placeholder Title 21|https://example.com/placeholder21
+Placeholder Title 22|https://example.com/placeholder22
+Placeholder Title 23|https://example.com/placeholder23
+Placeholder Title 24|https://example.com/placeholder24
+Placeholder Title 25|https://example.com/placeholder25
+Placeholder Title 26|https://example.com/placeholder26
+Placeholder Title 27|https://example.com/placeholder27
+Placeholder Title 28|https://example.com/placeholder28
+Placeholder Title 29|https://example.com/placeholder29
+Placeholder Title 30|https://example.com/placeholder30
+Placeholder Title 31|https://example.com/placeholder31
+Placeholder Title 32|https://example.com/placeholder32
