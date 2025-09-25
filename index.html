@@ -238,13 +238,21 @@
     height: 500px;
     margin: 0 auto;
     z-index: 5;
-    animation: spin-in 1.5s ease-out forwards;
+    animation: spin-in 1.5s ease-out 0.2s forwards;
+    -webkit-animation: spin-in 1.5s ease-out 0.2s forwards; /* Vendor prefix for Safari/Chrome */
     will-change: transform, opacity;
+    transform-origin: center center;
   }
 
   @keyframes spin-in {
     0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); } /* 3 full rotations (3 * 360deg) */
+    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); } /* 3 full rotations */
+    100% { opacity: 1; transform: scale(1) rotate(1080deg); }
+  }
+
+  @-webkit-keyframes spin-in {
+    0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); }
     100% { opacity: 1; transform: scale(1) rotate(1080deg); }
   }
 
@@ -256,6 +264,7 @@
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: rotate linear infinite;
+    -webkit-animation: rotate linear infinite;
     will-change: transform;
   }
   .orbital-ring-1{ width: 300px; height: 300px; animation-duration: 10s; }
@@ -263,6 +272,11 @@
   .orbital-ring-3{ width: 480px; height: 480px; animation-duration: 14s; }
 
   @keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @-webkit-keyframes rotate {
     from { transform: translate(-50%, -50%) rotate(0deg); }
     to { transform: translate(-50%, -50%) rotate(360deg); }
   }
@@ -335,6 +349,7 @@
     box-shadow: 0 0 20px rgba(255,221,0,0.4), 0 2px 8px rgba(0,0,0,0.1);
     padding: 4px;
     animation: electron-pulse 1.2s ease-in-out infinite;
+    will-change: transform, box-shadow;
   }
 
   @keyframes electron-pulse {
@@ -451,6 +466,7 @@
     border-radius: 2px;
     overflow: hidden;
     animation: organic-pulse 2s ease-in-out infinite;
+    will-change: opacity, box-shadow, filter;
   }
 
   .wheel-line::before {
@@ -741,6 +757,8 @@
     .wheel-container{
       width: 380px;
       height: 380px;
+      animation: spin-in 1.5s ease-out 0.2s forwards;
+      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards;
     }
     .wheel-center{
       width: 120px;
@@ -867,6 +885,8 @@
     .wheel-container{
       width: 320px;
       height: 320px;
+      animation: spin-in 1.5s ease-out 0.2s forwards;
+      -webkit-animation: spin-in 1.5s ease-out 0.2s forwards;
     }
     .wheel-center{
       width: 100px;
@@ -1035,7 +1055,7 @@
       opacity: 0.7;
     }
     .wheel-container {
-      animation: none;
+      animation: none !important; /* Override any animation */
       transform: scale(1);
       opacity: 1;
     }
@@ -1119,6 +1139,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const passwordInput = document.getElementById('password-input');
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
+  const wheelContainer = document.querySelector('.wheel-container');
+
+  // Force animation reset to ensure spin-in triggers
+  wheelContainer.style.animation = 'none';
+  setTimeout(() => {
+    wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
+  }, 10);
 
   overlay.classList.add('hidden');
   document.querySelectorAll('body > *').forEach(el => {
@@ -1134,6 +1161,11 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('body > *').forEach(el => {
         el.style.visibility = 'visible';
       });
+      // Re-trigger animation after password overlay is hidden
+      wheelContainer.style.animation = 'none';
+      setTimeout(() => {
+        wheelContainer.style.animation = 'spin-in 1.5s ease-out 0.2s forwards';
+      }, 10);
     } else {
       console.log('Incorrect password');
       errorMessage.style.display = 'block';
@@ -1151,6 +1183,8 @@ document.addEventListener('DOMContentLoaded', function() {
     passwordInput.value = '';
     errorMessage.style.display = 'none';
     passwordInput.focus();
+    // Reset animation
+    wheelContainer.style.animation = 'none';
   };
 
   submitButton.addEventListener('click', checkPassword);
