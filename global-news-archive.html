@@ -48,7 +48,7 @@
       display: flex;
       align-items: center;
       max-width: 800px;
-      justify-content: flex-start; /* Adjusted for no Go Deeper button */
+      justify-content: flex-start;
       margin-bottom: 10px;
     }
     .block-title {
@@ -76,9 +76,8 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--headline-red); /* Matches headline color from news.html */
+      color: var(--headline-red);
     }
-    /* Animation delays for faster unfolding, matching history-archive.html */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -113,22 +112,22 @@
       transition: all 0.3s ease;
     }
     .global-news-links .headline a:hover {
-      color: var(--red-light); /* Lighter red for hover effect */
+      color: var(--red-light);
       text-shadow: 0 0 10px var(--red-light);
     }
     .random-button, .home-btn {
       display: inline-block;
       background: transparent;
-      color: var(--light-red-glow); /* Matches Global News theme */
+      color: var(--light-red-glow);
       padding: 8px 16px;
-      border: 1px solid var(--light-red-glow); /* Matches Global News theme */
+      border: 1px solid var(--light-red-glow);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--light-red-glow); /* Matches Global News theme */
+      text-shadow: 0 0 5px var(--light-red-glow);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .random-button {
@@ -136,7 +135,7 @@
     }
     .random-button:hover, .home-btn:hover {
       background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(255,51,51,0.3); /* Matches Global News theme */
+      box-shadow: 0 0 15px rgba(255,51,51,0.3);
       transform: scale(1.05);
     }
     .button-container {
@@ -165,7 +164,7 @@
   <div class="wrap">
     <div class="global-news">
       <div class="title-container">
-        <div class="block-title global-news-title">Global News Archive</div>
+        <div class="block-title global-news-title">Global News Archive - Page 1</div>
       </div>
       <ul class="headlines global-news-links" id="global-news-links"></ul>
     </div>
@@ -200,7 +199,7 @@
       draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y,he size, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
