@@ -115,7 +115,7 @@
       color: var(--red-light);
       text-shadow: 0 0 10px var(--red-light);
     }
-    .random-button, .home-btn {
+    .random-button, .home-btn, .next-btn {
       display: inline-block;
       background: transparent;
       color: var(--light-red-glow);
@@ -130,10 +130,10 @@
       text-shadow: 0 0 5px var(--light-red-glow);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
-    .random-button {
+    .random-button, .next-btn {
       position: relative;
     }
-    .random-button:hover, .home-btn:hover {
+    .random-button:hover, .home-btn:hover, .next-btn:hover {
       background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(255,51,51,0.3);
       transform: scale(1.05);
@@ -158,7 +158,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .random-button { font-size: 10px; padding: 6px 12px; }
+      .random-button, .next-btn { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
       .error-message { font-size: 12px; }
@@ -178,6 +178,7 @@
     </div>
     <div class="button-container">
       <button class="random-button" onclick="goToRandomGlobal()">⚛️ SURPRISE ME!</button>
+      <a href="/global-news-archive-page2.html" class="next-btn">Next Page →</a>
     </div>
   </div>
   <script>
@@ -249,7 +250,7 @@
       init();
     });
 
-    // Load global news links
+    // Load global news links for Page 1 (6th oldest to 29th)
     async function loadGlobalNewsLinks() {
       try {
         const response = await fetch('global-news.txt');
@@ -268,7 +269,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 24);
+        const displayLinks = links.slice(5, 29); // Start from 6th link (index 5) for Page 1
         const grid = document.getElementById('global-news-links');
         const errorMessage = document.getElementById('error-message');
         if (grid && displayLinks.length > 0) {
@@ -278,9 +279,9 @@
             </li>
           `).join('');
           errorMessage.style.display = 'none';
-          console.log(`Showing ${displayLinks.length} global news links (${links.length - displayLinks.length} moved to archive)`);
+          console.log(`Showing ${displayLinks.length} global news links on Page 1 (${links.length - displayLinks.length - 5} remaining for other pages)`);
         } else {
-          throw new Error('No valid links to display');
+          throw new Error('No valid links to display on Page 1');
         }
       } catch (error) {
         console.error('Error loading global news links:', error.message);
@@ -291,7 +292,7 @@
       }
     }
 
-    // Random global news article
+    // Random global news article from Page 1 links
     async function goToRandomGlobal() {
       try {
         const response = await fetch('global-news.txt');
@@ -310,12 +311,12 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 24);
+        const currentLinks = links.slice(5, 29); // Random from Page 1 links (6th to 29th)
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
         } else {
-          throw new Error('No valid links to select randomly');
+          throw new Error('No valid links to select randomly on Page 1');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error.message);
