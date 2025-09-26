@@ -420,13 +420,50 @@
         canvas.height = window.innerHeight;
       });
       
-      // Add click handlers for content links
-      document.querySelectorAll('.content-link').forEach((link, index) => {
-        link.addEventListener('click', () => {
-          const linkUrl = link.querySelector('.link-url').textContent;
-          window.location.href = `/epstein/latest/${linkUrl}`;
-        });
-      });
+      // Load content from epstein-links.txt
+      async function loadEpsteinContent() {
+        try {
+          const response = await fetch('epstein-links.txt');
+          const text = await response.text();
+          const lines = text.trim().split('\n').filter(line => line.trim());
+          
+          // Parse each line: title|link|category
+          const entries = lines.map(line => {
+            const [title, link, category] = line.split('|');
+            return { title: title.trim(), link: link.trim(), category: category.trim() };
+          });
+          
+          // Display latest 5 in central box
+          const latest5 = entries.slice(0, 5);
+          const contentLinksContainer = document.querySelector('.content-links');
+          
+          // Clear existing placeholder content
+          contentLinksContainer.innerHTML = '';
+          
+          // Add real content
+          latest5.forEach(entry => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.innerHTML = `
+              <span class="link-title">${entry.title}</span>
+              <span class="link-url">${entry.link}</span>
+            `;
+            linkElement.addEventListener('click', () => {
+              window.location.href = entry.link;
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
+          
+          console.log('Loaded', entries.length, 'entries from epstein-links.txt');
+          
+        } catch (error) {
+          console.error('Error loading epstein-links.txt:', error);
+          console.log('Using placeholder content instead');
+        }
+      }
+      
+      // Load content when page loads
+      loadEpsteinContent();
     });
   </script>
 </body>
