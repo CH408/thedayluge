@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein Video Clips Archive - THE DAYLUGE</title>
+  <title>Video Clips - Epstein's Web</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -13,8 +13,12 @@
       --bright-green: #33FF88;
       --matrix-green: #00DD77;
       --neon-green: #00FF00;
+      --forest-green: #228B22;
+      --lime-green: #32CD32;
+      --emerald-green: #50C878;
       --black-bg: #000000;
       --dark-gray: #111111;
+      --gray: #333333;
       --maxw: 1200px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -58,10 +62,10 @@
     }
     @keyframes block-title-pulse-green {
       0% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--bright-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--matrix-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--bright-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; max-width: 800px; }
@@ -73,7 +77,7 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    /* Fast animation delays for unroll effect */
+    /* Fast animation delays */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -153,38 +157,10 @@
       box-shadow: 0 0 15px rgba(0,255,127,0.3);
       transform: scale(1.05);
     }
-    .button-container {
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .random-button {
-      display: inline-block;
-      background: transparent;
-      color: var(--crt-green);
-      padding: 8px 16px;
-      border: 1px solid var(--crt-green);
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--crt-green);
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      cursor: pointer;
-    }
-    .random-button:hover {
-      background: rgba(0,255,127,0.1);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(0,255,127,0.3);
-    }
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .back-btn, .home-btn, .random-button { 
+      .back-btn, .home-btn { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
@@ -193,15 +169,12 @@
   </style>
 </head>
 <body>
-  <a href="../epstein.html" class="back-btn">← Back to Epstein's Web</a>
-  <a href="/" class="home-btn">← Home</a>
+  <a href="/epstein-web.html" class="back-btn">← Back to Epstein's Web</a>
+  <a href="/conspiracy-corner.html" class="home-btn">← Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title">Epstein Video Clips Archive</div>
-    <ul class="headlines" id="archive-links"></ul>
-    <div class="button-container">
-      <button class="random-button" onclick="goToRandomVideo()">📹 SURPRISE ME!</button>
-    </div>
+    <div class="archive-title">Epstein Video Clips</div>
+    <ul class="headlines" id="video-links"></ul>
   </div>
   <script>
     // Particle effect
@@ -219,7 +192,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#00FF7F', '#00CC66', '#33FF88', '#00DD77', '#00FF00', '#50C878'][Math.floor(Math.random() * 6)];
+        this.color = ['#00FF7F', '#00CC66', '#33FF88', '#00DD77', '#00FF00', '#32CD32'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       
@@ -281,121 +254,65 @@
     });
 
     // Load video clip links from epstein-links.txt
-    async function loadArchiveLinks() {
+    async function loadVideoLinks() {
       try {
-        console.log('Fetching ../epstein-links.txt for video clips archive');
-        const response = await fetch('../epstein-links.txt');
+        console.log('Fetching epstein-links.txt for video clip content');
+        const response = await fetch('epstein-links.txt');
         console.log('Fetch response:', response);
         if (!response.ok) {
           console.error(`Failed to load epstein-links.txt: ${response.status}`);
-          // Show placeholder content if file not found
-          showPlaceholderContent();
           return;
         }
         const text = await response.text();
         console.log('Fetched text:', text);
-        const lines = text.trim().split('\n').filter(line => line.trim());
+        const lines = text.split('\n').filter(line => line.trim());
         console.log('Parsed lines:', lines);
         
         // Parse each line: title|link|category
-        const entries = lines.map(line => {
-          const [title, link, category] = line.split('|');
-          return { 
-            title: title.trim(), 
-            link: link.trim(), 
-            category: category.trim() 
-          };
-        });
-        
-        // Filter for videos only, skip the latest 5 (they're on main page)
-        const videoEntries = entries.filter(entry => entry.category === 'videos');
-        const archivedVideos = videoEntries.slice(5); // Skip first 5 (latest)
-        
-        console.log('Archive video links:', archivedVideos);
-
-        const grid = document.getElementById('archive-links');
-        if (grid) {
-          if (archivedVideos.length > 0) {
-            grid.innerHTML = archivedVideos.map((entry, index) => `
-              <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
-                <a href="${entry.link}" target="_blank">${entry.title}</a>
-              </li>
-            `).join('');
-            console.log('Rendered video archive links to DOM:', archivedVideos);
-          } else {
-            // Show placeholder if no archived videos
-            showPlaceholderContent();
+        const allLinks = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 3) {
+            return {
+              title: parts[0].trim(),
+              url: parts[1].trim(),
+              category: parts[2].trim().toLowerCase()
+            };
           }
+          return null;
+        }).filter(link => link !== null);
+        
+        console.log('All parsed links:', allLinks);
+        
+        // Filter for video clip entries
+        const videoLinks = allLinks.filter(link => 
+          link.category === 'video' || 
+          link.category === 'videos' ||
+          link.category.includes('video')
+        );
+        
+        console.log('Filtered video links:', videoLinks);
+
+        const grid = document.getElementById('video-links');
+        if (grid && videoLinks.length > 0) {
+          grid.innerHTML = videoLinks.map((link, index) => `
+            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+          console.log('Rendered video links to DOM:', videoLinks);
+        } else if (grid) {
+          grid.innerHTML = '<li class="headline"><span>No video clip content available yet.</span></li>';
         }
       } catch (error) {
-        console.error('Error loading video archive links:', error);
-        // Show placeholder content on error
-        showPlaceholderContent();
-      }
-    }
-
-    // Show placeholder content
-    function showPlaceholderContent() {
-      const placeholderVideos = [
-        { title: "Epstein Interview Footage Analysis", link: "#placeholder-video-1" },
-        { title: "Flight Log Documentary Clip", link: "#placeholder-video-2" },
-        { title: "Island Drone Footage Investigation", link: "#placeholder-video-3" },
-        { title: "Court Testimony Video Excerpts", link: "#placeholder-video-4" },
-        { title: "Financial Records Explanation", link: "#placeholder-video-5" },
-        { title: "Victim Impact Statement Videos", link: "#placeholder-video-6" },
-        { title: "Expert Analysis Compilation", link: "#placeholder-video-7" },
-        { title: "Hidden Camera Footage Review", link: "#placeholder-video-8" }
-      ];
-
-      const grid = document.getElementById('archive-links');
-      if (grid) {
-        grid.innerHTML = placeholderVideos.map((entry, index) => `
-          <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
-            <a href="${entry.link}" target="_blank">${entry.title}</a>
-          </li>
-        `).join('');
-        console.log('Showing placeholder video content');
-      }
-    }
-
-    // Random video from archive
-    async function goToRandomVideo() {
-      try {
-        console.log('Fetching ../epstein-links.txt for random video selection');
-        const response = await fetch('../epstein-links.txt');
-        if (!response.ok) {
-          console.log('Could not load epstein-links.txt for random selection');
-          return;
+        console.error('Error loading video links:', error);
+        const grid = document.getElementById('video-links');
+        if (grid) {
+          grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
         }
-        const text = await response.text();
-        const lines = text.trim().split('\n').filter(line => line.trim());
-        
-        // Parse and filter for videos
-        const entries = lines.map(line => {
-          const [title, link, category] = line.split('|');
-          return { 
-            title: title.trim(), 
-            link: link.trim(), 
-            category: category.trim() 
-          };
-        });
-        
-        const videoEntries = entries.filter(entry => entry.category === 'videos');
-        const archivedVideos = videoEntries.slice(5); // Skip first 5 (latest)
-        
-        if (archivedVideos.length > 0) {
-          const randomVideo = archivedVideos[Math.floor(Math.random() * archivedVideos.length)];
-          console.log('Opening random video:', randomVideo);
-          window.open(randomVideo.link, '_blank');
-        } else {
-          console.log('No archived videos available for random selection');
-        }
-      } catch (error) {
-        console.error('Error loading links for random video selection:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadArchiveLinks);
+    document.addEventListener('DOMContentLoaded', loadVideoLinks);
   </script>
 </body>
 </html>
