@@ -122,7 +122,13 @@
     <div class="spoke" onclick="window.location.href='/epstein/memes'">Memes</div>
     <div class="news-hub">
       <h2>Latest News</h2>
-      <ul class="news-list" id="news-list"></ul>
+      <ul class="news-list" id="news-list">
+        <li><a href="#" target="_blank">New Epstein Documents Released</a></li>
+        <li><a href="#" target="_blank">Podcast Explores Epstein Connections</a></li>
+        <li><a href="#" target="_blank">Insider Claims New Evidence Uncovered</a></li>
+        <li><a href="#" target="_blank">Meme Goes Viral on Epstein Case</a></li>
+        <li><a href="#" target="_blank">Article Questions Official Narrative</a></li>
+      </ul>
     </div>
   </div>
   <script>
@@ -179,26 +185,6 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       });
-      fetch('/epstein/epstein-news-links.txt')
-        .then(response => response.text())
-        .then(data => {
-          const newsList = document.getElementById('news-list');
-          const lines = data.trim().split('\n').reverse().slice(0, 5);
-          lines.forEach(line => {
-            const [title, url] = line.split('|').map(item => item.trim());
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = url;
-            a.textContent = title;
-            a.target = '_blank';
-            li.appendChild(a);
-            newsList.appendChild(li);
-          });
-        })
-        .catch(error => {
-          console.error('Error loading news:', error);
-          document.getElementById('news-list').innerHTML = '<li>Error loading news</li>';
-        });
     });
   </script>
 </body>
