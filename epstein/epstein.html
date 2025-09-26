@@ -22,8 +22,8 @@
     }
     body::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite; pointer-events: none;
+      background: radial-gradient(circle at center, rgba(0,255,127,0.15) 0%, transparent 70%);
+      animation: energy-pulse 5s ease-in-out infinite; pointer-events: none;
     }
     body::after {
       position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
@@ -53,51 +53,54 @@
       87.5% { color: var(--dark-green); text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { color: var(--crt-green); text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .hex-container {
+    .orbit-container {
       position: relative; width: 450px; height: 450px; margin: 0 auto; z-index: 5; animation: atomize 2s ease-in;
     }
-    @keyframes atomize { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-    .hex-glow {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 300px; height: 300px; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      background: radial-gradient(circle, rgba(0,255,127,0.2) 0%, transparent 70%); z-index: 1;
-      animation: rotate 20s linear infinite;
+    @keyframes atomize { from { opacity: 0; transform: scale(0.5) rotate(-180deg); } to { opacity: 1; transform: scale(1) rotate(0deg); } }
+    .orbital-ring {
+      position: absolute; top: 50%; left: 50%; border: 2px solid rgba(0,255,127,0.4); border-radius: 50%;
+      transform: translate(-50%, -50%); animation: rotate 18s linear infinite;
     }
+    .orbital-ring-1 { width: 250px; height: 200px; animation-duration: 14s; }
+    .orbital-ring-2 { width: 350px; height: 280px; animation-duration: 22s; animation-direction: reverse; }
     @keyframes rotate { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
     .news-hub {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 180px;
-      background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 10px;
-      padding: 15px; text-align: center; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px;
-      font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 0 20px rgba(0,255,127,0.5);
-      animation: glitch 0.5s infinite alternate; z-index: 15;
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 280px; height: 180px;
+      background: rgba(17,17,17,0.8); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 15px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: default; transition: all 0.3s ease;
+      z-index: 15; text-align: center; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px;
+      font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 0 25px rgba(0,255,127,0.6);
+      animation: pulse 2.5s ease-in-out infinite; padding: 15px;
     }
-    @keyframes glitch {
-      0% { transform: translate(-50%, -50%) skew(0deg); }
-      50% { transform: translate(-50%, -50%) skew(2deg); }
-      100% { transform: translate(-50%, -50%) skew(-2deg); }
-    }
-    .news-hub h2 { font-size: 14px; margin-bottom: 6px; text-shadow: 0 0 5px var(--crt-green); }
-    .news-list { list-style: none; max-height: 100px; overflow-y: auto; width: 100%; padding: 0 8px; }
-    .news-list li { margin-bottom: 4px; }
-    .news-list a { color: var(--neon-green); text-decoration: none; font-size: 10px; line-height: 1.3; transition: color 0.3s ease; }
+    .news-hub h2 { font-size: 16px; margin-bottom: 8px; text-shadow: 0 0 6px var(--crt-green); }
+    .news-list { list-style: none; max-height: 120px; overflow-y: auto; width: 100%; padding: 0 10px; }
+    .news-list li { margin-bottom: 5px; }
+    .news-list a { color: var(--neon-green); text-decoration: none; font-size: 11px; line-height: 1.4; transition: color 0.3s ease; }
     .news-list a:hover { color: var(--bright-green); text-shadow: 0 0 8px var(--bright-green); }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 25px rgba(0,255,127,0.6); border-color: var(--crt-green); }
+      50% { box-shadow: 0 0 50px rgba(0,255,127,0.9); border-color: var(--neon-green); transform: translate(-50%, -50%) scale(1.03); }
+    }
     .spoke {
-      position: absolute; width: 90px; height: 90px; background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-      color: var(--neon-green); border: 2px solid var(--crt-green); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      position: absolute; width: 100px; height: 80px; border: 2px solid var(--crt-green); border-radius: 50%;
       display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 11px; font-weight: 900;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px; font-weight: 900;
       text-align: center; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.2px;
-      box-shadow: 0 0 15px rgba(0,255,127,0.4); animation: electron-pulse 2s ease-in-out infinite; z-index: 10;
+      box-shadow: 0 0 20px rgba(0,255,127,0.5); background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
+      color: var(--neon-green); z-index: 10; animation: orbit 12s linear infinite;
     }
-    @keyframes electron-pulse {
-      0%, 100% { box-shadow: 0 0 15px rgba(0,255,127,0.4); border-color: var(--crt-green); }
-      50% { box-shadow: 0 0 30px rgba(0,255,127,0.8); border-color: var(--neon-green); }
+    .spoke:hover {
+      transform: scale(1.2); box-shadow: 0 0 40px rgba(0,255,127,0.9); background: var(--dark-gray);
+      animation-play-state: paused;
     }
-    .spoke:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(0,255,127,0.9); background: var(--dark-gray); }
-    .spoke-1 { left: 330px; top: 180px; }
-    .spoke-2 { left: 180px; bottom: 50px; }
-    .spoke-3 { left: 30px; top: 180px; }
-    .spoke-4 { left: 180px; top: 50px; }
+    @keyframes orbit {
+      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg); }
+    }
+    .spoke-1 { animation-delay: 0s; left: 50%; top: 50%; }
+    .spoke-2 { animation-delay: -3s; left: 50%; top: 50%; }
+    .spoke-3 { animation-delay: -6s; left: 50%; top: 50%; }
+    .spoke-4 { animation-delay: -9s; left: 50%; top: 50%; }
     .home-btn {
       position: fixed; bottom: 20px; right: 20px; background: var(--black-bg); color: var(--crt-green);
       border: 2px solid var(--crt-green); padding: 10px 20px; border-radius: 25px;
@@ -107,19 +110,32 @@
     }
     .home-btn:hover { background: var(--dark-gray); transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,127,0.6); }
     @media (max-width: 600px) {
-      .hex-container { width: 320px; height: auto; display: flex; flex-direction: column; align-items: center; }
-      .hex-glow { display: none; }
-      .news-hub { width: 90%; position: static; transform: none; margin: 20px 0; }
-      .spoke { position: static; margin: 10px 0; width: 90%; clip-path: none; border-radius: 10px; }
+      .orbit-container { width: 360px; height: 360px; }
+      .news-hub { width: 220px; height: 140px; font-size: 11px; }
+      .news-hub h2 { font-size: 14px; }
+      .news-list a { font-size: 10px; }
+      .spoke { width: 80px; height: 60px; font-size: 11px; animation: none; }
+      .spoke-1 { left: 260px; top: 144px; transform: none; }
+      .spoke-2 { left: 144px; bottom: 48px; transform: none; }
+      .spoke-3 { left: 24px; top: 144px; transform: none; }
+      .spoke-4 { left: 144px; top: 48px; transform: none; }
       .header h1 { font-size: 24px; }
+      .orbital-ring-1 { width: 200px; height: 160px; }
+      .orbital-ring-2 { width: 280px; height: 224px; }
     }
     @media (max-width: 400px) {
-      .hex-container { width: 280px; }
-      .news-hub { font-size: 10px; }
+      .orbit-container { width: 300px; height: 300px; }
+      .news-hub { width: 180px; height: 120px; font-size: 10px; }
       .news-hub h2 { font-size: 12px; }
       .news-list a { font-size: 9px; }
-      .spoke { font-size: 10px; }
+      .spoke { width: 70px; height: 50px; font-size: 10px; }
+      .spoke-1 { left: 220px; top: 120px; }
+      .spoke-2 { left: 120px; bottom: 40px; }
+      .spoke-3 { left: 20px; top: 120px; }
+      .spoke-4 { left: 120px; top: 40px; }
       .header h1 { font-size: 20px; }
+      .orbital-ring-1 { width: 180px; height: 144px; }
+      .orbital-ring-2 { width: 240px; height: 192px; }
     }
     #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
   </style>
@@ -128,10 +144,9 @@
   <div class="header"><h1>EPSTEIN'S WEB</h1></div>
   <a href="/" class="home-btn">← Back to Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
-  <div class="hex-container">
-    <div class="hex-glow"></div>
-    <div class="spoke spoke-1" onclick="window.location.href='/epstein/podcasts'">Podcasts & Clips</div>
-    <div class="spoke spoke-2" onclick="window.location.href='/epstein/articles'">Articles & Longform</div>
+  <div class="orbit-container">
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
     <div class="news-hub">
       <h2>Latest News</h2>
       <ul class="news-list" id="news-list">
@@ -142,6 +157,8 @@
         <li><a href="#" target="_blank">Article Questions Official Narrative</a></li>
       </ul>
     </div>
+    <div class="spoke spoke-1" onclick="window.location.href='/epstein/podcasts'">Podcasts & Clips</div>
+    <div class="spoke spoke-2" onclick="window.location.href='/epstein/articles'">Articles & Longform</div>
     <div class="spoke spoke-3" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
     <div class="spoke spoke-4" onclick="window.location.href='/epstein/memes'">Memes</div>
   </div>
