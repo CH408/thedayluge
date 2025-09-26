@@ -253,7 +253,7 @@
       init();
     });
 
-    // Load video clip links from epstein-links.txt
+    // Load video clip links from epstein-links.txt, starting from the 6th entry
     async function loadVideoLinks() {
       try {
         console.log('Fetching epstein-links.txt for video clip content');
@@ -283,14 +283,14 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for video clip entries
-        const videoLinks = allLinks.filter(link => 
+        // Filter for video clip entries, starting from the 6th entry (index 5)
+        const videoLinks = allLinks.slice(5).filter(link => 
           link.category === 'video' || 
           link.category === 'videos' ||
           link.category.includes('video')
         );
         
-        console.log('Filtered video links:', videoLinks);
+        console.log('Filtered video links (starting from 6th entry):', videoLinks);
 
         const grid = document.getElementById('video-links');
         if (grid && videoLinks.length > 0) {
