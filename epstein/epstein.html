@@ -197,11 +197,24 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
     @keyframes electron-pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(0,255,127,0.4); border-color: var(--crt-green); }
-      50% { box-shadow: 0 0 30px rgba(0,255,127,0.8); border-color: var(--neon-green); }
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(0,255,127,0.4); 
+        border-color: var(--crt-green); 
+      }
+      50% { 
+        box-shadow: 0 0 30px rgba(0,255,127,0.8); 
+        border-color: var(--neon-green); 
+      }
     }
     .perimeter-box:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(0,255,127,0.9);
+      background: var(--dark-gray);
+    }
+    
+    /* Stabilize right box hover to prevent wiggling */
+    .right-box:hover {
+      transform: translateY(-50%) scale(1.05);
       box-shadow: 0 0 35px rgba(0,255,127,0.9);
       background: var(--dark-gray);
     }
@@ -247,12 +260,23 @@
     }
     /* Left Box */
     .left-box {
+      position: absolute;
       top: 50%;
       left: 50px;
       transform: translateY(-50%);
       width: 80px;
       height: 120px;
       font-size: 16px;
+      transform-origin: center center;
+      will-change: transform, box-shadow;
+    }
+    
+    /* Stabilize left box hover too */
+    .left-box:hover {
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 0 35px rgba(0,255,127,0.9);
+      background: var(--dark-gray);
+      animation-play-state: paused;
     }
     .home-btn {
       position: fixed;
