@@ -222,12 +222,13 @@
       animation-play-state: paused;
       background: var(--dark-gray);
     }
-    /* Equidistant spoke positions (72° intervals, radius 150px) */
+    /* Equidistant spoke positions (60° intervals, radius 150px) */
     .spoke-1 { left: 355px; top: 205px; font-size: 14px; } /* Podcasts: 0° */
-    .spoke-2 { left: 305px; top: 337px; font-size: 14px; } /* Video Clips: 72° */
-    .spoke-3 { left: 169px; top: 357px; font-size: 12px; } /* Articles & Longform: 144° */
-    .spoke-4 { left: 115px; top: 225px; font-size: 12px; } /* Primary Sources: 216° */
-    .spoke-5 { left: 210px; top: 88px; font-size: 14px; } /* Memes: 288° */
+    .spoke-2 { left: 280px; top: 327px; font-size: 14px; } /* Video Clips: 60° */
+    .spoke-3 { left: 175px; top: 352px; font-size: 12px; } /* Articles & Longform: 120° */
+    .spoke-4 { left: 145px; top: 295px; font-size: 12px; } /* Primary Sources: 180° */
+    .spoke-5 { left: 175px; top: 138px; font-size: 14px; } /* Memes: 240° */
+    .spoke-6 { left: 280px; top: 163px; font-size: 14px; } /* #6: 300° */
     .wheel-line {
       position: absolute;
       background: 
@@ -284,10 +285,11 @@
       100% { --pulse-position-reverse: 0%; opacity: 0; }
     }
     .line-1 { animation-delay: 0s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(0deg); }
-    .line-2 { animation-delay: 0.5s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(72deg); }
-    .line-3 { animation-delay: 1s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(144deg); }
-    .line-4 { animation-delay: 1.5s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(216deg); }
-    .line-5 { animation-delay: 2s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(288deg); }
+    .line-2 { animation-delay: 0.4s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(60deg); }
+    .line-3 { animation-delay: 0.8s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(120deg); }
+    .line-4 { animation-delay: 1.2s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(180deg); }
+    .line-5 { animation-delay: 1.6s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(240deg); }
+    .line-6 { animation-delay: 2.0s; top: 50%; left: 50%; width: 150px; transform: translate(0, -50%) rotate(300deg); }
     .wheel-container:hover .wheel-line {
       animation: organic-pulse 2s ease-in-out infinite;
     }
@@ -326,12 +328,13 @@
       .wheel-center { width: 120px; height: 120px; font-size: 14px; }
       .spoke { width: 75px; height: 75px; }
       .spoke-1 { left: 270.3px; top: 152.5px; font-size: 12px; } /* 0° */
-      .spoke-2 { left: 232.3px; top: 256.4px; font-size: 12px; } /* 72° */
-      .spoke-3 { left: 128.8px; top: 271.9px; font-size: 11px; } /* 144° */
-      .spoke-4 { left: 87.3px; top: 171.5px; font-size: 11px; } /* 216° */
-      .spoke-5 { left: 159.7px; top: 67.1px; font-size: 12px; } /* 288° */
+      .spoke-2 { left: 213.3px; top: 248.9px; font-size: 12px; } /* 60° */
+      .spoke-3 { left: 133.3px; top: 267.9px; font-size: 11px; } /* 120° */
+      .spoke-4 { left: 110.5px; top: 224.5px; font-size: 11px; } /* 180° */
+      .spoke-5 { left: 133.3px; top: 105.1px; font-size: 12px; } /* 240° */
+      .spoke-6 { left: 213.3px; top: 124.1px; font-size: 12px; } /* 300° */
       .header h1 { font-size: 28px; }
-      .line-1, .line-2, .line-3, .line-4, .line-5 { width: 114px; }
+      .line-1, .line-2, .line-3, .line-4, .line-5, .line-6 { width: 114px; }
       .orbital-ring-1 { width: 240px; height: 240px; }
       .orbital-ring-2 { width: 300px; height: 300px; }
       .orbital-ring-3 { width: 360px; height: 360px; }
@@ -341,12 +344,13 @@
       .wheel-center { width: 100px; height: 100px; font-size: 12px; }
       .spoke { width: 65px; height: 65px; }
       .spoke-1 { left: 227.5px; top: 128.3px; font-size: 11px; } /* 0° */
-      .spoke-2 { left: 195.4px; top: 215.8px; font-size: 11px; } /* 72° */
-      .spoke-3 { left: 108.4px; top: 228.8px; font-size: 10px; } /* 144° */
-      .spoke-4 { left: 73.4px; top: 144.3px; font-size: 10px; } /* 216° */
-      .spoke-5 { left: 134.3px; top: 56.4px; font-size: 11px; } /* 288° */
+      .spoke-2 { left: 179.5px; top: 209.4px; font-size: 11px; } /* 60° */
+      .spoke-3 { left: 112.3px; top: 225.4px; font-size: 10px; } /* 120° */
+      .spoke-4 { left: 93.0px; top: 189.0px; font-size: 10px; } /* 180° */
+      .spoke-5 { left: 112.3px; top: 88.6px; font-size: 11px; } /* 240° */
+      .spoke-6 { left: 179.5px; top: 104.6px; font-size: 11px; } /* 300° */
       .header h1 { font-size: 24px; }
-      .line-1, .line-2, .line-3, .line-4, .line-5 { width: 96px; }
+      .line-1, .line-2, .line-3, .line-4, .line-5, .line-6 { width: 96px; }
     }
     .wheel-container:hover .orbital-ring {
       border-color: rgba(0,255,127,0.7);
@@ -371,7 +375,7 @@
       }
     }
     /* Temporary debug markers (remove after testing) */
-    .spoke::after {
+    .spoke::after, .wheel-center::after {
       content: '';
       position: absolute;
       width: 4px;
@@ -384,7 +388,8 @@
       z-index: 20;
     }
   </style>
-</body>
+</head>
+<body>
   <div class="header"><h1>EPSTEIN'S WEB</h1></div>
   <a href="/conspiracy-corner.html" class="home-btn">← Back to Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
@@ -397,6 +402,7 @@
     <div class="wheel-line line-3"></div>
     <div class="wheel-line line-4"></div>
     <div class="wheel-line line-5"></div>
+    <div class="wheel-line line-6"></div>
     <div class="wheel-center" onclick="goToRandomEpsteinContent()">
       NEW EPSTEIN CONTENT
     </div>
@@ -405,6 +411,7 @@
     <div class="spoke spoke-3" onclick="window.location.href='/epstein/articles'">Articles & Longform</div>
     <div class="spoke spoke-4" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
     <div class="spoke spoke-5" onclick="window.location.href='/epstein/memes'">Memes</div>
+    <div class="spoke spoke-6" onclick="window.location.href='/epstein/placeholder'">#6</div>
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -461,7 +468,7 @@
         canvas.height = window.innerHeight;
       });
       window.goToRandomEpsteinContent = function() {
-        const topics = ['podcasts', 'videos', 'articles', 'primary-sources', 'memes'];
+        const topics = ['podcasts', 'videos', 'articles', 'primary-sources', 'memes', 'placeholder'];
         const randomTopic = topics[Math.floor(Math.random() * topics.length)];
         window.location.href = `/epstein/${randomTopic}`;
       };
