@@ -8,35 +8,80 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --crt-green: #00FF7F; --dark-green: #00CC66; --bright-green: #33FF88; --matrix-green: #00DD77;
-      --neon-green: #00FF00; --forest-green: #228B22; --lime-green: #32CD32; --emerald-green: #50C878;
-      --black-bg: #000000; --dark-gray: #111111; --gray: #333333; --maxw: 1400px;
+      --crt-green: #00FF7F;
+      --dark-green: #00CC66;
+      --bright-green: #33FF88;
+      --matrix-green: #00DD77;
+      --neon-green: #00FF00;
+      --forest-green: #228B22;
+      --lime-green: #32CD32;
+      --emerald-green: #50C878;
+      --black-bg: #000000;
+      --dark-gray: #111111;
+      --gray: #333333;
+      --maxw: 1400px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--crt-green); line-height: 1.5; background: var(--black-bg);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 100vh; position: relative; overflow: hidden;
+      color: var(--crt-green);
+      line-height: 1.5;
+      background: var(--black-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
     }
     body::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite; pointer-events: none; z-index: 0;
+      animation: energy-pulse 6s ease-in-out infinite;
+      pointer-events: none;
     }
     body::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,255,127,0.05) 10px, rgba(0,255,127,0.05) 11px);
-      animation: scanline 4s linear infinite; pointer-events: none; z-index: 0;
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
+      pointer-events: none;
     }
-    @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    @keyframes scanline { 0% { background-position: 0 0; } 100% { background-position: 0 20px; } }
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    @keyframes edge-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
     .header {
-      position: absolute; top: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 10;
     }
     .header h1 {
-      text-transform: uppercase; letter-spacing: 0.5px; font-size: 28px; margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 32px;
+      margin-bottom: 8px;
       animation: title-pulse 8s ease-in-out infinite;
     }
     @keyframes title-pulse {
@@ -45,110 +90,300 @@
       25% { color: var(--neon-green); text-shadow: 0 0 17px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8); }
       37.5% { color: var(--lime-green); text-shadow: 0 0 18px var(--lime-green), 2px 2px 4px rgba(0,0,0,0.8); }
       50% { color: var(--emerald-green); text-shadow: 0 0 20px var(--emerald-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      62.5% { color: var(--forest-green); text-shadow: 0 0 18px var(--forest-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      62.5% { color: var(--forest-green); text-shadow: 0 0 18px var(--forest-green), 2px 2px 4px
+
+      rgba(0,0,0,0.8); }
       75% { color: var(--matrix-green); text-shadow: 0 0 17px var(--matrix-green), 2px 2px 4px rgba(0,0,0,0.8); }
       87.5% { color: var(--dark-green); text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { color: var(--crt-green); text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .console-container {
-      position: relative; width: 600px; margin: 50px auto 20px; padding: 20px; z-index: 5;
-      border: 2px solid rgba(0,255,127,0.3); border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,127,0.4);
-      background: repeating-linear-gradient(60deg, transparent, transparent 20px, rgba(0,255,127,0.1) 20px, rgba(0,255,127,0.1) 22px);
+    .wheel-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
+      z-index: 5;
+      animation: atomize 2s ease-in;
     }
-    .content-hub {
-      background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 10px;
-      padding: 15px; text-align: center; width: 100%; margin-bottom: 20px; font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
-      box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10; position: relative;
+    @keyframes atomize {
+      from { opacity: 0; transform: scale(0.5) rotate(-180deg); }
+      to { opacity: 1; transform: scale(1) rotate(0deg); }
     }
-    .content-hub::before {
-      content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
-      border: 2px solid rgba(0,255,127,0.2); border-radius: 10px; z-index: -1;
-      animation: glow-border 2s ease-in-out infinite;
+    .orbital-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 1px solid rgba(0,255,127,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: rotate 30s linear infinite;
     }
-    @keyframes glow-border { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    .content-hub h2 { font-size: 18px; margin-bottom: 8px; text-shadow: 0 0 5px var(--crt-green); }
-    .content-list { list-style: none; max-height: 120px; overflow-y: auto; width: 100%; padding: 0 10px; }
-    .content-list li { margin-bottom: 5px; }
-    .content-list a { color: var(--neon-green); text-decoration: none; font-size: 13px; line-height: 1.4; transition: color 0.3s ease; }
-    .content-list a:hover { color: var(--bright-green); text-shadow: 0 0 8px var(--bright-green); }
-    .spoke-container {
-      display: flex; justify-content: space-between;
+    .orbital-ring-1 { width: 300px; height: 300px; animation-duration: 25s; }
+    .orbital-ring-2 { width: 400px; height: 400px; animation-duration: 35s; animation-direction: reverse; }
+    .orbital-ring-3 { width: 480px; height: 480px; animation-duration: 40s; }
+    @keyframes rotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
+      color: var(--crt-green);
+      border: 2px solid var(--crt-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 15;
+      text-align: center;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      box-shadow: 0 0 30px rgba(0,255,127,0.5), 0 4px 12px rgba(0,0,0,0.8);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(0,255,127,0.5), 0 4px 12px rgba(0,0,0,0.8); border-color: var(--crt-green); }
+      50% { box-shadow: 0 0 60px rgba(0,255,127,0.8), 0 8px 25px rgba(0,255,127,0.4); border-color: var(--neon-green); transform: translate(-50%, -50%) scale(1.02); }
+    }
+    .wheel-center:hover {
+      background: radial-gradient(circle, var(--dark-gray) 0%, var(--black-bg) 100%);
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 0 40px rgba(0,255,127,0.8), 0 6px 16px rgba(0,0,0,0.2);
     }
     .spoke {
-      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%); color: var(--neon-green);
-      border: 2px solid var(--crt-green); border-radius: 50%; width: 80px; height: 80px;
-      display: flex; align-items: center; justify-content: center; text-align: center;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px; font-weight: 900;
-      text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(0,255,127,0.4); z-index: 10; position: relative;
-      filter: url(#gear-edge);
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border: 2px solid var(--crt-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      box-shadow: 0 0 20px rgba(0,255,127,0.4), 0 2px 8px rgba(0,0,0,0.1);
+      padding: 4px;
+      animation: electron-pulse 2s ease-in-out infinite;
+      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
+      color: var(--neon-green);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
-    .spoke::before {
-      content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
-      border: 1px solid rgba(0,255,127,0.3); border-radius: 50%; z-index: -1;
-      animation: glow-border 2s ease-in-out infinite;
+    @keyframes electron-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,255,127,0.4), 0 2px 8px rgba(0,0,0,0.1); border-color: var(--crt-green); }
+      50% { box-shadow: 0 0 40px rgba(0,255,127,0.8), 0 4px 15px rgba(0,255,127,0.3); border-color: var(--neon-green); }
     }
-    .spoke:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,255,127,0.9); background: var(--dark-gray); }
+    .spoke:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 35px rgba(0,255,127,0.9), 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 10;
+      animation-play-state: paused;
+      background: var(--dark-gray);
+    }
+    .spoke-1 { left: 390px; top: 205px; font-size: 14px; } /* Podcasts */
+    .spoke-2 { left: 336px; top: 336px; font-size: 14px; } /* Videos */
+    .spoke-3 { left: 205px; bottom: 20px; font-size: 12px; } /* Articles */
+    .spoke-4 { left: 74px; bottom: 64px; font-size: 12px; } /* Primary Sources */
+    .spoke-5 { left: 20px; top: 205px; font-size: 14px; } /* Memes */
+    .wheel-line {
+      position: absolute;
+      background: 
+        radial-gradient(ellipse 15px 8px at center, rgba(0,255,127,0.9) 0%, transparent 70%),
+        linear-gradient(90deg, transparent 0%, var(--crt-green) 20%, rgba(0,255,127,0.8) 50%, var(--crt-green) 80%, transparent 100%);
+      height: 4px;
+      transform-origin: left center;
+      z-index: 1;
+      border-radius: 2px;
+      overflow: hidden;
+      animation: organic-pulse 4s ease-in-out infinite;
+    }
+    .wheel-line::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      background: 
+        radial-gradient(ellipse 30px 6px at var(--pulse-position, 0%), rgba(0,255,127,0.9) 0%, var(--bright-green) 30%, transparent 70%);
+      border-radius: 3px;
+      animation: traveling-pulse-forward 3s ease-in-out infinite;
+    }
+    .wheel-line::after {
+      content: '';
+      position: absolute;
+      top: -0.5px;
+      left: 0;
+      right: 0;
+      bottom: -0.5px;
+      background: 
+        radial-gradient(ellipse 20px 4px at var(--pulse-position-reverse, 100%), rgba(0,255,127,0.8) 0%, transparent 60%);
+      border-radius: 2px;
+      animation: traveling-pulse-reverse 3.5s ease-in-out infinite 1.5s;
+    }
+    @keyframes organic-pulse {
+      0% { opacity: 0.6; box-shadow: 0 0 8px var(--crt-green); filter: brightness(0.8); }
+      25% { opacity: 0.9; box-shadow: 0 0 15px var(--crt-green), 0 0 25px var(--bright-green); filter: brightness(1.2); }
+      50% { opacity: 1; box-shadow: 0 0 20px var(--bright-green), 0 0 35px var(--crt-green); filter: brightness(1.4); }
+      75% { opacity: 0.9; box-shadow: 0 0 15px var(--crt-green), 0 0 25px var(--bright-green); filter: brightness(1.2); }
+      100% { opacity: 0.6; box-shadow: 0 0 8px var(--crt-green); filter: brightness(0.8); }
+    }
+    @keyframes traveling-pulse-forward {
+      0% { --pulse-position: 0%; opacity: 0; }
+      10% { --pulse-position: 10%; opacity: 1; }
+      90% { --pulse-position: 90%; opacity: 1; }
+      100% { --pulse-position: 100%; opacity: 0; }
+    }
+    @keyframes traveling-pulse-reverse {
+      0% { --pulse-position-reverse: 100%; opacity: 0; }
+      10% { --pulse-position-reverse: 90%; opacity: 0.8; }
+      90% { --pulse-position-reverse: 10%; opacity: 0.8; }
+      100% { --pulse-position-reverse: 0%; opacity: 0; }
+    }
+    .line-1 { animation-delay: 0s; }
+    .line-2 { animation-delay: 0.5s; }
+    .line-3 { animation-delay: 1s; }
+    .line-4 { animation-delay: 1.5s; }
+    .line-5 { animation-delay: 2s; }
+    .wheel-container:hover .wheel-line {
+      animation: organic-pulse 2s ease-in-out infinite;
+    }
+    .wheel-container:hover .wheel-line::before {
+      animation: traveling-pulse-forward 1.5s ease-in-out infinite;
+    }
+    .wheel-container:hover .wheel-line::after {
+      animation: traveling-pulse-reverse 2s ease-in-out infinite 0.5s;
+    }
+    .line-1 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(0deg); }
+    .line-2 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(45deg); }
+    .line-3 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(90deg); }
+    .line-4 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(135deg); }
+    .line-5 { top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(180deg); }
+    .random-button {
+      margin-top: 40px;
+      background: var(--black-bg);
+      color: var(--crt-green);
+      border: 2px solid var(--crt-green);
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      z-index: 10;
+    }
+    .random-button:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: var(--dark-gray);
+    }
     .home-btn {
-      position: fixed; bottom: 20px; right: 20px; background: var(--black-bg); color: var(--crt-green);
-      border: 2px solid var(--crt-green); padding: 10px 20px; border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px; font-weight: bold;
-      text-transform: uppercase; text-decoration: none; transition: all 0.3s ease; text-shadow: 0 0 5px var(--crt-green);
-      box-shadow: 0 0 10px rgba(0,255,127,0.3); z-index: 20;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--black-bg);
+      color: var(--crt-green);
+      border: 2px solid var(--crt-green);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--crt-green);
+      box-shadow: 0 0 10px rgba(0,255,127,0.3);
+      z-index: 20;
     }
-    .home-btn:hover { background: var(--dark-gray); transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,127,0.6); }
+    .home-btn:hover {
+      background: var(--dark-gray);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,127,0.6);
+    }
     @media (max-width: 600px) {
-      .console-container { width: 320px; padding: 15px; margin: 40px auto 20px; }
-      .spoke-container { flex-direction: column; align-items: center; }
-      .spoke { width: 100%; height: 60px; border-radius: 8px; filter: none; font-size: 11px; }
-      .spoke::before { border-radius: 8px; }
-      .content-hub { width: 100%; font-size: 13px; }
-      .content-hub h2 { font-size: 16px; }
-      .content-list a { font-size: 12px; }
-      .header h1 { font-size: 24px; }
+      .wheel-container { width: 380px; height: 380px; }
+      .wheel-center { width: 120px; height: 120px; font-size: 14px; }
+      .spoke { width: 75px; height: 75px; }
+      .spoke-1 { left: 295px; top: 150px; font-size: 12px; }
+      .spoke-2 { left: 255px; top: 255px; font-size: 12px; }
+      .spoke-3 { left: 150px; bottom: 15px; font-size: 11px; }
+      .spoke-4 { left: 45px; bottom: 50px; font-size: 11px; }
+      .spoke-5 { left: 15px; top: 150px; font-size: 12px; }
+      .header h1 { font-size: 28px; }
+      .line-1, .line-2, .line-3, .line-4, .line-5 { width: 105px; }
+      .orbital-ring-1 { width: 240px; height: 240px; }
+      .orbital-ring-2 { width: 300px; height: 300px; }
+      .orbital-ring-3 { width: 360px; height: 360px; }
     }
     @media (max-width: 400px) {
-      .console-container { width: 280px; margin: 30px auto 20px; }
-      .spoke { font-size: 10px; height: 50px; }
-      .content-hub { font-size: 12px; }
-      .content-hub h2 { font-size: 14px; }
-      .content-list a { font-size: 11px; }
-      .header h1 { font-size: 20px; }
+      .wheel-container { width: 320px; height: 320px; }
+      .wheel-center { width: 100px; height: 100px; font-size: 12px; }
+      .spoke { width: 65px; height: 65px; }
+      .spoke-1 { left: 245px; top: 127.5px; font-size: 11px; }
+      .spoke-2 { left: 215px; top: 215px; font-size: 11px; }
+      .spoke-3 { left: 127.5px; bottom: 12.5px; font-size: 10px; }
+      .spoke-4 { left: 40px; bottom: 40px; font-size: 10px; }
+      .spoke-5 { left: 12.5px; top: 127.5px; font-size: 11px; }
+      .header h1 { font-size: 24px; }
+      .line-1, .line-2, .line-3, .line-4, .line-5 { width: 85px; }
     }
-    #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-    svg { position: absolute; width: 0; height: 0; }
+    .wheel-container:hover .orbital-ring {
+      border-color: rgba(0,255,127,0.7);
+      box-shadow: 0 0 15px rgba(0,255,127,0.5);
+    }
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
   <div class="header"><h1>EPSTEIN'S WEB</h1></div>
-  <a href="/" class="home-btn">← Back to Conspiracy Corner</a>
+  <a href="/conspiracy-corner.html" class="home-btn">← Back to Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
-  <svg>
-    <filter id="gear-edge">
-      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" result="turbulence"/>
-      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="5" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </svg>
-  <div class="console-container">
-    <div class="content-hub">
-      <h2>New Epstein Content</h2>
-      <ul class="content-list" id="content-list">
-        <li><a href="#" target="_blank">New Epstein Documents Released</a></li>
-        <li><a href="#" target="_blank">Podcast Explores Epstein Connections</a></li>
-        <li><a href="#" target="_blank">Insider Claims New Evidence Uncovered</a></li>
-        <li><a href="#" target="_blank">Meme Goes Viral on Epstein Case</a></li>
-        <li><a href="#" target="_blank">Article Questions Official Narrative</a></li>
-      </ul>
+  <div class="wheel-container">
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
+    <div class="orbital-ring orbital-ring-3"></div>
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-line line-4"></div>
+    <div class="wheel-line line-5"></div>
+    <div class="wheel-center" onclick="goToRandomEpsteinContent()">
+      NEW EPSTEIN CONTENT
     </div>
-    <div class="spoke-container">
-      <div class="spoke" onclick="window.location.href='/epstein/podcasts'">Podcast Archive</div>
-      <div class="spoke" onclick="window.location.href='/epstein/videos'">Video Clips Archive</div>
-      <div class="spoke" onclick="window.location.href='/epstein/articles'">Articles & Longform Archive</div>
-      <div class="spoke" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
-      <div class="spoke" onclick="window.location.href='/epstein/memes'">Memes</div>
-    </div>
+    <div class="spoke spoke-1" onclick="window.location.href='/epstein/podcasts'">Podcasts</div>
+    <div class="spoke spoke-2" onclick="window.location.href='/epstein/videos'">Video Clips</div>
+    <div class="spoke spoke-3" onclick="window.location.href='/epstein/articles'">Articles</div>
+    <div class="spoke spoke-4" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
+    <div class="spoke spoke-5" onclick="window.location.href='/epstein/memes'">Memes</div>
   </div>
+  <button class="random-button" onclick="goToRandomEpsteinContent()">EPSTEIN CONTENT</button>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const canvas = document.getElementById('particle-canvas');
@@ -203,6 +438,11 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       });
+      window.goToRandomEpsteinContent = function() {
+        const topics = ['podcasts', 'videos', 'articles', 'primary-sources', 'memes'];
+        const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+        window.location.href = `/epstein/${randomTopic}`;
+      };
     });
   </script>
 </body>
