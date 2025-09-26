@@ -253,7 +253,7 @@
       init();
     });
 
-    // Load podcast links from epstein-links.txt
+    // Load podcast links from epstein-links.txt, starting from the 6th entry
     async function loadPodcastLinks() {
       try {
         console.log('Fetching epstein-links.txt for podcast content');
@@ -283,14 +283,14 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for podcast entries
-        const podcastLinks = allLinks.filter(link => 
+        // Filter for podcast entries, starting from the 6th entry (index 5)
+        const podcastLinks = allLinks.slice(5).filter(link => 
           link.category === 'podcast' || 
           link.category === 'podcasts' ||
           link.category.includes('podcast')
         );
         
-        console.log('Filtered podcast links:', podcastLinks);
+        console.log('Filtered podcast links (starting from 6th entry):', podcastLinks);
 
         const grid = document.getElementById('podcast-links');
         if (grid && podcastLinks.length > 0) {
