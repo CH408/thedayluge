@@ -102,8 +102,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 400px;
-      height: 200px;
+      width: 500px;
+      height: 240px;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
       border: 2px solid var(--crt-green);
       border-radius: 8px;
@@ -133,23 +133,20 @@
     .content-links {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
       flex: 1;
-      overflow: hidden;
+      overflow: auto;
     }
     .content-link {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       padding: 4px 8px;
       border: 1px solid rgba(0,255,127,0.3);
       border-radius: 4px;
       transition: all 0.3s ease;
       font-size: 14px;
-      line-height: 1.2;
+      line-height: 1.3;
       min-height: 32px;
-      max-height: 36px;
-      overflow: hidden;
     }
     .content-link:hover {
       background: rgba(0,255,127,0.2);
@@ -160,20 +157,7 @@
       color: var(--crt-green);
       text-decoration: none;
       cursor: pointer;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%; /* Adjusted to full width since no URL */
-    }
-    .link-url {
-      color: var(--matrix-green);
-      font-size: 12px;
-      opacity: 0.8;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 35%;
-      text-align: right;
+      max-width: 100%;
     }
     .perimeter-box {
       position: absolute;
@@ -209,64 +193,53 @@
       box-shadow: 0 0 35px rgba(0,255,127,0.9);
       background: var(--dark-gray);
     }
-    .right-box:hover {
-      transform: translateY(-50%) scale(1.05);
-      box-shadow: 0 0 35px rgba(0,255,127,0.9);
-      background: var(--dark-gray);
-    }
     .top-left-box {
       top: 60px;
-      left: calc(50% - 155px);
+      left: calc(50% - 375px);
+      width: 150px;
+      height: 60px;
+      font-size: 16px;
+    }
+    .top-middle-box {
+      top: 60px;
+      left: calc(50% - 125px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
     .top-right-box {
       top: 60px;
-      right: calc(50% - 155px);
+      right: calc(50% - 125px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
-    .right-box {
-      top: 50%;
-      right: 50px;
-      transform: translateY(-50%);
-      width: 80px;
-      height: 120px;
-      font-size: 18px;
-      transform-origin: center center;
-    }
     .bottom-left-box {
       bottom: 60px;
-      left: calc(50% - 155px);
+      left: calc(50% - 375px);
+      width: 150px;
+      height: 60px;
+      font-size: 15px;
+    }
+    .bottom-middle-box {
+      bottom: 60px;
+      left: calc(50% - 125px);
       width: 150px;
       height: 60px;
       font-size: 15px;
     }
     .bottom-right-box {
       bottom: 60px;
-      right: calc(50% - 155px);
+      right: calc(50% - 125px);
       width: 150px;
       height: 60px;
       font-size: 15px;
     }
-    .left-box {
-      position: absolute;
-      top: 50%;
-      left: 50px;
-      transform: translateY(-50%);
-      width: 80px;
-      height: 120px;
-      font-size: 16px;
-      transform-origin: center center;
-      will-change: transform, box-shadow;
-    }
-    .left-box:hover {
-      transform: translateY(-50%) scale(1.05);
+    .top-middle-box:hover,
+    .bottom-middle-box:hover {
+      transform: scale(1.05);
       box-shadow: 0 0 35px rgba(0,255,127,0.9);
       background: var(--dark-gray);
-      animation-play-state: paused;
     }
     .home-btn {
       position: fixed;
@@ -303,29 +276,37 @@
     }
     @media (max-width: 900px) {
       .layout-container { max-width: 90%; height: 500px; }
-      .central-content { width: 320px; height: 180px; padding: 12px; }
+      .central-content { width: 420px; height: 200px; padding: 12px; }
       .central-title { font-size: 16px; }
-      .content-link { font-size: 12px; padding: 3px 6px; min-height: 28px; max-height: 32px; }
-      .link-url { font-size: 10px; }
-      .top-left-box, .top-right-box, .bottom-left-box, .bottom-right-box { width: 120px; height: 50px; font-size: 14px; }
-      .top-left-box { left: calc(50% - 125px); }
+      .content-link { font-size: 12px; padding: 3px 6px; min-height: 28px; }
+      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 120px;
+        height: 50px;
+        font-size: 14px;
+      }
+      .top-left-box { left: calc(50% - 375px); }
+      .top-middle-box { left: calc(50% - 125px); }
       .top-right-box { right: calc(50% - 125px); }
-      .bottom-left-box { left: calc(50% - 125px); }
+      .bottom-left-box { left: calc(50% - 375px); }
+      .bottom-middle-box { left: calc(50% - 125px); }
       .bottom-right-box { right: calc(50% - 125px); }
-      .right-box, .left-box { width: 70px; height: 100px; font-size: 15px; }
     }
     @media (max-width: 600px) {
       .layout-container { height: 450px; }
-      .central-content { width: 280px; height: 160px; padding: 10px; }
+      .central-content { width: 340px; height: 180px; padding: 10px; }
       .central-title { font-size: 14px; margin-bottom: 8px; }
-      .content-link { font-size: 11px; padding: 3px 5px; min-height: 26px; max-height: 30px; }
-      .link-url { font-size: 9px; }
-      .top-left-box, .top-right-box, .bottom-left-box, .bottom-right-box { width: 100px; height: 45px; font-size: 12px; }
-      .top-left-box { left: calc(50% - 105px); }
+      .content-link { font-size: 11px; padding: 3px 5px; min-height: 26px; }
+      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 100px;
+        height: 45px;
+        font-size: 12px;
+      }
+      .top-left-box { left: calc(50% - 315px); }
+      .top-middle-box { left: calc(50% - 105px); }
       .top-right-box { right: calc(50% - 105px); }
-      .bottom-left-box { left: calc(50% - 105px); }
+      .bottom-left-box { left: calc(50% - 315px); }
+      .bottom-middle-box { left: calc(50% - 105px); }
       .bottom-right-box { right: calc(50% - 105px); }
-      .right-box, .left-box { width: 60px; height: 80px; font-size: 13px; }
       .header h1 { font-size: 24px; }
     }
   </style>
@@ -342,23 +323,18 @@
       <div class="content-links">
         <div class="content-link">
           <span class="link-title">Placeholder Title #1</span>
-          <span class="link-url">placeholder-link-1</span>
         </div>
         <div class="content-link">
           <span class="link-title">Placeholder Title #2</span>
-          <span class="link-url">placeholder-link-2</span>
         </div>
         <div class="content-link">
           <span class="link-title">Placeholder Title #3</span>
-          <span class="link-url">placeholder-link-3</span>
         </div>
         <div class="content-link">
           <span class="link-title">Placeholder Title #4</span>
-          <span class="link-url">placeholder-link-4</span>
         </div>
         <div class="content-link">
           <span class="link-title">Placeholder Title #5</span>
-          <span class="link-url">placeholder-link-5</span>
         </div>
       </div>
     </div>
@@ -367,26 +343,22 @@
     <div class="perimeter-box top-left-box" onclick="window.location.href='/epstein/podcasts.html'">
       Podcasts
     </div>
+    <div class="perimeter-box top-middle-box" onclick="window.location.href='/epstein/memes.html'">
+      Memes
+    </div>
     <div class="perimeter-box top-right-box" onclick="window.location.href='/epstein/video-clips.html'">
       Video Clips
-    </div>
-    
-    <!-- Right Box -->
-    <div class="perimeter-box right-box" onclick="window.location.href='/epstein/memes.html'">
-      Memes
     </div>
     
     <!-- Bottom Boxes -->
     <div class="perimeter-box bottom-left-box" onclick="window.location.href='/epstein/articles-longform.html'">
       Articles & Longform
     </div>
+    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/epstein/primary-sources.html'">
+      Primary Sources
+    </div>
     <div class="perimeter-box bottom-right-box" onclick="window.location.href='/epstein/box6.html'">
       Box #6
-    </div>
-    
-    <!-- Left Box -->
-    <div class="perimeter-box left-box" onclick="window.location.href='/epstein/primary-sources.html'">
-      Primary Sources
     </div>
   </div>
   
