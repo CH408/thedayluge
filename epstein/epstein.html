@@ -228,6 +228,7 @@
       width: 80px;
       height: 120px;
       font-size: 18px;
+      transform-origin: center center;
     }
     /* Bottom Boxes - Two separate boxes */
     .bottom-left-box {
@@ -455,8 +456,18 @@
           // Clear existing placeholder content
           contentLinksContainer.innerHTML = '';
           
+          // Ensure we always try to show 5 entries (pad with placeholders if needed)
+          const displayEntries = [...latest5];
+          while (displayEntries.length < 5) {
+            displayEntries.push({
+              title: `Placeholder Entry ${displayEntries.length + 1}`,
+              link: '#',
+              category: 'placeholder'
+            });
+          }
+          
           // Add real content
-          latest5.forEach(entry => {
+          displayEntries.forEach(entry => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
@@ -464,12 +475,15 @@
               <span class="link-url">${entry.link}</span>
             `;
             linkElement.addEventListener('click', () => {
-              window.location.href = entry.link;
+              if (entry.link !== '#') {
+                window.location.href = entry.link;
+              }
             });
             contentLinksContainer.appendChild(linkElement);
           });
           
           console.log('Loaded', entries.length, 'entries from epstein-links.txt');
+          console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
           console.error('Error loading epstein-links.txt:', error);
