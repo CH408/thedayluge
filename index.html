@@ -1,4 +1,5 @@
-0% { transform: translate(0, 0); }
+@keyframes asteroid-drift {
+    0% { transform: translate(0, 0); }
     100% { transform: translate(800px, 400px); }
   }
   .asteroid:nth-child(1) { left: 25%; top: 15%; animation-delay: 0s; }
@@ -99,20 +100,6 @@
     }
     .wheel-line::before, .wheel-line::after {
       animation: none;
-    }
-    @keyframes edge-glow {
-      0% {
-        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
-        opacity: 0.5;
-      }
-      50% {
-        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
-        opacity: 0.8;
-      }
-      100% {
-        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
-        opacity: 0.5;
-      }
     }
     .comet {
       width: 6px;
@@ -273,14 +260,10 @@
     pointer-events: none;
   }
 
-  /* Balanced motion approach - keep dramatic entrance, reduce ongoing animations */
   @media (prefers-reduced-motion: reduce) {
-    /* Keep the dramatic entrance spin - it's brief and impactful */
     .wheel-container {
       animation: spin-in 1.5s ease-out forwards;
     }
-    
-    /* Disable ongoing/looping animations that could be distracting */
     .wheel-line {
       animation: none;
       background: linear-gradient(
@@ -295,20 +278,14 @@
     .wheel-line::before, .wheel-line::after {
       animation: none;
     }
-    
-    /* Disable the pulsing button glow */
     .random-button::before, .archive-button::before {
       animation: none;
       box-shadow: 0 0 10px var(--yellow);
       opacity: 0.5;
     }
-    
-    /* Keep particle canvas but reduce intensity */
     #particle-canvas {
       opacity: 0.3;
     }
-    
-    /* Disable comet streaks */
     .comet {
       animation: none;
       opacity: 0.5;
@@ -317,27 +294,19 @@
     .comet::after {
       opacity: 0.3;
     }
-    
-    /* Disable asteroid drift */
     .asteroid {
       animation: none;
       opacity: 0.5;
     }
-    
-    /* Keep orbital rings spinning but slower */
     .orbital-ring {
-      animation-duration: 60s; /* Much slower */
+      animation-duration: 60s;
     }
-    
-    /* Keep spoke pulse but much slower */
     .spoke {
-      animation-duration: 6s; /* Much slower */
+      animation-duration: 6s;
     }
-    
-    /* Keep subtle background effects but reduce intensity */
     body::before, body::after {
-      animation-duration: 20s; /* Slower */
-      opacity: 0.2; /* Dimmer */
+      animation-duration: 20s;
+      opacity: 0.2;
     }
   }
 </style>
@@ -562,7 +531,6 @@ document.addEventListener('DOMContentLoaded', function() {
               return null;
           }).filter(link => link !== null);
           
-          // Use only the first 8 links
           const surpriseLinks = links.slice(0, 8);
           
           if (surpriseLinks.length > 0) {
@@ -1324,4 +1292,4 @@ window.openArchive = function() {
     animation: asteroid-drift 25s linear infinite;
     opacity: 0.6;
   }
-  @keyframes asteroid-drift {
+  @keyframes
