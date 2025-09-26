@@ -288,6 +288,8 @@
         console.log('Fetch response:', response);
         if (!response.ok) {
           console.error(`Failed to load epstein-links.txt: ${response.status}`);
+          // Show placeholder content if file not found
+          showPlaceholderContent();
           return;
         }
         const text = await response.text();
@@ -313,15 +315,46 @@
 
         const grid = document.getElementById('archive-links');
         if (grid) {
-          grid.innerHTML = archivedVideos.map((entry, index) => `
-            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
-              <a href="${entry.link}" target="_blank">${entry.title}</a>
-            </li>
-          `).join('');
-          console.log('Rendered video archive links to DOM:', archivedVideos);
+          if (archivedVideos.length > 0) {
+            grid.innerHTML = archivedVideos.map((entry, index) => `
+              <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+                <a href="${entry.link}" target="_blank">${entry.title}</a>
+              </li>
+            `).join('');
+            console.log('Rendered video archive links to DOM:', archivedVideos);
+          } else {
+            // Show placeholder if no archived videos
+            showPlaceholderContent();
+          }
         }
       } catch (error) {
         console.error('Error loading video archive links:', error);
+        // Show placeholder content on error
+        showPlaceholderContent();
+      }
+    }
+
+    // Show placeholder content
+    function showPlaceholderContent() {
+      const placeholderVideos = [
+        { title: "Epstein Interview Footage Analysis", link: "#placeholder-video-1" },
+        { title: "Flight Log Documentary Clip", link: "#placeholder-video-2" },
+        { title: "Island Drone Footage Investigation", link: "#placeholder-video-3" },
+        { title: "Court Testimony Video Excerpts", link: "#placeholder-video-4" },
+        { title: "Financial Records Explanation", link: "#placeholder-video-5" },
+        { title: "Victim Impact Statement Videos", link: "#placeholder-video-6" },
+        { title: "Expert Analysis Compilation", link: "#placeholder-video-7" },
+        { title: "Hidden Camera Footage Review", link: "#placeholder-video-8" }
+      ];
+
+      const grid = document.getElementById('archive-links');
+      if (grid) {
+        grid.innerHTML = placeholderVideos.map((entry, index) => `
+          <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+            <a href="${entry.link}" target="_blank">${entry.title}</a>
+          </li>
+        `).join('');
+        console.log('Showing placeholder video content');
       }
     }
 
