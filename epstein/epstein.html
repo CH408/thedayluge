@@ -93,7 +93,7 @@
       position: relative;
       width: 100%;
       max-width: 800px;
-      height: 650px;
+      height: 700px;
       margin: 40px auto 0;
       z-index: 5;
     }
@@ -103,7 +103,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 500px;
-      height: 300px;
+      height: 350px;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
       border: 2px solid var(--crt-green);
       border-radius: 8px;
@@ -134,10 +134,8 @@
     .content-links {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
     }
     .content-link {
       display: flex;
@@ -282,8 +280,8 @@
       pointer-events: none;
     }
     @media (max-width: 900px) {
-      .layout-container { max-width: 90%; height: 550px; }
-      .central-content { width: 420px; height: 260px; padding: 12px; }
+      .layout-container { max-width: 90%; height: 600px; }
+      .central-content { width: 420px; height: 300px; padding: 12px; }
       .central-title { font-size: 16px; }
       .content-link { font-size: 12px; padding: 6px 8px; }
       .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
@@ -299,8 +297,8 @@
       .bottom-right-box { left: calc(50% + 75px); }
     }
     @media (max-width: 600px) {
-      .layout-container { height: 500px; }
-      .central-content { width: 340px; height: 240px; padding: 10px; }
+      .layout-container { height: 550px; }
+      .central-content { width: 340px; height: 280px; padding: 10px; }
       .central-title { font-size: 14px; margin-bottom: 8px; }
       .content-link { font-size: 11px; padding: 6px 8px; }
       .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
@@ -316,24 +314,7 @@
       .bottom-right-box { left: calc(50% + 60px); }
       .header h1 { font-size: 24px; }
     }
-    
-    /* Custom scrollbar for webkit browsers */
-    .content-links::-webkit-scrollbar {
-      width: 6px;
-    }
-    .content-links::-webkit-scrollbar-track {
-      background: var(--dark-gray);
-      border-radius: 3px;
-    }
-    .content-links::-webkit-scrollbar-thumb {
-      background: var(--crt-green);
-      border-radius: 3px;
-      opacity: 0.7;
-    }
-    .content-links::-webkit-scrollbar-thumb:hover {
-      background: var(--neon-green);
-      opacity: 1;
-    }
+
   </style>
 </head>
 <body>
