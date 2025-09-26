@@ -33,7 +33,7 @@
     @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
     @keyframes scanline { 0% { background-position: 0 0; } 100% { background-position: 0 20px; } }
     .header {
-      position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;
     }
     .header h1 {
       text-transform: uppercase; letter-spacing: 0.5px; font-size: 28px; margin-bottom: 8px;
@@ -51,14 +51,13 @@
       100% { color: var(--crt-green); text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .console-container {
-      position: relative; width: 600px; margin: 80px auto; padding: 20px; z-index: 5;
-      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,255,127,0.1) 10px, rgba(0,255,127,0.1) 20px);
+      position: relative; width: 600px; margin: 50px auto 20px; padding: 20px; z-index: 5;
       border: 2px solid rgba(0,255,127,0.3); border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,127,0.4);
     }
     .content-hub {
       background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 10px;
-      padding: 15px; text-align: center; width: 100%; margin: 20px 0; font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 15px; text-align: center; width: 100%; margin-bottom: 20px; font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
       box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10; position: relative;
     }
     .content-hub::before {
@@ -67,18 +66,18 @@
       animation: glow-border 2s ease-in-out infinite;
     }
     @keyframes glow-border { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    .content-hub h2 { font-size: 16px; margin-bottom: 8px; text-shadow: 0 0 5px var(--crt-green); }
+    .content-hub h2 { font-size: 18px; margin-bottom: 8px; text-shadow: 0 0 5px var(--crt-green); }
     .content-list { list-style: none; max-height: 120px; overflow-y: auto; width: 100%; padding: 0 10px; }
     .content-list li { margin-bottom: 5px; }
-    .content-list a { color: var(--neon-green); text-decoration: none; font-size: 11px; line-height: 1.4; transition: color 0.3s ease; }
+    .content-list a { color: var(--neon-green); text-decoration: none; font-size: 13px; line-height: 1.4; transition: color 0.3s ease; }
     .content-list a:hover { color: var(--bright-green); text-shadow: 0 0 8px var(--bright-green); }
     .spoke-container {
-      display: flex; justify-content: space-between; margin-bottom: 20px;
+      display: flex; justify-content: space-between;
     }
     .spoke {
       background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%); color: var(--neon-green);
       border: 2px solid var(--crt-green); border-radius: 8px; padding: 10px; text-align: center;
-      width: 18%; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 10px;
+      width: 18%; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px;
       font-weight: 900; text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
       box-shadow: 0 0 15px rgba(0,255,127,0.4); z-index: 10; position: relative;
     }
@@ -97,20 +96,20 @@
     }
     .home-btn:hover { background: var(--dark-gray); transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,127,0.6); }
     @media (max-width: 600px) {
-      .console-container { width: 320px; padding: 15px; }
+      .console-container { width: 320px; padding: 15px; margin: 40px auto 20px; }
       .spoke-container { flex-direction: column; align-items: center; }
       .spoke { width: 100%; margin: 10px 0; font-size: 11px; }
-      .content-hub { width: 100%; font-size: 11px; }
-      .content-hub h2 { font-size: 14px; }
-      .content-list a { font-size: 10px; }
+      .content-hub { width: 100%; font-size: 13px; }
+      .content-hub h2 { font-size: 16px; }
+      .content-list a { font-size: 12px; }
       .header h1 { font-size: 24px; }
     }
     @media (max-width: 400px) {
-      .console-container { width: 280px; }
+      .console-container { width: 280px; margin: 30px auto 20px; }
       .spoke { font-size: 10px; }
-      .content-hub { font-size: 10px; }
-      .content-hub h2 { font-size: 12px; }
-      .content-list a { font-size: 9px; }
+      .content-hub { font-size: 12px; }
+      .content-hub h2 { font-size: 14px; }
+      .content-list a { font-size: 11px; }
       .header h1 { font-size: 20px; }
     }
     #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
@@ -121,13 +120,6 @@
   <a href="/" class="home-btn">← Back to Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
   <div class="console-container">
-    <div class="spoke-container">
-      <div class="spoke" onclick="window.location.href='/epstein/podcasts'">Podcast Archive</div>
-      <div class="spoke" onclick="window.location.href='/epstein/videos'">Video Clips Archive</div>
-      <div class="spoke" onclick="window.location.href='/epstein/articles'">Articles & Longform Archive</div>
-      <div class="spoke" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
-      <div class="spoke" onclick="window.location.href='/epstein/memes'">Memes</div>
-    </div>
     <div class="content-hub">
       <h2>New Epstein Content</h2>
       <ul class="content-list" id="content-list">
@@ -137,6 +129,13 @@
         <li><a href="#" target="_blank">Meme Goes Viral on Epstein Case</a></li>
         <li><a href="#" target="_blank">Article Questions Official Narrative</a></li>
       </ul>
+    </div>
+    <div class="spoke-container">
+      <div class="spoke" onclick="window.location.href='/epstein/podcasts'">Podcast Archive</div>
+      <div class="spoke" onclick="window.location.href='/epstein/videos'">Video Clips Archive</div>
+      <div class="spoke" onclick="window.location.href='/epstein/articles'">Articles & Longform Archive</div>
+      <div class="spoke" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
+      <div class="spoke" onclick="window.location.href='/epstein/memes'">Memes</div>
     </div>
   </div>
   <script>
