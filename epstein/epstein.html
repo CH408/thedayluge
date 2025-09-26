@@ -80,7 +80,7 @@
     .header h1 {
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      font-size: 32px; /* Increased from 28px */
+      font-size: 32px;
       margin-bottom: 8px;
       animation: title-pulse 8s ease-in-out infinite;
     }
@@ -120,7 +120,7 @@
     }
     .central-title {
       text-align: center;
-      font-size: 22px; /* Increased from 18px */
+      font-size: 22px;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -144,7 +144,7 @@
       border: 1px solid rgba(0,255,127,0.3);
       border-radius: 4px;
       transition: all 0.3s ease;
-      font-size: 16px; /* Increased from 14px */
+      font-size: 16px;
       line-height: 1.4;
       min-height: auto;
       word-wrap: break-word;
@@ -203,42 +203,42 @@
       left: calc(50% - 245px);
       width: 150px;
       height: 60px;
-      font-size: 18px; /* Increased from 16px */
+      font-size: 18px;
     }
     .top-middle-box {
       top: 60px;
       left: calc(50% - 75px);
       width: 150px;
       height: 60px;
-      font-size: 18px; /* Increased from 16px */
+      font-size: 18px;
     }
     .top-right-box {
       top: 60px;
       left: calc(50% + 95px);
       width: 150px;
       height: 60px;
-      font-size: 18px; /* Increased from 16px */
+      font-size: 18px;
     }
     .bottom-left-box {
       bottom: 60px;
       left: calc(50% - 245px);
       width: 150px;
       height: 60px;
-      font-size: 16px; /* Increased from 15px */
+      font-size: 16px;
     }
     .bottom-middle-box {
       bottom: 60px;
       left: calc(50% - 75px);
       width: 150px;
       height: 60px;
-      font-size: 16px; /* Increased from 15px */
+      font-size: 16px;
     }
     .bottom-right-box {
       bottom: 60px;
       left: calc(50% + 95px);
       width: 150px;
       height: 60px;
-      font-size: 16px; /* Increased from 15px */
+      font-size: 16px;
     }
     .top-middle-box:hover,
     .bottom-middle-box:hover {
@@ -256,7 +256,7 @@
       padding: 10px 20px;
       border-radius: 25px;
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px; /* Increased from 12px */
+      font-size: 14px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
@@ -282,12 +282,12 @@
     @media (max-width: 900px) {
       .layout-container { max-width: 90%; height: 600px; }
       .central-content { width: 420px; height: 300px; padding: 12px; }
-      .central-title { font-size: 18px; } /* Increased from 16px */
-      .content-link { font-size: 14px; padding: 6px 8px; } /* Increased from 12px */
+      .central-title { font-size: 18px; }
+      .content-link { font-size: 14px; padding: 6px 8px; }
       .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 120px;
         height: 50px;
-        font-size: 16px; /* Increased from 14px */
+        font-size: 16px;
       }
       .top-left-box { left: calc(50% - 195px); }
       .top-middle-box { left: calc(50% - 60px); }
@@ -299,12 +299,12 @@
     @media (max-width: 600px) {
       .layout-container { height: 550px; }
       .central-content { width: 340px; height: 280px; padding: 10px; }
-      .central-title { font-size: 16px; margin-bottom: 8px; } /* Increased from 14px */
-      .content-link { font-size: 13px; padding: 6px 8px; } /* Increased from 11px */
+      .central-title { font-size: 16px; margin-bottom: 8px; }
+      .content-link { font-size: 13px; padding: 6px 8px; }
       .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 100px;
         height: 45px;
-        font-size: 14px; /* Increased from 12px */
+        font-size: 14px;
       }
       .top-left-box { left: calc(50% - 160px); }
       .top-middle-box { left: calc(50% - 50px); }
@@ -312,9 +312,8 @@
       .bottom-left-box { left: calc(50% - 160px); }
       .bottom-middle-box { left: calc(50% - 50px); }
       .bottom-right-box { left: calc(50% + 60px); }
-      .header h1 { font-size: 28px; } /* Increased from 24px */
+      .header h1 { font-size: 28px; }
     }
-
   </style>
 </head>
 <body>
@@ -328,19 +327,19 @@
       <div class="central-title">Latest Epstein Content</div>
       <div class="content-links">
         <div class="content-link">
-          <span class="link-title">Placeholder Title #1</span>
+          <span class="link-title">Loading content...</span>
         </div>
         <div class="content-link">
-          <span class="link-title">Placeholder Title #2</span>
+          <span class="link-title">Loading content...</span>
         </div>
         <div class="content-link">
-          <span class="link-title">Placeholder Title #3</span>
+          <span class="link-title">Loading content...</span>
         </div>
         <div class="content-link">
-          <span class="link-title">Placeholder Title #4</span>
+          <span class="link-title">Loading content...</span>
         </div>
         <div class="content-link">
-          <span class="link-title">Placeholder Title #5</span>
+          <span class="link-title">Loading content...</span>
         </div>
       </div>
     </div>
@@ -431,15 +430,31 @@
       // Load content from epstein-links.txt
       async function loadEpsteinContent() {
         try {
-          const response = await fetch('epstein-links.txt');
+          console.log('Attempting to fetch epstein-links.txt');
+          const response = await fetch('/epstein/epstein-links.txt');
+          if (!response.ok) {
+            throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
+          }
           const text = await response.text();
+          console.log('Fetched text:', text);
           const lines = text.trim().split('\n').filter(line => line.trim());
+          console.log('Parsed lines:', lines);
           
           // Parse each line: title|link|category
-          const entries = lines.map(line => {
-            const [title, link, category] = line.split('|');
-            return { title: title.trim(), link: link.trim(), category: category.trim() };
-          });
+          const entries = lines.map((line, index) => {
+            const parts = line.split('|');
+            if (parts.length < 3) {
+              console.warn(`Invalid entry at line ${index + 1}: ${line}`);
+              return null;
+            }
+            return {
+              title: parts[0].trim(),
+              link: parts[1].trim(),
+              category: parts[2].trim()
+            };
+          }).filter(entry => entry !== null);
+          
+          console.log('Parsed entries:', entries);
           
           // Display latest 5 in central box
           const latest5 = entries.slice(0, 5);
@@ -448,8 +463,15 @@
           // Clear existing placeholder content
           contentLinksContainer.innerHTML = '';
           
-          // Ensure we always try to show 5 entries (pad with placeholders if needed)
+          // Ensure we always try to show 5 entries (pad with error message if needed)
           const displayEntries = [...latest5];
+          if (displayEntries.length === 0) {
+            displayEntries.push({
+              title: 'No content available. Check epstein-links.txt.',
+              link: '#',
+              category: 'error'
+            });
+          }
           while (displayEntries.length < 5) {
             displayEntries.push({
               title: `Placeholder Entry ${displayEntries.length + 1}`,
@@ -458,7 +480,7 @@
             });
           }
           
-          // Add real content
+          // Add content to DOM
           displayEntries.forEach(entry => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
@@ -477,8 +499,36 @@
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
-          console.error('Error loading epstein-links.txt:', error);
-          console.log('Using placeholder content instead');
+          console.error('Error loading epstein-links.txt:', error.message);
+          console.log('Falling back to error message in central content');
+          const contentLinksContainer = document.querySelector('.content-links');
+          contentLinksContainer.innerHTML = '';
+          const errorEntry = {
+            title: 'Error loading content. Check epstein-links.txt or console for details.',
+            link: '#',
+            category: 'error'
+          };
+          const displayEntries = [errorEntry];
+          while (displayEntries.length < 5) {
+            displayEntries.push({
+              title: `Placeholder Entry ${displayEntries.length + 1}`,
+              link: '#',
+              category: 'placeholder'
+            });
+          }
+          displayEntries.forEach(entry => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.innerHTML = `
+              <span class="link-title">${entry.title}</span>
+            `;
+            linkElement.addEventListener('click', () => {
+              if (entry.link !== '#') {
+                window.location.href = entry.link;
+              }
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
         }
       }
       
