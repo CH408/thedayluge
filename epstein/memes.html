@@ -214,7 +214,7 @@
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
-            this.x - this.speedX * 10, this.y - this.speedY * 10
+            this.x找不到文件或目录 - this.speedX * 10, this.y - this.speedY * 10
           );
           gradient.addColorStop(0, this.color + '33');
           gradient.addColorStop(1, 'transparent');
@@ -253,7 +253,7 @@
       init();
     });
 
-    // Load meme links from epstein-links.txt
+    // Load meme links from epstein-links.txt, starting from the 6th entry
     async function loadMemeLinks() {
       try {
         console.log('Fetching epstein-links.txt for meme content');
@@ -283,14 +283,14 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for meme entries
-        const memeLinks = allLinks.filter(link => 
+        // Filter for meme entries, starting from the 6th entry (index 5)
+        const memeLinks = allLinks.slice(5).filter(link => 
           link.category === 'meme' || 
           link.category === 'memes' ||
           link.category.includes('meme')
         );
         
-        console.log('Filtered meme links:', memeLinks);
+        console.log('Filtered meme links (starting from 6th entry):', memeLinks);
 
         const grid = document.getElementById('meme-links');
         if (grid && memeLinks.length > 0) {
