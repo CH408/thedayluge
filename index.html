@@ -145,35 +145,40 @@
 
   body::before {
     content: '';
-    position:absolute;
-    top:0; left:0; right:0; bottom:0;
-    background:
-      radial-gradient(circle at center, rgba(0,150,255,0.1) 0%, transparent 70%);
-    animation:energy-pulse 6s ease-in-out infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.08) 0%, transparent 80%);
+    animation: energy-pulse 8s ease-in-out infinite;
     pointer-events: none;
   }
 
   body::after {
-    position:absolute;
-    top:-2px; left:-2px; right:-2px; bottom:-2px;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
     background:
-      linear-gradient(0deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
-      linear-gradient(90deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
-      linear-gradient(180deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%),
-      linear-gradient(270deg, transparent 0%, rgba(0,200,255,0.3) 1%, transparent 3%);
-    animation:edge-glow 4s ease-in-out infinite;
+      linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.2) 1%, transparent 3%),
+      linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.2) 1%, transparent 3%),
+      linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.2) 1%, transparent 3%),
+      linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.2) 1%, transparent 3%);
+    animation: edge-glow 5s ease-in-out infinite;
     pointer-events: none;
-    content:'';
+    content: '';
   }
 
   @keyframes energy-pulse {
-    0%, 100% { opacity:0.5; }
-    50% { opacity:1; }
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
   }
 
   @keyframes edge-glow {
-    0%, 100% { opacity:0.4; }
-    50% { opacity:0.8; }
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
   }
 
   .header{
@@ -244,7 +249,7 @@
 
   @keyframes spin-in {
     0% { opacity: 0; transform: scale(0.8) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); } /* 3 full rotations (3 * 360deg) */
+    50% { opacity: 1; transform: scale(1.05) rotate(1080deg); }
     100% { opacity: 1; transform: scale(1) rotate(1080deg); }
   }
 
@@ -684,32 +689,35 @@
   }
   .comet {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background: radial-gradient(circle, var(--bright-purple-glow) 0%, transparent 70%);
-    box-shadow: 0 0 25px var(--bright-purple-glow);
-    animation: comet-streak 5s linear infinite;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle, var(--comet-color, #ffdd00) 0%, transparent 60%);
+    box-shadow: 0 0 40px var(--comet-color, #ffdd00), 0 0 60px var(--comet-color, #ffdd00);
+    animation: comet-streak 4s linear infinite;
     opacity: 0;
   }
   .comet::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: -50px;
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(to left, var(--bright-purple-glow), transparent);
-    opacity: 0.6;
+    top: 50%;
+    left: -100px;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to left, var(--comet-color, #ffdd00), transparent);
+    opacity: 0.8;
+    transform: translateY(-50%);
   }
   @keyframes comet-streak {
     0% { opacity: 0; transform: translate(0, 0) rotate(45deg); }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% { opacity: 0; transform: translate(2500px, -2500px) rotate(45deg); }
+    100% { opacity: 0; transform: translate(3000px, -3000px) rotate(45deg); }
   }
-  .comet:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-  .comet:nth-child(2) { left: 50%; top: 80%; animation-delay: 1.5s; }
-  .comet:nth-child(3) { left: 80%; top: 40%; animation-delay: 3s; }
+  .comet:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; --comet-color: #ffdd00; }
+  .comet:nth-child(2) { left: 50%; top: 80%; animation-delay: 1s; --comet-color: #ff4500; }
+  .comet:nth-child(3) { left: 80%; top: 40%; animation-delay: 2s; --comet-color: #ffdd00; }
+  .comet:nth-child(4) { left: 30%; top: 60%; animation-delay: 2.5s; --comet-color: #ff4500; width: 20px; height: 20px; }
+  .comet:nth-child(5) { left: 70%; top: 10%; animation-delay: 3.5s; --comet-color: #ffdd00; width: 12px; height: 12px; }
 
   #asteroid-container {
     position: absolute;
@@ -722,20 +730,20 @@
   }
   .asteroid {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 60%);
     border-radius: 50%;
-    box-shadow: 0 0 20px var(--light-cyan-glow);
-    animation: asteroid-drift 20s linear infinite;
-    opacity: 0.8;
+    box-shadow: 0 0 25px var(--light-cyan-glow);
+    animation: asteroid-drift 18s linear infinite;
+    opacity: 0.7;
   }
   @keyframes asteroid-drift {
     0% { transform: translate(0, 0); }
-    100% { transform: translate(1000px, 500px); }
+    100% { transform: translate(1200px, 600px); }
   }
   .asteroid:nth-child(1) { left: 20%; top: 10%; animation-delay: 0s; }
-  .asteroid:nth-child(2) { left: 70%; top: 60%; animation-delay: 10s; }
+  .asteroid:nth-child(2) { left: 70%; top: 60%; animation-delay: 8s; }
 
   @media(max-width:600px){
     .wheel-container{
@@ -848,18 +856,30 @@
       }
     }
     .comet {
-      width: 8px;
-      height: 8px;
-      box-shadow: 0 0 20px var(--bright-purple-glow);
+      width: 12px;
+      height: 12px;
+      box-shadow: 0 0 30px var(--comet-color, #ffdd00);
     }
+    .comet:nth-child(4) { width: 16px; height: 16px; }
+    .comet:nth-child(5) { width: 10px; height: 10px; }
     .comet::after {
-      width: 40px;
+      width: 80px;
       height: 2px;
     }
     .asteroid {
-      width: 15px;
-      height: 15px;
-      box-shadow: 0 0 15px var(--light-cyan-glow);
+      width: 20px;
+      height: 20px;
+      box-shadow: 0 0 20px var(--light-cyan-glow);
+    }
+    body::before {
+      background: radial-gradient(circle at center, rgba(255, 215, 0, 0.06) 0%, transparent 80%);
+    }
+    body::after {
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%);
     }
   }
 
@@ -970,18 +990,30 @@
       }
     }
     .comet {
-      width: 6px;
-      height: 6px;
-      box-shadow: 0 0 15px var(--bright-purple-glow);
+      width: 10px;
+      height: 10px;
+      box-shadow: 0 0 25px var(--comet-color, #ffdd00);
     }
+    .comet:nth-child(4) { width: 14px; height: 14px; }
+    .comet:nth-child(5) { width: 8px; height: 8px; }
     .comet::after {
-      width: 30px;
+      width: 60px;
       height: 1px;
     }
     .asteroid {
-      width: 12px;
-      height: 12px;
-      box-shadow: 0 0 12px var(--light-cyan-glow);
+      width: 15px;
+      height: 15px;
+      box-shadow: 0 0 15px var(--light-cyan-glow);
+    }
+    body::before {
+      background: radial-gradient(circle at center, rgba(255, 215, 0, 0.05) 0%, transparent 80%);
+    }
+    body::after {
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%);
     }
   }
 
@@ -1025,14 +1057,15 @@
     }
     .comet {
       animation: none;
-      opacity: 0.7;
+      opacity: 0.6;
+      box-shadow: 0 0 20px var(--comet-color, #ffdd00);
     }
     .comet::after {
       opacity: 0.4;
     }
     .asteroid {
       animation: none;
-      opacity: 0.7;
+      opacity: 0.6;
     }
     .wheel-container {
       animation: none;
@@ -1044,6 +1077,10 @@
     }
     .spoke {
       animation: none;
+    }
+    body::before, body::after {
+      animation: none;
+      opacity: 0.5;
     }
   }
 </style>
@@ -1063,8 +1100,17 @@
   </div>
 
   <canvas id="particle-canvas"></canvas>
-  <div id="comet-container"></div>
-  <div id="asteroid-container"></div>
+  <div id="comet-container">
+    <div class="comet"></div>
+    <div class="comet"></div>
+    <div class="comet"></div>
+    <div class="comet"></div>
+    <div class="comet"></div>
+  </div>
+  <div id="asteroid-container">
+    <div class="asteroid"></div>
+    <div class="asteroid"></div>
+  </div>
   <div class="wheel-container">
     <div class="orbital-ring orbital-ring-1"></div>
     <div class="orbital-ring orbital-ring-2"></div>
@@ -1177,8 +1223,8 @@ document.addEventListener('DOMContentLoaded', function() {
           this.size = Math.random() * 2 + 1;
           this.speedX = Math.random() * 1.5 - 0.75;
           this.speedY = Math.random() * 1.5 - 0.75;
-          this.color = ['#33ddff', '#ff33cc', '#ffff66', '#33ff99', '#ff6666', '#ff9933', '#66ccff'][Math.floor(Math.random() * 7)];
-          this.hasTail = Math.random() < 0.25;
+          this.color = ['#ffdd00', '#ff4500'][Math.floor(Math.random() * 2)]; // Yellow and reddish-orange
+          this.hasTail = Math.random() < 0.3;
       }
       update() {
           this.x += this.speedX;
