@@ -53,44 +53,32 @@
       87.5% { color: var(--dark-green); text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { color: var(--crt-green); text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .network-container {
-      position: relative; width: 500px; height: 500px; margin: 0 auto; z-index: 5;
-      background: repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(0,255,127,0.1) 20px, rgba(0,255,127,0.1) 22px);
+    .console-container {
+      position: relative; width: 600px; margin: 80px auto; padding: 20px; z-index: 5;
+      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,255,127,0.1) 10px, rgba(0,255,127,0.1) 20px);
     }
-    .synapse-line {
-      position: absolute; background: rgba(0,255,127,0.3); height: 2px; z-index: 1;
-    }
-    .synapse-1 { top: 50%; left: 50%; width: 130px; transform: translate(-50%, -50%) rotate(0deg); }
-    .synapse-2 { top: 50%; left: 50%; width: 130px; transform: translate(-50%, -50%) rotate(72deg); }
-    .synapse-3 { top: 50%; left: 50%; width: 130px; transform: translate(-50%, -50%) rotate(144deg); }
-    .synapse-4 { top: 50%; left: 50%; width: 130px; transform: translate(-50%, -50%) rotate(216deg); }
-    .synapse-5 { top: 50%; left: 50%; width: 130px; transform: translate(-50%, -50%) rotate(288deg); }
     .content-hub {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px;
-      background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 50%;
-      padding: 15px; text-align: center; font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 10px;
+      padding: 15px; text-align: center; width: 100%; margin: 20px 0; font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
-      box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 15;
+      box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10;
     }
-    .content-hub h2 { font-size: 14px; margin-bottom: 6px; text-shadow: 0 0 5px var(--crt-green); }
-    .content-list { list-style: none; max-height: 120px; overflow-y: auto; width: 100%; padding: 0 8px; }
-    .content-list li { margin-bottom: 4px; }
-    .content-list a { color: var(--neon-green); text-decoration: none; font-size: 10px; line-height: 1.3; transition: color 0.3s ease; }
+    .content-hub h2 { font-size: 16px; margin-bottom: 8px; text-shadow: 0 0 5px var(--crt-green); }
+    .content-list { list-style: none; max-height: 120px; overflow-y: auto; width: 100%; padding: 0 10px; }
+    .content-list li { margin-bottom: 5px; }
+    .content-list a { color: var(--neon-green); text-decoration: none; font-size: 11px; line-height: 1.4; transition: color 0.3s ease; }
     .content-list a:hover { color: var(--bright-green); text-shadow: 0 0 8px var(--bright-green); }
+    .spoke-container {
+      display: flex; justify-content: space-between; margin-bottom: 20px;
+    }
     .spoke {
-      position: absolute; width: 80px; height: 80px; background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%);
-      color: var(--neon-green); border: 2px solid var(--crt-green); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 10px; font-weight: 900;
-      text-align: center; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.2px;
+      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%); color: var(--neon-green);
+      border: 2px solid var(--crt-green); border-radius: 10px; padding: 10px; text-align: center;
+      width: 18%; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 10px;
+      font-weight: 900; text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
       box-shadow: 0 0 15px rgba(0,255,127,0.4); z-index: 10;
     }
     .spoke:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,255,127,0.9); background: var(--dark-gray); }
-    .spoke-1 { left: 350px; top: 250px; }
-    .spoke-2 { left: 270px; bottom: 50px; }
-    .spoke-3 { left: 150px; bottom: 110px; }
-    .spoke-4 { left: 150px; top: 110px; }
-    .spoke-5 { left: 270px; top: 50px; }
     .home-btn {
       position: fixed; bottom: 20px; right: 20px; background: var(--black-bg); color: var(--crt-green);
       border: 2px solid var(--crt-green); padding: 10px 20px; border-radius: 25px;
@@ -100,18 +88,20 @@
     }
     .home-btn:hover { background: var(--dark-gray); transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,127,0.6); }
     @media (max-width: 600px) {
-      .network-container { width: 320px; height: auto; display: flex; flex-direction: column; align-items: center; background: none; }
-      .synapse-line { display: none; }
-      .content-hub { width: 90%; position: static; transform: none; margin: 20px 0; border-radius: 10px; }
-      .spoke { position: static; margin: 10px 0; width: 90%; border-radius: 10px; }
+      .console-container { width: 320px; }
+      .spoke-container { flex-direction: column; align-items: center; }
+      .spoke { width: 100%; margin: 10px 0; font-size: 11px; }
+      .content-hub { width: 100%; font-size: 11px; }
+      .content-hub h2 { font-size: 14px; }
+      .content-list a { font-size: 10px; }
       .header h1 { font-size: 24px; }
     }
     @media (max-width: 400px) {
-      .network-container { width: 280px; }
+      .console-container { width: 280px; }
+      .spoke { font-size: 10px; }
       .content-hub { font-size: 10px; }
       .content-hub h2 { font-size: 12px; }
       .content-list a { font-size: 9px; }
-      .spoke { font-size: 9px; }
       .header h1 { font-size: 20px; }
     }
     #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
@@ -121,17 +111,14 @@
   <div class="header"><h1>EPSTEIN'S WEB</h1></div>
   <a href="/" class="home-btn">← Back to Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
-  <div class="network-container">
-    <div class="synapse-line synapse-1"></div>
-    <div class="synapse-line synapse-2"></div>
-    <div class="synapse-line synapse-3"></div>
-    <div class="synapse-line synapse-4"></div>
-    <div class="synapse-line synapse-5"></div>
-    <div class="spoke spoke-1" onclick="window.location.href='/epstein/podcasts'">Podcast Archive</div>
-    <div class="spoke spoke-2" onclick="window.location.href='/epstein/videos'">Video Clips Archive</div>
-    <div class="spoke spoke-3" onclick="window.location.href='/epstein/articles'">Articles & Longform Archive</div>
-    <div class="spoke spoke-4" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
-    <div class="spoke spoke-5" onclick="window.location.href='/epstein/memes'">Memes</div>
+  <div class="console-container">
+    <div class="spoke-container">
+      <div class="spoke" onclick="window.location.href='/epstein/podcasts'">Podcast Archive</div>
+      <div class="spoke" onclick="window.location.href='/epstein/videos'">Video Clips Archive</div>
+      <div class="spoke" onclick="window.location.href='/epstein/articles'">Articles & Longform Archive</div>
+      <div class="spoke" onclick="window.location.href='/epstein/primary-sources'">Primary Sources</div>
+      <div class="spoke" onclick="window.location.href='/epstein/memes'">Memes</div>
+    </div>
     <div class="content-hub">
       <h2>New Epstein Content</h2>
       <ul class="content-list" id="content-list">
