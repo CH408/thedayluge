@@ -26,15 +26,12 @@
       animation: energy-pulse 6s ease-in-out infinite; pointer-events: none; z-index: 0;
     }
     body::after {
-      position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background: linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
-                  linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
-                  linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
-                  linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite; pointer-events: none; z-index: 0;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,255,127,0.05) 10px, rgba(0,255,127,0.05) 11px);
+      animation: scanline 4s linear infinite; pointer-events: none; z-index: 0;
     }
     @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+    @keyframes scanline { 0% { background-position: 0 0; } 100% { background-position: 0 20px; } }
     .header {
       position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;
     }
@@ -56,13 +53,20 @@
     .console-container {
       position: relative; width: 600px; margin: 80px auto; padding: 20px; z-index: 5;
       background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,255,127,0.1) 10px, rgba(0,255,127,0.1) 20px);
+      border: 2px solid rgba(0,255,127,0.3); border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,127,0.4);
     }
     .content-hub {
       background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 10px;
       padding: 15px; text-align: center; width: 100%; margin: 20px 0; font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
-      box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10;
+      box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10; position: relative;
     }
+    .content-hub::before {
+      content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+      border: 2px solid rgba(0,255,127,0.2); border-radius: 10px; z-index: -1;
+      animation: glow-border 2s ease-in-out infinite;
+    }
+    @keyframes glow-border { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
     .content-hub h2 { font-size: 16px; margin-bottom: 8px; text-shadow: 0 0 5px var(--crt-green); }
     .content-list { list-style: none; max-height: 120px; overflow-y: auto; width: 100%; padding: 0 10px; }
     .content-list li { margin-bottom: 5px; }
@@ -73,10 +77,15 @@
     }
     .spoke {
       background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%); color: var(--neon-green);
-      border: 2px solid var(--crt-green); border-radius: 10px; padding: 10px; text-align: center;
+      border: 2px solid var(--crt-green); border-radius: 8px; padding: 10px; text-align: center;
       width: 18%; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 10px;
       font-weight: 900; text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
-      box-shadow: 0 0 15px rgba(0,255,127,0.4); z-index: 10;
+      box-shadow: 0 0 15px rgba(0,255,127,0.4); z-index: 10; position: relative;
+    }
+    .spoke::before {
+      content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+      border: 1px solid rgba(0,255,127,0.3); border-radius: 8px; z-index: -1;
+      animation: glow-border 2s ease-in-out infinite;
     }
     .spoke:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,255,127,0.9); background: var(--dark-gray); }
     .home-btn {
@@ -88,7 +97,7 @@
     }
     .home-btn:hover { background: var(--dark-gray); transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,127,0.6); }
     @media (max-width: 600px) {
-      .console-container { width: 320px; }
+      .console-container { width: 320px; padding: 15px; }
       .spoke-container { flex-direction: column; align-items: center; }
       .spoke { width: 100%; margin: 10px 0; font-size: 11px; }
       .content-hub { width: 100%; font-size: 11px; }
