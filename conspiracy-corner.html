@@ -142,6 +142,12 @@
     height:500px;
     margin:0 auto;
     z-index:5;
+    animation: atomize 1s ease-in; /* Changed from 2s to 1s */
+  }
+
+  @keyframes atomize{
+    from{opacity:0; transform:scale(0.5) rotate(-180deg);}
+    to{opacity:1; transform:scale(1) rotate(0deg);}
   }
 
   /* Orbital rings in green */
@@ -558,15 +564,6 @@
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
       width:85px;
     }
-  }
-
-  /* Loading animation */
-  .wheel-container{
-    animation:atomize 2s ease-in;
-  }
-  @keyframes atomize{
-    from{opacity:0; transform:scale(0.5) rotate(-180deg);}
-    to{opacity:1; transform:scale(1) rotate(0deg);}
   }
 
   .wheel-container:hover .orbital-ring{
