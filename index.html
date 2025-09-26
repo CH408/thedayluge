@@ -101,6 +101,20 @@
     .wheel-line::before, .wheel-line::after {
       animation: none;
     }
+    @keyframes edge-glow {
+      0% {
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        opacity: 0.5;
+      }
+      50% {
+        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
+        opacity: 0.8;
+      }
+      100% {
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        opacity: 0.5;
+      }
+    }
     .comet {
       width: 6px;
       height: 6px;
@@ -261,9 +275,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .wheel-container {
-      animation: spin-in 1.5s ease-out forwards;
-    }
     .wheel-line {
       animation: none;
       background: linear-gradient(
@@ -284,7 +295,7 @@
       opacity: 0.5;
     }
     #particle-canvas {
-      opacity: 0.3;
+      animation: none;
     }
     .comet {
       animation: none;
@@ -298,15 +309,20 @@
       animation: none;
       opacity: 0.5;
     }
+    .wheel-container {
+      animation: none;
+      transform: scale(1);
+      opacity: 1;
+    }
     .orbital-ring {
-      animation-duration: 60s;
+      animation: none;
     }
     .spoke {
-      animation-duration: 6s;
+      animation: none;
     }
     body::before, body::after {
-      animation-duration: 20s;
-      opacity: 0.2;
+      animation: none;
+      opacity: 0.4;
     }
   }
 </style>
@@ -531,6 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
               return null;
           }).filter(link => link !== null);
           
+          // Use only the first 8 links
           const surpriseLinks = links.slice(0, 8);
           
           if (surpriseLinks.length > 0) {
@@ -1292,4 +1309,3 @@ window.openArchive = function() {
     animation: asteroid-drift 25s linear infinite;
     opacity: 0.6;
   }
-  @keyframes
