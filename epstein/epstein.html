@@ -97,7 +97,6 @@
       margin: 40px auto 0;
       z-index: 5;
     }
-    /* Central Content Rectangle */
     .central-content {
       position: absolute;
       top: 50%;
@@ -164,7 +163,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 60%;
+      max-width: 100%; /* Adjusted to full width since no URL */
     }
     .link-url {
       color: var(--matrix-green);
@@ -176,7 +175,6 @@
       max-width: 35%;
       text-align: right;
     }
-    /* Perimeter Boxes */
     .perimeter-box {
       position: absolute;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -211,14 +209,11 @@
       box-shadow: 0 0 35px rgba(0,255,127,0.9);
       background: var(--dark-gray);
     }
-    
-    /* Stabilize right box hover to prevent wiggling */
     .right-box:hover {
       transform: translateY(-50%) scale(1.05);
       box-shadow: 0 0 35px rgba(0,255,127,0.9);
       background: var(--dark-gray);
     }
-    /* Top Boxes - Two separate boxes */
     .top-left-box {
       top: 60px;
       left: calc(50% - 155px);
@@ -233,7 +228,6 @@
       height: 60px;
       font-size: 16px;
     }
-    /* Right Box */
     .right-box {
       top: 50%;
       right: 50px;
@@ -243,7 +237,6 @@
       font-size: 18px;
       transform-origin: center center;
     }
-    /* Bottom Boxes - Two separate boxes */
     .bottom-left-box {
       bottom: 60px;
       left: calc(50% - 155px);
@@ -258,7 +251,6 @@
       height: 60px;
       font-size: 15px;
     }
-    /* Left Box */
     .left-box {
       position: absolute;
       top: 50%;
@@ -270,8 +262,6 @@
       transform-origin: center center;
       will-change: transform, box-shadow;
     }
-    
-    /* Stabilize left box hover too */
     .left-box:hover {
       transform: translateY(-50%) scale(1.05);
       box-shadow: 0 0 35px rgba(0,255,127,0.9);
@@ -496,7 +486,6 @@
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
               <span class="link-title">${entry.title}</span>
-              <span class="link-url">${entry.link}</span>
             `;
             linkElement.addEventListener('click', () => {
               if (entry.link !== '#') {
