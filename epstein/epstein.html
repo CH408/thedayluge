@@ -53,6 +53,7 @@
     .console-container {
       position: relative; width: 600px; margin: 50px auto 20px; padding: 20px; z-index: 5;
       border: 2px solid rgba(0,255,127,0.3); border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,127,0.4);
+      background: repeating-linear-gradient(60deg, transparent, transparent 20px, rgba(0,255,127,0.1) 20px, rgba(0,255,127,0.1) 22px);
     }
     .content-hub {
       background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 10px;
@@ -76,14 +77,16 @@
     }
     .spoke {
       background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%); color: var(--neon-green);
-      border: 2px solid var(--crt-green); border-radius: 8px; padding: 10px; text-align: center;
-      width: 18%; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px;
-      font-weight: 900; text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
+      border: 2px solid var(--crt-green); border-radius: 50%; width: 80px; height: 80px;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
       box-shadow: 0 0 15px rgba(0,255,127,0.4); z-index: 10; position: relative;
+      filter: url(#gear-edge);
     }
     .spoke::before {
       content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
-      border: 1px solid rgba(0,255,127,0.3); border-radius: 8px; z-index: -1;
+      border: 1px solid rgba(0,255,127,0.3); border-radius: 50%; z-index: -1;
       animation: glow-border 2s ease-in-out infinite;
     }
     .spoke:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,255,127,0.9); background: var(--dark-gray); }
@@ -98,7 +101,8 @@
     @media (max-width: 600px) {
       .console-container { width: 320px; padding: 15px; margin: 40px auto 20px; }
       .spoke-container { flex-direction: column; align-items: center; }
-      .spoke { width: 100%; margin: 10px 0; font-size: 11px; }
+      .spoke { width: 100%; height: 60px; border-radius: 8px; filter: none; font-size: 11px; }
+      .spoke::before { border-radius: 8px; }
       .content-hub { width: 100%; font-size: 13px; }
       .content-hub h2 { font-size: 16px; }
       .content-list a { font-size: 12px; }
@@ -106,19 +110,26 @@
     }
     @media (max-width: 400px) {
       .console-container { width: 280px; margin: 30px auto 20px; }
-      .spoke { font-size: 10px; }
+      .spoke { font-size: 10px; height: 50px; }
       .content-hub { font-size: 12px; }
       .content-hub h2 { font-size: 14px; }
       .content-list a { font-size: 11px; }
       .header h1 { font-size: 20px; }
     }
     #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    svg { position: absolute; width: 0; height: 0; }
   </style>
 </head>
 <body>
   <div class="header"><h1>EPSTEIN'S WEB</h1></div>
   <a href="/" class="home-btn">← Back to Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
+  <svg>
+    <filter id="gear-edge">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" result="turbulence"/>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
   <div class="console-container">
     <div class="content-hub">
       <h2>New Epstein Content</h2>
