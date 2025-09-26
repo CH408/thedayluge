@@ -146,10 +146,10 @@
       border: 1px solid rgba(0,255,127,0.3);
       border-radius: 4px;
       transition: all 0.3s ease;
-      font-size: 10px;
+      font-size: 12px;
       line-height: 1.1;
-      min-height: 24px;
-      max-height: 28px;
+      min-height: 26px;
+      max-height: 30px;
       overflow: hidden;
     }
     .content-link:hover {
@@ -161,11 +161,20 @@
       color: var(--crt-green);
       text-decoration: none;
       cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 60%;
     }
     .link-url {
       color: var(--matrix-green);
       font-size: 10px;
       opacity: 0.8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 35%;
+      text-align: right;
     }
     /* Perimeter Boxes */
     .perimeter-box {
@@ -281,7 +290,8 @@
       .layout-container { max-width: 90%; height: 500px; }
       .central-content { width: 320px; height: 180px; padding: 12px; }
       .central-title { font-size: 14px; }
-      .content-link { font-size: 10px; }
+      .content-link { font-size: 10px; padding: 2px 5px; min-height: 22px; max-height: 26px; }
+      .link-url { font-size: 8px; }
       .top-left-box, .top-right-box, .bottom-left-box, .bottom-right-box { width: 120px; height: 50px; font-size: 12px; }
       .top-left-box { left: calc(50% - 125px); }
       .top-right-box { right: calc(50% - 125px); }
@@ -293,7 +303,8 @@
       .layout-container { height: 450px; }
       .central-content { width: 280px; height: 160px; padding: 10px; }
       .central-title { font-size: 12px; margin-bottom: 8px; }
-      .content-link { font-size: 9px; padding: 3px 6px; }
+      .content-link { font-size: 9px; padding: 2px 4px; min-height: 20px; max-height: 24px; }
+      .link-url { font-size: 7px; }
       .top-left-box, .top-right-box, .bottom-left-box, .bottom-right-box { width: 100px; height: 45px; font-size: 10px; }
       .top-left-box { left: calc(50% - 105px); }
       .top-right-box { right: calc(50% - 105px); }
