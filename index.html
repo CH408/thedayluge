@@ -1,577 +1,4 @@
-@keyframes asteroid-drift {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(800px, 400px); }
-  }
-  .asteroid:nth-child(1) { left: 25%; top: 15%; animation-delay: 0s; }
-  .asteroid:nth-child(2) { left: 65%; top: 55%; animation-delay: 12s; }
-
-  @media(max-width:600px){
-    .wheel-container{
-      width: 380px;
-      height: 380px;
-    }
-    .wheel-center{
-      width: 120px;
-      height: 120px;
-      font-size: 16px;
-    }
-    .spoke{
-      width: 80px;
-      height: 80px;
-      font-size: 11px;
-      animation: electron-pulse 1.5s ease-in-out infinite;
-    }
-    .spoke-1{ left: 295px; top: 150px; font-size: 12px; }
-    .spoke-2{ left: 255px; top: 255px; font-size: 11px; }
-    .spoke-3{ left: 150px; bottom: 15px; font-size: 12px; font-weight: 900 !important; }
-    .spoke-4{ left: 45px; bottom: 50px; font-size: 11px; }
-    .spoke-5{ left: 15px; top: 150px; font-size: 11px; }
-    .spoke-6{ left: 45px; top: 50px; font-size: 12px; }
-    .spoke-7{ left: 150px; top: 15px; font-size: 12px; font-weight: 900 !important; color: #00ff00 !important; text-shadow: 0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
-    .spoke-8{ left: 255px; top: 50px; font-size: 12px; font-weight: 900 !important; }
-    .header h1{
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    .button-container {
-      gap: 12px;
-      margin-top: 25px;
-    }
-    .random-button, .archive-button {
-      padding: 12px 20px;
-      font-size: 14px;
-    }
-    .random-button::before, .archive-button::before {
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 31px;
-    }
-    @keyframes title-pulse {
-      0% {  
-        color: var(--bright-purple-glow);
-        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      12.5% {  
-        color: #8080ff;
-        text-shadow: 0 0 11px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      25% {  
-        color: var(--light-cyan-glow);
-        text-shadow: 0 0 12px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      37.5% {  
-        color: #6688cc;
-        text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      50% {  
-        color: var(--pink);
-        text-shadow: 0 0 14px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      62.5% {  
-        color: #cc4499;
-        text-shadow: 0 0 13px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      75% {  
-        color: var(--bright-blue);
-        text-shadow: 0 0 12px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      87.5% {  
-        color: #6688cc;
-        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      100% {  
-        color: var(--bright-purple-glow);
-        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-    }
-    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width: 105px;
-    }
-    .orbital-ring{
-      animation-duration: 15s;
-    }
-    .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 12s; }
-    .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 14s; animation-direction: reverse; }
-    .orbital-ring-3{ width: 360px; height: 360px; animation-duration: 16s; }
-    .wheel-line {
-      animation: organic-pulse 2.5s ease-in-out infinite;
-    }
-    .wheel-line::before, .wheel-line::after {
-      animation: none;
-    }
-    @keyframes edge-glow {
-      0% {
-        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
-        opacity: 0.5;
-      }
-      50% {
-        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
-        opacity: 0.8;
-      }
-      100% {
-        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
-        opacity: 0.5;
-      }
-    }
-    .comet {
-      width: 6px;
-      height: 6px;
-      box-shadow: 0 0 10px var(--light-cyan-glow);
-    }
-    .comet::after {
-      width: 30px;
-      height: 1px;
-    }
-    .asteroid {
-      width: 12px;
-      height: 12px;
-      box-shadow: 0 0 8px var(--light-cyan-glow);
-    }
-    body::before {
-      background: radial-gradient(circle at center, rgba(51, 221, 255, 0.04) 0%, transparent 85%);
-    }
-    body::after {
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%);
-    }
-  }
-
-  @media(max-width:400px){
-    .wheel-container{
-      width: 320px;
-      height: 320px;
-    }
-    .wheel-center{
-      width: 100px;
-      height: 100px;
-      font-size: 14px;
-    }
-    .spoke{
-      width: 65px;
-      height: 65px;
-      font-size: 10px;
-      animation: electron-pulse 1.8s ease-in-out infinite;
-    }
-    .spoke-1{ left: 245px; top: 127.5px; font-size: 11px; }
-    .spoke-2{ left: 215px; top: 215px; font-size: 10px; }
-    .spoke-3{ left: 127.5px; bottom: 12.5px; font-size: 11px; font-weight: 900 !important; }
-    .spoke-4{ left: 40px; bottom: 40px; font-size: 10px; }
-    .spoke-5{ left: 12.5px; top: 127.5px; font-size: 10px; }
-    .spoke-6{ left: 40px; top: 40px; font-size: 11px; }
-    .spoke-7{ left: 127.5px; top: 12.5px; font-size: 11px; font-weight: 900 !important; color: #00ff00 !important; text-shadow: 0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
-    .spoke-8{ left: 215px; top: 40px; font-size: 11px; font-weight: 900 !important; }
-    .header h1{
-      font-size: 28px;
-    }
-    .button-container {
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .random-button, .archive-button {
-      padding: 10px 18px;
-      font-size: 13px;
-    }
-    .random-button::before, .archive-button::before {
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 31px;
-    }
-    @keyframes title-pulse {
-      0% {  
-        color: var(--bright-purple-glow);
-        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      12.5% {  
-        color: #8080ff;
-        text-shadow: 0 0 9px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      25% {  
-        color: var(--light-cyan-glow);
-        text-shadow: 0 0 10px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      37.5% {  
-        color: #6688cc;
-        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      50% {  
-        color: var(--pink);
-        text-shadow: 0 0 12px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      62.5% {  
-        color: #cc4499;
-        text-shadow: 0 0 11px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      75% {  
-        color: var(--bright-blue);
-        text-shadow: 0 0 10px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      87.5% {  
-        color: #6688cc;
-        text-shadow: 0 0 9px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
-      }
-      100% {  
-        color: var(--bright-purple-glow);
-        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
-      }
-    }
-    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width: 85px;
-    }
-    .orbital-ring{
-      animation-duration: 12s;
-    }
-    .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 10s; }
-    .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 11s; animation-direction: reverse; }
-    .orbital-ring-3{ width: 360px; height: 360px; animation-duration: 12s; }
-    .wheel-line {
-      animation: organic-pulse 3s ease-in-out infinite;
-    }
-    .comet {
-      width: 5px;
-      height: 5px;
-      box-shadow: 0 0 8px var(--light-cyan-glow);
-    }
-    .comet::after {
-      width: 20px;
-      height: 1px;
-    }
-    .asteroid {
-      width: 10px;
-      height: 10px;
-      box-shadow: 0 0 6px var(--light-cyan-glow);
-    }
-    body::before {
-      background: radial-gradient(circle at center, rgba(51, 221, 255, 0.03) 0%, transparent 85%);
-    }
-    body::after {
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%);
-    }
-  }
-
-  .wheel-container:hover .orbital-ring {
-    border-color: #00ddffaa;
-    box-shadow: 0 0 15px #00ddff55;
-  }
-
-  #particle-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .wheel-line {
-      animation: none;
-      background: linear-gradient(
-        to right,
-        var(--light-cyan-glow) 0%,
-        #ffffff 3%,
-        var(--light-cyan-glow) 5%,
-        var(--light-cyan-glow) 100%
-      );
-      box-shadow: 0 0 10px var(--light-cyan-glow);
-    }
-    .wheel-line::before, .wheel-line::after {
-      animation: none;
-    }
-    .random-button::before, .archive-button::before {
-      animation: none;
-      box-shadow: 0 0 10px var(--yellow);
-      opacity: 0.5;
-    }
-    #particle-canvas {
-      animation: none;
-    }
-    .comet {
-      animation: none;
-      opacity: 0.5;
-      box-shadow: 0 0 10px var(--light-cyan-glow);
-    }
-    .comet::after {
-      opacity: 0.3;
-    }
-    .asteroid {
-      animation: none;
-      opacity: 0.5;
-    }
-    .wheel-container {
-      animation: none;
-      transform: scale(1);
-      opacity: 1;
-    }
-    .orbital-ring {
-      animation: none;
-    }
-    .spoke {
-      animation: none;
-    }
-    body::before, body::after {
-      animation: none;
-      opacity: 0.4;
-    }
-  }
-</style>
-</head>
-<body>
-  <div id="password-overlay" class="hidden">
-    <h2>Enter Password</h2>
-    <input type="password" id="password-input" placeholder="Password">
-    <button id="password-submit">Submit</button>
-    <p id="password-error">Incorrect password, please try again.</p>
-  </div>
-
-  <button id="reset-auth" onclick="resetAuth()" style="display:none;">Reset Auth</button>
-
-  <div class="header">
-    <h1>THE DAYLUGE</h1>
-  </div>
-
-  <canvas id="particle-canvas"></canvas>
-  <div id="comet-container">
-    <div class="comet"></div>
-    <div class="comet"></div>
-    <div class="comet"></div>
-  </div>
-  <div id="asteroid-container">
-    <div class="asteroid"></div>
-    <div class="asteroid"></div>
-  </div>
-  <div class="wheel-container">
-    <div class="orbital-ring orbital-ring-1"></div>
-    <div class="orbital-ring orbital-ring-2"></div>
-    <div class="orbital-ring orbital-ring-3"></div>
-    <div class="wheel-line line-1"></div>
-    <div class="wheel-line line-2"></div>
-    <div class="wheel-line line-3"></div>
-    <div class="wheel-line line-4"></div>
-    <div class="wheel-line line-5"></div>
-    <div class="wheel-line line-6"></div>
-    <div class="wheel-line line-7"></div>
-    <div class="wheel-line line-8"></div>
-
-    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
-      TRENDING
-      NEWS
-    </a>
-
-    <div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
-    <div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
-      &
-      Economics</div>
-    <div class="spoke spoke-3" onclick="goToCategory('sports-leisure')">Sports
-      &
-      Leisure</div>
-    <div class="spoke spoke-4" onclick="goToCategory('science-nature-technology')">Science,
-      Nature
-      &
-      Technology</div>
-    <div class="spoke spoke-5" onclick="goToCategory('arts-literature')">Arts
-      &
-      Literature</div>
-    <div class="spoke spoke-6" onclick="goToCategory('wisdom-philosophy')">Wisdom
-      &
-      Philosophy</div>
-    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
-      Corner</div>
-    <div class="spoke spoke-8" onclick="goToCategory('history')">History</div>
-  </div>
-
-  <div class="button-container">
-    <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
-    <button class="archive-button" onclick="goToSurpriseArchive()">SURPRISE ME ARCHIVES</button>
-  </div>
-
-  <div class="archive-bottom" onclick="openArchive()">archive</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Page loaded, bypassing password overlay...');
-  const overlay = document.getElementById('password-overlay');
-  const passwordInput = document.getElementById('password-input');
-  const submitButton = document.getElementById('password-submit');
-  const errorMessage = document.getElementById('password-error');
-
-  overlay.classList.add('hidden');
-  document.querySelectorAll('body > *').forEach(el => {
-    el.style.visibility = 'visible';
-  });
-
-  const correctPassword = '5813';
-  function checkPassword() {
-    console.log('Checking password:', passwordInput.value);
-    if (passwordInput.value === correctPassword) {
-      console.log('Password correct, hiding overlay');
-      overlay.classList.add('hidden');
-      document.querySelectorAll('body > *').forEach(el => {
-        el.style.visibility = 'visible';
-      });
-    } else {
-      console.log('Incorrect password');
-      errorMessage.style.display = 'block';
-      passwordInput.value = '';
-      passwordInput.focus();
-    }
-  }
-
-  window.resetAuth = function() {
-    localStorage.removeItem('isAuthenticated');
-    overlay.classList.remove('hidden');
-    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
-      el.style.visibility = 'hidden';
-    });
-    passwordInput.value = '';
-    errorMessage.style.display = 'none';
-    passwordInput.focus();
-  };
-
-  submitButton.addEventListener('click', checkPassword);
-  passwordInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      console.log('Enter key pressed, checking password');
-      checkPassword();
-    }
-  });
-
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const particlesArray = [];
-  const numberOfParticles = 80;
-
-  class Particle {
-      constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 1 + 0.5;
-          this.speedX = Math.random() * 0.3 - 0.15;
-          this.speedY = Math.random() * 0.3 - 0.15;
-          this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
-      }
-      update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-          if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-      }
-      draw() {
-          ctx.fillStyle = this.color;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.shadowBlur = 5;
-          ctx.shadowColor = this.color;
-      }
-  }
-
-  function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-          particlesArray.push(new Particle());
-      }
-  }
-
-  function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const particle of particlesArray) {
-          particle.update();
-          particle.draw();
-      }
-      requestAnimationFrame(animate);
-  }
-
-  init();
-  animate();
-
-  window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-  });
-
-  const categoryMap = {
-      'politics': 'politics.html',
-      'markets-economics': 'markets-economics.html',
-      'sports-leisure': 'sports-leisure.html',
-      'science-nature-technology': 'science-nature-technology.html',
-      'arts-literature': 'arts-literature.html',
-      'wisdom-philosophy': 'wisdom-philosophy.html',
-      'conspiracy-corner': 'conspiracy-corner.html',
-      'history': 'history.html'
-  };
-
-  window.goToCategory = function(category) {
-      const url = categoryMap[category];
-      if (url) {
-          window.location.href = url;
-      } else {
-          console.error('Invalid category:', category);
-      }
-  };
-
-  window.goToNewsHub = function() {
-      window.location.href = 'news.html';
-  };
-
-  window.goToRandomArticle = async function() {
-      try {
-          const response = await fetch('surprise-me-links.txt');
-          if (!response.ok) {
-              console.error('Failed to load surprise-me-links.txt:', response.status);
-              return;
-          }
-          const text = await response.text();
-          const lines = text.split('\n').filter(line => line.trim());
-          const links = lines.map(line => {
-              const parts = line.split('|');
-              if (parts.length >= 2) {
-                  return parts[1].trim();
-              }
-              return null;
-          }).filter(link => link !== null);
-          
-          // Use only the first 8 links
-          const surpriseLinks = links.slice(0, 8);
-          
-          if (surpriseLinks.length > 0) {
-              const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
-              window.open(randomLink, '_blank');
-          } else {
-              console.error('No valid links found in surprise-me-links.txt');
-          }
-      } catch (error) {
-          console.error('Error loading surprise me links:', error);
-      }
-  };
-
-  window.goToSurpriseArchive = function() {
-      window.location.href = 'surprise-archive.html';
-  };
-});
-
-window.openArchive = function() {
-    window.location.href = 'archive.html';
-};
-</script>
-</body>
-</html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -1309,3 +736,577 @@ window.openArchive = function() {
     animation: asteroid-drift 25s linear infinite;
     opacity: 0.6;
   }
+  @keyframes asteroid-drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(800px, 400px); }
+  }
+  .asteroid:nth-child(1) { left: 25%; top: 15%; animation-delay: 0s; }
+  .asteroid:nth-child(2) { left: 65%; top: 55%; animation-delay: 12s; }
+
+  @media(max-width:600px){
+    .wheel-container{
+      width: 380px;
+      height: 380px;
+    }
+    .wheel-center{
+      width: 120px;
+      height: 120px;
+      font-size: 16px;
+    }
+    .spoke{
+      width: 80px;
+      height: 80px;
+      font-size: 11px;
+      animation: electron-pulse 1.5s ease-in-out infinite;
+    }
+    .spoke-1{ left: 295px; top: 150px; font-size: 12px; }
+    .spoke-2{ left: 255px; top: 255px; font-size: 11px; }
+    .spoke-3{ left: 150px; bottom: 15px; font-size: 12px; font-weight: 900 !important; }
+    .spoke-4{ left: 45px; bottom: 50px; font-size: 11px; }
+    .spoke-5{ left: 15px; top: 150px; font-size: 11px; }
+    .spoke-6{ left: 45px; top: 50px; font-size: 12px; }
+    .spoke-7{ left: 150px; top: 15px; font-size: 12px; font-weight: 900 !important; color: #00ff00 !important; text-shadow: 0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
+    .spoke-8{ left: 255px; top: 50px; font-size: 12px; font-weight: 900 !important; }
+    .header h1{
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .button-container {
+      gap: 12px;
+      margin-top: 25px;
+    }
+    .random-button, .archive-button {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+    .random-button::before, .archive-button::before {
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px;
+    }
+    @keyframes title-pulse {
+      0% {  
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% {  
+        color: #8080ff;
+        text-shadow: 0 0 11px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% {  
+        color: var(--light-cyan-glow);
+        text-shadow: 0 0 12px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% {  
+        color: #6688cc;
+        text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% {  
+        color: var(--pink);
+        text-shadow: 0 0 14px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% {  
+        color: #cc4499;
+        text-shadow: 0 0 13px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% {  
+        color: var(--bright-blue);
+        text-shadow: 0 0 12px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% {  
+        color: #6688cc;
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% {  
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+    }
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
+      width: 105px;
+    }
+    .orbital-ring{
+      animation-duration: 15s;
+    }
+    .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 12s; }
+    .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 14s; animation-direction: reverse; }
+    .orbital-ring-3{ width: 360px; height: 360px; animation-duration: 16s; }
+    .wheel-line {
+      animation: organic-pulse 2.5s ease-in-out infinite;
+    }
+    .wheel-line::before, .wheel-line::after {
+      animation: none;
+    }
+    @keyframes edge-glow {
+      0% {
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        opacity: 0.5;
+      }
+      50% {
+        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
+        opacity: 0.8;
+      }
+      100% {
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        opacity: 0.5;
+      }
+    }
+    .comet {
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 10px var(--light-cyan-glow);
+    }
+    .comet::after {
+      width: 30px;
+      height: 1px;
+    }
+    .asteroid {
+      width: 12px;
+      height: 12px;
+      box-shadow: 0 0 8px var(--light-cyan-glow);
+    }
+    body::before {
+      background: radial-gradient(circle at center, rgba(51, 221, 255, 0.04) 0%, transparent 85%);
+    }
+    body::after {
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%);
+    }
+  }
+
+  @media(max-width:400px){
+    .wheel-container{
+      width: 320px;
+      height: 320px;
+    }
+    .wheel-center{
+      width: 100px;
+      height: 100px;
+      font-size: 14px;
+    }
+    .spoke{
+      width: 65px;
+      height: 65px;
+      font-size: 10px;
+      animation: electron-pulse 1.8s ease-in-out infinite;
+    }
+    .spoke-1{ left: 245px; top: 127.5px; font-size: 11px; }
+    .spoke-2{ left: 215px; top: 215px; font-size: 10px; }
+    .spoke-3{ left: 127.5px; bottom: 12.5px; font-size: 11px; font-weight: 900 !important; }
+    .spoke-4{ left: 40px; bottom: 40px; font-size: 10px; }
+    .spoke-5{ left: 12.5px; top: 127.5px; font-size: 10px; }
+    .spoke-6{ left: 40px; top: 40px; font-size: 11px; }
+    .spoke-7{ left: 127.5px; top: 12.5px; font-size: 11px; font-weight: 900 !important; color: #00ff00 !important; text-shadow: 0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
+    .spoke-8{ left: 215px; top: 40px; font-size: 11px; font-weight: 900 !important; }
+    .header h1{
+      font-size: 28px;
+    }
+    .button-container {
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .random-button, .archive-button {
+      padding: 10px 18px;
+      font-size: 13px;
+    }
+    .random-button::before, .archive-button::before {
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px;
+    }
+    @keyframes title-pulse {
+      0% {  
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% {  
+        color: #8080ff;
+        text-shadow: 0 0 9px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% {  
+        color: var(--light-cyan-glow);
+        text-shadow: 0 0 10px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% {  
+        color: #6688cc;
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% {  
+        color: var(--pink);
+        text-shadow: 0 0 12px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% {  
+        color: #cc4499;
+        text-shadow: 0 0 11px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% {  
+        color: var(--bright-blue);
+        text-shadow: 0 0 10px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% {  
+        color: #6688cc;
+        text-shadow: 0 0 9px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% {  
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+    }
+    .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
+      width: 85px;
+    }
+    .orbital-ring{
+      animation-duration: 12s;
+    }
+    .orbital-ring-1{ width: 240px; height: 240px; animation-duration: 10s; }
+    .orbital-ring-2{ width: 300px; height: 300px; animation-duration: 11s; animation-direction: reverse; }
+    .orbital-ring-3{ width: 360px; height: 360px; animation-duration: 12s; }
+    .wheel-line {
+      animation: organic-pulse 3s ease-in-out infinite;
+    }
+    .comet {
+      width: 5px;
+      height: 5px;
+      box-shadow: 0 0 8px var(--light-cyan-glow);
+    }
+    .comet::after {
+      width: 20px;
+      height: 1px;
+    }
+    .asteroid {
+      width: 10px;
+      height: 10px;
+      box-shadow: 0 0 6px var(--light-cyan-glow);
+    }
+    body::before {
+      background: radial-gradient(circle at center, rgba(51, 221, 255, 0.03) 0%, transparent 85%);
+    }
+    body::after {
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%);
+    }
+  }
+
+  .wheel-container:hover .orbital-ring {
+    border-color: #00ddffaa;
+    box-shadow: 0 0 15px #00ddff55;
+  }
+
+  #particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wheel-line {
+      animation: none;
+      background: linear-gradient(
+        to right,
+        var(--light-cyan-glow) 0%,
+        #ffffff 3%,
+        var(--light-cyan-glow) 5%,
+        var(--light-cyan-glow) 100%
+      );
+      box-shadow: 0 0 10px var(--light-cyan-glow);
+    }
+    .wheel-line::before, .wheel-line::after {
+      animation: none;
+    }
+    .random-button::before, .archive-button::before {
+      animation: none;
+      box-shadow: 0 0 10px var(--yellow);
+      opacity: 0.5;
+    }
+    #particle-canvas {
+      animation: none;
+    }
+    .comet {
+      animation: none;
+      opacity: 0.5;
+      box-shadow: 0 0 10px var(--light-cyan-glow);
+    }
+    .comet::after {
+      opacity: 0.3;
+    }
+    .asteroid {
+      animation: none;
+      opacity: 0.5;
+    }
+    .wheel-container {
+      animation: none;
+      transform: scale(1);
+      opacity: 1;
+    }
+    .orbital-ring {
+      animation: none;
+    }
+    .spoke {
+      animation: none;
+    }
+    body::before, body::after {
+      animation: none;
+      opacity: 0.4;
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="password-overlay" class="hidden">
+    <h2>Enter Password</h2>
+    <input type="password" id="password-input" placeholder="Password">
+    <button id="password-submit">Submit</button>
+    <p id="password-error">Incorrect password, please try again.</p>
+  </div>
+
+  <button id="reset-auth" onclick="resetAuth()" style="display:none;">Reset Auth</button>
+
+  <div class="header">
+    <h1>THE DAYLUGE</h1>
+  </div>
+
+  <canvas id="particle-canvas"></canvas>
+  <div id="comet-container">
+    <div class="comet"></div>
+    <div class="comet"></div>
+    <div class="comet"></div>
+  </div>
+  <div id="asteroid-container">
+    <div class="asteroid"></div>
+    <div class="asteroid"></div>
+  </div>
+  <div class="wheel-container">
+    <div class="orbital-ring orbital-ring-1"></div>
+    <div class="orbital-ring orbital-ring-2"></div>
+    <div class="orbital-ring orbital-ring-3"></div>
+    <div class="wheel-line line-1"></div>
+    <div class="wheel-line line-2"></div>
+    <div class="wheel-line line-3"></div>
+    <div class="wheel-line line-4"></div>
+    <div class="wheel-line line-5"></div>
+    <div class="wheel-line line-6"></div>
+    <div class="wheel-line line-7"></div>
+    <div class="wheel-line line-8"></div>
+
+    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
+      TRENDING
+      NEWS
+    </a>
+
+    <div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
+    <div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
+      &
+      Economics</div>
+    <div class="spoke spoke-3" onclick="goToCategory('sports-leisure')">Sports
+      &
+      Leisure</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-technology')">Science,
+      Nature
+      &
+      Technology</div>
+    <div class="spoke spoke-5" onclick="goToCategory('arts-literature')">Arts
+      &
+      Literature</div>
+    <div class="spoke spoke-6" onclick="goToCategory('wisdom-philosophy')">Wisdom
+      &
+      Philosophy</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
+      Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('history')">History</div>
+  </div>
+
+  <div class="button-container">
+    <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
+    <button class="archive-button" onclick="goToSurpriseArchive()">SURPRISE ME ARCHIVES</button>
+  </div>
+
+  <div class="archive-bottom" onclick="openArchive()">archive</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Page loaded, bypassing password overlay...');
+  const overlay = document.getElementById('password-overlay');
+  const passwordInput = document.getElementById('password-input');
+  const submitButton = document.getElementById('password-submit');
+  const errorMessage = document.getElementById('password-error');
+
+  overlay.classList.add('hidden');
+  document.querySelectorAll('body > *').forEach(el => {
+    el.style.visibility = 'visible';
+  });
+
+  const correctPassword = '5813';
+  function checkPassword() {
+    console.log('Checking password:', passwordInput.value);
+    if (passwordInput.value === correctPassword) {
+      console.log('Password correct, hiding overlay');
+      overlay.classList.add('hidden');
+      document.querySelectorAll('body > *').forEach(el => {
+        el.style.visibility = 'visible';
+      });
+    } else {
+      console.log('Incorrect password');
+      errorMessage.style.display = 'block';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  window.resetAuth = function() {
+    localStorage.removeItem('isAuthenticated');
+    overlay.classList.remove('hidden');
+    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+      el.style.visibility = 'hidden';
+    });
+    passwordInput.value = '';
+    errorMessage.style.display = 'none';
+    passwordInput.focus();
+  };
+
+  submitButton.addEventListener('click', checkPassword);
+  passwordInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log('Enter key pressed, checking password');
+      checkPassword();
+    }
+  });
+
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particlesArray = [];
+  const numberOfParticles = 80;
+
+  class Particle {
+      constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1 + 0.5;
+          this.speedX = Math.random() * 0.3 - 0.15;
+          this.speedY = Math.random() * 0.3 - 0.15;
+          this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
+      }
+      update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+          if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      draw() {
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 5;
+          ctx.shadowColor = this.color;
+      }
+  }
+
+  function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+          particlesArray.push(new Particle());
+      }
+  }
+
+  function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+          particle.update();
+          particle.draw();
+      }
+      requestAnimationFrame(animate);
+  }
+
+  init();
+  animate();
+
+  window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+  });
+
+  const categoryMap = {
+      'politics': 'politics.html',
+      'markets-economics': 'markets-economics.html',
+      'sports-leisure': 'sports-leisure.html',
+      'science-nature-technology': 'science-nature-technology.html',
+      'arts-literature': 'arts-literature.html',
+      'wisdom-philosophy': 'wisdom-philosophy.html',
+      'conspiracy-corner': 'conspiracy-corner.html',
+      'history': 'history.html'
+  };
+
+  window.goToCategory = function(category) {
+      const url = categoryMap[category];
+      if (url) {
+          window.location.href = url;
+      } else {
+          console.error('Invalid category:', category);
+      }
+  };
+
+  window.goToNewsHub = function() {
+      window.location.href = 'news.html';
+  };
+
+  window.goToRandomArticle = async function() {
+      try {
+          const response = await fetch('surprise-me-links.txt');
+          if (!response.ok) {
+              console.error('Failed to load surprise-me-links.txt:', response.status);
+              return;
+          }
+          const text = await response.text();
+          const lines = text.split('\n').filter(line => line.trim());
+          const links = lines.map(line => {
+              const parts = line.split('|');
+              if (parts.length >= 2) {
+                  return parts[1].trim();
+              }
+              return null;
+          }).filter(link => link !== null);
+          
+          // Use only the first 8 links
+          const surpriseLinks = links.slice(0, 8);
+          
+          if (surpriseLinks.length > 0) {
+              const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+              window.open(randomLink, '_blank');
+          } else {
+              console.error('No valid links found in surprise-me-links.txt');
+          }
+      } catch (error) {
+          console.error('Error loading surprise me links:', error);
+      }
+  };
+
+  window.goToSurpriseArchive = function() {
+      window.location.href = 'surprise-archive.html';
+  };
+});
+
+window.openArchive = function() {
+    window.location.href = 'archive.html';
+};
+</script>
+</body>
+</html>
