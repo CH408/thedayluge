@@ -17,7 +17,8 @@
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--crt-green); line-height: 1.5; background: var(--black-bg);
-      display: flex; flex-direction: column; align-items: center; min-height: 100vh; position: relative; overflow-y: auto;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; position: relative; overflow: hidden;
     }
     body::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -52,34 +53,29 @@
       87.5% { color: var(--dark-green); text-shadow: 0 0 16px var(--dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { color: var(--crt-green); text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .block-container {
-      position: relative; width: 100%; max-width: 600px; margin: 80px auto; padding: 20px; z-index: 5;
-      display: flex; flex-direction: column; align-items: center;
+    .grid-container {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 500px; margin: 80px auto; padding: 20px;
+      position: relative; z-index: 5; background: radial-gradient(circle, rgba(0,255,127,0.1) 0%, transparent 70%);
     }
-    .vertical-line {
-      position: absolute; top: 0; left: 50px; width: 4px; height: 100%;
-      background: radial-gradient(ellipse 10px 4px at center, rgba(0,255,127,0.9) 0%, transparent 70%);
-      z-index: 1;
-    }
-    .spoke {
-      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%); color: var(--neon-green);
-      border: 2px solid var(--crt-green); border-radius: 10px; padding: 15px; margin: 20px 0; width: 80%;
-      text-align: center; font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 14px;
-      font-weight: 900; text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10;
-    }
-    .spoke:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,255,127,0.9); background: var(--dark-gray); }
     .content-hub {
-      background: var(--dark-gray); color: var(--crt-green); border: 2px solid var(--crt-green); border-radius: 10px;
-      padding: 15px; text-align: center; width: 80%; margin: 20px 0; font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
-      box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10;
+      grid-column: 1 / 3; grid-row: 2; background: var(--dark-gray); color: var(--crt-green);
+      border: 2px solid var(--crt-green); border-radius: 10px; padding: 15px; text-align: center;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 0 20px rgba(0,255,127,0.5); z-index: 10;
     }
     .content-hub h2 { font-size: 16px; margin-bottom: 8px; text-shadow: 0 0 5px var(--crt-green); }
     .content-list { list-style: none; max-height: 120px; overflow-y: auto; width: 100%; padding: 0 10px; }
     .content-list li { margin-bottom: 5px; }
     .content-list a { color: var(--neon-green); text-decoration: none; font-size: 11px; line-height: 1.4; transition: color 0.3s ease; }
     .content-list a:hover { color: var(--bright-green); text-shadow: 0 0 8px var(--bright-green); }
+    .spoke {
+      background: radial-gradient(circle, var(--black-bg) 0%, var(--dark-gray) 100%); color: var(--neon-green);
+      border: 2px solid var(--crt-green); border-radius: 10px; padding: 10px; text-align: center;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace; font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.2px; cursor: pointer; transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0,255,127,0.4); z-index: 10;
+    }
+    .spoke:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,255,127,0.9); background: var(--dark-gray); }
     .home-btn {
       position: fixed; bottom: 20px; right: 20px; background: var(--black-bg); color: var(--crt-green);
       border: 2px solid var(--crt-green); padding: 10px 20px; border-radius: 25px;
@@ -89,20 +85,17 @@
     }
     .home-btn:hover { background: var(--dark-gray); transform: scale(1.05); box-shadow: 0 0 20px rgba(0,255,127,0.6); }
     @media (max-width: 600px) {
-      .block-container { width: 90%; max-width: 320px; }
-      .vertical-line { left: 20px; }
-      .spoke { width: 100%; font-size: 12px; }
-      .content-hub { width: 100%; font-size: 11px; }
-      .content-hub h2 { font-size: 14px; }
-      .content-list a { font-size: 10px; }
+      .grid-container { width: 320px; grid-template-columns: 1fr; grid-template-rows: repeat(5, auto); gap: 15px; }
+      .content-hub { grid-column: 1; grid-row: 5; width: 100%; }
+      .spoke { font-size: 11px; }
       .header h1 { font-size: 24px; }
     }
     @media (max-width: 400px) {
-      .block-container { width: 95%; max-width: 280px; }
-      .spoke { font-size: 11px; }
+      .grid-container { width: 280px; }
       .content-hub { font-size: 10px; }
       .content-hub h2 { font-size: 12px; }
       .content-list a { font-size: 9px; }
+      .spoke { font-size: 10px; }
       .header h1 { font-size: 20px; }
     }
     #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
@@ -112,8 +105,7 @@
   <div class="header"><h1>EPSTEIN'S WEB</h1></div>
   <a href="/" class="home-btn">← Back to Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
-  <div class="block-container">
-    <div class="vertical-line"></div>
+  <div class="grid-container">
     <div class="spoke" onclick="window.location.href='/epstein/podcasts'">Podcast Archive</div>
     <div class="spoke" onclick="window.location.href='/epstein/videos'">Video Clips Archive</div>
     <div class="spoke" onclick="window.location.href='/epstein/articles'">Articles & Longform Archive</div>
