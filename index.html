@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -1073,7 +1072,9 @@
     <p id="password-error">Incorrect password, please try again.</p>
   </div>
 
-  <button id="reset-auth" onclick="resetAuth()" style="display:none;">Reset Auth</button>  <div class="header">
+  <button id="reset-auth" onclick="resetAuth()" style="display:none;">Reset Auth</button>
+  
+  <div class="header">
     <h1>THE DAYLUGE</h1>
   </div>
 
@@ -1098,31 +1099,34 @@
     <div class="wheel-line line-5"></div>
     <div class="wheel-line line-6"></div>
     <div class="wheel-line line-7"></div>
-    <div class="wheel-line line-8"></div><a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
-  TRENDING
-  NEWS
-</a>
+    <div class="wheel-line line-8"></div>
 
-<div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
-<div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
-  &
-  Economics</div>
-<div class="spoke spoke-3" onclick="goToCategory('sports-leisure')">Sports
-  &
-  Leisure</div>
-<div class="spoke spoke-4" onclick="goToCategory('science-nature-technology')">Science,
-  Nature
-  &
-  Technology</div>
-<div class="spoke spoke-5" onclick="goToCategory('arts-literature')">Arts
-  &
-  Literature</div>
-<div class="spoke spoke-6" onclick="goToCategory('wisdom-philosophy')">Wisdom
-  &
-  Philosophy</div>
-<div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
-  Corner</div>
-<div class="spoke spoke-8" onclick="goToCategory('history')">History</div>  </div>
+    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
+      TRENDING
+      NEWS
+    </a>
+
+    <div class="spoke spoke-1" onclick="goToCategory('politics')">Politics</div>
+    <div class="spoke spoke-2" onclick="goToCategory('markets-economics')">Markets
+      &
+      Economics</div>
+    <div class="spoke spoke-3" onclick="goToCategory('sports-leisure')">Sports
+      &
+      Leisure</div>
+    <div class="spoke spoke-4" onclick="goToCategory('science-nature-technology')">Science,
+      Nature
+      &
+      Technology</div>
+    <div class="spoke spoke-5" onclick="goToCategory('arts-literature')">Arts
+      &
+      Literature</div>
+    <div class="spoke spoke-6" onclick="goToCategory('wisdom-philosophy')">Wisdom
+      &
+      Philosophy</div>
+    <div class="spoke spoke-7" onclick="goToCategory('conspiracy-corner')">Conspiracy
+      Corner</div>
+    <div class="spoke spoke-8" onclick="goToCategory('history')">History</div>
+  </div>
 
   <div class="button-container">
     <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
@@ -1292,8 +1296,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return null;
             }).filter(link => link !== null);
             
-            // Use only the first 8 links (as before)
-            const surpriseLinks = links.slice(0, 8);
+            // Use only the first 5 links (most recent)
+            const surpriseLinks = links.slice(0, 5);
             
             if (surpriseLinks.length > 0) {
                 const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
