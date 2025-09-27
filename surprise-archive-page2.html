@@ -376,4 +376,14 @@
         console.log('Opening random surprise archive page 2 link:', randomLink);
         window.open(randomLink, '_blank');
       } else {
-        console.log('No archive page
+        console.log('No archive page 2 links available for random selection');
+      }
+    } catch (error) {
+      console.error('Error loading links for random selection:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadSurpriseLinks);
+</script>
+</body>
+</html>
