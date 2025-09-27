@@ -82,9 +82,6 @@
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
     .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
     .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
-    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -165,7 +162,7 @@
       <ul class="headlines surprise-links" id="surprise-links"></ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomSurprise()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomSurprise()"> SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -237,69 +234,69 @@
       init();
     });
 
-    // Load surprise links (last 8)
-    async function loadSurpriseLinks() {
-      try {
-        const response = await fetch('surprise-me-links.txt');
-        if (!response.ok) {
-          console.error('Failed to load surprise-me-links.txt:', response.status);
-          return;
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
-          }
-          return null;
-        }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 8); // Show only the last 8 links
-        const grid = document.getElementById('surprise-links');
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
-        }
-        console.log(`Showing ${displayLinks.length} surprise links (${links.length - displayLinks.length} moved to archive)`);
-      } catch (error) {
-        console.error('Error loading surprise links:', error);
-      }
+// Load surprise links (first 5)
+async function loadSurpriseLinks() {
+  try {
+    const response = await fetch('surprise-me-links.txt');
+    if (!response.ok) {
+      console.error('Failed to load surprise-me-links.txt:', response.status);
+      return;
     }
-
-    // Random surprise article from the last 8 links
-    async function goToRandomSurprise() {
-      try {
-        const response = await fetch('surprise-me-links.txt');
-        if (!response.ok) {
-          console.log('Could not load surprise-me-links.txt for random selection');
-          return;
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
-          }
-          return null;
-        }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 8); // Use only the last 8 links
-        if (currentLinks.length > 0) {
-          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-          console.log('Opening random surprise link:', randomLink.url);
-          window.open(randomLink.url, '_blank');
-        } else {
-          console.log('No links available for random selection');
-        }
-      } catch (error) {
-        console.error('Error loading links for random selection:', error);
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return { title: parts[0].trim(), url: parts[1].trim() };
       }
+      return null;
+    }).filter(link => link !== null);
+    const displayLinks = links.slice(0, 5); // Show only the first 5 links
+    const grid = document.getElementById('surprise-links');
+    if (grid && displayLinks.length > 0) {
+      grid.innerHTML = displayLinks.map(link => `
+        <li class="headline">
+          <a href="${link.url}" target="_blank">${link.title}</a>
+        </li>
+      `).join('');
     }
+    console.log(`Showing ${displayLinks.length} surprise links (${links.length - displayLinks.length} moved to archive)`);
+  } catch (error) {
+    console.error('Error loading surprise links:', error);
+  }
+}
 
-    document.addEventListener('DOMContentLoaded', loadSurpriseLinks);
+// Random surprise article from the first 5 links
+async function goToRandomSurprise() {
+  try {
+    const response = await fetch('surprise-me-links.txt');
+    if (!response.ok) {
+      console.log('Could not load surprise-me-links.txt for random selection');
+      return;
+    }
+    const text = await response.text();
+    const lines = text.split('\n').filter(line => line.trim());
+    const links = lines.map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 2) {
+        return { title: parts[0].trim(), url: parts[1].trim() };
+      }
+      return null;
+    }).filter(link => link !== null);
+    const currentLinks = links.slice(0, 5); // Use only the first 5 links
+    if (currentLinks.length > 0) {
+      const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+      console.log('Opening random surprise link:', randomLink.url);
+      window.open(randomLink.url, '_blank');
+    } else {
+      console.log('No links available for random selection');
+    }
+  } catch (error) {
+    console.error('Error loading links for random selection:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadSurpriseLinks);
   </script>
 </body>
 </html>
