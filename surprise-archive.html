@@ -81,4 +81,243 @@
     .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
     .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
-    .headlines .headline:nth-chil
+    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(6) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(7) { animation-delay: 1.2s; }
+    .headlines .headline:nth-child(8) { animation-delay: 1.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 1.6s; }
+    .headlines .headline:nth-child(10) { animation-delay: 1.8s; }
+    .headlines .headline:nth-child(11) { animation-delay: 2.0s; }
+    .headlines .headline:nth-child(12) { animation-delay: 2.2s; }
+    .headlines .headline:nth-child(13) { animation-delay: 2.4s; }
+    .headlines .headline:nth-child(14) { animation-delay: 2.6s; }
+    .headlines .headline:nth-child(15) { animation-delay: 2.8s; }
+    .headlines .headline:nth-child(16) { animation-delay: 3.0s; }
+    .headlines .headline:nth-child(17) { animation-delay: 3.2s; }
+    .headlines .headline:nth-child(18) { animation-delay: 3.4s; }
+    .headlines .headline:nth-child(19) { animation-delay: 3.6s; }
+    .headlines .headline:nth-child(20) { animation-delay: 3.8s; }
+    .headlines .headline:nth-child(21) { animation-delay: 4.0s; }
+    .headlines .headline:nth-child(22) { animation-delay: 4.2s; }
+    .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
+    .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
+    .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .headline a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .surprise-links .headline a:hover {
+      color: var(--mint-green-light);
+      text-shadow: 0 0 10px var(--mint-green-light);
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: transparent;
+      color: #ffffff;
+      padding: 8px 16px;
+      border: 1px solid #ffffff;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px #ffffff;
+      transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    }
+    .home-btn:hover {
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .page-button {
+      display: inline-block;
+      background: transparent;
+      color: var(--mint-green);
+      padding: 8px 16px;
+      border: 1px solid var(--mint-green);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--mint-green);
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      cursor: pointer;
+    }
+    .page-button:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(152,255,204,0.3);
+    }
+    #archive-error {
+      color: #ff1493;
+      font-size: 16px;
+      text-align: center;
+      margin-top: 20px;
+      text-shadow: 0 0 5px #ff1493;
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .block-title { font-size: 14px; }
+      .headline { font-size: 14px; }
+      .home-btn, .page-button { 
+        font-family: 'Special Elite', 'Courier New', Courier, monospace;
+        font-size: 10px; 
+        padding: 6px 12px; 
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="home-btn">← Home</a>
+  <canvas id="particle-canvas"></canvas>
+  <div class="wrap">
+    <div class="surprise-archive">
+      <div class="title-container">
+        <div class="block-title surprise-archive-title">Surprise Me Archive</div>
+      </div>
+      <ul class="headlines surprise-links" id="surprise-links"></ul>
+      <p id="archive-error">Failed to load articles. Please try again later.</p>
+      <div class="button-container">
+        <a href="surprise-archive-page2.html" class="page-button">Page 2 →</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 50;
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#98ffcc', '#b3ffd9', '#80ffbf', '#a6ffd4', '#c0ffee', '#e6fff2'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    init();
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Load surprise archive links (links 6-30)
+    async function loadSurpriseLinks() {
+      try {
+        console.log('Starting to load surprise archive links...');
+        const response = await fetch('./surprise-me-links.txt');
+        if (!response.ok) {
+          console.error('Failed to load surprise-me-links.txt:', response.status, response.statusText);
+          document.getElementById('archive-error').style.display = 'block';
+          return;
+        }
+        console.log('Successfully fetched surprise-me-links.txt');
+        const text = await response.text();
+        console.log('File content length:', text.length);
+        const lines = text.split('\n').filter(line => line.trim());
+        console.log('Total lines found:', lines.length);
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        console.log('Valid links found:', links.length);
+        
+        // Take links 6-30 (skip first 5, show next 25)
+        const archiveLinks = links.length > 5 ? links.slice(5, 30) : [];
+        console.log('Archive links to display:', archiveLinks.length);
+        
+        const grid = document.getElementById('surprise-links');
+        if (grid && archiveLinks.length > 0) {
+          grid.innerHTML = archiveLinks.map(link => 
+            '<li class="headline"><a href="' + link.url + '" target="_blank">' + link.title + '</a></li>'
+          ).join('');
+          console.log('Successfully populated grid with', archiveLinks.length, 'links');
+        } else {
+          console.log('No archive links available (need more than 5 links in surprise-me-links.txt)');
+          document.getElementById('archive-error').textContent = 'No archived articles available to display.';
+          document.getElementById('archive-error').style.display = 'block';
+        }
+        console.log('Showing ' + archiveLinks.length + ' surprise archive links (6-30)');
+      } catch (error) {
+        console.error('Error loading surprise links:', error);
+        document.getElementById('archive-error').textContent = 'Error loading archive: ' + error.message;
+        document.getElementById('archive-error').style.display = 'block';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM loaded, calling loadSurpriseLinks...');
+      loadSurpriseLinks();
+    });
+  </script>
+</body>
+</html>
