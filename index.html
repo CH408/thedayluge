@@ -336,27 +336,29 @@
     line-height: 1.1;
     text-transform: uppercase;
     letter-spacing: 0.2px;
-    box-shadow: 0 0 15px rgba(0,255,0,0.3), 0 2px 6px rgba(0,0,0,0.1);
+    color: #00ff00 !important;
+    text-shadow: 0 0 6px rgba(0,255,0,0.6), 0 0 12px rgba(0,255,0,0.4);
+    box-shadow: 0 0 10px rgba(0,255,0,0.4), 0 2px 6px rgba(0,0,0,0.1);
     padding: 4px;
     animation: electron-pulse 1.2s ease-in-out infinite;
   }
 
   @keyframes electron-pulse {
     0%, 100% { 
-      box-shadow: 0 0 15px rgba(0,255,0,0.3), 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0,255,0,0.4), 0 2px 6px rgba(0,0,0,0.1);
       border-color: rgba(0,255,0,0.8);
       transform: scale(1);
     }
     50% { 
-      box-shadow: 0 0 30px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2);
+      box-shadow: 0 0 15px rgba(0,255,0,0.5), 0 4px 10px rgba(0,255,0,0.2);
       border-color: #00ff00;
-      transform: scale(1.02);
+      transform: scale(1.005);
     }
   }
 
   .spoke:hover{
-    transform: scale(1.15);
-    box-shadow: 0 0 25px rgba(0,255,0,0.6), 0 4px 10px rgba(0,255,0,0.2);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0,255,0,0.5), 0 4px 10px rgba(0,255,0,0.2);
     z-index: 10;
     animation-play-state: paused;
     border-color: rgba(0,255,0,0.8);
@@ -366,7 +368,6 @@
     left: 390px;
     top: 205px;
     background: linear-gradient(135deg, var(--marble-white) 0%, var(--marble-gray) 50%, var(--marble-white) 100%);
-    color: #333333 !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
@@ -374,7 +375,6 @@
     left: 336px;
     top: 336px;
     background: radial-gradient(circle, var(--bright-dark-green) 0%, var(--bright-dark-green-dark) 100%);
-    color: #ffffff !important;
     font-size: 13px;
     font-weight: 900 !important;
   }
@@ -382,7 +382,6 @@
     left: 205px;
     bottom: 20px;
     background: radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
-    color: #333333 !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
@@ -390,7 +389,6 @@
     left: 74px;
     bottom: 64px;
     background: radial-gradient(circle, var(--dodgers-blue) 0%, var(--dodgers-blue-dark) 100%);
-    color: #ffffff !important;
     font-size: 13px;
     font-weight: 900 !important;
   }
@@ -398,16 +396,13 @@
     left: 20px;
     top: 205px;
     background: radial-gradient(circle, var(--blue) 0%, #001166 100%);
-    color: white !important;
     font-size: 13px;
     font-weight: 900 !important;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
   }
   .spoke-6{
     left: 74px;
     top: 74px;
     background: radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
-    color: black !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
@@ -415,16 +410,13 @@
     left: 205px;
     top: 20px;
     background: radial-gradient(circle, #000000 0%, #111111 100%);
-    color: #00ff00 !important;
     font-size: 14px;
     font-weight: 900 !important;
-    text-shadow: 0 0 6px rgba(0,255,0,0.6), 0 0 12px rgba(0,255,0,0.4);
   }
   .spoke-8{
     left: 336px;
     top: 74px;
     background: radial-gradient(circle, var(--gold) 0%, var(--gold-dark) 100%);
-    color: #333333 !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
@@ -755,7 +747,7 @@
     .spoke-4{ left: 45px; bottom: 50px; font-size: 11px; }
     .spoke-5{ left: 15px; top: 150px; font-size: 11px; }
     .spoke-6{ left: 45px; top: 50px; font-size: 12px; }
-    .spoke-7{ left: 150px; top: 15px; font-size: 12px; font-weight: 900 !important; color: #00ff00 !important; text-shadow: 0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
+    .spoke-7{ left: 150px; top: 15px; font-size: 12px; font-weight: 900 !important; }
     .spoke-8{ left: 255px; top: 50px; font-size: 12px; font-weight: 900 !important; }
     .header h1{
       font-size: 32px;
@@ -891,7 +883,7 @@
     .spoke-4{ left: 40px; bottom: 40px; font-size: 10px; }
     .spoke-5{ left: 12.5px; top: 127.5px; font-size: 10px; }
     .spoke-6{ left: 40px; top: 40px; font-size: 11px; }
-    .spoke-7{ left: 127.5px; top: 12.5px; font-size: 11px; font-weight: 900 !important; color: #00ff00 !important; text-shadow: 0 0 5px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.3); }
+    .spoke-7{ left: 127.5px; top: 12.5px; font-size: 11px; font-weight: 900 !important; }
     .spoke-8{ left: 215px; top: 40px; font-size: 11px; font-weight: 900 !important; }
     .header h1{
       font-size: 28px;
