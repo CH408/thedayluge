@@ -102,6 +102,11 @@
     .headlines .headline:nth-child(23) { animation-delay: 4.4s; }
     .headlines .headline:nth-child(24) { animation-delay: 4.6s; }
     .headlines .headline:nth-child(25) { animation-delay: 4.8s; }
+    .headlines .headline:nth-child(26) { animation-delay: 5.0s; }
+    .headlines .headline:nth-child(27) { animation-delay: 5.2s; }
+    .headlines .headline:nth-child(28) { animation-delay: 5.4s; }
+    .headlines .headline:nth-child(29) { animation-delay: 5.6s; }
+    .headlines .headline:nth-child(30) { animation-delay: 5.8s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -163,7 +168,7 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .random-button {
+    .random-button, .page-button {
       display: inline-block;
       background: transparent;
       color: var(--mint-green);
@@ -179,7 +184,7 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       cursor: pointer;
     }
-    .random-button:hover {
+    .random-button:hover, .page-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(152,255,204,0.3);
@@ -195,7 +200,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 14px; }
       .headline { font-size: 14px; }
-      .back-btn, .home-btn, .random-button { 
+      .back-btn, .home-btn, .random-button, .page-button { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
@@ -205,7 +210,7 @@
     @media (max-width: 400px) {
       .block-title { font-size: 12px; }
       .headline { font-size: 12px; }
-      .back-btn, .home-btn, .random-button { 
+      .back-btn, .home-btn, .random-button, .page-button { 
         font-size: 8px; 
         padding: 5px 10px; 
       }
@@ -224,7 +229,8 @@
       <ul class="headlines surprise-links" id="surprise-links"></ul>
       <p id="archive-error">No additional archived articles available.</p>
       <div class="button-container">
-        <button class="random-button" onclick="goToRandomSurpriseArchive()">⚛️ SURPRISE ME!</button>
+        <button class="random-button" onclick="goToRandomSurpriseArchive()"> SURPRISE ME!</button>
+        <a href="surprise-archive-page3.html" class="page-button" id="page-3-button" style="display:none;">Page 3 →</a>
       </div>
     </div>
   </div>
@@ -297,7 +303,7 @@
     init();
   });
 
-  // Load surprise archive links from position 34 onwards
+  // Load surprise archive links from position 31-60
   async function loadSurpriseLinks() {
     try {
       const response = await fetch('/surprise-me-links.txt');
@@ -316,8 +322,8 @@
         return null;
       }).filter(link => link !== null);
       
-      // Take links from position 34 onwards (links 34+)
-      const archiveLinks = links.length > 33 ? links.slice(33) : [];
+      // Take links from position 31-60 (links 31-60)
+      const archiveLinks = links.length > 30 ? links.slice(30, 60) : [];
       
       const grid = document.getElementById('surprise-links');
       if (grid && archiveLinks.length > 0) {
@@ -328,18 +334,23 @@
         `).join('');
         // Hide error message if we have content
         document.getElementById('archive-error').style.display = 'none';
+        
+        // Show page 3 button if there are more than 60 links
+        if (links.length > 60) {
+          document.getElementById('page-3-button').style.display = 'inline-block';
+        }
       } else {
-        console.log('No additional archive links available (need more than 33 links in surprise-me-links.txt)');
+        console.log('No additional archive links available (need more than 30 links in surprise-me-links.txt)');
         document.getElementById('archive-error').style.display = 'block';
       }
-      console.log(`Showing ${archiveLinks.length} surprise archive page 2 links (34+)`);
+      console.log(`Showing ${archiveLinks.length} surprise archive page 2 links (31-60)`);
     } catch (error) {
       console.error('Error loading surprise links:', error);
       document.getElementById('archive-error').style.display = 'block';
     }
   }
 
-  // Random surprise article from page 2 archive links (34+)
+  // Random surprise article from page 2 archive links (31-60)
   async function goToRandomSurpriseArchive() {
     try {
       const response = await fetch('/surprise-me-links.txt');
@@ -357,22 +368,12 @@
         return null;
       }).filter(link => link !== null);
       
-      // Use links from position 34 onwards
-      const archiveLinks = links.length > 33 ? links.slice(33) : [];
+      // Use links from position 31-60
+      const archiveLinks = links.length > 30 ? links.slice(30, 60) : [];
       
       if (archiveLinks.length > 0) {
         const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
         console.log('Opening random surprise archive page 2 link:', randomLink);
         window.open(randomLink, '_blank');
       } else {
-        console.log('No archive page 2 links available for random selection');
-      }
-    } catch (error) {
-      console.error('Error loading links for random selection:', error);
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', loadSurpriseLinks);
-</script>
-</body>
-</html>
+        console.log('No archive page
