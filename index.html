@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -237,6 +238,36 @@
     }
   }
 
+  @keyframes text-glow-pulse {
+    0% {  
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    12.5% {  
+      text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    25% {  
+      text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    37.5% {  
+      text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% {  
+      text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    62.5% {  
+      text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    75% {  
+      text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    87.5% {  
+      text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    100% {  
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+  }
+
   .wheel-container{
     position: relative;
     width: 500px;
@@ -339,7 +370,7 @@
     letter-spacing: 0.2px;
     box-shadow: 0 0 15px rgba(0,255,0,0.3), 0 2px 6px rgba(0,0,0,0.1);
     padding: 4px;
-    animation: electron-pulse 1.2s ease-in-out infinite;
+    animation: text-glow-pulse 8s ease-in-out infinite, electron-pulse 1.2s ease-in-out infinite;
   }
 
   @keyframes electron-pulse {
@@ -569,14 +600,14 @@
     animation: traveling-pulse-reverse 0.8s ease-in-out infinite 0.2s;
   }
 
-  .line-1{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(0deg); }
-  .line-2{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(45deg); }
-  .line-3{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(90deg); }
-  .line-4{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(135deg); }
-  .line-5{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(180deg); }
-  .line-6{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(225deg); }
-  .line-7{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(270deg); }
-  .line-8{ top: 50%; left: 50%; width: 140px; transform: translate(0, -50%) rotate(315deg); }
+  .line-1{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(0deg); }
+  .line-2{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(45deg); }
+  .line-3{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(90deg); }
+  .line-4{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(135deg); }
+  .line-5{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(180deg); }
+  .line-6{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(225deg); }
+  .line-7{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(270deg); }
+  .line-8{ top: 50%; left: 50%; width: 185px; transform: translate(0, -50%) rotate(315deg); }
 
   .button-container {
     display: flex;
@@ -736,7 +767,36 @@
       width: 80px;
       height: 80px;
       font-size: 11px;
-      animation: electron-pulse 1.5s ease-in-out infinite;
+      animation: text-glow-pulse 8s ease-in-out infinite, electron-pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes text-glow-pulse {
+      0% {  
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% {  
+        text-shadow: 0 0 11px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% {  
+        text-shadow: 0 0 12px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% {  
+        text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% {  
+        text-shadow: 0 0 14px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% {  
+        text-shadow: 0 0 13px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% {  
+        text-shadow: 0 0 12px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% {  
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% {  
+        text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
     }
     .spoke-1{ left: 295px; top: 150px; font-size: 12px; }
     .spoke-2{ left: 255px; top: 255px; font-size: 11px; }
@@ -749,21 +809,6 @@
     .header h1{
       font-size: 32px;
       margin-bottom: 20px;
-    }
-    .button-container {
-      gap: 12px;
-      margin-top: 25px;
-    }
-    .random-button {
-      padding: 12px 20px;
-      font-size: 14px;
-    }
-    .random-button::before {
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 31px;
     }
     @keyframes title-pulse {
       0% {  
@@ -803,8 +848,23 @@
         text-shadow: 0 0 10px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
     }
+    .button-container {
+      gap: 12px;
+      margin-top: 25px;
+    }
+    .random-button {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+    .random-button::before {
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px;
+    }
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width: 105px;
+      width: 145px;
     }
     .orbital-ring{
       animation-duration: 15s;
@@ -872,7 +932,36 @@
       width: 65px;
       height: 65px;
       font-size: 10px;
-      animation: electron-pulse 1.8s ease-in-out infinite;
+      animation: text-glow-pulse 8s ease-in-out infinite, electron-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes text-glow-pulse {
+      0% {  
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% {  
+        text-shadow: 0 0 9px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% {  
+        text-shadow: 0 0 10px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% {  
+        text-shadow: 0 0 11px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% {  
+        text-shadow: 0 0 12px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% {  
+        text-shadow: 0 0 11px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% {  
+        text-shadow: 0 0 10px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% {  
+        text-shadow: 0 0 9px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% {  
+        text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
     }
     .spoke-1{ left: 245px; top: 127.5px; font-size: 11px; }
     .spoke-2{ left: 215px; top: 215px; font-size: 10px; }
@@ -884,21 +973,6 @@
     .spoke-8{ left: 215px; top: 40px; font-size: 11px; font-weight: 900 !important; }
     .header h1{
       font-size: 28px;
-    }
-    .button-container {
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .random-button {
-      padding: 10px 18px;
-      font-size: 13px;
-    }
-    .random-button::before {
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 31px;
     }
     @keyframes title-pulse {
       0% {  
@@ -938,8 +1012,23 @@
         text-shadow: 0 0 8px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
       }
     }
+    .button-container {
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .random-button {
+      padding: 10px 18px;
+      font-size: 13px;
+    }
+    .random-button::before {
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 31px;
+    }
     .line-1, .line-2, .line-3, .line-4, .line-5, .line-6, .line-7, .line-8{
-      width: 85px;
+      width: 118px;
     }
     .orbital-ring{
       animation-duration: 12s;
@@ -1307,3 +1396,4 @@ window.openArchive = function() {
 </script>
 </body>
 </html>
+```
