@@ -1197,6 +1197,7 @@ document.addEventListener('DOMContentLoaded', function() {
       update() {
           this.x += this.speedX;
           this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.05;
           if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
           if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
@@ -1219,9 +1220,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const particle of particlesArray) {
-          particle.update();
-          particle.draw();
+      for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+              particlesArray.splice(i, 1);
+              i--;
+              particlesArray.push(new Particle());
+          }
       }
       requestAnimationFrame(animate);
   }
