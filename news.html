@@ -385,7 +385,7 @@
       }
     }
 
-    document.addEventLoaded('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       loadSection('global-news.txt', 'global-news-links');
       loadSection('us-news.txt', 'us-news-links');
       loadSection('economy-mkts-news.txt', 'economy-news-links');
