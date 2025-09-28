@@ -188,9 +188,9 @@
         <div class="block-title history-title">History</div>
         <a href="/history-archive.html" class="go-deeper">Go Deeper</a>
       </div>
-      <ul class="headlines history-links" id="history-links"></ul>
+      <ul class="headlines history-links" id="history-links" style="display: none;"></ul>
     </div>
-    <div class="button-container">
+    <div class="button-container" style="display: none;">
       <button class="random-button" onclick="goToRandomHistory()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
@@ -288,10 +288,20 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          grid.style.display = '';
+        }
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
         }
         console.log(`Showing ${displayLinks.length} history links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error('Error loading history links:', error);
+        // On error, still show buttons for navigation
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
+        }
       }
     }
 
