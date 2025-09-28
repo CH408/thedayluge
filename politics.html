@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -185,9 +184,9 @@
       <div class="title-container">
         <div class="block-title politics-news-title">Politics</div>
       </div>
-      <ul class="headlines politics-news-links" id="politics-news-links"></ul>
+      <ul class="headlines politics-news-links" id="politics-news-links" style="display: none;"></ul>
     </div>
-    <div class="button-container">
+    <div class="button-container" style="display: none;">
       <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
       <a href="/politics-archive.html" class="go-deeper">Next</a>
     </div>
@@ -293,10 +292,20 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          grid.style.display = '';
+        }
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
         }
         console.log(`Showing ${displayLinks.length} politics links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error('Error loading politics links:', error);
+        // On error, still show buttons for navigation
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
+        }
       }
     }
 
@@ -331,4 +340,3 @@
   </script>
 </body>
 </html>
-```
