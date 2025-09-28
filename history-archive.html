@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,10 +158,38 @@
       box-shadow: 0 0 15px rgba(0,255,127,0.3);
       transform: scale(1.05);
     }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .random-button, .nav-button {
+      display: inline-block;
+      background: transparent;
+      color: var(--crt-green);
+      padding: 8px 16px;
+      border: 1px solid var(--crt-green);
+      border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--crt-green);
+      cursor: pointer;
+    }
+    .random-button:hover, .nav-button:hover {
+      background: rgba(0,255,127,0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,255,127,0.3);
+    }
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .back-btn, .home-btn { 
+      .back-btn, .home-btn, .random-button, .nav-button { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
@@ -173,8 +202,9 @@
   <a href="/conspiracy-corner.html" class="home-btn">← Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title">Epstein Podcasts</div>
+    <div class="archive-title" id="archive-title">Epstein Podcasts</div>
     <ul class="headlines" id="podcast-links"></ul>
+    <div class="button-container" id="nav-buttons"></div>
   </div>
   <script>
     // Particle effect
@@ -253,6 +283,15 @@
       init();
     });
 
+    let allPodcastLinks = []; // Global to store filtered podcast links
+    const linksPerPage = 24;
+
+    // Parse URL for page number
+    function getCurrentPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return parseInt(urlParams.get('page')) || 1;
+    }
+
     // Load podcast links from epstein-links.txt
     async function loadPodcastLinks() {
       try {
@@ -260,8 +299,7 @@
         const response = await fetch('../epstein-links.txt');
         console.log('Fetch response:', response);
         if (!response.ok) {
-          console.error(`Failed to load epstein-links.txt: ${response.status}`);
-          return;
+          throw new Error(`Failed to load epstein-links.txt: ${response.status}`);
         }
         const text = await response.text();
         console.log('Fetched text:', text);
@@ -284,25 +322,39 @@
         console.log('All parsed links:', allLinks);
         
         // Filter for podcast entries
-        const podcastLinks = allLinks.filter(link => 
+        allPodcastLinks = allLinks.filter(link => 
           link.category === 'podcast' || 
           link.category === 'podcasts' ||
           link.category.includes('podcast')
         );
         
-        console.log('Filtered podcast links:', podcastLinks);
+        console.log('Filtered podcast links:', allPodcastLinks);
+
+        const currentPage = getCurrentPage();
+        const totalPages = Math.ceil(allPodcastLinks.length / linksPerPage);
+        const startIndex = (currentPage - 1) * linksPerPage;
+        const endIndex = Math.min(startIndex + linksPerPage, allPodcastLinks.length);
+        const pageLinks = allPodcastLinks.slice(startIndex, endIndex);
+
+        // Update title
+        document.getElementById('archive-title').textContent = `Epstein Podcasts - Page ${currentPage} of ${totalPages}`;
 
         const grid = document.getElementById('podcast-links');
-        if (grid && podcastLinks.length > 0) {
-          grid.innerHTML = podcastLinks.map((link, index) => `
-            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
-          console.log('Rendered podcast links to DOM:', podcastLinks);
-        } else if (grid) {
-          grid.innerHTML = '<li class="headline"><span>No podcast content available yet.</span></li>';
+        if (grid) {
+          if (pageLinks.length > 0) {
+            grid.innerHTML = pageLinks.map((link, index) => `
+              <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+                <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
+              </li>
+            `).join('');
+            console.log('Rendered podcast links to DOM:', pageLinks);
+          } else {
+            grid.innerHTML = '<li class="headline"><span>No podcast content available yet.</span></li>';
+          }
         }
+
+        // Update navigation buttons
+        updateNavigation(currentPage, totalPages);
       } catch (error) {
         console.error('Error loading podcast links:', error);
         const grid = document.getElementById('podcast-links');
@@ -312,7 +364,41 @@
       }
     }
 
+    // Dynamically update navigation
+    function updateNavigation(currentPage, totalPages) {
+      const container = document.getElementById('nav-buttons');
+      let navHtml = '<button class="random-button" onclick="goToRandomPodcast()">⚛️ SURPRISE ME!</button>';
+
+      if (currentPage > 1) {
+        const prevPage = currentPage - 1;
+        navHtml += `<a href="?page=${prevPage}" class="nav-button">← Prev</a>`;
+      }
+
+      if (currentPage < totalPages) {
+        const nextPage = currentPage + 1;
+        navHtml += `<a href="?page=${nextPage}" class="nav-button">Next →</a>`;
+      }
+
+      container.innerHTML = navHtml;
+    }
+
+    // Random podcast from current page
+    function goToRandomPodcast() {
+      const currentPage = getCurrentPage();
+      const startIndex = (currentPage - 1) * linksPerPage;
+      const endIndex = Math.min(startIndex + linksPerPage, allPodcastLinks.length);
+      const pageLinks = allPodcastLinks.slice(startIndex, endIndex).map(link => link.url);
+
+      if (pageLinks.length > 0) {
+        const randomLink = pageLinks[Math.floor(Math.random() * pageLinks.length)];
+        window.open(randomLink, '_blank', 'noopener,noreferrer');
+      } else {
+        alert('No links on this page.');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', loadPodcastLinks);
   </script>
 </body>
 </html>
+```
