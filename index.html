@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,7 +49,7 @@
     font-family:'Special Elite', 'Courier New', Courier, monospace;
     color:var(--ink);
     line-height:1.5;
-    background:#0a1428;
+    background:#000000;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -64,7 +65,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0a1428;
+    background: #000000;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -149,8 +150,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, rgba(51, 221, 255, 0.05) 0%, transparent 85%);
-    animation: energy-pulse 10s ease-in-out infinite;
+    background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
+    animation: energy-pulse 6s ease-in-out infinite;
     pointer-events: none;
   }
 
@@ -161,23 +162,23 @@
     right: -2px;
     bottom: -2px;
     background:
-      linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%),
-      linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%),
-      linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%),
-      linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.15) 1%, transparent 3%);
-    animation: edge-glow 6s ease-in-out infinite;
+      linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+      linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+      linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+      linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%);
+    animation: edge-glow 4s ease-in-out infinite;
     pointer-events: none;
     content: '';
   }
 
   @keyframes energy-pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
   }
 
   @keyframes edge-glow {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 0.5; }
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
   }
 
   .header{
@@ -858,14 +859,14 @@
       box-shadow: 0 0 8px var(--light-cyan-glow);
     }
     body::before {
-      background: radial-gradient(circle at center, rgba(51, 221, 255, 0.04) 0%, transparent 85%);
+      background: radial-gradient(circle at center, rgba(0,255,127,0.08) 0%, transparent 70%);
     }
     body::after {
       background:
-        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.1) 1%, transparent 3%);
+        linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%);
     }
   }
 
@@ -976,14 +977,14 @@
       box-shadow: 0 0 6px var(--light-cyan-glow);
     }
     body::before {
-      background: radial-gradient(circle at center, rgba(51, 221, 255, 0.03) 0%, transparent 85%);
+      background: radial-gradient(circle at center, rgba(0,255,127,0.06) 0%, transparent 70%);
     }
     body::after {
       background:
-        linear-gradient(0deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(51, 221, 255, 0.08) 1%, transparent 3%);
+        linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%);
     }
   }
 
