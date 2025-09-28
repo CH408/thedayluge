@@ -587,7 +587,7 @@
     margin-top: 30px;
   }
 
-  .random-button, .archive-button {
+  .random-button {
     background: var(--yellow);
     color: var(--red);
     border: 2px solid var(--yellow);
@@ -606,11 +606,7 @@
     text-shadow: none;
   }
 
-  .archive-button {
-    border: 2px solid var(--light-cyan-glow);
-  }
-
-  .random-button::before, .archive-button::before {
+  .random-button::before {
     content: '';
     position: absolute;
     top: -4px;
@@ -622,10 +618,6 @@
     z-index: -1;
     animation: edge-glow 3s ease-in-out infinite;
     opacity: 0.5;
-  }
-
-  .archive-button::before {
-    background: linear-gradient(45deg, var(--light-cyan-glow), var(--light-cyan-glow), var(--light-cyan-glow));
   }
 
   @keyframes edge-glow {
@@ -643,13 +635,9 @@
     }
   }
 
-  .random-button:hover, .archive-button:hover {
+  .random-button:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
-  }
-
-  .archive-button:hover {
-    box-shadow: 0 0 35px var(--light-cyan-glow), 0 8px 20px rgba(0,0,0,0.4);
   }
 
   .archive-bottom{
@@ -766,11 +754,11 @@
       gap: 12px;
       margin-top: 25px;
     }
-    .random-button, .archive-button {
+    .random-button {
       padding: 12px 20px;
       font-size: 14px;
     }
-    .random-button::before, .archive-button::before {
+    .random-button::before {
       top: -3px;
       left: -3px;
       right: -3px;
@@ -901,11 +889,11 @@
       gap: 10px;
       margin-top: 20px;
     }
-    .random-button, .archive-button {
+    .random-button {
       padding: 10px 18px;
       font-size: 13px;
     }
-    .random-button::before, .archive-button::before {
+    .random-button::before {
       top: -3px;
       left: -3px;
       right: -3px;
@@ -1018,7 +1006,7 @@
     .wheel-line::before, .wheel-line::after {
       animation: none;
     }
-    .random-button::before, .archive-button::before {
+    .random-button::before {
       animation: none;
       box-shadow: 0 0 10px var(--yellow);
       opacity: 0.5;
@@ -1122,7 +1110,6 @@
 
   <div class="button-container">
     <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
-    <button class="archive-button" onclick="goToSurpriseArchive()">SURPRISE ME ARCHIVES</button>
   </div>
 
   <div class="archive-bottom" onclick="openArchive()">archive</div>
@@ -1311,10 +1298,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             // Optional: Show a user-friendly message, e.g., via a toast or alert
         });
-  };
-
-  window.goToSurpriseArchive = function() {
-      window.location.href = 'surprise-archive.html';
   };
 });
 
