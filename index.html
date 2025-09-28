@@ -1373,8 +1373,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return null;
             }).filter(link => link !== null);
             
-            // Use only the first 5 links (most recent)
-            const surpriseLinks = links.slice(0, 5);
+            // Use only the first 12 links (most recent)
+            const surpriseLinks = links.slice(0, 12);
             
             if (surpriseLinks.length > 0) {
                 const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
