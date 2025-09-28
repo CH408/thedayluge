@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,7 +157,7 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .random-button {
+    .random-button, .nav-button {
       display: inline-block;
       background: transparent;
       color: var(--marble-white);
@@ -172,7 +173,7 @@
       text-shadow: 0 0 5px var(--marble-white);
       cursor: pointer;
     }
-    .random-button:hover {
+    .random-button:hover, .nav-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(245,245,245,0.3);
@@ -180,7 +181,7 @@
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .back-btn, .home-btn, .random-button { 
+      .back-btn, .home-btn, .random-button, .nav-button { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
@@ -193,11 +194,10 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title">Politics Archive - Page 1</div>
+    <div class="archive-title" id="archive-title">Politics Archive - Page 1</div>
     <ul class="headlines" id="archive-links"></ul>
-    <div class="button-container">
+    <div class="button-container" id="nav-buttons">
       <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
-      <a href="/politics-archive-2.html" class="random-button">Page 2 →</a>
     </div>
   </div>
   <script>
@@ -276,72 +276,86 @@
       init();
     });
 
-    // Load archive links (links 25-48 for page 1)
+    let allLinks = []; // Global to store all parsed links
+    const linksPerPage = 24;
+
+    // Parse URL for page number
+    function getCurrentPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return parseInt(urlParams.get('page')) || 1;
+    }
+
+    // Load all links and display current page
     async function loadArchiveLinks() {
       try {
-        console.log('Fetching politics-links.txt for archive');
         const response = await fetch('politics-links.txt');
-        console.log('Fetch response:', response);
         if (!response.ok) {
-          console.error(`Failed to load politics-links.txt: ${response.status}`);
-          return;
+          throw new Error(`Failed to load politics-links.txt: ${response.status}`);
         }
         const text = await response.text();
-        console.log('Fetched text:', text);
         const lines = text.split('\n').filter(line => line.trim());
-        console.log('Parsed lines:', lines);
-        const links = lines.map(line => {
+        allLinks = lines.map(line => {
           const [title, url] = line.split('|').map(s => s.trim());
           return { title, url };
         }).filter(link => link.title && link.url);
-        console.log('Processed links:', links);
 
-        // Take links 25-48 (archive page 1)
-        const archivedLinks = links.length > 24 ? links.slice(24, 48) : [];
-        console.log('Archive page 1 links (25-48):', archivedLinks);
+        const currentPage = getCurrentPage();
+        const totalPages = Math.ceil(allLinks.length / linksPerPage);
+        const startIndex = (currentPage - 1) * linksPerPage;
+        const endIndex = Math.min(startIndex + linksPerPage, allLinks.length);
+        const pageLinks = allLinks.slice(startIndex, endIndex);
 
+        // Update title
+        document.getElementById('archive-title').textContent = `Politics Archive - Page ${currentPage} of ${totalPages}`;
+
+        // Render links
         const grid = document.getElementById('archive-links');
         if (grid) {
-          grid.innerHTML = archivedLinks.map((link, index) => `
+          grid.innerHTML = pageLinks.map((link, index) => `
             <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
-              <a href="${link.url}" target="_blank">${link.title}</a>
+              <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
             </li>
           `).join('');
-          console.log('Rendered archive links to DOM:', archivedLinks);
         }
+
+        // Update navigation buttons
+        updateNavigation(currentPage, totalPages);
       } catch (error) {
         console.error('Error loading archive links:', error);
+        document.getElementById('archive-links').innerHTML = '<li class="headline" style="color: #ff6b6b;">Error loading links from politics-links.txt</li>';
       }
     }
 
-    // Random politics article from archive page 1
-    async function goToRandomPolitics() {
-      try {
-        console.log('Fetching politics-links.txt for random selection');
-        const response = await fetch('politics-links.txt');
-        if (!response.ok) {
-          console.log('Could not load politics-links.txt for random selection');
-          return;
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
-          }
-          return null;
-        }).filter(link => link !== null);
-        const archiveLinks = links.slice(24, 48); // Archive page 1 links (25-48)
-        if (archiveLinks.length > 0) {
-          const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
-          console.log('Opening random archive page 1 link:', randomLink);
-          window.open(randomLink, '_blank');
-        } else {
-          console.log('No archive links available for random selection');
-        }
-      } catch (error) {
-        console.error('Error loading links for random selection:', error);
+    // Dynamically update navigation
+    function updateNavigation(currentPage, totalPages) {
+      const container = document.getElementById('nav-buttons');
+      let navHtml = '<button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>';
+
+      if (currentPage > 1) {
+        const prevPage = currentPage - 1;
+        navHtml += `<a href="?page=${prevPage}" class="nav-button">← Prev</a>`;
+      }
+
+      if (currentPage < totalPages) {
+        const nextPage = currentPage + 1;
+        navHtml += `<a href="?page=${nextPage}" class="nav-button">Next →</a>`;
+      }
+
+      container.innerHTML = navHtml;
+    }
+
+    // Random politics article from current page
+    function goToRandomPolitics() {
+      const currentPage = getCurrentPage();
+      const startIndex = (currentPage - 1) * linksPerPage;
+      const endIndex = Math.min(startIndex + linksPerPage, allLinks.length);
+      const pageLinks = allLinks.slice(startIndex, endIndex).map(link => link.url);
+
+      if (pageLinks.length > 0) {
+        const randomLink = pageLinks[Math.floor(Math.random() * pageLinks.length)];
+        window.open(randomLink, '_blank', 'noopener,noreferrer');
+      } else {
+        alert('No links on this page.');
       }
     }
 
@@ -349,3 +363,4 @@
   </script>
 </body>
 </html>
+```
