@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -278,6 +277,7 @@
 
     let allLinks = []; // Global to store all parsed links
     const linksPerPage = 24;
+    const archiveStart = 24; // Start archive after the first 24 links shown on main page
 
     // Parse URL for page number
     function getCurrentPage() {
@@ -300,8 +300,15 @@
         }).filter(link => link.title && link.url);
 
         const currentPage = getCurrentPage();
-        const totalPages = Math.ceil(allLinks.length / linksPerPage);
-        const startIndex = (currentPage - 1) * linksPerPage;
+        const availableLinks = Math.max(0, allLinks.length - archiveStart);
+        const totalPages = Math.ceil(availableLinks / linksPerPage);
+        if (totalPages === 0) {
+          document.getElementById('archive-title').textContent = 'Politics Archive - No additional links available';
+          document.getElementById('archive-links').innerHTML = '<li class="headline" style="color: #ff6b6b;">No archived links to display.</li>';
+          document.getElementById('nav-buttons').innerHTML = '<button class="random-button" onclick="goToRandomPolitics()" disabled>⚛️ SURPRISE ME!</button>';
+          return;
+        }
+        const startIndex = archiveStart + (currentPage - 1) * linksPerPage;
         const endIndex = Math.min(startIndex + linksPerPage, allLinks.length);
         const pageLinks = allLinks.slice(startIndex, endIndex);
 
@@ -347,7 +354,7 @@
     // Random politics article from current page
     function goToRandomPolitics() {
       const currentPage = getCurrentPage();
-      const startIndex = (currentPage - 1) * linksPerPage;
+      const startIndex = archiveStart + (currentPage - 1) * linksPerPage;
       const endIndex = Math.min(startIndex + linksPerPage, allLinks.length);
       const pageLinks = allLinks.slice(startIndex, endIndex).map(link => link.url);
 
@@ -363,4 +370,3 @@
   </script>
 </body>
 </html>
-```
