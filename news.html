@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +64,18 @@
       max-width: 800px;
       justify-content: space-between;
       margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInTitle 0.5s ease forwards;
     }
+    @keyframes fadeInTitle {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .global-news .title-container { animation-delay: 0s; }
+    .us-news .title-container { animation-delay: 1s; }
+    .economy-news .title-container { animation-delay: 2s; }
+    .sports-news .title-container { animation-delay: 3s; }
+    .popculture-news .title-container { animation-delay: 4s; }
     .global-news-title { color: var(--light-red-glow); animation: block-title-pulse-red 8s ease-in-out infinite; }
     @keyframes block-title-pulse-red {
       0% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
@@ -122,11 +134,36 @@
     .economy-news-links .headline { color: var(--headline-green); }
     .sports-news-links .headline { color: var(--headline-cyan); }
     .popculture-news-links .headline { color: var(--headline-pink); }
-    .headlines .headline:nth-child(1) { animation-delay: 0s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.8s; }
+    /* Global News headlines */
+    .global-news-links .headline:nth-child(1) { animation-delay: 0s; }
+    .global-news-links .headline:nth-child(2) { animation-delay: 0.2s; }
+    .global-news-links .headline:nth-child(3) { animation-delay: 0.4s; }
+    .global-news-links .headline:nth-child(4) { animation-delay: 0.6s; }
+    .global-news-links .headline:nth-child(5) { animation-delay: 0.8s; }
+    /* US News headlines */
+    .us-news-links .headline:nth-child(1) { animation-delay: 1.5s; }
+    .us-news-links .headline:nth-child(2) { animation-delay: 1.7s; }
+    .us-news-links .headline:nth-child(3) { animation-delay: 1.9s; }
+    .us-news-links .headline:nth-child(4) { animation-delay: 2.1s; }
+    .us-news-links .headline:nth-child(5) { animation-delay: 2.3s; }
+    /* Economy headlines */
+    .economy-news-links .headline:nth-child(1) { animation-delay: 3s; }
+    .economy-news-links .headline:nth-child(2) { animation-delay: 3.2s; }
+    .economy-news-links .headline:nth-child(3) { animation-delay: 3.4s; }
+    .economy-news-links .headline:nth-child(4) { animation-delay: 3.6s; }
+    .economy-news-links .headline:nth-child(5) { animation-delay: 3.8s; }
+    /* Sports headlines */
+    .sports-news-links .headline:nth-child(1) { animation-delay: 4.5s; }
+    .sports-news-links .headline:nth-child(2) { animation-delay: 4.7s; }
+    .sports-news-links .headline:nth-child(3) { animation-delay: 4.9s; }
+    .sports-news-links .headline:nth-child(4) { animation-delay: 5.1s; }
+    .sports-news-links .headline:nth-child(5) { animation-delay: 5.3s; }
+    /* Pop Culture headlines */
+    .popculture-news-links .headline:nth-child(1) { animation-delay: 6s; }
+    .popculture-news-links .headline:nth-child(2) { animation-delay: 6.2s; }
+    .popculture-news-links .headline:nth-child(3) { animation-delay: 6.4s; }
+    .popculture-news-links .headline:nth-child(4) { animation-delay: 6.6s; }
+    .popculture-news-links .headline:nth-child(5) { animation-delay: 6.8s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
@@ -358,3 +395,4 @@
   </script>
 </body>
 </html>
+```
