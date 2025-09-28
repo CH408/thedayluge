@@ -47,7 +47,7 @@
       display: flex;
       align-items: center;
       max-width: 800px;
-      justify-content: space-between;
+      justify-content: flex-start;
       margin-bottom: 10px;
     }
     .block-title {
@@ -115,7 +115,7 @@
       color: var(--marble-gray); /* Slightly darker for hover contrast */
       text-shadow: 0 0 10px var(--marble-gray);
     }
-    .go-deeper, .random-button {
+    .random-button {
       display: inline-block;
       background: transparent;
       color: var(--marble-white); /* Changed to off-white */
@@ -131,7 +131,7 @@
       text-shadow: 0 0 5px var(--marble-white);
       cursor: pointer;
     }
-    .go-deeper:hover, .random-button:hover {
+    .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(245,245,245,0.3); /* Marble-white shadow */
@@ -167,7 +167,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper, .random-button, .home-btn { 
+      .random-button, .home-btn { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
@@ -183,12 +183,12 @@
     <div class="politics-news">
       <div class="title-container">
         <div class="block-title politics-news-title">Politics</div>
-        <a href="/politics-archive.html" class="go-deeper">Go Deeper</a>
       </div>
       <ul class="headlines politics-news-links" id="politics-news-links"></ul>
     </div>
     <div class="button-container">
       <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
+      <a href="/politics-archive.html" class="random-button">Next</a>
     </div>
   </div>
   <script>
