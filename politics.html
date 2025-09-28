@@ -1,16 +1,3 @@
-### Plan
-To fix the persistent flash: The initial opacity:0 on .headline should prevent visibility, but if the UL renders empty briefly, it might cause a layout shift. I'll add CSS to hide the entire #politics-news-links UL until JS populates it (display:none initially, then block post-load), and trigger reflow for smooth fade-in.
-
-To fix the Next button loop: This could be due to browser history/caching or a misperceived redirect (e.g., archive's "Back" button). I'll make the link more robust by adding a JS click handler that prevents default and uses window.location.href = '/politics-archive.html' for forced navigation, bypassing any potential href issues. If it's server-side, this won't fix it, but it's client-side safe.
-
-Overall: Updated full politics.html with these, keeping everything else intact.
-
-### What I Did
-- **Flash Fix**: Added `#politics-news-links { display: none; }` in CSS. In loadPoliticsLinks(), after innerHTML = ..., set ul.style.display = 'block'; and force reflow with ul.offsetHeight before applying animations (ensures no empty space flashes).
-- **Next Button**: Changed <a> to <button class="random-button" onclick="goToNextPage()">Next</button>, with new JS function goToNextPage() { window.location.href = '/politics-archive.html'; } – this explicitly navigates without relying on href, preventing any loop or cache weirdness.
-- **Other**: Minor: Ensured target="_blank" on headline links for consistency. Tested: Page loads blank UL (no flash), populates smoothly; Next forces to archive.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +47,7 @@ Overall: Updated full politics.html with these, keeping everything else intact.
       display: flex;
       align-items: center;
       max-width: 800px;
-      justify-content: flex-start;
+      justify-content: space-between;
       margin-bottom: 10px;
     }
     .block-title {
@@ -82,9 +69,6 @@ Overall: Updated full politics.html with these, keeping everything else intact.
       100% { text-shadow: 0 0 15px var(--marble-white), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; max-width: 800px; }
-    #politics-news-links {
-      display: none; /* Hide until loaded to prevent flash */
-    }
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
@@ -131,7 +115,7 @@ Overall: Updated full politics.html with these, keeping everything else intact.
       color: var(--marble-gray); /* Slightly darker for hover contrast */
       text-shadow: 0 0 10px var(--marble-gray);
     }
-    .random-button {
+    .go-deeper, .random-button {
       display: inline-block;
       background: transparent;
       color: var(--marble-white); /* Changed to off-white */
@@ -147,7 +131,7 @@ Overall: Updated full politics.html with these, keeping everything else intact.
       text-shadow: 0 0 5px var(--marble-white);
       cursor: pointer;
     }
-    .random-button:hover {
+    .go-deeper:hover, .random-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(245,245,245,0.3); /* Marble-white shadow */
@@ -183,7 +167,7 @@ Overall: Updated full politics.html with these, keeping everything else intact.
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .random-button, .home-btn { 
+      .go-deeper, .random-button, .home-btn { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
@@ -199,12 +183,12 @@ Overall: Updated full politics.html with these, keeping everything else intact.
     <div class="politics-news">
       <div class="title-container">
         <div class="block-title politics-news-title">Politics</div>
+        <a href="/politics-archive.html" class="go-deeper">Go Deeper</a>
       </div>
       <ul class="headlines politics-news-links" id="politics-news-links"></ul>
     </div>
     <div class="button-container">
       <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
-      <button class="random-button" onclick="goToNextPage()">Next</button>
     </div>
   </div>
   <script>
@@ -230,4 +214,119 @@ Overall: Updated full politics.html with these, keeping everything else intact.
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    
+    init();
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Load politics links
+    async function loadPoliticsLinks() {
+      try {
+        const response = await fetch('politics-links.txt');
+        if (!response.ok) {
+          console.error('Failed to load politics-links.txt:', response.status);
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        const displayLinks = links.slice(0, 24); // Changed from 36 to 24
+        const grid = document.getElementById('politics-news-links');
+        if (grid && displayLinks.length > 0) {
+          grid.innerHTML = displayLinks.map(link => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+        }
+        console.log(`Showing ${displayLinks.length} politics links (${links.length - displayLinks.length} moved to archive)`);
+      } catch (error) {
+        console.error('Error loading politics links:', error);
+      }
+    }
+
+    // Random politics article
+    async function goToRandomPolitics() {
+      try {
+        const response = await fetch('politics-links.txt');
+        if (!response.ok) {
+          console.log('Could not load politics-links.txt for random selection');
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const currentLinks = links.slice(0, 24); // Changed from 36 to 24
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+          window.open(randomLink, '_blank');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadPoliticsLinks);
+  </script>
+</body>
+</html>
