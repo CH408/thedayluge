@@ -608,14 +608,16 @@
     letter-spacing: 0.5px;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
     text-shadow: none;
   }
 
   .archive-button {
-    border: 2px solid var(--light-cyan-glow);
+    background: var(--violet);
+    color: white;
+    border: 2px solid var(--violet);
   }
 
   .random-button::before, .archive-button::before {
@@ -629,35 +631,35 @@
     background: linear-gradient(45deg, var(--yellow), var(--yellow), var(--yellow));
     z-index: -1;
     animation: edge-glow 3s ease-in-out infinite;
-    opacity: 0.5;
+    opacity: 0.3;
   }
 
   .archive-button::before {
-    background: linear-gradient(45deg, var(--light-cyan-glow), var(--light-cyan-glow), var(--light-cyan-glow));
+    background: linear-gradient(45deg, var(--violet), var(--violet), var(--violet));
   }
 
   @keyframes edge-glow {
     0% {
-      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
-      opacity: 0.5;
+      box-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow);
+      opacity: 0.3;
     }
     50% {
-      box-shadow: 0 0 20px var(--yellow), 0 0 40px var(--yellow);
-      opacity: 0.8;
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+      opacity: 0.6;
     }
     100% {
-      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
-      opacity: 0.5;
+      box-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow);
+      opacity: 0.3;
     }
   }
 
   .random-button:hover, .archive-button:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
   }
 
   .archive-button:hover {
-    box-shadow: 0 0 35px var(--light-cyan-glow), 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px var(--violet), 0 8px 20px rgba(0,0,0,0.4);
   }
 
   .archive-bottom{
@@ -863,16 +865,16 @@
     }
     @keyframes edge-glow {
       0% {
-        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
-        opacity: 0.5;
+        box-shadow: 0 0 4px var(--yellow), 0 0 8px var(--yellow);
+        opacity: 0.3;
       }
       50% {
-        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
-        opacity: 0.8;
+        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        opacity: 0.6;
       }
       100% {
-        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
-        opacity: 0.5;
+        box-shadow: 0 0 4px var(--yellow), 0 0 8px var(--yellow);
+        opacity: 0.3;
       }
     }
     .comet {
