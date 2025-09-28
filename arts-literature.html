@@ -174,22 +174,8 @@
       }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
-
-/* Mock data display for demonstration */
-.demo-links {
-  color: var(--blue);
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-.demo-links a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: bold;
-}
-.demo-links a:hover {
-  color: var(--blue-light);
-  text-shadow: 0 0 10px var(--blue-light);
-}  </style></head>
+  </style>
+</head>
 <body>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
@@ -200,35 +186,11 @@
         <a href="/arts-literature-archive.html" class="go-deeper">Go Deeper</a>
       </div>
       <ul class="headlines arts-literature-links" id="arts-literature-links">
-        <!-- Demo content showing what it will look like -->
-        <li class="demo-links">Robert Plant Passed On a White Collar Career to Sing for Led Zeppelin</li>
-        <li class="demo-links">Master Psychologist Fyodor Dostoevsky on Lying to Ourselves</li>
-        <li class="demo-links">David Bowie Spent His Final Months Writing a Musical</li>
-        <li class="demo-links">Dante's Words for Those Who Maintain Neutrality in Times of Moral Crisis</li>
-        <li class="demo-links">The New Yorker's 100 Essential Jazz Albums</li>
-        <li class="demo-links">Cool: Isolated Comfortably Numb Guitar Solo</li>
-        <li class="demo-links">Orwell's Animal Farm at 80</li>
-        <li class="demo-links">Jerry Garcia's Tones Over the Years</li>
-        <li class="demo-links">Hemingway's Favorite Books</li>
-        <li class="demo-links">Get Your "Author Trading Cards" Here!</li>
-        <li class="demo-links">Read the Great Books</li>
-        <li class="demo-links">Dave Smith: "I Was A Militant Atheist"</li>
-        <li class="demo-links">Placeholder Link 1</li>
-        <li class="demo-links">Placeholder Link 2</li>
-        <li class="demo-links">Placeholder Link 3</li>
-        <li class="demo-links">Placeholder Link 4</li>
-        <li class="demo-links">Placeholder Link 5</li>
-        <li class="demo-links">Placeholder Link 6</li>
-        <li class="demo-links">Placeholder Link 7</li>
-        <li class="demo-links">Placeholder Link 8</li>
-        <li class="demo-links">Placeholder Link 9</li>
-        <li class="demo-links">Placeholder Link 10</li>
-        <li class="demo-links">Placeholder Link 11</li>
-        <li class="demo-links">Placeholder Link 12</li>
+        <!-- Links will be loaded dynamically from arts-literature-links.txt -->
       </ul>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomArtsLiterature()"> SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomArtsLiterature()">⚛️ SURPRISE ME!</button>
     </div>
   </div>
   <script>
@@ -240,137 +202,117 @@
     const particlesArray = [];
     const numberOfParticles = 50;
     
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = Math.random() * 1.5 - 0.75;
-    this.speedY = Math.random() * 1.5 - 0.75;
-    this.color = ['#87ceeb', '#4682b4', '#add8e6', '#5f9ea0', '#b0c4de', '#6a5acd'][Math.floor(Math.random() * 6)];
-    this.hasTail = Math.random() < 0.25;
-  }
-  
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-    if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-  }
-  
-  draw() {
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = this.color;
-    
-    if (this.hasTail) {
-      const gradient = ctx.createLinearGradient(
-        this.x, this.y,
-        this.x - this.speedX * 10, this.y - this.speedY * 10
-      );
-      gradient.addColorStop(0, this.color + '33');
-      gradient.addColorStop(1, 'transparent');
-      ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
-      ctx.strokeStyle = gradient;
-      ctx.lineWidth = this.size;
-      ctx.stroke();
-    }
-  }
-}
-
-function init() {
-  particlesArray.length = 0;
-  for (let i = 0; i < numberOfParticles; i++) {
-    particlesArray.push(new Particle());
-  }
-}
-
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const particle of particlesArray) {
-    particle.update();
-    particle.draw();
-  }
-  requestAnimationFrame(animate);
-}
-
-init();
-animate();
-
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  init();
-});
-
-// Load and populate arts-literature-links.txt
-async function loadArtsLiteratureLinks() {
-  try {
-    const response = await fetch('arts-literature-links.txt');
-    if (!response.ok) throw new Error('Failed to load links file');
-    const text = await response.text();
-    const lines = text.split('\n').filter(line => line.trim() && line.includes('|'));
-    const ul = document.getElementById('arts-literature-links');
-    
-    // Clear demo content
-    ul.innerHTML = '';
-    
-    lines.forEach((line, index) => {
-      const [title, url] = line.split('|').map(part => part.trim());
-      if (title && url) {
-        const li = document.createElement('li');
-        li.className = 'headline';
-        li.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
-        li.style.animationDelay = `${0.05 * (index + 1)}s`;  // Reuse existing delay logic
-        ul.appendChild(li);
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#87ceeb', '#4682b4', '#add8e6', '#5f9ea0', '#b0c4de', '#6a5acd'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
       }
-    });
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
     
-    // Trigger fade-in after population (reuses your existing CSS animation)
-    const headlines = ul.querySelectorAll('.headline');
-    headlines.forEach(headline => {
-      headline.style.opacity = '0';
-      headline.style.transform = 'translateY(10px)';
-      headline.offsetHeight;  // Trigger reflow
-      headline.style.animation = 'fadeIn 0.5s ease forwards';
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    
+    init();
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
     });
-  } catch (error) {
-    console.error('Error loading links:', error);
-    // Fallback: Show a message in the UL
-    const ul = document.getElementById('arts-literature-links');
-    ul.innerHTML = '<li class="headline" style="color: #ff6b6b;">Error loading links from arts-literature-links.txt</li>';
-  }
-}
 
-// Apply fade-in animation to demo links (only if not replaced)
-document.addEventListener('DOMContentLoaded', () => {
-  // Load the actual links first
-  loadArtsLiteratureLinks();
-  
-  // Fallback fade-in for any remaining demo links (shouldn't happen after load)
-  const demoLinks = document.querySelectorAll('.demo-links');
-  demoLinks.forEach((link, index) => {
-    link.style.opacity = '0';
-    link.style.transform = 'translateY(10px)';
-    link.style.animation = `fadeIn 0.5s ease forwards`;
-    link.style.animationDelay = `${0.05 * (index + 1)}s`;
-  });
-});
+    // Load and populate arts-literature-links.txt
+    async function loadArtsLiteratureLinks() {
+      try {
+        const response = await fetch('arts-literature-links.txt');
+        if (!response.ok) throw new Error('Failed to load links file');
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim() && line.includes('|'));
+        const ul = document.getElementById('arts-literature-links');
+        
+        // Clear any existing content
+        ul.innerHTML = '';
+        
+        lines.forEach((line, index) => {
+          const [title, url] = line.split('|').map(part => part.trim());
+          if (title && url) {
+            const li = document.createElement('li');
+            li.className = 'headline';
+            li.style.animationDelay = `${0.05 * (index + 1)}s`;
+            li.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
+            ul.appendChild(li);
+          }
+        });
+      } catch (error) {
+        console.error('Error loading links:', error);
+        // Fallback: Show a message in the UL
+        const ul = document.getElementById('arts-literature-links');
+        ul.innerHTML = '<li class="headline" style="color: #ff6b6b;">Error loading links from arts-literature-links.txt</li>';
+      }
+    }
 
-// Random arts & literature article (updated to use loaded links)
-function goToRandomArtsLiterature() {
-  const links = document.querySelectorAll('#arts-literature-links .headline a');
-  if (links.length > 0) {
-    const randomLink = links[Math.floor(Math.random() * links.length)];
-    window.open(randomLink.href, '_blank');
-  } else {
-    alert('No links loaded yet—check console for errors.');
-  }
-}  </script></body>
+    // Call on DOM load
+    document.addEventListener('DOMContentLoaded', loadArtsLiteratureLinks);
+
+    // Random arts & literature article (updated to use loaded links)
+    function goToRandomArtsLiterature() {
+      const links = document.querySelectorAll('#arts-literature-links .headline a');
+      if (links.length > 0) {
+        const randomLink = links[Math.floor(Math.random() * links.length)];
+        window.open(randomLink.href, '_blank');
+      } else {
+        alert('No links loaded yet—check console for errors.');
+      }
+    }
+  </script>
+</body>
 </html>
-
