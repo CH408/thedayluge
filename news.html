@@ -1,3 +1,12 @@
+### Quick Summary of Changes:
+To speed up the "unroll" effect, I reduced the animation duration for both section titles (`.title-container`) and individual headlines (`.headline`) from 0.15s to **0.08s**—that's a noticeable quicken without feeling abrupt. I also tightened the delays between elements:
+- Each section title starts immediately after the previous one's headlines finish.
+- Within each section, headlines stagger by just 0.08s each (matching the duration for a seamless chain).
+- Total unfold time now ~2.8s (down from ~4.5s), keeping strict top-to-bottom order: Global title → its 5 headlines → US title → its headlines → etc.
+- No other changes—links load as before, particles/hovers intact.
+
+This should feel snappier and smoother. If it's *too* fast or you want even quicker (e.g., 0.05s), let me know!
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -66,16 +75,16 @@
       margin-bottom: 10px;
       opacity: 0;
       transform: translateY(10px);
-      animation: fadeInTitle 0.15s ease-out forwards;
+      animation: fadeInTitle 0.08s ease-out forwards;
     }
     @keyframes fadeInTitle {
       to { opacity: 1; transform: translateY(0); }
     }
     .global-news .title-container { animation-delay: 0s; }
-    .us-news .title-container { animation-delay: 0.9s; }
-    .economy-news .title-container { animation-delay: 1.8s; }
-    .sports-news .title-container { animation-delay: 2.7s; }
-    .popculture-news .title-container { animation-delay: 3.6s; }
+    .us-news .title-container { animation-delay: 0.48s; }
+    .economy-news .title-container { animation-delay: 0.96s; }
+    .sports-news .title-container { animation-delay: 1.44s; }
+    .popculture-news .title-container { animation-delay: 1.92s; }
     .global-news-title { color: var(--light-red-glow); animation: block-title-pulse-red 8s ease-in-out infinite; }
     @keyframes block-title-pulse-red {
       0% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
@@ -127,7 +136,7 @@
       margin-bottom: 5px;
       opacity: 0;
       transform: translateY(10px);
-      animation: fadeIn 0.15s ease-out forwards;
+      animation: fadeIn 0.08s ease-out forwards;
     }
     .global-news-links .headline { color: var(--headline-red); }
     .us-news-links .headline { color: var(--headline-orange); }
@@ -135,35 +144,35 @@
     .sports-news-links .headline { color: var(--headline-cyan); }
     .popculture-news-links .headline { color: var(--headline-pink); }
     /* Global News headlines */
-    .global-news-links .headline:nth-child(1) { animation-delay: 0.15s; }
-    .global-news-links .headline:nth-child(2) { animation-delay: 0.3s; }
-    .global-news-links .headline:nth-child(3) { animation-delay: 0.45s; }
-    .global-news-links .headline:nth-child(4) { animation-delay: 0.6s; }
-    .global-news-links .headline:nth-child(5) { animation-delay: 0.75s; }
+    .global-news-links .headline:nth-child(1) { animation-delay: 0.08s; }
+    .global-news-links .headline:nth-child(2) { animation-delay: 0.16s; }
+    .global-news-links .headline:nth-child(3) { animation-delay: 0.24s; }
+    .global-news-links .headline:nth-child(4) { animation-delay: 0.32s; }
+    .global-news-links .headline:nth-child(5) { animation-delay: 0.4s; }
     /* US News headlines */
-    .us-news-links .headline:nth-child(1) { animation-delay: 1.05s; }
-    .us-news-links .headline:nth-child(2) { animation-delay: 1.2s; }
-    .us-news-links .headline:nth-child(3) { animation-delay: 1.35s; }
-    .us-news-links .headline:nth-child(4) { animation-delay: 1.5s; }
-    .us-news-links .headline:nth-child(5) { animation-delay: 1.65s; }
+    .us-news-links .headline:nth-child(1) { animation-delay: 0.56s; }
+    .us-news-links .headline:nth-child(2) { animation-delay: 0.64s; }
+    .us-news-links .headline:nth-child(3) { animation-delay: 0.72s; }
+    .us-news-links .headline:nth-child(4) { animation-delay: 0.8s; }
+    .us-news-links .headline:nth-child(5) { animation-delay: 0.88s; }
     /* Economy headlines */
-    .economy-news-links .headline:nth-child(1) { animation-delay: 1.95s; }
-    .economy-news-links .headline:nth-child(2) { animation-delay: 2.1s; }
-    .economy-news-links .headline:nth-child(3) { animation-delay: 2.25s; }
-    .economy-news-links .headline:nth-child(4) { animation-delay: 2.4s; }
-    .economy-news-links .headline:nth-child(5) { animation-delay: 2.55s; }
+    .economy-news-links .headline:nth-child(1) { animation-delay: 1.04s; }
+    .economy-news-links .headline:nth-child(2) { animation-delay: 1.12s; }
+    .economy-news-links .headline:nth-child(3) { animation-delay: 1.2s; }
+    .economy-news-links .headline:nth-child(4) { animation-delay: 1.28s; }
+    .economy-news-links .headline:nth-child(5) { animation-delay: 1.36s; }
     /* Sports headlines */
-    .sports-news-links .headline:nth-child(1) { animation-delay: 2.85s; }
-    .sports-news-links .headline:nth-child(2) { animation-delay: 3.0s; }
-    .sports-news-links .headline:nth-child(3) { animation-delay: 3.15s; }
-    .sports-news-links .headline:nth-child(4) { animation-delay: 3.3s; }
-    .sports-news-links .headline:nth-child(5) { animation-delay: 3.45s; }
+    .sports-news-links .headline:nth-child(1) { animation-delay: 1.52s; }
+    .sports-news-links .headline:nth-child(2) { animation-delay: 1.6s; }
+    .sports-news-links .headline:nth-child(3) { animation-delay: 1.68s; }
+    .sports-news-links .headline:nth-child(4) { animation-delay: 1.76s; }
+    .sports-news-links .headline:nth-child(5) { animation-delay: 1.84s; }
     /* Pop Culture headlines */
-    .popculture-news-links .headline:nth-child(1) { animation-delay: 3.75s; }
-    .popculture-news-links .headline:nth-child(2) { animation-delay: 3.9s; }
-    .popculture-news-links .headline:nth-child(3) { animation-delay: 4.05s; }
-    .popculture-news-links .headline:nth-child(4) { animation-delay: 4.2s; }
-    .popculture-news-links .headline:nth-child(5) { animation-delay: 4.35s; }
+    .popculture-news-links .headline:nth-child(1) { animation-delay: 2.0s; }
+    .popculture-news-links .headline:nth-child(2) { animation-delay: 2.08s; }
+    .popculture-news-links .headline:nth-child(3) { animation-delay: 2.16s; }
+    .popculture-news-links .headline:nth-child(4) { animation-delay: 2.24s; }
+    .popculture-news-links .headline:nth-child(5) { animation-delay: 2.32s; }
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
