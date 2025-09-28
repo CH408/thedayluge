@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,6 +46,8 @@
     --crt-green: #00FF7F;
     --bright-green: #33FF88;
     --neon-green: #00FF00;
+    /* Darker purple for archive button */
+    --dark-violet: #9932cc;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -612,12 +615,18 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
     text-shadow: none;
+    --glow-color: var(--yellow);
+  }
+
+  .random-button {
+    --glow-color: var(--yellow);
   }
 
   .archive-button {
-    background: var(--violet);
+    background: var(--dark-violet);
     color: white;
-    border: 2px solid var(--violet);
+    border: 2px solid var(--dark-violet);
+    --glow-color: var(--dark-violet);
   }
 
   .random-button::before, .archive-button::before {
@@ -628,38 +637,30 @@
     right: -4px;
     bottom: -4px;
     border-radius: 32px;
-    background: linear-gradient(45deg, var(--yellow), var(--yellow), var(--yellow));
+    background: linear-gradient(45deg, var(--glow-color), var(--glow-color), var(--glow-color));
     z-index: -1;
     animation: edge-glow 3s ease-in-out infinite;
     opacity: 0.3;
   }
 
-  .archive-button::before {
-    background: linear-gradient(45deg, var(--violet), var(--violet), var(--violet));
-  }
-
   @keyframes edge-glow {
     0% {
-      box-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow);
+      box-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
       opacity: 0.3;
     }
     50% {
-      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+      box-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
       opacity: 0.6;
     }
     100% {
-      box-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow);
+      box-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
       opacity: 0.3;
     }
   }
 
   .random-button:hover, .archive-button:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 20px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
-  }
-
-  .archive-button:hover {
-    box-shadow: 0 0 20px var(--violet), 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px var(--glow-color), 0 8px 20px rgba(0,0,0,0.4);
   }
 
   .archive-bottom{
@@ -865,15 +866,15 @@
     }
     @keyframes edge-glow {
       0% {
-        box-shadow: 0 0 4px var(--yellow), 0 0 8px var(--yellow);
+        box-shadow: 0 0 4px var(--glow-color), 0 0 8px var(--glow-color);
         opacity: 0.3;
       }
       50% {
-        box-shadow: 0 0 8px var(--yellow), 0 0 15px var(--yellow);
+        box-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color);
         opacity: 0.6;
       }
       100% {
-        box-shadow: 0 0 4px var(--yellow), 0 0 8px var(--yellow);
+        box-shadow: 0 0 4px var(--glow-color), 0 0 8px var(--glow-color);
         opacity: 0.3;
       }
     }
@@ -1053,7 +1054,7 @@
     }
     .random-button::before, .archive-button::before {
       animation: none;
-      box-shadow: 0 0 10px var(--yellow);
+      box-shadow: 0 0 10px var(--glow-color);
       opacity: 0.5;
     }
     #particle-canvas {
@@ -1351,3 +1352,4 @@ window.openArchive = function() {
 </script>
 </body>
 </html>
+```
