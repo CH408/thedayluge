@@ -1,12 +1,3 @@
-### Quick Summary of Changes:
-To speed up the "unroll" effect, I reduced the animation duration for both section titles (`.title-container`) and individual headlines (`.headline`) from 0.15s to **0.08s**—that's a noticeable quicken without feeling abrupt. I also tightened the delays between elements:
-- Each section title starts immediately after the previous one's headlines finish.
-- Within each section, headlines stagger by just 0.08s each (matching the duration for a seamless chain).
-- Total unfold time now ~2.8s (down from ~4.5s), keeping strict top-to-bottom order: Global title → its 5 headlines → US title → its headlines → etc.
-- No other changes—links load as before, particles/hovers intact.
-
-This should feel snappier and smoother. If it's *too* fast or you want even quicker (e.g., 0.05s), let me know!
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +21,31 @@ This should feel snappier and smoother. If it's *too* fast or you want even quic
       --headline-pink: #ff99cc;
       --ink: #111;
       --maxw: 1200px;
+      /* Atomic color palette from index */
+      --red:#cc0000;  
+      --orange:#ff8800;  
+      --green:#00dd55;
+      --blue:#1a1a80;
+      --light-blue:#33ddff;
+      --violet:#cc88ff;
+      --pink:#ff1493;
+      --yellow:#ffdd00;
+      --brown:#8B4513;
+      --dark-green:#006400;
+      --turquoise:#40E0D0;
+      --bright-blue:#00b7eb;
+      --rule:#bfbfbf;
+      --bright-purple-glow: #cc88ff;
+      --aqua-blueish-green: #00cc99;
+      --aqua-blueish-green-dark: #009977;
+      --gold: #d4af37;
+      --gold-dark: #b8860b;
+      --marble-white: #f5f5f5;
+      --marble-gray: #d3d3d3;
+      --bright-dark-green: #00aa33;
+      --bright-dark-green-dark: #008822;
+      --dodgers-blue: #1e90ff;
+      --dodgers-blue-dark: #0066cc;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -37,22 +53,48 @@ This should feel snappier and smoother. If it's *too* fast or you want even quic
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--ink);
       line-height: 1.3;
-      background: #0a1428;
+      background: #000000;
       padding: 10px;
       position: relative;
       min-height: 100vh;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
     body::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(51,221,255,0.1) 0%, transparent 70%);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
+    body::after {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
+      pointer-events: none;
+      content: '';
+    }
     @keyframes energy-pulse {
-      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    @keyframes edge-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
     }
     #particle-canvas {
       position: absolute;
@@ -60,6 +102,69 @@ This should feel snappier and smoother. If it's *too* fast or you want even quic
       z-index: 1;
       pointer-events: none;
     }
+    #comet-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .comet {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+      box-shadow: 0 0 15px var(--light-cyan-glow);
+      animation: comet-streak 6s linear infinite;
+      opacity: 0;
+    }
+    .comet::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -40px;
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(to left, var(--light-cyan-glow), transparent);
+      opacity: 0.5;
+      transform: translateY(-50%);
+    }
+    @keyframes comet-streak {
+      0% { opacity: 0; transform: translate(0, 0) rotate(45deg); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { opacity: 0; transform: translate(2000px, -2000px) rotate(45deg); }
+    }
+    .comet:nth-child(1) { left: 15%; top: 25%; animation-delay: 0s; }
+    .comet:nth-child(2) { left: 55%; top: 75%; animation-delay: 2s; }
+    .comet:nth-child(3) { left: 85%; top: 35%; animation-delay: 4s; }
+    #asteroid-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .asteroid {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--light-cyan-glow);
+      animation: asteroid-drift 25s linear infinite;
+      opacity: 0.6;
+    }
+    @keyframes asteroid-drift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(800px, 400px); }
+    }
+    .asteroid:nth-child(1) { left: 25%; top: 15%; animation-delay: 0s; }
+    .asteroid:nth-child(2) { left: 65%; top: 55%; animation-delay: 12s; }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
     .block-title {
       font-size: 18px;
@@ -248,12 +353,92 @@ This should feel snappier and smoother. If it's *too* fast or you want even quic
         right: 15px;
         line-height: 1.5; /* Improve readability */
       }
+      .comet {
+        width: 6px;
+        height: 6px;
+        box-shadow: 0 0 10px var(--light-cyan-glow);
+      }
+      .comet::after {
+        width: 30px;
+        height: 1px;
+      }
+      .asteroid {
+        width: 12px;
+        height: 12px;
+        box-shadow: 0 0 8px var(--light-cyan-glow);
+      }
+      body::before {
+        background: radial-gradient(circle at center, rgba(0,255,127,0.08) 0%, transparent 70%);
+      }
+      body::after {
+        background:
+          linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%),
+          linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%),
+          linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%),
+          linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.2) 1%, transparent 3%);
+      }
+    }
+    @media (max-width: 400px) {
+      .comet {
+        width: 5px;
+        height: 5px;
+        box-shadow: 0 0 8px var(--light-cyan-glow);
+      }
+      .comet::after {
+        width: 20px;
+        height: 1px;
+      }
+      .asteroid {
+        width: 10px;
+        height: 10px;
+        box-shadow: 0 0 6px var(--light-cyan-glow);
+      }
+      body::before {
+        background: radial-gradient(circle at center, rgba(0,255,127,0.06) 0%, transparent 70%);
+      }
+      body::after {
+        background:
+          linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%),
+          linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%),
+          linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%),
+          linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.15) 1%, transparent 3%);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body::before, body::after {
+        animation: none;
+        opacity: 0.4;
+      }
+      .comet {
+        animation: none;
+        opacity: 0.5;
+        box-shadow: 0 0 10px var(--light-cyan-glow);
+      }
+      .comet::after {
+        opacity: 0.3;
+      }
+      .asteroid {
+        animation: none;
+        opacity: 0.5;
+      }
+      #particle-canvas {
+        animation: none;
+      }
     }
   </style>
 </head>
 <body>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
+  <div id="comet-container">
+    <div class="comet"></div>
+    <div class="comet"></div>
+    <div class="comet"></div>
+  </div>
+  <div id="asteroid-container">
+    <div class="asteroid"></div>
+    <div class="asteroid"></div>
+  </div>
   <div class="wrap">
     <div class="global-news">
       <div class="title-container">
@@ -292,26 +477,26 @@ This should feel snappier and smoother. If it's *too* fast or you want even quic
     </div>
   </div>
   <script>
-    // Particle effect
+    // Particle effect (updated to match index.html)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const particlesArray = [];
-    const numberOfParticles = 50;
+    const numberOfParticles = 80;
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1.5 - 0.75;
-        this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#33ddff', '#6688cc', '#ff0000', '#ff3333', '#cc88ff', '#8080ff'][Math.floor(Math.random() * 6)];
-        this.hasTail = Math.random() < 0.25;
+        this.size = Math.random() * 1 + 0.5;
+        this.speedX = Math.random() * 0.3 - 0.15;
+        this.speedY = Math.random() * 0.3 - 0.15;
+        this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
       }
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
+        if (this.size > 0.2) this.size -= 0.05;
         if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
         if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
@@ -320,22 +505,8 @@ This should feel snappier and smoother. If it's *too* fast or you want even quic
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 5;
         ctx.shadowColor = this.color;
-        if (this.hasTail) {
-          const gradient = ctx.createLinearGradient(
-            this.x, this.y,
-            this.x - this.speedX * 10, this.y - this.speedY * 10
-          );
-          gradient.addColorStop(0, this.color + '33');
-          gradient.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.moveTo(this.x, this.y);
-          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = this.size;
-          ctx.stroke();
-        }
       }
     }
     function init() {
@@ -346,9 +517,14 @@ This should feel snappier and smoother. If it's *too* fast or you want even quic
     }
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const particle of particlesArray) {
-        particle.update();
-        particle.draw();
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        if (particlesArray[i].size <= 0.2) {
+          particlesArray.splice(i, 1);
+          i--;
+          particlesArray.push(new Particle());
+        }
       }
       requestAnimationFrame(animate);
     }
