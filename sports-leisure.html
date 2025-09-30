@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --orange: #ff8c00; /* Matches Sports & Leisure spoke background */
-      --orange-dark: #e07b00; /* Matches Sports & Leisure spoke gradient */
+      --orange: #ff8c00;
+      --orange-dark: #e07b00;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -43,18 +43,12 @@
       pointer-events: none;
     }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .title-container {
-      display: flex;
-      align-items: center;
-      max-width: 800px;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
     .block-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
+      margin-bottom: 10px;
     }
     .sports-news-title {
       color: var(--orange);
@@ -77,7 +71,6 @@
       animation: fadeIn 0.5s ease forwards;
       color: var(--orange);
     }
-    /* Fast animation delays - same as Arts & Literature */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -115,7 +108,7 @@
       color: var(--orange-dark);
       text-shadow: 0 0 10px var(--orange-dark);
     }
-    .go-deeper, .random-button {
+    .go-deeper, .random-button, .home-btn {
       display: inline-block;
       background: transparent;
       color: var(--orange);
@@ -131,7 +124,7 @@
       text-shadow: 0 0 5px var(--orange);
       cursor: pointer;
     }
-    .go-deeper:hover, .random-button:hover {
+    .go-deeper:hover, .random-button:hover, .home-btn:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(255,140,0,0.3);
@@ -143,27 +136,6 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      background: transparent;
-      color: var(--orange);
-      padding: 8px 16px;
-      border: 1px solid var(--orange);
-      border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 5px var(--orange);
-      transition: all 0.3s ease;
-    }
-    .home-btn:hover {
-      background: rgba(255,140,0,0.1);
-      box-shadow: 0 0 15px rgba(255,140,0,0.3);
-      transform: scale(1.05);
-    }
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
@@ -172,23 +144,20 @@
         font-size: 10px; 
         padding: 6px 12px; 
       }
-      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
   </style>
 </head>
 <body>
-  <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="sports-news">
-      <div class="title-container">
-        <div class="block-title sports-news-title">Sports & Leisure</div>
-        <a href="/sports-leisure-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines sports-news-links" id="sports-news-links"></ul>
+      <div class="block-title sports-news-title">Sports & Leisure</div>
+      <ul class="headlines sports-news-links" id="sports-news-links" style="display: none;"></ul>
     </div>
-    <div class="button-container">
+    <div class="button-container" style="display: none;">
       <button class="random-button" onclick="goToRandomSports()">⚛️ SURPRISE ME!</button>
+      <a href="/sports-leisure-archive.html" class="go-deeper">Go Deeper</a>
+      <a href="/" class="home-btn">← Home</a>
     </div>
   </div>
   <script>
@@ -284,7 +253,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 24); // Changed from 36 to 24
+        const displayLinks = links.slice(0, 24);
         const grid = document.getElementById('sports-news-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -292,10 +261,19 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          grid.style.display = '';
+        }
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
         }
         console.log(`Showing ${displayLinks.length} sports & leisure links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error('Error loading sports & leisure links:', error);
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
+        }
       }
     }
 
@@ -316,7 +294,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 24); // Changed from 36 to 24
+        const currentLinks = links.slice(0, 24);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
