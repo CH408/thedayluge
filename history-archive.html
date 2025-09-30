@@ -8,9 +8,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --gold: #d4af37; /* Matches History spoke background */
-      --gold-dark: #b8860b; /* Matches History spoke gradient */
-      --gold-light: #f0d064; /* Lighter gold for better contrast */
+      --gold: #d4af37;
+      --gold-dark: #b8860b;
+      --gold-light: #f0d064;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -70,7 +70,6 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    /* Fast animation delays */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -178,6 +177,21 @@
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(212,175,55,0.3);
     }
+    .nav-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .nav-button:disabled:hover {
+      background: transparent;
+      transform: none;
+      box-shadow: none;
+    }
+    .page-info {
+      color: var(--gold);
+      font-size: 14px;
+      text-align: center;
+      margin: 10px 0;
+    }
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
@@ -186,6 +200,7 @@
         font-size: 10px; 
         padding: 6px 12px; 
       }
+      .page-info { font-size: 12px; }
     }
   </style>
 </head>
@@ -195,6 +210,7 @@
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="archive-title" id="archive-title">History Archive</div>
+    <div class="page-info" id="page-info"></div>
     <ul class="headlines" id="history-archive-links" style="display: none;"></ul>
     <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
@@ -275,7 +291,13 @@
       init();
     });
 
-    // Load history archive links (remaining after first 24)
+    // Get current page from URL
+    function getCurrentPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return parseInt(urlParams.get('page')) || 1;
+    }
+
+    // Load history archive links with pagination
     async function loadHistoryArchiveLinks() {
       try {
         const response = await fetch('history-links.txt');
@@ -292,25 +314,70 @@
           }
           return null;
         }).filter(link => link !== null);
-        const archiveLinks = links.slice(24); // All after first page
+        
+        // Archive starts after first 24 links
+        const archiveLinks = links.slice(24);
+        const currentPage = getCurrentPage();
+        const linksPerPage = 24;
+        const totalPages = Math.ceil(archiveLinks.length / linksPerPage);
+        
+        // Calculate start and end indices for current page
+        const startIndex = (currentPage - 1) * linksPerPage;
+        const endIndex = startIndex + linksPerPage;
+        const pageLinks = archiveLinks.slice(startIndex, endIndex);
+        
         const grid = document.getElementById('history-archive-links');
-        if (grid && archiveLinks.length > 0) {
-          grid.innerHTML = archiveLinks.map((link, index) => `
+        const pageInfo = document.getElementById('page-info');
+        
+        if (grid && pageLinks.length > 0) {
+          grid.innerHTML = pageLinks.map((link, index) => `
             <li class="headline">
               <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
             </li>
           `).join('');
           grid.style.display = '';
-        } else {
+          
+          if (pageInfo) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+          }
+        } else if (archiveLinks.length === 0) {
           grid.innerHTML = '<li class="headline"><span>No archive content available yet.</span></li>';
           grid.style.display = '';
+          if (pageInfo) {
+            pageInfo.textContent = '';
+          }
+        } else {
+          grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
+          grid.style.display = '';
         }
+        
+        // Create navigation buttons
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
-          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomHistoryArchive()">⚛️ SURPRISE ME!</button>';
+          let buttonsHTML = '';
+          
+          // Previous button
+          if (currentPage > 1) {
+            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage - 1})">← Previous</button>`;
+          } else {
+            buttonsHTML += `<button class="nav-button" disabled>← Previous</button>`;
+          }
+          
+          // Random button
+          buttonsHTML += '<button class="random-button" onclick="goToRandomHistoryArchive()">⚛️ SURPRISE ME!</button>';
+          
+          // Next button
+          if (currentPage < totalPages) {
+            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage + 1})">Next →</button>`;
+          } else {
+            buttonsHTML += `<button class="nav-button" disabled>Next →</button>`;
+          }
+          
+          buttonContainer.innerHTML = buttonsHTML;
           buttonContainer.style.display = '';
         }
-        console.log(`Showing ${archiveLinks.length} history archive links`);
+        
+        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${archiveLinks.length} total in archive)`);
       } catch (error) {
         console.error('Error loading history archive links:', error);
         const grid = document.getElementById('history-archive-links');
@@ -320,9 +387,15 @@
         }
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
+          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomHistoryArchive()">⚛️ SURPRISE ME!</button>';
           buttonContainer.style.display = '';
         }
       }
+    }
+
+    // Navigate to specific page
+    function goToPage(pageNum) {
+      window.location.href = `history-archive.html?page=${pageNum}`;
     }
 
     // Random history archive article
@@ -355,6 +428,3 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadHistoryArchiveLinks);
-  </script>
-</body>
-</html>
