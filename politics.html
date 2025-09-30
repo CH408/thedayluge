@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --marble-white: #f5f5f5; /* Matches Politics spoke background */
-      --marble-gray: #d3d3d3; /* Matches Politics spoke gradient */
+      --marble-white: #f5f5f5;
+      --marble-gray: #d3d3d3;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -29,7 +29,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(245,245,245,0.1) 0%, transparent 70%); /* Marble-white glow */
+      background: radial-gradient(circle at center, rgba(245,245,245,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -43,21 +43,15 @@
       pointer-events: none;
     }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .title-container {
-      display: flex;
-      align-items: center;
-      max-width: 800px;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
     .block-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
+      margin-bottom: 10px;
     }
     .politics-news-title {
-      color: var(--marble-white); /* Changed to off-white */
+      color: var(--marble-white);
       animation: block-title-pulse-white 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse-white {
@@ -75,9 +69,8 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--marble-white); /* Off-white for readability */
+      color: var(--marble-white);
     }
-    /* Fast animation delays - same as Arts & Literature */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -112,40 +105,11 @@
       transition: all 0.3s ease;
     }
     .politics-news-links .headline a:hover {
-      color: var(--marble-gray); /* Slightly darker for hover contrast */
+      color: var(--marble-gray);
       text-shadow: 0 0 10px var(--marble-gray);
     }
-    .go-deeper, .random-button {
+    .go-deeper, .random-button, .home-btn {
       display: inline-block;
-      background: transparent;
-      color: var(--marble-white); /* Changed to off-white */
-      padding: 8px 16px;
-      border: 1px solid var(--marble-white); /* Changed to off-white */
-      border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--marble-white);
-      cursor: pointer;
-    }
-    .go-deeper:hover, .random-button:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(245,245,245,0.3); /* Marble-white shadow */
-    }
-    .button-container {
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
       background: transparent;
       color: var(--marble-white);
       padding: 8px 16px;
@@ -156,13 +120,21 @@
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px var(--marble-white);
       transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--marble-white);
+      cursor: pointer;
     }
-    .home-btn:hover {
-      background: rgba(245,245,245,0.1);
-      box-shadow: 0 0 15px rgba(245,245,245,0.3);
+    .go-deeper:hover, .random-button:hover, .home-btn:hover {
+      background: rgba(255,255,255,0.1);
       transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(245,245,245,0.3);
+    }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
@@ -172,23 +144,20 @@
         font-size: 10px; 
         padding: 6px 12px; 
       }
-      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
     }
   </style>
 </head>
 <body>
-  <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="politics-news">
-      <div class="title-container">
-        <div class="block-title politics-news-title">Politics</div>
-      </div>
+      <div class="block-title politics-news-title">Politics</div>
       <ul class="headlines politics-news-links" id="politics-news-links" style="display: none;"></ul>
     </div>
     <div class="button-container" style="display: none;">
       <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
-      <a href="/politics-archive.html" class="go-deeper">Next</a>
+      <a href="/politics-archive.html" class="go-deeper">Go Deeper</a>
+      <a href="/" class="home-btn">← Home</a>
     </div>
   </div>
   <script>
@@ -207,7 +176,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#f5f5f5', '#d3d3d3', '#e8e8e8', '#cccccc', '#ffffff', '#e0e0e0'][Math.floor(Math.random() * 6)]; /* Marble-white/gray palette */
+        this.color = ['#f5f5f5', '#d3d3d3', '#e8e8e8', '#cccccc', '#ffffff', '#e0e0e0'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       
@@ -284,7 +253,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 24); // Changed from 36 to 24
+        const displayLinks = links.slice(0, 24);
         const grid = document.getElementById('politics-news-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -301,7 +270,6 @@
         console.log(`Showing ${displayLinks.length} politics links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error('Error loading politics links:', error);
-        // On error, still show buttons for navigation
         const buttonContainer = document.querySelector('.button-container');
         if (buttonContainer) {
           buttonContainer.style.display = '';
@@ -326,7 +294,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 24); // Changed from 36 to 24
+        const currentLinks = links.slice(0, 24);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
