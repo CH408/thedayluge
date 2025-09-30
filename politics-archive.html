@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --marble-white: #f5f5f5; /* Matches Politics spoke background */
-      --marble-gray: #d3d3d3; /* Matches Politics spoke gradient */
+      --marble-white: #f5f5f5;
+      --marble-gray: #d3d3d3;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -69,7 +69,6 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    /* Fast animation delays - same as Arts & Literature */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -115,16 +114,16 @@
       padding: 8px 16px;
       border: 1px solid var(--marble-white);
       border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       text-shadow: 0 0 5px var(--marble-white);
       transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .back-btn:hover {
-      background: rgba(245,245,245,0.1);
+      background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(245,245,245,0.3);
       transform: scale(1.05);
     }
@@ -136,16 +135,16 @@
       padding: 8px 16px;
       border: 1px solid var(--marble-white);
       border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       text-shadow: 0 0 5px var(--marble-white);
       transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .home-btn:hover {
-      background: rgba(245,245,245,0.1);
+      background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(245,245,245,0.3);
       transform: scale(1.05);
     }
@@ -177,6 +176,21 @@
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(245,245,245,0.3);
     }
+    .nav-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .nav-button:disabled:hover {
+      background: transparent;
+      transform: none;
+      box-shadow: none;
+    }
+    .page-info {
+      color: var(--marble-white);
+      font-size: 14px;
+      text-align: center;
+      margin: 10px 0;
+    }
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
@@ -185,6 +199,7 @@
         font-size: 10px; 
         padding: 6px 12px; 
       }
+      .page-info { font-size: 12px; }
     }
   </style>
 </head>
@@ -193,11 +208,10 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title" id="archive-title">Politics Archive - Page 1</div>
-    <ul class="headlines" id="archive-links"></ul>
-    <div class="button-container" id="nav-buttons">
-      <button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>
-    </div>
+    <div class="archive-title" id="archive-title">Politics Archive</div>
+    <div class="page-info" id="page-info"></div>
+    <ul class="headlines" id="politics-archive-links" style="display: none;"></ul>
+    <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
     // Particle effect
@@ -233,6 +247,7 @@
         ctx.fill();
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
+        
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
@@ -275,98 +290,154 @@
       init();
     });
 
-    let allLinks = []; // Global to store all parsed links
-    const linksPerPage = 24;
-    const archiveStart = 24; // Start archive after the first 24 links shown on main page
-
-    // Parse URL for page number
+    // Get current page from URL
     function getCurrentPage() {
       const urlParams = new URLSearchParams(window.location.search);
       return parseInt(urlParams.get('page')) || 1;
     }
 
-    // Load all links and display current page
-    async function loadArchiveLinks() {
+    // Load politics archive links with pagination
+    async function loadPoliticsArchiveLinks() {
+      console.log('Starting to load politics archive links...');
       try {
         const response = await fetch('politics-links.txt');
+        console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
-          throw new Error(`Failed to load politics-links.txt: ${response.status}`);
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        allLinks = lines.map(line => {
-          const [title, url] = line.split('|').map(s => s.trim());
-          return { title, url };
-        }).filter(link => link.title && link.url);
-
-        const currentPage = getCurrentPage();
-        const availableLinks = Math.max(0, allLinks.length - archiveStart);
-        const totalPages = Math.ceil(availableLinks / linksPerPage);
-        if (totalPages === 0) {
-          document.getElementById('archive-title').textContent = 'Politics Archive - No additional links available';
-          document.getElementById('archive-links').innerHTML = '<li class="headline" style="color: #ff6b6b;">No archived links to display.</li>';
-          document.getElementById('nav-buttons').innerHTML = '<button class="random-button" onclick="goToRandomPolitics()" disabled>⚛️ SURPRISE ME!</button>';
+          console.error('Failed to load politics-links.txt:', response.status);
           return;
         }
-        const startIndex = archiveStart + (currentPage - 1) * linksPerPage;
-        const endIndex = Math.min(startIndex + linksPerPage, allLinks.length);
-        const pageLinks = allLinks.slice(startIndex, endIndex);
-
-        // Update title
-        document.getElementById('archive-title').textContent = `Politics Archive - Page ${currentPage} of ${totalPages}`;
-
-        // Render links
-        const grid = document.getElementById('archive-links');
-        if (grid) {
+        const text = await response.text();
+        console.log('Text loaded, length:', text.length);
+        const lines = text.split('\n').filter(line => line.trim());
+        console.log('Total lines:', lines.length);
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        
+        console.log('Total links parsed:', links.length);
+        
+        // Archive starts after first 24 links
+        const archiveLinks = links.slice(24);
+        console.log('Archive links:', archiveLinks.length);
+        const currentPage = getCurrentPage();
+        const linksPerPage = 24;
+        const totalPages = Math.ceil(archiveLinks.length / linksPerPage);
+        
+        console.log('Current page:', currentPage, 'Total pages:', totalPages);
+        
+        // Calculate start and end indices for current page
+        const startIndex = (currentPage - 1) * linksPerPage;
+        const endIndex = startIndex + linksPerPage;
+        const pageLinks = archiveLinks.slice(startIndex, endIndex);
+        
+        console.log('Page links for this page:', pageLinks.length);
+        
+        const grid = document.getElementById('politics-archive-links');
+        const pageInfo = document.getElementById('page-info');
+        
+        if (grid && pageLinks.length > 0) {
           grid.innerHTML = pageLinks.map((link, index) => `
-            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+            <li class="headline">
               <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
             </li>
           `).join('');
+          grid.style.display = '';
+          
+          if (pageInfo) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+          }
+        } else if (archiveLinks.length === 0) {
+          grid.innerHTML = '<li class="headline"><span>No archive content available yet.</span></li>';
+          grid.style.display = '';
+          if (pageInfo) {
+            pageInfo.textContent = '';
+          }
+        } else {
+          grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
+          grid.style.display = '';
         }
-
-        // Update navigation buttons
-        updateNavigation(currentPage, totalPages);
+        
+        // Create navigation buttons
+        const buttonContainer = document.getElementById('nav-buttons');
+        if (buttonContainer) {
+          let buttonsHTML = '';
+          
+          // Previous button
+          if (currentPage > 1) {
+            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage - 1})">← Previous</button>`;
+          } else {
+            buttonsHTML += `<button class="nav-button" disabled>← Previous</button>`;
+          }
+          
+          // Random button
+          buttonsHTML += '<button class="random-button" onclick="goToRandomPoliticsArchive()">⚛️ SURPRISE ME!</button>';
+          
+          // Next button
+          if (currentPage < totalPages) {
+            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage + 1})">Next →</button>`;
+          } else {
+            buttonsHTML += `<button class="nav-button" disabled>Next →</button>`;
+          }
+          
+          buttonContainer.innerHTML = buttonsHTML;
+          buttonContainer.style.display = '';
+        }
+        
+        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${archiveLinks.length} total in archive)`);
       } catch (error) {
-        console.error('Error loading archive links:', error);
-        document.getElementById('archive-links').innerHTML = '<li class="headline" style="color: #ff6b6b;">Error loading links from politics-links.txt</li>';
+        console.error('Error loading politics archive links:', error);
+        const grid = document.getElementById('politics-archive-links');
+        if (grid) {
+          grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
+          grid.style.display = '';
+        }
+        const buttonContainer = document.getElementById('nav-buttons');
+        if (buttonContainer) {
+          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomPoliticsArchive()">⚛️ SURPRISE ME!</button>';
+          buttonContainer.style.display = '';
+        }
       }
     }
 
-    // Dynamically update navigation
-    function updateNavigation(currentPage, totalPages) {
-      const container = document.getElementById('nav-buttons');
-      let navHtml = '<button class="random-button" onclick="goToRandomPolitics()">⚛️ SURPRISE ME!</button>';
-
-      if (currentPage > 1) {
-        const prevPage = currentPage - 1;
-        navHtml += `<a href="?page=${prevPage}" class="nav-button">← Prev</a>`;
-      }
-
-      if (currentPage < totalPages) {
-        const nextPage = currentPage + 1;
-        navHtml += `<a href="?page=${nextPage}" class="nav-button">Next →</a>`;
-      }
-
-      container.innerHTML = navHtml;
+    // Navigate to specific page
+    function goToPage(pageNum) {
+      window.location.href = `politics-archive.html?page=${pageNum}`;
     }
 
-    // Random politics article from current page
-    function goToRandomPolitics() {
-      const currentPage = getCurrentPage();
-      const startIndex = archiveStart + (currentPage - 1) * linksPerPage;
-      const endIndex = Math.min(startIndex + linksPerPage, allLinks.length);
-      const pageLinks = allLinks.slice(startIndex, endIndex).map(link => link.url);
-
-      if (pageLinks.length > 0) {
-        const randomLink = pageLinks[Math.floor(Math.random() * pageLinks.length)];
-        window.open(randomLink, '_blank', 'noopener,noreferrer');
-      } else {
-        alert('No links on this page.');
+    // Random politics archive article
+    async function goToRandomPoliticsArchive() {
+      try {
+        const response = await fetch('politics-links.txt');
+        if (!response.ok) {
+          console.log('Could not load politics-links.txt for random selection');
+          return;
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const archiveLinks = links.slice(24);
+        if (archiveLinks.length > 0) {
+          const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
+          window.open(randomLink, '_blank', 'noopener,noreferrer');
+        } else {
+          alert('No links in archive.');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadArchiveLinks);
+    document.addEventListener('DOMContentLoaded', loadPoliticsArchiveLinks);
   </script>
 </body>
 </html>
