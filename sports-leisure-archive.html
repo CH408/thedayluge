@@ -8,8 +8,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --orange: #ff8c00; /* Matches Sports & Leisure spoke background */
-      --orange-dark: #e07b00; /* Matches Sports & Leisure spoke gradient */
+      --orange: #ff8c00;
+      --orange-dark: #e07b00;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -69,7 +69,6 @@
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
     }
-    /* Fast animation delays - same as Arts & Literature */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -115,16 +114,16 @@
       padding: 8px 16px;
       border: 1px solid var(--orange);
       border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       text-shadow: 0 0 5px var(--orange);
       transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .back-btn:hover {
-      background: rgba(255,140,0,0.1);
+      background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(255,140,0,0.3);
       transform: scale(1.05);
     }
@@ -136,16 +135,16 @@
       padding: 8px 16px;
       border: 1px solid var(--orange);
       border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       text-shadow: 0 0 5px var(--orange);
       transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .home-btn:hover {
-      background: rgba(255,140,0,0.1);
+      background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(255,140,0,0.3);
       transform: scale(1.05);
     }
@@ -156,7 +155,7 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .random-button {
+    .random-button, .nav-button {
       display: inline-block;
       background: transparent;
       color: var(--orange);
@@ -172,19 +171,35 @@
       text-shadow: 0 0 5px var(--orange);
       cursor: pointer;
     }
-    .random-button:hover {
+    .random-button:hover, .nav-button:hover {
       background: rgba(255,255,255,0.1);
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(255,140,0,0.3);
     }
+    .nav-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .nav-button:disabled:hover {
+      background: transparent;
+      transform: none;
+      box-shadow: none;
+    }
+    .page-info {
+      color: var(--orange);
+      font-size: 14px;
+      text-align: center;
+      margin: 10px 0;
+    }
     @media (max-width: 600px) {
       .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .back-btn, .home-btn, .random-button { 
+      .back-btn, .home-btn, .random-button, .nav-button { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
       }
+      .page-info { font-size: 12px; }
     }
   </style>
 </head>
@@ -193,12 +208,10 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title">Sports & Leisure Archive - Page 1</div>
-    <ul class="headlines" id="archive-links"></ul>
-    <div class="button-container">
-      <button class="random-button" onclick="goToRandomSports()">⚛️ SURPRISE ME!</button>
-      <a href="/sports-leisure-archive-2.html" class="random-button">Page 2 →</a>
-    </div>
+    <div class="archive-title" id="archive-title">Sports & Leisure Archive</div>
+    <div class="page-info" id="page-info"></div>
+    <ul class="headlines" id="sports-archive-links" style="display: none;"></ul>
+    <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
     // Particle effect
@@ -234,6 +247,7 @@
         ctx.fill();
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
+        
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
@@ -276,48 +290,127 @@
       init();
     });
 
-    // Load archive links (links 25-48 for page 1)
-    async function loadArchiveLinks() {
+    // Get current page from URL
+    function getCurrentPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return parseInt(urlParams.get('page')) || 1;
+    }
+
+    // Load sports archive links with pagination
+    async function loadSportsArchiveLinks() {
+      console.log('Starting to load sports archive links...');
       try {
-        console.log('Fetching sports-leisure-links.txt for archive');
         const response = await fetch('sports-leisure-links.txt');
-        console.log('Fetch response:', response);
+        console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
-          console.error(`Failed to load sports-leisure-links.txt: ${response.status}`);
+          console.error('Failed to load sports-leisure-links.txt:', response.status);
           return;
         }
         const text = await response.text();
-        console.log('Fetched text:', text);
+        console.log('Text loaded, length:', text.length);
         const lines = text.split('\n').filter(line => line.trim());
-        console.log('Parsed lines:', lines);
+        console.log('Total lines:', lines.length);
         const links = lines.map(line => {
-          const [title, url] = line.split('|').map(s => s.trim());
-          return { title, url };
-        }).filter(link => link.title && link.url);
-        console.log('Processed links:', links);
-
-        // Take links 25-48 (archive page 1)
-        const archivedLinks = links.length > 24 ? links.slice(24, 48) : [];
-        console.log('Archive page 1 links (25-48):', archivedLinks);
-
-        const grid = document.getElementById('archive-links');
-        if (grid) {
-          grid.innerHTML = archivedLinks.map((link, index) => `
-            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
-              <a href="${link.url}" target="_blank">${link.title}</a>
+          const parts = line.split('|');
+          if (parts.length >= 2) {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        
+        console.log('Total links parsed:', links.length);
+        
+        // Archive starts after first 24 links
+        const archiveLinks = links.slice(24);
+        console.log('Archive links:', archiveLinks.length);
+        const currentPage = getCurrentPage();
+        const linksPerPage = 24;
+        const totalPages = Math.ceil(archiveLinks.length / linksPerPage);
+        
+        console.log('Current page:', currentPage, 'Total pages:', totalPages);
+        
+        // Calculate start and end indices for current page
+        const startIndex = (currentPage - 1) * linksPerPage;
+        const endIndex = startIndex + linksPerPage;
+        const pageLinks = archiveLinks.slice(startIndex, endIndex);
+        
+        console.log('Page links for this page:', pageLinks.length);
+        
+        const grid = document.getElementById('sports-archive-links');
+        const pageInfo = document.getElementById('page-info');
+        
+        if (grid && pageLinks.length > 0) {
+          grid.innerHTML = pageLinks.map((link, index) => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
             </li>
           `).join('');
-          console.log('Rendered archive links to DOM:', archivedLinks);
+          grid.style.display = '';
+          
+          if (pageInfo) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+          }
+        } else if (archiveLinks.length === 0) {
+          grid.innerHTML = '<li class="headline"><span>No archive content available yet.</span></li>';
+          grid.style.display = '';
+          if (pageInfo) {
+            pageInfo.textContent = '';
+          }
+        } else {
+          grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
+          grid.style.display = '';
         }
+        
+        // Create navigation buttons
+        const buttonContainer = document.getElementById('nav-buttons');
+        if (buttonContainer) {
+          let buttonsHTML = '';
+          
+          // Previous button
+          if (currentPage > 1) {
+            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage - 1})">← Previous</button>`;
+          } else {
+            buttonsHTML += `<button class="nav-button" disabled>← Previous</button>`;
+          }
+          
+          // Random button
+          buttonsHTML += '<button class="random-button" onclick="goToRandomSportsArchive()">⚛️ SURPRISE ME!</button>';
+          
+          // Next button
+          if (currentPage < totalPages) {
+            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage + 1})">Next →</button>`;
+          } else {
+            buttonsHTML += `<button class="nav-button" disabled>Next →</button>`;
+          }
+          
+          buttonContainer.innerHTML = buttonsHTML;
+          buttonContainer.style.display = '';
+        }
+        
+        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${archiveLinks.length} total in archive)`);
       } catch (error) {
-        console.error('Error loading archive links:', error);
+        console.error('Error loading sports archive links:', error);
+        const grid = document.getElementById('sports-archive-links');
+        if (grid) {
+          grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
+          grid.style.display = '';
+        }
+        const buttonContainer = document.getElementById('nav-buttons');
+        if (buttonContainer) {
+          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomSportsArchive()">⚛️ SURPRISE ME!</button>';
+          buttonContainer.style.display = '';
+        }
       }
     }
 
-    // Random sports & leisure article from archive page 1
-    async function goToRandomSports() {
+    // Navigate to specific page
+    function goToPage(pageNum) {
+      window.location.href = `sports-leisure-archive.html?page=${pageNum}`;
+    }
+
+    // Random sports archive article
+    async function goToRandomSportsArchive() {
       try {
-        console.log('Fetching sports-leisure-links.txt for random selection');
         const response = await fetch('sports-leisure-links.txt');
         if (!response.ok) {
           console.log('Could not load sports-leisure-links.txt for random selection');
@@ -332,20 +425,19 @@
           }
           return null;
         }).filter(link => link !== null);
-        const archiveLinks = links.slice(24, 48); // Archive page 1 links (25-48)
+        const archiveLinks = links.slice(24);
         if (archiveLinks.length > 0) {
           const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
-          console.log('Opening random archive page 1 link:', randomLink);
-          window.open(randomLink, '_blank');
+          window.open(randomLink, '_blank', 'noopener,noreferrer');
         } else {
-          console.log('No archive links available for random selection');
+          alert('No links in archive.');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadArchiveLinks);
+    document.addEventListener('DOMContentLoaded', loadSportsArchiveLinks);
   </script>
 </body>
 </html>

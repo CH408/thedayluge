@@ -113,18 +113,12 @@
     .asteroid:nth-child(1) { left: 20%; top: 10%; animation-delay: 0s; }
     .asteroid:nth-child(2) { left: 70%; top: 60%; animation-delay: 10s; }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .title-container {
-      display: flex;
-      align-items: center;
-      max-width: 800px;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
     .block-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
+      margin-bottom: 10px;
       color: var(--bright-purple-glow);
       animation: block-title-pulse 8s ease-in-out infinite;
     }
@@ -148,7 +142,6 @@
       animation: fadeIn 0.5s ease forwards;
       color: var(--violet);
     }
-    /* Fast animation delays - same as Arts & Literature */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -186,7 +179,7 @@
       color: #9966dd;
       text-shadow: 0 0 10px #9966dd;
     }
-    .go-deeper, .random-button {
+    .go-deeper, .random-button, .home-btn {
       display: inline-block;
       background: transparent;
       color: var(--violet);
@@ -202,7 +195,7 @@
       text-shadow: 0 0 5px var(--violet);
       cursor: pointer;
     }
-    .go-deeper:hover, .random-button:hover {
+    .go-deeper:hover, .random-button:hover, .home-btn:hover {
       background: rgba(255,255,255,0.1);
       color: #9966dd;
       border-color: #9966dd;
@@ -217,30 +210,6 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      background: transparent;
-      color: var(--violet);
-      padding: 8px 16px;
-      border: 1px solid var(--violet);
-      border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 5px var(--violet);
-      transition: all 0.3s ease;
-    }
-    .home-btn:hover {
-      background: rgba(204,136,255,0.1);
-      color: #9966dd;
-      border-color: #9966dd;
-      box-shadow: 0 0 15px rgba(153,102,221,0.6);
-      transform: scale(1.05);
-      text-shadow: 0 0 5px #9966dd;
-    }
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
@@ -249,7 +218,6 @@
         font-size: 10px; 
         padding: 6px 12px; 
       }
-      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
       .comet { width: 8px; height: 8px; box-shadow: 0 0 20px var(--bright-purple-glow); }
       .comet::after { width: 40px; height: 2px; }
       .asteroid { width: 15px; height: 15px; box-shadow: 0 0 15px var(--light-cyan-glow); }
@@ -257,20 +225,18 @@
   </style>
 </head>
 <body>
-  <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div id="comet-container"></div>
   <div id="asteroid-container"></div>
   <div class="wrap">
     <div class="wisdom-philosophy">
-      <div class="title-container">
-        <div class="block-title">Wisdom & Philosophy</div>
-        <a href="/wisdom-philosophy-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
-      <ul class="headlines wisdom-philosophy-links" id="wisdom-philosophy-links"></ul>
+      <div class="block-title">Wisdom & Philosophy</div>
+      <ul class="headlines wisdom-philosophy-links" id="wisdom-philosophy-links" style="display: none;"></ul>
     </div>
-    <div class="button-container">
+    <div class="button-container" style="display: none;">
       <button class="random-button" onclick="goToRandomWisdomPhilosophy()">⚛️ SURPRISE ME!</button>
+      <a href="/wisdom-philosophy-archive.html" class="go-deeper">Go Deeper</a>
+      <a href="/" class="home-btn">← Home</a>
     </div>
   </div>
   <script>
@@ -376,7 +342,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 24); // Changed from 18 to 24
+        const displayLinks = links.slice(0, 24);
         const grid = document.getElementById('wisdom-philosophy-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -384,10 +350,19 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          grid.style.display = '';
+        }
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
         }
         console.log(`Showing ${displayLinks.length} wisdom & philosophy links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error('Error loading wisdom & philosophy links:', error);
+        const buttonContainer = document.querySelector('.button-container');
+        if (buttonContainer) {
+          buttonContainer.style.display = '';
+        }
       }
     }
 
@@ -408,7 +383,7 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 24); // Changed from 18 to 24
+        const currentLinks = links.slice(0, 24);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');

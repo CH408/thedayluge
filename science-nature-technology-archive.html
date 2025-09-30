@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sports & Leisure - THE DAYLUGE</title>
+  <title>Science, Nature & Technology Archive - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --orange: #ff8c00;
-      --orange-dark: #e07b00;
+      --dodgers-blue: #4ab3ff;
+      --dodgers-blue-dark: #0066cc;
+      --dodgers-blue-light: #4aa8ff;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -29,7 +30,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(255,140,0,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(30,144,255,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -43,33 +44,31 @@
       pointer-events: none;
     }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .block-title {
+    .archive-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
+      color: var(--dodgers-blue);
       margin-bottom: 10px;
+      animation: block-title-pulse-blue 8s ease-in-out infinite;
     }
-    .sports-news-title {
-      color: var(--orange);
-      animation: block-title-pulse-orange 8s ease-in-out infinite;
-    }
-    @keyframes block-title-pulse-orange {
-      0% { text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+    @keyframes block-title-pulse-blue {
+      0% { text-shadow: 0 0 15px var(--dodgers-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--dodgers-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--dodgers-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--dodgers-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--dodgers-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--dodgers-blue), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; max-width: 800px; }
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
+      color: var(--dodgers-blue);
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--orange);
     }
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
@@ -104,30 +103,51 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .sports-news-links .headline a:hover {
-      color: var(--orange-dark);
-      text-shadow: 0 0 10px var(--orange-dark);
+    .headline a:hover {
+      color: var(--dodgers-blue-light);
+      text-shadow: 0 0 10px var(--dodgers-blue-light);
     }
-    .go-deeper, .random-button, .home-btn {
-      display: inline-block;
+    .back-btn {
+      position: fixed;
+      bottom: 50px; right: 20px;
       background: transparent;
-      color: var(--orange);
+      color: var(--dodgers-blue);
       padding: 8px 16px;
-      border: 1px solid var(--orange);
+      border: 1px solid var(--dodgers-blue);
       border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
+      text-shadow: 0 0 5px var(--dodgers-blue);
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--orange);
-      cursor: pointer;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
-    .go-deeper:hover, .random-button:hover, .home-btn:hover {
+    .back-btn:hover {
       background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(30,144,255,0.3);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255,140,0,0.3);
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: transparent;
+      color: var(--dodgers-blue);
+      padding: 8px 16px;
+      border: 1px solid var(--dodgers-blue);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-shadow: 0 0 5px var(--dodgers-blue);
+      transition: all 0.3s ease;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    }
+    .home-btn:hover {
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(30,144,255,0.3);
+      transform: scale(1.05);
     }
     .button-container {
       margin: 20px auto;
@@ -136,29 +156,63 @@
       gap: 20px;
       flex-wrap: wrap;
     }
+    .random-button, .nav-button {
+      display: inline-block;
+      background: transparent;
+      color: var(--dodgers-blue);
+      padding: 8px 16px;
+      border: 1px solid var(--dodgers-blue);
+      border-radius: 20px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--dodgers-blue);
+      cursor: pointer;
+    }
+    .random-button:hover, .nav-button:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(30,144,255,0.3);
+    }
+    .nav-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .nav-button:disabled:hover {
+      background: transparent;
+      transform: none;
+      box-shadow: none;
+    }
+    .page-info {
+      color: var(--dodgers-blue);
+      font-size: 14px;
+      text-align: center;
+      margin: 10px 0;
+    }
     @media (max-width: 600px) {
-      .block-title { font-size: 16px; }
+      .archive-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper, .random-button, .home-btn { 
+      .back-btn, .home-btn, .random-button, .nav-button { 
         font-family: 'Special Elite', 'Courier New', Courier, monospace;
         font-size: 10px; 
         padding: 6px 12px; 
       }
+      .page-info { font-size: 12px; }
     }
   </style>
 </head>
 <body>
+  <a href="/science-nature-technology.html" class="back-btn">← Back to Science, Nature & Technology</a>
+  <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="sports-news">
-      <div class="block-title sports-news-title">Sports & Leisure</div>
-      <ul class="headlines sports-news-links" id="sports-news-links" style="display: none;"></ul>
-    </div>
-    <div class="button-container" style="display: none;">
-      <button class="random-button" onclick="goToRandomSports()">⚛️ SURPRISE ME!</button>
-      <a href="/sports-leisure-archive.html" class="go-deeper">Go Deeper</a>
-      <a href="/" class="home-btn">← Home</a>
-    </div>
+    <div class="archive-title" id="archive-title">Science, Nature & Technology Archive</div>
+    <div class="page-info" id="page-info"></div>
+    <ul class="headlines" id="science-archive-links" style="display: none;"></ul>
+    <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
     // Particle effect
@@ -176,7 +230,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#ff8c00', '#e07b00', '#ffa040', '#d26900', '#ffbc80', '#c95f00'][Math.floor(Math.random() * 6)];
+        this.color = ['#1e90ff', '#0066cc', '#4aa8ff', '#0033cc', '#66b3ff', '#0044ff'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       
@@ -194,6 +248,7 @@
         ctx.fill();
         ctx.shadowBlur = 8;
         ctx.shadowColor = this.color;
+        
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
@@ -236,75 +291,22 @@
       init();
     });
 
-    // Load sports & leisure links
-    async function loadSportsLinks() {
+    // Get current page from URL
+    function getCurrentPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return parseInt(urlParams.get('page')) || 1;
+    }
+
+    // Load science archive links with pagination
+    async function loadScienceArchiveLinks() {
+      console.log('Starting to load science archive links...');
       try {
-        const response = await fetch('sports-leisure-links.txt');
+        const response = await fetch('science-nature-technology-links.txt');
+        console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
-          console.error('Failed to load sports-leisure-links.txt:', response.status);
+          console.error('Failed to load science-nature-technology-links.txt:', response.status);
           return;
         }
         const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
-          }
-          return null;
-        }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 24);
-        const grid = document.getElementById('sports-news-links');
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
-          grid.style.display = '';
-        }
-        const buttonContainer = document.querySelector('.button-container');
-        if (buttonContainer) {
-          buttonContainer.style.display = '';
-        }
-        console.log(`Showing ${displayLinks.length} sports & leisure links (${links.length - displayLinks.length} moved to archive)`);
-      } catch (error) {
-        console.error('Error loading sports & leisure links:', error);
-        const buttonContainer = document.querySelector('.button-container');
-        if (buttonContainer) {
-          buttonContainer.style.display = '';
-        }
-      }
-    }
-
-    // Random sports & leisure article
-    async function goToRandomSports() {
-      try {
-        const response = await fetch('sports-leisure-links.txt');
-        if (!response.ok) {
-          console.log('Could not load sports-leisure-links.txt for random selection');
-          return;
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
-          }
-          return null;
-        }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 24);
-        if (currentLinks.length > 0) {
-          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-          window.open(randomLink, '_blank');
-        }
-      } catch (error) {
-        console.error('Error loading links for random selection:', error);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadSportsLinks);
-  </script>
-</body>
-</html>
+        console.log('Text loaded, length:', text.length);
+        const lines = text.
