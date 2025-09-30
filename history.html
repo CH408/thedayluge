@@ -8,9 +8,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --gold: #d4af37; /* Matches History spoke background */
-      --gold-dark: #b8860b; /* Matches History spoke gradient */
-      --gold-light: #f0d064; /* Lighter gold for better contrast */
+      --gold: #d4af37;
+      --gold-dark: #b8860b;
+      --gold-light: #f0d064;
       --ink: #111;
       --maxw: 1200px;
     }
@@ -44,18 +44,12 @@
       pointer-events: none;
     }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .title-container {
-      display: flex;
-      align-items: center;
-      max-width: 800px;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
     .block-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
+      margin-bottom: 10px;
     }
     .history-title {
       color: var(--gold);
@@ -76,9 +70,8 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--gold); /* Changed to gold for readability */
+      color: var(--gold);
     }
-    /* Updated animation delays for faster unfolding */
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
     .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
@@ -113,10 +106,10 @@
       transition: all 0.3s ease;
     }
     .history-links .headline a:hover {
-      color: var(--gold-light); /* Lighter gold for hover effect */
+      color: var(--gold-light);
       text-shadow: 0 0 10px var(--gold-light);
     }
-    .go-deeper {
+    .go-deeper, .random-button, .home-btn {
       display: inline-block;
       background: transparent;
       color: var(--gold);
@@ -130,33 +123,11 @@
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--gold);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      cursor: pointer;
     }
-    .go-deeper:hover {
+    .go-deeper:hover, .random-button:hover, .home-btn:hover {
       background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
       box-shadow: 0 0 15px rgba(212,175,55,0.3);
-    }
-    .random-button, .home-btn {
-      display: inline-block;
-      background: transparent;
-      color: var(--gold); /* Changed to gold */
-      padding: 8px 16px;
-      border: 1px solid var(--gold); /* Changed to gold */
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--gold); /* Changed to gold */
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    }
-    .random-button {
-      position: relative;
-    }
-    .random-button:hover, .home-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(212,175,55,0.3); /* Changed to gold */
       transform: scale(1.05);
     }
     .button-container {
@@ -166,32 +137,24 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
-    }
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .go-deeper, .random-button { font-size: 10px; padding: 6px 12px; }
-      .home-btn { font-size: 10px; padding: 6px 12px; }
-      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .go-deeper, .random-button, .home-btn { font-size: 10px; padding: 6px 12px; }
     }
   </style>
 </head>
 <body>
-  <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="history">
-      <div class="title-container">
-        <div class="block-title history-title">History</div>
-        <a href="/history-archive.html" class="go-deeper">Go Deeper</a>
-      </div>
+      <div class="block-title history-title">History</div>
       <ul class="headlines history-links" id="history-links" style="display: none;"></ul>
     </div>
     <div class="button-container" style="display: none;">
       <button class="random-button" onclick="goToRandomHistory()">⚛️ SURPRISE ME!</button>
+      <a href="/history-archive.html" class="go-deeper">Go Deeper</a>
+      <a href="/" class="home-btn">← Home</a>
     </div>
   </div>
   <script>
@@ -297,7 +260,6 @@
         console.log(`Showing ${displayLinks.length} history links (${links.length - displayLinks.length} moved to archive)`);
       } catch (error) {
         console.error('Error loading history links:', error);
-        // On error, still show buttons for navigation
         const buttonContainer = document.querySelector('.button-container');
         if (buttonContainer) {
           buttonContainer.style.display = '';
