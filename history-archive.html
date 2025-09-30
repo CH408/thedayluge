@@ -299,14 +299,18 @@
 
     // Load history archive links with pagination
     async function loadHistoryArchiveLinks() {
+      console.log('Starting to load history archive links...');
       try {
         const response = await fetch('history-links.txt');
+        console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
           console.error('Failed to load history-links.txt:', response.status);
           return;
         }
         const text = await response.text();
+        console.log('Text loaded, length:', text.length);
         const lines = text.split('\n').filter(line => line.trim());
+        console.log('Total lines:', lines.length);
         const links = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 2) {
@@ -315,16 +319,23 @@
           return null;
         }).filter(link => link !== null);
         
+        console.log('Total links parsed:', links.length);
+        
         // Archive starts after first 24 links
         const archiveLinks = links.slice(24);
+        console.log('Archive links:', archiveLinks.length);
         const currentPage = getCurrentPage();
         const linksPerPage = 24;
         const totalPages = Math.ceil(archiveLinks.length / linksPerPage);
+        
+        console.log('Current page:', currentPage, 'Total pages:', totalPages);
         
         // Calculate start and end indices for current page
         const startIndex = (currentPage - 1) * linksPerPage;
         const endIndex = startIndex + linksPerPage;
         const pageLinks = archiveLinks.slice(startIndex, endIndex);
+        
+        console.log('Page links for this page:', pageLinks.length);
         
         const grid = document.getElementById('history-archive-links');
         const pageInfo = document.getElementById('page-info');
@@ -428,3 +439,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadHistoryArchiveLinks);
+  </script>
+</body>
+</html>
