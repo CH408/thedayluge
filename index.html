@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --synapse-duration: 2s;
+    --pulse-duration: 1.8s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -117,15 +117,36 @@
   .connection-path {
     fill: none;
     stroke: var(--connection-color);
-    stroke-width: 1;
     stroke-linecap: round;
-    stroke-opacity: 0.3;
+    animation: pulse-beam var(--pulse-duration) ease-in-out infinite;
   }
 
-  .synapse-particle {
-    fill: var(--connection-color);
-    filter: drop-shadow(0 0 4px var(--connection-color));
+  @keyframes pulse-beam {
+    0% {
+      stroke-width: 1;
+      stroke-opacity: 0.3;
+      filter: drop-shadow(0 0 4px var(--connection-color));
+    }
+    50% {
+      stroke-width: 3;
+      stroke-opacity: 1;
+      filter: drop-shadow(0 0 8px var(--connection-color));
+    }
+    100% {
+      stroke-width: 1;
+      stroke-opacity: 0.3;
+      filter: drop-shadow(0 0 4px var(--connection-color));
+    }
   }
+
+  .path-1 { animation-delay: 0s; }
+  .path-2 { animation-delay: 0.2s; }
+  .path-3 { animation-delay: 0.4s; }
+  .path-4 { animation-delay: 0.6s; }
+  .path-5 { animation-delay: 0.8s; }
+  .path-6 { animation-delay: 1.0s; }
+  .path-7 { animation-delay: 1.2s; }
+  .path-8 { animation-delay: 1.4s; }
 
   .wheel-center {
     position: absolute;
@@ -273,11 +294,16 @@
     .circle-7 { left: 123px; top: 12px; }
     .circle-8 { left: 201px; top: 45px; }
     .connection-path {
-      stroke-width: 0.8;
+      animation: pulse-beam var(--pulse-duration) ease-in-out infinite;
     }
-    .synapse-particle {
-      transform: scale(0.8);
-    }
+    .connection-path:nth-child(1) { animation-delay: 0s; }
+    .connection-path:nth-child(2) { animation-delay: 0.2s; }
+    .connection-path:nth-child(3) { animation-delay: 0.4s; }
+    .connection-path:nth-child(4) { animation-delay: 0.6s; }
+    .connection-path:nth-child(5) { animation-delay: 0.8s; }
+    .connection-path:nth-child(6) { animation-delay: 1.0s; }
+    .connection-path:nth-child(7) { animation-delay: 1.2s; }
+    .connection-path:nth-child(8) { animation-delay: 1.4s; }
   }
 
   @media (max-width: 400px) {
@@ -307,11 +333,16 @@
     .circle-7 { left: 102px; top: 10px; }
     .circle-8 { left: 168px; top: 37px; }
     .connection-path {
-      stroke-width: 0.6;
+      animation: pulse-beam var(--pulse-duration) ease-in-out infinite;
     }
-    .synapse-particle {
-      transform: scale(0.6);
-    }
+    .connection-path:nth-child(1) { animation-delay: 0s; }
+    .connection-path:nth-child(2) { animation-delay: 0.2s; }
+    .connection-path:nth-child(3) { animation-delay: 0.4s; }
+    .connection-path:nth-child(4) { animation-delay: 0.6s; }
+    .connection-path:nth-child(5) { animation-delay: 0.8s; }
+    .connection-path:nth-child(6) { animation-delay: 1.0s; }
+    .connection-path:nth-child(7) { animation-delay: 1.2s; }
+    .connection-path:nth-child(8) { animation-delay: 1.4s; }
   }
 </style>
 </head>
@@ -411,8 +442,8 @@
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       // Define gap distances (in pixels)
-      const hubGap = 10; // Stop 10px from hub edge
-      const circleGap = 10; // Stop 10px from circle edge
+      const hubGap = 10;
+      const circleGap = 10;
 
       // Calculate start and end points to create gaps
       const startX = hubCenterX + (dx / distance) * (hubRadius + hubGap);
@@ -426,40 +457,8 @@
       const controlY = (startY + endY) / 2;
       const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
       path.setAttribute('d', d);
-      path.setAttribute('id', `path-${index}`);
-      path.classList.add('connection-path');
+      path.classList.add('connection-path', `path-${index + 1}`);
       svg.appendChild(path);
-
-      // Create particle
-      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      particle.setAttribute('class', 'synapse-particle');
-      particle.setAttribute('r', '3');
-      svg.appendChild(particle);
-
-      // Animate particle along path
-      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-      animateMotion.setAttribute('dur', `2s`);
-      animateMotion.setAttribute('repeatCount', 'indefinite');
-      animateMotion.setAttribute('begin', `${index * 0.25}s`);
-      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
-      particle.appendChild(animateMotion);
-
-      // Animate particle size and opacity
-      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-      animateSize.setAttribute('attributeName', 'r');
-      animateSize.setAttribute('values', '2;4;2');
-      animateSize.setAttribute('dur', '2s');
-      animateSize.setAttribute('repeatCount', 'indefinite');
-      animateSize.setAttribute('begin', `${index * 0.25}s`);
-      particle.appendChild(animateSize);
-
-      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-      animateOpacity.setAttribute('attributeName', 'fill-opacity');
-      animateOpacity.setAttribute('values', '0.5;1;0.5');
-      animateOpacity.setAttribute('dur', '2s');
-      animateOpacity.setAttribute('repeatCount', 'indefinite');
-      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
-      particle.appendChild(animateOpacity);
     });
   }
 
