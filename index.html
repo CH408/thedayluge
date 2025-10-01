@@ -98,8 +98,8 @@
 
   .wheel-container {
     position: relative;
-    width: 398px; /* Reduced from 530px by ~25% */
-    height: 398px;
+    width: 600px; /* Increased from 398px to allow more space for outer circles */
+    height: 600px;
     margin: 0 auto;
     z-index: 5;
   }
@@ -132,7 +132,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 135px; /* Reduced from 180px by 25% */
+    width: 135px;
     height: 135px;
     background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
     color: yellow;
@@ -143,7 +143,7 @@
     justify-content: center;
     cursor: pointer;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 18px; /* Reduced from 22px to fit */
+    font-size: 18px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -168,7 +168,7 @@
 
   .circle {
     position: absolute;
-    width: 84px; /* Reduced from 112px by 25% */
+    width: 84px;
     height: 84px;
     border-radius: 50%;
     display: flex;
@@ -177,21 +177,21 @@
     text-align: center;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-weight: 900;
-    font-size: 12px; /* Reduced from 14px to fit */
+    font-size: 12px;
     line-height: 1.1;
     cursor: pointer;
     background: black;
-    padding: 8px; /* Reduced from 10px */
+    padding: 8px;
   }
 
-  .circle-1 { left: 306px; top: 159px; border: 2px solid var(--marble-gray); color: var(--marble-gray); }
-  .circle-2 { left: 263px; top: 263px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3 { left: 159px; bottom: 13px; border: 2px solid var(--orange); color: var(--orange); }
-  .circle-4 { left: 55px; bottom: 55px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5 { left: 11px; top: 159px; border: 2px solid var(--violet); color: var(--violet); }
-  .circle-6 { left: 55px; top: 55px; border: 2px solid var(--pink); color: var(--pink); }
-  .circle-7 { left: 159px; top: 13px; border: 2px solid #00ff00; color: #00ff00; }
-  .circle-8 { left: 263px; top: 55px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
+  .circle-1 { left: 458px; top: 238px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Moved farther out */
+  .circle-2 { left: 395px; top: 395px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3 { left: 238px; bottom: 12px; border: 2px solid var(--orange); color: var(--orange); }
+  .circle-4 { left: 82px; bottom: 82px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5 { left: 16px; top: 238px; border: 2px solid var(--violet); color: var(--violet); }
+  .circle-6 { left: 82px; top: 82px; border: 2px solid var(--pink); color: var(--pink); }
+  .circle-7 { left: 238px; top: 12px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-8 { left: 395px; top: 82px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
     display: flex;
