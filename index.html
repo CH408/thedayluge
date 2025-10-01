@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --synapse-duration: 2s;
+    --circuit-duration: 1.5s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -98,7 +98,7 @@
 
   .wheel-container {
     position: relative;
-    width: 550px; /* Increased to accommodate larger circles */
+    width: 550px; /* Increased for larger circles */
     height: 550px;
     margin: 0 auto;
     z-index: 5;
@@ -117,15 +117,35 @@
   .connection-path {
     fill: none;
     stroke: var(--connection-color);
-    stroke-width: 1;
-    stroke-linecap: round;
-    stroke-opacity: 0.3;
+    stroke-width: 2;
+    stroke-linecap: square;
+    stroke-dasharray: 8 4;
+    animation: circuit-flicker var(--circuit-duration) ease-in-out infinite;
   }
 
-  .synapse-particle {
-    fill: var(--connection-color);
-    filter: drop-shadow(0 0 4px var(--connection-color));
+  @keyframes circuit-flicker {
+    0% {
+      stroke-opacity: 0.3;
+      filter: drop-shadow(0 0 2px var(--connection-color));
+    }
+    50% {
+      stroke-opacity: 1;
+      filter: drop-shadow(0 0 6px var(--connection-color));
+    }
+    100% {
+      stroke-opacity: 0.3;
+      filter: drop-shadow(0 0 2px var(--connection-color));
+    }
   }
+
+  .path-1 { animation-delay: 0s; }
+  .path-2 { animation-delay: 0.2s; }
+  .path-3 { animation-delay: 0.4s; }
+  .path-4 { animation-delay: 0.6s; }
+  .path-5 { animation-delay: 0.8s; }
+  .path-6 { animation-delay: 1.0s; }
+  .path-7 { animation-delay: 1.2s; }
+  .path-8 { animation-delay: 1.4s; }
 
   .wheel-center {
     position: absolute;
@@ -184,7 +204,7 @@
     padding: 10px;
   }
 
-  .circle-1 { left: 413px; top: 213px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Adjusted positions */
+  .circle-1 { left: 413px; top: 213px; border: 2px solid var(--marble-gray); color: var(--marble-gray); }
   .circle-2 { left: 352px; top: 352px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
   .circle-3 { left: 213px; bottom: 17px; border: 2px solid var(--orange); color: var(--orange); }
   .circle-4 { left: 74px; bottom: 76px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
@@ -278,11 +298,18 @@
     .circle-7 { left: 128px; top: 11px; }
     .circle-8 { left: 211px; top: 45px; }
     .connection-path {
-      stroke-width: 0.8;
+      stroke-width: 1.5;
+      stroke-dasharray: 6 3;
+      animation: circuit-flicker var(--circuit-duration) ease-in-out infinite;
     }
-    .synapse-particle {
-      transform: scale(0.8);
-    }
+    .path-1 { animation-delay: 0s; }
+    .path-2 { animation-delay: 0.2s; }
+    .path-3 { animation-delay: 0.4s; }
+    .path-4 { animation-delay: 0.6s; }
+    .path-5 { animation-delay: 0.8s; }
+    .path-6 { animation-delay: 1.0s; }
+    .path-7 { animation-delay: 1.2s; }
+    .path-8 { animation-delay: 1.4s; }
   }
 
   @media (max-width: 400px) {
@@ -313,11 +340,18 @@
     .circle-7 { left: 106px; top: 9px; }
     .circle-8 { left: 176px; top: 37px; }
     .connection-path {
-      stroke-width: 0.6;
+      stroke-width: 1.2;
+      stroke-dasharray: 5 2;
+      animation: circuit-flicker var(--circuit-duration) ease-in-out infinite;
     }
-    .synapse-particle {
-      transform: scale(0.6);
-    }
+    .path-1 { animation-delay: 0s; }
+    .path-2 { animation-delay: 0.2s; }
+    .path-3 { animation-delay: 0.4s; }
+    .path-4 { animation-delay: 0.6s; }
+    .path-5 { animation-delay: 0.8s; }
+    .path-6 { animation-delay: 1.0s; }
+    .path-7 { animation-delay: 1.2s; }
+    .path-8 { animation-delay: 1.4s; }
   }
 </style>
 </head>
@@ -426,46 +460,16 @@
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
-      // Create curved path
+      // Create zigzag path for circuit-like effect
+      const midX1 = startX + (endX - startX) * 0.3;
+      const midY1 = startY + (endY - startY) * 0.3 + 20;
+      const midX2 = startX + (endX - startX) * 0.7;
+      const midY2 = startY + (endY - startY) * 0.7 - 20;
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const controlX = (startX + endX) / 2;
-      const controlY = (startY + endY) / 2;
-      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
+      const d = `M${startX},${startY} L${midX1},${midY1} L${midX2},${midY2} L${endX},${endY}`;
       path.setAttribute('d', d);
-      path.setAttribute('id', `path-${index}`);
-      path.classList.add('connection-path');
+      path.classList.add('connection-path', `path-${index + 1}`);
       svg.appendChild(path);
-
-      // Create particle
-      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      particle.setAttribute('class', 'synapse-particle');
-      particle.setAttribute('r', '3');
-      svg.appendChild(particle);
-
-      // Animate particle along path
-      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-      animateMotion.setAttribute('dur', `2s`);
-      animateMotion.setAttribute('repeatCount', 'indefinite');
-      animateMotion.setAttribute('begin', `${index * 0.25}s`);
-      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
-      particle.appendChild(animateMotion);
-
-      // Animate particle size and opacity
-      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-      animateSize.setAttribute('attributeName', 'r');
-      animateSize.setAttribute('values', '2;4;2');
-      animateSize.setAttribute('dur', '2s');
-      animateSize.setAttribute('repeatCount', 'indefinite');
-      animateSize.setAttribute('begin', `${index * 0.25}s`);
-      particle.appendChild(animateSize);
-
-      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-      animateOpacity.setAttribute('attributeName', 'fill-opacity');
-      animateOpacity.setAttribute('values', '0.5;1;0.5');
-      animateOpacity.setAttribute('dur', '2s');
-      animateOpacity.setAttribute('repeatCount', 'indefinite');
-      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
-      particle.appendChild(animateOpacity);
     });
   }
 
