@@ -8,8 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-  
   :root{
     --red:#cc0000;  
     --orange:#ff8800;  
@@ -24,12 +22,8 @@
     --turquoise:#40E0D0;
     --bright-blue:#00b7eb;
     --ink:#111;  
-    --rule:#bfbfbf;
-    --maxw:1400px;
     --bright-purple-glow: #cc88ff;
     --light-cyan-glow: #33ddff;
-    --aqua-blueish-green: #00cc99;
-    --aqua-blueish-green-dark: #009977;
     --gold: #d4af37;
     --gold-dark: #b8860b;
     --marble-white: #f5f5f5;
@@ -57,10 +51,9 @@
     overflow:hidden;
   }
 
-  /* ===== HEADER ===== */
   .header{
     position:absolute;
-    top:20px;
+    top:50px;
     left:50%;
     transform:translateX(-50%);
     text-align:center;
@@ -76,14 +69,44 @@
   }
 
   @keyframes title-pulse {
-    0% { color: var(--bright-purple-glow); }
-    25% { color: var(--light-cyan-glow); }
-    50% { color: var(--pink); }
-    75% { color: var(--orange); }
-    100% { color: var(--bright-purple-glow); }
+    0% {  
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    12.5% {  
+      color: #8080ff;
+      text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    25% {  
+      color: var(--light-cyan-glow);
+      text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    37.5% {  
+      color: #6688cc;
+      text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    50% {  
+      color: var(--pink);
+      text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    62.5% {  
+      color: #cc4499;
+      text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    75% {  
+      color: var(--bright-blue);
+      text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    87.5% {  
+      color: #6688cc;
+      text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    100% {  
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+    }
   }
 
-  /* ===== WHEEL CONTAINER ===== */
   .wheel-container{
     position: relative;
     width: 500px;
@@ -91,11 +114,7 @@
     margin: 0 auto;
     z-index: 5;
   }
-  @media (min-width: 1024px) {
-    .wheel-container { margin-top: 100px; }
-  }
 
-  /* ===== CENTER CIRCLE ===== */
   .wheel-center{
     position: absolute;
     top: 50%;
@@ -111,21 +130,30 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-size: 20px;
     font-weight: 900;
     text-transform: uppercase;
-    text-align: center;
+    letter-spacing: 0.5px;
     line-height: 1.2;
     box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
     animation: pulse 3s ease-in-out infinite;
     text-decoration: none;
-  }
-  @keyframes pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50%      { transform: translate(-50%, -50%) scale(1.05); }
+    text-align:center;
   }
 
-  /* ===== OUTER CIRCLES ===== */
+  @keyframes pulse {
+    0%, 100% {  
+      box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+      border-color: #ffdd00;
+    }
+    50% {  
+      box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
+      border-color: #ffff00;
+      transform: translate(-50%, -50%) scale(1.02);
+    }
+  }
+
   .circle{
     position: absolute;
     width: 90px;
@@ -134,262 +162,205 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    text-align:center;
+    padding: 4px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-weight: 900;
-    text-transform: uppercase;
-    background: #000; /* black background */
+    font-size: 13px;
+    line-height: 1.2;
     cursor: pointer;
   }
-  .circle-1 { left: 390px; top: 205px; border: 3px solid var(--marble-gray); color: var(--marble-gray); }
-  .circle-2 { left: 336px; top: 336px; border: 3px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3 { left: 205px; bottom: 20px; border: 3px solid var(--orange); color: var(--orange); }
-  .circle-4 { left: 74px; bottom: 64px; border: 3px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5 { left: 20px; top: 205px; border: 3px solid var(--blue); color: var(--blue); }
-  .circle-6 { left: 74px; top: 74px; border: 3px solid var(--violet); color: var(--violet); }
-  .circle-7 { left: 205px; top: 20px; border: 3px solid var(--green); color: var(--green); }
-  .circle-8 { left: 336px; top: 74px; border: 3px solid var(--gold); color: var(--gold); }
 
-  .circle:hover { transform: scale(1.15); }
-
-  /* ===== PARTICLE BACKGROUND ===== */
-  #particle-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
+  .circle-1{
+    left: 390px; top: 205px;
+    border:2px solid var(--marble-gray);
+    color: #333333;
+  }
+  .circle-2{
+    left: 336px; top: 336px;
+    border:2px solid var(--bright-dark-green);
+    color: #ffffff;
+  }
+  .circle-3{
+    left: 205px; bottom: 20px;
+    border:2px solid var(--orange);
+    color: #333333;
+  }
+  .circle-4{
+    left: 74px; bottom: 64px;
+    border:2px solid var(--dodgers-blue);
+    color: #ffffff;
+  }
+  .circle-5{
+    left: 20px; top: 205px;
+    border:2px solid var(--blue);
+    color: white;
+  }
+  .circle-6{
+    left: 74px; top: 74px;
+    border:2px solid var(--violet);
+    color: black;
+  }
+  .circle-7{
+    left: 205px; top: 20px;
+    border:2px solid #00ff00;
+    color: #00ff00;
+  }
+  .circle-8{
+    left: 336px; top: 74px;
+    border:2px solid var(--gold);
+    color: #333333;
   }
 
-  /* ===== COMETS ===== */
-  #comet-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
   }
-  .comet {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: radial-gradient(circle, #ffffff 0%, transparent 70%);
-    box-shadow: 0 0 15px var(--light-cyan-glow);
-    animation: comet-streak 6s linear infinite;
-    opacity: 0;
+
+  .random-button {
+    background: var(--yellow);
+    color: var(--red);
+    border: 2px solid var(--yellow);
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
   }
-  .comet::after {
+
+  .random-button::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: -40px;
-    width: 40px;
-    height: 1px;
-    background: linear-gradient(to left, var(--light-cyan-glow), transparent);
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 32px;
+    background: linear-gradient(45deg, var(--yellow), var(--yellow), var(--yellow));
+    z-index: -1;
+    animation: edge-glow 3s ease-in-out infinite;
     opacity: 0.5;
-    transform: translateY(-50%);
   }
-  @keyframes comet-streak {
-    0% { opacity: 0; transform: translate(0, 0) rotate(45deg); }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
-    100% { opacity: 0; transform: translate(2000px, -2000px) rotate(45deg); }
-  }
-  .comet:nth-child(1) { left: 15%; top: 25%; animation-delay: 0s; }
-  .comet:nth-child(2) { left: 55%; top: 75%; animation-delay: 2s; }
-  .comet:nth-child(3) { left: 85%; top: 35%; animation-delay: 4s; }
 
-  /* ===== ASTEROIDS ===== */
-  #asteroid-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
+  @keyframes edge-glow {
+    0% {
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+      opacity: 0.5;
+    }
+    50% {
+      box-shadow: 0 0 20px var(--yellow), 0 0 40px var(--yellow);
+      opacity: 0.8;
+    }
+    100% {
+      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+      opacity: 0.5;
+    }
   }
-  .asteroid {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--light-cyan-glow);
-    animation: asteroid-drift 25s linear infinite;
-    opacity: 0.6;
-  }
-  @keyframes asteroid-drift {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(800px, 400px); }
-  }
-  .asteroid:nth-child(1) { left: 25%; top: 15%; animation-delay: 0s; }
-  .asteroid:nth-child(2) { left: 65%; top: 55%; animation-delay: 12s; }
 
-  /* ===== RESPONSIVE ADJUSTMENTS ===== */
-  @media(max-width:600px){
-    .wheel-container{ width: 380px; height: 380px; }
-    .wheel-center{ width: 120px; height: 120px; font-size: 16px; }
-    .circle{ width: 75px; height: 75px; font-size: 12px; }
-    .header h1{ font-size: 32px; margin-bottom: 12px; }
+  .random-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
   }
-  @media(max-width:400px){
-    .wheel-container{ width: 320px; height: 320px; }
-    .wheel-center{ width: 100px; height: 100px; font-size: 14px; }
-    .circle{ width: 65px; height: 65px; font-size: 11px; }
-    .header h1{ font-size: 28px; }
+
+  .archive-bottom{
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    font-size: 11px;
+    color: #aaccff;
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 0.7;
+    text-shadow: 0 0 5px #00ddff;
+  }
+  .archive-bottom:hover{
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ddff;
   }
 </style>
 </head>
 <body>
-
-  <!-- HEADER -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
-    <!-- REMOVED glowing separator line -->
   </div>
 
-  <!-- PARTICLE LAYERS -->
-  <canvas id="particle-canvas"></canvas>
-  <div id="comet-container">
-    <div class="comet"></div><div class="comet"></div><div class="comet"></div>
-  </div>
-  <div id="asteroid-container">
-    <div class="asteroid"></div><div class="asteroid"></div>
-  </div>
-
-  <!-- WHEEL -->
   <div class="wheel-container">
-    <!-- REMOVED orbital rings -->
-    <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
+    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
+      TRENDING<br>NEWS
+    </a>
+
     <div class="circle circle-1" onclick="goToCategory('politics')">Politics</div>
     <div class="circle circle-2" onclick="goToCategory('markets-economics')">Markets &amp; Economics</div>
     <div class="circle circle-3" onclick="goToCategory('sports-leisure')">Sports &amp; Leisure</div>
-    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">Science &amp; Tech</div>
+    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">Science, Nature &amp; Technology</div>
     <div class="circle circle-5" onclick="goToCategory('arts-literature')">Arts &amp; Literature</div>
     <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy')">Wisdom &amp; Philosophy</div>
     <div class="circle circle-7" onclick="goToCategory('conspiracy-corner')">Conspiracy Corner</div>
     <div class="circle circle-8" onclick="goToCategory('history')">History</div>
   </div>
 
-  <!-- Random button -->
   <div class="button-container">
     <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
   </div>
 
-  <!-- Archive link -->
   <div class="archive-bottom" onclick="openArchive()">archive</div>
 
 <script>
-/* Removed all password overlay JS */
+  const categoryMap = {
+      'politics': 'politics.html',
+      'markets-economics': 'markets-economics.html',
+      'sports-leisure': 'sports-leisure.html',
+      'science-nature-technology': 'science-nature-technology.html',
+      'arts-literature': 'arts-literature.html',
+      'wisdom-philosophy': 'wisdom-philosophy.html',
+      'conspiracy-corner': 'conspiracy-corner.html',
+      'history': 'history.html'
+  };
 
-/* PARTICLES */
-const canvas = document.getElementById('particle-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const particlesArray = [];
-const numberOfParticles = 80;
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 1 + 0.5;
-    this.speedX = Math.random() * 0.3 - 0.15;
-    this.speedY = Math.random() * 0.3 - 0.15;
-    this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if (this.size > 0.2) this.size -= 0.05;
-    if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-    if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-  }
-  draw() {
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 5;
-    ctx.shadowColor = this.color;
-  }
-}
-function init() {
-  particlesArray.length = 0;
-  for (let i = 0; i < numberOfParticles; i++) {
-    particlesArray.push(new Particle());
-  }
-}
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < particlesArray.length; i++) {
-    particlesArray[i].update();
-    particlesArray[i].draw();
-    if (particlesArray[i].size <= 0.2) {
-      particlesArray.splice(i, 1);
-      i--;
-      particlesArray.push(new Particle());
-    }
-  }
-  requestAnimationFrame(animate);
-}
-init(); animate();
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  init();
-});
-
-/* CATEGORY NAVIGATION */
-const categoryMap = {
-  'politics': 'politics.html',
-  'markets-economics': 'markets-economics.html',
-  'sports-leisure': 'sports-leisure.html',
-  'science-nature-technology': 'science-nature-technology.html',
-  'arts-literature': 'arts-literature.html',
-  'wisdom-philosophy': 'wisdom-philosophy.html',
-  'conspiracy-corner': 'conspiracy-corner.html',
-  'history': 'history.html'
-};
-function goToCategory(category) {
-  const url = categoryMap[category];
-  if (url) window.location.href = url;
-}
-
-/* RANDOM ARTICLE */
-function goToRandomArticle() {
-  const newWindow = window.open('', '_blank');
-  if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-    console.error('Popup blocked.');
-    return;
-  }
-  fetch('surprise-me-links.txt')
-    .then(response => response.text())
-    .then(text => {
-      const lines = text.split('\n').filter(line => line.trim());
-      const links = lines.map(line => {
-        const parts = line.split('|');
-        if (parts.length >= 2) return parts[1].trim();
-        return null;
-      }).filter(link => link !== null);
-      const surpriseLinks = links.slice(0, 12);
-      if (surpriseLinks.length > 0) {
-        const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
-        newWindow.location.href = randomLink;
-      } else {
-        newWindow.close();
+  window.goToCategory = function(category) {
+      const url = categoryMap[category];
+      if (url) {
+          window.location.href = url;
       }
-    })
-    .catch(error => {
-      console.error('Error loading surprise links:', error);
-      if (newWindow && !newWindow.closed) newWindow.close();
-    });
-}
-function openArchive() { window.location.href = 'archive.html'; }
+  };
+
+  window.goToRandomArticle = function() {
+    const newWindow = window.open('', '_blank');
+    if (!newWindow) return;
+
+    fetch('surprise-me-links.txt')
+        .then(response => response.text())
+        .then(text => {
+            const lines = text.split('\n').filter(line => line.trim());
+            const links = lines.map(line => {
+                const parts = line.split('|');
+                if (parts.length >= 2) return parts[1].trim();
+                return null;
+            }).filter(link => link !== null);
+            
+            const surpriseLinks = links.slice(0, 12);
+            if (surpriseLinks.length > 0) {
+                const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+                newWindow.location.href = randomLink;
+            }
+        });
+  };
+
+  window.openArchive = function() {
+    window.location.href = 'archive.html';
+  };
 </script>
 </body>
 </html>
