@@ -427,8 +427,8 @@
       path.classList.add('connection-path');
       svg.appendChild(path);
 
-      // Create 3 sparks per path
-      for (let i = 0; i < 3; i++) {
+      // Create 6 sparks per path
+      for (let i = 0; i < 6; i++) {
         const spark = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         spark.setAttribute('class', 'spark');
         spark.setAttribute('r', '2');
@@ -438,7 +438,7 @@
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
         animateMotion.setAttribute('dur', `${1 + Math.random() * 0.5}s`);
         animateMotion.setAttribute('repeatCount', 'indefinite');
-        animateMotion.setAttribute('begin', `${(index * 0.3 + i * 0.2) + Math.random() * 0.5}s`);
+        animateMotion.setAttribute('begin', `${(index * 0.2 + i * 0.1) + Math.random() * 0.5}s`);
         animateMotion.setAttribute('path', d);
         animateMotion.setAttribute('keyPoints', `${Math.random() * 0.8 + 0.1};${Math.random() * 0.8 + 0.1}`);
         animateMotion.setAttribute('keyTimes', '0;1');
@@ -451,7 +451,7 @@
         animateSize.setAttribute('values', '1;3;1');
         animateSize.setAttribute('dur', `${0.8 + Math.random() * 0.4}s`);
         animateSize.setAttribute('repeatCount', 'indefinite');
-        animateSize.setAttribute('begin', `${(index * 0.3 + i * 0.2) + Math.random() * 0.5}s`);
+        animateSize.setAttribute('begin', `${(index * 0.2 + i * 0.1) + Math.random() * 0.5}s`);
         spark.appendChild(animateSize);
 
         // Animate spark opacity
@@ -460,7 +460,7 @@
         animateOpacity.setAttribute('values', '0;1;0');
         animateOpacity.setAttribute('dur', `${0.8 + Math.random() * 0.4}s`);
         animateOpacity.setAttribute('repeatCount', 'indefinite');
-        animateOpacity.setAttribute('begin', `${(index * 0.3 + i * 0.2) + Math.random() * 0.5}s`);
+        animateOpacity.setAttribute('begin', `${(index * 0.2 + i * 0.1) + Math.random() * 0.5}s`);
         spark.appendChild(animateOpacity);
       }
     });
