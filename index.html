@@ -8,58 +8,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --red:#cc0000;  
-    --orange:#ff8800;  
-    --green:#00dd55;
-    --blue:#1a1a80;
-    --light-blue:#33ddff;
-    --violet:#cc88ff;
-    --pink:#ff69b4; /* lighter, brighter pink */
-    --yellow:#ffdd00;
-    --bright-blue:#00b7eb;
-    --ink:#111;  
+  :root {
+    --red: #cc0000;  
+    --orange: #ff8800;  
+    --green: #00dd55;
+    --blue: #1a1a80;
+    --light-blue: #33ddff;
+    --violet: #cc88ff;
+    --pink: #ff69b4;
+    --yellow: #ffcc00; /* Dimmed from #ffdd00 */
+    --bright-blue: #00b7eb;
+    --ink: #111;  
     --bright-purple-glow: #cc88ff;
     --light-cyan-glow: #33ddff;
     --gold: #d4af37;
-    --gold-bright: #ffd700; /* brighter gold */
+    --gold-bright: #ffd700;
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
+    --synapse-duration: 2s;
+    --connection-color: var(--light-cyan-glow);
   }
 
-  *{box-sizing:border-box;margin:0;padding:0}
-  html, body {height:100%; overflow-x:hidden;}
-
-  body{
-    font-family:'Special Elite', 'Courier New', Courier, monospace;
-    color:var(--ink);
-    line-height:1.5;
-    background:#000000;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    min-height:100vh;
-    position:relative;
-    overflow:hidden;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
-  .header{
-    position:absolute;
-    top:50px;
-    left:50%;
-    transform:translateX(-50%);
-    text-align:center;
-    z-index:10;
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
   }
-  .header h1{
-    text-transform:uppercase;  
-    letter-spacing:.5px;  
-    font-size:42px;  
-    margin-bottom:8px;
-    font-family:'Special Elite', 'Courier New', Courier, monospace;
-    animation:title-pulse 8s ease-in-out infinite;
+
+  body {
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    color: var(--ink);
+    line-height: 1.5;
+    background: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+
+  .header h1 {
+    text-transform: uppercase;  
+    letter-spacing: .5px;  
+    font-size: 42px;  
+    margin-bottom: 8px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    animation: title-pulse 8s ease-in-out infinite;
   }
 
   @keyframes title-pulse {
@@ -85,15 +96,38 @@
     }
   }
 
-  .wheel-container{
+  .wheel-container {
     position: relative;
-    width: 500px;
+    width: 500px; /* Adjusted for smaller circles */
     height: 500px;
     margin: 0 auto;
     z-index: 5;
   }
 
-  .wheel-center{
+  .connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .connection-path {
+    fill: none;
+    stroke: var(--connection-color);
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-opacity: 0.3;
+  }
+
+  .synapse-particle {
+    fill: var(--connection-color);
+    filter: drop-shadow(0 0 4px var(--connection-color));
+  }
+
+  .wheel-center {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -117,7 +151,7 @@
     box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
     animation: pulse 3s ease-in-out infinite;
     text-decoration: none;
-    text-align:center;
+    text-align: center;
   }
 
   @keyframes pulse {
@@ -132,32 +166,32 @@
     }
   }
 
-  .circle{
+  .circle {
     position: absolute;
-    width: 90px;
-    height: 90px;
+    width: 93px; /* Reduced 25% from 124px */
+    height: 93px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align:center;
+    text-align: center;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-weight: 900;
-    font-size: 13px;
-    line-height: 1.2;
+    font-size: 13px; /* Adjusted for smaller circles */
+    line-height: 1.1;
     cursor: pointer;
-    background:black;
+    background: black;
+    padding: 8px;
   }
 
-  /* --- Circle colors --- */
-  .circle-1{ left: 390px; top: 205px; border:2px solid var(--marble-gray); color: var(--marble-gray); }
-  .circle-2{ left: 336px; top: 336px; border:2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3{ left: 205px; bottom: 20px; border:2px solid var(--orange); color: var(--orange); }
-  .circle-4{ left: 74px; bottom: 64px; border:2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5{ left: 20px; top: 205px; border:2px solid var(--violet); color: var(--violet); }
-  .circle-6{ left: 74px; top: 74px; border:2px solid var(--pink); color: var(--pink); }
-  .circle-7{ left: 205px; top: 20px; border:2px solid #00ff00; color: #00ff00; }
-  .circle-8{ left: 336px; top: 74px; border:2px solid var(--gold-bright); color: var(--gold-bright); }
+  .circle-1 { left: 390px; top: 206px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Adjusted positions */
+  .circle-2 { left: 337px; top: 337px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3 { left: 206px; bottom: 19px; border: 2px solid var(--orange); color: var(--orange); }
+  .circle-4 { left: 74px; bottom: 65px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5 { left: 20px; top: 206px; border: 2px solid var(--violet); color: var(--violet); }
+  .circle-6 { left: 74px; top: 74px; border: 2px solid var(--pink); color: var(--pink); }
+  .circle-7 { left: 206px; top: 19px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-8 { left: 337px; top: 74px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
     display: flex;
@@ -176,7 +210,7 @@
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 900; /* Emphasized bold */
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -198,7 +232,7 @@
     box-shadow: 0 0 40px var(--red), 0 8px 20px rgba(0,0,0,0.4), 0 0 25px var(--yellow);
   }
 
-  .archive-bottom{
+  .archive-bottom {
     position: fixed;
     bottom: 15px;
     left: 15px;
@@ -209,10 +243,81 @@
     opacity: 0.7;
     text-shadow: 0 0 5px #00ddff;
   }
-  .archive-bottom:hover{
+
+  .archive-bottom:hover {
     opacity: 1;
     color: #ffffff;
     text-shadow: 0 0 10px #00ddff;
+  }
+
+  @media (max-width: 600px) {
+    .header h1 {
+      font-size: 28px; /* Adjusted for single line */
+      letter-spacing: 0.3px;
+    }
+    .wheel-container {
+      width: 300px; /* Adjusted for smaller circles */
+      height: 300px;
+    }
+    .wheel-center {
+      width: 100px;
+      height: 100px;
+      font-size: 16px;
+    }
+    .circle {
+      width: 62px; /* Reduced 25% from 83px */
+      height: 62px;
+      font-size: 10px; /* Adjusted for fit */
+    }
+    .circle-1 { left: 234px; top: 124px; }
+    .circle-2 { left: 202px; top: 202px; }
+    .circle-3 { left: 124px; bottom: 11px; }
+    .circle-4 { left: 45px; bottom: 39px; }
+    .circle-5 { left: 12px; top: 124px; }
+    .circle-6 { left: 45px; top: 45px; }
+    .circle-7 { left: 124px; top: 11px; }
+    .circle-8 { left: 202px; top: 45px; }
+    .connection-path {
+      stroke-width: 0.8;
+    }
+    .synapse-particle {
+      transform: scale(0.8);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .header h1 {
+      font-size: 28px; /* Adjusted for single line */
+      letter-spacing: 0.3px;
+    }
+    .wheel-container {
+      width: 250px; /* Adjusted for smaller circles */
+      height: 250px;
+    }
+    .wheel-center {
+      width: 80px;
+      height: 80px;
+      font-size: 14px;
+    }
+    .circle {
+      width: 52px; /* Reduced 25% from 69px */
+      height: 52px;
+      font-size: 9px; /* Adjusted for fit */
+    }
+    .circle-1 { left: 195px; top: 103px; }
+    .circle-2 { left: 168px; top: 168px; }
+    .circle-3 { left: 103px; bottom: 9px; }
+    .circle-4 { left: 37px; bottom: 33px; }
+    .circle-5 { left: 10px; top: 103px; }
+    .circle-6 { left: 37px; top: 37px; }
+    .circle-7 { left: 103px; top: 9px; }
+    .circle-8 { left: 168px; top: 37px; }
+    .connection-path {
+      stroke-width: 0.6;
+    }
+    .synapse-particle {
+      transform: scale(0.6);
+    }
   }
 </style>
 </head>
@@ -222,18 +327,18 @@
   </div>
 
   <div class="wheel-container">
+    <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
       TRENDING<br>NEWS
     </a>
-
-    <div class="circle circle-1" onclick="goToCategory('politics')">Politics</div>
-    <div class="circle circle-2" onclick="goToCategory('markets-economics')">Markets &amp; Economics</div>
-    <div class="circle circle-3" onclick="goToCategory('sports-leisure')">Sports &amp; Leisure</div>
-    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">Science, Nature &amp; Technology</div>
-    <div class="circle circle-5" onclick="goToCategory('arts-literature')">Arts &amp; Literature</div>
-    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy')">Wisdom &amp; Philosophy</div>
-    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner')">Conspiracy Corner</div>
-    <div class="circle circle-8" onclick="goToCategory('history')">History</div>
+    <div class="circle circle-1" onclick="goToCategory('politics')">POLITICS</div>
+    <div class="circle circle-2" onclick="goToCategory('markets-economics')">MARKETS & ECONOMICS</div>
+    <div class="circle circle-3" onclick="goToCategory('sports-leisure')">SPORTS & LEISURE</div>
+    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">SCIENCE, NATURE & TECHNOLOGY</div>
+    <div class="circle circle-5" onclick="goToCategory('arts-literature')">ARTS & LITERATURE</div>
+    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy')">WISDOM & PHILOSOPHY</div>
+    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner')">CONSPIRACY CORNER</div>
+    <div class="circle circle-8" onclick="goToCategory('history')">HISTORY</div>
   </div>
 
   <div class="button-container">
@@ -244,21 +349,21 @@
 
 <script>
   const categoryMap = {
-      'politics': 'politics.html',
-      'markets-economics': 'markets-economics.html',
-      'sports-leisure': 'sports-leisure.html',
-      'science-nature-technology': 'science-nature-technology.html',
-      'arts-literature': 'arts-literature.html',
-      'wisdom-philosophy': 'wisdom-philosophy.html',
-      'conspiracy-corner': 'conspiracy-corner.html',
-      'history': 'history.html'
+    'politics': 'politics.html',
+    'markets-economics': 'markets-economics.html',
+    'sports-leisure': 'sports-leisure.html',
+    'science-nature-technology': 'science-nature-technology.html',
+    'arts-literature': 'arts-literature.html',
+    'wisdom-philosophy': 'wisdom-philosophy.html',
+    'conspiracy-corner': 'conspiracy-corner.html',
+    'history': 'history.html'
   };
 
   window.goToCategory = function(category) {
-      const url = categoryMap[category];
-      if (url) {
-          window.location.href = url;
-      }
+    const url = categoryMap[category];
+    if (url) {
+      window.location.href = url;
+    }
   };
 
   window.goToRandomArticle = function() {
@@ -266,26 +371,107 @@
     if (!newWindow) return;
 
     fetch('surprise-me-links.txt')
-        .then(response => response.text())
-        .then(text => {
-            const lines = text.split('\n').filter(line => line.trim());
-            const links = lines.map(line => {
-                const parts = line.split('|');
-                if (parts.length >= 2) return parts[1].trim();
-                return null;
-            }).filter(link => link !== null);
-            
-            const surpriseLinks = links.slice(0, 12);
-            if (surpriseLinks.length > 0) {
-                const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
-                newWindow.location.href = randomLink;
-            }
-        });
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) return parts[1].trim();
+          return null;
+        }).filter(link => link !== null);
+        
+        const surpriseLinks = links.slice(0, 12);
+        if (surpriseLinks.length > 0) {
+          const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+          newWindow.location.href = randomLink;
+        }
+      });
   };
 
   window.openArchive = function() {
     window.location.href = 'archive.html';
   };
+
+  function drawConnections() {
+    const svg = document.querySelector('.connection-lines');
+    const wheelCenter = document.querySelector('.wheel-center');
+    const circles = document.querySelectorAll('.circle');
+
+    const svgRect = svg.getBoundingClientRect();
+    const hubRect = wheelCenter.getBoundingClientRect();
+    const hubRadius = hubRect.width / 2;
+    const hubCenterX = hubRect.left + hubRadius - svgRect.left;
+    const hubCenterY = hubRect.top + hubRadius - svgRect.top;
+
+    svg.innerHTML = '';
+
+    circles.forEach((circle, index) => {
+      const rect = circle.getBoundingClientRect();
+      const circleRadius = rect.width / 2;
+      const circleCenterX = rect.left + circleRadius - svgRect.left;
+      const circleCenterY = rect.top + circleRadius - svgRect.top;
+
+      // Calculate direction vector and distance
+      const dx = circleCenterX - hubCenterX;
+      const dy = circleCenterY - hubCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // Define gap distances
+      const hubGap = 10;
+      const circleGap = 10;
+
+      // Calculate start and end points for gaps
+      const startX = hubCenterX + (dx / distance) * (hubRadius + hubGap);
+      const startY = hubCenterY + (dy / distance) * (hubRadius + hubGap);
+      const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
+      const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
+
+      // Create curved path
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const controlX = (startX + endX) / 2;
+      const controlY = (startY + endY) / 2;
+      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
+      path.setAttribute('d', d);
+      path.setAttribute('id', `path-${index}`);
+      path.classList.add('connection-path');
+      svg.appendChild(path);
+
+      // Create particle
+      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      particle.setAttribute('class', 'synapse-particle');
+      particle.setAttribute('r', '3');
+      svg.appendChild(particle);
+
+      // Animate particle along path
+      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+      animateMotion.setAttribute('dur', `2s`);
+      animateMotion.setAttribute('repeatCount', 'indefinite');
+      animateMotion.setAttribute('begin', `${index * 0.25}s`);
+      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
+      particle.appendChild(animateMotion);
+
+      // Animate particle size and opacity
+      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateSize.setAttribute('attributeName', 'r');
+      animateSize.setAttribute('values', '2;4;2');
+      animateSize.setAttribute('dur', '2s');
+      animateSize.setAttribute('repeatCount', 'indefinite');
+      animateSize.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateSize);
+
+      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateOpacity.setAttribute('attributeName', 'fill-opacity');
+      animateOpacity.setAttribute('values', '0.5;1;0.5');
+      animateOpacity.setAttribute('dur', '2s');
+      animateOpacity.setAttribute('repeatCount', 'indefinite');
+      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateOpacity);
+    });
+  }
+
+  window.addEventListener('load', drawConnections);
+  window.addEventListener('resize', drawConnections);
+  window.addEventListener('orientationchange', drawConnections);
 </script>
 </body>
 </html>
