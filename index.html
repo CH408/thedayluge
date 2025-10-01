@@ -16,7 +16,7 @@
     --light-blue: #33ddff;
     --violet: #cc88ff;
     --pink: #ff69b4;
-    --yellow: #ffcc00; /* Dimmed from #ffdd00 */
+    --yellow: #ffcc00;
     --bright-blue: #00b7eb;
     --ink: #111;  
     --bright-purple-glow: #cc88ff;
@@ -98,8 +98,8 @@
 
   .wheel-container {
     position: relative;
-    width: 530px; /* Adjusted for larger circles */
-    height: 530px;
+    width: 480px; /* Reduced from 600px to bring circles closer */
+    height: 480px;
     margin: 0 auto;
     z-index: 5;
   }
@@ -132,8 +132,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 180px; /* Increased 20% from 150px */
-    height: 180px;
+    width: 135px;
+    height: 135px;
     background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
     color: yellow;
     border: 2px solid #ffdd00;
@@ -143,7 +143,7 @@
     justify-content: center;
     cursor: pointer;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 22px; /* Adjusted for larger hub */
+    font-size: 18px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -168,8 +168,8 @@
 
   .circle {
     position: absolute;
-    width: 112px; /* Increased 20% from 93px */
-    height: 112px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -177,21 +177,21 @@
     text-align: center;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-weight: 900;
-    font-size: 14px; /* Adjusted for larger circles */
+    font-size: 12px;
     line-height: 1.1;
     cursor: pointer;
     background: black;
-    padding: 10px;
+    padding: 8px;
   }
 
-  .circle-1 { left: 403px; top: 210px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Adjusted positions */
-  .circle-2 { left: 346px; top: 346px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3 { left: 210px; bottom: 18px; border: 2px solid var(--orange); color: var(--orange); }
-  .circle-4 { left: 74px; bottom: 71px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5 { left: 17px; top: 210px; border: 2px solid var(--violet); color: var(--violet); }
-  .circle-6 { left: 74px; top: 74px; border: 2px solid var(--pink); color: var(--pink); }
-  .circle-7 { left: 210px; top: 18px; border: 2px solid #00ff00; color: #00ff00; }
-  .circle-8 { left: 346px; top: 74px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
+  .circle-1 { left: 368px; top: 191px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Adjusted to reduce distance by ~33% */
+  .circle-2 { left: 317px; top: 317px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3 { left: 191px; bottom: 10px; border: 2px solid var(--orange); color: var(--orange); }
+  .circle-4 { left: 66px; bottom: 66px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5 { left: 13px; top: 191px; border: 2px solid var(--violet); color: var(--violet); }
+  .circle-6 { left: 66px; top: 66px; border: 2px solid var(--pink); color: var(--pink); }
+  .circle-7 { left: 191px; top: 10px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-8 { left: 317px; top: 66px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
     display: flex;
@@ -210,7 +210,7 @@
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-size: 14px;
-    font-weight: 900; /* Emphasized bold */
+    font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -252,31 +252,31 @@
 
   @media (max-width: 600px) {
     .header h1 {
-      font-size: 28px; /* Adjusted for single line */
+      font-size: 28px;
       letter-spacing: 0.3px;
     }
     .wheel-container {
-      width: 320px; /* Adjusted for larger circles */
-      height: 320px;
+      width: 380px;
+      height: 380px;
     }
     .wheel-center {
-      width: 120px; /* Increased 20% from 100px */
+      width: 120px;
       height: 120px;
-      font-size: 18px; /* Adjusted for larger hub */
+      font-size: 18px;
     }
     .circle {
-      width: 74px; /* Increased 20% from 62px */
+      width: 74px;
       height: 74px;
-      font-size: 11px; /* Adjusted for fit */
+      font-size: 11px;
     }
-    .circle-1 { left: 242px; top: 126px; }
-    .circle-2 { left: 208px; top: 208px; }
-    .circle-3 { left: 126px; bottom: 11px; }
-    .circle-4 { left: 45px; bottom: 47px; }
-    .circle-5 { left: 10px; top: 126px; }
-    .circle-6 { left: 45px; top: 45px; }
-    .circle-7 { left: 126px; top: 11px; }
-    .circle-8 { left: 208px; top: 45px; }
+    .circle-1 { left: 272px; top: 142px; }
+    .circle-2 { left: 234px; top: 234px; }
+    .circle-3 { left: 142px; bottom: 13px; }
+    .circle-4 { left: 50px; bottom: 53px; }
+    .circle-5 { left: 12px; top: 142px; }
+    .circle-6 { left: 50px; top: 50px; }
+    .circle-7 { left: 142px; top: 13px; }
+    .circle-8 { left: 234px; top: 50px; }
     .connection-path {
       stroke-width: 0.8;
     }
@@ -287,31 +287,31 @@
 
   @media (max-width: 400px) {
     .header h1 {
-      font-size: 28px; /* Adjusted for single line */
+      font-size: 28px;
       letter-spacing: 0.3px;
     }
     .wheel-container {
-      width: 270px; /* Adjusted for larger circles */
-      height: 270px;
+      width: 320px;
+      height: 320px;
     }
     .wheel-center {
-      width: 96px; /* Increased 20% from 80px */
+      width: 96px;
       height: 96px;
-      font-size: 15px; /* Adjusted for larger hub */
+      font-size: 15px;
     }
     .circle {
-      width: 62px; /* Increased 20% from 52px */
+      width: 62px;
       height: 62px;
-      font-size: 10px; /* Adjusted for fit */
+      font-size: 10px;
     }
-    .circle-1 { left: 202px; top: 105px; }
-    .circle-2 { left: 173px; top: 173px; }
-    .circle-3 { left: 105px; bottom: 9px; }
-    .circle-4 { left: 37px; bottom: 40px; }
-    .circle-5 { left: 8px; top: 105px; }
-    .circle-6 { left: 37px; top: 37px; }
-    .circle-7 { left: 105px; top: 9px; }
-    .circle-8 { left: 173px; top: 37px; }
+    .circle-1 { left: 227px; top: 118px; }
+    .circle-2 { left: 195px; top: 195px; }
+    .circle-3 { left: 118px; bottom: 11px; }
+    .circle-4 { left: 42px; bottom: 45px; }
+    .circle-5 { left: 10px; top: 118px; }
+    .circle-6 { left: 42px; top: 42px; }
+    .circle-7 { left: 118px; top: 11px; }
+    .circle-8 { left: 195px; top: 42px; }
     .connection-path {
       stroke-width: 0.6;
     }
@@ -411,22 +411,18 @@
       const circleCenterX = rect.left + circleRadius - svgRect.left;
       const circleCenterY = rect.top + circleRadius - svgRect.top;
 
-      // Calculate direction vector and distance
       const dx = circleCenterX - hubCenterX;
       const dy = circleCenterY - hubCenterY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      // Define gap distances
       const hubGap = 10;
       const circleGap = 10;
 
-      // Calculate start and end points for gaps
       const startX = hubCenterX + (dx / distance) * (hubRadius + hubGap);
       const startY = hubCenterY + (dy / distance) * (hubRadius + hubGap);
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
-      // Create curved path
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const controlX = (startX + endX) / 2;
       const controlY = (startY + endY) / 2;
@@ -436,13 +432,11 @@
       path.classList.add('connection-path');
       svg.appendChild(path);
 
-      // Create particle
       const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       particle.setAttribute('class', 'synapse-particle');
       particle.setAttribute('r', '3');
       svg.appendChild(particle);
 
-      // Animate particle along path
       const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
       animateMotion.setAttribute('dur', `2s`);
       animateMotion.setAttribute('repeatCount', 'indefinite');
@@ -450,7 +444,6 @@
       animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
       particle.appendChild(animateMotion);
 
-      // Animate particle size and opacity
       const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
       animateSize.setAttribute('attributeName', 'r');
       animateSize.setAttribute('values', '2;4;2');
