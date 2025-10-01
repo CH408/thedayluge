@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --glow-duration: 1.5s;
+    --synapse-duration: 2s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -117,24 +117,14 @@
   .connection-path {
     fill: none;
     stroke: var(--connection-color);
-    stroke-width: 2;
+    stroke-width: 1;
     stroke-linecap: round;
-    animation: neural-glow var(--glow-duration) ease-in-out infinite;
+    stroke-opacity: 0.3;
   }
 
-  @keyframes neural-glow {
-    0% {
-      stroke-opacity: 0.4;
-      filter: drop-shadow(0 0 4px var(--connection-color));
-    }
-    50% {
-      stroke-opacity: 1;
-      filter: drop-shadow(0 0 8px var(--connection-color));
-    }
-    100% {
-      stroke-opacity: 0.4;
-      filter: drop-shadow(0 0 4px var(--connection-color));
-    }
+  .synapse-particle {
+    fill: var(--connection-color);
+    filter: drop-shadow(0 0 4px var(--connection-color));
   }
 
   .wheel-center {
@@ -283,7 +273,10 @@
     .circle-7 { left: 123px; top: 12px; }
     .circle-8 { left: 201px; top: 45px; }
     .connection-path {
-      stroke-width: 1.5;
+      stroke-width: 0.8;
+    }
+    .synapse-particle {
+      transform: scale(0.8);
     }
   }
 
@@ -313,6 +306,12 @@
     .circle-6 { left: 37px; top: 37px; }
     .circle-7 { left: 102px; top: 10px; }
     .circle-8 { left: 168px; top: 37px; }
+    .connection-path {
+      stroke-width: 0.6;
+    }
+    .synapse-particle {
+      transform: scale(0.6);
+    }
   }
 </style>
 </head>
@@ -394,29 +393,73 @@
 
     const svgRect = svg.getBoundingClientRect();
     const hubRect = wheelCenter.getBoundingClientRect();
-    const hubCenterX = hubRect.left + hubRect.width / 2 - svgRect.left;
-    const hubCenterY = hubRect.top + hubRect.height / 2 - svgRect.top;
+    const hubRadius = hubRect.width / 2;
+    const hubCenterX = hubRect.left + hubRadius - svgRect.left;
+    const hubCenterY = hubRect.top + hubRadius - svgRect.top;
 
     svg.innerHTML = '';
 
-    circles.forEach((circle) => {
+    circles.forEach((circle, index) => {
       const rect = circle.getBoundingClientRect();
-      const circleCenterX = rect.left + rect.width / 2 - svgRect.left;
-      const circleCenterY = rect.top + rect.height / 2 - svgRect.top;
+      const circleRadius = rect.width / 2;
+      const circleCenterX = rect.left + circleRadius - svgRect.left;
+      const circleCenterY = rect.top + circleRadius - svgRect.top;
 
+      // Calculate direction vector from hub to circle
+      const dx = circleCenterX - hubCenterX;
+      const dy = circleCenterY - hubCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // Define gap distances (in pixels)
+      const hubGap = 10; // Stop 10px from hub edge
+      const circleGap = 10; // Stop 10px from circle edge
+
+      // Calculate start and end points to create gaps
+      const startX = hubCenterX + (dx / distance) * (hubRadius + hubGap);
+      const startY = hubCenterY + (dy / distance) * (hubRadius + hubGap);
+      const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
+      const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
+
+      // Create curved path
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const controlX = (hubCenterX + circleCenterX) / 2;
-      const controlY = (hubCenterY + circleCenterY) / 2;
-      const d = `M${hubCenterX},${hubCenterY} Q${controlX},${controlY} ${circleCenterX},${circleCenterY}`;
-      // For lightning bolt effect, uncomment below and comment out the Bezier curve
-      // const midX1 = hubCenterX + (circleCenterX - hubCenterX) * 0.33 + (Math.random() - 0.5) * 20;
-      // const midY1 = hubCenterY + (circleCenterY - hubCenterY) * 0.33 + (Math.random() - 0.5) * 20;
-      // const midX2 = hubCenterX + (circleCenterX - hubCenterX) * 0.66 + (Math.random() - 0.5) * 20;
-      // const midY2 = hubCenterY + (circleCenterY - hubCenterY) * 0.66 + (Math.random() - 0.5) * 20;
-      // const d = `M${hubCenterX},${hubCenterY} L${midX1},${midY1} L${midX2},${midY2} L${circleCenterX},${circleCenterY}`;
+      const controlX = (startX + endX) / 2;
+      const controlY = (startY + endY) / 2;
+      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
       path.setAttribute('d', d);
+      path.setAttribute('id', `path-${index}`);
       path.classList.add('connection-path');
       svg.appendChild(path);
+
+      // Create particle
+      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      particle.setAttribute('class', 'synapse-particle');
+      particle.setAttribute('r', '3');
+      svg.appendChild(particle);
+
+      // Animate particle along path
+      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+      animateMotion.setAttribute('dur', `2s`);
+      animateMotion.setAttribute('repeatCount', 'indefinite');
+      animateMotion.setAttribute('begin', `${index * 0.25}s`);
+      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
+      particle.appendChild(animateMotion);
+
+      // Animate particle size and opacity
+      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateSize.setAttribute('attributeName', 'r');
+      animateSize.setAttribute('values', '2;4;2');
+      animateSize.setAttribute('dur', '2s');
+      animateSize.setAttribute('repeatCount', 'indefinite');
+      animateSize.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateSize);
+
+      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateOpacity.setAttribute('attributeName', 'fill-opacity');
+      animateOpacity.setAttribute('values', '0.5;1;0.5');
+      animateOpacity.setAttribute('dur', '2s');
+      animateOpacity.setAttribute('repeatCount', 'indefinite');
+      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateOpacity);
     });
   }
 
