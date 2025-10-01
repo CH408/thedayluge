@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --spark-duration: 1.2s;
+    --synapse-duration: 2s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -117,13 +117,14 @@
   .connection-path {
     fill: none;
     stroke: var(--connection-color);
-    stroke-width: 0.5;
-    stroke-opacity: 0.2;
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-opacity: 0.3;
   }
 
-  .spark {
+  .synapse-particle {
     fill: var(--connection-color);
-    filter: drop-shadow(0 0 3px var(--connection-color));
+    filter: drop-shadow(0 0 4px var(--connection-color));
   }
 
   .wheel-center {
@@ -277,9 +278,9 @@
     .circle-7 { left: 128px; top: 11px; }
     .circle-8 { left: 211px; top: 45px; }
     .connection-path {
-      stroke-width: 0.4;
+      stroke-width: 0.8;
     }
-    .spark {
+    .synapse-particle {
       transform: scale(0.8);
     }
   }
@@ -312,9 +313,9 @@
     .circle-7 { left: 106px; top: 9px; }
     .circle-8 { left: 176px; top: 37px; }
     .connection-path {
-      stroke-width: 0.3;
+      stroke-width: 0.6;
     }
-    .spark {
+    .synapse-particle {
       transform: scale(0.6);
     }
   }
@@ -425,50 +426,46 @@
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
-      // Create straight path
+      // Create curved path
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const d = `M${startX},${startY} L${endX},${endY}`;
+      const controlX = (startX + endX) / 2;
+      const controlY = (startY + endY) / 2;
+      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
       path.setAttribute('d', d);
       path.setAttribute('id', `path-${index}`);
       path.classList.add('connection-path');
       svg.appendChild(path);
 
-      // Create 6 sparks per path
-      for (let i = 0; i < 6; i++) {
-        const spark = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        spark.setAttribute('class', 'spark');
-        spark.setAttribute('r', '2');
-        svg.appendChild(spark);
+      // Create particle
+      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      particle.setAttribute('class', 'synapse-particle');
+      particle.setAttribute('r', '3');
+      svg.appendChild(particle);
 
-        // Animate spark position along path
-        const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        animateMotion.setAttribute('dur', `${1 + Math.random() * 0.5}s`);
-        animateMotion.setAttribute('repeatCount', 'indefinite');
-        animateMotion.setAttribute('begin', `${(index * 0.2 + i * 0.1) + Math.random() * 0.5}s`);
-        animateMotion.setAttribute('path', d);
-        animateMotion.setAttribute('keyPoints', `${Math.random() * 0.8 + 0.1};${Math.random() * 0.8 + 0.1}`);
-        animateMotion.setAttribute('keyTimes', '0;1');
-        animateMotion.setAttribute('calcMode', 'linear');
-        spark.appendChild(animateMotion);
+      // Animate particle along path
+      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+      animateMotion.setAttribute('dur', `2s`);
+      animateMotion.setAttribute('repeatCount', 'indefinite');
+      animateMotion.setAttribute('begin', `${index * 0.25}s`);
+      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
+      particle.appendChild(animateMotion);
 
-        // Animate spark size
-        const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-        animateSize.setAttribute('attributeName', 'r');
-        animateSize.setAttribute('values', '1;3;1');
-        animateSize.setAttribute('dur', `${0.8 + Math.random() * 0.4}s`);
-        animateSize.setAttribute('repeatCount', 'indefinite');
-        animateSize.setAttribute('begin', `${(index * 0.2 + i * 0.1) + Math.random() * 0.5}s`);
-        spark.appendChild(animateSize);
+      // Animate particle size and opacity
+      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateSize.setAttribute('attributeName', 'r');
+      animateSize.setAttribute('values', '2;4;2');
+      animateSize.setAttribute('dur', '2s');
+      animateSize.setAttribute('repeatCount', 'indefinite');
+      animateSize.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateSize);
 
-        // Animate spark opacity
-        const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-        animateOpacity.setAttribute('attributeName', 'fill-opacity');
-        animateOpacity.setAttribute('values', '0;1;0');
-        animateOpacity.setAttribute('dur', `${0.8 + Math.random() * 0.4}s`);
-        animateOpacity.setAttribute('repeatCount', 'indefinite');
-        animateOpacity.setAttribute('begin', `${(index * 0.2 + i * 0.1) + Math.random() * 0.5}s`);
-        spark.appendChild(animateOpacity);
-      }
+      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateOpacity.setAttribute('attributeName', 'fill-opacity');
+      animateOpacity.setAttribute('values', '0.5;1;0.5');
+      animateOpacity.setAttribute('dur', '2s');
+      animateOpacity.setAttribute('repeatCount', 'indefinite');
+      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateOpacity);
     });
   }
 
