@@ -1,5 +1,3 @@
-html
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -402,40 +400,40 @@ html
   .spoke-1{
     left: 390px;
     top: 205px;
-    background: linear-gradient(135deg, var(--marble-white) 0%, var(--marble-gray) 50%, var(--marble-white) 100%);
-    color: #333333 !important;
+    border-color: var(--marble-gray) !important;
+    color: var(--marble-gray) !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
   .spoke-2{
     left: 336px;
     top: 336px;
-    background: radial-gradient(circle, var(--bright-dark-green) 0%, var(--bright-dark-green-dark) 100%);
-    color: #ffffff !important;
+    border-color: var(--bright-dark-green) !important;
+    color: var(--bright-dark-green) !important;
     font-size: 13px;
     font-weight: 900 !important;
   }
   .spoke-3{
     left: 205px;
     bottom: 20px;
-    background: radial-gradient(circle, var(--orange) 0%, #cc6600 100%);
-    color: #333333 !important;
+    border-color: var(--orange) !important;
+    color: var(--orange) !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
   .spoke-4{
     left: 74px;
     bottom: 64px;
-    background: radial-gradient(circle, var(--dodgers-blue) 0%, var(--dodgers-blue-dark) 100%);
-    color: #ffffff !important;
+    border-color: var(--dodgers-blue) !important;
+    color: var(--dodgers-blue) !important;
     font-size: 13px;
     font-weight: 900 !important;
   }
   .spoke-5{
     left: 20px;
     top: 205px;
-    background: radial-gradient(circle, var(--blue) 0%, #001166 100%);
-    color: white !important;
+    border-color: var(--blue) !important;
+    color: var(--blue) !important;
     font-size: 13px;
     font-weight: 900 !important;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
@@ -443,15 +441,15 @@ html
   .spoke-6{
     left: 74px;
     top: 74px;
-    background: radial-gradient(circle, var(--violet) 0%, #9966dd 100%);
-    color: black !important;
+    border-color: var(--violet) !important;
+    color: var(--violet) !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
   .spoke-7{
     left: 205px;
     top: 20px;
-    background: radial-gradient(circle, #000000 0%, #111111 100%);
+    border-color: #00ff00 !important;
     color: #00ff00 !important;
     font-size: 14px;
     font-weight: 900 !important;
@@ -460,8 +458,8 @@ html
   .spoke-8{
     left: 336px;
     top: 74px;
-    background: radial-gradient(circle, var(--gold) 0%, var(--gold-dark) 100%);
-    color: #333333 !important;
+    border-color: var(--gold) !important;
+    color: var(--gold) !important;
     font-size: 14px;
     font-weight: 900 !important;
   }
@@ -1134,7 +1132,7 @@ html
 </style>
 </head>
 <body>
-  <div id="password-overlay" class="hidden">
+  <div id="password-overlay">
     <h2>Enter Password</h2>
     <input type="password" id="password-input" placeholder="Password">
     <button id="password-submit">Submit</button>
@@ -1205,15 +1203,15 @@ html
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('Page loaded, bypassing password overlay...');
   const overlay = document.getElementById('password-overlay');
   const passwordInput = document.getElementById('password-input');
   const submitButton = document.getElementById('password-submit');
   const errorMessage = document.getElementById('password-error');
+  const resetAuthButton = document.getElementById('reset-auth');
 
-  overlay.classList.add('hidden');
-  document.querySelectorAll('body > *').forEach(el => {
-    el.style.visibility = 'visible';
+  // Initially hide all content except overlay
+  document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
+    el.style.visibility = 'hidden';
   });
 
   const correctPassword = '5813';
@@ -1225,6 +1223,8 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('body > *').forEach(el => {
         el.style.visibility = 'visible';
       });
+      resetAuthButton.style.display = 'block';
+      localStorage.setItem('isAuthenticated', 'true');
     } else {
       console.log('Incorrect password');
       errorMessage.style.display = 'block';
@@ -1239,10 +1239,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
       el.style.visibility = 'hidden';
     });
+    resetAuthButton.style.display = 'none';
     passwordInput.value = '';
     errorMessage.style.display = 'none';
     passwordInput.focus();
   };
+
+  // Check if already authenticated
+  if (localStorage.getItem('isAuthenticated') === 'true') {
+    overlay.classList.add('hidden');
+    document.querySelectorAll('body > *').forEach(el => {
+      el.style.visibility = 'visible';
+    });
+    resetAuthButton.style.display = 'block';
+  } else {
+    passwordInput.focus();
+  }
 
   submitButton.addEventListener('click', checkPassword);
   passwordInput.addEventListener('keydown', function(event) {
