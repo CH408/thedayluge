@@ -149,15 +149,15 @@
     background:black;
   }
 
-  /* --- Circle colors per your rules --- */
+  /* --- Circle colors --- */
   .circle-1{ left: 390px; top: 205px; border:2px solid var(--marble-gray); color: var(--marble-gray); }
   .circle-2{ left: 336px; top: 336px; border:2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
   .circle-3{ left: 205px; bottom: 20px; border:2px solid var(--orange); color: var(--orange); }
   .circle-4{ left: 74px; bottom: 64px; border:2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5{ left: 20px; top: 205px; border:2px solid var(--violet); color: var(--violet); } /* Arts & Lit → violet */
-  .circle-6{ left: 74px; top: 74px; border:2px solid var(--pink); color: var(--pink); } /* Wisdom → lighter pink */
+  .circle-5{ left: 20px; top: 205px; border:2px solid var(--violet); color: var(--violet); }
+  .circle-6{ left: 74px; top: 74px; border:2px solid var(--pink); color: var(--pink); }
   .circle-7{ left: 205px; top: 20px; border:2px solid #00ff00; color: #00ff00; }
-  .circle-8{ left: 336px; top: 74px; border:2px solid var(--gold-bright); color: var(--gold-bright); } /* History brighter gold */
+  .circle-8{ left: 336px; top: 74px; border:2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
     display: flex;
@@ -171,7 +171,7 @@
   .random-button {
     background: var(--yellow);
     color: var(--red);
-    border: 2px solid var(--yellow);
+    border: 2px solid var(--red);
     padding: 14px 28px;
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
@@ -181,43 +181,21 @@
     letter-spacing: 0.5px;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     z-index: 10;
+    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3), 0 0 15px var(--red);
+    animation: red-glow 2s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .random-button::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    right: -4px;
-    bottom: -4px;
-    border-radius: 32px;
-    background: linear-gradient(45deg, var(--yellow), var(--yellow), var(--yellow));
-    z-index: -1;
-    animation: edge-glow 3s ease-in-out infinite;
-    opacity: 0.5;
-  }
-
-  @keyframes edge-glow {
-    0% {
-      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
-      opacity: 0.5;
-    }
-    50% {
-      box-shadow: 0 0 20px var(--yellow), 0 0 40px var(--yellow);
-      opacity: 0.8;
-    }
-    100% {
-      box-shadow: 0 0 10px var(--yellow), 0 0 20px var(--yellow);
-      opacity: 0.5;
-    }
+  @keyframes red-glow {
+    0% { box-shadow: 0 0 10px var(--red), 0 0 20px var(--red), 0 0 20px var(--yellow); }
+    50% { box-shadow: 0 0 25px var(--red), 0 0 40px var(--red), 0 0 25px var(--yellow); }
+    100% { box-shadow: 0 0 10px var(--red), 0 0 20px var(--red), 0 0 20px var(--yellow); }
   }
 
   .random-button:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 35px var(--yellow), 0 8px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 0 40px var(--red), 0 8px 20px rgba(0,0,0,0.4), 0 0 25px var(--yellow);
   }
 
   .archive-bottom{
