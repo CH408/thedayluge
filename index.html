@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --wave-duration: 1.5s;
+    --spark-duration: 1.2s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -117,35 +117,14 @@
   .connection-path {
     fill: none;
     stroke: var(--connection-color);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-dasharray: 10 5;
-    animation: wave-flow var(--wave-duration) linear infinite;
-    filter: drop-shadow(0 0 4px var(--connection-color));
+    stroke-width: 0.5;
+    stroke-opacity: 0.2;
   }
 
-  @keyframes wave-flow {
-    0% {
-      stroke-dashoffset: 0;
-      stroke-opacity: 0.5;
-    }
-    50% {
-      stroke-opacity: 1;
-    }
-    100% {
-      stroke-dashoffset: 30;
-      stroke-opacity: 0.5;
-    }
+  .spark {
+    fill: var(--connection-color);
+    filter: drop-shadow(0 0 3px var(--connection-color));
   }
-
-  .path-1 { animation-delay: 0s; }
-  .path-2 { animation-delay: 0.2s; }
-  .path-3 { animation-delay: 0.4s; }
-  .path-4 { animation-delay: 0.6s; }
-  .path-5 { animation-delay: 0.8s; }
-  .path-6 { animation-delay: 1.0s; }
-  .path-7 { animation-delay: 1.2s; }
-  .path-8 { animation-delay: 1.4s; }
 
   .wheel-center {
     position: absolute;
@@ -293,18 +272,11 @@
     .circle-7 { left: 123px; top: 12px; }
     .circle-8 { left: 201px; top: 45px; }
     .connection-path {
-      stroke-width: 1.5;
-      stroke-dasharray: 8 4;
-      animation: wave-flow var(--wave-duration) linear infinite;
+      stroke-width: 0.4;
     }
-    .connection-path:nth-child(1) { animation-delay: 0s; }
-    .connection-path:nth-child(2) { animation-delay: 0.2s; }
-    .connection-path:nth-child(3) { animation-delay: 0.4s; }
-    .connection-path:nth-child(4) { animation-delay: 0.6s; }
-    .connection-path:nth-child(5) { animation-delay: 0.8s; }
-    .connection-path:nth-child(6) { animation-delay: 1.0s; }
-    .connection-path:nth-child(7) { animation-delay: 1.2s; }
-    .connection-path:nth-child(8) { animation-delay: 1.4s; }
+    .spark {
+      transform: scale(0.8);
+    }
   }
 
   @media (max-width: 400px) {
@@ -334,18 +306,11 @@
     .circle-7 { left: 102px; top: 10px; }
     .circle-8 { left: 168px; top: 37px; }
     .connection-path {
-      stroke-width: 1.2;
-      stroke-dasharray: 6 3;
-      animation: wave-flow var(--wave-duration) linear infinite;
+      stroke-width: 0.3;
     }
-    .connection-path:nth-child(1) { animation-delay: 0s; }
-    .connection-path:nth-child(2) { animation-delay: 0.2s; }
-    .connection-path:nth-child(3) { animation-delay: 0.4s; }
-    .connection-path:nth-child(4) { animation-delay: 0.6s; }
-    .connection-path:nth-child(5) { animation-delay: 0.8s; }
-    .connection-path:nth-child(6) { animation-delay: 1.0s; }
-    .connection-path:nth-child(7) { animation-delay: 1.2s; }
-    .connection-path:nth-child(8) { animation-delay: 1.4s; }
+    .spark {
+      transform: scale(0.6);
+    }
   }
 </style>
 </head>
@@ -454,14 +419,50 @@
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
-      // Create curved path
+      // Create straight path
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const controlX = (startX + endX) / 2;
-      const controlY = (startY + endY) / 2;
-      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
+      const d = `M${startX},${startY} L${endX},${endY}`;
       path.setAttribute('d', d);
-      path.classList.add('connection-path', `path-${index + 1}`);
+      path.setAttribute('id', `path-${index}`);
+      path.classList.add('connection-path');
       svg.appendChild(path);
+
+      // Create 3 sparks per path
+      for (let i = 0; i < 3; i++) {
+        const spark = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        spark.setAttribute('class', 'spark');
+        spark.setAttribute('r', '2');
+        svg.appendChild(spark);
+
+        // Animate spark position along path
+        const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+        animateMotion.setAttribute('dur', `${1 + Math.random() * 0.5}s`);
+        animateMotion.setAttribute('repeatCount', 'indefinite');
+        animateMotion.setAttribute('begin', `${(index * 0.3 + i * 0.2) + Math.random() * 0.5}s`);
+        animateMotion.setAttribute('path', d);
+        animateMotion.setAttribute('keyPoints', `${Math.random() * 0.8 + 0.1};${Math.random() * 0.8 + 0.1}`);
+        animateMotion.setAttribute('keyTimes', '0;1');
+        animateMotion.setAttribute('calcMode', 'linear');
+        spark.appendChild(animateMotion);
+
+        // Animate spark size
+        const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        animateSize.setAttribute('attributeName', 'r');
+        animateSize.setAttribute('values', '1;3;1');
+        animateSize.setAttribute('dur', `${0.8 + Math.random() * 0.4}s`);
+        animateSize.setAttribute('repeatCount', 'indefinite');
+        animateSize.setAttribute('begin', `${(index * 0.3 + i * 0.2) + Math.random() * 0.5}s`);
+        spark.appendChild(animateSize);
+
+        // Animate spark opacity
+        const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        animateOpacity.setAttribute('attributeName', 'fill-opacity');
+        animateOpacity.setAttribute('values', '0;1;0');
+        animateOpacity.setAttribute('dur', `${0.8 + Math.random() * 0.4}s`);
+        animateOpacity.setAttribute('repeatCount', 'indefinite');
+        animateOpacity.setAttribute('begin', `${(index * 0.3 + i * 0.2) + Math.random() * 0.5}s`);
+        spark.appendChild(animateOpacity);
+      }
     });
   }
 
