@@ -11,7 +11,6 @@
   @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
   
   :root{
-    /* ==== COLOR VARIABLES ==== */
     --red:#cc0000;  
     --orange:#ff8800;  
     --green:#00dd55;
@@ -56,15 +55,12 @@
     min-height:100vh;
     position:relative;
     overflow:hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
 
   /* ===== HEADER ===== */
   .header{
     position:absolute;
-    top:20px; /* was 50px → lowered so header does NOT overlap circles */
+    top:20px;
     left:50%;
     transform:translateX(-50%);
     text-align:center;
@@ -79,30 +75,6 @@
     animation:title-pulse 8s ease-in-out infinite;
   }
 
-  /* ===== NEW SEPARATOR LINE UNDER TITLE ===== */
-  /* Added glowing, color-shifting line to match "THE DAYLUGE" animation */
-  .separator {
-    width: 240px;
-    height: 4px;
-    margin: 0 auto;
-    border-radius: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--bright-purple-glow),
-      var(--light-cyan-glow),
-      var(--pink),
-      var(--orange),
-      var(--gold)
-    );
-    background-size: 300% 100%;
-    animation: separator-shift 6s linear infinite;
-  }
-  @keyframes separator-shift {
-    0%   { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-  }
-
-  /* ===== TITLE COLOR CYCLE ===== */
   @keyframes title-pulse {
     0% { color: var(--bright-purple-glow); }
     25% { color: var(--light-cyan-glow); }
@@ -119,31 +91,8 @@
     margin: 0 auto;
     z-index: 5;
   }
-
-  /* Desktop-only adjustment: push wheel further down to avoid overlap */
   @media (min-width: 1024px) {
-    .wheel-container {
-      margin-top: 100px; /* was smaller before */
-    }
-  }
-
-  /* ===== ORBITAL RINGS ===== */
-  .orbital-ring{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 1px solid #00ff0044;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotate linear infinite;
-  }
-  .orbital-ring-1{ width: 300px; height: 300px; animation-duration: 10s; }
-  .orbital-ring-2{ width: 400px; height: 400px; animation-duration: 12s; animation-direction: reverse; }
-  .orbital-ring-3{ width: 480px; height: 480px; animation-duration: 14s; }
-
-  @keyframes rotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to   { transform: translate(-50%, -50%) rotate(360deg); }
+    .wheel-container { margin-top: 100px; }
   }
 
   /* ===== CENTER CIRCLE ===== */
@@ -171,15 +120,12 @@
     animation: pulse 3s ease-in-out infinite;
     text-decoration: none;
   }
-
   @keyframes pulse {
     0%, 100% { transform: translate(-50%, -50%) scale(1); }
     50%      { transform: translate(-50%, -50%) scale(1.05); }
   }
 
   /* ===== OUTER CIRCLES ===== */
-  /* Spokes completely removed. Only 8 circles remain. 
-     Each has: black background, colored border, and matching font color */
   .circle{
     position: absolute;
     width: 90px;
@@ -191,7 +137,7 @@
     font-size: 13px;
     font-weight: 900;
     text-transform: uppercase;
-    background: #000; /* matches page background */
+    background: #000; /* black background */
     cursor: pointer;
   }
   .circle-1 { left: 390px; top: 205px; border: 3px solid var(--marble-gray); color: var(--marble-gray); }
@@ -204,8 +150,6 @@
   .circle-8 { left: 336px; top: 74px; border: 3px solid var(--gold); color: var(--gold); }
 
   .circle:hover { transform: scale(1.15); }
-
-  /* ==== END OF BLOCK 1 of 3 ==== */
 
   /* ===== PARTICLE BACKGROUND ===== */
   #particle-canvas {
@@ -287,106 +231,40 @@
 
   /* ===== RESPONSIVE ADJUSTMENTS ===== */
   @media(max-width:600px){
-    .wheel-container{
-      width: 380px;
-      height: 380px;
-    }
-    .wheel-center{
-      width: 120px;
-      height: 120px;
-      font-size: 16px;
-    }
-    .circle{
-      width: 75px;
-      height: 75px;
-      font-size: 12px;
-    }
-    .header h1{
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-    .separator{
-      width: 160px;
-      height: 3px;
-    }
+    .wheel-container{ width: 380px; height: 380px; }
+    .wheel-center{ width: 120px; height: 120px; font-size: 16px; }
+    .circle{ width: 75px; height: 75px; font-size: 12px; }
+    .header h1{ font-size: 32px; margin-bottom: 12px; }
   }
-
   @media(max-width:400px){
-    .wheel-container{
-      width: 320px;
-      height: 320px;
-    }
-    .wheel-center{
-      width: 100px;
-      height: 100px;
-      font-size: 14px;
-    }
-    .circle{
-      width: 65px;
-      height: 65px;
-      font-size: 11px;
-    }
-    .header h1{
-      font-size: 28px;
-    }
-    .separator{
-      width: 140px;
-      height: 3px;
-    }
+    .wheel-container{ width: 320px; height: 320px; }
+    .wheel-center{ width: 100px; height: 100px; font-size: 14px; }
+    .circle{ width: 65px; height: 65px; font-size: 11px; }
+    .header h1{ font-size: 28px; }
   }
-
-  /* ===== END OF BLOCK 2 of 3 ===== */
 </style>
 </head>
 <body>
 
-  <!-- ===== BODY CONTENT START ===== -->
-
-  <!-- Password overlay (currently bypassed by JS, but still included for fallback) -->
-  <div id="password-overlay" class="hidden">
-    <h2>Enter Password</h2>
-    <input type="password" id="password-input" placeholder="Password">
-    <button id="password-submit">Submit</button>
-    <p id="password-error">Incorrect password, please try again.</p>
-  </div>
-
-  <!-- Reset auth button (hidden unless explicitly used) -->
-  <button id="reset-auth" onclick="resetAuth()" style="display:none;">Reset Auth</button>
-  
   <!-- HEADER -->
   <div class="header">
     <h1>THE DAYLUGE</h1>
-    <div class="separator"></div> <!-- glowing line under title -->
+    <!-- REMOVED glowing separator line -->
   </div>
 
-  <!-- PARTICLE LAYER -->
+  <!-- PARTICLE LAYERS -->
   <canvas id="particle-canvas"></canvas>
-
-  <!-- COMETS -->
   <div id="comet-container">
-    <div class="comet"></div>
-    <div class="comet"></div>
-    <div class="comet"></div>
+    <div class="comet"></div><div class="comet"></div><div class="comet"></div>
   </div>
-
-  <!-- ASTEROIDS -->
   <div id="asteroid-container">
-    <div class="asteroid"></div>
-    <div class="asteroid"></div>
+    <div class="asteroid"></div><div class="asteroid"></div>
   </div>
 
-  <!-- WHEEL CONTAINER -->
+  <!-- WHEEL -->
   <div class="wheel-container">
-    <div class="orbital-ring orbital-ring-1"></div>
-    <div class="orbital-ring orbital-ring-2"></div>
-    <div class="orbital-ring orbital-ring-3"></div>
-
-    <!-- Center button -->
-    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
-      TRENDING<br>NEWS
-    </a>
-
-    <!-- Outer category circles (spokes removed, now standalone) -->
+    <!-- REMOVED orbital rings -->
+    <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
     <div class="circle circle-1" onclick="goToCategory('politics')">Politics</div>
     <div class="circle circle-2" onclick="goToCategory('markets-economics')">Markets &amp; Economics</div>
     <div class="circle circle-3" onclick="goToCategory('sports-leisure')">Sports &amp; Leisure</div>
@@ -405,177 +283,113 @@
   <!-- Archive link -->
   <div class="archive-bottom" onclick="openArchive()">archive</div>
 
-  <!-- ===== JAVASCRIPT ===== -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Page loaded, bypassing password overlay...');
-  const overlay = document.getElementById('password-overlay');
-  const passwordInput = document.getElementById('password-input');
-  const submitButton = document.getElementById('password-submit');
-  const errorMessage = document.getElementById('password-error');
+/* Removed all password overlay JS */
 
-  /* Password overlay bypassed */
-  overlay.classList.add('hidden');
-  document.querySelectorAll('body > *').forEach(el => {
-    el.style.visibility = 'visible';
-  });
-
-  const correctPassword = '5813';
-  function checkPassword() {
-    if (passwordInput.value === correctPassword) {
-      overlay.classList.add('hidden');
-      document.querySelectorAll('body > *').forEach(el => {
-        el.style.visibility = 'visible';
-      });
-    } else {
-      errorMessage.style.display = 'block';
-      passwordInput.value = '';
-      passwordInput.focus();
+/* PARTICLES */
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const particlesArray = [];
+const numberOfParticles = 80;
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 1 + 0.5;
+    this.speedX = Math.random() * 0.3 - 0.15;
+    this.speedY = Math.random() * 0.3 - 0.15;
+    this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.size > 0.2) this.size -= 0.05;
+    if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+    if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+  }
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 5;
+    ctx.shadowColor = this.color;
+  }
+}
+function init() {
+  particlesArray.length = 0;
+  for (let i = 0; i < numberOfParticles; i++) {
+    particlesArray.push(new Particle());
+  }
+}
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < particlesArray.length; i++) {
+    particlesArray[i].update();
+    particlesArray[i].draw();
+    if (particlesArray[i].size <= 0.2) {
+      particlesArray.splice(i, 1);
+      i--;
+      particlesArray.push(new Particle());
     }
   }
-
-  window.resetAuth = function() {
-    localStorage.removeItem('isAuthenticated');
-    overlay.classList.remove('hidden');
-    document.querySelectorAll('body > *:not(#password-overlay)').forEach(el => {
-      el.style.visibility = 'hidden';
-    });
-    passwordInput.value = '';
-    errorMessage.style.display = 'none';
-    passwordInput.focus();
-  };
-
-  submitButton.addEventListener('click', checkPassword);
-  passwordInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      checkPassword();
-    }
-  });
-
-  /* ===== PARTICLES ===== */
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
+  requestAnimationFrame(animate);
+}
+init(); animate();
+window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
-  const particlesArray = [];
-  const numberOfParticles = 80;
-
-  class Particle {
-      constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 1 + 0.5;
-          this.speedX = Math.random() * 0.3 - 0.15;
-          this.speedY = Math.random() * 0.3 - 0.15;
-          this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
-      }
-      update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.05;
-          if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-          if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-      }
-      draw() {
-          ctx.fillStyle = this.color;
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.shadowBlur = 5;
-          ctx.shadowColor = this.color;
-      }
-  }
-
-  function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-          particlesArray.push(new Particle());
-      }
-  }
-
-  function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-              particlesArray.splice(i, 1);
-              i--;
-              particlesArray.push(new Particle());
-          }
-      }
-      requestAnimationFrame(animate);
-  }
-
   init();
-  animate();
-
-  window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-  });
-
-  /* ===== CATEGORY MAP ===== */
-  const categoryMap = {
-      'politics': 'politics.html',
-      'markets-economics': 'markets-economics.html',
-      'sports-leisure': 'sports-leisure.html',
-      'science-nature-technology': 'science-nature-technology.html',
-      'arts-literature': 'arts-literature.html',
-      'wisdom-philosophy': 'wisdom-philosophy.html',
-      'conspiracy-corner': 'conspiracy-corner.html',
-      'history': 'history.html'
-  };
-
-  window.goToCategory = function(category) {
-      const url = categoryMap[category];
-      if (url) {
-          window.location.href = url;
-      }
-  };
-
-  window.goToRandomArticle = function() {
-    const newWindow = window.open('', '_blank');
-    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-        console.error('Popup blocked. Please allow popups for this site.');
-        return;
-    }
-
-    fetch('surprise-me-links.txt')
-        .then(response => response.text())
-        .then(text => {
-            const lines = text.split('\n').filter(line => line.trim());
-            const links = lines.map(line => {
-                const parts = line.split('|');
-                if (parts.length >= 2) return parts[1].trim();
-                return null;
-            }).filter(link => link !== null);
-            const surpriseLinks = links.slice(0, 12);
-            if (surpriseLinks.length > 0) {
-                const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
-                newWindow.location.href = randomLink;
-            } else {
-                newWindow.close();
-            }
-        })
-        .catch(error => {
-            console.error('Error loading surprise links:', error);
-            if (newWindow && !newWindow.closed) newWindow.close();
-        });
-  };
-
-  window.openArchive = function() {
-      window.location.href = 'archive.html';
-  };
 });
-</script>
 
+/* CATEGORY NAVIGATION */
+const categoryMap = {
+  'politics': 'politics.html',
+  'markets-economics': 'markets-economics.html',
+  'sports-leisure': 'sports-leisure.html',
+  'science-nature-technology': 'science-nature-technology.html',
+  'arts-literature': 'arts-literature.html',
+  'wisdom-philosophy': 'wisdom-philosophy.html',
+  'conspiracy-corner': 'conspiracy-corner.html',
+  'history': 'history.html'
+};
+function goToCategory(category) {
+  const url = categoryMap[category];
+  if (url) window.location.href = url;
+}
+
+/* RANDOM ARTICLE */
+function goToRandomArticle() {
+  const newWindow = window.open('', '_blank');
+  if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+    console.error('Popup blocked.');
+    return;
+  }
+  fetch('surprise-me-links.txt')
+    .then(response => response.text())
+    .then(text => {
+      const lines = text.split('\n').filter(line => line.trim());
+      const links = lines.map(line => {
+        const parts = line.split('|');
+        if (parts.length >= 2) return parts[1].trim();
+        return null;
+      }).filter(link => link !== null);
+      const surpriseLinks = links.slice(0, 12);
+      if (surpriseLinks.length > 0) {
+        const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+        newWindow.location.href = randomLink;
+      } else {
+        newWindow.close();
+      }
+    })
+    .catch(error => {
+      console.error('Error loading surprise links:', error);
+      if (newWindow && !newWindow.closed) newWindow.close();
+    });
+}
+function openArchive() { window.location.href = 'archive.html'; }
+</script>
 </body>
 </html>
-
-<!-- ===== END OF BLOCK 3 of 3 ===== -->
-
-
