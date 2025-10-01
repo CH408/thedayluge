@@ -16,7 +16,7 @@
     --light-blue: #33ddff;
     --violet: #cc88ff;
     --pink: #ff69b4;
-    --yellow: #ffdd00;
+    --yellow: #ffcc00; /* Dimmed from #ffdd00 */
     --bright-blue: #00b7eb;
     --ink: #111;  
     --bright-purple-glow: #cc88ff;
@@ -98,8 +98,8 @@
 
   .wheel-container {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 550px; /* Increased to accommodate larger circles */
+    height: 550px;
     margin: 0 auto;
     z-index: 5;
   }
@@ -167,8 +167,8 @@
 
   .circle {
     position: absolute;
-    width: 90px;
-    height: 90px;
+    width: 124px; /* Increased from 90px */
+    height: 124px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -176,20 +176,21 @@
     text-align: center;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-weight: 900;
-    font-size: 13px;
-    line-height: 1.2;
+    font-size: 14px; /* Adjusted for larger circles */
+    line-height: 1.1;
     cursor: pointer;
     background: black;
+    padding: 10px;
   }
 
-  .circle-1 { left: 390px; top: 205px; border: 2px solid var(--marble-gray); color: var(--marble-gray); }
-  .circle-2 { left: 336px; top: 336px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3 { left: 205px; bottom: 20px; border: 2px solid var(--orange); color: var(--orange); }
-  .circle-4 { left: 74px; bottom: 64px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5 { left: 20px; top: 205px; border: 2px solid var(--violet); color: var(--violet); }
+  .circle-1 { left: 413px; top: 213px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Adjusted positions */
+  .circle-2 { left: 352px; top: 352px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3 { left: 213px; bottom: 17px; border: 2px solid var(--orange); color: var(--orange); }
+  .circle-4 { left: 74px; bottom: 76px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5 { left: 13px; top: 213px; border: 2px solid var(--violet); color: var(--violet); }
   .circle-6 { left: 74px; top: 74px; border: 2px solid var(--pink); color: var(--pink); }
-  .circle-7 { left: 205px; top: 20px; border: 2px solid #00ff00; color: #00ff00; }
-  .circle-8 { left: 336px; top: 74px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
+  .circle-7 { left: 213px; top: 17px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-8 { left: 352px; top: 74px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
     display: flex;
@@ -208,7 +209,7 @@
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 900; /* Emphasized bold */
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
@@ -249,9 +250,13 @@
   }
 
   @media (max-width: 600px) {
+    .header h1 {
+      font-size: 28px; /* Adjusted for single line */
+      letter-spacing: 0.3px;
+    }
     .wheel-container {
-      width: 300px;
-      height: 300px;
+      width: 330px; /* Increased for larger circles */
+      height: 330px;
     }
     .wheel-center {
       width: 100px;
@@ -259,18 +264,18 @@
       font-size: 16px;
     }
     .circle {
-      width: 60px;
-      height: 60px;
-      font-size: 10px;
+      width: 83px; /* Increased from 60px */
+      height: 83px;
+      font-size: 11px; /* Adjusted for fit */
     }
-    .circle-1 { left: 234px; top: 123px; }
-    .circle-2 { left: 201px; top: 201px; }
-    .circle-3 { left: 123px; bottom: 12px; }
-    .circle-4 { left: 45px; bottom: 39px; }
-    .circle-5 { left: 12px; top: 123px; }
+    .circle-1 { left: 248px; top: 128px; }
+    .circle-2 { left: 211px; top: 211px; }
+    .circle-3 { left: 128px; bottom: 11px; }
+    .circle-4 { left: 45px; bottom: 51px; }
+    .circle-5 { left: 8px; top: 128px; }
     .circle-6 { left: 45px; top: 45px; }
-    .circle-7 { left: 123px; top: 12px; }
-    .circle-8 { left: 201px; top: 45px; }
+    .circle-7 { left: 128px; top: 11px; }
+    .circle-8 { left: 211px; top: 45px; }
     .connection-path {
       stroke-width: 0.4;
     }
@@ -281,11 +286,12 @@
 
   @media (max-width: 400px) {
     .header h1 {
-      font-size: 32px;
+      font-size: 28px; /* Adjusted for single line */
+      letter-spacing: 0.3px;
     }
     .wheel-container {
-      width: 250px;
-      height: 250px;
+      width: 275px; /* Increased for larger circles */
+      height: 275px;
     }
     .wheel-center {
       width: 80px;
@@ -293,18 +299,18 @@
       font-size: 14px;
     }
     .circle {
-      width: 50px;
-      height: 50px;
-      font-size: 9px;
+      width: 69px; /* Increased from 50px */
+      height: 69px;
+      font-size: 10px; /* Adjusted for fit */
     }
-    .circle-1 { left: 195px; top: 102px; }
-    .circle-2 { left: 168px; top: 168px; }
-    .circle-3 { left: 102px; bottom: 10px; }
-    .circle-4 { left: 37px; bottom: 32px; }
-    .circle-5 { left: 10px; top: 102px; }
+    .circle-1 { left: 206px; top: 106px; }
+    .circle-2 { left: 176px; top: 176px; }
+    .circle-3 { left: 106px; bottom: 9px; }
+    .circle-4 { left: 37px; bottom: 43px; }
+    .circle-5 { left: 6px; top: 106px; }
     .circle-6 { left: 37px; top: 37px; }
-    .circle-7 { left: 102px; top: 10px; }
-    .circle-8 { left: 168px; top: 37px; }
+    .circle-7 { left: 106px; top: 9px; }
+    .circle-8 { left: 176px; top: 37px; }
     .connection-path {
       stroke-width: 0.3;
     }
