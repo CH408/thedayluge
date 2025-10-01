@@ -1,4 +1,5 @@
-```html
+html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1015,6 +1016,55 @@
     }
   }
 
+  /* NEW: Fix for short viewport heights (e.g., non-maximized desktop windows + Windows font rendering) */
+  @media (max-height: 800px) {
+    .header {
+      top: 20px;
+    }
+    .header h1 {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    @keyframes title-pulse {
+      0% {  
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 12px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      12.5% {  
+        color: #8080ff;
+        text-shadow: 0 0 13px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      25% {  
+        color: var(--light-cyan-glow);
+        text-shadow: 0 0 14px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      37.5% {  
+        color: #6688cc;
+        text-shadow: 0 0 15px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      50% {  
+        color: var(--pink);
+        text-shadow: 0 0 16px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      62.5% {  
+        color: #cc4499;
+        text-shadow: 0 0 15px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      75% {  
+        color: var(--bright-blue);
+        text-shadow: 0 0 14px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      87.5% {  
+        color: #6688cc;
+        text-shadow: 0 0 13px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
+      }
+      100% {  
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 12px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
+      }
+    }
+  }
+
   .wheel-container:hover .orbital-ring {
     border-color: #00ff00aa;
     box-shadow: 0 0 15px #00ff0055;
@@ -1346,4 +1396,4 @@ window.openArchive = function() {
 </script>
 </body>
 </html>
-```
+
