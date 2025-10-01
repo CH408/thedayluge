@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --plasma-duration: 2s;
+    --synapse-duration: 2s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -98,8 +98,8 @@
 
   .wheel-container {
     position: relative;
-    width: 550px; /* Increased for larger circles */
-    height: 550px;
+    width: 500px; /* Adjusted for smaller circles */
+    height: 500px;
     margin: 0 auto;
     z-index: 5;
   }
@@ -117,38 +117,15 @@
   .connection-path {
     fill: none;
     stroke: var(--connection-color);
-    stroke-width: 2;
+    stroke-width: 1;
     stroke-linecap: round;
-    stroke-dasharray: 12 6;
-    animation: plasma-flow var(--plasma-duration) linear infinite;
+    stroke-opacity: 0.3;
+  }
+
+  .synapse-particle {
+    fill: var(--connection-color);
     filter: drop-shadow(0 0 4px var(--connection-color));
   }
-
-  @keyframes plasma-flow {
-    0% {
-      stroke-dashoffset: 0;
-      stroke-opacity: 0.5;
-      filter: drop-shadow(0 0 4px var(--connection-color));
-    }
-    50% {
-      stroke-opacity: 1;
-      filter: drop-shadow(0 0 8px var(--connection-color));
-    }
-    100% {
-      stroke-dashoffset: 36;
-      stroke-opacity: 0.5;
-      filter: drop-shadow(0 0 4px var(--connection-color));
-    }
-  }
-
-  .path-1 { animation-delay: 0s; }
-  .path-2 { animation-delay: 0.25s; }
-  .path-3 { animation-delay: 0.5s; }
-  .path-4 { animation-delay: 0.75s; }
-  .path-5 { animation-delay: 1s; }
-  .path-6 { animation-delay: 1.25s; }
-  .path-7 { animation-delay: 1.5s; }
-  .path-8 { animation-delay: 1.75s; }
 
   .wheel-center {
     position: absolute;
@@ -191,8 +168,8 @@
 
   .circle {
     position: absolute;
-    width: 124px; /* Increased from 90px */
-    height: 124px;
+    width: 93px; /* Reduced 25% from 124px */
+    height: 93px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -200,21 +177,21 @@
     text-align: center;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-weight: 900;
-    font-size: 14px; /* Adjusted for larger circles */
+    font-size: 13px; /* Adjusted for smaller circles */
     line-height: 1.1;
     cursor: pointer;
     background: black;
-    padding: 10px;
+    padding: 8px;
   }
 
-  .circle-1 { left: 413px; top: 213px; border: 2px solid var(--marble-gray); color: var(--marble-gray); }
-  .circle-2 { left: 352px; top: 352px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3 { left: 213px; bottom: 17px; border: 2px solid var(--orange); color: var(--orange); }
-  .circle-4 { left: 74px; bottom: 76px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5 { left: 13px; top: 213px; border: 2px solid var(--violet); color: var(--violet); }
+  .circle-1 { left: 390px; top: 206px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Adjusted positions */
+  .circle-2 { left: 337px; top: 337px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3 { left: 206px; bottom: 19px; border: 2px solid var(--orange); color: var(--orange); }
+  .circle-4 { left: 74px; bottom: 65px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5 { left: 20px; top: 206px; border: 2px solid var(--violet); color: var(--violet); }
   .circle-6 { left: 74px; top: 74px; border: 2px solid var(--pink); color: var(--pink); }
-  .circle-7 { left: 213px; top: 17px; border: 2px solid #00ff00; color: #00ff00; }
-  .circle-8 { left: 352px; top: 74px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
+  .circle-7 { left: 206px; top: 19px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-8 { left: 337px; top: 74px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
     display: flex;
@@ -279,8 +256,8 @@
       letter-spacing: 0.3px;
     }
     .wheel-container {
-      width: 330px; /* Increased for larger circles */
-      height: 330px;
+      width: 300px; /* Adjusted for smaller circles */
+      height: 300px;
     }
     .wheel-center {
       width: 100px;
@@ -288,31 +265,24 @@
       font-size: 16px;
     }
     .circle {
-      width: 83px; /* Increased from 60px */
-      height: 83px;
-      font-size: 11px; /* Adjusted for fit */
+      width: 62px; /* Reduced 25% from 83px */
+      height: 62px;
+      font-size: 10px; /* Adjusted for fit */
     }
-    .circle-1 { left: 248px; top: 128px; }
-    .circle-2 { left: 211px; top: 211px; }
-    .circle-3 { left: 128px; bottom: 11px; }
-    .circle-4 { left: 45px; bottom: 51px; }
-    .circle-5 { left: 8px; top: 128px; }
+    .circle-1 { left: 234px; top: 124px; }
+    .circle-2 { left: 202px; top: 202px; }
+    .circle-3 { left: 124px; bottom: 11px; }
+    .circle-4 { left: 45px; bottom: 39px; }
+    .circle-5 { left: 12px; top: 124px; }
     .circle-6 { left: 45px; top: 45px; }
-    .circle-7 { left: 128px; top: 11px; }
-    .circle-8 { left: 211px; top: 45px; }
+    .circle-7 { left: 124px; top: 11px; }
+    .circle-8 { left: 202px; top: 45px; }
     .connection-path {
-      stroke-width: 1.5;
-      stroke-dasharray: 10 5;
-      animation: plasma-flow var(--plasma-duration) linear infinite;
+      stroke-width: 0.8;
     }
-    .path-1 { animation-delay: 0s; }
-    .path-2 { animation-delay: 0.25s; }
-    .path-3 { animation-delay: 0.5s; }
-    .path-4 { animation-delay: 0.75s; }
-    .path-5 { animation-delay: 1s; }
-    .path-6 { animation-delay: 1.25s; }
-    .path-7 { animation-delay: 1.5s; }
-    .path-8 { animation-delay: 1.75s; }
+    .synapse-particle {
+      transform: scale(0.8);
+    }
   }
 
   @media (max-width: 400px) {
@@ -321,8 +291,8 @@
       letter-spacing: 0.3px;
     }
     .wheel-container {
-      width: 275px; /* Increased for larger circles */
-      height: 275px;
+      width: 250px; /* Adjusted for smaller circles */
+      height: 250px;
     }
     .wheel-center {
       width: 80px;
@@ -330,31 +300,24 @@
       font-size: 14px;
     }
     .circle {
-      width: 69px; /* Increased from 50px */
-      height: 69px;
-      font-size: 10px; /* Adjusted for fit */
+      width: 52px; /* Reduced 25% from 69px */
+      height: 52px;
+      font-size: 9px; /* Adjusted for fit */
     }
-    .circle-1 { left: 206px; top: 106px; }
-    .circle-2 { left: 176px; top: 176px; }
-    .circle-3 { left: 106px; bottom: 9px; }
-    .circle-4 { left: 37px; bottom: 43px; }
-    .circle-5 { left: 6px; top: 106px; }
+    .circle-1 { left: 195px; top: 103px; }
+    .circle-2 { left: 168px; top: 168px; }
+    .circle-3 { left: 103px; bottom: 9px; }
+    .circle-4 { left: 37px; bottom: 33px; }
+    .circle-5 { left: 10px; top: 103px; }
     .circle-6 { left: 37px; top: 37px; }
-    .circle-7 { left: 106px; top: 9px; }
-    .circle-8 { left: 176px; top: 37px; }
+    .circle-7 { left: 103px; top: 9px; }
+    .circle-8 { left: 168px; top: 37px; }
     .connection-path {
-      stroke-width: 1.2;
-      stroke-dasharray: 8 4;
-      animation: plasma-flow var(--plasma-duration) linear infinite;
+      stroke-width: 0.6;
     }
-    .path-1 { animation-delay: 0s; }
-    .path-2 { animation-delay: 0.25s; }
-    .path-3 { animation-delay: 0.5s; }
-    .path-4 { animation-delay: 0.75s; }
-    .path-5 { animation-delay: 1s; }
-    .path-6 { animation-delay: 1.25s; }
-    .path-7 { animation-delay: 1.5s; }
-    .path-8 { animation-delay: 1.75s; }
+    .synapse-particle {
+      transform: scale(0.6);
+    }
   }
 </style>
 </head>
@@ -368,14 +331,14 @@
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
       TRENDING<br>NEWS
     </a>
-    <div class="circle circle-1" onclick="goToCategory('politics')">Politics</div>
-    <div class="circle circle-2" onclick="goToCategory('markets-economics')">Markets &amp; Economics</div>
-    <div class="circle circle-3" onclick="goToCategory('sports-leisure')">Sports &amp; Leisure</div>
-    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">Science, Nature &amp; Technology</div>
-    <div class="circle circle-5" onclick="goToCategory('arts-literature')">Arts &amp; Literature</div>
-    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy')">Wisdom &amp; Philosophy</div>
-    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner')">Conspiracy Corner</div>
-    <div class="circle circle-8" onclick="goToCategory('history')">History</div>
+    <div class="circle circle-1" onclick="goToCategory('politics')">POLITICS</div>
+    <div class="circle circle-2" onclick="goToCategory('markets-economics')">MARKETS & ECONOMICS</div>
+    <div class="circle circle-3" onclick="goToCategory('sports-leisure')">SPORTS & LEISURE</div>
+    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">SCIENCE, NATURE & TECHNOLOGY</div>
+    <div class="circle circle-5" onclick="goToCategory('arts-literature')">ARTS & LITERATURE</div>
+    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy')">WISDOM & PHILOSOPHY</div>
+    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner')">CONSPIRACY CORNER</div>
+    <div class="circle circle-8" onclick="goToCategory('history')">HISTORY</div>
   </div>
 
   <div class="button-container">
@@ -469,8 +432,40 @@
       const controlY = (startY + endY) / 2;
       const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
       path.setAttribute('d', d);
-      path.classList.add('connection-path', `path-${index + 1}`);
+      path.setAttribute('id', `path-${index}`);
+      path.classList.add('connection-path');
       svg.appendChild(path);
+
+      // Create particle
+      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      particle.setAttribute('class', 'synapse-particle');
+      particle.setAttribute('r', '3');
+      svg.appendChild(particle);
+
+      // Animate particle along path
+      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+      animateMotion.setAttribute('dur', `2s`);
+      animateMotion.setAttribute('repeatCount', 'indefinite');
+      animateMotion.setAttribute('begin', `${index * 0.25}s`);
+      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
+      particle.appendChild(animateMotion);
+
+      // Animate particle size and opacity
+      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateSize.setAttribute('attributeName', 'r');
+      animateSize.setAttribute('values', '2;4;2');
+      animateSize.setAttribute('dur', '2s');
+      animateSize.setAttribute('repeatCount', 'indefinite');
+      animateSize.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateSize);
+
+      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateOpacity.setAttribute('attributeName', 'fill-opacity');
+      animateOpacity.setAttribute('values', '0.5;1;0.5');
+      animateOpacity.setAttribute('dur', '2s');
+      animateOpacity.setAttribute('repeatCount', 'indefinite');
+      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateOpacity);
     });
   }
 
