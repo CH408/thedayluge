@@ -17,21 +17,15 @@
     --violet:#cc88ff;
     --pink:#ff1493;
     --yellow:#ffdd00;
-    --brown:#8B4513;
-    --dark-green:#006400;
-    --turquoise:#40E0D0;
     --bright-blue:#00b7eb;
     --ink:#111;  
     --bright-purple-glow: #cc88ff;
     --light-cyan-glow: #33ddff;
     --gold: #d4af37;
-    --gold-dark: #b8860b;
-    --marble-white: #f5f5f5;
+    --gold-bright: #ffd700; /* brighter gold */
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
-    --bright-dark-green-dark: #008822;
     --dodgers-blue: #1e90ff;
-    --dodgers-blue-dark: #0066cc;
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
@@ -73,33 +67,17 @@
       color: var(--bright-purple-glow);
       text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    12.5% {  
-      color: #8080ff;
-      text-shadow: 0 0 16px #8080ff, 2px 2px 4px rgba(0,0,0,0.8);
-    }
     25% {  
       color: var(--light-cyan-glow);
       text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    37.5% {  
-      color: #6688cc;
-      text-shadow: 0 0 18px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
     50% {  
       color: var(--pink);
       text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    62.5% {  
-      color: #cc4499;
-      text-shadow: 0 0 18px #cc4499, 2px 2px 4px rgba(0,0,0,0.8);
-    }
     75% {  
       color: var(--bright-blue);
       text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    87.5% {  
-      color: #6688cc;
-      text-shadow: 0 0 16px #6688cc, 2px 2px 4px rgba(0,0,0,0.8);
     }
     100% {  
       color: var(--bright-purple-glow);
@@ -163,54 +141,23 @@
     align-items: center;
     justify-content: center;
     text-align:center;
-    padding: 4px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
     font-weight: 900;
     font-size: 13px;
     line-height: 1.2;
     cursor: pointer;
+    background:black;
   }
 
-  .circle-1{
-    left: 390px; top: 205px;
-    border:2px solid var(--marble-gray);
-    color: #333333;
-  }
-  .circle-2{
-    left: 336px; top: 336px;
-    border:2px solid var(--bright-dark-green);
-    color: #ffffff;
-  }
-  .circle-3{
-    left: 205px; bottom: 20px;
-    border:2px solid var(--orange);
-    color: #333333;
-  }
-  .circle-4{
-    left: 74px; bottom: 64px;
-    border:2px solid var(--dodgers-blue);
-    color: #ffffff;
-  }
-  .circle-5{
-    left: 20px; top: 205px;
-    border:2px solid var(--blue);
-    color: white;
-  }
-  .circle-6{
-    left: 74px; top: 74px;
-    border:2px solid var(--violet);
-    color: black;
-  }
-  .circle-7{
-    left: 205px; top: 20px;
-    border:2px solid #00ff00;
-    color: #00ff00;
-  }
-  .circle-8{
-    left: 336px; top: 74px;
-    border:2px solid var(--gold);
-    color: #333333;
-  }
+  /* --- Circle colors per your rules --- */
+  .circle-1{ left: 390px; top: 205px; border:2px solid var(--marble-gray); color: var(--marble-gray); }
+  .circle-2{ left: 336px; top: 336px; border:2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3{ left: 205px; bottom: 20px; border:2px solid var(--orange); color: var(--orange); }
+  .circle-4{ left: 74px; bottom: 64px; border:2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5{ left: 20px; top: 205px; border:2px solid var(--violet); color: var(--violet); } /* Arts & Lit → violet */
+  .circle-6{ left: 74px; top: 74px; border:2px solid var(--red); color: var(--red); } /* Wisdom → red */
+  .circle-7{ left: 205px; top: 20px; border:2px solid #00ff00; color: #00ff00; }
+  .circle-8{ left: 336px; top: 74px; border:2px solid var(--gold-bright); color: var(--gold-bright); } /* History brighter gold */
 
   .button-container {
     display: flex;
