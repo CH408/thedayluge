@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --circuit-duration: 1.5s;
+    --plasma-duration: 2s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -118,34 +118,37 @@
     fill: none;
     stroke: var(--connection-color);
     stroke-width: 2;
-    stroke-linecap: square;
-    stroke-dasharray: 8 4;
-    animation: circuit-flicker var(--circuit-duration) ease-in-out infinite;
+    stroke-linecap: round;
+    stroke-dasharray: 12 6;
+    animation: plasma-flow var(--plasma-duration) linear infinite;
+    filter: drop-shadow(0 0 4px var(--connection-color));
   }
 
-  @keyframes circuit-flicker {
+  @keyframes plasma-flow {
     0% {
-      stroke-opacity: 0.3;
-      filter: drop-shadow(0 0 2px var(--connection-color));
+      stroke-dashoffset: 0;
+      stroke-opacity: 0.5;
+      filter: drop-shadow(0 0 4px var(--connection-color));
     }
     50% {
       stroke-opacity: 1;
-      filter: drop-shadow(0 0 6px var(--connection-color));
+      filter: drop-shadow(0 0 8px var(--connection-color));
     }
     100% {
-      stroke-opacity: 0.3;
-      filter: drop-shadow(0 0 2px var(--connection-color));
+      stroke-dashoffset: 36;
+      stroke-opacity: 0.5;
+      filter: drop-shadow(0 0 4px var(--connection-color));
     }
   }
 
   .path-1 { animation-delay: 0s; }
-  .path-2 { animation-delay: 0.2s; }
-  .path-3 { animation-delay: 0.4s; }
-  .path-4 { animation-delay: 0.6s; }
-  .path-5 { animation-delay: 0.8s; }
-  .path-6 { animation-delay: 1.0s; }
-  .path-7 { animation-delay: 1.2s; }
-  .path-8 { animation-delay: 1.4s; }
+  .path-2 { animation-delay: 0.25s; }
+  .path-3 { animation-delay: 0.5s; }
+  .path-4 { animation-delay: 0.75s; }
+  .path-5 { animation-delay: 1s; }
+  .path-6 { animation-delay: 1.25s; }
+  .path-7 { animation-delay: 1.5s; }
+  .path-8 { animation-delay: 1.75s; }
 
   .wheel-center {
     position: absolute;
@@ -299,17 +302,17 @@
     .circle-8 { left: 211px; top: 45px; }
     .connection-path {
       stroke-width: 1.5;
-      stroke-dasharray: 6 3;
-      animation: circuit-flicker var(--circuit-duration) ease-in-out infinite;
+      stroke-dasharray: 10 5;
+      animation: plasma-flow var(--plasma-duration) linear infinite;
     }
     .path-1 { animation-delay: 0s; }
-    .path-2 { animation-delay: 0.2s; }
-    .path-3 { animation-delay: 0.4s; }
-    .path-4 { animation-delay: 0.6s; }
-    .path-5 { animation-delay: 0.8s; }
-    .path-6 { animation-delay: 1.0s; }
-    .path-7 { animation-delay: 1.2s; }
-    .path-8 { animation-delay: 1.4s; }
+    .path-2 { animation-delay: 0.25s; }
+    .path-3 { animation-delay: 0.5s; }
+    .path-4 { animation-delay: 0.75s; }
+    .path-5 { animation-delay: 1s; }
+    .path-6 { animation-delay: 1.25s; }
+    .path-7 { animation-delay: 1.5s; }
+    .path-8 { animation-delay: 1.75s; }
   }
 
   @media (max-width: 400px) {
@@ -341,17 +344,17 @@
     .circle-8 { left: 176px; top: 37px; }
     .connection-path {
       stroke-width: 1.2;
-      stroke-dasharray: 5 2;
-      animation: circuit-flicker var(--circuit-duration) ease-in-out infinite;
+      stroke-dasharray: 8 4;
+      animation: plasma-flow var(--plasma-duration) linear infinite;
     }
     .path-1 { animation-delay: 0s; }
-    .path-2 { animation-delay: 0.2s; }
-    .path-3 { animation-delay: 0.4s; }
-    .path-4 { animation-delay: 0.6s; }
-    .path-5 { animation-delay: 0.8s; }
-    .path-6 { animation-delay: 1.0s; }
-    .path-7 { animation-delay: 1.2s; }
-    .path-8 { animation-delay: 1.4s; }
+    .path-2 { animation-delay: 0.25s; }
+    .path-3 { animation-delay: 0.5s; }
+    .path-4 { animation-delay: 0.75s; }
+    .path-5 { animation-delay: 1s; }
+    .path-6 { animation-delay: 1.25s; }
+    .path-7 { animation-delay: 1.5s; }
+    .path-8 { animation-delay: 1.75s; }
   }
 </style>
 </head>
@@ -460,13 +463,11 @@
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
-      // Create zigzag path for circuit-like effect
-      const midX1 = startX + (endX - startX) * 0.3;
-      const midY1 = startY + (endY - startY) * 0.3 + 20;
-      const midX2 = startX + (endX - startX) * 0.7;
-      const midY2 = startY + (endY - startY) * 0.7 - 20;
+      // Create curved path
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const d = `M${startX},${startY} L${midX1},${midY1} L${midX2},${midY2} L${endX},${endY}`;
+      const controlX = (startX + endX) / 2;
+      const controlY = (startY + endY) / 2;
+      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
       path.setAttribute('d', d);
       path.classList.add('connection-path', `path-${index + 1}`);
       svg.appendChild(path);
