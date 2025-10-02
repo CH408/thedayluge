@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein News - THE DAYLUGE</title>
+  <title>Latest Epstein News - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -233,7 +233,7 @@
   <div class="wrap">
     <div class="epstein-news">
       <div class="title-container">
-        <div class="block-title epstein-title">Epstein News</div>
+        <div class="block-title epstein-title">Latest Epstein News</div>
         <a href="/epstein/epstein-news-archive.html" class="go-deeper">Go Deeper</a>
       </div>
       <ul class="headlines epstein-links" id="epstein-links"></ul>
@@ -301,21 +301,44 @@
     // Load Epstein news links
     async function loadEpsteinLinks() {
       try {
-        const response = await fetch('epstein-news-links.txt');
+        console.log('Fetching epstein-links.txt for news content');
+        const response = await fetch('/epstein/epstein-links.txt');
+        console.log('Fetch response:', response);
         if (!response.ok) {
-          console.error('Failed to load epstein-news-links.txt:', response.status);
+          console.error(`Failed to load epstein-links.txt: ${response.status}`);
           return;
         }
         const text = await response.text();
+        console.log('Fetched text:', text);
         const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
+        console.log('Parsed lines:', lines);
+        
+        // Parse each line: title|link|category
+        const allLinks = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
+          if (parts.length >= 3) {
+            return {
+              title: parts[0].trim(),
+              url: parts[1].trim(),
+              category: parts[2].trim().toLowerCase()
+            };
           }
           return null;
         }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 36);
+        
+        console.log('All parsed links:', allLinks);
+        
+        // Filter for news entries
+        const newsLinks = allLinks.filter(link => 
+          link.category === 'news' || 
+          link.category.includes('news')
+        );
+        
+        console.log('Filtered news links:', newsLinks);
+
+        // Limit to 36 news links
+        const displayLinks = newsLinks.slice(0, 36);
+        
         const grid = document.getElementById('epstein-links');
         if (grid && displayLinks.length > 0) {
           grid.innerHTML = displayLinks.map(link => `
@@ -323,34 +346,67 @@
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
+          console.log('Rendered news links to DOM:', displayLinks);
+        } else if (grid) {
+          grid.innerHTML = '<li class="headline"><span>No news content available yet.</span></li>';
         }
-        console.log(`Showing ${displayLinks.length} Epstein news links (${links.length - displayLinks.length} moved to archive)`);
+        
+        console.log(`Showing ${displayLinks.length} news links (${newsLinks.length - displayLinks.length} moved to archive)`);
       } catch (error) {
-        console.error('Error loading Epstein news links:', error);
+        console.error('Error loading news links:', error);
+        const grid = document.getElementById('epstein-links');
+        if (grid) {
+          grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
+        }
       }
     }
 
     // Random Epstein news article
     async function goToRandomEpstein() {
       try {
-        const response = await fetch('epstein-news-links.txt');
+        console.log('Fetching epstein-links.txt for random news selection');
+        const response = await fetch('/epstein/epstein-links.txt');
+        console.log('Fetch response:', response);
         if (!response.ok) {
-          console.log('Could not load epstein-news-links.txt for random selection');
+          console.log('Could not load epstein-links.txt for random selection');
           return;
         }
         const text = await response.text();
+        console.log('Fetched text:', text);
         const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
+        console.log('Parsed lines:', lines);
+        
+        // Parse each line: title|link|category
+        const allLinks = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
+          if (parts.length >= 3) {
+            return {
+              title: parts[0].trim(),
+              url: parts[1].trim(),
+              category: parts[2].trim().toLowerCase()
+            };
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 36);
+        
+        console.log('All parsed links:', allLinks);
+        
+        // Filter for news entries
+        const newsLinks = allLinks.filter(link => 
+          link.category === 'news' || 
+          link.category.includes('news')
+        );
+        
+        console.log('Filtered news links for random selection:', newsLinks);
+        
+        // Limit to 36 news links
+        const currentLinks = newsLinks.slice(0, 36);
+        
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-          window.open(randomLink, '_blank');
+          window.open(randomLink.url, '_blank');
+        } else {
+          console.log('No news links available for random selection');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);

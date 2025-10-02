@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Memes - Epstein's Web</title>
+  <title>Epstein Memes - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -169,7 +169,7 @@
   </style>
 </head>
 <body>
-  <a href="/epstein-web.html" class="back-btn">← Back to Epstein's Web</a>
+  <a href="/epstein/epstein.html" class="back-btn">← Back to Epstein's Web</a>
   <a href="/conspiracy-corner.html" class="home-btn">← Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
@@ -214,7 +214,7 @@
         if (this.hasTail) {
           const gradient = ctx.createLinearGradient(
             this.x, this.y,
-            this.x找不到文件或目录 - this.speedX * 10, this.y - this.speedY * 10
+            this.x - this.speedX * 10, this.y - this.speedY * 10
           );
           gradient.addColorStop(0, this.color + '33');
           gradient.addColorStop(1, 'transparent');
@@ -253,11 +253,11 @@
       init();
     });
 
-    // Load meme links from epstein-links.txt, starting from the 6th entry
+    // Load meme links from epstein-links.txt
     async function loadMemeLinks() {
       try {
         console.log('Fetching epstein-links.txt for meme content');
-        const response = await fetch('epstein-links.txt');
+        const response = await fetch('/epstein/epstein-links.txt');
         console.log('Fetch response:', response);
         if (!response.ok) {
           console.error(`Failed to load epstein-links.txt: ${response.status}`);
@@ -283,14 +283,14 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for meme entries, starting from the 6th entry (index 5)
-        const memeLinks = allLinks.slice(5).filter(link => 
+        // Filter for meme entries
+        const memeLinks = allLinks.filter(link => 
           link.category === 'meme' || 
           link.category === 'memes' ||
           link.category.includes('meme')
         );
         
-        console.log('Filtered meme links (starting from 6th entry):', memeLinks);
+        console.log('Filtered meme links:', memeLinks);
 
         const grid = document.getElementById('meme-links');
         if (grid && memeLinks.length > 0) {

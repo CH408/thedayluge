@@ -253,11 +253,11 @@
       init();
     });
 
-    // Load article and longform links from epstein-links.txt, starting from the 6th entry
+    // Load article and longform links from epstein-links.txt
     async function loadArticleLinks() {
       try {
         console.log('Fetching epstein-links.txt for article and longform content');
-        const response = await fetch('epstein-links.txt');
+        const response = await fetch('/epstein/epstein-links.txt');
         console.log('Fetch response:', response);
         if (!response.ok) {
           console.error(`Failed to load epstein-links.txt: ${response.status}`);
@@ -283,8 +283,8 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for article and longform entries, starting from the 6th entry (index 5)
-        const articleLinks = allLinks.slice(5).filter(link => 
+        // Filter for article and longform entries
+        const articleLinks = allLinks.filter(link => 
           link.category === 'article' || 
           link.category === 'articles' ||
           link.category === 'longform' ||
@@ -292,7 +292,7 @@
           link.category.includes('longform')
         );
         
-        console.log('Filtered article and longform links (starting from 6th entry):', articleLinks);
+        console.log('Filtered article and longform links:', articleLinks);
 
         const grid = document.getElementById('article-links');
         if (grid && articleLinks.length > 0) {

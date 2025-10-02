@@ -253,7 +253,7 @@
       init();
     });
 
-    // Load primary sources links from epstein-links.txt, starting from the 6th entry
+    // Load primary sources links from epstein-links.txt
     async function loadPrimarySourcesLinks() {
       try {
         console.log('Fetching epstein-links.txt for primary sources content');
@@ -283,12 +283,14 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for primary sources entries, starting from the 6th entry (index 5)
-        const primarySourcesLinks = allLinks.slice(5).filter(link => 
-          link.category === 'primary-sources'
+        // Filter for primary sources entries
+        const primarySourcesLinks = allLinks.filter(link => 
+          link.category === 'primary-sources' || 
+          link.category === 'primarysources' ||
+          link.category.includes('primary')
         );
         
-        console.log('Filtered primary sources links (starting from 6th entry):', primarySourcesLinks);
+        console.log('Filtered primary sources links:', primarySourcesLinks);
 
         const grid = document.getElementById('primary-sources-links');
         if (grid && primarySourcesLinks.length > 0) {
