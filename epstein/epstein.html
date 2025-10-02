@@ -339,7 +339,7 @@
   <div class="layout-container">
     <!-- Central Content Rectangle -->
     <div class="central-content">
-      <div class="central-title">Latest Epstein Content</div>
+      <div class="central-title">Latest Epstein News</div>
       <div class="content-links">
         <div class="content-link">
           <span class="link-title">Loading content...</span>
@@ -465,14 +465,22 @@
             return {
               title: parts[0].trim(),
               link: parts[1].trim(),
-              category: parts[2].trim()
+              category: parts[2].trim().toLowerCase()
             };
           }).filter(entry => entry !== null);
           
           console.log('Parsed entries:', entries);
           
-          // Display latest 5 in central box
-          const latest5 = entries.slice(0, 5);
+          // Filter for news entries
+          const newsEntries = entries.filter(entry => 
+            entry.category === 'news' || 
+            entry.category.includes('news')
+          );
+          
+          console.log('Filtered news entries:', newsEntries);
+          
+          // Display latest 5 news entries in central box
+          const latest5 = newsEntries.slice(0, 5);
           const contentLinksContainer = document.querySelector('.content-links');
           
           // Clear existing placeholder content
@@ -482,7 +490,7 @@
           const displayEntries = [...latest5];
           if (displayEntries.length === 0) {
             displayEntries.push({
-              title: 'No content available. Check epstein-links.txt.',
+              title: 'No news content available. Check epstein-links.txt.',
               link: '#',
               category: 'error'
             });
@@ -510,7 +518,7 @@
             contentLinksContainer.appendChild(linkElement);
           });
           
-          console.log('Loaded', entries.length, 'entries from epstein-links.txt');
+          console.log('Loaded', newsEntries.length, 'news entries from epstein-links.txt');
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
@@ -519,7 +527,7 @@
           const contentLinksContainer = document.querySelector('.content-links');
           contentLinksContainer.innerHTML = '';
           const errorEntry = {
-            title: 'Error loading content. Check epstein-links.txt or console for details.',
+            title: 'Error loading news content. Check epstein-links.txt or console for details.',
             link: '#',
             category: 'error'
           };
