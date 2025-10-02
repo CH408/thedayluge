@@ -339,7 +339,7 @@
   <div class="layout-container">
     <!-- Central Content Rectangle -->
     <div class="central-content">
-      <div class="central-title">Latest Epstein Content</div>
+      <div class="central-title">Latest Epstein News</div>
       <div class="content-links">
         <div class="content-link">
           <span class="link-title">Loading content...</span>
@@ -445,13 +445,14 @@
       // Load content from epstein-links.txt
       async function loadEpsteinContent() {
         try {
-          console.log('Attempting to fetch epstein-links.txt');
+          console.log('Attempting to fetch /epstein/epstein-links.txt');
           const response = await fetch('/epstein/epstein-links.txt');
+          console.log('Fetch response status:', response.status, response.statusText);
           if (!response.ok) {
             throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
           }
           const text = await response.text();
-          console.log('Fetched text:', text);
+          console.log('Fetched text content:', text);
           const lines = text.trim().split('\n').filter(line => line.trim());
           console.log('Parsed lines:', lines);
           
@@ -465,14 +466,22 @@
             return {
               title: parts[0].trim(),
               link: parts[1].trim(),
-              category: parts[2].trim()
+              category: parts[2].trim().toLowerCase()
             };
           }).filter(entry => entry !== null);
           
-          console.log('Parsed entries:', entries);
+          console.log('Parsed entries with categories:', entries);
           
-          // Display latest 5 in central box
-          const latest5 = entries.slice(0, 5);
+          // Filter for news entries (handle /news by removing slashes)
+          const newsEntries = entries.filter(entry => {
+            const cleanedCategory = entry.category.replace(/^\/|\/$/g, '').trim().toLowerCase();
+            console.log(`Checking category: "${entry.category}" -> cleaned: "${cleanedCategory}"`);
+            return cleanedCategory === 'news' || cleanedCategory.includes('news');
+          });
+          console.log('Filtered news entries:', newsEntries);
+          
+          // Display latest 5 news entries in central box
+          const latest5 = newsEntries.slice(0, 5);
           const contentLinksContainer = document.querySelector('.content-links');
           
           // Clear existing placeholder content
@@ -481,8 +490,9 @@
           // Ensure we always try to show 5 entries (pad with error message if needed)
           const displayEntries = [...latest5];
           if (displayEntries.length === 0) {
+            console.log('No news entries found, displaying error message');
             displayEntries.push({
-              title: 'No content available. Check epstein-links.txt.',
+              title: 'No news content available. Check epstein-links.txt.',
               link: '#',
               category: 'error'
             });
@@ -495,22 +505,22 @@
             });
           }
           
+          console.log('Display entries:', displayEntries);
+          
           // Add content to DOM with animation
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
-              <span class="link-title">${entry.title}</span>
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
             `;
-            linkElement.addEventListener('click', () => {
-              if (entry.link !== '#') {
-                window.location.href = entry.link;
-              }
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
             });
             contentLinksContainer.appendChild(linkElement);
           });
           
-          console.log('Loaded', entries.length, 'entries from epstein-links.txt');
+          console.log('Loaded', newsEntries.length, 'news entries from epstein-links.txt');
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
@@ -519,7 +529,7 @@
           const contentLinksContainer = document.querySelector('.content-links');
           contentLinksContainer.innerHTML = '';
           const errorEntry = {
-            title: 'Error loading content. Check epstein-links.txt or console for details.',
+            title: 'Error loading news content. Check epstein-links.txt or console for details.',
             link: '#',
             category: 'error'
           };
