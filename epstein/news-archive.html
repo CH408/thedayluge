@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Primary Sources - Epstein's Web</title>
+  <title>News Archive - Epstein's Web</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -173,8 +173,8 @@
   <a href="/conspiracy-corner.html" class="home-btn">← Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title">Epstein Primary Sources</div>
-    <ul class="headlines" id="primary-sources-links"></ul>
+    <div class="archive-title">Epstein News Archive</div>
+    <ul class="headlines" id="news-archive-links"></ul>
   </div>
   <script>
     // Particle effect
@@ -253,10 +253,10 @@
       init();
     });
 
-    // Load primary sources links from epstein-links.txt, starting from the 6th entry
-    async function loadPrimarySourcesLinks() {
+    // Load news archive links from epstein-links.txt, starting from the 6th entry
+    async function loadNewsArchiveLinks() {
       try {
-        console.log('Fetching epstein-links.txt for primary sources content');
+        console.log('Fetching epstein-links.txt for news archive content');
         const response = await fetch('/epstein/epstein-links.txt');
         console.log('Fetch response:', response);
         if (!response.ok) {
@@ -283,34 +283,34 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for primary sources entries, starting from the 6th entry (index 5)
-        const primarySourcesLinks = allLinks.slice(5).filter(link => 
-          link.category === 'primary-sources'
+        // Filter for news entries, starting from the 6th entry (index 5)
+        const newsArchiveLinks = allLinks.slice(5).filter(link => 
+          link.category === 'news'
         );
         
-        console.log('Filtered primary sources links (starting from 6th entry):', primarySourcesLinks);
+        console.log('Filtered news archive links (starting from 6th entry):', newsArchiveLinks);
 
-        const grid = document.getElementById('primary-sources-links');
-        if (grid && primarySourcesLinks.length > 0) {
-          grid.innerHTML = primarySourcesLinks.map((link, index) => `
+        const grid = document.getElementById('news-archive-links');
+        if (grid && newsArchiveLinks.length > 0) {
+          grid.innerHTML = newsArchiveLinks.map((link, index) => `
             <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
-          console.log('Rendered primary sources links to DOM:', primarySourcesLinks);
+          console.log('Rendered news archive links to DOM:', newsArchiveLinks);
         } else if (grid) {
-          grid.innerHTML = '<li class="headline"><span>No primary sources content available yet.</span></li>';
+          grid.innerHTML = '<li class="headline"><span>No news archive content available yet.</span></li>';
         }
       } catch (error) {
-        console.error('Error loading primary sources links:', error);
-        const grid = document.getElementById('primary-sources-links');
+        console.error('Error loading news archive links:', error);
+        const grid = document.getElementById('news-archive-links');
         if (grid) {
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
         }
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadPrimarySourcesLinks);
+    document.addEventListener('DOMContentLoaded', loadNewsArchiveLinks);
   </script>
 </body>
 </html>
