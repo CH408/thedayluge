@@ -169,12 +169,12 @@
   </style>
 </head>
 <body>
-  <a href="/epstein-web.html" class="back-btn">← Back to Epstein's Web</a>
+  <a href="/epstein/epstein.html" class="back-btn">← Back to Epstein's Web</a>
   <a href="/conspiracy-corner.html" class="home-btn">← Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="archive-title">Epstein Primary Sources</div>
-    <ul class="headlines" id="primary-source-links"></ul>
+    <ul class="headlines" id="primary-sources-links"></ul>
   </div>
   <script>
     // Particle effect
@@ -253,11 +253,11 @@
       init();
     });
 
-    // Load primary source links from epstein-links.txt, starting from the 6th entry
-    async function loadPrimarySourceLinks() {
+    // Load primary sources links from epstein-links.txt, starting from the 6th entry
+    async function loadPrimarySourcesLinks() {
       try {
-        console.log('Fetching epstein-links.txt for primary source content');
-        const response = await fetch('epstein-links.txt');
+        console.log('Fetching epstein-links.txt for primary sources content');
+        const response = await fetch('/epstein/epstein-links.txt');
         console.log('Fetch response:', response);
         if (!response.ok) {
           console.error(`Failed to load epstein-links.txt: ${response.status}`);
@@ -283,37 +283,34 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for primary source entries, starting from the 6th entry (index 5)
-        const primarySourceLinks = allLinks.slice(5).filter(link => 
-          link.category === 'primary' || 
-          link.category === 'primary source' ||
-          link.category === 'primary sources' ||
-          link.category.includes('primary')
+        // Filter for primary sources entries, starting from the 6th entry (index 5)
+        const primarySourcesLinks = allLinks.slice(5).filter(link => 
+          link.category === 'primary-sources'
         );
         
-        console.log('Filtered primary source links (starting from 6th entry):', primarySourceLinks);
+        console.log('Filtered primary sources links (starting from 6th entry):', primarySourcesLinks);
 
-        const grid = document.getElementById('primary-source-links');
-        if (grid && primarySourceLinks.length > 0) {
-          grid.innerHTML = primarySourceLinks.map((link, index) => `
+        const grid = document.getElementById('primary-sources-links');
+        if (grid && primarySourcesLinks.length > 0) {
+          grid.innerHTML = primarySourcesLinks.map((link, index) => `
             <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
           `).join('');
-          console.log('Rendered primary source links to DOM:', primarySourceLinks);
+          console.log('Rendered primary sources links to DOM:', primarySourcesLinks);
         } else if (grid) {
-          grid.innerHTML = '<li class="headline"><span>No primary source content available yet.</span></li>';
+          grid.innerHTML = '<li class="headline"><span>No primary sources content available yet.</span></li>';
         }
       } catch (error) {
-        console.error('Error loading primary source links:', error);
-        const grid = document.getElementById('primary-source-links');
+        console.error('Error loading primary sources links:', error);
+        const grid = document.getElementById('primary-sources-links');
         if (grid) {
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
         }
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadPrimarySourceLinks);
+    document.addEventListener('DOMContentLoaded', loadPrimarySourcesLinks);
   </script>
 </body>
 </html>
