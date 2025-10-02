@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Memes - Epstein's Web</title>
+  <title>Epstein Memes - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -169,5 +169,150 @@
   </style>
 </head>
 <body>
-  <a href="/epstein-web.html" class="back-btn">← Back to Epstein's Web</a>
-  <a href="/conspiracy-corner.html...
+  <a href="/epstein/epstein.html" class="back-btn">← Back to Epstein's Web</a>
+  <a href="/conspiracy-corner.html" class="home-btn">← Conspiracy Corner</a>
+  <canvas id="particle-canvas"></canvas>
+  <div class="wrap">
+    <div class="archive-title">Epstein Memes</div>
+    <ul class="headlines" id="meme-links"></ul>
+  </div>
+  <script>
+    // Particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 50;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#00FF7F', '#00CC66', '#33FF88', '#00DD77', '#00FF00', '#32CD32'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
+      }
+      
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    
+    init();
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Load meme links from epstein-links.txt
+    async function loadMemeLinks() {
+      try {
+        console.log('Fetching epstein-links.txt for meme content');
+        const response = await fetch('/epstein/epstein-links.txt');
+        console.log('Fetch response:', response);
+        if (!response.ok) {
+          console.error(`Failed to load epstein-links.txt: ${response.status}`);
+          return;
+        }
+        const text = await response.text();
+        console.log('Fetched text:', text);
+        const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines);
+        
+        // Parse each line: title|link|category
+        const allLinks = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 3) {
+            return {
+              title: parts[0].trim(),
+              url: parts[1].trim(),
+              category: parts[2].trim().toLowerCase()
+            };
+          }
+          return null;
+        }).filter(link => link !== null);
+        
+        console.log('All parsed links:', allLinks);
+        
+        // Filter for meme entries
+        const memeLinks = allLinks.filter(link => 
+          link.category === 'meme' || 
+          link.category === 'memes' ||
+          link.category.includes('meme')
+        );
+        
+        console.log('Filtered meme links:', memeLinks);
+
+        const grid = document.getElementById('meme-links');
+        if (grid && memeLinks.length > 0) {
+          grid.innerHTML = memeLinks.map((link, index) => `
+            <li class="headline" style="animation-delay: ${0.05 * (index + 1)}s;">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+          console.log('Rendered meme links to DOM:', memeLinks);
+        } else if (grid) {
+          grid.innerHTML = '<li class="headline"><span>No meme content available yet.</span></li>';
+        }
+      } catch (error) {
+        console.error('Error loading meme links:', error);
+        const grid = document.getElementById('meme-links');
+        if (grid) {
+          grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadMemeLinks);
+  </script>
+</body>
+</html>
