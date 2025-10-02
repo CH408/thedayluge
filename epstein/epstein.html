@@ -447,14 +447,14 @@
         try {
           console.log('Attempting to fetch /epstein/epstein-links.txt at', new Date().toISOString());
           const response = await fetch('/epstein/epstein-links.txt');
-          console.log('Fetch response:', { status: response.status, statusText: response.statusText });
+          console.log('Fetch response:', { status: response.status, statusText: response.statusText, url: response.url });
           if (!response.ok) {
             throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
           }
           const text = await response.text();
-          console.log('Raw fetched text:', text);
+          console.log('Raw fetched text (first 500 chars):', text.substring(0, 500)); // Log first 500 chars to avoid flooding
           const lines = text.trim().split('\n').filter(line => line.trim());
-          console.log('Parsed lines:', lines);
+          console.log('Parsed lines count:', lines.length, 'First line:', lines[0], 'Line 19:', lines[18]); // Line 19 is index 18
           
           // Parse each line: title|link|category
           const entries = lines.map((line, index) => {
@@ -468,15 +468,16 @@
               link: parts[1].trim(),
               category: parts[2].trim()
             };
-            console.log(`Line ${index + 1}:`, { rawCategory: entry.category, cleanedCategory: entry.category.replace(/^\/|\/$/g, '').toLowerCase() });
+            console.log(`Line ${index + 1}:`, { rawLine: line, parsed: entry });
             return entry;
           }).filter(entry => entry !== null);
           
-          console.log('Parsed entries:', entries);
+          console.log('Parsed entries count:', entries.length, 'Entries:', entries);
           
           // Filter for news entries (handle /news)
           const newsEntries = entries.filter(entry => {
             const cleanedCategory = entry.category.replace(/^\/|\/$/g, '').trim().toLowerCase();
+            console.log(`Filtering: ${entry.title} | Category: "${entry.category}" -> Cleaned: "${cleanedCategory}"`);
             return cleanedCategory === 'news';
           });
           console.log('Filtered news entries:', newsEntries);
@@ -493,7 +494,7 @@
           if (displayEntries.length === 0) {
             console.log('No news entries found, displaying error message');
             displayEntries.push({
-              title: 'No news content available. Check epstein-links.txt.',
+              title: 'No news content available. Check epstein-links.txt or console logs.',
               link: '#',
               category: 'error'
             });
@@ -525,12 +526,11 @@
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
-          console.error('Error loading epstein-links.txt:', error.message);
-          console.log('Falling back to error message in central content');
+          console.error('Error loading epstein-links.txt:', error.message, 'Stack:', error.stack);
           const contentLinksContainer = document.querySelector('.content-links');
           contentLinksContainer.innerHTML = '';
           const errorEntry = {
-            title: 'Error loading news content. Check epstein-links.txt or console for details.',
+            title: 'Error loading news content. Check console logs for details.',
             link: '#',
             category: 'error'
           };
