@@ -445,14 +445,14 @@
       // Load content from epstein-links.txt
       async function loadEpsteinContent() {
         try {
-          console.log('Attempting to fetch /epstein/epstein-links.txt');
+          console.log('Attempting to fetch /epstein/epstein-links.txt at', new Date().toISOString());
           const response = await fetch('/epstein/epstein-links.txt');
-          console.log('Fetch response status:', response.status, response.statusText);
+          console.log('Fetch response:', { status: response.status, statusText: response.statusText });
           if (!response.ok) {
             throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
           }
           const text = await response.text();
-          console.log('Fetched text content:', text);
+          console.log('Raw fetched text:', text);
           const lines = text.trim().split('\n').filter(line => line.trim());
           console.log('Parsed lines:', lines);
           
@@ -463,20 +463,21 @@
               console.warn(`Invalid entry at line ${index + 1}: ${line}`);
               return null;
             }
-            return {
+            const entry = {
               title: parts[0].trim(),
               link: parts[1].trim(),
-              category: parts[2].trim().toLowerCase()
+              category: parts[2].trim()
             };
+            console.log(`Line ${index + 1}:`, { rawCategory: entry.category, cleanedCategory: entry.category.replace(/^\/|\/$/g, '').toLowerCase() });
+            return entry;
           }).filter(entry => entry !== null);
           
-          console.log('Parsed entries with categories:', entries);
+          console.log('Parsed entries:', entries);
           
-          // Filter for news entries (handle /news by removing slashes)
+          // Filter for news entries (handle /news)
           const newsEntries = entries.filter(entry => {
             const cleanedCategory = entry.category.replace(/^\/|\/$/g, '').trim().toLowerCase();
-            console.log(`Checking category: "${entry.category}" -> cleaned: "${cleanedCategory}"`);
-            return cleanedCategory === 'news' || cleanedCategory.includes('news');
+            return cleanedCategory === 'news';
           });
           console.log('Filtered news entries:', newsEntries);
           
