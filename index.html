@@ -1,555 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Epstein's Web - Conspiracy Corner</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --crt-green: #00FF7F;
-      --dark-green: #00CC66;
-      --bright-green: #33FF88;
-      --matrix-green: #00DD77;
-      --neon-green: #00FF00;
-      --forest-green: #228B22;
-      --lime-green: #32CD32;
-      --emerald-green: #50C878;
-      --black-bg: #000000;
-      --dark-gray: #111111;
-      --gray: #333333;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE DAYLUGE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --red: #cc0000;  
+    --orange: #ff8800;  
+    --green: #00dd55;
+    --blue: #1a1a80;
+    --light-blue: #33ddff;
+    --violet: #cc88ff;
+    --pink: #ff69b4;
+    --yellow: #ffcc00;
+    --bright-blue: #00b7eb;
+    --ink: #111;  
+    --bright-purple-glow: #cc88ff;
+    --light-cyan-glow: #33ddff;
+    --gold: #d4af37;
+    --gold-bright: #ffd700;
+    --marble-gray: #d3d3d3;
+    --bright-dark-green: #00aa33;
+    --dodgers-blue: #1e90ff;
+    --synapse-duration: 2s;
+    --connection-color: var(--light-cyan-glow);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    color: var(--ink);
+    line-height: 1.5;
+    background: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+  }
+
+  .header h1 {
+    text-transform: uppercase;  
+    letter-spacing: .5px;  
+    font-size: 42px;  
+    margin-bottom: 8px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    animation: title-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes title-pulse {
+    0% {  
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--crt-green);
-      line-height: 1.4;
-      background: var(--black-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 20px;
+    25% {  
+      color: var(--light-cyan-glow);
+      text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
+    50% {  
+      color: var(--pink);
+      text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    body::after {
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(0,255,127,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite;
-      pointer-events: none;
+    75% {  
+      color: var(--bright-blue);
+      text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+    100% {  
+      color: var(--bright-purple-glow);
+      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
     }
-    @keyframes edge-glow {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
+  }
+
+  .wheel-container {
+    position: relative;
+    width: 480px; /* Reduced from 600px to bring circles closer */
+    height: 480px;
+    margin: 0 auto;
+    z-index: 5;
+  }
+
+  .connection-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .connection-path {
+    fill: none;
+    stroke: var(--connection-color);
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-opacity: 0.3;
+  }
+
+  .synapse-particle {
+    fill: var(--connection-color);
+    filter: drop-shadow(0 0 4px var(--connection-color));
+  }
+
+  .wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 135px;
+    height: 135px;
+    background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
+    color: yellow;
+    border: 2px solid #ffdd00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+    animation: pulse 3s ease-in-out infinite;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  @keyframes pulse {
+    0%, 100% {  
+      box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+      border-color: #ffdd00;
     }
-    .header {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
+    50% {  
+      box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
+      border-color: #ffff00;
+      transform: translate(-50%, -50%) scale(1.02);
     }
+  }
+
+  .circle {
+    position: absolute;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 1.1;
+    cursor: pointer;
+    background: black;
+    padding: 8px;
+  }
+
+  .circle-1 { left: 368px; top: 191px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* Adjusted to reduce distance by ~33% */
+  .circle-2 { left: 317px; top: 317px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3 { left: 191px; bottom: 10px; border: 2px solid var(--orange); color: var(--orange); }
+  .circle-4 { left: 66px; bottom: 66px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5 { left: 13px; top: 191px; border: 2px solid var(--violet); color: var(--violet); }
+  .circle-6 { left: 66px; top: 66px; border: 2px solid var(--pink); color: var(--pink); }
+  .circle-7 { left: 191px; top: 10px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-8 { left: 317px; top: 66px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .random-button {
+    background: var(--yellow);
+    color: var(--red);
+    border: 2px solid var(--red);
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3), 0 0 15px var(--red);
+    animation: red-glow 2s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  @keyframes red-glow {
+    0% { box-shadow: 0 0 10px var(--red), 0 0 20px var(--red), 0 0 20px var(--yellow); }
+    50% { box-shadow: 0 0 25px var(--red), 0 0 40px var(--red), 0 0 25px var(--yellow); }
+    100% { box-shadow: 0 0 10px var(--red), 0 0 20px var(--red), 0 0 20px var(--yellow); }
+  }
+
+  .random-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 40px var(--red), 0 8px 20px rgba(0,0,0,0.4), 0 0 25px var(--yellow);
+  }
+
+  .archive-bottom {
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    font-size: 11px;
+    color: #aaccff;
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 0.7;
+    text-shadow: 0 0 5px #00ddff;
+  }
+
+  .archive-bottom:hover {
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ddff;
+  }
+
+  @media (max-width: 600px) {
     .header h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 32px;
-      margin-bottom: 8px;
-      animation: title-pulse 8s ease-in-out infinite;
-    }
-    @keyframes title-pulse {
-      0% { color: var(--crt-green); text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { color: var(--crt-green); text-shadow: 0 0 15px var(--crt-green), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .layout-container {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      height: 700px;
-      margin: 40px auto 0;
-      z-index: 5;
-    }
-    .central-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 350px;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--crt-green);
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      z-index: 15;
-      box-shadow: 0 0 30px rgba(0,255,127,0.5), 0 4px 12px rgba(0,0,0,0.8);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(0,255,127,0.5), 0 4px 12px rgba(0,0,0,0.8); }
-      50% { box-shadow: 0 0 40px rgba(0,255,127,0.8), 0 6px 16px rgba(0,255,127,0.4); }
-    }
-    .central-title {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--neon-green);
-      text-shadow: 0 0 8px var(--neon-green);
-      margin-bottom: 12px;
-      border-bottom: 1px solid var(--crt-green);
-      padding-bottom: 6px;
-      flex-shrink: 0;
-    }
-    .content-links {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-      max-height: calc(100% - 50px); /* Adjust for central-title height */
-      overflow-y: auto; /* Enable scrolling if content overflows */
-    }
-    .content-link {
-      display: flex;
-      align-items: flex-start;
-      padding: 6px 8px;
-      border: 1px solid rgba(0,255,127,0.3);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-size: 16px;
-      line-height: 1.4;
-      min-height: 0;
-      overflow-wrap: anywhere;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: unroll 0.5s ease-out forwards;
-    }
-    @keyframes unroll {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .content-link:nth-child(1) { animation-delay: 0.1s; }
-    .content-link:nth-child(2) { animation-delay: 0.2s; }
-    .content-link:nth-child(3) { animation-delay: 0.3s; }
-    .content-link:nth-child(4) { animation-delay: 0.4s; }
-    .content-link:nth-child(5) { animation-delay: 0.5s; }
-    .content-link:hover {
-      background: rgba(0,255,127,0.2);
-      border-color: var(--crt-green);
-      box-shadow: 0 0 10px rgba(0,255,127,0.4);
-    }
-    .link-title {
-      color: var(--crt-green);
-      text-decoration: none;
-      cursor: pointer;
-      width: 100%;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-    }
-    .perimeter-box {
-      position: absolute;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--crt-green);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 900;
-      text-transform: uppercase;
+      font-size: 28px;
       letter-spacing: 0.3px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,255,127,0.4);
-      animation: electron-pulse 2s ease-in-out infinite;
-      color: var(--neon-green);
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
-    @keyframes electron-pulse {
-      0%, 100% { 
-        box-shadow: 0 0 20px rgba(0,255,127,0.4); 
-        border-color: var(--crt-green); 
-      }
-      50% { 
-        box-shadow: 0 0 30px rgba(0,255,127,0.8); 
-        border-color: var(--neon-green); 
-      }
+    .wheel-container {
+      width: 380px;
+      height: 380px;
     }
-    .perimeter-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(0,255,127,0.9);
-      background: var(--dark-gray);
-    }
-    .top-left-box {
-      top: 60px;
-      left: calc(50% - 245px);
-      width: 150px;
-      height: 60px;
+    .wheel-center {
+      width: 120px;
+      height: 120px;
       font-size: 18px;
     }
-    .top-middle-box {
-      top: 60px;
-      left: calc(50% - 75px);
-      width: 150px;
-      height: 60px;
-      font-size: 18px;
+    .circle {
+      width: 74px;
+      height: 74px;
+      font-size: 11px;
     }
-    .top-right-box {
-      top: 60px;
-      left: calc(50% + 95px);
-      width: 150px;
-      height: 60px;
-      font-size: 18px;
+    .circle-1 { left: 272px; top: 142px; }
+    .circle-2 { left: 234px; top: 234px; }
+    .circle-3 { left: 142px; bottom: 13px; }
+    .circle-4 { left: 50px; bottom: 53px; }
+    .circle-5 { left: 12px; top: 142px; }
+    .circle-6 { left: 50px; top: 50px; }
+    .circle-7 { left: 142px; top: 13px; }
+    .circle-8 { left: 234px; top: 50px; }
+    .connection-path {
+      stroke-width: 0.8;
     }
-    .bottom-left-box {
-      bottom: 60px;
-      left: calc(50% - 245px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
+    .synapse-particle {
+      transform: scale(0.8);
     }
-    .bottom-middle-box {
-      bottom: 60px;
-      left: calc(50% - 75px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
+  }
+
+  @media (max-width: 400px) {
+    .header h1 {
+      font-size: 28px;
+      letter-spacing: 0.3px;
     }
-    .bottom-right-box {
-      bottom: 60px;
-      left: calc(50% + 95px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
+    .wheel-container {
+      width: 320px;
+      height: 320px;
     }
-    .top-middle-box:hover,
-    .bottom-middle-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(0,255,127,0.9);
-      background: var(--dark-gray);
+    .wheel-center {
+      width: 96px;
+      height: 96px;
+      font-size: 15px;
     }
-    .home-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--black-bg);
-      color: var(--crt-green);
-      border: 2px solid var(--crt-green);
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--crt-green);
-      box-shadow: 0 0 10px rgba(0,255,127,0.3);
-      z-index: 20;
+    .circle {
+      width: 62px;
+      height: 62px;
+      font-size: 10px;
     }
-    .home-btn:hover {
-      background: var(--dark-gray);
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0,255,127,0.6);
+    .circle-1 { left: 227px; top: 118px; }
+    .circle-2 { left: 195px; top: 195px; }
+    .circle-3 { left: 118px; bottom: 11px; }
+    .circle-4 { left: 42px; bottom: 45px; }
+    .circle-5 { left: 10px; top: 118px; }
+    .circle-6 { left: 42px; top: 42px; }
+    .circle-7 { left: 118px; top: 11px; }
+    .circle-8 { left: 195px; top: 42px; }
+    .connection-path {
+      stroke-width: 0.6;
     }
-    #particle-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+    .synapse-particle {
+      transform: scale(0.6);
     }
-    @media (max-width: 900px) {
-      .layout-container { max-width: 90%; height: 600px; }
-      .central-content { width: 420px; height: 300px; padding: 12px; }
-      .central-title { font-size: 18px; }
-      .content-link { font-size: 14px; padding: 5px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 120px;
-        height: 50px;
-        font-size: 16px;
-      }
-      .top-left-box { left: calc(50% - 195px); }
-      .top-middle-box { left: calc(50% - 60px); }
-      .top-right-box { left: calc(50% + 75px); }
-      .bottom-left-box { left: calc(50% - 195px); }
-      .bottom-middle-box { left: calc(50% - 60px); }
-      .bottom-right-box { left: calc(50% + 75px); }
-    }
-    @media (max-width: 600px) {
-      .layout-container { height: 550px; }
-      .central-content { width: 340px; height: 280px; padding: 10px; }
-      .central-title { font-size: 16px; margin-bottom: 8px; }
-      .content-link { font-size: 12px; padding: 4px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 100px;
-        height: 45px;
-        font-size: 14px;
-      }
-      .top-left-box { left: calc(50% - 160px); }
-      .top-middle-box { left: calc(50% - 50px); }
-      .top-right-box { left: calc(50% + 60px); }
-      .bottom-left-box { left: calc(50% - 160px); }
-      .bottom-middle-box { left: calc(50% - 50px); }
-      .bottom-right-box { left: calc(50% + 60px); }
-      .header h1 { font-size: 28px; }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="header"><h1>EPSTEIN'S WEB</h1></div>
-  <a href="/conspiracy-corner.html" class="home-btn">← Back to Conspiracy Corner</a>
-  <canvas id="particle-canvas"></canvas>
-  
-  <div class="layout-container">
-    <!-- Central Content Rectangle -->
-    <div class="central-content">
-      <div class="central-title">Latest Epstein News</div>
-      <div class="content-links">
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Top Boxes -->
-    <div class="perimeter-box top-left-box" onclick="window.location.href='/epstein/podcasts.html'">
-      Podcasts
-    </div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='/epstein/memes.html'">
-      Memes
-    </div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='/epstein/video-clips.html'">
-      Video Clips
-    </div>
-    
-    <!-- Bottom Boxes -->
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/epstein/articles-longform.html'">
-      Articles & Longform
-    </div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/epstein/primary-sources.html'">
-      News Archive
-    </div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/epstein/box6.html'">
-      Primary Sources
-    </div>
+  <div class="header">
+    <h1>THE DAYLUGE</h1>
   </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const particlesArray = [];
-      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
-      
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.5 - 0.25;
-          this.speedY = Math.random() * 0.5 - 0.25;
+
+  <div class="wheel-container">
+    <svg class="connection-lines" width="100%" height="100%"></svg>
+    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
+      TRENDING<br>NEWS
+    </a>
+    <div class="circle circle-1" onclick="goToCategory('politics')">POLITICS</div>
+    <div class="circle circle-2" onclick="goToCategory('markets-economics')">MARKETS & ECONOMICS</div>
+    <div class="circle circle-3" onclick="goToCategory('sports-leisure')">SPORTS & LEISURE</div>
+    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">SCIENCE, NATURE & TECHNOLOGY</div>
+    <div class="circle circle-5" onclick="goToCategory('arts-literature')">ARTS & LITERATURE</div>
+    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy')">WISDOM & PHILOSOPHY</div>
+    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner')">CONSPIRACY CORNER</div>
+    <div class="circle circle-8" onclick="goToCategory('history')">HISTORY</div>
+  </div>
+
+  <div class="button-container">
+    <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
+  </div>
+
+  <div class="archive-bottom" onclick="openArchive()">archive</div>
+
+<script>
+  const categoryMap = {
+    'politics': 'politics.html',
+    'markets-economics': 'markets-economics.html',
+    'sports-leisure': 'sports-leisure.html',
+    'science-nature-technology': 'science-nature-technology.html',
+    'arts-literature': 'arts-literature.html',
+    'wisdom-philosophy': 'wisdom-philosophy.html',
+    'conspiracy-corner': 'conspiracy-corner.html',
+    'history': 'history.html'
+  };
+
+  window.goToCategory = function(category) {
+    const url = categoryMap[category];
+    if (url) {
+      window.location.href = url;
+    }
+  };
+
+  window.goToRandomArticle = function() {
+    const newWindow = window.open('', '_blank');
+    if (!newWindow) return;
+
+    fetch('surprise-me-links.txt')
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) return parts[1].trim();
+          return null;
+        }).filter(link => link !== null);
+        
+        const surpriseLinks = links.slice(0, 12);
+        if (surpriseLinks.length > 0) {
+          const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+          newWindow.location.href = randomLink;
         }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.1;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        draw() {
-          ctx.fillStyle = 'rgba(0,255,127,0.6)';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-      
-      function init() {
-        for (let i = 0; i < numberOfParticles; i++) {
-          particlesArray.push(new Particle());
-        }
-      }
-      
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1);
-            i--;
-            particlesArray.push(new Particle());
-          }
-        }
-        requestAnimationFrame(animate);
-      }
-      
-      init();
-      animate();
-      
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
       });
-      
-      // Load content from epstein-links.txt
-      async function loadEpsteinContent() {
-        try {
-          console.log('Attempting to fetch epstein-links.txt');
-          const response = await fetch('/epstein/epstein-links.txt');
-          if (!response.ok) {
-            throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
-          }
-          const text = await response.text();
-          console.log('Fetched text:', text);
-          const lines = text.trim().split('\n').filter(line => line.trim());
-          console.log('Parsed lines:', lines);
-          
-          // Parse each line: title|link|category
-          const entries = lines.map((line, index) => {
-            const parts = line.split('|');
-            if (parts.length < 3) {
-              console.warn(`Invalid entry at line ${index + 1}: ${line}`);
-              return null;
-            }
-            return {
-              title: parts[0].trim(),
-              link: parts[1].trim(),
-              category: parts[2].trim()
-            };
-          }).filter(entry => entry !== null);
-          
-          console.log('Parsed entries:', entries);
-          
-          // Display latest 5 in central box
-          const latest5 = entries.slice(0, 5);
-          const contentLinksContainer = document.querySelector('.content-links');
-          
-          // Clear existing placeholder content
-          contentLinksContainer.innerHTML = '';
-          
-          // Ensure we always try to show 5 entries (pad with error message if needed)
-          const displayEntries = [...latest5];
-          if (displayEntries.length === 0) {
-            displayEntries.push({
-              title: 'No content available. Check epstein-links.txt.',
-              link: '#',
-              category: 'error'
-            });
-          }
-          while (displayEntries.length < 5) {
-            displayEntries.push({
-              title: `Placeholder Entry ${displayEntries.length + 1}`,
-              link: '#',
-              category: 'placeholder'
-            });
-          }
-          
-          // Add content to DOM with animation
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.innerHTML = `
-              <span class="link-title">${entry.title}</span>
-            `;
-            linkElement.addEventListener('click', () => {
-              if (entry.link !== '#') {
-                window.location.href = entry.link;
-              }
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
-          
-          console.log('Loaded', entries.length, 'entries from epstein-links.txt');
-          console.log('Displaying', displayEntries.length, 'entries in central box');
-          
-        } catch (error) {
-          console.error('Error loading epstein-links.txt:', error.message);
-          console.log('Falling back to error message in central content');
-          const contentLinksContainer = document.querySelector('.content-links');
-          contentLinksContainer.innerHTML = '';
-          const errorEntry = {
-            title: 'Error loading content. Check epstein-links.txt or console for details.',
-            link: '#',
-            category: 'error'
-          };
-          const displayEntries = [errorEntry];
-          while (displayEntries.length < 5) {
-            displayEntries.push({
-              title: `Placeholder Entry ${displayEntries.length + 1}`,
-              link: '#',
-              category: 'placeholder'
-            });
-          }
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.innerHTML = `
-              <span class="link-title">${entry.title}</span>
-            `;
-            linkElement.addEventListener('click', () => {
-              if (entry.link !== '#') {
-                window.location.href = entry.link;
-              }
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
-        }
-      }
-      
-      // Load content when page loads
-      loadEpsteinContent();
+  };
+
+  window.openArchive = function() {
+    window.location.href = 'archive.html';
+  };
+
+  function drawConnections() {
+    const svg = document.querySelector('.connection-lines');
+    const wheelCenter = document.querySelector('.wheel-center');
+    const circles = document.querySelectorAll('.circle');
+
+    const svgRect = svg.getBoundingClientRect();
+    const hubRect = wheelCenter.getBoundingClientRect();
+    const hubRadius = hubRect.width / 2;
+    const hubCenterX = hubRect.left + hubRadius - svgRect.left;
+    const hubCenterY = hubRect.top + hubRadius - svgRect.top;
+
+    svg.innerHTML = '';
+
+    circles.forEach((circle, index) => {
+      const rect = circle.getBoundingClientRect();
+      const circleRadius = rect.width / 2;
+      const circleCenterX = rect.left + circleRadius - svgRect.left;
+      const circleCenterY = rect.top + circleRadius - svgRect.top;
+
+      const dx = circleCenterX - hubCenterX;
+      const dy = circleCenterY - hubCenterY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      const hubGap = 10;
+      const circleGap = 10;
+
+      const startX = hubCenterX + (dx / distance) * (hubRadius + hubGap);
+      const startY = hubCenterY + (dy / distance) * (hubRadius + hubGap);
+      const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
+      const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const controlX = (startX + endX) / 2;
+      const controlY = (startY + endY) / 2;
+      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
+      path.setAttribute('d', d);
+      path.setAttribute('id', `path-${index}`);
+      path.classList.add('connection-path');
+      svg.appendChild(path);
+
+      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      particle.setAttribute('class', 'synapse-particle');
+      particle.setAttribute('r', '3');
+      svg.appendChild(particle);
+
+      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+      animateMotion.setAttribute('dur', `2s`);
+      animateMotion.setAttribute('repeatCount', 'indefinite');
+      animateMotion.setAttribute('begin', `${index * 0.25}s`);
+      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
+      particle.appendChild(animateMotion);
+
+      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateSize.setAttribute('attributeName', 'r');
+      animateSize.setAttribute('values', '2;4;2');
+      animateSize.setAttribute('dur', '2s');
+      animateSize.setAttribute('repeatCount', 'indefinite');
+      animateSize.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateSize);
+
+      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+      animateOpacity.setAttribute('attributeName', 'fill-opacity');
+      animateOpacity.setAttribute('values', '0.5;1;0.5');
+      animateOpacity.setAttribute('dur', '2s');
+      animateOpacity.setAttribute('repeatCount', 'indefinite');
+      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
+      particle.appendChild(animateOpacity);
     });
-  </script>
+  }
+
+  window.addEventListener('load', drawConnections);
+  window.addEventListener('resize', drawConnections);
+  window.addEventListener('orientationchange', drawConnections);
+</script>
 </body>
 </html>
