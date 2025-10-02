@@ -169,7 +169,7 @@
   </style>
 </head>
 <body>
-  <a href="/epstein-web.html" class="back-btn">← Back to Epstein's Web</a>
+  <a href="/epstein/epstein.html" class="back-btn">← Back to Epstein's Web</a>
   <a href="/conspiracy-corner.html" class="home-btn">← Conspiracy Corner</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
@@ -253,7 +253,7 @@
       init();
     });
 
-    // Load news archive links from epstein-links.txt, starting from the first entry
+    // Load news archive links from epstein-links.txt, starting from the 6th entry
     async function loadNewsArchiveLinks() {
       try {
         console.log('Fetching epstein-links.txt for news archive content');
@@ -283,15 +283,12 @@
         
         console.log('All parsed links:', allLinks);
         
-        // Filter for news archive entries, starting from the first entry (index 0)
-        const newsArchiveLinks = allLinks.filter(link => 
-          link.category === 'news-archive' || 
-          link.category === 'news' ||
-          link.category.includes('news-archive') ||
-          link.category.includes('news')
+        // Filter for news entries, starting from the 6th entry (index 5)
+        const newsArchiveLinks = allLinks.slice(5).filter(link => 
+          link.category === 'news'
         );
         
-        console.log('Filtered news archive links (starting from first entry):', newsArchiveLinks);
+        console.log('Filtered news archive links (starting from 6th entry):', newsArchiveLinks);
 
         const grid = document.getElementById('news-archive-links');
         if (grid && newsArchiveLinks.length > 0) {
