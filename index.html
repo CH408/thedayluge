@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --synapse-duration: 2s;
+    --synapse-duration: 1.5s; /* Faster for more dynamic effect */
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -102,17 +102,17 @@
     height: 480px;
     margin: 0 auto;
     z-index: 5;
-    animation: spin-wheel 1.5s ease-out forwards; /* Fast spin on load */
+    animation: spin-wheel 1.5s ease-out forwards;
   }
 
   @keyframes spin-wheel {
     0% {
-      transform: rotateZ(1080deg); /* 3 full rotations */
-      opacity: 0.5; /* Slightly transparent for effect */
+      transform: rotateZ(1080deg);
+      opacity: 0.5;
     }
     100% {
-      transform: rotateZ(0deg); /* Ends at normal position */
-      opacity: 1; /* Fully visible */
+      transform: rotateZ(0deg);
+      opacity: 1;
     }
   }
 
@@ -136,7 +136,7 @@
 
   .synapse-particle {
     fill: var(--connection-color);
-    filter: drop-shadow(0 0 4px var(--connection-color));
+    filter: drop-shadow(0 0 8px var(--connection-color)); /* Stronger glow */
   }
 
   .wheel-center {
@@ -196,15 +196,14 @@
     padding: 8px;
   }
 
-  /* Circle positions for 480px wheel-container, radius 180px, center (240, 240) */
-  .circle-1 { left: 378px; top: 198px; border: 2px solid var(--marble-gray); color: var(--marble-gray); } /* 0° */
-  .circle-2 { left: 325px; top: 325px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); } /* 45° */
-  .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); } /* 90° */
-  .circle-4 { left: 71px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); } /* 135° */
-  .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); } /* 180° */
-  .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); } /* 225° */
-  .circle-7 { left: 198px; top: 18px; border: 2px solid #00ff00; color: #00ff00; } /* 270° */
-  .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); } /* 315° */
+  .circle-1 { left: 378px; top: 198px; border: 2px solid var(--marble-gray); color: var(--marble-gray); }
+  .circle-2 { left: 325px; top: 325px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
+  .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); }
+  .circle-4 { left: 71px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
+  .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); }
+  .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); }
+  .circle-7 { left: 198px; top: 18px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
     display: flex;
@@ -282,7 +281,6 @@
       height: 74px;
       font-size: 11px;
     }
-    /* Circle positions for 380px wheel-container, radius 142px, center (190, 190) */
     .circle-1 { left: 295px; top: 153px; }
     .circle-2 { left: 257px; top: 257px; }
     .circle-3 { left: 153px; top: 295px; }
@@ -318,7 +316,6 @@
       height: 62px;
       font-size: 10px;
     }
-    /* Circle positions for 320px wheel-container, radius 120px, center (160, 160) */
     .circle-1 { left: 249px; top: 129px; }
     .circle-2 { left: 218px; top: 218px; }
     .circle-3 { left: 129px; top: 249px; }
@@ -449,32 +446,34 @@
 
       // Create 3 particles per path with staggered timing
       for (let particleNum = 0; particleNum < 3; particleNum++) {
-        const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        const particle = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
         particle.setAttribute('class', 'synapse-particle');
-        particle.setAttribute('r', '3');
+        particle.setAttribute('width', '4'); // Narrow width for streak effect
+        particle.setAttribute('height', '10'); // Initial height for elongated shape
+        particle.setAttribute('rx', '2'); // Slight rounding for smoother look
         svg.appendChild(particle);
 
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        animateMotion.setAttribute('dur', '2s');
+        animateMotion.setAttribute('dur', '1.5s'); // Faster for dynamic effect
         animateMotion.setAttribute('repeatCount', 'indefinite');
-        animateMotion.setAttribute('begin', `${index * 0.25 + particleNum * 0.5}s`); // Stagger each particle by 0.5s
-        animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
+        animateMotion.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`); // Tighter stagger
+        animateMotion.setAttribute('path', d); // Use path directly
         particle.appendChild(animateMotion);
 
         const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-        animateSize.setAttribute('attributeName', 'r');
-        animateSize.setAttribute('values', '2;4;2');
-        animateSize.setAttribute('dur', '2s');
+        animateSize.setAttribute('attributeName', 'height');
+        animateSize.setAttribute('values', '10;20;10'); // Stretch and contract for pulse
+        animateSize.setAttribute('dur', '1.5s');
         animateSize.setAttribute('repeatCount', 'indefinite');
-        animateSize.setAttribute('begin', `${index * 0.25 + particleNum * 0.5}s`);
+        animateSize.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
         particle.appendChild(animateSize);
 
         const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
-        animateOpacity.setAttribute('values', '0.5;1;0.5');
-        animateOpacity.setAttribute('dur', '2s');
+        animateOpacity.setAttribute('values', '0.4;1;0.4'); // Flicker like an impulse
+        animateOpacity.setAttribute('dur', '1.5s');
         animateOpacity.setAttribute('repeatCount', 'indefinite');
-        animateOpacity.setAttribute('begin', `${index * 0.25 + particleNum * 0.5}s`);
+        animateOpacity.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
         particle.appendChild(animateOpacity);
       }
     });
