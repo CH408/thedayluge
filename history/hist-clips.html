@@ -249,6 +249,7 @@
     }
     
     function init() {
+      console.log('Initializing particle effect');
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
@@ -275,6 +276,7 @@
 
     // Get current page from URL
     function getCurrentPage() {
+      console.log('Getting current page from URL');
       const urlParams = new URLSearchParams(window.location.search);
       return parseInt(urlParams.get('page')) || 1;
     }
@@ -283,11 +285,11 @@
     async function loadClipsLinks() {
       console.log('Starting to load history video clips links...');
       try {
-        const response = await fetch('/thedayluge/history/history-links.txt');
+        console.log('Attempting to fetch ./history-links.txt');
+        const response = await fetch('./history-links.txt');
         console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
-          console.error('Failed to load history-links.txt:', response.status);
-          return;
+          throw new Error(`Failed to load history-links.txt: ${response.status}`);
         }
         const text = await response.text();
         console.log('Text loaded, length:', text.length);
@@ -298,6 +300,7 @@
           if (parts.length >= 3) {
             return { title: parts[0].trim(), url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
+          console.warn('Invalid line format:', line);
           return null;
         }).filter(link => link !== null);
         
@@ -322,7 +325,13 @@
         const grid = document.getElementById('history-clips-links');
         const pageInfo = document.getElementById('page-info');
         
-        if (grid && pageLinks.length > 0) {
+        if (!grid) {
+          console.error('Element with ID history-clips-links not found');
+          return;
+        }
+        
+        if (pageLinks.length > 0) {
+          console.log('Displaying page links:', pageLinks);
           grid.innerHTML = pageLinks.map((link, index) => `
             <li class="headline">
               <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
@@ -334,19 +343,25 @@
             pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
           }
         } else if (clipsLinks.length === 0) {
+          console.log('No clips links found, displaying no content message');
           grid.innerHTML = '<li class="headline"><span>No video clips available yet.</span></li>';
           grid.style.display = '';
           if (pageInfo) {
             pageInfo.textContent = '';
           }
         } else {
+          console.log('No links on this page');
           grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
           grid.style.display = '';
+          if (pageInfo) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+          }
         }
         
         // Create navigation buttons
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
+          console.log('Creating navigation buttons');
           let buttonsHTML = '';
           
           // Previous button
@@ -375,26 +390,30 @@
         console.error('Error loading history video clips links:', error);
         const grid = document.getElementById('history-clips-links');
         if (grid) {
+          console.log('Displaying error message due to fetch failure');
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
           grid.style.display = '';
         }
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
+          console.log('Setting random button only due to error');
           buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomClips()">⚛️ SURPRISE ME!</button>';
-          grid.style.display = '';
+          buttonContainer.style.display = '';
         }
       }
     }
 
     // Navigate to specific page
     function goToPage(pageNum) {
+      console.log('Navigating to page:', pageNum);
       window.location.href = `/thedayluge/history/hist-clips.html?page=${pageNum}`;
     }
 
     // Random video clips link
     async function goToRandomClips() {
+      console.log('Attempting to load random clip');
       try {
-        const response = await fetch('/thedayluge/history/history-links.txt');
+        const response = await fetch('./history-links.txt');
         if (!response.ok) {
           console.log('Could not load history-links.txt for random selection');
           return;
@@ -410,8 +429,10 @@
         }).filter(link => link !== null);
         if (links.length > 0) {
           const randomLink = links[Math.floor(Math.random() * links.length)];
+          console.log('Opening random clip:', randomLink);
           window.open(randomLink, '_blank', 'noopener,noreferrer');
         } else {
+          console.log('No clips available for random selection');
           alert('No video clips available.');
         }
       } catch (error) {
@@ -419,7 +440,10 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadClipsLinks);
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM content loaded, calling loadClipsLinks');
+      loadClipsLinks();
+    });
   </script>
 </body>
 </html>
