@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History Video Clips - THE DAYLUGE</title>
+  <title>History Podcasts - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -210,9 +210,9 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title" id="archive-title">History Video Clips</div>
+    <div class="archive-title" id="archive-title">History Podcasts</div>
     <div class="page-info" id="page-info"></div>
-    <ul class="headlines" id="history-clips-links" style="display: none;"></ul>
+    <ul class="headlines" id="history-podcasts-links" style="display: none;"></ul>
     <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
@@ -281,9 +281,9 @@
       return parseInt(urlParams.get('page')) || 1;
     }
 
-    // Load video clips links with pagination
-    async function loadClipsLinks() {
-      console.log('Starting to load history video clips links...');
+    // Load podcasts links with pagination
+    async function loadPodcastsLinks() {
+      console.log('Starting to load history podcasts links...');
       try {
         console.log('Attempting to fetch ./history-links.txt');
         const response = await fetch('./history-links.txt');
@@ -306,27 +306,27 @@
         
         console.log('Total links parsed:', links.length);
         
-        // Filter for clips category
-        const clipsLinks = links.filter(link => link.category === 'clips');
-        console.log('Clips links:', clipsLinks.length);
+        // Filter for podcasts category
+        const podcastsLinks = links.filter(link => link.category === 'podcasts');
+        console.log('Podcasts links:', podcastsLinks.length);
         const currentPage = getCurrentPage();
         const linksPerPage = 24;
-        const totalPages = Math.ceil(clipsLinks.length / linksPerPage);
+        const totalPages = Math.ceil(podcastsLinks.length / linksPerPage);
         
         console.log('Current page:', currentPage, 'Total pages:', totalPages);
         
         // Calculate start and end indices for current page
         const startIndex = (currentPage - 1) * linksPerPage;
         const endIndex = startIndex + linksPerPage;
-        const pageLinks = clipsLinks.slice(startIndex, endIndex);
+        const pageLinks = podcastsLinks.slice(startIndex, endIndex);
         
         console.log('Page links for this page:', pageLinks.length);
         
-        const grid = document.getElementById('history-clips-links');
+        const grid = document.getElementById('history-podcasts-links');
         const pageInfo = document.getElementById('page-info');
         
         if (!grid) {
-          console.error('Element with ID history-clips-links not found');
+          console.error('Element with ID history-podcasts-links not found');
           return;
         }
         
@@ -342,9 +342,9 @@
           if (pageInfo) {
             pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
           }
-        } else if (clipsLinks.length === 0) {
-          console.log('No clips links found, displaying no content message');
-          grid.innerHTML = '<li class="headline"><span>No video clips available yet.</span></li>';
+        } else if (podcastsLinks.length === 0) {
+          console.log('No podcasts links found, displaying no content message');
+          grid.innerHTML = '<li class="headline"><span>No podcasts available yet.</span></li>';
           grid.style.display = '';
           if (pageInfo) {
             pageInfo.textContent = '';
@@ -372,7 +372,7 @@
           }
           
           // Random button
-          buttonsHTML += '<button class="random-button" onclick="goToRandomClips()">⚛️ SURPRISE ME!</button>';
+          buttonsHTML += '<button class="random-button" onclick="goToRandomPodcasts()">⚛️ SURPRISE ME!</button>';
           
           // Next button
           if (currentPage < totalPages) {
@@ -385,10 +385,10 @@
           buttonContainer.style.display = '';
         }
         
-        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${clipsLinks.length} total in clips category)`);
+        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${podcastsLinks.length} total in podcasts category)`);
       } catch (error) {
-        console.error('Error loading history video clips links:', error);
-        const grid = document.getElementById('history-clips-links');
+        console.error('Error loading history podcasts links:', error);
+        const grid = document.getElementById('history-podcasts-links');
         if (grid) {
           console.log('Displaying error message due to fetch failure');
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
@@ -397,7 +397,7 @@
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
           console.log('Setting random button only due to error');
-          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomClips()">⚛️ SURPRISE ME!</button>';
+          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomPodcasts()">⚛️ SURPRISE ME!</button>';
           buttonContainer.style.display = '';
         }
       }
@@ -406,12 +406,12 @@
     // Navigate to specific page
     function goToPage(pageNum) {
       console.log('Navigating to page:', pageNum);
-      window.location.href = `/thedayluge/history/hist-clips.html?page=${pageNum}`;
+      window.location.href = `/thedayluge/history/hist-podcasts.html?page=${pageNum}`;
     }
 
-    // Random video clips link
-    async function goToRandomClips() {
-      console.log('Attempting to load random clip');
+    // Random podcasts link
+    async function goToRandomPodcasts() {
+      console.log('Attempting to load random podcast');
       try {
         const response = await fetch('./history-links.txt');
         if (!response.ok) {
@@ -422,18 +422,18 @@
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'clips') {
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'podcasts') {
             return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
         if (links.length > 0) {
           const randomLink = links[Math.floor(Math.random() * links.length)];
-          console.log('Opening random clip:', randomLink);
+          console.log('Opening random podcast:', randomLink);
           window.open(randomLink, '_blank', 'noopener,noreferrer');
         } else {
-          console.log('No clips available for random selection');
-          alert('No video clips available.');
+          console.log('No podcasts available for random selection');
+          alert('No podcasts available.');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
@@ -441,8 +441,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM content loaded, calling loadClipsLinks');
-      loadClipsLinks();
+      console.log('DOM content loaded, calling loadPodcastsLinks');
+      loadPodcastsLinks();
     });
   </script>
 </body>
