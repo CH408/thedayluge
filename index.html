@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --synapse-duration: 1.2s; /* Slightly faster for electric feel */
+    --synapse-duration: 0.8s; /* Faster for twinkling star effect */
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -136,7 +136,7 @@
 
   .synapse-particle {
     fill: var(--connection-color);
-    filter: drop-shadow(0 0 8px var(--connection-color)) drop-shadow(0 0 12px #ffffff); /* Double glow for electric spark */
+    filter: drop-shadow(0 0 8px var(--connection-color)) drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 12px var(--bright-purple-glow)); /* Triple glow for starry twinkle */
   }
 
   .wheel-center {
@@ -448,38 +448,40 @@
       for (let particleNum = 0; particleNum < 3; particleNum++) {
         const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         particle.setAttribute('class', 'synapse-particle');
-        particle.setAttribute('r', '3'); // Keep small size
+        particle.setAttribute('r', '1.5'); // Smaller for star-like twinkle
         svg.appendChild(particle);
 
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        animateMotion.setAttribute('dur', '1.2s'); // Faster for spark-like speed
+        animateMotion.setAttribute('dur', '0.8s'); // Faster for rapid back-and-forth
         animateMotion.setAttribute('repeatCount', 'indefinite');
-        animateMotion.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
+        animateMotion.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`); // Tighter stagger
+        animateMotion.setAttribute('keyPoints', '0;1;0'); // Back and forth
+        animateMotion.setAttribute('keyTimes', '0;0.5;1');
         animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
         particle.appendChild(animateMotion);
 
         const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateSize.setAttribute('attributeName', 'r');
-        animateSize.setAttribute('values', '2;5;2'); // Pulse size for spark effect
-        animateSize.setAttribute('dur', '1.2s');
+        animateSize.setAttribute('values', '1;2.5;1'); // Small pulse for twinkle
+        animateSize.setAttribute('dur', '0.8s');
         animateSize.setAttribute('repeatCount', 'indefinite');
-        animateSize.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
+        animateSize.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateSize);
 
         const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
-        animateOpacity.setAttribute('values', '0.3;1;0.3'); // Sharp flicker for electric vibe
-        animateOpacity.setAttribute('dur', '1.2s');
+        animateOpacity.setAttribute('values', '0.2;1;0.2'); // Sharp twinkle
+        animateOpacity.setAttribute('dur', '0.8s');
         animateOpacity.setAttribute('repeatCount', 'indefinite');
-        animateOpacity.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
+        animateOpacity.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateOpacity);
 
         const animateColor = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateColor.setAttribute('attributeName', 'fill');
-        animateColor.setAttribute('values', '#33ddff;#ffffff;#33ddff'); // Cyan to white to cyan
-        animateColor.setAttribute('dur', '1.2s');
+        animateColor.setAttribute('values', '#33ddff;#ffffff;#cc88ff;#33ddff'); // Cyan to white to purple to cyan
+        animateColor.setAttribute('dur', '0.8s');
         animateColor.setAttribute('repeatCount', 'indefinite');
-        animateColor.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
+        animateColor.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateColor);
       }
     });
