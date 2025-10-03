@@ -355,24 +355,24 @@
     </div>
     
     <!-- Top Boxes -->
-    <div class="perimeter-box top-left-box" onclick="window.location.href='/history/podcasts.html'">
+    <div class="perimeter-box top-left-box" onclick="window.location.href='/history/hist-podcasts.html'">
       Podcasts
     </div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='/history/articles-longform.html'">
+    <div class="perimeter-box top-middle-box" onclick="window.location.href='/history/hist-articles-longform.html'">
       Articles & Longform
     </div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='/history/video-clips.html'">
+    <div class="perimeter-box top-right-box" onclick="window.location.href='/history/hist-clips.html'">
       Video Clips
     </div>
     
     <!-- Bottom Boxes -->
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/history/books.html'">
+    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/history/hist-books.html'">
       Books
     </div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/history/memes.html'">
+    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/history/hist-memes.html'">
       Memes
     </div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/history/tv-movies.html'">
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/history/hist-tv-movies.html'">
       TV & Movies
     </div>
   </div>
@@ -493,12 +493,12 @@
           
           console.log('Display entries:', displayEntries);
           
-          // Add content to DOM with animation
+          // Add content to DOM with animation, including category
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
-              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title} (${entry.category})</a>
             `;
             linkElement.addEventListener('click', (e) => {
               if (entry.link === '#') e.preventDefault();
@@ -531,7 +531,7 @@
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
-              <span class="link-title">${entry.title}</span>
+              <span class="link-title">${entry.title} (${entry.category})</span>
             `;
             linkElement.addEventListener('click', () => {
               if (entry.link !== '#') {
