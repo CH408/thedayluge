@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --synapse-duration: 0.8s; /* Faster for twinkling star effect */
+    --synapse-duration: 1.6s; /* Slower for relaxed twinkle */
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -102,16 +102,16 @@
     height: 480px;
     margin: 0 auto;
     z-index: 5;
-    animation: spin-wheel 1.5s ease-out forwards;
+    animation: spin-wheel 0.75s ease-out forwards; /* Shorter duration */
   }
 
   @keyframes spin-wheel {
     0% {
-      transform: rotateZ(1080deg);
+      transform: rotateZ(0deg); /* Start at 0 */
       opacity: 0.5;
     }
     100% {
-      transform: rotateZ(0deg);
+      transform: rotateZ(360deg); /* One full clockwise turn */
       opacity: 1;
     }
   }
@@ -161,7 +161,7 @@
     letter-spacing: 0.5px;
     line-height: 1.2;
     box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
-    animation: pulse 3s ease-in-out infinite;
+    animation: pulse 5s ease-in-out infinite; /* Slower pulse */
     text-decoration: none;
     text-align: center;
   }
@@ -452,9 +452,9 @@
         svg.appendChild(particle);
 
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        animateMotion.setAttribute('dur', '0.8s'); // Faster for rapid back-and-forth
+        animateMotion.setAttribute('dur', '1.6s'); // Slower for relaxed twinkle
         animateMotion.setAttribute('repeatCount', 'indefinite');
-        animateMotion.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`); // Tighter stagger
+        animateMotion.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         animateMotion.setAttribute('keyPoints', '0;1;0'); // Back and forth
         animateMotion.setAttribute('keyTimes', '0;0.5;1');
         animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
@@ -463,7 +463,7 @@
         const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateSize.setAttribute('attributeName', 'r');
         animateSize.setAttribute('values', '1;2.5;1'); // Small pulse for twinkle
-        animateSize.setAttribute('dur', '0.8s');
+        animateSize.setAttribute('dur', '1.6s');
         animateSize.setAttribute('repeatCount', 'indefinite');
         animateSize.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateSize);
@@ -471,15 +471,15 @@
         const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
         animateOpacity.setAttribute('values', '0.2;1;0.2'); // Sharp twinkle
-        animateOpacity.setAttribute('dur', '0.8s');
-        animateOpacity.setAttribute('repeatCount', 'indefinite');
+        animateOpacity.setAttribute('dur', '1.6s');
+        animateMotion.setAttribute('repeatCount', 'indefinite');
         animateOpacity.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateOpacity);
 
         const animateColor = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateColor.setAttribute('attributeName', 'fill');
         animateColor.setAttribute('values', '#33ddff;#ffffff;#cc88ff;#33ddff'); // Cyan to white to purple to cyan
-        animateColor.setAttribute('dur', '0.8s');
+        animateColor.setAttribute('dur', '1.6s');
         animateColor.setAttribute('repeatCount', 'indefinite');
         animateColor.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateColor);
