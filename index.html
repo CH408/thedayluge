@@ -447,33 +447,36 @@
       path.classList.add('connection-path');
       svg.appendChild(path);
 
-      const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      particle.setAttribute('class', 'synapse-particle');
-      particle.setAttribute('r', '3');
-      svg.appendChild(particle);
+      // Create 3 particles per path with staggered timing
+      for (let particleNum = 0; particleNum < 3; particleNum++) {
+        const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        particle.setAttribute('class', 'synapse-particle');
+        particle.setAttribute('r', '3');
+        svg.appendChild(particle);
 
-      const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-      animateMotion.setAttribute('dur', `2s`);
-      animateMotion.setAttribute('repeatCount', 'indefinite');
-      animateMotion.setAttribute('begin', `${index * 0.25}s`);
-      animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
-      particle.appendChild(animateMotion);
+        const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+        animateMotion.setAttribute('dur', '2s');
+        animateMotion.setAttribute('repeatCount', 'indefinite');
+        animateMotion.setAttribute('begin', `${index * 0.25 + particleNum * 0.5}s`); // Stagger each particle by 0.5s
+        animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
+        particle.appendChild(animateMotion);
 
-      const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-      animateSize.setAttribute('attributeName', 'r');
-      animateSize.setAttribute('values', '2;4;2');
-      animateSize.setAttribute('dur', '2s');
-      animateSize.setAttribute('repeatCount', 'indefinite');
-      animateSize.setAttribute('begin', `${index * 0.25}s`);
-      particle.appendChild(animateSize);
+        const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        animateSize.setAttribute('attributeName', 'r');
+        animateSize.setAttribute('values', '2;4;2');
+        animateSize.setAttribute('dur', '2s');
+        animateSize.setAttribute('repeatCount', 'indefinite');
+        animateSize.setAttribute('begin', `${index * 0.25 + particleNum * 0.5}s`);
+        particle.appendChild(animateSize);
 
-      const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-      animateOpacity.setAttribute('attributeName', 'fill-opacity');
-      animateOpacity.setAttribute('values', '0.5;1;0.5');
-      animateOpacity.setAttribute('dur', '2s');
-      animateOpacity.setAttribute('repeatCount', 'indefinite');
-      animateOpacity.setAttribute('begin', `${index * 0.25}s`);
-      particle.appendChild(animateOpacity);
+        const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        animateOpacity.setAttribute('attributeName', 'fill-opacity');
+        animateOpacity.setAttribute('values', '0.5;1;0.5');
+        animateOpacity.setAttribute('dur', '2s');
+        animateOpacity.setAttribute('repeatCount', 'indefinite');
+        animateOpacity.setAttribute('begin', `${index * 0.25 + particleNum * 0.5}s`);
+        particle.appendChild(animateOpacity);
+      }
     });
   }
 
