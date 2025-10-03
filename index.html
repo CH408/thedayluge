@@ -26,7 +26,7 @@
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
-    --synapse-duration: 1.2s; /* Even faster for electric feel */
+    --synapse-duration: 1.2s; /* Slightly faster for electric feel */
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -132,18 +132,50 @@
     stroke-width: 1;
     stroke-linecap: round;
     stroke-opacity: 0.3;
-    animation: flicker-path 0.5s ease-in-out infinite alternate; /* Flicker effect */
-  }
-
-  @keyframes flicker-path {
-    0% { stroke-opacity: 0.3; }
-    100% { stroke-opacity: 0.5; }
   }
 
   .synapse-particle {
-    fill: url(#spark-gradient); /* Gradient for electric effect */
-    filter: url(#glow); /* Apply glow filter */
-    transform-origin: center;
+    fill: var(--connection-color);
+    filter: drop-shadow(0 0 8px var(--connection-color)) drop-shadow(0 0 12px #ffffff); /* Double glow for electric spark */
+  }
+
+  .wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 135px;
+    height: 135px;
+    background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
+    color: yellow;
+    border: 2px solid #ffdd00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+    animation: pulse 3s ease-in-out infinite;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  @keyframes pulse {
+    0%, 100% {  
+      box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+      border-color: #ffdd00;
+    }
+    50% {  
+      box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
+      border-color: #ffff00;
+      transform: translate(-50%, -50%) scale(1.02);
+    }
   }
 
   .circle {
@@ -307,25 +339,7 @@
   </div>
 
   <div class="wheel-container">
-    <svg class="connection-lines" width="100%" height="100%">
-      <!-- Define glow filter -->
-      <defs>
-        <filter id="glow">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-          <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.7 0" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        <!-- Define gradient for spark -->
-        <linearGradient id="spark-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-          <stop offset="50%" style="stop-color:var(--light-cyan-glow);stop-opacity:1" />
-          <stop offset="100%" style="stop-color:var(--bright-purple-glow);stop-opacity:0.7" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
       TRENDING<br>NEWS
     </a>
@@ -401,7 +415,7 @@
     const hubCenterX = hubRect.left + hubRadius - svgRect.left;
     const hubCenterY = hubRect.top + hubRadius - svgRect.top;
 
-    svg.innerHTML = svg.querySelector('defs').outerHTML; // Preserve defs
+    svg.innerHTML = '';
 
     circles.forEach((circle, index) => {
       const rect = circle.getBoundingClientRect();
@@ -432,48 +446,41 @@
 
       // Create 3 particles per path with staggered timing
       for (let particleNum = 0; particleNum < 3; particleNum++) {
-        const particle = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         particle.setAttribute('class', 'synapse-particle');
-        particle.setAttribute('width', '3'); // Thinner for lightning-like effect
-        particle.setAttribute('height', '12'); // Taller for streak
-        particle.setAttribute('rx', '1.5'); // Subtle rounding
+        particle.setAttribute('r', '3'); // Keep small size
         svg.appendChild(particle);
 
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        const dur = 1.2 + particleNum * 0.1; // Slight variation in speed
-        animateMotion.setAttribute('dur', `${dur}s`);
+        animateMotion.setAttribute('dur', '1.2s'); // Faster for spark-like speed
         animateMotion.setAttribute('repeatCount', 'indefinite');
-        animateMotion.setAttribute('begin', `${index * 0.15 + particleNum * 0.3}s`); // Tighter stagger
-        animateMotion.setAttribute('path', d);
-        // Add keySplines for erratic movement
-        animateMotion.setAttribute('keySplines', '0.1 0.8 0.2 1; 0.8 0.2 0.9 0.2');
-        animateMotion.setAttribute('calcMode', 'spline');
+        animateMotion.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
+        animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
         particle.appendChild(animateMotion);
 
         const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-        animateSize.setAttribute('attributeName', 'height');
-        animateSize.setAttribute('values', '12;24;12'); // More pronounced stretch
-        animateSize.setAttribute('dur', `${dur}s`);
+        animateSize.setAttribute('attributeName', 'r');
+        animateSize.setAttribute('values', '2;5;2'); // Pulse size for spark effect
+        animateSize.setAttribute('dur', '1.2s');
         animateSize.setAttribute('repeatCount', 'indefinite');
-        animateSize.setAttribute('begin', `${index * 0.15 + particleNum * 0.3}s`);
+        animateSize.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
         particle.appendChild(animateSize);
 
         const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
-        animateOpacity.setAttribute('values', '0.3;1;0.3'); // Sharper flicker
-        animateOpacity.setAttribute('dur', `${dur}s`);
+        animateOpacity.setAttribute('values', '0.3;1;0.3'); // Sharp flicker for electric vibe
+        animateOpacity.setAttribute('dur', '1.2s');
         animateOpacity.setAttribute('repeatCount', 'indefinite');
-        animateOpacity.setAttribute('begin', `${index * 0.15 + particleNum * 0.3}s`);
+        animateOpacity.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
         particle.appendChild(animateOpacity);
 
-        const animateRotate = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
-        animateRotate.setAttribute('attributeName', 'transform');
-        animateRotate.setAttribute('type', 'rotate');
-        animateRotate.setAttribute('values', '0;10;-10;0'); // Slight wobble
-        animateRotate.setAttribute('dur', `${dur}s`);
-        animateRotate.setAttribute('repeatCount', 'indefinite');
-        animateRotate.setAttribute('begin', `${index * 0.15 + particleNum * 0.3}s`);
-        particle.appendChild(animateRotate);
+        const animateColor = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        animateColor.setAttribute('attributeName', 'fill');
+        animateColor.setAttribute('values', '#33ddff;#ffffff;#33ddff'); // Cyan to white to cyan
+        animateColor.setAttribute('dur', '1.2s');
+        animateColor.setAttribute('repeatCount', 'indefinite');
+        animateColor.setAttribute('begin', `${index * 0.2 + particleNum * 0.4}s`);
+        particle.appendChild(animateColor);
       }
     });
   }
