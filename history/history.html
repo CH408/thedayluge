@@ -503,12 +503,12 @@
           
           console.log('Display entries:', displayEntries.length);
           
-          // Add content to DOM with animation, including category
+          // Add content to DOM with animation, without category
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
-              <a href="${entry.link}" class="link-title" target="_blank">${entry.title} (${entry.category})</a>
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
             `;
             linkElement.addEventListener('click', (e) => {
               if (entry.link === '#') e.preventDefault();
@@ -542,7 +542,7 @@
               const linkElement = document.createElement('div');
               linkElement.className = 'content-link';
               linkElement.innerHTML = `
-                <span class="link-title">${entry.title} (${entry.category})</span>
+                <span class="link-title">${entry.title}</span>
               `;
               linkElement.addEventListener('click', () => {
                 if (entry.link !== '#') {
