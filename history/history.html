@@ -378,7 +378,8 @@
   </div>
   
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM content loaded, initializing history page');
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
@@ -410,6 +411,7 @@
       }
       
       function init() {
+        console.log('Initializing particle effect');
         for (let i = 0; i < numberOfParticles; i++) {
           particlesArray.push(new Particle());
         }
@@ -435,20 +437,23 @@
       window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        init();
       });
       
       // Load content from history-links.txt
       async function loadHistoryContent() {
+        console.log('Starting to load history content');
         try {
-          console.log('Attempting to fetch /thedayluge/history/history-links.txt');
-          const response = await fetch('/thedayluge/history/history-links.txt');
+          console.log('Attempting to fetch ./history-links.txt');
+          const response = await fetch('./history-links.txt');
+          console.log('Fetch response:', response.ok, response.status);
           if (!response.ok) {
-            throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
+            throw new Error(`Fetch failed with status ${response.status}`);
           }
           const text = await response.text();
-          console.log('Fetched text:', text);
+          console.log('Fetched text, length:', text.length);
           const lines = text.trim().split('\n').filter(line => line.trim());
-          console.log('Parsed lines:', lines);
+          console.log('Parsed lines:', lines.length);
           
           // Parse each line: title|link|category
           const entries = lines.map((line, index) => {
@@ -464,11 +469,16 @@
             };
           }).filter(entry => entry !== null);
           
-          console.log('Parsed entries:', entries);
+          console.log('Parsed entries:', entries.length);
           
           // Take first 5 entries across all categories for central box
           const latest5 = entries.slice(0, 5);
           const contentLinksContainer = document.querySelector('.content-links');
+          
+          if (!contentLinksContainer) {
+            console.error('Content links container not found');
+            return;
+          }
           
           // Clear existing placeholder content
           contentLinksContainer.innerHTML = '';
@@ -491,7 +501,7 @@
             });
           }
           
-          console.log('Display entries:', displayEntries);
+          console.log('Display entries:', displayEntries.length);
           
           // Add content to DOM with animation, including category
           displayEntries.forEach((entry, index) => {
@@ -510,40 +520,41 @@
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
-          console.error('Error loading history-links.txt:', error.message);
-          console.log('Falling back to error message in central content');
+          console.error('Error loading history-links.txt:', error);
           const contentLinksContainer = document.querySelector('.content-links');
-          contentLinksContainer.innerHTML = '';
-          const errorEntry = {
-            title: 'Error loading history content. Check history-links.txt or console for details.',
-            link: '#',
-            category: 'error'
-          };
-          const displayEntries = [errorEntry];
-          while (displayEntries.length < 5) {
-            displayEntries.push({
-              title: `Placeholder Entry ${displayEntries.length + 1}`,
+          if (contentLinksContainer) {
+            console.log('Displaying error message due to fetch failure');
+            contentLinksContainer.innerHTML = '';
+            const errorEntry = {
+              title: 'Error loading history content. Check history-links.txt or console for details.',
               link: '#',
-              category: 'placeholder'
+              category: 'error'
+            };
+            const displayEntries = [errorEntry];
+            while (displayEntries.length < 5) {
+              displayEntries.push({
+                title: `Placeholder Entry ${displayEntries.length + 1}`,
+                link: '#',
+                category: 'placeholder'
+              });
+            }
+            displayEntries.forEach((entry, index) => {
+              const linkElement = document.createElement('div');
+              linkElement.className = 'content-link';
+              linkElement.innerHTML = `
+                <span class="link-title">${entry.title} (${entry.category})</span>
+              `;
+              linkElement.addEventListener('click', () => {
+                if (entry.link !== '#') {
+                  window.location.href = entry.link;
+                }
+              });
+              contentLinksContainer.appendChild(linkElement);
             });
           }
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.innerHTML = `
-              <span class="link-title">${entry.title} (${entry.category})</span>
-            `;
-            linkElement.addEventListener('click', () => {
-              if (entry.link !== '#') {
-                window.location.href = entry.link;
-              }
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
         }
       }
       
-      // Load content when page loads
       loadHistoryContent();
     });
   </script>
