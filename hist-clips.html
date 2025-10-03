@@ -325,7 +325,7 @@
         if (grid && pageLinks.length > 0) {
           grid.innerHTML = pageLinks.map((link, index) => `
             <li class="headline">
-              <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title} (${link.category})</a>
+              <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
             </li>
           `).join('');
           grid.style.display = '';
@@ -381,7 +381,7 @@
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
           buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomClips()">⚛️ SURPRISE ME!</button>';
-          buttonContainer.style.display = '';
+          grid.style.display = '';
         }
       }
     }
