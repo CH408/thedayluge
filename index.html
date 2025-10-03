@@ -102,6 +102,26 @@
     height: 480px;
     margin: 0 auto;
     z-index: 5;
+    perspective: 1000px; /* Adds 3D perspective for depth */
+    animation: spin-wheel 3s ease-out forwards; /* Animation on load */
+  }
+
+  @keyframes spin-wheel {
+    0% {
+      transform: rotateY(360deg); /* Starts rotated fully backward */
+      opacity: 0.5; /* Slightly transparent for effect */
+    }
+    100% {
+      transform: rotateY(0deg); /* Ends at normal position */
+      opacity: 1; /* Fully visible */
+    }
+  }
+
+  /* Ensure child elements inherit the 3D transform context */
+  .wheel-center,
+  .circle,
+  .connection-lines {
+    transform-style: preserve-3d;
   }
 
   .connection-lines {
@@ -259,6 +279,7 @@
     .wheel-container {
       width: 380px;
       height: 380px;
+      perspective: 800px; /* Slightly reduced perspective for smaller screens */
     }
     .wheel-center {
       width: 120px;
@@ -295,6 +316,7 @@
     .wheel-container {
       width: 320px;
       height: 320px;
+      perspective: 600px; /* Further reduced for smallest screens */
     }
     .wheel-center {
       width: 96px;
