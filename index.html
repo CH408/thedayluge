@@ -12,7 +12,7 @@
     --red: #cc0000;  
     --orange: #ff8800;  
     --green: #00dd55;
-    --blue: #1a1a80;
+    --blue: #1a1a80; /* Navy blue for new button font */
     --light-blue: #33ddff;
     --violet: #cc88ff;
     --pink: #ff69b4;
@@ -25,7 +25,7 @@
     --gold-bright: #ffd700;
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
-    --dodgers-blue: #1e90ff;
+    --dodgers-blue: #1e90ff; /* Dodger blue for new button background */
     --synapse-duration: 1.6s; /* Slower for relaxed twinkle */
     --connection-color: var(--light-cyan-glow);
   }
@@ -149,7 +149,7 @@
     background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
     color: yellow;
     border: 2px solid #ffdd00;
-    border-radius: 50%;
+    border-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,6 +244,37 @@
     box-shadow: 0 0 40px var(--red), 0 8px 20px rgba(0,0,0,0.4), 0 0 25px var(--yellow);
   }
 
+  .random-button-more {
+    background: var(--dodgers-blue);
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    padding: 7px 28px; /* Half height of random-button (14px / 2) */
+    border-radius: 30px;
+    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-size: 12px; /* Smaller font to fit */
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 20px var(--dodgers-blue), 0 4px 12px rgba(0,0,0,0.3), 0 0 15px var(--blue);
+    animation: blue-glow 2s ease-in-out infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 150px; /* Match random-button width */
+  }
+
+  @keyframes blue-glow {
+    0% { box-shadow: 0 0 10px var(--blue), 0 0 20px var(--blue), 0 0 20px var(--dodgers-blue); }
+    50% { box-shadow: 0 0 25px var(--blue), 0 0 40px var(--blue), 0 0 25px var(--dodgers-blue); }
+    100% { box-shadow: 0 0 10px var(--blue), 0 0 20px var(--blue), 0 0 20px var(--dodgers-blue); }
+  }
+
+  .random-button-more:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 40px var(--blue), 0 8px 20px rgba(0,0,0,0.4), 0 0 25px var(--dodgers-blue);
+  }
+
   .archive-bottom {
     position: fixed;
     bottom: 15px;
@@ -295,6 +326,9 @@
     .synapse-particle {
       transform: scale(0.8);
     }
+    .random-button, .random-button-more {
+      width: 130px; /* Adjust width for smaller screens */
+    }
   }
 
   @media (max-width: 400px) {
@@ -330,6 +364,14 @@
     .synapse-particle {
       transform: scale(0.6);
     }
+    .random-button, .random-button-more {
+      width: 120px; /* Further adjust width */
+      font-size: 12px; /* Adjust font size for random-button */
+    }
+    .random-button-more {
+      font-size: 10px; /* Smaller font for half-height button */
+      padding: 6px 28px; /* Adjust padding for smaller screens */
+    }
   }
 </style>
 </head>
@@ -355,6 +397,7 @@
 
   <div class="button-container">
     <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
+    <button class="random-button-more" onclick="goToRandomArticleMore()">SURPRISE ME MORE!</button>
   </div>
 
   <div class="archive-bottom" onclick="openArchive()">archive</div>
@@ -383,6 +426,28 @@
     if (!newWindow) return;
 
     fetch('surprise-me-links.txt')
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.split('\n').filter(line => line.trim());
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 2) return parts[1].trim();
+          return null;
+        }).filter(link => link !== null);
+        
+        const surpriseLinks = links.slice(0, 12);
+        if (surpriseLinks.length > 0) {
+          const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+          newWindow.location.href = randomLink;
+        }
+      });
+  };
+
+  window.goToRandomArticleMore = function() {
+    const newWindow = window.open('', '_blank');
+    if (!newWindow) return;
+
+    fetch('surprise-me-links.txt') // Same file for now; can be customized later
       .then(response => response.text())
       .then(text => {
         const lines = text.split('\n').filter(line => line.trim());
@@ -472,7 +537,7 @@
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
         animateOpacity.setAttribute('values', '0.2;1;0.2'); // Sharp twinkle
         animateOpacity.setAttribute('dur', '1.6s');
-        animateMotion.setAttribute('repeatCount', 'indefinite');
+        animateOpacity.setAttribute('repeatCount', 'indefinite');
         animateOpacity.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateOpacity);
 
