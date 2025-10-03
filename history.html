@@ -120,7 +120,7 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--gold); /* Changed to match .link-title and .perimeter-box */
+      color: var(--gold);
       text-shadow: 0 0 8px var(--gold);
       margin-bottom: 12px;
       border-bottom: 1px solid var(--gold);
@@ -450,41 +450,44 @@
           const lines = text.trim().split('\n').filter(line => line.trim());
           console.log('Parsed lines:', lines);
           
-          // Parse each line: title|link (no category yet)
+          // Parse each line: title|link|category
           const entries = lines.map((line, index) => {
             const parts = line.split('|');
-            if (parts.length < 2) {
+            if (parts.length < 3) {
               console.warn(`Invalid entry at line ${index + 1}: ${line}`);
               return null;
             }
             return {
               title: parts[0].trim(),
-              link: parts[1].trim()
+              link: parts[1].trim(),
+              category: parts[2].trim().toLowerCase()
             };
           }).filter(entry => entry !== null);
           
           console.log('Parsed entries:', entries);
           
-          // Take first 5 entries for central box
+          // Take first 5 entries across all categories for central box
           const latest5 = entries.slice(0, 5);
           const contentLinksContainer = document.querySelector('.content-links');
           
           // Clear existing placeholder content
           contentLinksContainer.innerHTML = '';
           
-          // Ensure 5 entries are displayed (pad with placeholders if needed)
+          // Ensure we always try to show 5 entries (pad with error message if needed)
           const displayEntries = [...latest5];
           if (displayEntries.length === 0) {
             console.log('No history entries found, displaying error message');
             displayEntries.push({
               title: 'No history content available. Check history-links.txt.',
-              link: '#'
+              link: '#',
+              category: 'error'
             });
           }
           while (displayEntries.length < 5) {
             displayEntries.push({
               title: `Placeholder Entry ${displayEntries.length + 1}`,
-              link: '#'
+              link: '#',
+              category: 'placeholder'
             });
           }
           
@@ -513,13 +516,15 @@
           contentLinksContainer.innerHTML = '';
           const errorEntry = {
             title: 'Error loading history content. Check history-links.txt or console for details.',
-            link: '#'
+            link: '#',
+            category: 'error'
           };
           const displayEntries = [errorEntry];
           while (displayEntries.length < 5) {
             displayEntries.push({
               title: `Placeholder Entry ${displayEntries.length + 1}`,
-              link: '#'
+              link: '#',
+              category: 'placeholder'
             });
           }
           displayEntries.forEach((entry, index) => {
