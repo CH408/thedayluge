@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History - THE DAYLUGE</title>
+  <title>History - Conspiracy Corner</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -12,289 +12,510 @@
       --gold-dark: #b8860b;
       --gold-light: #f0d064;
       --ink: #111;
-      --maxw: 1200px;
+      --black-bg: #0a1428;
+      --dark-gray: #111111;
+      --gray: #333333;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html, body { height: 100%; overflow-x: hidden; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--ink);
-      line-height: 1.3;
-      background: #0a1428;
-      padding: 10px;
-      position: relative;
+      color: var(--gold);
+      line-height: 1.4;
+      background: var(--black-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       min-height: 100vh;
-      overflow-x: hidden;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
     }
     body::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
-    }
-    #particle-canvas {
+    body::after {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(212,175,55,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(212,175,55,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(212,175,55,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
       pointer-events: none;
     }
-    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .block-title {
-      font-size: 18px;
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    @keyframes edge-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .header {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 10;
+    }
+    .header h1 {
       text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 32px;
+      margin-bottom: 8px;
+      animation: title-pulse 8s ease-in-out infinite;
+    }
+    @keyframes title-pulse {
+      0% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { color: var(--gold-light); text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .layout-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 700px;
+      margin: 40px auto 0;
+      z-index: 5;
+    }
+    .central-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 350px;
+      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      z-index: 15;
+      box-shadow: 0 0 30px rgba(212,175,55,0.5), 0 4px 12px rgba(0,0,0,0.8);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(212,175,55,0.5), 0 4px 12px rgba(0,0,0,0.8); }
+      50% { box-shadow: 0 0 40px rgba(212,175,55,0.8), 0 6px 16px rgba(212,175,55,0.4); }
+    }
+    .central-title {
+      text-align: center;
+      font-size: 22px;
       font-weight: 900;
-      text-align: left;
-      margin-bottom: 10px;
-    }
-    .history-title {
-      color: var(--gold);
-      animation: block-title-pulse-gold 8s ease-in-out infinite;
-    }
-    @keyframes block-title-pulse-gold {
-      0% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .headlines { list-style: none; max-width: 800px; }
-    .headline {
-      font-size: 16px;
-      margin-bottom: 5px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.5s ease forwards;
-      color: var(--gold);
-    }
-    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
-    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
-    .headlines .headline:nth-child(7) { animation-delay: 0.35s; }
-    .headlines .headline:nth-child(8) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(9) { animation-delay: 0.45s; }
-    .headlines .headline:nth-child(10) { animation-delay: 0.5s; }
-    .headlines .headline:nth-child(11) { animation-delay: 0.55s; }
-    .headlines .headline:nth-child(12) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(13) { animation-delay: 0.65s; }
-    .headlines .headline:nth-child(14) { animation-delay: 0.7s; }
-    .headlines .headline:nth-child(15) { animation-delay: 0.75s; }
-    .headlines .headline:nth-child(16) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(17) { animation-delay: 0.85s; }
-    .headlines .headline:nth-child(18) { animation-delay: 0.9s; }
-    .headlines .headline:nth-child(19) { animation-delay: 0.95s; }
-    .headlines .headline:nth-child(20) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(21) { animation-delay: 1.05s; }
-    .headlines .headline:nth-child(22) { animation-delay: 1.1s; }
-    .headlines .headline:nth-child(23) { animation-delay: 1.15s; }
-    .headlines .headline:nth-child(24) { animation-delay: 1.2s; }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .headline a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .history-links .headline a:hover {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       color: var(--gold-light);
-      text-shadow: 0 0 10px var(--gold-light);
+      text-shadow: 0 0 8px var(--gold-light);
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 6px;
+      flex-shrink: 0;
     }
-    .go-deeper, .random-button, .home-btn {
-      display: inline-block;
-      background: transparent;
+    .content-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      max-height: calc(100% - 50px);
+      overflow-y: auto;
+    }
+    .content-link {
+      display: flex;
+      align-items: flex-start;
+      padding: 6px 8px;
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      line-height: 1.4;
+      min-height: 0;
+      overflow-wrap: anywhere;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: unroll 0.5s ease-out forwards;
+    }
+    @keyframes unroll {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .content-link:nth-child(1) { animation-delay: 0.1s; }
+    .content-link:nth-child(2) { animation-delay: 0.2s; }
+    .content-link:nth-child(3) { animation-delay: 0.3s; }
+    .content-link:nth-child(4) { animation-delay: 0.4s; }
+    .content-link:nth-child(5) { animation-delay: 0.5s; }
+    .content-link:hover {
+      background: rgba(212,175,55,0.2);
+      border-color: var(--gold);
+      box-shadow: 0 0 10px rgba(212,175,55,0.4);
+    }
+    .link-title {
       color: var(--gold);
-      padding: 8px 16px;
-      border: 1px solid var(--gold);
-      border-radius: 20px;
-      font-size: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      width: 100%;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+    .perimeter-box {
+      position: absolute;
+      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
+      border: 2px solid var(--gold);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(212,175,55,0.4);
+      animation: electron-pulse 2s ease-in-out infinite;
+      color: var(--gold-light);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+    @keyframes electron-pulse {
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(212,175,55,0.4); 
+        border-color: var(--gold); 
+      }
+      50% { 
+        box-shadow: 0 0 30px rgba(212,175,55,0.8); 
+        border-color: var(--gold-light); 
+      }
+    }
+    .perimeter-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(212,175,55,0.9);
+      background: var(--dark-gray);
+    }
+    .top-left-box {
+      top: 60px;
+      left: calc(50% - 245px);
+      width: 150px;
+      height: 60px;
+      font-size: 18px;
+    }
+    .top-middle-box {
+      top: 60px;
+      left: calc(50% - 75px);
+      width: 150px;
+      height: 60px;
+      font-size: 18px;
+    }
+    .top-right-box {
+      top: 60px;
+      left: calc(50% + 95px);
+      width: 150px;
+      height: 60px;
+      font-size: 18px;
+    }
+    .bottom-left-box {
+      bottom: 60px;
+      left: calc(50% - 245px);
+      width: 150px;
+      height: 60px;
+      font-size: 16px;
+    }
+    .bottom-middle-box {
+      bottom: 60px;
+      left: calc(50% - 75px);
+      width: 150px;
+      height: 60px;
+      font-size: 16px;
+    }
+    .bottom-right-box {
+      bottom: 60px;
+      left: calc(50% + 95px);
+      width: 150px;
+      height: 60px;
+      font-size: 16px;
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--black-bg);
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 14px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--gold);
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      cursor: pointer;
+      box-shadow: 0 0 10px rgba(212,175,55,0.3);
+      z-index: 20;
     }
-    .go-deeper:hover, .random-button:hover, .home-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(212,175,55,0.3);
+    .home-btn:hover {
+      background: var(--dark-gray);
       transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(212,175,55,0.6);
     }
-    .button-container {
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .layout-container { max-width: 90%; height: 600px; }
+      .central-content { width: 420px; height: 300px; padding: 12px; }
+      .central-title { font-size: 18px; }
+      .content-link { font-size: 14px; padding: 5px 6px; }
+      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 120px;
+        height: 50px;
+        font-size: 16px;
+      }
+      .top-left-box { left: calc(50% - 195px); }
+      .top-middle-box { left: calc(50% - 60px); }
+      .top-right-box { left: calc(50% + 75px); }
+      .bottom-left-box { left: calc(50% - 195px); }
+      .bottom-middle-box { left: calc(50% - 60px); }
+      .bottom-right-box { left: calc(50% + 75px); }
     }
     @media (max-width: 600px) {
-      .block-title { font-size: 16px; }
-      .headline { font-size: 14px; }
-      .go-deeper, .random-button, .home-btn { font-size: 10px; padding: 6px 12px; }
+      .layout-container { height: 550px; }
+      .central-content { width: 340px; height: 280px; padding: 10px; }
+      .central-title { font-size: 16px; margin-bottom: 8px; }
+      .content-link { font-size: 12px; padding: 4px 6px; }
+      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 100px;
+        height: 45px;
+        font-size: 14px;
+      }
+      .top-left-box { left: calc(50% - 160px); }
+      .top-middle-box { left: calc(50% - 50px); }
+      .top-right-box { left: calc(50% + 60px); }
+      .bottom-left-box { left: calc(50% - 160px); }
+      .bottom-middle-box { left: calc(50% - 50px); }
+      .bottom-right-box { left: calc(50% + 60px); }
+      .header h1 { font-size: 28px; }
     }
   </style>
 </head>
 <body>
+  <div class="header"><h1>THE DAYLUGE - HISTORY</h1></div>
+  <a href="/" class="home-btn">← Back to Home</a>
   <canvas id="particle-canvas"></canvas>
-  <div class="wrap">
-    <div class="history">
-      <div class="block-title history-title">History</div>
-      <ul class="headlines history-links" id="history-links" style="display: none;"></ul>
+  
+  <div class="layout-container">
+    <!-- Central Content Rectangle -->
+    <div class="central-content">
+      <div class="central-title">Latest History Reports</div>
+      <div class="content-links">
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
+      </div>
     </div>
-    <div class="button-container" style="display: none;">
-      <button class="random-button" onclick="goToRandomHistory()">⚛️ SURPRISE ME!</button>
-      <a href="/history-archive.html" class="go-deeper">Go Deeper</a>
-      <a href="/" class="home-btn">← Home</a>
+    
+    <!-- Top Boxes -->
+    <div class="perimeter-box top-left-box" onclick="window.location.href='/history/documents.html'">
+      Documents
+    </div>
+    <div class="perimeter-box top-middle-box" onclick="window.location.href='/history/timelines.html'">
+      Timelines
+    </div>
+    <div class="perimeter-box top-right-box" onclick="window.location.href='/history/videos.html'">
+      Videos
+    </div>
+    
+    <!-- Bottom Boxes -->
+    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/history/articles.html'">
+      Articles
+    </div>
+    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/history/books.html'">
+      Books
+    </div>
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/history-archive.html'">
+      History Archive
     </div>
   </div>
+  
   <script>
-    // Particle effect
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const particlesArray = [];
-    const numberOfParticles = 50;
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1.5 - 0.75;
-        this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#d4af37', '#b8860b', '#f0d064', '#c69b2f', '#e6c14d', '#a67c00'][Math.floor(Math.random() * 6)];
-        this.hasTail = Math.random() < 0.25;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-      }
-      draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = this.color;
-        if (this.hasTail) {
-          const gradient = ctx.createLinearGradient(
-            this.x, this.y,
-            this.x - this.speedX * 10, this.y - this.speedY * 10
-          );
-          gradient.addColorStop(0, this.color + '33');
-          gradient.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.moveTo(this.x, this.y);
-          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = this.size;
-          ctx.stroke();
-        }
-      }
-    }
-    function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
-      }
-    }
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const particle of particlesArray) {
-        particle.update();
-        particle.draw();
-      }
-      requestAnimationFrame(animate);
-    }
-    init();
-    animate();
-    window.addEventListener('resize', () => {
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      const particlesArray = [];
+      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
+      
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 1;
+          this.speedX = Math.random() * 0.5 - 0.25;
+          this.speedY = Math.random() * 0.5 - 0.25;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.1;
+          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+        draw() {
+          ctx.fillStyle = 'rgba(212,175,55,0.6)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      
+      function init() {
+        for (let i = 0; i < numberOfParticles; i++) {
+          particlesArray.push(new Particle());
+        }
+      }
+      
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+            particlesArray.splice(i, 1);
+            i--;
+            particlesArray.push(new Particle());
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+      
       init();
-    });
-
-    // Load history links
-    async function loadHistoryLinks() {
-      try {
-        const response = await fetch('history-links.txt');
-        if (!response.ok) {
-          console.error('Failed to load history-links.txt:', response.status);
-          return;
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
+      animate();
+      
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+      
+      // Load content from history-links.txt
+      async function loadHistoryContent() {
+        try {
+          console.log('Attempting to fetch /history-links.txt');
+          const response = await fetch('/history-links.txt');
+          if (!response.ok) {
+            throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
           }
-          return null;
-        }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 24);
-        const grid = document.getElementById('history-links');
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
-          grid.style.display = '';
-        }
-        const buttonContainer = document.querySelector('.button-container');
-        if (buttonContainer) {
-          buttonContainer.style.display = '';
-        }
-        console.log(`Showing ${displayLinks.length} history links (${links.length - displayLinks.length} moved to archive)`);
-      } catch (error) {
-        console.error('Error loading history links:', error);
-        const buttonContainer = document.querySelector('.button-container');
-        if (buttonContainer) {
-          buttonContainer.style.display = '';
-        }
-      }
-    }
-
-    // Random history article
-    async function goToRandomHistory() {
-      try {
-        const response = await fetch('history-links.txt');
-        if (!response.ok) {
-          console.log('Could not load history-links.txt for random selection');
-          return;
-        }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
+          const text = await response.text();
+          console.log('Fetched text:', text);
+          const lines = text.trim().split('\n').filter(line => line.trim());
+          console.log('Parsed lines:', lines);
+          
+          // Parse each line: title|link (no category yet)
+          const entries = lines.map((line, index) => {
+            const parts = line.split('|');
+            if (parts.length < 2) {
+              console.warn(`Invalid entry at line ${index + 1}: ${line}`);
+              return null;
+            }
+            return {
+              title: parts[0].trim(),
+              link: parts[1].trim()
+            };
+          }).filter(entry => entry !== null);
+          
+          console.log('Parsed entries:', entries);
+          
+          // Take first 5 entries for central box
+          const latest5 = entries.slice(0, 5);
+          const contentLinksContainer = document.querySelector('.content-links');
+          
+          // Clear existing placeholder content
+          contentLinksContainer.innerHTML = '';
+          
+          // Ensure 5 entries are displayed (pad with placeholders if needed)
+          const displayEntries = [...latest5];
+          if (displayEntries.length === 0) {
+            console.log('No history entries found, displaying error message');
+            displayEntries.push({
+              title: 'No history content available. Check history-links.txt.',
+              link: '#'
+            });
           }
-          return null;
-        }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 24);
-        if (currentLinks.length > 0) {
-          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-          window.open(randomLink, '_blank');
-        }
-      } catch (error) {
-        console.error('Error loading links for random selection:', error);
-      }
-    }
+          while (displayEntries.length < 5) {
+            displayEntries.push({
+              title: `Placeholder Entry ${displayEntries.length + 1}`,
+              link: '#'
+            });
+          }
+          
+          console.log('Display entries:', displayEntries);
+          
+          // Add content to DOM with animation
+          displayEntries.forEach((entry, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.innerHTML = `
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+            `;
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
+          
+          console.log('Loaded', entries.length, 'history entries from history-links.txt');
+          console.log('Displaying', displayEntries.length, 'entries in central box');
+          
+        } JavaScript to load links from `history-links.txt`, adapted from `epstein.html` but simplified for the `title|url` format (no category filtering yet).
+   - **Perimeter Boxes**: Added six placeholder navigation boxes with history-related links (`/history/documents.html`, `/history/timelines.html`, etc.), mirroring the `epstein.html` structure. The bottom-right box links to `/history-archive.html` to match the original button.
+   - **Particle Animation**: Updated to use the gold color (`rgba(212,175,55,0.6)`) instead of green, but kept the same logic as `epstein.html` (fewer particles on mobile).
+   - **Responsive Design**: Copied the media queries from `epstein.html` to ensure the layout adjusts for smaller screens (900px and 600px breakpoints).
 
-    document.addEventListener('DOMContentLoaded', loadHistoryLinks);
-  </script>
-</body>
-</html>
+### Notes
+- The `history-links.txt` is assumed to have the format `title|url` based on the original `history.html` script. If you want to add a category field (e.g., `title|url|category`) like `epstein-links.txt`, please confirm, and I can modify the JavaScript to filter for a specific category (e.g., "history" or "news").
+- The perimeter box links are placeholders (`Documents`, `Timelines`, `Videos`, `Articles`, `Books`, `History Archive`). Let me know the specific categories or URLs you want for these.
+- The home button links to `/` as in the original `history.html`, but I can change it to `/conspiracy-corner.html` to match `epstein.html` if needed.
+
+### Next Steps
+Please review the edited `history.html` and let me know:
+1. If the structure, styling, or functionality needs any tweaks.
+2. The exact format of `history-links.txt` (e.g., does it include a category field like `epstein-links.txt`?).
+3. The desired labels and URLs for the six perimeter boxes.
+4. Any other changes before we move to `history-archive.html`.
+
+Once you confirm, we can create the `history-archive.html` page, likely using a similar template or adapting it based on your requirements. Let me know how to proceed!
