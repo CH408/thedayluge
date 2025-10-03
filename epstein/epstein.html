@@ -356,7 +356,7 @@
         <div class="content-link">
           <span class="link-title">Loading content...</span>
         </div>
-      </div>
+    </div>
     </div>
     
     <!-- Top Boxes -->
@@ -445,7 +445,7 @@
       // Load content from epstein-links.txt
       async function loadEpsteinContent() {
         try {
-          console.log('Attempting to fetch epstein-links.txt');
+          console.log('Attempting to fetch /epstein/epstein-links.txt');
           const response = await fetch('/epstein/epstein-links.txt');
           if (!response.ok) {
             throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
@@ -472,10 +472,7 @@
           console.log('Parsed entries:', entries);
           
           // Filter for news entries
-          const newsEntries = entries.filter(entry => 
-            entry.category === 'news' || 
-            entry.category.includes('news')
-          );
+          const newsEntries = entries.filter(entry => entry.category === 'news');
           
           console.log('Filtered news entries:', newsEntries);
           
@@ -489,6 +486,7 @@
           // Ensure we always try to show 5 entries (pad with error message if needed)
           const displayEntries = [...latest5];
           if (displayEntries.length === 0) {
+            console.log('No news entries found, displaying error message');
             displayEntries.push({
               title: 'No news content available. Check epstein-links.txt.',
               link: '#',
@@ -503,17 +501,17 @@
             });
           }
           
+          console.log('Display entries:', displayEntries);
+          
           // Add content to DOM with animation
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
-              <span class="link-title">${entry.title}</span>
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
             `;
-            linkElement.addEventListener('click', () => {
-              if (entry.link !== '#') {
-                window.location.href = entry.link;
-              }
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
             });
             contentLinksContainer.appendChild(linkElement);
           });
