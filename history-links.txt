@@ -53,16 +53,4 @@ Placeholder Title|Placeholder Link #24
 Placeholder Title|Placeholder Link #25
 Placeholder Title|Placeholder Link #26
 Placeholder Title|Placeholder Link #27
-Placeholder Title|Placeholder Link #28
-Placeholder Title|Placeholder Link #29
-Placeholder Title|Placeholder Link #30
-Placeholder Title|Placeholder Link #31
-Placeholder Title|Placeholder Link #32
-Placeholder Title|Placeholder Link #33
-Placeholder Title|Placeholder Link #34
-Placeholder Title|Placeholder Link #35
-Placeholder Title|Placeholder Link #36
-Placeholder Title|Placeholder Link #37
-Placeholder Title|Placeholder Link #38
-Placeholder Title|Placeholder Link #39
-Placeholder Title|Placeholder Link #40
+
