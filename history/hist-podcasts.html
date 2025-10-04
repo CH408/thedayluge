@@ -298,7 +298,9 @@
         const links = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3) {
-            return { title: parts[0].trim(), url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
+            // Clean title by removing suffixes like (art-long) or (art+long)
+            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+            return { title: cleanTitle, url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
           console.warn('Invalid line format:', line);
           return null;
@@ -322,7 +324,9 @@
         
         console.log('Page links for this page:', pageLinks.length);
         
-        const grid = document.getElementById('history-podcasts-links');
+        const grid = document.getElementById('history
+
+-podcasts-links');
         const pageInfo = document.getElementById('page-info');
         
         if (!grid) {
