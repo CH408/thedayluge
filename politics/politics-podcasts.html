@@ -59,7 +59,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .podcasts-title {
+    .global-news-title {
       color: var(--marble-gray);
       animation: block-title-pulse-gray 8s ease-in-out infinite;
     }
@@ -132,7 +132,7 @@
       text-shadow: 0 0 5px var(--marble-gray);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
-    .random-button, .pagination-button {
+    .random-button {
       position: relative;
     }
     .random-button:hover, .home-btn:hover, .pagination-button:hover {
@@ -177,11 +177,11 @@
   <a href="../politics.html" class="home-btn">← Back to Politics</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="podcasts">
+    <div class="global-news">
       <div class="title-container">
-        <div class="block-title podcasts-title" id="page-title">Politics - Podcasts - Page 1</div>
+        <div class="block-title global-news-title" id="page-title">Politics - Podcasts - Page 1</div>
       </div>
-      <ul class="headlines" id="podcasts-links"></ul>
+      <ul class="headlines" id="headlines"></ul>
       <p class="error-message" id="error-message" style="display: none;">Unable to load podcast links. Please try again later.</p>
     </div>
     <div class="button-container">
@@ -263,16 +263,19 @@
       canvas.height = window.innerHeight;
       init();
     });
-
-    // Load podcast links with pagination
+    // Load podcasts with pagination
     async function loadPodcastsContent(page = 1) {
       try {
-        const response = await fetch('../politics-links.txt');
+        console.log('Fetching politics-links.txt from /politics/politics-links.txt');
+        const response = await fetch('/politics/politics-links.txt');
+        console.log('Fetch response:', response.status, response.statusText);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const text = await response.text();
+        console.log('Fetched text length:', text.length);
         const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines.length);
         const entries = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3) {
@@ -280,15 +283,16 @@
             return { title: cleanTitle, link: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
           return null;
-        }).filter(entry => entry !== null && entry.category === 'pod');
+        }).filter(entry => entry !== null && entry.category === 'pods');
         
+        console.log('Filtered pods entries:', entries.length);
         const itemsPerPage = 24;
         const totalPages = Math.ceil(entries.length / itemsPerPage);
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         const paginatedEntries = entries.slice(start, end);
         
-        const headlines = document.getElementById('podcasts-links');
+        const headlines = document.getElementById('headlines');
         const pageTitle = document.getElementById('page-title');
         const errorMessage = document.getElementById('error-message');
         if (headlines) {
@@ -301,9 +305,9 @@
             : '<li class="headline">No podcast content available.</li>';
           pageTitle.textContent = `Politics - Podcasts - Page ${page}`;
           errorMessage.style.display = 'none';
-          console.log(`Showing ${paginatedEntries.length} podcast links on Page ${page} (${entries.length - (page - 1) * itemsPerPage} remaining)`);
+          console.log(`Showing ${paginatedEntries.length} podcasts on Page ${page}`);
         } else {
-          throw new Error('Podcasts links container not found');
+          throw new Error('Headlines container not found');
         }
         
         // Update pagination
@@ -327,11 +331,10 @@
         }
       }
     }
-
     // Random podcast from current page links
     async function goToRandomPodcast() {
       try {
-        const response = await fetch('../politics-links.txt');
+        const response = await fetch('/politics/politics-links.txt');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -339,7 +342,7 @@
         const lines = text.split('\n').filter(line => line.trim());
         const entries = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'pod') {
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'pods') {
             return parts[1].trim();
           }
           return null;
@@ -359,7 +362,6 @@
         }
       }
     }
-
     // Track current page in function scope
     loadPodcastsContent.page = 1;
     document.addEventListener('DOMContentLoaded', () => loadPodcastsContent());
