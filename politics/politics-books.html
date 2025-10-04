@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Politics - Podcasts</title>
+  <title>Politics - Books</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -179,13 +179,13 @@
   <div class="wrap">
     <div class="global-news">
       <div class="title-container">
-        <div class="block-title global-news-title" id="page-title">Politics - Podcasts - Page 1</div>
+        <div class="block-title global-news-title" id="page-title">Politics - Books - Page 1</div>
       </div>
       <ul class="headlines" id="headlines"></ul>
-      <p class="error-message" id="error-message" style="display: none;">Unable to load podcast links. Please try again later.</p>
+      <p class="error-message" id="error-message" style="display: none;">Unable to load books. Please try again later.</p>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomPodcast()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomBook()">⚛️ SURPRISE ME!</button>
     </div>
     <div class="pagination" id="pagination"></div>
   </div>
@@ -263,11 +263,11 @@
       canvas.height = window.innerHeight;
       init();
     });
-    // Load podcasts with pagination
-    async function loadPodcastsContent(page = 1) {
+    // Load books with pagination
+    async function loadBooksContent(page = 1) {
       try {
-        console.log('Fetching politics-links.txt from /politics/politics-links.txt');
-        const response = await fetch('/politics/politics-links.txt');
+        console.log('Fetching politics-links.txt from ./politics-links.txt');
+        const response = await fetch('./politics-links.txt');
         console.log('Fetch response:', response.status, response.statusText);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -283,9 +283,9 @@
             return { title: cleanTitle, link: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
           return null;
-        }).filter(entry => entry !== null && entry.category === 'pods');
+        }).filter(entry => entry !== null && entry.category === 'books');
         
-        console.log('Filtered pods entries:', entries.length);
+        console.log('Filtered books entries:', entries.length);
         const itemsPerPage = 24;
         const totalPages = Math.ceil(entries.length / itemsPerPage);
         const start = (page - 1) * itemsPerPage;
@@ -302,10 +302,10 @@
                   <a href="${entry.link}" target="_blank">${entry.title}</a>
                 </li>
               `).join('')
-            : '<li class="headline">No podcast content available.</li>';
-          pageTitle.textContent = `Politics - Podcasts - Page ${page}`;
+            : '<li class="headline">No books available.</li>';
+          pageTitle.textContent = `Politics - Books - Page ${page}`;
           errorMessage.style.display = 'none';
-          console.log(`Showing ${paginatedEntries.length} podcasts on Page ${page}`);
+          console.log(`Showing ${paginatedEntries.length} books on Page ${page}`);
         } else {
           throw new Error('Headlines container not found');
         }
@@ -319,20 +319,20 @@
             button.className = 'pagination-button';
             button.textContent = i;
             button.disabled = i === page;
-            button.addEventListener('click', () => loadPodcastsContent(i));
+            button.addEventListener('click', () => loadBooksContent(i));
             pagination.appendChild(button);
           }
         }
       } catch (error) {
-        console.error('Error loading podcast links:', error.message);
+        console.error('Error loading books:', error.message);
         const errorMessage = document.getElementById('error-message');
         if (errorMessage) {
           errorMessage.style.display = 'block';
         }
       }
     }
-    // Random podcast from current page links
-    async function goToRandomPodcast() {
+    // Random book from current page links
+    async function goToRandomBook() {
       try {
         const response = await fetch('/politics/politics-links.txt');
         if (!response.ok) {
@@ -342,17 +342,17 @@
         const lines = text.split('\n').filter(line => line.trim());
         const entries = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'pods') {
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'books') {
             return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = entries.slice((loadPodcastsContent.page - 1) * 24, loadPodcastsContent.page * 24);
+        const currentLinks = entries.slice((loadBooksContent.page - 1) * 24, loadBooksContent.page * 24);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
         } else {
-          throw new Error('No valid podcast links to select randomly on current page');
+          throw new Error('No valid books to select randomly on current page');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error.message);
@@ -363,8 +363,8 @@
       }
     }
     // Track current page in function scope
-    loadPodcastsContent.page = 1;
-    document.addEventListener('DOMContentLoaded', () => loadPodcastsContent());
+    loadBooksContent.page = 1;
+    document.addEventListener('DOMContentLoaded', () => loadBooksContent());
   </script>
 </body>
 </html>
