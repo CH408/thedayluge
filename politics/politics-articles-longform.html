@@ -117,7 +117,7 @@
       color: var(--marble-gray-light);
       text-shadow: 0 0 10px var(--marble-gray-light);
     }
-    .random-button, .home-btn, .next-btn {
+    .random-button, .home-btn, .pagination-button {
       display: inline-block;
       background: transparent;
       color: var(--marble-gray);
@@ -132,10 +132,10 @@
       text-shadow: 0 0 5px var(--marble-gray);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
-    .random-button, .next-btn {
+    .random-button {
       position: relative;
     }
-    .random-button:hover, .home-btn:hover, .next-btn:hover {
+    .random-button:hover, .home-btn:hover, .pagination-button:hover {
       background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(211,211,211,0.3);
       transform: scale(1.05);
@@ -146,6 +146,12 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
     }
     .home-btn {
       position: fixed;
@@ -160,7 +166,7 @@
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .random-button, .next-btn { font-size: 10px; padding: 6px 12px; }
+      .random-button, .pagination-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
       .error-message { font-size: 12px; }
@@ -173,15 +179,15 @@
   <div class="wrap">
     <div class="global-news">
       <div class="title-container">
-        <div class="block-title global-news-title">Politics - Articles & Longform - Page 1</div>
+        <div class="block-title global-news-title" id="page-title">Politics - Articles & Longform - Page 1</div>
       </div>
       <ul class="headlines" id="headlines"></ul>
       <p class="error-message" id="error-message" style="display: none;">Unable to load articles & longform links. Please try again later.</p>
     </div>
     <div class="button-container">
       <button class="random-button" onclick="goToRandomArticle()">⚛️ SURPRISE ME!</button>
-      <a href="politics-articles-longform-page2.html" class="next-btn">Next Page →</a>
     </div>
+    <div class="pagination" id="pagination"></div>
   </div>
   
   <script>
@@ -258,8 +264,8 @@
       init();
     });
 
-    // Load articles & longform links for Page 1
-    async function loadArticlesContent() {
+    // Load articles & longform links with pagination
+    async function loadArticlesContent(page = 1) {
       try {
         const response = await fetch('../politics-links.txt');
         if (!response.ok) {
@@ -276,19 +282,42 @@
           return null;
         }).filter(entry => entry !== null && entry.category === 'art-long');
         
+        const itemsPerPage = 24;
+        const totalPages = Math.ceil(entries.length / itemsPerPage);
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedEntries = entries.slice(start, end);
+        
         const headlines = document.getElementById('headlines');
+        const pageTitle = document.getElementById('page-title');
         const errorMessage = document.getElementById('error-message');
-        if (headlines && entries.length > 0) {
-          const displayEntries = entries.slice(0, 24); // First 24 entries for Page 1
-          headlines.innerHTML = displayEntries.map((entry, index) => `
-            <li class="headline">
-              <a href="${entry.link}" target="_blank">${entry.title}</a>
-            </li>
-          `).join('');
+        if (headlines) {
+          headlines.innerHTML = paginatedEntries.length > 0
+            ? paginatedEntries.map((entry, index) => `
+                <li class="headline">
+                  <a href="${entry.link}" target="_blank">${entry.title}</a>
+                </li>
+              `).join('')
+            : '<li class="headline">No articles & longform content available.</li>';
+          pageTitle.textContent = `Politics - Articles & Longform - Page ${page}`;
           errorMessage.style.display = 'none';
-          console.log(`Showing ${displayEntries.length} articles & longform links on Page 1 (${entries.length - 24} remaining for other pages)`);
+          console.log(`Showing ${paginatedEntries.length} articles & longform links on Page ${page} (${entries.length - (page - 1) * itemsPerPage} remaining)`);
         } else {
-          throw new Error('No valid articles & longform links to display on Page 1');
+          throw new Error('Headlines container not found');
+        }
+        
+        // Update pagination
+        const pagination = document.getElementById('pagination');
+        if (pagination) {
+          pagination.innerHTML = '';
+          for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+            button.className = 'pagination-button';
+            button.textContent = i;
+            button.disabled = i === page;
+            button.addEventListener('click', () => loadArticlesContent(i));
+            pagination.appendChild(button);
+          }
         }
       } catch (error) {
         console.error('Error loading articles & longform links:', error.message);
@@ -299,7 +328,7 @@
       }
     }
 
-    // Random article from Page 1 links
+    // Random article from current page links
     async function goToRandomArticle() {
       try {
         const response = await fetch('../politics-links.txt');
@@ -315,12 +344,12 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = entries.slice(0, 24); // Random from Page 1 links (first 24)
+        const currentLinks = entries.slice((loadArticlesContent.page - 1) * 24, loadArticlesContent.page * 24);
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
         } else {
-          throw new Error('No valid articles & longform links to select randomly on Page 1');
+          throw new Error('No valid articles & longform links to select randomly on current page');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error.message);
@@ -331,7 +360,9 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadArticlesContent);
+    // Track current page in function scope
+    loadArticlesContent.page = 1;
+    document.addEventListener('DOMContentLoaded', () => loadArticlesContent());
   </script>
 </body>
 </html>
