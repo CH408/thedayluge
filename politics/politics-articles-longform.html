@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Articles & Longform - THE DAYLUGE</title>
+  <title>Politics - Articles & Longform</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -11,6 +11,9 @@
       --marble-gray: #d3d3d3;
       --marble-gray-light: #e6e6e6;
       --ink: #111;
+      --black-bg: #0a1428;
+      --dark-gray: #111111;
+      --gray: #333333;
       --maxw: 1200px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,7 +22,7 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--ink);
       line-height: 1.3;
-      background: #0a1428;
+      background: var(--black-bg);
       padding: 10px;
       position: relative;
       min-height: 100vh;
@@ -34,8 +37,7 @@
       pointer-events: none;
     }
     @keyframes energy-pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
     }
     #particle-canvas {
       position: absolute;
@@ -57,7 +59,7 @@
       font-weight: 900;
       text-align: left;
     }
-    .articles-longform-title {
+    .global-news-title {
       color: var(--marble-gray);
       animation: block-title-pulse-gray 8s ease-in-out infinite;
     }
@@ -76,7 +78,7 @@
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
-      color: var(--marble-gray-light);
+      color: var(--marble-gray);
     }
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
@@ -111,11 +113,11 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .articles-longform-links .headline a:hover {
+    .headlines .headline a:hover {
       color: var(--marble-gray-light);
       text-shadow: 0 0 10px var(--marble-gray-light);
     }
-    .random-button, .home-btn, .prev-btn, .next-btn {
+    .random-button, .home-btn, .pagination-button {
       display: inline-block;
       background: transparent;
       color: var(--marble-gray);
@@ -130,10 +132,10 @@
       text-shadow: 0 0 5px var(--marble-gray);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
-    .prev-btn, .next-btn {
+    .random-button {
       position: relative;
     }
-    .random-button:hover, .home-btn:hover, .prev-btn:hover, .next-btn:hover {
+    .random-button:hover, .home-btn:hover, .pagination-button:hover {
       background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(211,211,211,0.3);
       transform: scale(1.05);
@@ -145,47 +147,49 @@
       gap: 20px;
       flex-wrap: wrap;
     }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
     .home-btn {
       position: fixed;
       bottom: 20px; right: 20px;
     }
     .error-message {
-      color: var(--marble-gray-light);
+      color: var(--marble-gray);
       font-size: 14px;
       margin-top: 10px;
       text-align: center;
     }
-    .pagination-info {
-      color: var(--marble-gray-light);
-      font-size: 12px;
-      text-align: center;
-      margin-top: 10px;
-    }
     @media (max-width: 600px) {
       .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .random-button, .prev-btn, .next-btn { font-size: 10px; padding: 6px 12px; }
+      .random-button, .pagination-button { font-size: 10px; padding: 6px 12px; }
       .home-btn { font-size: 10px; padding: 6px 12px; }
       .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
       .error-message { font-size: 12px; }
-      .pagination-info { font-size: 10px; }
     }
   </style>
 </head>
 <body>
-  <a href="/politics" class="home-btn">← Back to Politics</a>
+  <a href="../politics.html" class="home-btn">← Back to Politics</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="articles-longform">
+    <div class="global-news">
       <div class="title-container">
-        <div class="block-title articles-longform-title">Articles & Longform - Page 1</div>
+        <div class="block-title global-news-title" id="page-title">Politics - Articles & Longform - Page 1</div>
       </div>
-      <ul class="headlines articles-longform-links" id="articles-longform-links"></ul>
-      <p class="error-message" id="error-message" style="display: none;">Unable to load article links. Please try again later.</p>
-      <div class="button-container" id="pagination-buttons"></div>
-      <div class="pagination-info" id="pagination-info"></div>
+      <ul class="headlines" id="headlines"></ul>
+      <p class="error-message" id="error-message" style="display: none;">Unable to load articles & longform links. Please try again later.</p>
     </div>
+    <div class="button-container">
+      <button class="random-button" onclick="goToRandomArticle()">⚛️ SURPRISE ME!</button>
+    </div>
+    <div class="pagination" id="pagination"></div>
   </div>
+  
   <script>
     // Particle effect
     const canvas = document.getElementById('particle-canvas');
@@ -194,6 +198,7 @@
     canvas.height = window.innerHeight;
     const particlesArray = [];
     const numberOfParticles = 50;
+    
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -201,7 +206,7 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#d3d3d3', '#e6e6e6', '#c0c0c0', '#b3b3b3', '#d9d9d9', '#e3e3e3'][Math.floor(Math.random() * 6)];
+        this.color = ['#d3d3d3', '#e6e6e6', '#b3b3b3', '#c0c0c0', '#d9d9d9', '#a9a9a9'][Math.floor(Math.random() * 6)];
         this.hasTail = Math.random() < 0.25;
       }
       update() {
@@ -233,12 +238,14 @@
         }
       }
     }
+    
     function init() {
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
     }
+    
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (const particle of particlesArray) {
@@ -247,132 +254,102 @@
       }
       requestAnimationFrame(animate);
     }
+    
     init();
     animate();
+    
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();
     });
 
-    // Pagination logic
-    const itemsPerPage = 24;
-    let currentPage = 1;
-
-    // Load article links dynamically
-    async function loadArticleLinks(page = 1) {
+    // Load articles & longform links with pagination
+    async function loadArticlesContent(page = 1) {
       try {
-        const response = await fetch('politics-links.txt');
+        const response = await fetch('../politics-links.txt');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
-        if (lines.length < 6) {
-          throw new Error('Not enough links in politics-links.txt to start from the 6th oldest');
-        }
-        const links = lines.map(line => {
+        const entries = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'art-long') {
-            return { title: parts[0].trim(), url: parts[1].trim() };
+          if (parts.length >= 3) {
+            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+            return { title: cleanTitle, link: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
           return null;
-        }).filter(link => link !== null);
-
-        const totalItems = links.length;
-        const totalPages = Math.ceil((totalItems - 5) / itemsPerPage) || 1; // Start from 6th item
-        const startIdx = 5 + (page - 1) * itemsPerPage;
-        const endIdx = startIdx + itemsPerPage;
-        const displayLinks = links.slice(startIdx, endIdx > totalItems ? totalItems : endIdx);
-
-        const grid = document.getElementById('articles-longform-links');
+        }).filter(entry => entry !== null && entry.category === 'art-long');
+        
+        const itemsPerPage = 24;
+        const totalPages = Math.ceil(entries.length / itemsPerPage);
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedEntries = entries.slice(start, end);
+        
+        const headlines = document.getElementById('headlines');
+        const pageTitle = document.getElementById('page-title');
         const errorMessage = document.getElementById('error-message');
-        const paginationButtons = document.getElementById('pagination-buttons');
-        const paginationInfo = document.getElementById('pagination-info');
-
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank">${link.title}</a>
-            </li>
-          `).join('');
+        if (headlines) {
+          headlines.innerHTML = paginatedEntries.length > 0
+            ? paginatedEntries.map((entry, index) => `
+                <li class="headline">
+                  <a href="${entry.link}" target="_blank">${entry.title}</a>
+                </li>
+              `).join('')
+            : '<li class="headline">No articles & longform content available.</li>';
+          pageTitle.textContent = `Politics - Articles & Longform - Page ${page}`;
           errorMessage.style.display = 'none';
-
-          // Update page title and info
-          document.querySelector('.articles-longform-title').textContent = `Articles & Longform - Page ${page}`;
-          paginationInfo.textContent = `Page ${page} of ${totalPages} (Showing ${displayLinks.length} of ${totalItems - 5} total items)`;
-
-          // Generate pagination buttons
-          paginationButtons.innerHTML = '';
-          if (page > 1) {
-            const prevButton = document.createElement('a');
-            prevButton.href = `/politics/articles-longform-page${page - 1}.html`;
-            prevButton.className = 'prev-btn';
-            prevButton.textContent = '← Previous';
-            prevButton.onclick = (e) => {
-              e.preventDefault();
-              loadArticleLinks(page - 1);
-              window.history.pushState({}, '', prevButton.href);
-            };
-            paginationButtons.appendChild(prevButton);
-          }
-          if (page < totalPages) {
-            const nextButton = document.createElement('a';
-            nextButton.href = `/politics/articles-longform-page${page + 1}.html`;
-            nextButton.className = 'next-btn';
-            nextButton.textContent = 'Next Page →';
-            nextButton.onclick = (e) => {
-              e.preventDefault();
-              loadArticleLinks(page + 1);
-              window.history.pushState({}, '', nextButton.href);
-            };
-            paginationButtons.appendChild(nextButton);
-          }
-
-          currentPage = page;
+          console.log(`Showing ${paginatedEntries.length} articles & longform links on Page ${page} (${entries.length - (page - 1) * itemsPerPage} remaining)`);
         } else {
-          throw new Error('No valid article links to display on this page');
+          throw new Error('Headlines container not found');
+        }
+        
+        // Update pagination
+        const pagination = document.getElementById('pagination');
+        if (pagination) {
+          pagination.innerHTML = '';
+          for (let i = 1; i <= totalPages; i++) {
+            const button = document.createElement('button');
+            button.className = 'pagination-button';
+            button.textContent = i;
+            button.disabled = i === page;
+            button.addEventListener('click', () => loadArticlesContent(i));
+            pagination.appendChild(button);
+          }
         }
       } catch (error) {
-        console.error('Error loading article links:', error.message);
+        console.error('Error loading articles & longform links:', error.message);
         const errorMessage = document.getElementById('error-message');
-        const grid = document.getElementById('articles-longform-links');
-        const paginationButtons = document.getElementById('pagination-buttons');
-        const paginationInfo = document.getElementById('pagination-info');
         if (errorMessage) {
           errorMessage.style.display = 'block';
-          grid.innerHTML = '';
-          paginationButtons.innerHTML = '';
-          paginationInfo.textContent = '';
         }
       }
     }
 
-    // Random article from all links
+    // Random article from current page links
     async function goToRandomArticle() {
       try {
-        const response = await fetch('politics-links.txt');
+        const response = await fetch('../politics-links.txt');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
-        if (lines.length < 6) {
-          throw new Error('Not enough links in politics-links.txt for random selection from archive');
-        }
-        const links = lines.map(line => {
+        const entries = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'art-long') {
             return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
-        const allLinks = links.slice(5); // All links starting from 6th item
-        if (allLinks.length > 0) {
-          const randomLink = allLinks[Math.floor(Math.random() * allLinks.length)];
+        const currentLinks = entries.slice((loadArticlesContent.page - 1) * 24, loadArticlesContent.page * 24);
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
         } else {
-          throw new Error('No valid article links to select randomly');
+          throw new Error('No valid articles & longform links to select randomly on current page');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error.message);
@@ -383,21 +360,9 @@
       }
     }
 
-    // Handle page load and URL changes
-    function getPageFromURL() {
-      const path = window.location.pathname;
-      const match = path.match(/articles-longform-page(\d+)\.html$/);
-      return match ? parseInt(match[1], 10) : 1;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const initialPage = getPageFromURL();
-      loadArticleLinks(initialPage);
-      window.onpopstate = () => loadArticleLinks(getPageFromURL());
-    });
-
-    // Attach random button event
-    document.querySelector('.random-button').addEventListener('click', goToRandomArticle);
+    // Track current page in function scope
+    loadArticlesContent.page = 1;
+    document.addEventListener('DOMContentLoaded', () => loadArticlesContent());
   </script>
 </body>
 </html>
