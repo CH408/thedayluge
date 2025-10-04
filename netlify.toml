@@ -91,3 +91,28 @@
   from = "/politics/*"
   to = "/politics/:splat"
   status = 200
+
+[[redirects]]
+  from = "/sports-news"
+  to = "/sports-news/sports-news-archive.html"
+  status = 200
+
+[[redirects]]
+  from = "/history"
+  to = "/history/history.html"
+  status = 200
+
+[[redirects]]
+  from = "/politics"
+  to = "/politics/politics.html"
+  status = 200
+
+[[redirects]]
+  from = "/history/*"
+  to = "/history/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/politics/*"
+  to = "/politics/:splat"
+  status = 200
