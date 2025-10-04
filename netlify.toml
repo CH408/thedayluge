@@ -1,7 +1,7 @@
 [build]
-  functions = "netlify/functions"
   publish = "."
-  included_files = ["sports-news.txt", "global-news.txt", "us-news.txt", "economy-mkts-news.txt", "popculture-news.txt"]
+  command = ""
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/sports-news-archive"
@@ -62,3 +62,23 @@
   to = "/popculture-news-archive.html"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/history"
+  to = "/history/history.html"
+  status = 200
+
+[[redirects]]
+  from = "/politics"
+  to = "/politics/politics.html"
+  status = 200
+
+[[redirects]]
+  from = "/history/*"
+  to = "/history/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/politics/*"
+  to = "/politics/:splat"
+  status = 200

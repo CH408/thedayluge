@@ -1,2 +1,6 @@
-/sports-news-archive /sports-news-archive.html 200!
-/sports-news-archive/* /sports-news-archive.html 200!
+/sports-news /sports-news/sports-news-archive.html 200
+/history /history/history.html 200
+/politics /politics/politics.html 200
+/history/* /history/:splat 200
+/politics/* /politics/:splat 200
+/* /index.html 200
