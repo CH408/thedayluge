@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Politics - THE DAYLUGE</title> <!-- Changed from "History - THE DAYLUGE" -->
+  <title>Politics - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -19,7 +19,7 @@
     html, body { height: 100%; overflow-x: hidden; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--marble-gray); /* Changed from --gold */
+      color: var(--marble-gray);
       line-height: 1.4;
       background: var(--black-bg);
       display: flex;
@@ -38,7 +38,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at center, rgba(211,211,211,0.1) 0%, transparent 70%); /* Changed from gold base */
+      background: radial-gradient(circle at center, rgba(211,211,211,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -80,9 +80,9 @@
       animation: title-pulse 8s ease-in-out infinite;
     }
     @keyframes title-pulse {
-      0% { color: var(--marble-gray); text-shadow: 0 0 15px var(--marble-gray), 2px 2px 4px rgba(0,0,0,0.8); } /* Changed from --gold */
-      50% { color: var(--marble-gray-light); text-shadow: 0 0 20px var(--marble-gray-light), 2px 2px 4px rgba(0,0,0,0.8); } /* Changed from --gold-light */
-      100% { color: var(--marble-gray); text-shadow: 0 0 15px var(--marble-gray), 2px 2px 4px rgba(0,0,0,0.8); } /* Changed from --gold */
+      0% { color: var(--marble-gray); text-shadow: 0 0 15px var(--marble-gray), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { color: var(--marble-gray-light); text-shadow: 0 0 20px var(--marble-gray-light), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { color: var(--marble-gray); text-shadow: 0 0 15px var(--marble-gray), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .layout-container {
       position: relative;
@@ -100,18 +100,18 @@
       width: 500px;
       height: 350px;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--marble-gray); /* Changed from --gold */
+      border: 2px solid var(--marble-gray);
       border-radius: 8px;
       padding: 15px;
       display: flex;
       flex-direction: column;
       z-index: 15;
-      box-shadow: 0 0 30px rgba(211,211,211,0.5), 0 4px 12px rgba(0,0,0,0.8); /* Changed from gold base */
+      box-shadow: 0 0 30px rgba(211,211,211,0.5), 0 4px 12px rgba(0,0,0,0.8);
       animation: pulse 3s ease-in-out infinite;
     }
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(211,211,211,0.5), 0 4px 12px rgba(0,0,0,0.8); } /* Changed from gold base */
-      50% { box-shadow: 0 0 40px rgba(211,211,211,0.8), 0 6px 16px rgba(211,211,211,0.4); } /* Changed from gold base */
+      0%, 100% { box-shadow: 0 0 30px rgba(211,211,211,0.5), 0 4px 12px rgba(0,0,0,0.8); }
+      50% { box-shadow: 0 0 40px rgba(211,211,211,0.8), 0 6px 16px rgba(211,211,211,0.4); }
     }
     .central-title {
       text-align: center;
@@ -119,10 +119,10 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--marble-gray); /* Changed from --gold */
-      text-shadow: 0 0 8px var(--marble-gray); /* Changed from --gold */
+      color: var(--marble-gray);
+      text-shadow: 0 0 8px var(--marble-gray);
       margin-bottom: 12px;
-      border-bottom: 1px solid var(--marble-gray); /* Changed from --gold */
+      border-bottom: 1px solid var(--marble-gray);
       padding-bottom: 6px;
       flex-shrink: 0;
     }
@@ -138,7 +138,7 @@
       display: flex;
       align-items: flex-start;
       padding: 6px 8px;
-      border: 1px solid rgba(211,211,211,0.3); /* Changed from gold base */
+      border: 1px solid rgba(211,211,211,0.3);
       border-radius: 4px;
       transition: all 0.3s ease;
       font-size: 16px;
@@ -162,12 +162,12 @@
     .content-link:nth-child(4) { animation-delay: 0.4s; }
     .content-link:nth-child(5) { animation-delay: 0.5s; }
     .content-link:hover {
-      background: rgba(211,211,211,0.2); /* Changed from gold base */
-      border-color: var(--marble-gray); /* Changed from --gold */
-      box-shadow: 0 0 10px rgba(211,211,211,0.4); /* Changed from gold base */
+      background: rgba(211,211,211,0.2);
+      border-color: var(--marble-gray);
+      box-shadow: 0 0 10px rgba(211,211,211,0.4);
     }
     .link-title {
-      color: var(--marble-gray); /* Changed from --gold */
+      color: var(--marble-gray);
       text-decoration: none;
       cursor: pointer;
       width: 100%;
@@ -177,7 +177,7 @@
     .perimeter-box {
       position: absolute;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--marble-gray); /* Changed from --gold */
+      border: 2px solid var(--marble-gray);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -188,25 +188,25 @@
       text-transform: uppercase;
       letter-spacing: 0.3px;
       text-align: center;
-      box-shadow: 0 0 20px rgba(211,211,211,0.4); /* Changed from gold base */
+      box-shadow: 0 0 20px rgba(211,211,211,0.4);
       animation: electron-pulse 2s ease-in-out infinite;
-      color: var(--marble-gray); /* Changed from --gold */
+      color: var(--marble-gray);
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
       padding: 5px;
     }
     @keyframes electron-pulse {
       0%, 100% { 
-        box-shadow: 0 0 20px rgba(211,211,211,0.4); /* Changed from gold base */
-        border-color: var(--marble-gray); /* Changed from --gold */
+        box-shadow: 0 0 20px rgba(211,211,211,0.4); 
+        border-color: var(--marble-gray); 
       }
       50% { 
-        box-shadow: 0 0 30px rgba(211,211,211,0.8); /* Changed from gold base */
-        border-color: var(--marble-gray-light); /* Changed from --gold-light */
+        box-shadow: 0 0 30px rgba(211,211,211,0.8); 
+        border-color: var(--marble-gray-light); 
       }
     }
     .perimeter-box:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(211,211,211,0.9); /* Changed from gold base */
+      box-shadow: 0 0 35px rgba(211,211,211,0.9);
       background: var(--dark-gray);
     }
     .top-left-box {
@@ -234,28 +234,21 @@
     }
     .bottom-left-box {
       bottom: 60px;
-      left: calc(50% - 325px);
+      left: calc(50% - 245px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
-    .bottom-middle-left-box {
+    .bottom-middle-box {
       bottom: 60px;
-      left: calc(50% - 155px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
-    }
-    .bottom-middle-right-box {
-      bottom: 60px;
-      left: calc(50% + 15px);
+      left: calc(50% - 75px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
     .bottom-right-box {
       bottom: 60px;
-      left: calc(50% + 185px);
+      left: calc(50% + 95px);
       width: 150px;
       height: 60px;
       font-size: 16px;
@@ -265,8 +258,8 @@
       bottom: 20px;
       right: 20px;
       background: var(--black-bg);
-      color: var(--marble-gray); /* Changed from --gold */
-      border: 2px solid var(--marble-gray); /* Changed from --gold */
+      color: var(--marble-gray);
+      border: 2px solid var(--marble-gray);
       padding: 10px 20px;
       border-radius: 25px;
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
@@ -275,14 +268,14 @@
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--marble-gray); /* Changed from --gold */
-      box-shadow: 0 0 10px rgba(211,211,211,0.3); /* Changed from gold base */
+      text-shadow: 0 0 5px var(--marble-gray);
+      box-shadow: 0 0 10px rgba(211,211,211,0.3);
       z-index: 20;
     }
     .home-btn:hover {
       background: var(--dark-gray);
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(211,211,211,0.6); /* Changed from gold base */
+      box-shadow: 0 0 20px rgba(211,211,211,0.6);
     }
     #particle-canvas {
       position: absolute;
@@ -299,7 +292,7 @@
       .central-title { font-size: 18px; }
       .content-link { font-size: 14px; padding: 5px 6px; }
       .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-left-box, .bottom-middle-right-box, .bottom-right-box {
+      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 120px;
         height: 50px;
         font-size: 14px;
@@ -308,10 +301,9 @@
       .top-left-box { left: calc(50% - 195px); }
       .top-middle-box { left: calc(50% - 60px); }
       .top-right-box { left: calc(50% + 75px); }
-      .bottom-left-box { left: calc(50% - 260px); }
-      .bottom-middle-left-box { left: calc(50% - 130px); }
-      .bottom-middle-right-box { left: calc(50% + 10px); }
-      .bottom-right-box { left: calc(50% + 140px); }
+      .bottom-left-box { left: calc(50% - 195px); }
+      .bottom-middle-box { left: calc(50% - 60px); }
+      .bottom-right-box { left: calc(50% + 75px); }
     }
     @media (max-width: 600px) {
       .layout-container { height: 550px; }
@@ -319,7 +311,7 @@
       .central-title { font-size: 16px; margin-bottom: 8px; }
       .content-link { font-size: 12px; padding: 4px 6px; }
       .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-left-box, .bottom-middle-right-box, .bottom-right-box {
+      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 100px;
         height: 45px;
         font-size: 12px;
@@ -328,23 +320,22 @@
       .top-left-box { left: calc(50% - 160px); }
       .top-middle-box { left: calc(50% - 50px); }
       .top-right-box { left: calc(50% + 60px); }
-      .bottom-left-box { left: calc(50% - 210px); }
-      .bottom-middle-left-box { left: calc(50% - 105px); }
-      .bottom-middle-right-box { left: calc(50% + 5px); }
-      .bottom-right-box { left: calc(50% + 110px); }
+      .bottom-left-box { left: calc(50% - 160px); }
+      .bottom-middle-box { left: calc(50% - 50px); }
+      .bottom-right-box { left: calc(50% + 60px); }
       .header h1 { font-size: 28px; }
     }
   </style>
 </head>
 <body>
-  <div class="header"><h1>THE DAYLUGE - POLITICS</h1></div> <!-- Changed from "THE DAYLUGE - HISTORY" -->
+  <div class="header"><h1>THE DAYLUGE - POLITICS</h1></div>
   <a href="/" class="home-btn">← Back to Home</a>
   <canvas id="particle-canvas"></canvas>
   
   <div class="layout-container">
     <!-- Central Content Rectangle -->
     <div class="central-content">
-      <div class="central-title">Latest Politics Content</div> <!-- Changed from "Latest History Content" -->
+      <div class="central-title">Latest Politics Content</div>
       <div class="content-links">
         <div class="content-link">
           <span class="link-title">Loading content...</span>
@@ -365,27 +356,24 @@
     </div>
     
     <!-- Top Boxes -->
-    <div class="perimeter-box top-left-box" onclick="window.location.href='/thedayluge/politics/politics-podcasts.html'"> <!-- Changed from hist- to politics- -->
+    <div class="perimeter-box top-left-box" onclick="window.location.href='/thedayluge/politics/politics-podcasts.html'">
       Podcasts
     </div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='/thedayluge/politics/politics-articles-longform.html'"> <!-- Changed from hist- to politics- -->
+    <div class="perimeter-box top-middle-box" onclick="window.location.href='/thedayluge/politics/politics-articles-longform.html'">
       Articles & Longform
     </div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='/thedayluge/politics/politics-clips.html'"> <!-- Changed from hist- to politics- -->
+    <div class="perimeter-box top-right-box" onclick="window.location.href='/thedayluge/politics/politics-clips.html'">
       Video Clips
     </div>
     
     <!-- Bottom Boxes -->
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/thedayluge/politics/politics-books.html'"> <!-- Changed from hist- to politics- -->
-      Books
-    </div>
-    <div class="perimeter-box bottom-middle-left-box" onclick="window.location.href='/thedayluge/politics/politics-memes.html'"> <!-- Changed from hist- to politics- -->
+    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/thedayluge/politics/politics-memes.html'">
       Memes
     </div>
-    <div class="perimeter-box bottom-middle-right-box" onclick="window.location.href='/thedayluge/politics/politics-tv-movies.html'"> <!-- Changed from hist- to politics- -->
-      TV & Movies
+    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/thedayluge/politics/politics-books.html';window.location.href='/thedayluge/politics/politics-tv-movies.html'">
+      Books, Movies & TV
     </div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/thedayluge/politics/politics-archive.html'"> <!-- Changed from hist- to politics- -->
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/thedayluge/politics/politics-archive.html'">
       Archive
     </div>
   </div>
@@ -416,7 +404,7 @@
           if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
         }
         draw() {
-          ctx.fillStyle = 'rgba(211,211,211,0.6)'; /* Changed from gold base */
+          ctx.fillStyle = 'rgba(211,211,211,0.6)';
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
           ctx.fill();
@@ -454,11 +442,11 @@
       });
       
       // Load content from politics-links.txt
-      async function loadPoliticsContent() { // Changed from loadHistoryContent
+      async function loadPoliticsContent() {
         console.log('Starting to load politics content');
         try {
-          console.log('Attempting to fetch ./politics-links.txt'); // Changed from history-links.txt
-          const response = await fetch('./politics-links.txt'); // Changed from history-links.txt
+          console.log('Attempting to fetch ./politics-links.txt');
+          const response = await fetch('./politics-links.txt');
           console.log('Fetch response:', response.ok, response.status);
           if (!response.ok) {
             throw new Error(`Fetch failed with status ${response.status}`);
@@ -531,17 +519,17 @@
             contentLinksContainer.appendChild(linkElement);
           });
           
-          console.log('Loaded', entries.length, 'politics entries from politics-links.txt'); // Changed from history
+          console.log('Loaded', entries.length, 'politics entries from politics-links.txt');
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
-          console.error('Error loading politics-links.txt:', error); // Changed from history-links.txt
+          console.error('Error loading politics-links.txt:', error);
           const contentLinksContainer = document.querySelector('.content-links');
           if (contentLinksContainer) {
             console.log('Displaying error message due to fetch failure');
             contentLinksContainer.innerHTML = '';
             const errorEntry = {
-              title: 'Error loading politics content. Check politics-links.txt or console for details.', // Changed from history
+              title: 'Error loading politics content. Check politics-links.txt or console for details.',
               link: '#',
               category: 'error'
             };
@@ -570,7 +558,7 @@
         }
       }
       
-      loadPoliticsContent(); // Changed from loadHistoryContent
+      loadPoliticsContent();
     });
   </script>
 </body>
