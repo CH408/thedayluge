@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History Video Clips - THE DAYLUGE</title>
+  <title>Politics Articles & Longform - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -206,13 +206,13 @@
   </style>
 </head>
 <body>
-  <a href="/history.html" class="back-btn">← Back to History</a>
+  <a href="/thedayluge/politics/politics.html" class="back-btn">← Back to Politics</a>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title" id="archive-title">History Video Clips</div>
+    <div class="archive-title" id="archive-title">Politics Articles & Longform</div>
     <div class="page-info" id="page-info"></div>
-    <ul class="headlines" id="history-clips-links" style="display: none;"></ul>
+    <ul class="headlines" id="politics-articles-links" style="display: none;"></ul>
     <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
@@ -249,6 +249,7 @@
     }
     
     function init() {
+      console.log('Initializing particle effect');
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
@@ -275,19 +276,20 @@
 
     // Get current page from URL
     function getCurrentPage() {
+      console.log('Getting current page from URL');
       const urlParams = new URLSearchParams(window.location.search);
       return parseInt(urlParams.get('page')) || 1;
     }
 
-    // Load video clips links with pagination
-    async function loadClipsLinks() {
-      console.log('Starting to load history video clips links...');
+    // Load articles links with pagination
+    async function loadArticlesLinks() {
+      console.log('Starting to load politics articles links...');
       try {
-        const response = await fetch('/history-links.txt');
+        console.log('Attempting to fetch ./politics-links.txt');
+        const response = await fetch('./politics-links.txt');
         console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
-          console.error('Failed to load history-links.txt:', response.status);
-          return;
+          throw new Error(`Failed to load politics-links.txt: ${response.status}`);
         }
         const text = await response.text();
         console.log('Text loaded, length:', text.length);
@@ -298,31 +300,38 @@
           if (parts.length >= 3) {
             return { title: parts[0].trim(), url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
+          console.warn('Invalid line format:', line);
           return null;
         }).filter(link => link !== null);
         
         console.log('Total links parsed:', links.length);
         
-        // Filter for clips category
-        const clipsLinks = links.filter(link => link.category === 'clips');
-        console.log('Clips links:', clipsLinks.length);
+        // Filter for articles category
+        const articlesLinks = links.filter(link => link.category === 'art-long');
+        console.log('Articles links:', articlesLinks.length);
         const currentPage = getCurrentPage();
         const linksPerPage = 24;
-        const totalPages = Math.ceil(clipsLinks.length / linksPerPage);
+        const totalPages = Math.ceil(articlesLinks.length / linksPerPage);
         
         console.log('Current page:', currentPage, 'Total pages:', totalPages);
         
         // Calculate start and end indices for current page
         const startIndex = (currentPage - 1) * linksPerPage;
         const endIndex = startIndex + linksPerPage;
-        const pageLinks = clipsLinks.slice(startIndex, endIndex);
+        const pageLinks = articlesLinks.slice(startIndex, endIndex);
         
         console.log('Page links for this page:', pageLinks.length);
         
-        const grid = document.getElementById('history-clips-links');
+        const grid = document.getElementById('politics-articles-links');
         const pageInfo = document.getElementById('page-info');
         
-        if (grid && pageLinks.length > 0) {
+        if (!grid) {
+          console.error('Element with ID politics-articles-links not found');
+          return;
+        }
+        
+        if (pageLinks.length > 0) {
+          console.log('Displaying page links:', pageLinks);
           grid.innerHTML = pageLinks.map((link, index) => `
             <li class="headline">
               <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
@@ -333,20 +342,26 @@
           if (pageInfo) {
             pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
           }
-        } else if (clipsLinks.length === 0) {
-          grid.innerHTML = '<li class="headline"><span>No video clips available yet.</span></li>';
+        } else if (articlesLinks.length === 0) {
+          console.log('No articles links found, displaying no content message');
+          grid.innerHTML = '<li class="headline"><span>No articles available yet.</span></li>';
           grid.style.display = '';
           if (pageInfo) {
             pageInfo.textContent = '';
           }
         } else {
+          console.log('No links on this page');
           grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
           grid.style.display = '';
+          if (pageInfo) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+          }
         }
         
         // Create navigation buttons
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
+          console.log('Creating navigation buttons');
           let buttonsHTML = '';
           
           // Previous button
@@ -357,7 +372,7 @@
           }
           
           // Random button
-          buttonsHTML += '<button class="random-button" onclick="goToRandomClips()">⚛️ SURPRISE ME!</button>';
+          buttonsHTML += '<button class="random-button" onclick="goToRandomArticles()">⚛️ SURPRISE ME!</button>';
           
           // Next button
           if (currentPage < totalPages) {
@@ -370,56 +385,65 @@
           buttonContainer.style.display = '';
         }
         
-        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${clipsLinks.length} total in clips category)`);
+        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${articlesLinks.length} total in articles category)`);
       } catch (error) {
-        console.error('Error loading history video clips links:', error);
-        const grid = document.getElementById('history-clips-links');
+        console.error('Error loading politics articles links:', error);
+        const grid = document.getElementById('politics-articles-links');
         if (grid) {
+          console.log('Displaying error message due to fetch failure');
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
           grid.style.display = '';
         }
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
-          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomClips()">⚛️ SURPRISE ME!</button>';
-          grid.style.display = '';
+          console.log('Setting random button only due to error');
+          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomArticles()">⚛️ SURPRISE ME!</button>';
+          buttonContainer.style.display = '';
         }
       }
     }
 
     // Navigate to specific page
     function goToPage(pageNum) {
-      window.location.href = `/history/hist-clips.html?page=${pageNum}`;
+      console.log('Navigating to page:', pageNum);
+      window.location.href = `/thedayluge/politics/politics-articles-longform.html?page=${pageNum}`;
     }
 
-    // Random video clips link
-    async function goToRandomClips() {
+    // Random articles link
+    async function goToRandomArticles() {
+      console.log('Attempting to load random article');
       try {
-        const response = await fetch('/history-links.txt');
+        const response = await fetch('./politics-links.txt');
         if (!response.ok) {
-          console.log('Could not load history-links.txt for random selection');
+          console.log('Could not load politics-links.txt for random selection');
           return;
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'clips') {
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'art-long') {
             return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
         if (links.length > 0) {
           const randomLink = links[Math.floor(Math.random() * links.length)];
+          console.log('Opening random article:', randomLink);
           window.open(randomLink, '_blank', 'noopener,noreferrer');
         } else {
-          alert('No video clips available.');
+          console.log('No articles available for random selection');
+          alert('No articles available.');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadClipsLinks);
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM content loaded, calling loadArticlesLinks');
+      loadArticlesLinks();
+    });
   </script>
 </body>
 </html>

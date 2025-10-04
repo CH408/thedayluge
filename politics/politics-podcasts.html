@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History Podcasts - THE DAYLUGE</title>
+  <title>Politics Podcasts - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -206,13 +206,13 @@
   </style>
 </head>
 <body>
-  <a href="/thedayluge/history/history.html" class="back-btn">← Back to History</a>
+  <a href="/thedayluge/politics/politics.html" class="back-btn">← Back to Politics</a>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title" id="archive-title">History Podcasts</div>
+    <div class="archive-title" id="archive-title">Politics Podcasts</div>
     <div class="page-info" id="page-info"></div>
-    <ul class="headlines" id="history-podcasts-links" style="display: none;"></ul>
+    <ul class="headlines" id="politics-podcasts-links" style="display: none;"></ul>
     <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
@@ -283,13 +283,13 @@
 
     // Load podcasts links with pagination
     async function loadPodcastsLinks() {
-      console.log('Starting to load history podcasts links...');
+      console.log('Starting to load politics podcasts links...');
       try {
-        console.log('Attempting to fetch ./history-links.txt');
-        const response = await fetch('./history-links.txt');
+        console.log('Attempting to fetch ./politics-links.txt');
+        const response = await fetch('./politics-links.txt');
         console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
-          throw new Error(`Failed to load history-links.txt: ${response.status}`);
+          throw new Error(`Failed to load politics-links.txt: ${response.status}`);
         }
         const text = await response.text();
         console.log('Text loaded, length:', text.length);
@@ -298,9 +298,7 @@
         const links = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3) {
-            // Clean title by removing suffixes like (art-long) or (art+long)
-            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
-            return { title: cleanTitle, url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
+            return { title: parts[0].trim(), url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
           console.warn('Invalid line format:', line);
           return null;
@@ -309,7 +307,7 @@
         console.log('Total links parsed:', links.length);
         
         // Filter for podcasts category
-        const podcastsLinks = links.filter(link => link.category === 'podcasts');
+        const podcastsLinks = links.filter(link => link.category === 'pods');
         console.log('Podcasts links:', podcastsLinks.length);
         const currentPage = getCurrentPage();
         const linksPerPage = 24;
@@ -324,13 +322,11 @@
         
         console.log('Page links for this page:', pageLinks.length);
         
-        const grid = document.getElementById('history
-
--podcasts-links');
+        const grid = document.getElementById('politics-podcasts-links');
         const pageInfo = document.getElementById('page-info');
         
         if (!grid) {
-          console.error('Element with ID history-podcasts-links not found');
+          console.error('Element with ID politics-podcasts-links not found');
           return;
         }
         
@@ -391,8 +387,8 @@
         
         console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${podcastsLinks.length} total in podcasts category)`);
       } catch (error) {
-        console.error('Error loading history podcasts links:', error);
-        const grid = document.getElementById('history-podcasts-links');
+        console.error('Error loading politics podcasts links:', error);
+        const grid = document.getElementById('politics-podcasts-links');
         if (grid) {
           console.log('Displaying error message due to fetch failure');
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
@@ -410,23 +406,23 @@
     // Navigate to specific page
     function goToPage(pageNum) {
       console.log('Navigating to page:', pageNum);
-      window.location.href = `/thedayluge/history/hist-podcasts.html?page=${pageNum}`;
+      window.location.href = `/thedayluge/politics/politics-podcasts.html?page=${pageNum}`;
     }
 
     // Random podcasts link
     async function goToRandomPodcasts() {
       console.log('Attempting to load random podcast');
       try {
-        const response = await fetch('./history-links.txt');
+        const response = await fetch('./politics-links.txt');
         if (!response.ok) {
-          console.log('Could not load history-links.txt for random selection');
+          console.log('Could not load politics-links.txt for random selection');
           return;
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'podcasts') {
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'pods') {
             return parts[1].trim();
           }
           return null;

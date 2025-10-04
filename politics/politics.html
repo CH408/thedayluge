@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History - Conspiracy Corner</title>
+  <title>Politics - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -235,21 +235,28 @@
     }
     .bottom-left-box {
       bottom: 60px;
-      left: calc(50% - 245px);
+      left: calc(50% - 325px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
-    .bottom-middle-box {
+    .bottom-middle-left-box {
       bottom: 60px;
-      left: calc(50% - 75px);
+      left: calc(50% - 155px);
+      width: 150px;
+      height: 60px;
+      font-size: 16px;
+    }
+    .bottom-middle-right-box {
+      bottom: 60px;
+      left: calc(50% + 15px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
     .bottom-right-box {
       bottom: 60px;
-      left: calc(50% + 95px);
+      left: calc(50% + 185px);
       width: 150px;
       height: 60px;
       font-size: 16px;
@@ -292,7 +299,8 @@
       .central-content { width: 420px; height: 300px; padding: 12px; }
       .central-title { font-size: 18px; }
       .content-link { font-size: 14px; padding: 5px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-left-box, .bottom-middle-right-box, .bottom-right-box {
         width: 120px;
         height: 50px;
         font-size: 14px;
@@ -301,16 +309,18 @@
       .top-left-box { left: calc(50% - 195px); }
       .top-middle-box { left: calc(50% - 60px); }
       .top-right-box { left: calc(50% + 75px); }
-      .bottom-left-box { left: calc(50% - 195px); }
-      .bottom-middle-box { left: calc(50% - 60px); }
-      .bottom-right-box { left: calc(50% + 75px); }
+      .bottom-left-box { left: calc(50% - 260px); }
+      .bottom-middle-left-box { left: calc(50% - 130px); }
+      .bottom-middle-right-box { left: calc(50% + 10px); }
+      .bottom-right-box { left: calc(50% + 140px); }
     }
     @media (max-width: 600px) {
       .layout-container { height: 550px; }
       .central-content { width: 340px; height: 280px; padding: 10px; }
       .central-title { font-size: 16px; margin-bottom: 8px; }
       .content-link { font-size: 12px; padding: 4px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-left-box, .bottom-middle-right-box, .bottom-right-box {
         width: 100px;
         height: 45px;
         font-size: 12px;
@@ -319,22 +329,23 @@
       .top-left-box { left: calc(50% - 160px); }
       .top-middle-box { left: calc(50% - 50px); }
       .top-right-box { left: calc(50% + 60px); }
-      .bottom-left-box { left: calc(50% - 160px); }
-      .bottom-middle-box { left: calc(50% - 50px); }
-      .bottom-right-box { left: calc(50% + 60px); }
+      .bottom-left-box { left: calc(50% - 210px); }
+      .bottom-middle-left-box { left: calc(50% - 105px); }
+      .bottom-middle-right-box { left: calc(50% + 5px); }
+      .bottom-right-box { left: calc(50% + 110px); }
       .header h1 { font-size: 28px; }
     }
   </style>
 </head>
 <body>
-  <div class="header"><h1>THE DAYLUGE - HISTORY</h1></div>
+  <div class="header"><h1>THE DAYLUGE - POLITICS</h1></div>
   <a href="/" class="home-btn">← Back to Home</a>
   <canvas id="particle-canvas"></canvas>
   
   <div class="layout-container">
     <!-- Central Content Rectangle -->
     <div class="central-content">
-      <div class="central-title">Latest History Content</div>
+      <div class="central-title">Latest Politics Content</div>
       <div class="content-links">
         <div class="content-link">
           <span class="link-title">Loading content...</span>
@@ -355,30 +366,34 @@
     </div>
     
     <!-- Top Boxes -->
-    <div class="perimeter-box top-left-box" onclick="window.location.href='/history/hist-podcasts.html'">
+    <div class="perimeter-box top-left-box" onclick="window.location.href='/thedayluge/politics/politics-podcasts.html'">
       Podcasts
     </div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='/history/hist-articles-longform.html'">
-      Articles & Longform
+    <div class="perimeter-box top-middle-box" onclick="window.location.href='/thedayluge/politics/politics-articles.html'">
+      Articles
     </div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='/history/hist-clips.html'">
-      Video Clips
+    <div class="perimeter-box top-right-box" onclick="window.location.href='/thedayluge/politics/politics-videos.html'">
+      Videos
     </div>
     
     <!-- Bottom Boxes -->
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/history/hist-books.html'">
-      Books
+    <div class="perimeter-box bottom-left-box" onclick="window.location.href='/thedayluge/politics/politics-commentary.html'">
+      Commentary
     </div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/history/hist-memes.html'">
+    <div class="perimeter-box bottom-middle-left-box" onclick="window.location.href='/thedayluge/politics/politics-documents.html'">
+      Documents
+    </div>
+    <div class="perimeter-box bottom-middle-right-box" onclick="window.location.href='/thedayluge/politics/politics-memes.html'">
       Memes
     </div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/history/hist-tv-movies.html'">
-      TV & Movies
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/thedayluge/politics/politics-archive.html'">
+      Archive
     </div>
   </div>
   
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM content loaded, initializing politics page');
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
@@ -410,6 +425,7 @@
       }
       
       function init() {
+        console.log('Initializing particle effect');
         for (let i = 0; i < numberOfParticles; i++) {
           particlesArray.push(new Particle());
         }
@@ -435,20 +451,23 @@
       window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        init();
       });
       
-      // Load content from history-links.txt
-      async function loadHistoryContent() {
+      // Load content from politics-links.txt
+      async function loadPoliticsContent() {
+        console.log('Starting to load politics content');
         try {
-          console.log('Attempting to fetch /history-links.txt');
-          const response = await fetch('/history-links.txt');
+          console.log('Attempting to fetch ./politics-links.txt');
+          const response = await fetch('./politics-links.txt');
+          console.log('Fetch response:', response.ok, response.status);
           if (!response.ok) {
-            throw new Error(`Fetch failed with status ${response.status}: ${response.statusText}`);
+            throw new Error(`Fetch failed with status ${response.status}`);
           }
           const text = await response.text();
-          console.log('Fetched text:', text);
+          console.log('Fetched text, length:', text.length);
           const lines = text.trim().split('\n').filter(line => line.trim());
-          console.log('Parsed lines:', lines);
+          console.log('Parsed lines:', lines.length);
           
           // Parse each line: title|link|category
           const entries = lines.map((line, index) => {
@@ -457,18 +476,25 @@
               console.warn(`Invalid entry at line ${index + 1}: ${line}`);
               return null;
             }
+            // Clean title by removing suffixes like (art-long) or (art+long)
+            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
             return {
-              title: parts[0].trim(),
+              title: cleanTitle,
               link: parts[1].trim(),
               category: parts[2].trim().toLowerCase()
             };
           }).filter(entry => entry !== null);
           
-          console.log('Parsed entries:', entries);
+          console.log('Parsed entries:', entries.length);
           
           // Take first 5 entries across all categories for central box
           const latest5 = entries.slice(0, 5);
           const contentLinksContainer = document.querySelector('.content-links');
+          
+          if (!contentLinksContainer) {
+            console.error('Content links container not found');
+            return;
+          }
           
           // Clear existing placeholder content
           contentLinksContainer.innerHTML = '';
@@ -476,9 +502,9 @@
           // Ensure we always try to show 5 entries (pad with error message if needed)
           const displayEntries = [...latest5];
           if (displayEntries.length === 0) {
-            console.log('No history entries found, displaying error message');
+            console.log('No politics entries found, displaying error message');
             displayEntries.push({
-              title: 'No history content available. Check history-links.txt.',
+              title: 'No politics content available. Check politics-links.txt.',
               link: '#',
               category: 'error'
             });
@@ -491,14 +517,14 @@
             });
           }
           
-          console.log('Display entries:', displayEntries);
+          console.log('Display entries:', displayEntries.length);
           
-          // Add content to DOM with animation, including category
+          // Add content to DOM with animation, using cleaned titles
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
             linkElement.innerHTML = `
-              <a href="${entry.link}" class="link-title" target="_blank">${entry.title} (${entry.category})</a>
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
             `;
             linkElement.addEventListener('click', (e) => {
               if (entry.link === '#') e.preventDefault();
@@ -506,45 +532,46 @@
             contentLinksContainer.appendChild(linkElement);
           });
           
-          console.log('Loaded', entries.length, 'history entries from history-links.txt');
+          console.log('Loaded', entries.length, 'politics entries from politics-links.txt');
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
-          console.error('Error loading history-links.txt:', error.message);
-          console.log('Falling back to error message in central content');
+          console.error('Error loading politics-links.txt:', error);
           const contentLinksContainer = document.querySelector('.content-links');
-          contentLinksContainer.innerHTML = '';
-          const errorEntry = {
-            title: 'Error loading history content. Check history-links.txt or console for details.',
-            link: '#',
-            category: 'error'
-          };
-          const displayEntries = [errorEntry];
-          while (displayEntries.length < 5) {
-            displayEntries.push({
-              title: `Placeholder Entry ${displayEntries.length + 1}`,
+          if (contentLinksContainer) {
+            console.log('Displaying error message due to fetch failure');
+            contentLinksContainer.innerHTML = '';
+            const errorEntry = {
+              title: 'Error loading politics content. Check politics-links.txt or console for details.',
               link: '#',
-              category: 'placeholder'
+              category: 'error'
+            };
+            const displayEntries = [errorEntry];
+            while (displayEntries.length < 5) {
+              displayEntries.push({
+                title: `Placeholder Entry ${displayEntries.length + 1}`,
+                link: '#',
+                category: 'placeholder'
+              });
+            }
+            displayEntries.forEach((entry, index) => {
+              const linkElement = document.createElement('div');
+              linkElement.className = 'content-link';
+              linkElement.innerHTML = `
+                <span class="link-title">${entry.title}</span>
+              `;
+              linkElement.addEventListener('click', () => {
+                if (entry.link !== '#') {
+                  window.location.href = entry.link;
+                }
+              });
+              contentLinksContainer.appendChild(linkElement);
             });
           }
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.innerHTML = `
-              <span class="link-title">${entry.title} (${entry.category})</span>
-            `;
-            linkElement.addEventListener('click', () => {
-              if (entry.link !== '#') {
-                window.location.href = entry.link;
-              }
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
         }
       }
       
-      // Load content when page loads
-      loadHistoryContent();
+      loadPoliticsContent();
     });
   </script>
 </body>

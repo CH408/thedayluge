@@ -235,21 +235,28 @@
     }
     .bottom-left-box {
       bottom: 60px;
-      left: calc(50% - 245px);
+      left: calc(50% - 325px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
-    .bottom-middle-box {
+    .bottom-middle-left-box {
       bottom: 60px;
-      left: calc(50% - 75px);
+      left: calc(50% - 155px);
+      width: 150px;
+      height: 60px;
+      font-size: 16px;
+    }
+    .bottom-middle-right-box {
+      bottom: 60px;
+      left: calc(50% + 15px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
     .bottom-right-box {
       bottom: 60px;
-      left: calc(50% + 95px);
+      left: calc(50% + 185px);
       width: 150px;
       height: 60px;
       font-size: 16px;
@@ -292,7 +299,8 @@
       .central-content { width: 420px; height: 300px; padding: 12px; }
       .central-title { font-size: 18px; }
       .content-link { font-size: 14px; padding: 5px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-left-box, .bottom-middle-right-box, .bottom-right-box {
         width: 120px;
         height: 50px;
         font-size: 14px;
@@ -301,16 +309,18 @@
       .top-left-box { left: calc(50% - 195px); }
       .top-middle-box { left: calc(50% - 60px); }
       .top-right-box { left: calc(50% + 75px); }
-      .bottom-left-box { left: calc(50% - 195px); }
-      .bottom-middle-box { left: calc(50% - 60px); }
-      .bottom-right-box { left: calc(50% + 75px); }
+      .bottom-left-box { left: calc(50% - 260px); }
+      .bottom-middle-left-box { left: calc(50% - 130px); }
+      .bottom-middle-right-box { left: calc(50% + 10px); }
+      .bottom-right-box { left: calc(50% + 140px); }
     }
     @media (max-width: 600px) {
       .layout-container { height: 550px; }
       .central-content { width: 340px; height: 280px; padding: 10px; }
       .central-title { font-size: 16px; margin-bottom: 8px; }
       .content-link { font-size: 12px; padding: 4px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box, .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-left-box, .bottom-middle-right-box, .bottom-right-box {
         width: 100px;
         height: 45px;
         font-size: 12px;
@@ -319,9 +329,10 @@
       .top-left-box { left: calc(50% - 160px); }
       .top-middle-box { left: calc(50% - 50px); }
       .top-right-box { left: calc(50% + 60px); }
-      .bottom-left-box { left: calc(50% - 160px); }
-      .bottom-middle-box { left: calc(50% - 50px); }
-      .bottom-right-box { left: calc(50% + 60px); }
+      .bottom-left-box { left: calc(50% - 210px); }
+      .bottom-middle-left-box { left: calc(50% - 105px); }
+      .bottom-middle-right-box { left: calc(50% + 5px); }
+      .bottom-right-box { left: calc(50% + 110px); }
       .header h1 { font-size: 28px; }
     }
   </style>
@@ -369,11 +380,14 @@
     <div class="perimeter-box bottom-left-box" onclick="window.location.href='/thedayluge/history/hist-books.html'">
       Books
     </div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='/thedayluge/history/hist-memes.html'">
+    <div class="perimeter-box bottom-middle-left-box" onclick="window.location.href='/thedayluge/history/hist-memes.html'">
       Memes
     </div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/thedayluge/history/hist-tv-movies.html'">
+    <div class="perimeter-box bottom-middle-right-box" onclick="window.location.href='/thedayluge/history/hist-tv-movies.html'">
       TV & Movies
+    </div>
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='/thedayluge/history/history-archive.html'">
+      Archive
     </div>
   </div>
   
@@ -462,8 +476,10 @@
               console.warn(`Invalid entry at line ${index + 1}: ${line}`);
               return null;
             }
+            // Clean title by removing suffixes like (art-long) or (art+long)
+            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
             return {
-              title: parts[0].trim(),
+              title: cleanTitle,
               link: parts[1].trim(),
               category: parts[2].trim().toLowerCase()
             };
@@ -503,7 +519,7 @@
           
           console.log('Display entries:', displayEntries.length);
           
-          // Add content to DOM with animation, without category
+          // Add content to DOM with animation, using cleaned titles
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';

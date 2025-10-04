@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History Podcasts - THE DAYLUGE</title>
+  <title>History Archive - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -210,9 +210,9 @@
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title" id="archive-title">History Podcasts</div>
+    <div class="archive-title" id="archive-title">History Archive</div>
     <div class="page-info" id="page-info"></div>
-    <ul class="headlines" id="history-podcasts-links" style="display: none;"></ul>
+    <ul class="headlines" id="history-archive-links" style="display: none;"></ul>
     <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
@@ -281,9 +281,9 @@
       return parseInt(urlParams.get('page')) || 1;
     }
 
-    // Load podcasts links with pagination
-    async function loadPodcastsLinks() {
-      console.log('Starting to load history podcasts links...');
+    // Load archive links with pagination
+    async function loadArchiveLinks() {
+      console.log('Starting to load history archive links...');
       try {
         console.log('Attempting to fetch ./history-links.txt');
         const response = await fetch('./history-links.txt');
@@ -308,29 +308,27 @@
         
         console.log('Total links parsed:', links.length);
         
-        // Filter for podcasts category
-        const podcastsLinks = links.filter(link => link.category === 'podcasts');
-        console.log('Podcasts links:', podcastsLinks.length);
+        // No category filter for archive
+        const archiveLinks = links;
+        console.log('Archive links:', archiveLinks.length);
         const currentPage = getCurrentPage();
         const linksPerPage = 24;
-        const totalPages = Math.ceil(podcastsLinks.length / linksPerPage);
+        const totalPages = Math.ceil(archiveLinks.length / linksPerPage);
         
         console.log('Current page:', currentPage, 'Total pages:', totalPages);
         
         // Calculate start and end indices for current page
         const startIndex = (currentPage - 1) * linksPerPage;
         const endIndex = startIndex + linksPerPage;
-        const pageLinks = podcastsLinks.slice(startIndex, endIndex);
+        const pageLinks = archiveLinks.slice(startIndex, endIndex);
         
         console.log('Page links for this page:', pageLinks.length);
         
-        const grid = document.getElementById('history
-
--podcasts-links');
+        const grid = document.getElementById('history-archive-links');
         const pageInfo = document.getElementById('page-info');
         
         if (!grid) {
-          console.error('Element with ID history-podcasts-links not found');
+          console.error('Element with ID history-archive-links not found');
           return;
         }
         
@@ -346,19 +344,12 @@
           if (pageInfo) {
             pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
           }
-        } else if (podcastsLinks.length === 0) {
-          console.log('No podcasts links found, displaying no content message');
-          grid.innerHTML = '<li class="headline"><span>No podcasts available yet.</span></li>';
+        } else {
+          console.log('No archive links found, displaying no content message');
+          grid.innerHTML = '<li class="headline"><span>No content available yet.</span></li>';
           grid.style.display = '';
           if (pageInfo) {
             pageInfo.textContent = '';
-          }
-        } else {
-          console.log('No links on this page');
-          grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
-          grid.style.display = '';
-          if (pageInfo) {
-            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
           }
         }
         
@@ -376,7 +367,7 @@
           }
           
           // Random button
-          buttonsHTML += '<button class="random-button" onclick="goToRandomPodcasts()">⚛️ SURPRISE ME!</button>';
+          buttonsHTML += '<button class="random-button" onclick="goToRandomArchive()">⚛️ SURPRISE ME!</button>';
           
           // Next button
           if (currentPage < totalPages) {
@@ -389,10 +380,10 @@
           buttonContainer.style.display = '';
         }
         
-        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${podcastsLinks.length} total in podcasts category)`);
+        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${archiveLinks.length} total in archive)`);
       } catch (error) {
-        console.error('Error loading history podcasts links:', error);
-        const grid = document.getElementById('history-podcasts-links');
+        console.error('Error loading history archive links:', error);
+        const grid = document.getElementById('history-archive-links');
         if (grid) {
           console.log('Displaying error message due to fetch failure');
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
@@ -401,7 +392,7 @@
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
           console.log('Setting random button only due to error');
-          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomPodcasts()">⚛️ SURPRISE ME!</button>';
+          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomArchive()">⚛️ SURPRISE ME!</button>';
           buttonContainer.style.display = '';
         }
       }
@@ -410,12 +401,12 @@
     // Navigate to specific page
     function goToPage(pageNum) {
       console.log('Navigating to page:', pageNum);
-      window.location.href = `/thedayluge/history/hist-podcasts.html?page=${pageNum}`;
+      window.location.href = `/thedayluge/history/history-archive.html?page=${pageNum}`;
     }
 
-    // Random podcasts link
-    async function goToRandomPodcasts() {
-      console.log('Attempting to load random podcast');
+    // Random archive link
+    async function goToRandomArchive() {
+      console.log('Attempting to load random archive link');
       try {
         const response = await fetch('./history-links.txt');
         if (!response.ok) {
@@ -426,18 +417,18 @@
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'podcasts') {
+          if (parts.length >= 3) {
             return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
         if (links.length > 0) {
           const randomLink = links[Math.floor(Math.random() * links.length)];
-          console.log('Opening random podcast:', randomLink);
+          console.log('Opening random archive link:', randomLink);
           window.open(randomLink, '_blank', 'noopener,noreferrer');
         } else {
-          console.log('No podcasts available for random selection');
-          alert('No podcasts available.');
+          console.log('No archive links available for random selection');
+          alert('No content available.');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
@@ -445,8 +436,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM content loaded, calling loadPodcastsLinks');
-      loadPodcastsLinks();
+      console.log('DOM content loaded, calling loadArchiveLinks');
+      loadArchiveLinks();
     });
   </script>
 </body>

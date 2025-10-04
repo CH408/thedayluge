@@ -3,24 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History Archive - THE DAYLUGE</title>
+  <title>Politics Memes - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
-      --gold: #d4af37;
-      --gold-dark: #b8860b;
-      --gold-light: #f0d064;
+      --gold: #FFD700;
+      --gold-dark: #DAA520;
+      --gold-light: #FFEC8B;
       --ink: #111;
+      --black-bg: #0a1428;
+      --dark-gray: #111111;
+      --gray: #333333;
       --maxw: 1200px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--ink);
+      color: var(--gold);
       line-height: 1.3;
-      background: #0a1428;
+      background: var(--black-bg);
       padding: 10px;
       position: relative;
       min-height: 100vh;
@@ -30,7 +33,7 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, transparent 70%);
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
@@ -50,15 +53,13 @@
       font-weight: 900;
       text-align: left;
       color: var(--gold);
+      text-shadow: 0 0 8px var(--gold);
       margin-bottom: 10px;
       animation: block-title-pulse-gold 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse-gold {
       0% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; max-width: 800px; }
@@ -98,7 +99,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .headline a {
-      color: inherit;
+      color: var(--gold);
       text-decoration: none;
       font-weight: bold;
       transition: all 0.3s ease;
@@ -110,10 +111,10 @@
     .back-btn {
       position: fixed;
       bottom: 50px; right: 20px;
-      background: transparent;
+      background: var(--black-bg);
       color: var(--gold);
       padding: 8px 16px;
-      border: 1px solid var(--gold);
+      border: 2px solid var(--gold);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
@@ -124,17 +125,17 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .back-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(212,175,55,0.3);
+      background: var(--dark-gray);
+      box-shadow: 0 0 15px rgba(255,215,0,0.3);
       transform: scale(1.05);
     }
     .home-btn {
       position: fixed;
       bottom: 20px; right: 20px;
-      background: transparent;
+      background: var(--black-bg);
       color: var(--gold);
       padding: 8px 16px;
-      border: 1px solid var(--gold);
+      border: 2px solid var(--gold);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
@@ -145,8 +146,8 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
     }
     .home-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(212,175,55,0.3);
+      background: var(--dark-gray);
+      box-shadow: 0 0 15px rgba(255,215,0,0.3);
       transform: scale(1.05);
     }
     .button-container {
@@ -158,10 +159,10 @@
     }
     .random-button, .nav-button {
       display: inline-block;
-      background: transparent;
+      background: var(--black-bg);
       color: var(--gold);
       padding: 8px 16px;
-      border: 1px solid var(--gold);
+      border: 2px solid var(--gold);
       border-radius: 20px;
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 12px;
@@ -173,16 +174,16 @@
       cursor: pointer;
     }
     .random-button:hover, .nav-button:hover {
-      background: rgba(255,255,255,0.1);
+      background: var(--dark-gray);
       transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(212,175,55,0.3);
+      box-shadow: 0 0 15px rgba(255,215,0,0.3);
     }
     .nav-button:disabled {
       opacity: 0.3;
       cursor: not-allowed;
     }
     .nav-button:disabled:hover {
-      background: transparent;
+      background: var(--black-bg);
       transform: none;
       box-shadow: none;
     }
@@ -205,13 +206,13 @@
   </style>
 </head>
 <body>
-  <a href="/history.html" class="back-btn">← Back to History</a>
+  <a href="/thedayluge/politics/politics.html" class="back-btn">← Back to Politics</a>
   <a href="/" class="home-btn">← Home</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title" id="archive-title">History Archive</div>
+    <div class="archive-title" id="archive-title">Politics Memes</div>
     <div class="page-info" id="page-info"></div>
-    <ul class="headlines" id="history-archive-links" style="display: none;"></ul>
+    <ul class="headlines" id="politics-memes-links" style="display: none;"></ul>
     <div class="button-container" id="nav-buttons" style="display: none;"></div>
   </div>
   <script>
@@ -230,43 +231,25 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#d4af37', '#b8860b', '#f0d064', '#c69b2f', '#e6c14d', '#a67c00'][Math.floor(Math.random() * 6)];
-        this.hasTail = Math.random() < 0.25;
       }
-      
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
         if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
         if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
-      
       draw() {
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = 'rgba(255,215,0,0.6)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 8;
-        ctx.shadowColor = this.color;
-        
-        if (this.hasTail) {
-          const gradient = ctx.createLinearGradient(
-            this.x, this.y,
-            this.x - this.speedX * 10, this.y - this.speedY * 10
-          );
-          gradient.addColorStop(0, this.color + '33');
-          gradient.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.moveTo(this.x, this.y);
-          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = this.size;
-          ctx.stroke();
-        }
+        ctx.shadowColor = 'rgba(255,215,0,0.6)';
       }
     }
     
     function init() {
+      console.log('Initializing particle effect');
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
@@ -293,19 +276,20 @@
 
     // Get current page from URL
     function getCurrentPage() {
+      console.log('Getting current page from URL');
       const urlParams = new URLSearchParams(window.location.search);
       return parseInt(urlParams.get('page')) || 1;
     }
 
-    // Load history archive links with pagination
-    async function loadHistoryArchiveLinks() {
-      console.log('Starting to load history archive links...');
+    // Load memes links with pagination
+    async function loadMemesLinks() {
+      console.log('Starting to load politics memes links...');
       try {
-        const response = await fetch('history-links.txt');
+        console.log('Attempting to fetch ./politics-links.txt');
+        const response = await fetch('./politics-links.txt');
         console.log('Fetch response:', response.ok, response.status);
         if (!response.ok) {
-          console.error('Failed to load history-links.txt:', response.status);
-          return;
+          throw new Error(`Failed to load politics-links.txt: ${response.status}`);
         }
         const text = await response.text();
         console.log('Text loaded, length:', text.length);
@@ -313,34 +297,41 @@
         console.log('Total lines:', lines.length);
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
+          if (parts.length >= 3) {
+            return { title: parts[0].trim(), url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
+          console.warn('Invalid line format:', line);
           return null;
         }).filter(link => link !== null);
         
         console.log('Total links parsed:', links.length);
         
-        // Archive starts after first 24 links
-        const archiveLinks = links.slice(24);
-        console.log('Archive links:', archiveLinks.length);
+        // Filter for memes category
+        const memesLinks = links.filter(link => link.category === 'memes');
+        console.log('Memes links:', memesLinks.length);
         const currentPage = getCurrentPage();
         const linksPerPage = 24;
-        const totalPages = Math.ceil(archiveLinks.length / linksPerPage);
+        const totalPages = Math.ceil(memesLinks.length / linksPerPage);
         
         console.log('Current page:', currentPage, 'Total pages:', totalPages);
         
         // Calculate start and end indices for current page
         const startIndex = (currentPage - 1) * linksPerPage;
         const endIndex = startIndex + linksPerPage;
-        const pageLinks = archiveLinks.slice(startIndex, endIndex);
+        const pageLinks = memesLinks.slice(startIndex, endIndex);
         
         console.log('Page links for this page:', pageLinks.length);
         
-        const grid = document.getElementById('history-archive-links');
+        const grid = document.getElementById('politics-memes-links');
         const pageInfo = document.getElementById('page-info');
         
-        if (grid && pageLinks.length > 0) {
+        if (!grid) {
+          console.error('Element with ID politics-memes-links not found');
+          return;
+        }
+        
+        if (pageLinks.length > 0) {
+          console.log('Displaying page links:', pageLinks);
           grid.innerHTML = pageLinks.map((link, index) => `
             <li class="headline">
               <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
@@ -351,20 +342,26 @@
           if (pageInfo) {
             pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
           }
-        } else if (archiveLinks.length === 0) {
-          grid.innerHTML = '<li class="headline"><span>No archive content available yet.</span></li>';
+        } else if (memesLinks.length === 0) {
+          console.log('No memes links found, displaying no content message');
+          grid.innerHTML = '<li class="headline"><span>No memes available yet.</span></li>';
           grid.style.display = '';
           if (pageInfo) {
             pageInfo.textContent = '';
           }
         } else {
+          console.log('No links on this page');
           grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
           grid.style.display = '';
+          if (pageInfo) {
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+          }
         }
         
         // Create navigation buttons
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
+          console.log('Creating navigation buttons');
           let buttonsHTML = '';
           
           // Previous button
@@ -375,7 +372,7 @@
           }
           
           // Random button
-          buttonsHTML += '<button class="random-button" onclick="goToRandomHistoryArchive()">⚛️ SURPRISE ME!</button>';
+          buttonsHTML += '<button class="random-button" onclick="goToRandomMemes()">⚛️ SURPRISE ME!</button>';
           
           // Next button
           if (currentPage < totalPages) {
@@ -388,17 +385,19 @@
           buttonContainer.style.display = '';
         }
         
-        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${archiveLinks.length} total in archive)`);
+        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${memesLinks.length} total in memes category)`);
       } catch (error) {
-        console.error('Error loading history archive links:', error);
-        const grid = document.getElementById('history-archive-links');
+        console.error('Error loading politics memes links:', error);
+        const grid = document.getElementById('politics-memes-links');
         if (grid) {
+          console.log('Displaying error message due to fetch failure');
           grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
           grid.style.display = '';
         }
         const buttonContainer = document.getElementById('nav-buttons');
         if (buttonContainer) {
-          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomHistoryArchive()">⚛️ SURPRISE ME!</button>';
+          console.log('Setting random button only due to error');
+          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomMemes()">⚛️ SURPRISE ME!</button>';
           buttonContainer.style.display = '';
         }
       }
@@ -406,39 +405,45 @@
 
     // Navigate to specific page
     function goToPage(pageNum) {
-      window.location.href = `history-archive.html?page=${pageNum}`;
+      console.log('Navigating to page:', pageNum);
+      window.location.href = `/thedayluge/politics/politics-memes.html?page=${pageNum}`;
     }
 
-    // Random history archive article
-    async function goToRandomHistoryArchive() {
+    // Random memes link
+    async function goToRandomMemes() {
+      console.log('Attempting to load random meme');
       try {
-        const response = await fetch('history-links.txt');
+        const response = await fetch('./politics-links.txt');
         if (!response.ok) {
-          console.log('Could not load history-links.txt for random selection');
+          console.log('Could not load politics-links.txt for random selection');
           return;
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
         const links = lines.map(line => {
           const parts = line.split('|');
-          if (parts.length >= 2) {
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'memes') {
             return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
-        const archiveLinks = links.slice(24);
-        if (archiveLinks.length > 0) {
-          const randomLink = archiveLinks[Math.floor(Math.random() * archiveLinks.length)];
+        if (links.length > 0) {
+          const randomLink = links[Math.floor(Math.random() * links.length)];
+          console.log('Opening random meme:', randomLink);
           window.open(randomLink, '_blank', 'noopener,noreferrer');
         } else {
-          alert('No links in archive.');
+          console.log('No memes available for random selection');
+          alert('No memes available.');
         }
       } catch (error) {
         console.error('Error loading links for random selection:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadHistoryArchiveLinks);
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM content loaded, calling loadMemesLinks');
+      loadMemesLinks();
+    });
   </script>
 </body>
 </html>
