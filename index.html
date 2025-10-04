@@ -12,7 +12,7 @@
     --red: #cc0000;  
     --orange: #ff8800;  
     --green: #00dd55;
-    --blue: #1a1a80; /* Navy blue for new button font */
+    --blue: #1a1a80;
     --light-blue: #33ddff;
     --violet: #cc88ff;
     --pink: #ff69b4;
@@ -25,8 +25,8 @@
     --gold-bright: #ffd700;
     --marble-gray: #d3d3d3;
     --bright-dark-green: #00aa33;
-    --dodgers-blue: #1e90ff; /* Dodger blue for new button background */
-    --synapse-duration: 1.6s; /* Slower for relaxed twinkle */
+    --dodgers-blue: #1e90ff;
+    --synapse-duration: 1.6s;
     --connection-color: var(--light-cyan-glow);
   }
 
@@ -102,16 +102,16 @@
     height: 480px;
     margin: 0 auto;
     z-index: 5;
-    animation: spin-wheel 0.75s ease-out forwards; /* Shorter duration */
+    animation: spin-wheel 0.75s ease-out forwards;
   }
 
   @keyframes spin-wheel {
     0% {
-      transform: rotateZ(0deg); /* Start at 0 */
+      transform: rotateZ(0deg);
       opacity: 0.5;
     }
     100% {
-      transform: rotateZ(360deg); /* One full clockwise turn */
+      transform: rotateZ(360deg);
       opacity: 1;
     }
   }
@@ -136,7 +136,7 @@
 
   .synapse-particle {
     fill: var(--connection-color);
-    filter: drop-shadow(0 0 8px var(--connection-color)) drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 12px var(--bright-purple-glow)); /* Triple glow for starry twinkle */
+    filter: drop-shadow(0 0 8px var(--connection-color)) drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 12px var(--bright-purple-glow));
   }
 
   .wheel-center {
@@ -149,7 +149,7 @@
     background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
     color: yellow;
     border: 2px solid #ffdd00;
-    border-radius: 50%; /* Restored to circle */
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,7 +161,7 @@
     letter-spacing: 0.5px;
     line-height: 1.2;
     box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
-    animation: pulse 5s ease-in-out infinite; /* Slower pulse */
+    animation: pulse 5s ease-in-out infinite;
     text-decoration: none;
     text-align: center;
   }
@@ -248,10 +248,10 @@
     background: var(--dodgers-blue);
     color: var(--blue);
     border: 2px solid var(--blue);
-    padding: 7px 28px; /* Half height of random-button */
+    padding: 7px 28px;
     border-radius: 30px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 12px; /* Smaller font to fit */
+    font-size: 12px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -261,7 +261,7 @@
     box-shadow: 0 0 20px var(--dodgers-blue), 0 4px 12px rgba(0,0,0,0.3), 0 0 15px var(--blue);
     animation: blue-glow 2s ease-in-out infinite;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 150px; /* Match random-button width */
+    width: 150px;
   }
 
   @keyframes blue-glow {
@@ -327,7 +327,7 @@
       transform: scale(0.8);
     }
     .random-button, .random-button-more {
-      width: 130px; /* Adjust width for smaller screens */
+      width: 130px;
     }
   }
 
@@ -365,12 +365,12 @@
       transform: scale(0.6);
     }
     .random-button, .random-button-more {
-      width: 120px; /* Further adjust width */
-      font-size: 12px; /* Adjust font size for random-button */
+      width: 120px;
+      font-size: 12px;
     }
     .random-button-more {
-      font-size: 10px; /* Smaller font for half-height button */
-      padding: 6px 28px; /* Adjust padding for smaller screens */
+      font-size: 10px;
+      padding: 6px 28px;
     }
   }
 </style>
@@ -404,14 +404,14 @@
 
 <script>
   const categoryMap = {
-    'politics': 'politics.html',
-    'markets-economics': 'markets-economics.html',
-    'sports-leisure': 'sports-leisure.html',
-    'science-nature-technology': 'science-nature-technology.html',
-    'arts-literature': 'arts-literature.html',
-    'wisdom-philosophy': 'wisdom-philosophy.html',
-    'conspiracy-corner': 'conspiracy-corner.html',
-    'history': 'history.html'
+    'politics': '/politics/politics.html',
+    'markets-economics': '/markets-economics.html',
+    'sports-leisure': '/sports-leisure.html',
+    'science-nature-technology': '/science-nature-technology.html',
+    'arts-literature': '/arts-literature.html',
+    'wisdom-philosophy': '/wisdom-philosophy.html',
+    'conspiracy-corner': '/conspiracy-corner.html',
+    'history': '/history/history.html'
   };
 
   window.goToCategory = function(category) {
@@ -447,7 +447,7 @@
     const newWindow = window.open('', '_blank');
     if (!newWindow) return;
 
-    fetch('surprise-me-links.txt') // Same file for now; can be customized later
+    fetch('surprise-me-links.txt')
       .then(response => response.text())
       .then(text => {
         const lines = text.split('\n').filter(line => line.trim());
@@ -509,25 +509,24 @@
       path.classList.add('connection-path');
       svg.appendChild(path);
 
-      // Create 3 particles per path with staggered timing
       for (let particleNum = 0; particleNum < 3; particleNum++) {
         const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         particle.setAttribute('class', 'synapse-particle');
-        particle.setAttribute('r', '1.5'); // Smaller for star-like twinkle
+        particle.setAttribute('r', '1.5');
         svg.appendChild(particle);
 
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        animateMotion.setAttribute('dur', '1.6s'); // Slower for relaxed twinkle
+        animateMotion.setAttribute('dur', '1.6s');
         animateMotion.setAttribute('repeatCount', 'indefinite');
         animateMotion.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
-        animateMotion.setAttribute('keyPoints', '0;1;0'); // Back and forth
+        animateMotion.setAttribute('keyPoints', '0;1;0');
         animateMotion.setAttribute('keyTimes', '0;0.5;1');
         animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
         particle.appendChild(animateMotion);
 
         const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateSize.setAttribute('attributeName', 'r');
-        animateSize.setAttribute('values', '1;2.5;1'); // Small pulse for twinkle
+        animateSize.setAttribute('values', '1;2.5;1');
         animateSize.setAttribute('dur', '1.6s');
         animateSize.setAttribute('repeatCount', 'indefinite');
         animateSize.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
@@ -535,7 +534,7 @@
 
         const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
-        animateOpacity.setAttribute('values', '0.2;1;0.2'); // Sharp twinkle
+        animateOpacity.setAttribute('values', '0.2;1;0.2');
         animateOpacity.setAttribute('dur', '1.6s');
         animateOpacity.setAttribute('repeatCount', 'indefinite');
         animateOpacity.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
@@ -543,7 +542,7 @@
 
         const animateColor = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateColor.setAttribute('attributeName', 'fill');
-        animateColor.setAttribute('values', '#33ddff;#ffffff;#cc88ff;#33ddff'); // Cyan to white to purple to cyan
+        animateColor.setAttribute('values', '#33ddff;#ffffff;#cc88ff;#33ddff');
         animateColor.setAttribute('dur', '1.6s');
         animateColor.setAttribute('repeatCount', 'indefinite');
         animateColor.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
