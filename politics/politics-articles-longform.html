@@ -267,12 +267,16 @@
     // Load articles & longform links with pagination
     async function loadArticlesContent(page = 1) {
       try {
-        const response = await fetch('../politics-links.txt');
+        console.log('Fetching politics-links.txt from /politics/politics-links.txt');
+        const response = await fetch('/politics/politics-links.txt'); // Updated to subdirectory
+        console.log('Fetch response:', response.status, response.statusText);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const text = await response.text();
+        console.log('Fetched text length:', text.length);
         const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines.length);
         const entries = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3) {
@@ -282,6 +286,7 @@
           return null;
         }).filter(entry => entry !== null && entry.category === 'art-long');
         
+        console.log('Filtered art-long entries:', entries.length);
         const itemsPerPage = 24;
         const totalPages = Math.ceil(entries.length / itemsPerPage);
         const start = (page - 1) * itemsPerPage;
@@ -301,7 +306,7 @@
             : '<li class="headline">No articles & longform content available.</li>';
           pageTitle.textContent = `Politics - Articles & Longform - Page ${page}`;
           errorMessage.style.display = 'none';
-          console.log(`Showing ${paginatedEntries.length} articles & longform links on Page ${page} (${entries.length - (page - 1) * itemsPerPage} remaining)`);
+          console.log(`Showing ${paginatedEntries.length} articles on Page ${page}`);
         } else {
           throw new Error('Headlines container not found');
         }
@@ -331,7 +336,7 @@
     // Random article from current page links
     async function goToRandomArticle() {
       try {
-        const response = await fetch('../politics-links.txt');
+        const response = await fetch('/politics/politics-links.txt');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
