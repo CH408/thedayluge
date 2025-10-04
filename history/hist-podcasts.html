@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>History Podcasts - THE DAYLUGE</title>
+  <title>History - Podcasts</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --gold: #FFD700;
-      --gold-dark: #DAA520;
       --gold-light: #FFEC8B;
       --ink: #111;
-      --black-bg: #0a1428;
+      --black-bg: #000000; /* Jet black background */
       --dark-gray: #111111;
       --gray: #333333;
       --maxw: 1200px;
@@ -37,7 +36,21 @@
       animation: energy-pulse 6s ease-in-out infinite;
       pointer-events: none;
     }
+    body::after {
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
     @keyframes energy-pulse {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+    }
+    @keyframes edge-glow {
       0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
     }
     #particle-canvas {
@@ -47,29 +60,37 @@
       pointer-events: none;
     }
     .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .archive-title {
+    .title-container {
+      display: flex;
+      align-items: center;
+      max-width: 800px;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+    .block-title {
       font-size: 18px;
       text-transform: uppercase;
       font-weight: 900;
       text-align: left;
       color: var(--gold);
-      text-shadow: 0 0 8px var(--gold);
-      margin-bottom: 10px;
       animation: block-title-pulse-gold 8s ease-in-out infinite;
     }
     @keyframes block-title-pulse-gold {
       0% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .headlines { list-style: none; max-width: 800px; }
     .headline {
       font-size: 16px;
       margin-bottom: 5px;
-      color: var(--gold);
       opacity: 0;
       transform: translateY(10px);
       animation: fadeIn 0.5s ease forwards;
+      color: var(--gold);
     }
     .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
     .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
@@ -99,56 +120,41 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .headline a {
-      color: var(--gold);
+      color: inherit;
       text-decoration: none;
       font-weight: bold;
       transition: all 0.3s ease;
     }
-    .headline a:hover {
+    .headlines .headline a:hover {
       color: var(--gold-light);
       text-shadow: 0 0 10px var(--gold-light);
     }
-    .back-btn {
-      position: fixed;
-      bottom: 50px; right: 20px;
-      background: var(--black-bg);
+    .random-button, .home-btn, .pagination-button {
+      display: inline-block;
+      background: transparent;
       color: var(--gold);
       padding: 8px 16px;
-      border: 2px solid var(--gold);
+      border: 1px solid var(--gold);
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 5px var(--gold);
       transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--gold);
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      cursor: pointer;
     }
-    .back-btn:hover {
-      background: var(--dark-gray);
+    .random-button:hover, .home-btn:hover, .pagination-button:hover {
+      background: rgba(255,255,255,0.1);
       box-shadow: 0 0 15px rgba(255,215,0,0.3);
       transform: scale(1.05);
     }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      background: var(--black-bg);
-      color: var(--gold);
-      padding: 8px 16px;
-      border: 2px solid var(--gold);
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 5px var(--gold);
-      transition: all 0.3s ease;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    }
-    .home-btn:hover {
-      background: var(--dark-gray);
-      box-shadow: 0 0 15px rgba(255,215,0,0.3);
-      transform: scale(1.05);
+    .pagination-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
     .button-container {
       margin: 20px auto;
@@ -157,64 +163,48 @@
       gap: 20px;
       flex-wrap: wrap;
     }
-    .random-button, .nav-button {
-      display: inline-block;
-      background: var(--black-bg);
-      color: var(--gold);
-      padding: 8px 16px;
-      border: 2px solid var(--gold);
-      border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--gold);
-      cursor: pointer;
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
     }
-    .random-button:hover, .nav-button:hover {
-      background: var(--dark-gray);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255,215,0,0.3);
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
     }
-    .nav-button:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-    .nav-button:disabled:hover {
-      background: var(--black-bg);
-      transform: none;
-      box-shadow: none;
-    }
-    .page-info {
+    .error-message {
       color: var(--gold);
       font-size: 14px;
+      margin-top: 10px;
       text-align: center;
-      margin: 10px 0;
     }
     @media (max-width: 600px) {
-      .archive-title { font-size: 16px; }
+      .block-title { font-size: 16px; }
       .headline { font-size: 14px; }
-      .back-btn, .home-btn, .random-button, .nav-button { 
-        font-family: 'Special Elite', 'Courier New', Courier, monospace;
-        font-size: 10px; 
-        padding: 6px 12px; 
-      }
-      .page-info { font-size: 12px; }
+      .random-button, .pagination-button, .home-btn { font-size: 10px; padding: 6px 12px; }
+      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .error-message { font-size: 12px; }
     }
   </style>
 </head>
 <body>
-  <a href="/thedayluge/history/history.html" class="back-btn">← Back to History</a>
-  <a href="/" class="home-btn">← Home</a>
+  <a href="../history.html" class="home-btn">← Back to History</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
-    <div class="archive-title" id="archive-title">History Podcasts</div>
-    <div class="page-info" id="page-info"></div>
-    <ul class="headlines" id="history-podcasts-links" style="display: none;"></ul>
-    <div class="button-container" id="nav-buttons" style="display: none;"></div>
+    <div class="global-news">
+      <div class="title-container">
+        <div class="block-title global-news-title" id="page-title">History - Podcasts - Page 1</div>
+      </div>
+      <ul class="headlines" id="headlines"></ul>
+      <p class="error-message" id="error-message" style="display: none;">Unable to load podcasts links. Please try again later.</p>
+    </div>
+    <div class="button-container">
+      <button class="random-button" onclick="goToRandomPodcast()">⚛️ SURPRISE ME!</button>
+    </div>
+    <div class="pagination" id="pagination"></div>
   </div>
+  
   <script>
     // Particle effect
     const canvas = document.getElementById('particle-canvas');
@@ -231,6 +221,8 @@
         this.size = Math.random() * 2 + 1;
         this.speedX = Math.random() * 1.5 - 0.75;
         this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#FFD700', '#FFEC8B', '#DAA520', '#EEC900', '#FFB90F', '#CDAD00'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
       }
       update() {
         this.x += this.speedX;
@@ -239,17 +231,30 @@
         if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
       draw() {
-        ctx.fillStyle = 'rgba(255,215,0,0.6)';
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 8;
-        ctx.shadowColor = 'rgba(255,215,0,0.6)';
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
       }
     }
     
     function init() {
-      console.log('Initializing particle effect');
       particlesArray.length = 0;
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
@@ -274,179 +279,132 @@
       init();
     });
 
-    // Get current page from URL
-    function getCurrentPage() {
-      console.log('Getting current page from URL');
-      const urlParams = new URLSearchParams(window.location.search);
-      return parseInt(urlParams.get('page')) || 1;
-    }
-
     // Load podcasts links with pagination
-    async function loadPodcastsLinks() {
-      console.log('Starting to load history podcasts links...');
+    async function loadPodcastsContent(page = 1) {
       try {
-        console.log('Attempting to fetch ./history-links.txt');
+        console.log('Fetching history-links.txt from ./history-links.txt');
         const response = await fetch('./history-links.txt');
-        console.log('Fetch response:', response.ok, response.status);
+        console.log('Fetch response:', response.status, response.statusText);
         if (!response.ok) {
-          throw new Error(`Failed to load history-links.txt: ${response.status}`);
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const text = await response.text();
-        console.log('Text loaded, length:', text.length);
+        console.log('Fetched text length:', text.length);
         const lines = text.split('\n').filter(line => line.trim());
-        console.log('Total lines:', lines.length);
-        const links = lines.map(line => {
+        console.log('Parsed lines:', lines.length);
+        const entries = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3) {
-            // Clean title by removing suffixes like (art-long) or (art+long)
             const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
-            return { title: cleanTitle, url: parts[1].trim(), category: parts[2].trim().toLowerCase() };
+            return { title: cleanTitle, link: parts[1].trim(), category: parts[2].trim().toLowerCase() };
           }
-          console.warn('Invalid line format:', line);
           return null;
-        }).filter(link => link !== null);
+        }).filter(entry => entry !== null && entry.category === 'podcasts');
         
-        console.log('Total links parsed:', links.length);
+        console.log('Filtered podcasts entries:', entries.length);
+        const itemsPerPage = 24;
+        const totalPages = Math.ceil(entries.length / itemsPerPage);
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedEntries = entries.slice(start, end);
         
-        // Filter for podcasts category
-        const podcastsLinks = links.filter(link => link.category === 'podcasts');
-        console.log('Podcasts links:', podcastsLinks.length);
-        const currentPage = getCurrentPage();
-        const linksPerPage = 24;
-        const totalPages = Math.ceil(podcastsLinks.length / linksPerPage);
-        
-        console.log('Current page:', currentPage, 'Total pages:', totalPages);
-        
-        // Calculate start and end indices for current page
-        const startIndex = (currentPage - 1) * linksPerPage;
-        const endIndex = startIndex + linksPerPage;
-        const pageLinks = podcastsLinks.slice(startIndex, endIndex);
-        
-        console.log('Page links for this page:', pageLinks.length);
-        
-        const grid = document.getElementById('history
-
--podcasts-links');
-        const pageInfo = document.getElementById('page-info');
-        
-        if (!grid) {
-          console.error('Element with ID history-podcasts-links not found');
-          return;
-        }
-        
-        if (pageLinks.length > 0) {
-          console.log('Displaying page links:', pageLinks);
-          grid.innerHTML = pageLinks.map((link, index) => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
-            </li>
-          `).join('');
-          grid.style.display = '';
-          
-          if (pageInfo) {
-            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-          }
-        } else if (podcastsLinks.length === 0) {
-          console.log('No podcasts links found, displaying no content message');
-          grid.innerHTML = '<li class="headline"><span>No podcasts available yet.</span></li>';
-          grid.style.display = '';
-          if (pageInfo) {
-            pageInfo.textContent = '';
-          }
+        const headlines = document.getElementById('headlines');
+        const pageTitle = document.getElementById('page-title');
+        const errorMessage = document.getElementById('error-message');
+        if (headlines) {
+          headlines.innerHTML = paginatedEntries.length > 0
+            ? paginatedEntries.map((entry, index) => `
+                <li class="headline">
+                  <a href="${entry.link}" target="_blank">${entry.title}</a>
+                </li>
+              `).join('')
+            : '<li class="headline">No podcasts content available.</li>';
+          pageTitle.textContent = `History - Podcasts - Page ${page}`;
+          errorMessage.style.display = 'none';
+          console.log(`Showing ${paginatedEntries.length} podcasts on Page ${page}`);
         } else {
-          console.log('No links on this page');
-          grid.innerHTML = '<li class="headline"><span>No links on this page.</span></li>';
-          grid.style.display = '';
-          if (pageInfo) {
-            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-          }
+          throw new Error('Headlines container not found');
         }
         
-        // Create navigation buttons
-        const buttonContainer = document.getElementById('nav-buttons');
-        if (buttonContainer) {
-          console.log('Creating navigation buttons');
-          let buttonsHTML = '';
-          
-          // Previous button
-          if (currentPage > 1) {
-            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage - 1})">← Previous</button>`;
+        // Update pagination
+        const pagination = document.getElementById('pagination');
+        if (pagination) {
+          pagination.innerHTML = '';
+          if (page > 1) {
+            const prevButton = document.createElement('button');
+            prevButton.className = 'pagination-button';
+            prevButton.textContent = '← Previous';
+            prevButton.addEventListener('click', () => loadPodcastsContent(page - 1));
+            pagination.appendChild(prevButton);
           } else {
-            buttonsHTML += `<button class="nav-button" disabled>← Previous</button>`;
+            const prevButton = document.createElement('button');
+            prevButton.className = 'pagination-button';
+            prevButton.textContent = '← Previous';
+            prevButton.disabled = true;
+            pagination.appendChild(prevButton);
           }
-          
-          // Random button
-          buttonsHTML += '<button class="random-button" onclick="goToRandomPodcasts()">⚛️ SURPRISE ME!</button>';
-          
-          // Next button
-          if (currentPage < totalPages) {
-            buttonsHTML += `<button class="nav-button" onclick="goToPage(${currentPage + 1})">Next →</button>`;
+          if (page < totalPages) {
+            const nextButton = document.createElement('button');
+            nextButton.className = 'pagination-button';
+            nextButton.textContent = 'Next →';
+            nextButton.addEventListener('click', () => loadPodcastsContent(page + 1));
+            pagination.appendChild(nextButton);
           } else {
-            buttonsHTML += `<button class="nav-button" disabled>Next →</button>`;
+            const nextButton = document.createElement('button');
+            nextButton.className = 'pagination-button';
+            nextButton.textContent = 'Next →';
+            nextButton.disabled = true;
+            pagination.appendChild(nextButton);
           }
-          
-          buttonContainer.innerHTML = buttonsHTML;
-          buttonContainer.style.display = '';
         }
-        
-        console.log(`Showing page ${currentPage} of ${totalPages} (${pageLinks.length} links on this page, ${podcastsLinks.length} total in podcasts category)`);
       } catch (error) {
-        console.error('Error loading history podcasts links:', error);
-        const grid = document.getElementById('history-podcasts-links');
-        if (grid) {
-          console.log('Displaying error message due to fetch failure');
-          grid.innerHTML = '<li class="headline"><span>Error loading content. Please try again later.</span></li>';
-          grid.style.display = '';
-        }
-        const buttonContainer = document.getElementById('nav-buttons');
-        if (buttonContainer) {
-          console.log('Setting random button only due to error');
-          buttonContainer.innerHTML = '<button class="random-button" onclick="goToRandomPodcasts()">⚛️ SURPRISE ME!</button>';
-          buttonContainer.style.display = '';
+        console.error('Error loading podcasts links:', error.message);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.style.display = 'block';
         }
       }
     }
 
-    // Navigate to specific page
-    function goToPage(pageNum) {
-      console.log('Navigating to page:', pageNum);
-      window.location.href = `/thedayluge/history/hist-podcasts.html?page=${pageNum}`;
-    }
-
-    // Random podcasts link
-    async function goToRandomPodcasts() {
-      console.log('Attempting to load random podcast');
+    // Random podcast from current page links
+    async function goToRandomPodcast() {
       try {
         const response = await fetch('./history-links.txt');
         if (!response.ok) {
-          console.log('Could not load history-links.txt for random selection');
-          return;
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
+        const entries = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'podcasts') {
             return parts[1].trim();
           }
           return null;
         }).filter(link => link !== null);
-        if (links.length > 0) {
-          const randomLink = links[Math.floor(Math.random() * links.length)];
-          console.log('Opening random podcast:', randomLink);
-          window.open(randomLink, '_blank', 'noopener,noreferrer');
+        const currentLinks = entries.slice((loadPodcastsContent.page - 1) * 24, loadPodcastsContent.page * 24);
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+          window.open(randomLink, '_blank');
         } else {
-          console.log('No podcasts available for random selection');
-          alert('No podcasts available.');
+          throw new Error('No valid podcasts links to select randomly on current page');
         }
       } catch (error) {
-        console.error('Error loading links for random selection:', error);
+        console.error('Error loading links for random selection:', error.message);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.style.display = 'block';
+        }
       }
     }
 
+    // Track current page in function scope
+    loadPodcastsContent.page = 1;
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM content loaded, calling loadPodcastsLinks');
-      loadPodcastsLinks();
+      const urlParams = new URLSearchParams(window.location.search);
+      const page = parseInt(urlParams.get('page')) || 1;
+      loadPodcastsContent.page = page;
+      loadPodcastsContent(page);
     });
   </script>
 </body>
