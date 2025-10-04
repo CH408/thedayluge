@@ -67,18 +67,22 @@
   from = "/history"
   to = "/history/history.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/politics"
   to = "/politics/politics.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/history/*"
   to = "/history/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/politics/*"
   to = "/politics/:splat"
   status = 200
+  force = true
