@@ -1,11 +1,67 @@
 [build]
-  publish = "./"
+  publish = "."
   command = ""
+  functions = "netlify/functions"
 
 [[redirects]]
-  from = "/sports-news"
-  to = "/sports-news/sports-news-archive.html"
+  from = "/sports-news-archive"
+  to = "/sports-news-archive.html"
   status = 200
+  force = true
+
+[[redirects]]
+  from = "/sports-news-archive/*"
+  to = "/sports-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/global-news-archive"
+  to = "/global-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/global-news-archive/*"
+  to = "/global-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/us-news-archive"
+  to = "/us-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/us-news-archive/*"
+  to = "/us-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/economy-news-archive"
+  to = "/economy-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/economy-news-archive/*"
+  to = "/economy-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/popculture-news-archive"
+  to = "/popculture-news-archive.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/popculture-news-archive/*"
+  to = "/popculture-news-archive.html"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/history"
