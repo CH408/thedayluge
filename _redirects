@@ -3,3 +3,4 @@
 /politics /politics/politics.html 200
 /history/* /history/:splat 200
 /politics/* /politics/:splat 200
+/* /index.html 200
