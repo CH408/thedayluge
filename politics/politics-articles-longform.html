@@ -128,4 +128,206 @@
       text-decoration: none;
       transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--marble-gray);
-      font-family: 'Special Elite', '
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    }
+    .random-button, .next-btn {
+      position: relative;
+    }
+    .random-button:hover, .home-btn:hover, .next-btn:hover {
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(211,211,211,0.3);
+      transform: scale(1.05);
+    }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+    }
+    .error-message {
+      color: var(--marble-gray-light);
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .block-title { font-size: 16px; }
+      .headline { font-size: 14px; }
+      .random-button, .next-btn { font-size: 10px; padding: 6px 12px; }
+      .home-btn { font-size: 10px; padding: 6px 12px; }
+      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .error-message { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="/politics" class="home-btn">← Back to Politics</a>
+  <canvas id="particle-canvas"></canvas>
+  <div class="wrap">
+    <div class="articles-longform">
+      <div class="title-container">
+        <div class="block-title articles-longform-title">Articles & Longform - Page 1</div>
+      </div>
+      <ul class="headlines articles-longform-links" id="articles-longform-links"></ul>
+      <p class="error-message" id="error-message" style="display: none;">Unable to load article links. Please try again later.</p>
+    </div>
+    <div class="button-container">
+      <button class="random-button" onclick="goToRandomArticle()">⚛️ SURPRISE ME!</button>
+      <a href="/politics/articles-longform-page2.html" class="next-btn">Next Page →</a>
+    </div>
+  </div>
+  <script>
+    // Particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 50;
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#d3d3d3', '#e6e6e6', '#c0c0c0', '#b3b3b3', '#d9d9d9', '#e3e3e3'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    init();
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    // Load article links for Page 1 (6th oldest to 29th)
+    async function loadArticleLinks() {
+      try {
+        const response = await fetch('politics-links.txt');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        if (lines.length < 6) {
+          throw new Error('Not enough links in politics-links.txt to start from the 6th oldest');
+        }
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'articles-longform') {
+            return { title: parts[0].trim(), url: parts[1].trim() };
+          }
+          return null;
+        }).filter(link => link !== null);
+        const displayLinks = links.slice(5, 29); // Start from 6th link (index 5) for Page 1
+        const grid = document.getElementById('articles-longform-links');
+        const errorMessage = document.getElementById('error-message');
+        if (grid && displayLinks.length > 0) {
+          grid.innerHTML = displayLinks.map(link => `
+            <li class="headline">
+              <a href="${link.url}" target="_blank">${link.title}</a>
+            </li>
+          `).join('');
+          errorMessage.style.display = 'none';
+          console.log(`Showing ${displayLinks.length} article links on Page 1 (${links.length - displayLinks.length - 5} remaining for other pages)`);
+        } else {
+          throw new Error('No valid article links to display on Page 1');
+        }
+      } catch (error) {
+        console.error('Error loading article links:', error.message);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.style.display = 'block';
+        }
+      }
+    }
+
+    // Random article from Page 1 links
+    async function goToRandomArticle() {
+      try {
+        const response = await fetch('politics-links.txt');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        if (lines.length < 6) {
+          throw new Error('Not enough links in politics-links.txt for random selection from archive');
+        }
+        const links = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'articles-longform') {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const currentLinks = links.slice(5, 29); // Random from Page 1 links (6th to 29th)
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+          window.open(randomLink, '_blank');
+        } else {
+          throw new Error('No valid article links to select randomly on Page 1');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error.message);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.style.display = 'block';
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadArticleLinks);
+  </script>
+</body>
+</html>
