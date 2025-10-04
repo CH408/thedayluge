@@ -216,9 +216,18 @@
       height: 60px;
       font-size: 18px;
     }
-    .top-middle-box {
+    .top-middle-left-box {
       top: 60px;
-      left: calc(50% - 75px);
+      left: calc(50% - 155px);
+      width: 150px;
+      height: 60px;
+      font-size: 16px;
+      line-height: 1.2;
+      white-space: normal;
+    }
+    .top-middle-right-box {
+      top: 60px;
+      left: calc(50% - 5px);
       width: 150px;
       height: 60px;
       font-size: 16px;
@@ -227,7 +236,7 @@
     }
     .top-right-box {
       top: 60px;
-      left: calc(50% + 95px);
+      left: calc(50% + 145px);
       width: 150px;
       height: 60px;
       font-size: 18px;
@@ -239,16 +248,16 @@
       height: 60px;
       font-size: 16px;
     }
-    .bottom-middle-box {
+    .bottom-middle-left-box {
       bottom: 60px;
-      left: calc(50% - 75px);
+      left: calc(50% - 155px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
     .bottom-right-box {
       bottom: 60px;
-      left: calc(50% + 95px);
+      left: calc(50% + 145px);
       width: 150px;
       height: 60px;
       font-size: 16px;
@@ -291,38 +300,42 @@
       .central-content { width: 420px; height: 300px; padding: 12px; }
       .central-title { font-size: 18px; }
       .content-link { font-size: 14px; padding: 5px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+      .top-left-box, .top-middle-left-box, .top-middle-right-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-left-box, .bottom-right-box {
         width: 120px;
         height: 50px;
         font-size: 14px;
       }
-      .top-middle-box { font-size: 12px; }
+      .top-middle-left-box { font-size: 12px; }
+      .top-middle-right-box { font-size: 12px; }
       .top-left-box { left: calc(50% - 195px); }
-      .top-middle-box { left: calc(50% - 60px); }
-      .top-right-box { left: calc(50% + 75px); }
+      .top-middle-left-box { left: calc(50% - 125px); }
+      .top-middle-right-box { left: calc(50% - 5px); }
+      .top-right-box { left: calc(50% + 115px); }
       .bottom-left-box { left: calc(50% - 195px); }
-      .bottom-middle-box { left: calc(50% - 60px); }
-      .bottom-right-box { left: calc(50% + 75px); }
+      .bottom-middle-left-box { left: calc(50% - 125px); }
+      .bottom-right-box { left: calc(50% + 115px); }
     }
     @media (max-width: 600px) {
       .layout-container { height: 550px; }
       .central-content { width: 340px; height: 280px; padding: 10px; }
       .central-title { font-size: 16px; margin-bottom: 8px; }
       .content-link { font-size: 12px; padding: 4px 6px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+      .top-left-box, .top-middle-left-box, .top-middle-right-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-left-box, .bottom-right-box {
         width: 100px;
         height: 45px;
         font-size: 12px;
       }
-      .top-middle-box { font-size: 10px; }
+      .top-middle-left-box { font-size: 10px; }
+      .top-middle-right-box { font-size: 10px; }
       .top-left-box { left: calc(50% - 160px); }
-      .top-middle-box { left: calc(50% - 50px); }
-      .top-right-box { left: calc(50% + 60px); }
+      .top-middle-left-box { left: calc(50% - 100px); }
+      .top-middle-right-box { left: calc(50% - 0px); }
+      .top-right-box { left: calc(50% + 100px); }
       .bottom-left-box { left: calc(50% - 160px); }
-      .bottom-middle-box { left: calc(50% - 50px); }
-      .bottom-right-box { left: calc(50% + 60px); }
+      .bottom-middle-left-box { left: calc(50% - 100px); }
+      .bottom-right-box { left: calc(50% + 100px); }
       .header h1 { font-size: 28px; }
     }
   </style>
@@ -359,19 +372,25 @@
     <div class="perimeter-box top-left-box" onclick="window.location.href='./politics-podcasts.html'">
       Podcasts
     </div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='./politics-articles-longform.html'">
+    <div class="perimeter-box top-middle-left-box" onclick="window.location.href='./politics-articles-longform.html'">
       Articles & Longform
     </div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='./politics-clips.html'">
+    <div class="perimeter-box top-middle-right-box" onclick="window.location.href='./politics-clips.html'">
       Video Clips
+    </div>
+    <div class="perimeter-box top-right-box" onclick="window.location.href='./politics-memes.html'">
+      Memes
     </div>
     
     <!-- Bottom Boxes -->
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='./politics-memes.html'">
-      Memes
+    <div class="perimeter-box bottom-left-box" onclick="window.location.href='./politics-books.html'">
+      Books
     </div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./politics-books-movies-tv.html'">
-      Books, Movies & TV
+    <div class="perimeter-box bottom-middle-left-box" onclick="window.location.href='./politics-movies-tv.html'">
+      Movies & TV
+    </div>
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='#'">
+      Archive (Coming Soon)
     </div>
   </div>
   
