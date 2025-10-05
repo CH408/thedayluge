@@ -46,6 +46,7 @@
       --dodgers-blue: #1e90ff;
       --dodgers-blue-dark: #0066cc;
       --robins-egg-blue: #ADD8E6;
+      --sports-blue: #66B4F2;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
@@ -198,14 +199,14 @@
       75% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .sports-news-title { color: var(--robins-egg-blue); animation: block-title-pulse-robins-egg-blue 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-robins-egg-blue {
-      0% { text-shadow: 0 0 15px var(--robins-egg-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--robins-egg-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--robins-egg-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--robins-egg-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--robins-egg-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--robins-egg-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+    .sports-news-title { color: var(--sports-blue); animation: block-title-pulse-sports-blue 8s ease-in-out infinite; }
+    @keyframes block-title-pulse-sports-blue {
+      0% { text-shadow: 0 0 15px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
     }
     .popculture-news-title { color: var(--light-pink-glow); animation: block-title-pulse-pink 8s ease-in-out infinite; }
     @keyframes block-title-pulse-pink {
@@ -227,7 +228,7 @@
     .global-news-links .headline { color: var(--bright-purple-glow); }
     .us-news-links .headline { color: var(--light-red-glow); }
     .economy-news-links .headline { color: var(--headline-green); }
-    .sports-news-links .headline { color: var(--robins-egg-blue); }
+    .sports-news-links .headline { color: var(--sports-blue); }
     .popculture-news-links .headline { color: var(--headline-pink); }
     /* Global News headlines */
     .global-news-links .headline:nth-child(1) { animation-delay: 0.08s; }
@@ -271,7 +272,7 @@
     .global-news-links .headline a:hover { color: var(--bright-purple-glow); text-shadow: 0 0 10px var(--bright-purple-glow); }
     .us-news-links .headline a:hover { color: var(--light-red-glow); text-shadow: 0 0 10px var(--light-red-glow); }
     .economy-news-links .headline a:hover { color: var(--light-green-glow); text-shadow: 0 0 10px var(--light-green-glow); }
-    .sports-news-links .headline a:hover { color: var(--robins-egg-blue); text-shadow: 0 0 10px var(--robins-egg-blue); }
+    .sports-news-links .headline a:hover { color: var(--sports-blue); text-shadow: 0 0 10px var(--sports-blue); }
     .popculture-news-links .headline a:hover { color: var(--light-pink-glow); text-shadow: 0 0 10px var(--light-pink-glow); }
     .go-deeper {
       display: inline-block;
@@ -289,7 +290,7 @@
     .global-news .go-deeper { border-color: var(--bright-purple-glow); color: var(--bright-purple-glow); text-shadow: 0 0 5px var(--bright-purple-glow); }
     .us-news .go-deeper { border-color: var(--light-red-glow); color: var(--light-red-glow); text-shadow: 0 0 5px var(--light-red-glow); }
     .economy-news .go-deeper { border-color: var(--light-green-glow); color: var(--light-green-glow); text-shadow: 0 0 5px var(--light-green-glow); }
-    .sports-news .go-deeper { border-color: var(--robins-egg-blue); color: var(--robins-egg-blue); text-shadow: 0 0 5px var(--robins-egg-blue); }
+    .sports-news .go-deeper { border-color: var(--sports-blue); color: var(--sports-blue); text-shadow: 0 0 5px var(--sports-blue); }
     .popculture-news .go-deeper { border-color: var(--light-pink-glow); color: var(--light-pink-glow); text-shadow: 0 0 5px var(--light-pink-glow); }
     .go-deeper:hover {
       background: rgba(255,255,255,0.1);
@@ -298,7 +299,7 @@
     .global-news .go-deeper:hover { box-shadow: 0 0 15px rgba(204,136,255,0.3); }
     .us-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,51,51,0.3); }
     .economy-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,255,102,0.3); }
-    .sports-news .go-deeper:hover { box-shadow: 0 0 15px rgba(173,216,230,0.3); }
+    .sports-news .go-deeper:hover { box-shadow: 0 0 15px rgba(102,180,242,0.3); }
     .popculture-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,102,204,0.3); }
     .home-btn {
       position: fixed;
