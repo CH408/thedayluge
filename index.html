@@ -7,6 +7,15 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
 
+<!-- Cookie Consent for GDPR -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+<script>
+  window.cookieconsent.initialise({
+    "palette": { "popup": { "background": "#000" }, "button": { "background": "#f1d600" } },
+    "content": { "message": "We use cookies for Google Analytics.", "dismiss": "Got it!", "link": "Learn more", "href": "/privacy" }
+  });
+</script>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM9B5CP8GS"></script>
 <script>
@@ -391,24 +400,22 @@
 
   <div class="wheel-container">
     <svg class="connection-lines" width="100%" height="100%"></svg>
-    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News">
-      TRENDING<br>NEWS
-    </a>
-    <div class="circle circle-1" onclick="goToCategory('politics')">POLITICS</div>
-    <div class="circle circle-2" onclick="goToCategory('markets-economics')">MARKETS & ECONOMICS</div>
-    <div class="circle circle-3" onclick="goToCategory('sports-leisure')">SPORTS & LEISURE</div>
-    <div class="circle circle-4" onclick="goToCategory('science-nature-technology')">SCIENCE, NATURE & TECHNOLOGY</div>
-    <div class="circle circle-5" onclick="goToCategory('arts-literature')">ARTS & LITERATURE</div>
-    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy')">WISDOM & PHILOSOPHY</div>
-    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner')">CONSPIRACY CORNER</div>
-    <div class="circle circle-8" onclick="goToCategory('history')">HISTORY</div>
+    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
+    <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
+    <div class="circle circle-2" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
+    <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
+    <div class="circle circle-4" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECHNOLOGY</div>
+    <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
+    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
+    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
+    <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});">HISTORY</div>
   </div>
 
   <div class="button-container">
-    <button class="random-button" onclick="goToRandomArticle()">SURPRISE ME!</button>
+    <button class="random-button" onclick="goToRandomArticle(); gtag('event', 'click_button', {'button': 'surprise_me'});">SURPRISE ME!</button>
   </div>
 
-  <div class="archive-bottom" onclick="openArchive()">archive</div>
+  <div class="archive-bottom" onclick="openArchive(); gtag('event', 'click_link', {'link': 'archive'});">archive</div>
 
 <script>
   const categoryMap = {
