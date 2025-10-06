@@ -6,12 +6,11 @@
   <title>Politics - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --marble-gray: #d3d3d3;
       --marble-gray-light: #e6e6e6;
       --ink: #111;
-      --black-bg: #000000; /* Changed to jet black */
+      --black-bg: #000000;
       --dark-gray: #111111;
       --gray: #333333;
     }
@@ -98,7 +97,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 500px;
-      height: 350px;
+      height: 420px;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
       border: 2px solid var(--marble-gray);
       border-radius: 8px;
@@ -115,7 +114,7 @@
     }
     .central-title {
       text-align: center;
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -137,11 +136,11 @@
     .content-link {
       display: flex;
       align-items: flex-start;
-      padding: 6px 8px;
+      padding: 8px 10px;
       border: 1px solid rgba(211,211,211,0.3);
       border-radius: 4px;
       transition: all 0.3s ease;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.4;
       min-height: 0;
       overflow-wrap: anywhere;
@@ -156,11 +155,6 @@
         transform: translateY(0);
       }
     }
-    .content-link:nth-child(1) { animation-delay: 0.1s; }
-    .content-link:nth-child(2) { animation-delay: 0.2s; }
-    .content-link:nth-child(3) { animation-delay: 0.3s; }
-    .content-link:nth-child(4) { animation-delay: 0.4s; }
-    .content-link:nth-child(5) { animation-delay: 0.5s; }
     .content-link:hover {
       background: rgba(211,211,211,0.2);
       border-color: var(--marble-gray);
@@ -214,14 +208,14 @@
       left: calc(50% - 245px);
       width: 150px;
       height: 60px;
-      font-size: 18px;
+      font-size: 20px;
     }
     .top-middle-box {
       top: 60px;
       left: calc(50% - 75px);
       width: 150px;
       height: 60px;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.2;
       white-space: normal;
     }
@@ -230,21 +224,21 @@
       left: calc(50% + 95px);
       width: 150px;
       height: 60px;
-      font-size: 18px;
+      font-size: 20px;
     }
     .bottom-left-box {
       bottom: 60px;
       left: calc(50% - 245px);
       width: 150px;
       height: 60px;
-      font-size: 16px;
+      font-size: 18px;
     }
     .bottom-middle-box {
       bottom: 60px;
       left: calc(50% - 75px);
       width: 150px;
       height: 60px;
-      font-size: 16px;
+      font-size: 18px;
       line-height: 1.2;
       white-space: normal;
     }
@@ -253,7 +247,7 @@
       left: calc(50% + 95px);
       width: 150px;
       height: 60px;
-      font-size: 16px;
+      font-size: 18px;
     }
     .home-btn {
       position: fixed;
@@ -265,7 +259,7 @@
       padding: 10px 20px;
       border-radius: 25px;
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
@@ -290,35 +284,36 @@
     }
     @media (max-width: 900px) {
       .layout-container { max-width: 90%; height: 600px; }
-      .central-content { width: 420px; height: 300px; padding: 12px; }
-      .central-title { font-size: 18px; }
-      .content-link { font-size: 14px; padding: 5px 6px; }
+      .central-content { width: 420px; height: 360px; padding: 12px; }
+      .central-title { font-size: 22px; }
+      .content-link { font-size: 16px; padding: 6px 8px; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 120px;
         height: 50px;
-        font-size: 14px;
+        font-size: 16px;
       }
-      .top-middle-box { font-size: 12px; }
+      .top-middle-box { font-size: 14px; }
       .top-left-box { left: calc(50% - 195px); }
       .top-middle-box { left: calc(50% - 60px); }
       .top-right-box { left: calc(50% + 75px); }
       .bottom-left-box { left: calc(50% - 195px); }
       .bottom-middle-box { left: calc(50% - 60px); }
       .bottom-right-box { left: calc(50% + 75px); }
+      .home-btn { font-size: 14px; }
     }
     @media (max-width: 600px) {
       .layout-container { height: 550px; }
-      .central-content { width: 340px; height: 280px; padding: 10px; }
-      .central-title { font-size: 16px; margin-bottom: 8px; }
-      .content-link { font-size: 12px; padding: 4px 6px; }
+      .central-content { width: 340px; height: 320px; padding: 10px; }
+      .central-title { font-size: 18px; margin-bottom: 8px; }
+      .content-link { font-size: 14px; padding: 5px 6px; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 100px;
         height: 45px;
-        font-size: 12px;
+        font-size: 14px;
       }
-      .top-middle-box { font-size: 10px; }
+      .top-middle-box { font-size: 12px; }
       .top-left-box { left: calc(50% - 160px); }
       .top-middle-box { left: calc(50% - 50px); }
       .top-right-box { left: calc(50% + 60px); }
@@ -326,6 +321,7 @@
       .bottom-middle-box { left: calc(50% - 50px); }
       .bottom-right-box { left: calc(50% + 60px); }
       .header h1 { font-size: 28px; }
+      .home-btn { font-size: 12px; }
     }
   </style>
 </head>
@@ -335,7 +331,6 @@
   <canvas id="particle-canvas"></canvas>
   
   <div class="layout-container">
-    <!-- Central Content Rectangle -->
     <div class="central-content">
       <div class="central-title">Latest Politics Content</div>
       <div class="content-links">
@@ -354,10 +349,18 @@
         <div class="content-link">
           <span class="link-title">Loading content...</span>
         </div>
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
+        <div class="content-link">
+          <span class="link-title">Loading content...</span>
+        </div>
       </div>
     </div>
     
-    <!-- Top Boxes -->
     <div class="perimeter-box top-left-box" onclick="window.location.href='./politics-podcasts.html'">
       Podcasts
     </div>
@@ -368,7 +371,6 @@
       Video Clips
     </div>
     
-    <!-- Bottom Boxes -->
     <div class="perimeter-box bottom-left-box" onclick="window.location.href='./politics-books.html'">
       Books
     </div>
@@ -443,7 +445,6 @@
         init();
       });
       
-      // Load content from politics-links.txt
       async function loadPoliticsContent() {
         console.log('Starting to load politics content');
         try {
@@ -458,14 +459,12 @@
           const lines = text.trim().split('\n').filter(line => line.trim());
           console.log('Parsed lines:', lines.length);
           
-          // Parse each line: title|link|category
           const entries = lines.map((line, index) => {
             const parts = line.split('|');
             if (parts.length < 3) {
               console.warn(`Invalid entry at line ${index + 1}: ${line}`);
               return null;
             }
-            // Clean title by removing suffixes like (art-long) or (art+long)
             const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
             return {
               title: cleanTitle,
@@ -476,8 +475,7 @@
           
           console.log('Parsed entries:', entries.length);
           
-          // Take first 5 entries across all categories for central box
-          const latest5 = entries.slice(0, 5);
+          const latest8 = entries.slice(0, 8);
           const contentLinksContainer = document.querySelector('.content-links');
           
           if (!contentLinksContainer) {
@@ -485,11 +483,9 @@
             return;
           }
           
-          // Clear existing placeholder content
           contentLinksContainer.innerHTML = '';
           
-          // Ensure we always try to show 5 entries (pad with error message if needed)
-          const displayEntries = [...latest5];
+          const displayEntries = [...latest8];
           if (displayEntries.length === 0) {
             console.log('No politics entries found, displaying error message');
             displayEntries.push({
@@ -498,9 +494,9 @@
               category: 'error'
             });
           }
-          while (displayEntries.length < 5) {
+          while (displayEntries.length < 8) {
             displayEntries.push({
-              title: `Placeholder Entry ${displayEntries.length + 1}`,
+              title: 'No additional content available',
               link: '#',
               category: 'placeholder'
             });
@@ -508,10 +504,10 @@
           
           console.log('Display entries:', displayEntries.length);
           
-          // Add content to DOM with animation, using cleaned titles
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
             linkElement.innerHTML = `
               <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
             `;
@@ -536,9 +532,9 @@
               category: 'error'
             };
             const displayEntries = [errorEntry];
-            while (displayEntries.length < 5) {
+            while (displayEntries.length < 8) {
               displayEntries.push({
-                title: `Placeholder Entry ${displayEntries.length + 1}`,
+                title: 'No additional content available',
                 link: '#',
                 category: 'placeholder'
               });
@@ -546,13 +542,12 @@
             displayEntries.forEach((entry, index) => {
               const linkElement = document.createElement('div');
               linkElement.className = 'content-link';
+              linkElement.style.animationDelay = `${index * 0.1}s`;
               linkElement.innerHTML = `
-                <span class="link-title">${entry.title}</span>
+                <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
               `;
-              linkElement.addEventListener('click', () => {
-                if (entry.link !== '#') {
-                  window.location.href = entry.link;
-                }
+              linkElement.addEventListener('click', (e) => {
+                if (entry.link === '#') e.preventDefault();
               });
               contentLinksContainer.appendChild(linkElement);
             });
