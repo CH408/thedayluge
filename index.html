@@ -450,9 +450,8 @@
           return null;
         }).filter(link => link !== null);
         
-        const surpriseLinks = links.slice(0, 12);
-        if (surpriseLinks.length > 0) {
-          const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+        if (links.length > 0) {
+          const randomLink = links[Math.floor(Math.random() * links.length)];
           newWindow.location.href = randomLink;
         }
       });
@@ -472,9 +471,8 @@
           return null;
         }).filter(link => link !== null);
         
-        const surpriseLinks = links.slice(0, 12);
-        if (surpriseLinks.length > 0) {
-          const randomLink = surpriseLinks[Math.floor(Math.random() * surpriseLinks.length)];
+        if (links.length > 0) {
+          const randomLink = links[Math.floor(Math.random() * links.length)];
           newWindow.location.href = randomLink;
         }
       });
