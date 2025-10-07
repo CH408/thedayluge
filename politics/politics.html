@@ -168,6 +168,12 @@
       overflow-wrap: anywhere;
       hyphens: auto;
     }
+    .loading-indicator {
+      text-align: center;
+      font-size: 15px;
+      color: var(--silver-white);
+      padding: 10px;
+    }
     .perimeter-box {
       position: absolute;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -288,6 +294,7 @@
       .central-title { font-size: 18px; margin-bottom: 10px; }
       .content-links { gap: 16px; }
       .content-link { font-size: 13px; padding: 5px 7px; line-height: 1.2; }
+      .loading-indicator { font-size: 13px; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 120px;
@@ -309,6 +316,7 @@
       .central-title { font-size: 14px; margin-bottom: 8px; }
       .content-links { gap: 14px; }
       .content-link { font-size: 11px; padding: 4px 6px; line-height: 1.2; }
+      .loading-indicator { font-size: 11px; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 100px;
@@ -336,30 +344,7 @@
     <div class="central-content">
       <div class="central-title">Latest Politics Content</div>
       <div class="content-links">
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
+        <div class="loading-indicator">Loading...</div>
       </div>
     </div>
     
@@ -448,16 +433,29 @@
       });
       
       async function loadPoliticsContent() {
-        console.log('Starting to load politics content');
+        const contentLinksContainer = document.querySelector('.content-links');
+        if (!contentLinksContainer) {
+          console.error('Content links container not found');
+          return;
+        }
+        
+        // Show loading indicator
+        contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
+        
         try {
           console.log('Attempting to fetch ./politics-links.txt');
-          const response = await fetch('./politics-links.txt');
+          // Add cache-busting query parameter
+          const response = await fetch(`./politics-links.txt?_=${new Date().getTime()}`);
           console.log('Fetch response:', response.ok, response.status);
           if (!response.ok) {
             throw new Error(`Fetch failed with status ${response.status}`);
           }
           const text = await response.text();
           console.log('Fetched text, length:', text.length);
+          
+          // Cache the content
+          localStorage.setItem('politics-links', text);
+          
           const lines = text.trim().split('\n').filter(line => line.trim());
           console.log('Parsed lines:', lines.length);
           
@@ -477,25 +475,40 @@
           
           console.log('Parsed entries:', entries.length);
           
+          // Take first 8 entries
           const latest8 = entries.slice(0, 8);
-          const contentLinksContainer = document.querySelector('.content-links');
           
-          if (!contentLinksContainer) {
-            console.error('Content links container not found');
-            return;
-          }
-          
+          // Clear loading indicator
           contentLinksContainer.innerHTML = '';
           
+          // Display entries
           const displayEntries = [...latest8];
           if (displayEntries.length === 0) {
-            console.log('No politics entries found, displaying error message');
-            displayEntries.push({
-              title: 'No politics content available. Check politics-links.txt.',
-              link: '#',
-              category: 'error'
-            });
+            console.log('No valid entries found, using cached content or error message');
+            const cached = localStorage.getItem('politics-links');
+            if (cached) {
+              const cachedLines = cached.trim().split('\n').filter(line => line.trim());
+              const cachedEntries = cachedLines.map((line, index) => {
+                const parts = line.split('|');
+                if (parts.length < 3) return null;
+                const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+                return {
+                  title: cleanTitle,
+                  link: parts[1].trim(),
+                  category: parts[2].trim().toLowerCase()
+                };
+              }).filter(entry => entry !== null).slice(0, 8);
+              displayEntries.push(...cachedEntries);
+            }
+            if (displayEntries.length === 0) {
+              displayEntries.push({
+                title: 'No politics content available. Please try again later.',
+                link: '#',
+                category: 'error'
+              });
+            }
           }
+          
           while (displayEntries.length < 8) {
             displayEntries.push({
               title: 'No additional content available',
@@ -523,13 +536,76 @@
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
-          console.error('Error loading politics-links.txt:', error);
-          const contentLinksContainer = document.querySelector('.content-links');
-          if (contentLinksContainer) {
-            console.log('Displaying error message due to fetch failure');
-            contentLinksContainer.innerHTML = '';
-            const errorEntry = {
-              title: 'Error loading politics content]')
+          console.error('Error loading politics-links.txt:', error.message);
+          contentLinksContainer.innerHTML = '';
+          
+          // Try cached content
+          const cached = localStorage.getItem('politics-links');
+          if (cached) {
+            console.log('Using cached content');
+            const cachedLines = cached.trim().split('\n').filter(line => line.trim());
+            const cachedEntries = cachedLines.map((line, index) => {
+              const parts = line.split('|');
+              if (parts.length < 3) return null;
+              const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+              return {
+                title: cleanTitle,
+                link: parts[1].trim(),
+                category: parts[2].trim().toLowerCase()
+              };
+            }).filter(entry => entry !== null).slice(0, 8);
+            
+            if (cachedEntries.length > 0) {
+              const displayEntries = [...cachedEntries];
+              while (displayEntries.length < 8) {
+                displayEntries.push({
+                  title: 'No additional content available',
+                  link: '#',
+                  category: 'placeholder'
+                });
+              }
+              displayEntries.forEach((entry, index) => {
+                const linkElement = document.createElement('div');
+                linkElement.className = 'content-link';
+                linkElement.style.animationDelay = `${index * 0.1}s`;
+                linkElement.innerHTML = `
+                  <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+                `;
+                linkElement.addEventListener('click', (e) => {
+                  if (entry.link === '#') e.preventDefault();
+                });
+                contentLinksContainer.appendChild(linkElement);
+              });
+              return;
+            }
+          }
+          
+          // Fallback to error message
+          console.log('Displaying error message due to fetch failure');
+          const displayEntries = [{
+            title: 'Error loading content. Please try again later.',
+            link: '#',
+            category: 'error'
+          }];
+          while (displayEntries.length < 8) {
+            displayEntries.push({
+              title: 'No additional content available',
+              link: '#',
+              category: 'placeholder'
+            });
+          }
+          displayEntries.forEach((entry, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
+            linkElement.innerHTML = `
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+            `;
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
         }
       }
       
