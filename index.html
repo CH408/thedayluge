@@ -72,26 +72,71 @@
       text-transform: uppercase;
       letter-spacing: .5px;
       font-size: 42px;
-      background: linear-gradient(
-        90deg,
-        var(--light-blue) 0%,
-        var(--green) 16.67%,
-        var(--violet) 33.33%,
-        var(--pink) 50%,
-        var(--yellow) 66.67%,
-        #5dccdb 83.33%,
-        var(--light-blue) 100%
-      );
-      background-size: 200% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-      animation: gradientWipe 6s linear infinite;
+      color: var(--light-blue);
+      text-shadow: 0 0 5px var(--light-blue);
+      animation: glitch 6s infinite;
     }
-    @keyframes gradientWipe {
-      0% { background-position: 200% 0; }
-      100% { background-position: 0 0; }
+    @keyframes glitch {
+      0%, 16% {
+        color: var(--light-blue);
+        text-shadow: 0 0 5px var(--light-blue);
+        transform: translate(0, 0);
+      }
+      17% {
+        color: var(--light-blue);
+        text-shadow: 2px 0 5px rgba(255, 0, 0, 0.5), -2px 0 5px rgba(0, 255, 255, 0.5);
+        transform: translate(-2px, 2px);
+      }
+      18%, 32% {
+        color: var(--green);
+        text-shadow: 0 0 5px var(--green);
+        transform: translate(0, 0);
+      }
+      33% {
+        color: var(--green);
+        text-shadow: 2px 0 5px rgba(255, 0, 0, 0.5), -2px 0 5px rgba(0, 255, 255, 0.5);
+        transform: translate(2px, -2px);
+      }
+      34%, 49% {
+        color: var(--violet);
+        text-shadow: 0 0 5px var(--violet);
+        transform: translate(0, 0);
+      }
+      50% {
+        color: var(--violet);
+        text-shadow: -2px 0 5px rgba(255, 0, 0, 0.5), 2px 0 5px rgba(0, 255, 255, 0.5);
+        transform: translate(-2px, 2px);
+      }
+      51%, 66% {
+        color: var(--pink);
+        text-shadow: 0 0 5px var(--pink);
+        transform: translate(0, 0);
+      }
+      67% {
+        color: var(--pink);
+        text-shadow: 2px 0 5px rgba(255, 0, 0, 0.5), -2px 0 5px rgba(0, 255, 255, 0.5);
+        transform: translate(2px, -2px);
+      }
+      68%, 82% {
+        color: var(--yellow);
+        text-shadow: 0 0 5px var(--yellow);
+        transform: translate(0, 0);
+      }
+      83% {
+        color: var(--yellow);
+        text-shadow: -2px 0 5px rgba(255, 0, 0, 0.5), 2px 0 5px rgba(0, 255, 255, 0.5);
+        transform: translate(-2px, 2px);
+      }
+      84%, 99% {
+        color: #5dccdb;
+        text-shadow: 0 0 5px #5dccdb;
+        transform: translate(0, 0);
+      }
+      100% {
+        color: var(--light-blue);
+        text-shadow: 0 0 5px var(--light-blue);
+        transform: translate(0, 0);
+      }
     }
 
     .wheel-container {
