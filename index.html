@@ -50,7 +50,7 @@
     --circle-size: 84px;
     /* Distance from the center of the wheel to the center of a circle */
     --radius: 160px; 
-    /* Vertical offset to move the circle's top edge to the starting radius point */
+    /* Vertical offset to move the circle's top edge to the starting radius point (12 o'clock) */
     --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
     /* Horizontal offset to center the circle on the X-axis */
     --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
@@ -198,7 +198,7 @@
     background: black;
     padding: 8px;
     
-    /* Place all circles at the center-top starting point */
+    /* Place all circles at the center-top starting point (12:00) */
     top: var(--top-offset);
     left: var(--left-offset);
     
@@ -206,7 +206,7 @@
     transform-origin: 50% calc(50% + var(--radius)); 
   }
 
-  /* This span keeps the text inside the circle upright */
+  /* This span rotates the content back to upright */
   .circle span {
     display: block;
     transform: rotate(0deg); 
@@ -222,39 +222,42 @@
     .circle { animation: none !important; }
   }
   
-  /* *** FINAL CORRECTED POSITIONS (Clockwise from top, starting with POLITICS) *** */
+  /* *** FINAL CORRECTED POSITIONS (Clockwise from 12:00) ***
+  Rotation starts at 12:00 (0 degrees), then adds -45 deg for each clockwise step.
+  The inner span rotates the opposite angle (positive) to keep text upright.
+  */
 
-  /* Circle 1: POLITICS (Top-Center: 90°) */
-  .circle-1 { transform: rotate(-90deg); border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-1 span { transform: rotate(90deg); }
+  /* Circle 1: POLITICS (12:00) - 0 deg rotation from top offset position */
+  .circle-1 { transform: rotate(0deg); border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-1 span { transform: rotate(0deg); }
   
-  /* Circle 2: SCIENCE, NATURE & TECH (Top-Right: 45°) */
-  .circle-2 { transform: rotate(-45deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-2 span { transform: rotate(45deg); }
+  /* Circle 8: HISTORY (1:30) - 45 deg clockwise rotation */
+  .circle-8 { transform: rotate(45deg); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-8 span { transform: rotate(-45deg); }
   
-  /* Circle 3: SPORTS & LEISURE (Bottom-Right: 315° / +45°) */
-  .circle-3 { transform: rotate(0deg); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-3 span { transform: rotate(0deg); }
-  
-  /* Circle 4: CONSPIRACY CORNER (Bottom-Center: 270° / +90°) */
-  .circle-4 { transform: rotate(45deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-4 span { transform: rotate(-45deg); }
-  
-  /* Circle 5: ARTS & LITERATURE (Bottom-Left: 225° / +135°) */
-  .circle-5 { transform: rotate(90deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-5 span { transform: rotate(-90deg); }
-  
-  /* Circle 6: WISDOM & PHILOSOPHY (Top-Left: 135° / -135°) */
-  .circle-6 { transform: rotate(135deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-6 span { transform: rotate(-135deg); }
-  
-  /* Circle 7: MARKETS & ECONOMICS (Left-Center: 180° / -180°) */
-  .circle-7 { transform: rotate(180deg); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-7 span { transform: rotate(-180deg); }
+  /* Circle 7: MARKETS & ECONOMICS (3:00) - 90 deg clockwise rotation */
+  .circle-7 { transform: rotate(90deg); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-7 span { transform: rotate(-90deg); }
 
-  /* Circle 8: HISTORY (Top-Left corner of circle arrangement: 135° / -45°) */
-  .circle-8 { transform: rotate(-135deg); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-8 span { transform: rotate(135deg); }
+  /* Circle 2: SCIENCE/NATURE/TECH (4:30) - 135 deg clockwise rotation */
+  .circle-2 { transform: rotate(135deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-2 span { transform: rotate(-135deg); }
+  
+  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation */
+  .circle-3 { transform: rotate(180deg); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-3 span { transform: rotate(-180deg); }
+  
+  /* Circle 4: CONSPIRACY CORNER (7:30) - 225 deg clockwise rotation */
+  .circle-4 { transform: rotate(225deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-4 span { transform: rotate(-225deg); }
+  
+  /* Circle 5: ARTS/LIT (9:00) - 270 deg clockwise rotation */
+  .circle-5 { transform: rotate(270deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-5 span { transform: rotate(-270deg); }
+  
+  /* Circle 6: WISDOM/PHILOSOPHY (10:30) - 315 deg clockwise rotation */
+  .circle-6 { transform: rotate(315deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-6 span { transform: rotate(-315deg); }
 
   
   .button-container {
@@ -426,13 +429,13 @@
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
 
     <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});"><span>POLITICS</span></div>
+    <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});"><span>HISTORY</span></div>
+    <div class="circle circle-7" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});"><span>MARKETS & ECONOMICS</span></div>
     <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});"><span>SCIENCE, NATURE & TECH</span></div>
     <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});"><span>SPORTS & LEISURE</span></div>
     <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});"><span>CONSPIRACY CORNER</span></div>
     <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});"><span>ARTS & LITERATURE</span></div>
     <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});"><span>WISDOM & PHILOSOPHY</span></div>
-    <div class="circle circle-7" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});"><span>MARKETS & ECONOMICS</span></div>
-    <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});"><span>HISTORY</span></div>
   </div>
 
   <div class="button-container">
