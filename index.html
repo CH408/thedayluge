@@ -80,27 +80,15 @@
   .connection-path {
     fill: none;
     stroke: var(--connection-color);
-    stroke-width: 0.8;
+    stroke-width: 0.25;
     stroke-linecap: round;
-    stroke-opacity: 0.3;
+    stroke-opacity: 0.2;
+    stroke-dasharray: 2 4;
   }
 
-  .glow-path {
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 2;
-    stroke-linecap: round;
-    filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px var(--connection-color));
-    stroke-dasharray: 30 1000;
-    stroke-dashoffset: 0;
-    animation: glowPulse 1.5s ease-in-out infinite;
-  }
-  
-  @keyframes glowPulse {
-    0%, 100% { stroke-dashoffset: 0; opacity: 0; }
-    10% { opacity: 1; }
-    50% { stroke-dashoffset: -1030; opacity: 1; }
-    90% { opacity: 0; }
+  .spark {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #cfd8dc);
   }
 
   .wheel-center {
@@ -257,8 +245,6 @@ function drawConnections() {
   const cy = hubRect.top - rect.top + hubRect.height / 2;
   const hubR = hubRect.width / 2;
 
-  const colors = ['#ECEFF1', '#ffd700', '#00cc44', '#5dccdb', '#ff8800', '#00ff00', '#cc88ff', '#ff69b4'];
-  
   circles.forEach((circle, i) => {
     const cr = circle.getBoundingClientRect();
     const r = cr.width / 2;
@@ -272,24 +258,40 @@ function drawConnections() {
     const ex = x - (dx/dist)*(r+10);
     const ey = y - (dy/dist)*(r+10);
 
-    // Base line
+    // Base line (very subtle dotted)
     const path = document.createElementNS('http://www.w3.org/2000/svg','path');
     path.setAttribute('d',`M${sx},${sy} L${ex},${ey}`);
+    path.setAttribute('id',`path${i}`);
     path.classList.add('connection-path');
     svg.appendChild(path);
 
-    // Create 2-3 pulses with different speeds per line
-    const numPulses = 2 + Math.floor(Math.random() * 2); // 2 or 3 pulses
-    const speeds = ['glow-fast', 'glow-medium', 'glow-slow'];
-    
-    for (let p = 0; p < numPulses; p++) {
-      const glowPath = document.createElementNS('http://www.w3.org/2000/svg','path');
-      glowPath.setAttribute('d',`M${sx},${sy} L${ex},${ey}`);
-      glowPath.setAttribute('stroke', colors[i]);
-      glowPath.classList.add('glow-path');
-      glowPath.classList.add(speeds[p % speeds.length]);
-      glowPath.style.animationDelay = `${i * 0.2 + p * 0.7}s`;
-      svg.appendChild(glowPath);
+    // Create bursts of tiny sparks - 8-12 sparks per burst, 3 bursts per spoke
+    for (let burst = 0; burst < 3; burst++) {
+      const numSparks = 8 + Math.floor(Math.random() * 5); // 8-12 sparks
+      
+      for (let s = 0; s < numSparks; s++) {
+        const spark = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        spark.setAttribute('r', Math.random() * 1 + 0.5); // Random size 0.5-1.5
+        spark.classList.add('spark');
+        svg.appendChild(spark);
+
+        const motion = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+        motion.setAttribute('dur','2.5s');
+        motion.setAttribute('repeatCount','indefinite');
+        motion.setAttribute('begin',`${i * 0.3 + burst * 0.8 + s * 0.05}s`); // Slight offset for each spark
+        motion.innerHTML = `<mpath href="#path${i}" />`;
+        spark.appendChild(motion);
+        
+        // Add fade in/out
+        const animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
+        animate.setAttribute('attributeName','opacity');
+        animate.setAttribute('values','0;1;1;0');
+        animate.setAttribute('keyTimes','0;0.2;0.8;1');
+        animate.setAttribute('dur','2.5s');
+        animate.setAttribute('repeatCount','indefinite');
+        animate.setAttribute('begin',`${i * 0.3 + burst * 0.8 + s * 0.05}s`);
+        spark.appendChild(animate);
+      }
     }
   });
 }
