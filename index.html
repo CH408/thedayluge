@@ -215,19 +215,9 @@
     padding: 8px;
   }
 
-  /* Symmetrical circle positions at 45-degree intervals, radius 160px */
-  /* Note: 160 * cos(45) = 160 * sin(45) ≈ 113.14px */
-  /* Circle half-width/height is 42px */
+  /* Corrected Symmetrical circle positions (Radius 160px from center (240px, 240px). Circle half-width: 42px). */
+  /* Note: 160 * cos(45) ≈ 113.14px */
   
-  /* Angle 90° (Top) */
-  .circle-1 {
-    left: calc(50% - 42px);
-    top: calc(50% - 160px); /* 240 - 160 = 80px (top edge), 80px - 42px (radius offset) = 38px from center */
-    border: 2px solid var(--silver-white-light);
-    color: var(--silver-white);
-    animation: sparkle-border 2s ease-in-out infinite;
-  }
-
   @keyframes sparkle-border {
     0% { box-shadow: 0 0 8px currentColor; }
     50% { box-shadow: 0 0 12px currentColor; }
@@ -240,103 +230,52 @@
     }
   }
   
-  /* The original code was inconsistent and using different calculations. */
-  /* Corrected values based on a 160px radius from center (240px, 240px) */
-  /* Position = Center +/- Offset - Half-Width/Height (42px) */
-  
-  /* Angle 45° (Top Right) */
-  .circle-2 {
-    left: calc(50% + 113.14px - 42px); /* 240 + 113.14 - 42 = 311.14px */
-    top: calc(50% - 113.14px - 42px); /* 240 - 113.14 - 42 = 84.86px */
-    border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite;
-  }
-  /* Angle 360°/0° (Right) */
-  .circle-7 { /* Original was circle-7, but this is the right position */
-    left: calc(50% + 160px - 42px); /* 240 + 160 - 42 = 358px */
-    top: calc(50% - 42px);
-    border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite;
-  }
-  /* Angle 315°/ -45° (Bottom Right) */
-  .circle-3 { /* Original was circle-3, but this is the bottom-right position */
-    left: calc(50% + 113.14px - 42px); /* 240 + 113.14 - 42 = 311.14px */
-    top: calc(50% + 113.14px - 42px); /* 240 + 113.14 - 42 = 311.14px */
-    border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite;
-  }
-  /* Angle 270° (Bottom) */
-  .circle-8 { /* Original was circle-8, but this is the bottom position */
-    left: calc(50% - 42px);
-    top: calc(50% + 160px - 42px); /* 240 + 160 - 42 = 358px */
-    border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite;
-  }
-  /* Angle 225° (Bottom Left) */
-  .circle-4 { /* Original was circle-4, but this is the bottom-left position */
-    left: calc(50% - 113.14px - 42px); /* 240 - 113.14 - 42 = 84.86px */
-    top: calc(50% + 113.14px - 42px); /* 240 + 113.14 - 42 = 311.14px */
-    border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite;
-  }
-  /* Angle 180° (Left) */
-  .circle-5 { /* Original was circle-5, but this is the left position */
-    left: calc(50% - 160px - 42px); /* 240 - 160 - 42 = 38px */
-    top: calc(50% - 42px);
-    border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite;
-  }
-  /* Angle 135° (Top Left) */
-  .circle-6 { /* Original was circle-6, but this is the top-left position */
-    left: calc(50% - 113.14px - 42px); /* 240 - 113.14 - 42 = 84.86px */
-    top: calc(50% - 113.14px - 42px); /* 240 - 113.14 - 42 = 84.86px */
-    border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite;
-  }
-  
-  /* Re-ordering the circles to match 1-8 sequence in a clockwise direction starting from the top. */
-  /* The original code had the circles mapped to angles out of order. */
-  /* Here is the correct mapping to re-establish the logical order for the synapse effects: */
-  
-  /* circle-1: Top (90°) */
+  /* Circle 1: Top (90°) */
   .circle-1 {
     left: calc(50% - 42px);
     top: calc(50% - 160px); 
     border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite;
   }
-  /* circle-2: Top Right (45°) */
+  /* Circle 2: Top Right (45°) */
   .circle-2 {
     left: calc(50% + 113.14px - 42px);
     top: calc(50% - 113.14px - 42px);
     border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite;
   }
-  /* circle-3: Right (0°/360°) */
+  /* Circle 3: Bottom Right (315°) - Original HTML was here */
   .circle-3 {
-    left: calc(50% + 160px - 42px);
-    top: calc(50% - 42px);
+    left: calc(50% + 113.14px - 42px);
+    top: calc(50% + 113.14px - 42px);
     border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite;
   }
-  /* circle-4: Bottom Right (315°) */
+  /* Circle 4: Bottom Left (225°) - Original HTML was here */
   .circle-4 {
-    left: calc(50% + 113.14px - 42px);
+    left: calc(50% - 113.14px - 42px);
     top: calc(50% + 113.14px - 42px);
     border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite;
   }
-  /* circle-5: Bottom (270°) */
+  /* Circle 5: Left (180°) - Original HTML was here */
   .circle-5 {
-    left: calc(50% - 42px);
-    top: calc(50% + 160px - 42px);
+    left: calc(50% - 160px - 42px);
+    top: calc(50% - 42px);
     border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite;
   }
-  /* circle-6: Bottom Left (225°) */
+  /* Circle 6: Top Left (135°) - Original HTML was here */
   .circle-6 {
     left: calc(50% - 113.14px - 42px);
-    top: calc(50% + 113.14px - 42px);
+    top: calc(50% - 113.14px - 42px);
     border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite;
   }
-  /* circle-7: Left (180°) */
+  /* Circle 7: Right (0°/360°) - Original HTML was here */
   .circle-7 {
-    left: calc(50% - 160px - 42px);
+    left: calc(50% + 160px - 42px);
     top: calc(50% - 42px);
     border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite;
   }
-  /* circle-8: Top Left (135°) */
+  /* Circle 8: Bottom (270°) - Original HTML was here */
   .circle-8 {
-    left: calc(50% - 113.14px - 42px);
-    top: calc(50% - 113.14px - 42px);
+    left: calc(50% - 42px);
+    top: calc(50% + 160px - 42px);
     border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite;
   }
   
@@ -447,17 +386,16 @@
       width: 74px;
       height: 74px;
       font-size: 11px;
-      /* Radius is now 125px for 380px container (center is 190px). Half-width is 37px. */
+      /* Radius is 125px for 380px container. Half-width is 37px. 125 * cos(45) ≈ 88.39px */
     }
-    /* New Radius: 125px. 125 * cos(45) ≈ 88.39px */
-    .circle-1 { left: calc(50% - 37px); top: calc(50% - 125px); } /* 190 - 125 = 65 */
+    .circle-1 { left: calc(50% - 37px); top: calc(50% - 125px); }
     .circle-2 { left: calc(50% + 88.39px - 37px); top: calc(50% - 88.39px - 37px); }
-    .circle-3 { left: calc(50% + 125px - 37px); top: calc(50% - 37px); }
-    .circle-4 { left: calc(50% + 88.39px - 37px); top: calc(50% + 88.39px - 37px); }
-    .circle-5 { left: calc(50% - 37px); top: calc(50% + 125px - 37px); }
-    .circle-6 { left: calc(50% - 88.39px - 37px); top: calc(50% + 88.39px - 37px); }
-    .circle-7 { left: calc(50% - 125px - 37px); top: calc(50% - 37px); }
-    .circle-8 { left: calc(50% - 88.39px - 37px); top: calc(50% - 88.39px - 37px); }
+    .circle-3 { left: calc(50% + 88.39px - 37px); top: calc(50% + 88.39px - 37px); }
+    .circle-4 { left: calc(50% - 88.39px - 37px); top: calc(50% + 88.39px - 37px); }
+    .circle-5 { left: calc(50% - 125px - 37px); top: calc(50% - 37px); }
+    .circle-6 { left: calc(50% - 88.39px - 37px); top: calc(50% - 88.39px - 37px); }
+    .circle-7 { left: calc(50% + 125px - 37px); top: calc(50% - 37px); }
+    .circle-8 { left: calc(50% - 37px); top: calc(50% + 125px - 37px); }
     .connection-path {
       stroke-width: 0.8;
     }
@@ -487,17 +425,16 @@
       width: 62px;
       height: 62px;
       font-size: 10px;
-      /* Radius is now 100px for 320px container (center is 160px). Half-width is 31px. */
+      /* Radius is 100px for 320px container. Half-width is 31px. 100 * cos(45) ≈ 70.71px */
     }
-    /* New Radius: 100px. 100 * cos(45) ≈ 70.71px */
-    .circle-1 { left: calc(50% - 31px); top: calc(50% - 100px); } /* 160 - 100 = 60 */
+    .circle-1 { left: calc(50% - 31px); top: calc(50% - 100px); }
     .circle-2 { left: calc(50% + 70.71px - 31px); top: calc(50% - 70.71px - 31px); }
-    .circle-3 { left: calc(50% + 100px - 31px); top: calc(50% - 31px); }
-    .circle-4 { left: calc(50% + 70.71px - 31px); top: calc(50% + 70.71px - 31px); }
-    .circle-5 { left: calc(50% - 31px); top: calc(50% + 100px - 31px); }
-    .circle-6 { left: calc(50% - 70.71px - 31px); top: calc(50% + 70.71px - 31px); }
-    .circle-7 { left: calc(50% - 100px - 31px); top: calc(50% - 31px); }
-    .circle-8 { left: calc(50% - 70.71px - 31px); top: calc(50% - 70.71px - 31px); }
+    .circle-3 { left: calc(50% + 70.71px - 31px); top: calc(50% + 70.71px - 31px); }
+    .circle-4 { left: calc(50% - 70.71px - 31px); top: calc(50% + 70.71px - 31px); }
+    .circle-5 { left: calc(50% - 100px - 31px); top: calc(50% - 31px); }
+    .circle-6 { left: calc(50% - 70.71px - 31px); top: calc(50% - 70.71px - 31px); }
+    .circle-7 { left: calc(50% + 100px - 31px); top: calc(50% - 31px); }
+    .circle-8 { left: calc(50% - 31px); top: calc(50% + 100px - 31px); }
     .connection-path {
       stroke-width: 0.6;
     }
@@ -523,13 +460,13 @@
   <div class="wheel-container">
     <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
-    <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
+        <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
     <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECH</div>
-    <div class="circle circle-3" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
-    <div class="circle circle-4" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
-    <div class="circle circle-5" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
-    <div class="circle circle-6" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
-    <div class="circle circle-7" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
+    <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
+    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
+    <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
+    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
+    <div class="circle circle-7" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
     <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});">HISTORY</div>
   </div>
 
