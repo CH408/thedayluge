@@ -39,9 +39,9 @@
       --silver-white-light: #F7F9FB;
       --connection-color: #cfd8dc;
       --pulse-color: #ffffff;
-      --wheel-size: 480px; /* Original size */
-      --circle-size: 84px; /* Original size */
-      --radius: 160px; /* Original size */
+      --wheel-size: 480px;
+      --circle-size: 84px;
+      --radius: 160px;
       --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
       --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
     }
@@ -56,23 +56,75 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100dvh; /* Dynamic viewport height for iPhone */
-      overflow-x: hidden; /* Prevent horizontal overflow */
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); /* Respect iPhone safe areas */
+      min-height: 100dvh;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
     .header {
       position: absolute;
-      top: 20px; /* Adjusted to avoid overlap */
+      top: 20px;
       text-align: center;
       z-index: 10;
-      width: 100%; /* Ensure header centers across full width */
+      width: 100%;
     }
     .header h1 {
       text-transform: uppercase;
       letter-spacing: .5px;
-      font-size: 42px; /* Original size */
-      color: #fff;
+      font-size: 42px;
+      color: var(--light-blue);
+      text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue), 0 0 20px var(--light-blue);
+      animation: neonFlicker 6s infinite;
+    }
+    @keyframes neonFlicker {
+      0%, 16% {
+        color: var(--light-blue);
+        text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue), 0 0 20px var(--light-blue);
+      }
+      17% {
+        color: #888;
+        text-shadow: 0 0 2px #888, 0 0 5px #888;
+      }
+      18%, 32% {
+        color: var(--green);
+        text-shadow: 0 0 5px var(--green), 0 0 10px var(--green), 0 0 20px var(--green);
+      }
+      33% {
+        color: #888;
+        text-shadow: 0 0 2px #888, 0 0 5px #888;
+      }
+      34%, 49% {
+        color: var(--violet);
+        text-shadow: 0 0 5px var(--violet), 0 0 10px var(--violet), 0 0 20px var(--violet);
+      }
+      50% {
+        color: #888;
+        text-shadow: 0 0 2px #888, 0 0 5px #888;
+      }
+      51%, 66% {
+        color: var(--pink);
+        text-shadow: 0 0 5px var(--pink), 0 0 10px var(--pink), 0 0 20px var(--pink);
+      }
+      67% {
+        color: #888;
+        text-shadow: 0 0 2px #888, 0 0 5px #888;
+      }
+      68%, 82% {
+        color: var(--yellow);
+        text-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow), 0 0 20px var(--yellow);
+      }
+      83% {
+        color: #888;
+        text-shadow: 0 0 2px #888, 0 0 5px #888;
+      }
+      84%, 99% {
+        color: #5dccdb; /* Cyan from circle-2 */
+        text-shadow: 0 0 5px #5dccdb, 0 0 10px #5dccdb, 0 0 20px #5dccdb;
+      }
+      100% {
+        color: var(--light-blue);
+        text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue), 0 0 20px var(--light-blue);
+      }
     }
 
     .wheel-container {
@@ -114,7 +166,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 135px; /* Original size */
+      width: 135px;
       height: 135px;
       background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
       color: yellow;
@@ -124,7 +176,7 @@
       align-items: center;
       justify-content: center;
       text-transform: uppercase;
-      font-size: 18px; /* Original size */
+      font-size: 18px;
       font-weight: 900;
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
@@ -149,7 +201,7 @@
       background: #000;
       color: #fff;
       font-weight: 900;
-      font-size: 12px; /* Original size */
+      font-size: 12px;
       text-align: center;
       transform-origin: 50% calc(50% + var(--radius));
       top: var(--top-offset);
@@ -158,7 +210,6 @@
       border: 2px solid #666;
     }
 
-    /* Circle positions */
     .circle-1 {
       transform: rotate(0deg);
       border-color: var(--silver-white);
@@ -233,11 +284,11 @@
       background: var(--yellow);
       color: var(--red);
       border: 2px solid var(--red);
-      padding: 14px 28px; /* Original size */
+      padding: 14px 28px;
       border-radius: 30px;
       font-family: 'Special Elite', monospace;
       font-weight: 900;
-      font-size: 16px; /* Original size */
+      font-size: 16px;
       cursor: pointer;
     }
   </style>
