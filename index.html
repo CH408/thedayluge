@@ -519,21 +519,26 @@
     const wheelCenter = document.querySelector('.wheel-center');
     const circles = document.querySelectorAll('.circle');
 
-    // Get the bounding rectangle of the wheel container for relative positioning
+    // Force layout reflow to ensure accurate positioning
+    wheelContainer.offsetHeight;
+
+    // Get wheel container dimensions
     const wheelRect = wheelContainer.getBoundingClientRect();
-    const svgRect = svg.getBoundingClientRect();
     const hubRect = wheelCenter.getBoundingClientRect();
     const hubRadius = hubRect.width / 2;
-    // Calculate hub center relative to the wheel container
+    // Calculate hub center relative to wheel container
     const hubCenterX = hubRect.left + hubRadius - wheelRect.left;
     const hubCenterY = hubRect.top + hubRadius - wheelRect.top;
 
+    // Set SVG dimensions explicitly to match wheel-container
+    svg.setAttribute('width', wheelRect.width);
+    svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
 
     circles.forEach((circle, index) => {
       const rect = circle.getBoundingClientRect();
       const circleRadius = rect.width / 2;
-      // Calculate circle center relative to the wheel container
+      // Calculate circle center relative to wheel container
       const circleCenterX = rect.left + circleRadius - wheelRect.left;
       const circleCenterY = rect.top + circleRadius - wheelRect.top;
 
@@ -600,14 +605,29 @@
     });
   }
 
-  // Use a slight delay to ensure DOM is fully rendered
-  function initConnections() {
-    setTimeout(drawConnections, 100);
+  // Debounce function to limit rapid calls
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      clearTimeout(timeout);
+      timeout = setTimeout(func, wait);
+    };
   }
 
+  // Initialize connections after animation frame
+  function initConnections() {
+    // Wait for the next animation frame to ensure DOM and animations are settled
+    requestAnimationFrame(() => {
+      setTimeout(drawConnections, 100); // Additional delay for reliability
+    });
+  }
+
+  // Debounced versions of event handlers
+  const debouncedInitConnections = debounce(initConnections, 200);
+
   window.addEventListener('load', initConnections);
-  window.addEventListener('resize', initConnections);
-  window.addEventListener('orientationchange', initConnections);
+  window.addEventListener('resize', debouncedInitConnections);
+  window.addEventListener('orientationchange', debouncedInitConnections);
 </script>
 </body>
 </html>
