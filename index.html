@@ -227,7 +227,7 @@
   The inner span rotates the opposite angle (negative) to keep text upright.
   */
 
-  /* Circle 1: POLITICS (12:00) - 0 deg rotation from top offset position */
+  /* Circle 1: POLITICS (12:00) - 0 deg rotation */
   .circle-1 { transform: rotate(0deg); border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-1 span { transform: rotate(0deg); }
   
@@ -243,8 +243,8 @@
   .circle-2 { transform: rotate(135deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-2 span { transform: rotate(-135deg); }
   
-  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation */
-  .circle-3 { transform: rotate(180deg); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
+  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation - Z-INDEX BOOST ADDED */
+  .circle-3 { transform: rotate(180deg); border: 2px solid var(--orange); color: var(--orange); z-index: 10; animation: sparkle-border 2s ease-in-out infinite; }
   .circle-3 span { transform: rotate(-180deg); }
   
   /* Circle 4: CONSPIRACY CORNER (7:30) - 225 deg clockwise rotation */
