@@ -83,15 +83,17 @@
       background-size: 200% 100%;
       -webkit-background-clip: text;
       background-clip: text;
-      animation: colorCycle 6s infinite, shine 2s linear infinite;
+      animation: colorCycle 8s infinite, shine 2s linear infinite;
     }
     @keyframes colorCycle {
       0% { color: var(--light-blue); text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue); }
-      16.67% { color: var(--green); text-shadow: 0 0 5px var(--green), 0 0 10px var(--green); }
-      33.33% { color: var(--violet); text-shadow: 0 0 5px var(--violet), 0 0 10px var(--violet); }
-      50% { color: var(--pink); text-shadow: 0 0 5px var(--pink), 0 0 10px var(--pink); }
-      66.67% { color: var(--yellow); text-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow); }
-      83.33% { color: #5dccdb; text-shadow: 0 0 5px #5dccdb, 0 0 10px #5dccdb; }
+      12.5% { color: var(--green); text-shadow: 0 0 5px var(--green), 0 0 10px var(--green); }
+      25% { color: var(--violet); text-shadow: 0 0 5px var(--violet), 0 0 10px var(--violet); }
+      37.5% { color: #1e90ff; text-shadow: 0 0 5px #1e90ff, 0 0 10px #1e90ff; }
+      50% { color: #00ff7f; text-shadow: 0 0 5px #00ff7f, 0 0 10px #00ff7f; }
+      62.5% { color: #9370db; text-shadow: 0 0 5px #9370db, 0 0 10px #9370db; }
+      75% { color: var(--bright-blue); text-shadow: 0 0 5px var(--bright-blue), 0 0 10px var(--bright-blue); }
+      87.5% { color: #6a5acd; text-shadow: 0 0 5px #6a5acd, 0 0 10px #6a5acd; }
       100% { color: var(--light-blue); text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue); }
     }
     @keyframes shine {
