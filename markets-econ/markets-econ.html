@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Markets & Economics - THE DAYLUGE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bright-dark-green: #00cc44;
+      --bright-dark-green-light: #33ff77;
+      --ink: #111;
+      --black-bg: #000000;
+      --dark-gray: #111111;
+      --gray: #333333;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      color: var(--bright-dark-green);
+      line-height: 1.4;
+      background: var(--black-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(0,204,68,0.1) 0%, transparent 70%);
+      animation: energy-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    body::after {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    @keyframes edge-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .header {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 10;
+    }
+    .header h1 {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 32px;
+      margin-bottom: 8px;
+      animation: title-pulse 8s ease-in-out infinite;
+    }
+    @keyframes title-pulse {
+      0% { color: var(--bright-dark-green); text-shadow: 0 0 15px var(--bright-dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { color: var(--bright-dark-green-light); text-shadow: 0 0 20px var(--bright-dark-green-light), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { color: var(--bright-dark-green); text-shadow: 0 0 15px var(--bright-dark-green), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .layout-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 750px;
+      margin: 40px auto 0;
+      z-index: 5;
+    }
+    .central-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 480px;
+      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
+      border: 2px solid var(--bright-dark-green);
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      z-index: 15;
+      box-shadow: 0 0 30px rgba(0,204,68,0.5), 0 4px 12px rgba(0,0,0,0.8);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(0,204,68,0.5), 0 4px 12px rgba(0,0,0,0.8); }
+      50% { box-shadow: 0 0 40px rgba(0,204,68,0.8), 0 6px 16px rgba(0,204,68,0.4); }
+    }
+    .central-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--bright-dark-green);
+      text-shadow: 0 0 5px rgba(0,204,68,0.3);
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--bright-dark-green);
+      padding-bottom: 6px;
+      flex-shrink: 0;
+    }
+    .content-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+      max-height: calc(100% - 38px);
+      overflow-y: auto;
+    }
+    .content-link {
+      display: flex;
+      align-items: flex-start;
+      padding: 7px 9px;
+      border: 1px solid rgba(0,204,68,0.3);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-size: 15px;
+      line-height: 1.2;
+      min-height: 0;
+      overflow-wrap: anywhere;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: unroll 0.5s ease-out forwards;
+    }
+    @keyframes unroll {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .content-link:hover {
+      background: rgba(0,204,68,0.2);
+      border-color: var(--bright-dark-green);
+      box-shadow: 0 0 10px rgba(0,204,68,0.4);
+    }
+    .link-title {
+      color: var(--bright-dark-green);
+      text-decoration: none;
+      cursor: pointer;
+      width: 100%;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+    .loading-indicator {
+      text-align: center;
+      font-size: 15px;
+      color: var(--bright-dark-green);
+      padding: 10px;
+    }
+    .perimeter-box {
+      position: absolute;
+      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
+      border: 2px solid var(--bright-dark-green);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,204,68,0.4);
+      animation: electron-pulse 2s ease-in-out infinite;
+      color: var(--bright-dark-green);
+      text-shadow: 0 0 5px rgba(0,204,68,0.3);
+      padding: 5px;
+    }
+    @keyframes electron-pulse {
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(0,204,68,0.4); 
+        border-color: var(--bright-dark-green); 
+      }
+      50% { 
+        box-shadow: 0 0 30px rgba(0,204,68,0.8); 
+        border-color: var(--bright-dark-green-light); 
+      }
+    }
+    .perimeter-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(0,204,68,0.9);
+      background: var(--dark-gray);
+    }
+    .top-left-box {
+      top: 30px;
+      left: calc(50% - 245px);
+      width: 150px;
+      height: 60px;
+      font-size: 17px;
+    }
+    .top-middle-box {
+      top: 30px;
+      left: calc(50% - 75px);
+      width: 150px;
+      height: 60px;
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: normal;
+    }
+    .top-right-box {
+      top: 30px;
+      left: calc(50% + 95px);
+      width: 150px;
+      height: 60px;
+      font-size: 17px;
+    }
+    .bottom-left-box {
+      bottom: 30px;
+      left: calc(50% - 245px);
+      width: 150px;
+      height: 60px;
+      font-size: 15px;
+    }
+    .bottom-middle-box {
+      bottom: 30px;
+      left: calc(50% - 75px);
+      width: 150px;
+      height: 60px;
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: normal;
+    }
+    .bottom-right-box {
+      bottom: 30px;
+      left: calc(50% + 95px);
+      width: 150px;
+      height: 60px;
+      font-size: 15px;
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--black-bg);
+      color: var(--bright-dark-green);
+      border: 2px solid var(--bright-dark-green);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px rgba(0,204,68,0.3);
+      box-shadow: 0 0 10px rgba(0,204,68,0.3);
+      z-index: 20;
+    }
+    .home-btn:hover {
+      background: var(--dark-gray);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,204,68,0.6);
+    }
+    #particle-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .layout-container { max-width: 90%; height: 650px; }
+      .central-content { width: 420px; height: 420px; padding: 12px; }
+      .central-title { font-size: 18px; margin-bottom: 10px; }
+      .content-links { gap: 16px; }
+      .content-link { font-size: 13px; padding: 5px 7px; line-height: 1.2; }
+      .loading-indicator { font-size: 13px; }
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 120px;
+        height: 50px;
+        font-size: 13px;
+      }
+      .top-middle-box { font-size: 11px; }
+      .top-left-box { top: 20px; left: calc(50% - 195px); }
+      .top-middle-box { top: 20px; left: calc(50% - 60px); }
+      .top-right-box { top: 20px; left: calc(50% + 75px); }
+      .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
+      .bottom-middle-box { bottom: 20px; left: calc(50% - 60px); }
+      .bottom-right-box { bottom: 20px; left: calc(50% + 75px); }
+      .home-btn { font-size: 11px; }
+    }
+    @media (max-width: 600px) {
+      .layout-container { height: 600px; }
+      .central-content { width: 340px; height: 360px; padding: 10px; }
+      .central-title { font-size: 14px; margin-bottom: 8px; }
+      .content-links { gap: 14px; }
+      .content-link { font-size: 11px; padding: 4px 6px; line-height: 1.2; }
+      .loading-indicator { font-size: 11px; }
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 100px;
+        height: 45px;
+        font-size: 11px;
+      }
+      .top-middle-box { font-size: 9px; }
+      .top-left-box { top: 15px; left: calc(50% - 160px); }
+      .top-middle-box { top: 15px; left: calc(50% - 50px); }
+      .top-right-box { top: 15px; left: calc(50% + 60px); }
+      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
+      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
+      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
+      .header h1 { font-size: 28px; }
+      .home-btn { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>THE DAYLUGE - MARKETS & ECONOMICS</h1></div>
+  <a href="/" class="home-btn">← Back to Home</a>
+  <canvas id="particle-canvas"></canvas>
+  
+  <div class="layout-container">
+    <div class="central-content">
+      <div class="central-title">Latest Markets & Economics</div>
+      <div class="content-links">
+        <div class="loading-indicator">Loading...</div>
+      </div>
+    </div>
+    
+    <div class="perimeter-box top-left-box" onclick="window.location.href='./markets-econ-podcasts.html'">
+      Podcasts
+    </div>
+    <div class="perimeter-box top-middle-box" onclick="window.location.href='./markets-econ-articles-longform.html'">
+      Articles & Longform
+    </div>
+    <div class="perimeter-box top-right-box" onclick="window.location.href='./markets-econ-clips.html'">
+      Video Clips
+    </div>
+    
+    <div class="perimeter-box bottom-left-box" onclick="window.location.href='./markets-econ-books.html'">
+      Books
+    </div>
+    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./markets-econ-memes.html'">
+      Memes
+    </div>
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='./markets-econ-tv-movies.html'">
+      Movies & TV
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM content loaded, initializing markets & economics page');
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particlesArray = [];
+      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
+      
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 1;
+          this.speedX = Math.random() * 0.5 - 0.25;
+          this.speedY = Math.random() * 0.5 - 0.25;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.1;
+          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+        draw() {
+          ctx.fillStyle = 'rgba(0,204,68,0.6)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      
+      function init() {
+        console.log('Initializing particle effect');
+        for (let i = 0; i < numberOfParticles; i++) {
+          particlesArray.push(new Particle());
+        }
+      }
+      
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+            particlesArray.splice(i, 1);
+            i--;
+            particlesArray.push(new Particle());
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+      
+      init();
+      animate();
+      
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      });
+      
+      async function loadMarketsEconContent() {
+        const contentLinksContainer = document.querySelector('.content-links');
+        if (!contentLinksContainer) {
+          console.error('Content links container not found');
+          return;
+        }
+        
+        contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
+        
+        try {
+          console.log('Attempting to fetch ./markets-econ-links.txt');
+          const response = await fetch(`./markets-econ-links.txt?_=${new Date().getTime()}`);
+          console.log('Fetch response:', response.ok, response.status);
+          if (!response.ok) {
+            throw new Error(`Fetch failed with status ${response.status}`);
+          }
+          const text = await response.text();
+          console.log('Fetched text, length:', text.length);
+          
+          localStorage.setItem('markets-econ-links', text);
+          
+          const lines = text.trim().split('\n').filter(line => line.trim());
+          console.log('Parsed lines:', lines.length);
+          
+          const entries = lines.map((line, index) => {
+            const parts = line.split('|');
+            if (parts.length < 3) {
+              console.warn(`Invalid entry at line ${index + 1}: ${line}`);
+              return null;
+            }
+            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+            return {
+              title: cleanTitle,
+              link: parts[1].trim(),
+              category: parts[2].trim().toLowerCase()
+            };
+          }).filter(entry => entry !== null);
+          
+          console.log('Parsed entries:', entries.length);
+          
+          const latest8 = entries.slice(0, 8);
+          
+          contentLinksContainer.innerHTML = '';
+          
+          const displayEntries = [...latest8];
+          if (displayEntries.length === 0) {
+            console.log('No valid entries found, using cached content or error message');
+            const cached = localStorage.getItem('markets-econ-links');
+            if (cached) {
+              const cachedLines = cached.trim().split('\n').filter(line => line.trim());
+              const cachedEntries = cachedLines.map((line, index) => {
+                const parts = line.split('|');
+                if (parts.length < 3) return null;
+                const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+                return {
+                  title: cleanTitle,
+                  link: parts[1].trim(),
+                  category: parts[2].trim().toLowerCase()
+                };
+              }).filter(entry => entry !== null).slice(0, 8);
+              displayEntries.push(...cachedEntries);
+            }
+            if (displayEntries.length === 0) {
+              displayEntries.push({
+                title: 'No markets & economics content available. Please try again later.',
+                link: '#',
+                category: 'error'
+              });
+            }
+          }
+          
+          while (displayEntries.length < 8) {
+            displayEntries.push({
+              title: 'No additional content available',
+              link: '#',
+              category: 'placeholder'
+            });
+          }
+          
+          console.log('Display entries:', displayEntries.length);
+          
+          displayEntries.forEach((entry, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
+            linkElement.innerHTML = `
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+            `;
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
+          
+          console.log('Loaded', entries.length, 'markets & economics entries from markets-econ-links.txt');
+          console.log('Displaying', displayEntries.length, 'entries in central box');
+          
+        } catch (error) {
+          console.error('Error loading markets-econ-links.txt:', error.message);
+          contentLinksContainer.innerHTML = '';
+          
+          const cached = localStorage.getItem('markets-econ-links');
+          if (cached) {
+            console.log('Using cached content');
+            const cachedLines = cached.trim().split('\n').filter(line => line.trim());
+            const cachedEntries = cachedLines.map((line, index) => {
+              const parts = line.split('|');
+              if (parts.length < 3) return null;
+              const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+              return {
+                title: cleanTitle,
+                link: parts[1].trim(),
+                category: parts[2].trim().toLowerCase()
+              };
+            }).filter(entry => entry !== null).slice(0, 8);
+            
+            if (cachedEntries.length > 0) {
+              const displayEntries = [...cachedEntries];
+              while (displayEntries.length < 8) {
+                displayEntries.push({
+                  title: 'No additional content available',
+                  link: '#',
+                  category: 'placeholder'
+                });
+              }
+              displayEntries.forEach((entry, index) => {
+                const linkElement = document.createElement('div');
+                linkElement.className = 'content-link';
+                linkElement.style.animationDelay = `${index * 0.1}s`;
+                linkElement.innerHTML = `
+                  <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+                `;
+                linkElement.addEventListener('click', (e) => {
+                  if (entry.link === '#') e.preventDefault();
+                });
+                contentLinksContainer.appendChild(linkElement);
+              });
+              return;
+            }
+          }
+          
+          console.log('Displaying error message due to fetch failure');
+          const displayEntries = [{
+            title: 'Error loading content. Please try again later.',
+            link: '#',
+            category: 'error'
+          }];
+          while (displayEntries.length < 8) {
+            displayEntries.push({
+              title: 'No additional content available',
+              link: '#',
+              category: 'placeholder'
+            });
+          }
+          displayEntries.forEach((entry, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
+            linkElement.innerHTML = `
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+            `;
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
+        }
+      }
+      
+      loadMarketsEconContent();
+    });
+  </script>
+</body>
+</html>
