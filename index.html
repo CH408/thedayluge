@@ -44,8 +44,8 @@
     --marble-gray: #d3d3d3;
     --silver-white: #ECEFF1;
     --silver-white-light: #F7F9FB;
-    --bright-dark-green: #00aa33;
-    --dodgers-blue: #1e90ff;
+    --bright-dark-green: #00cc44;
+    --dodgers-blue: #5dccdb;
     --synapse-duration: 1.6s;
     --connection-color: var(--light-cyan-glow);
   }
@@ -219,16 +219,15 @@
   .circle-1 {
     left: 198px;
     top: 18px;
-    border: 2px solid #00ff00;
-    color: #00ff00;
-    box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5);
+    border: 2px solid var(--silver-white-light);
+    color: var(--silver-white);
     animation: sparkle-border 2s ease-in-out infinite;
   }
 
   @keyframes sparkle-border {
-    0% { box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5); }
-    50% { box-shadow: 0 0 25px rgba(0,255,0,1), 0 0 35px rgba(0,255,0,0.7); }
-    100% { box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5); }
+    0% { box-shadow: 0 0 8px currentColor; }
+    50% { box-shadow: 0 0 12px currentColor; }
+    100% { box-shadow: 0 0 8px currentColor; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -238,20 +237,19 @@
     }
   }
 
-  .circle-2 { left: 325px; top: 325px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); }
-  .circle-4 { left: 71px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); }
-  .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); }
+  .circle-2 { left: 325px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-4 { left: 71px; top: 325px; border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-7 {
     left: 378px;
     top: 198px;
-    border: 2px solid var(--silver-white-light);
-    color: var(--silver-white);
-    box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5);
+    border: 2px solid var(--bright-dark-green);
+    color: var(--bright-dark-green);
     animation: sparkle-border 2s ease-in-out infinite;
   }
-  .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
+  .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
 
   .button-container {
     display: flex;
@@ -363,25 +361,21 @@
     .circle-1 {
       left: 153px;
       top: 11px;
-      border: 2px solid #00ff00;
-      color: #00ff00;
-      box-shadow: 0 0 12px rgba(0,255,0,0.8), 0 0 20px rgba(0,255,0,0.5);
+      border: 2px solid var(--silver-white-light);
+      color: var(--silver-white);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-2 { left: 257px; top: 257px; }
-    .circle-3 { left: 153px; top: 295px; }
-    .circle-4 { left: 49px; top: 257px; }
-    .circle-5 { left: 11px; top: 153px; }
-    .circle-6 { left: 49px; top: 49px; }
+    .circle-2 { left: 257px; top: 257px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-3 { left: 153px; top: 295px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-4 { left: 49px; top: 257px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-5 { left: 11px; top: 153px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-6 { left: 49px; top: 49px; animation: sparkle-border 2s ease-in-out infinite; }
     .circle-7 {
       left: 295px;
       top: 153px;
-      border: 2px solid var(--silver-white-light);
-      color: var(--silver-white);
-      box-shadow: 0 0 12px rgba(247,249,251,0.8), 0 0 20px rgba(247,249,251,0.5);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-8 { left: 257px; top: 49px; }
+    .circle-8 { left: 257px; top: 49px; animation: sparkle-border 2s ease-in-out infinite; }
     .connection-path {
       stroke-width: 0.8;
     }
@@ -394,9 +388,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .circle-1, .circle-7 {
+    .circle-1, .circle-2, .circle-3, .circle-4, .circle-5, .circle-6, .circle-7, .circle-8 {
       animation: none;
-      box-shadow: 0 0 12px rgba(0,255,0,0.8);
     }
   }
 
@@ -422,25 +415,21 @@
     .circle-1 {
       left: 129px;
       top: 9px;
-      border: 2px solid #00ff00;
-      color: #00ff00;
-      box-shadow: 0 0 10px rgba(0,255,0,0.8), 0 0 15px rgba(0,255,0,0.5);
+      border: 2px solid var(--silver-white-light);
+      color: var(--silver-white);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-2 { left: 218px; top: 218px; }
-    .circle-3 { left: 129px; top: 249px; }
-    .circle-4 { left: 40px; top: 218px; }
-    .circle-5 { left: 9px; top: 129px; }
-    .circle-6 { left: 40px; top: 40px; }
+    .circle-2 { left: 218px; top: 218px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-3 { left: 129px; top: 249px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-4 { left: 40px; top: 218px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-5 { left: 9px; top: 129px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-6 { left: 40px; top: 40px; animation: sparkle-border 2s ease-in-out infinite; }
     .circle-7 {
       left: 249px;
       top: 129px;
-      border: 2px solid var(--silver-white-light);
-      color: var(--silver-white);
-      box-shadow: 0 0 10px rgba(247,249,251,0.8), 0 0 15px rgba(247,249,251,0.5);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-8 { left: 218px; top: 40px; }
+    .circle-8 { left: 218px; top: 40px; animation: sparkle-border 2s ease-in-out infinite; }
     .connection-path {
       stroke-width: 0.6;
     }
@@ -466,13 +455,13 @@
   <div class="wheel-container">
     <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
-    <div class="circle circle-1" style="left: 198px; top: 18px;" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
-    <div class="circle circle-2" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
+    <div class="circle circle-1" style="left: 198px; top: 18px;" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
+    <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECH</div>
     <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
-    <div class="circle circle-4" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECHNOLOGY</div>
+    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
     <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
     <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
-    <div class="circle circle-7" style="left: 378px; top: 198px;" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
+    <div class="circle circle-7" style="left: 378px; top: 198px;" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
     <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});">HISTORY</div>
   </div>
 
@@ -553,18 +542,14 @@
     const wheelCenter = document.querySelector('.wheel-center');
     const circles = document.querySelectorAll('.circle');
 
-    // Force layout reflow to ensure accurate positioning
     wheelContainer.offsetHeight;
 
-    // Get wheel container dimensions
     const wheelRect = wheelContainer.getBoundingClientRect();
     const hubRect = wheelCenter.getBoundingClientRect();
     const hubRadius = hubRect.width / 2;
-    // Calculate hub center relative to wheel container
-    const hubCenterX = hubRect.left + hubRadius - wheelRect.left + (wheelRect.width - 480) / 2; // Adjust for potential container width mismatch
+    const hubCenterX = hubRect.left + hubRadius - wheelRect.left + (wheelRect.width - 480) / 2;
     const hubCenterY = hubRect.top + hubRadius - wheelRect.top + (wheelRect.height - 480) / 2;
 
-    // Set SVG dimensions explicitly to match wheel-container
     svg.setAttribute('width', wheelRect.width);
     svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
@@ -575,7 +560,6 @@
       const top = parseFloat(style.top);
       const circleRadius = circle.offsetWidth / 2;
 
-      // Use CSS positions as fallback, adjusted relative to wheel container
       const circleCenterX = left + circleRadius;
       const circleCenterY = top + circleRadius;
 
@@ -642,19 +626,16 @@
     });
   }
 
-  // Initialize connections after spin-wheel animation ends
   function initConnections() {
     const wheelContainer = document.querySelector('.wheel-container');
     wheelContainer.addEventListener('animationend', () => {
-      // Force a redraw to ensure final layout
       wheelContainer.style.display = 'none';
-      wheelContainer.offsetHeight; // Trigger reflow
+      wheelContainer.offsetHeight;
       wheelContainer.style.display = '';
       drawConnections();
     }, { once: true });
   }
 
-  // Debounce function to limit rapid calls
   function debounce(func, wait) {
     let timeout;
     return function() {
