@@ -39,13 +39,21 @@
     --light-cyan-glow: #33ddff;
     --gold: #d4af37;
     --gold-bright: #ffd700;
-    --marble-gray: #d3d3d3;
     --silver-white: #ECEFF1;
     --silver-white-light: #F7F9FB;
     --bright-dark-green: #00cc44;
     --dodgers-blue: #5dccdb;
-    --synapse-duration: 1.6s;
     --connection-color: var(--light-cyan-glow);
+
+    /* --- CSS ROTATION VARIABLES (Desktop Default) --- */
+    --wheel-size: 480px;
+    --circle-size: 84px;
+    /* Distance from the center of the wheel to the center of a circle */
+    --radius: 160px; 
+    /* Vertical offset to move the circle's top edge to the starting radius point */
+    --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
+    /* Horizontal offset to center the circle on the X-axis */
+    --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
   }
 
   * {
@@ -92,8 +100,8 @@
 
   .wheel-container {
     position: relative;
-    width: 480px;
-    height: 480px;
+    width: var(--wheel-size);
+    height: var(--wheel-size);
     margin: 0 auto;
     z-index: 5;
     animation: spin-wheel 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -138,7 +146,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Keep transform on center for easy centering */
+    transform: translate(-50%, -50%);
     width: 135px;
     height: 135px;
     background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
@@ -175,8 +183,8 @@
 
   .circle {
     position: absolute;
-    width: 84px;
-    height: 84px;
+    width: var(--circle-size);
+    height: var(--circle-size);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -189,14 +197,22 @@
     cursor: pointer;
     background: black;
     padding: 8px;
-    /* REMOVED TRANSFORM: TRANSLATE HERE TO ENSURE CLEAN PIXEL REPORTING */
+    
+    /* --- CSS ROTATION FIXES --- */
+    /* Place all circles at the center-top starting point */
+    top: var(--top-offset);
+    left: var(--left-offset);
+    
+    /* Set the rotation origin to the center of the wheel container */
+    transform-origin: 50% calc(50% + var(--radius)); 
   }
 
-  /*
-  *** RELIABLE PIXEL-BASED SYMMETRICAL POSITIONS (480x480 container) ***
-  Center: 240px, 240px. Radius: 160px. Half-width: 42px.
-  The CSS (left/top) values are the coordinates of the top-left corner.
-  */
+  /* This span keeps the text inside the circle upright */
+  .circle span {
+    display: block;
+    /* This will be overwritten by specific circle styles */
+    transform: rotate(0deg); 
+  }
 
   @keyframes sparkle-border {
     0% { box-shadow: 0 0 8px currentColor; }
@@ -205,59 +221,33 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .circle-1, .circle-2, .circle-3, .circle-4, .circle-5, .circle-6, .circle-7, .circle-8 {
-      animation: none;
-    }
+    .circle { animation: none !important; }
   }
   
   /* Circle 1: Top (90°) */
-  .circle-1 {
-    left: 198px; /* 240 - 42 (X-coordinate - half-width) */
-    top: 80px; /* 240 - 160 (Y-coordinate - half-width) */ 
-    border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite;
-  }
-  /* Circle 2: Top Right (45°) - 113.14px from center on both axes */
-  .circle-2 {
-    left: 311.14px; /* 240 + 113.14 - 42 */
-    top: 84.86px; /* 240 - 113.14 - 42 */
-    border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite;
-  }
+  .circle-1 { transform: rotate(-90deg); border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-1 span { transform: rotate(90deg); }
+  /* Circle 2: Top Right (45°) */
+  .circle-2 { transform: rotate(-45deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-2 span { transform: rotate(45deg); }
   /* Circle 3: Bottom Right (315°) */
-  .circle-3 {
-    left: 311.14px; /* 240 + 113.14 - 42 */
-    top: 355.14px; /* 240 + 113.14 - 42 */
-    border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite;
-  }
+  .circle-3 { transform: rotate(45deg); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-3 span { transform: rotate(-45deg); }
   /* Circle 4: Bottom Left (225°) */
-  .circle-4 {
-    left: 84.86px; /* 240 - 113.14 - 42 */
-    top: 355.14px; /* 240 + 113.14 - 42 */
-    border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite;
-  }
+  .circle-4 { transform: rotate(135deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-4 span { transform: rotate(-135deg); }
   /* Circle 5: Left (180°) */
-  .circle-5 {
-    left: 38px; /* 240 - 160 - 42 */
-    top: 198px; /* 240 - 42 */
-    border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite;
-  }
+  .circle-5 { transform: rotate(-180deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-5 span { transform: rotate(180deg); }
   /* Circle 6: Top Left (135°) */
-  .circle-6 {
-    left: 84.86px; /* 240 - 113.14 - 42 */
-    top: 84.86px; /* 240 - 113.14 - 42 */
-    border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite;
-  }
+  .circle-6 { transform: rotate(-135deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-6 span { transform: rotate(135deg); }
   /* Circle 7: Right (0°/360°) */
-  .circle-7 {
-    left: 358px; /* 240 + 160 - 42 */
-    top: 198px; /* 240 - 42 */
-    border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite;
-  }
+  .circle-7 { transform: rotate(0deg); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-7 span { transform: rotate(0deg); }
   /* Circle 8: Bottom (270°) */
-  .circle-8 {
-    left: 198px; /* 240 - 42 */
-    top: 358px; /* 240 + 160 - 42 */
-    border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite;
-  }
+  .circle-8 { transform: rotate(90deg); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-8 span { transform: rotate(-90deg); }
   
   
   .button-container {
@@ -349,16 +339,19 @@
   }
 
   /*
-  *** Media Query Fixes using pixel-based logic for reliability ***
+  *** Media Query Fixes using CSS Variables ***
   */
   @media (max-width: 600px) {
+    :root {
+      --wheel-size: 380px;
+      --circle-size: 74px;
+      --radius: 125px; 
+      --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
+      --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
+    }
     .header h1 {
       font-size: 28px;
       letter-spacing: 0.3px;
-    }
-    .wheel-container {
-      width: 380px;
-      height: 380px;
     }
     .wheel-center {
       width: 120px;
@@ -366,39 +359,30 @@
       font-size: 18px;
     }
     .circle {
-      width: 74px; /* Half-width: 37px */
-      height: 74px;
       font-size: 11px;
     }
-    /* 380x380 container. Center: 190px, 190px. Radius: 125px. 125 * cos(45) ≈ 88.39px */
-    .circle-1 { left: 153px; /* 190 - 37 */ top: 65px; /* 190 - 125 */ }
-    .circle-2 { left: 241.39px; /* 190 + 88.39 - 37 */ top: 64.61px; /* 190 - 88.39 - 37 */ }
-    .circle-7 { left: 278px; /* 190 + 125 - 37 */ top: 153px; /* 190 - 37 */ }
-    .circle-3 { left: 241.39px; /* 190 + 88.39 - 37 */ top: 241.39px; /* 190 + 88.39 - 37 */ }
-    .circle-8 { left: 153px; /* 190 - 37 */ top: 278px; /* 190 + 125 - 37 */ }
-    .circle-4 { left: 64.61px; /* 190 - 88.39 - 37 */ top: 241.39px; /* 190 + 88.39 - 37 */ }
-    .circle-5 { left: 28px; /* 190 - 125 - 37 */ top: 153px; /* 190 - 37 */ }
-    .circle-6 { left: 64.61px; /* 190 - 88.39 - 37 */ top: 64.61px; /* 190 - 88.39 - 37 */ }
-    
+    .random-button, .random-button-more {
+      width: 130px;
+    }
     .connection-path {
       stroke-width: 0.8;
     }
     .synapse-particle {
       transform: scale(0.8);
     }
-    .random-button, .random-button-more {
-      width: 130px;
-    }
   }
 
   @media (max-width: 400px) {
+    :root {
+      --wheel-size: 320px;
+      --circle-size: 62px;
+      --radius: 100px; 
+      --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
+      --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
+    }
     .header h1 {
       font-size: 28px;
       letter-spacing: 0.3px;
-    }
-    .wheel-container {
-      width: 320px;
-      height: 320px;
     }
     .wheel-center {
       width: 96px;
@@ -406,25 +390,7 @@
       font-size: 15px;
     }
     .circle {
-      width: 62px; /* Half-width: 31px */
-      height: 62px;
       font-size: 10px;
-    }
-    /* 320x320 container. Center: 160px, 160px. Radius: 100px. 100 * cos(45) ≈ 70.71px */
-    .circle-1 { left: 129px; /* 160 - 31 */ top: 60px; /* 160 - 100 */ }
-    .circle-2 { left: 199.71px; /* 160 + 70.71 - 31 */ top: 58.29px; /* 160 - 70.71 - 31 */ }
-    .circle-7 { left: 229px; /* 160 + 100 - 31 */ top: 129px; /* 160 - 31 */ }
-    .circle-3 { left: 199.71px; /* 160 + 70.71 - 31 */ top: 199.71px; /* 160 + 70.71 - 31 */ }
-    .circle-8 { left: 129px; /* 160 - 31 */ top: 229px; /* 160 + 100 - 31 */ }
-    .circle-4 { left: 58.29px; /* 160 - 70.71 - 31 */ top: 199.71px; /* 160 + 70.71 - 31 */ }
-    .circle-5 { left: 29px; /* 160 - 100 - 31 */ top: 129px; /* 160 - 31 */ }
-    .circle-6 { left: 58.29px; /* 160 - 70.71 - 31 */ top: 58.29px; /* 160 - 70.71 - 31 */ }
-    
-    .connection-path {
-      stroke-width: 0.6;
-    }
-    .synapse-particle {
-      transform: scale(0.6);
     }
     .random-button, .random-button-more {
       width: 120px;
@@ -433,6 +399,12 @@
     .random-button-more {
       font-size: 10px;
       padding: 6px 28px;
+    }
+    .connection-path {
+      stroke-width: 0.6;
+    }
+    .synapse-particle {
+      transform: scale(0.6);
     }
   }
 </style>
@@ -445,14 +417,15 @@
   <div class="wheel-container">
     <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
-    <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
-    <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECH</div>
-    <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
-    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
-    <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
-    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
-    <div class="circle circle-7" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
-    <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});">HISTORY</div>
+
+    <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});"><span>POLITICS</span></div>
+    <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});"><span>SCIENCE, NATURE & TECH</span></div>
+    <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});"><span>SPORTS & LEISURE</span></div>
+    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});"><span>CONSPIRACY CORNER</span></div>
+    <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});"><span>ARTS & LITERATURE</span></div>
+    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});"><span>WISDOM & PHILOSOPHY</span></div>
+    <div class="circle circle-7" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});"><span>MARKETS & ECONOMICS</span></div>
+    <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});"><span>HISTORY</span></div>
   </div>
 
   <div class="button-container">
@@ -509,15 +482,13 @@
     const svg = document.querySelector('.connection-lines');
     const wheelContainer = document.querySelector('.wheel-container');
     const wheelCenter = document.querySelector('.wheel-center');
-    const circles = document.querySelectorAll('.circle');
+    const circles = document.querySelectorAll('.circle'); 
 
-    // Ensure the SVG matches the wheel container's dimensions
     const wheelRect = wheelContainer.getBoundingClientRect();
     svg.setAttribute('width', wheelRect.width);
     svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
 
-    // Calculate the center of the wheel-center element
     const hubRect = wheelCenter.getBoundingClientRect();
     const wheelCenterX = hubRect.left - wheelRect.left + hubRect.width / 2;
     const wheelCenterY = hubRect.top - wheelRect.top + hubRect.height / 2;
@@ -527,11 +498,9 @@
       const circleRect = circle.getBoundingClientRect();
       const circleRadius = circleRect.width / 2;
 
-      // Calculate circle center relative to wheel container
       const circleCenterX = circleRect.left - wheelRect.left + circleRadius;
       const circleCenterY = circleRect.top - wheelRect.top + circleRadius;
 
-      // Calculate the connection path with gaps
       const dx = circleCenterX - wheelCenterX;
       const dy = circleCenterY - wheelCenterY;
       const distance = Math.sqrt(dx * dx + dy * dy);
@@ -539,13 +508,11 @@
       const hubGap = 10;
       const circleGap = 10;
 
-      // Normalize direction and calculate start/end points
       const startX = wheelCenterX + (dx / distance) * (hubRadius + hubGap);
       const startY = wheelCenterY + (dy / distance) * (hubRadius + hubGap);
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
-      // Create straight path for simplicity and accuracy
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const d = `M${startX},${startY} L${endX},${endY}`;
       path.setAttribute('d', d);
@@ -553,14 +520,13 @@
       path.classList.add('connection-path');
       svg.appendChild(path);
 
-      // Create three particles per connection
+      // Create three particles per connection (Synapse effect)
       for (let particleNum = 0; particleNum < 3; particleNum++) {
         const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         particle.setAttribute('class', 'synapse-particle');
         particle.setAttribute('r', '1.5');
         svg.appendChild(particle);
 
-        // Animate particle along the path
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
         animateMotion.setAttribute('dur', '1.6s');
         animateMotion.setAttribute('repeatCount', 'indefinite');
@@ -570,7 +536,6 @@
         animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
         particle.appendChild(animateMotion);
 
-        // Animate particle size
         const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateSize.setAttribute('attributeName', 'r');
         animateSize.setAttribute('values', '1;2.5;1');
@@ -579,7 +544,6 @@
         animateSize.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateSize);
 
-        // Animate particle opacity
         const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
         animateOpacity.setAttribute('values', '0.2;1;0.2');
@@ -588,7 +552,6 @@
         animateOpacity.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateOpacity);
 
-        // Animate particle color
         const animateColor = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateColor.setAttribute('attributeName', 'fill');
         animateColor.setAttribute('values', '#33ddff;#ffffff;#cc88ff;#33ddff');
@@ -604,10 +567,10 @@
     const wheelContainer = document.querySelector('.wheel-container');
     // Force layout recalculation
     wheelContainer.offsetHeight;
-    // Increased delay to ensure rendering is complete before calculating positions
+    // Delay necessary to allow the CSS rotations to stabilize and be reflected in getBoundingClientRect()
     setTimeout(() => {
       drawConnections();
-    }, 400); 
+    }, 200); 
   }
 
   function debounce(func, wait) {
