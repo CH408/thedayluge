@@ -88,30 +88,6 @@
     font-size: 42px;  
     margin-bottom: 8px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    animation: title-pulse 8s ease-in-out infinite;
-  }
-
-  @keyframes title-pulse {
-    0% {  
-      color: var(--bright-purple-glow);
-      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    25% {  
-      color: var(--light-cyan-glow);
-      text-shadow: 0 0 17px var(--light-cyan-glow), 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    50% {  
-      color: var(--pink);
-      text-shadow: 0 0 20px var(--pink), 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    75% {  
-      color: var(--bright-blue);
-      text-shadow: 0 0 17px var(--bright-blue), 2px 2px 4px rgba(0,0,0,0.8);
-    }
-    100% {  
-      color: var(--bright-purple-glow);
-      text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8);
-    }
   }
 
   .wheel-container {
@@ -371,7 +347,7 @@
   }
 
   /*
-  *** Media Query Fixes using similar pixel-based logic for reliability ***
+  *** Media Query Fixes using pixel-based logic for reliability ***
   */
   @media (max-width: 600px) {
     .header h1 {
@@ -392,7 +368,7 @@
       height: 74px;
       font-size: 11px;
     }
-    /* 380x380 container. Center: 190px, 190px. Radius: 125px. */
+    /* 380x380 container. Center: 190px, 190px. Radius: 125px. 125 * cos(45) ≈ 88.39px */
     .circle-1 { left: 153px; /* 190 - 37 */ top: 65px; /* 190 - 125 */ }
     .circle-2 { left: 241.39px; /* 190 + 88.39 - 37 */ top: 64.61px; /* 190 - 88.39 - 37 */ }
     .circle-7 { left: 278px; /* 190 + 125 - 37 */ top: 153px; /* 190 - 37 */ }
@@ -432,7 +408,7 @@
       height: 62px;
       font-size: 10px;
     }
-    /* 320x320 container. Center: 160px, 160px. Radius: 100px. */
+    /* 320x320 container. Center: 160px, 160px. Radius: 100px. 100 * cos(45) ≈ 70.71px */
     .circle-1 { left: 129px; /* 160 - 31 */ top: 60px; /* 160 - 100 */ }
     .circle-2 { left: 199.71px; /* 160 + 70.71 - 31 */ top: 58.29px; /* 160 - 70.71 - 31 */ }
     .circle-7 { left: 229px; /* 160 + 100 - 31 */ top: 129px; /* 160 - 31 */ }
