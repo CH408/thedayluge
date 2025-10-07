@@ -527,8 +527,8 @@
     const hubRect = wheelCenter.getBoundingClientRect();
     const hubRadius = hubRect.width / 2;
     // Calculate hub center relative to wheel container
-    const hubCenterX = hubRect.left + hubRadius - wheelRect.left;
-    const hubCenterY = hubRect.top + hubRadius - wheelRect.top;
+    const hubCenterX = hubRect.left + hubRadius - wheelRect.left + (wheelRect.width - 480) / 2; // Adjust for potential container width mismatch
+    const hubCenterY = hubRect.top + hubRadius - wheelRect.top + (wheelRect.height - 480) / 2;
 
     // Set SVG dimensions explicitly to match wheel-container
     svg.setAttribute('width', wheelRect.width);
@@ -536,11 +536,14 @@
     svg.innerHTML = '';
 
     circles.forEach((circle, index) => {
-      const rect = circle.getBoundingClientRect();
-      const circleRadius = rect.width / 2;
-      // Calculate circle center relative to wheel container
-      const circleCenterX = rect.left + circleRadius - wheelRect.left;
-      const circleCenterY = rect.top + circleRadius - wheelRect.top;
+      const style = window.getComputedStyle(circle);
+      const left = parseFloat(style.left);
+      const top = parseFloat(style.top);
+      const circleRadius = circle.offsetWidth / 2;
+
+      // Use CSS positions as fallback, adjusted relative to wheel container
+      const circleCenterX = left + circleRadius;
+      const circleCenterY = top + circleRadius;
 
       const dx = circleCenterX - hubCenterX;
       const dy = circleCenterY - hubCenterY;
@@ -605,6 +608,18 @@
     });
   }
 
+  // Initialize connections after spin-wheel animation ends
+  function initConnections() {
+    const wheelContainer = document.querySelector('.wheel-container');
+    wheelContainer.addEventListener('animationend', () => {
+      // Force a redraw to ensure final layout
+      wheelContainer.style.display = 'none';
+      wheelContainer.offsetHeight; // Trigger reflow
+      wheelContainer.style.display = '';
+      drawConnections();
+    }, { once: true });
+  }
+
   // Debounce function to limit rapid calls
   function debounce(func, wait) {
     let timeout;
@@ -614,15 +629,6 @@
     };
   }
 
-  // Initialize connections after animation frame
-  function initConnections() {
-    // Wait for the next animation frame to ensure DOM and animations are settled
-    requestAnimationFrame(() => {
-      setTimeout(drawConnections, 100); // Additional delay for reliability
-    });
-  }
-
-  // Debounced versions of event handlers
   const debouncedInitConnections = debounce(initConnections, 200);
 
   window.addEventListener('load', initConnections);
