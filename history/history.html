@@ -11,7 +11,7 @@
       --gold: #FFD700;
       --gold-light: #FFEC8B;
       --ink: #111;
-      --black-bg: #000000; /* Changed to jet black */
+      --black-bg: #000000;
       --dark-gray: #111111;
       --gray: #333333;
     }
@@ -88,7 +88,7 @@
       position: relative;
       width: 100%;
       max-width: 800px;
-      height: 700px;
+      height: 750px;
       margin: 40px auto 0;
       z-index: 5;
     }
@@ -98,7 +98,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 500px;
-      height: 350px;
+      height: 480px;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
       border: 2px solid var(--gold);
       border-radius: 8px;
@@ -121,7 +121,7 @@
       letter-spacing: 0.5px;
       color: var(--gold);
       text-shadow: 0 0 8px var(--gold);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border-bottom: 1px solid var(--gold);
       padding-bottom: 6px;
       flex-shrink: 0;
@@ -129,20 +129,20 @@
     .content-links {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 14px;
       flex: 1;
-      max-height: calc(100% - 50px);
+      max-height: calc(100% - 38px);
       overflow-y: auto;
     }
     .content-link {
       display: flex;
       align-items: flex-start;
-      padding: 6px 8px;
+      padding: 7px 9px;
       border: 1px solid rgba(255,215,0,0.3);
       border-radius: 4px;
       transition: all 0.3s ease;
-      font-size: 16px;
-      line-height: 1.4;
+      font-size: 15px;
+      line-height: 1.2;
       min-height: 0;
       overflow-wrap: anywhere;
       cursor: pointer;
@@ -161,6 +161,9 @@
     .content-link:nth-child(3) { animation-delay: 0.3s; }
     .content-link:nth-child(4) { animation-delay: 0.4s; }
     .content-link:nth-child(5) { animation-delay: 0.5s; }
+    .content-link:nth-child(6) { animation-delay: 0.6s; }
+    .content-link:nth-child(7) { animation-delay: 0.7s; }
+    .content-link:nth-child(8) { animation-delay: 0.8s; }
     .content-link:hover {
       background: rgba(255,215,0,0.2);
       border-color: var(--gold);
@@ -173,6 +176,12 @@
       width: 100%;
       overflow-wrap: anywhere;
       hyphens: auto;
+    }
+    .loading-indicator {
+      text-align: center;
+      font-size: 15px;
+      color: var(--gold);
+      padding: 10px;
     }
     .perimeter-box {
       position: absolute;
@@ -210,14 +219,14 @@
       background: var(--dark-gray);
     }
     .top-left-box {
-      top: 60px;
+      top: 30px;
       left: calc(50% - 245px);
       width: 150px;
       height: 60px;
       font-size: 18px;
     }
     .top-middle-box {
-      top: 60px;
+      top: 30px;
       left: calc(50% - 75px);
       width: 150px;
       height: 60px;
@@ -226,21 +235,21 @@
       white-space: normal;
     }
     .top-right-box {
-      top: 60px;
+      top: 30px;
       left: calc(50% + 95px);
       width: 150px;
       height: 60px;
       font-size: 18px;
     }
     .bottom-left-box {
-      bottom: 60px;
+      bottom: 30px;
       left: calc(50% - 245px);
       width: 150px;
       height: 60px;
       font-size: 16px;
     }
     .bottom-middle-box {
-      bottom: 60px;
+      bottom: 30px;
       left: calc(50% - 75px);
       width: 150px;
       height: 60px;
@@ -249,7 +258,7 @@
       white-space: normal;
     }
     .bottom-right-box {
-      bottom: 60px;
+      bottom: 30px;
       left: calc(50% + 95px);
       width: 150px;
       height: 60px;
@@ -289,10 +298,11 @@
       pointer-events: none;
     }
     @media (max-width: 900px) {
-      .layout-container { max-width: 90%; height: 600px; }
-      .central-content { width: 420px; height: 300px; padding: 12px; }
-      .central-title { font-size: 18px; }
-      .content-link { font-size: 14px; padding: 5px 6px; }
+      .layout-container { max-width: 90%; height: 650px; }
+      .central-content { width: 420px; height: 420px; padding: 12px; }
+      .central-title { font-size: 18px; margin-bottom: 10px; }
+      .content-links { gap: 16px; }
+      .content-link { font-size: 13px; padding: 5px 7px; line-height: 1.2; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 120px;
@@ -300,18 +310,19 @@
         font-size: 14px;
       }
       .top-middle-box { font-size: 12px; }
-      .top-left-box { left: calc(50% - 195px); }
-      .top-middle-box { left: calc(50% - 60px); }
-      .top-right-box { left: calc(50% + 75px); }
-      .bottom-left-box { left: calc(50% - 195px); }
-      .bottom-middle-box { left: calc(50% - 60px); }
-      .bottom-right-box { left: calc(50% + 75px); }
+      .top-left-box { top: 20px; left: calc(50% - 195px); }
+      .top-middle-box { top: 20px; left: calc(50% - 60px); }
+      .top-right-box { top: 20px; left: calc(50% + 75px); }
+      .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
+      .bottom-middle-box { bottom: 20px; left: calc(50% - 60px); }
+      .bottom-right-box { bottom: 20px; left: calc(50% + 75px); }
     }
     @media (max-width: 600px) {
-      .layout-container { height: 550px; }
-      .central-content { width: 340px; height: 280px; padding: 10px; }
-      .central-title { font-size: 16px; margin-bottom: 8px; }
-      .content-link { font-size: 12px; padding: 4px 6px; }
+      .layout-container { height: 600px; }
+      .central-content { width: 340px; height: 360px; padding: 10px; }
+      .central-title { font-size: 14px; margin-bottom: 8px; }
+      .content-links { gap: 14px; }
+      .content-link { font-size: 11px; padding: 4px 6px; line-height: 1.2; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 100px;
@@ -319,12 +330,12 @@
         font-size: 12px;
       }
       .top-middle-box { font-size: 10px; }
-      .top-left-box { left: calc(50% - 160px); }
-      .top-middle-box { left: calc(50% - 50px); }
-      .top-right-box { left: calc(50% + 60px); }
-      .bottom-left-box { left: calc(50% - 160px); }
-      .bottom-middle-box { left: calc(50% - 50px); }
-      .bottom-right-box { left: calc(50% + 60px); }
+      .top-left-box { top: 15px; left: calc(50% - 160px); }
+      .top-middle-box { top: 15px; left: calc(50% - 50px); }
+      .top-right-box { top: 15px; left: calc(50% + 60px); }
+      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
+      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
+      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
       .header h1 { font-size: 28px; }
     }
   </style>
@@ -339,21 +350,7 @@
     <div class="central-content">
       <div class="central-title">Latest History Content</div>
       <div class="content-links">
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
-        <div class="content-link">
-          <span class="link-title">Loading content...</span>
-        </div>
+        <div class="loading-indicator">Loading...</div>
       </div>
     </div>
     
@@ -446,6 +443,15 @@
       // Load content from history-links.txt
       async function loadHistoryContent() {
         console.log('Starting to load history content');
+        const contentLinksContainer = document.querySelector('.content-links');
+        if (!contentLinksContainer) {
+          console.error('Content links container not found');
+          return;
+        }
+        
+        // Show loading indicator
+        contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
+        
         try {
           console.log('Attempting to fetch ./history-links.txt');
           const response = await fetch('./history-links.txt');
@@ -476,20 +482,14 @@
           
           console.log('Parsed entries:', entries.length);
           
-          // Take first 5 entries across all categories for central box
-          const latest5 = entries.slice(0, 5);
-          const contentLinksContainer = document.querySelector('.content-links');
+          // Take first 8 entries across all categories for central box
+          const latest8 = entries.slice(0, 8);
           
-          if (!contentLinksContainer) {
-            console.error('Content links container not found');
-            return;
-          }
-          
-          // Clear existing placeholder content
+          // Clear loading indicator
           contentLinksContainer.innerHTML = '';
           
-          // Ensure we always try to show 5 entries (pad with error message if needed)
-          const displayEntries = [...latest5];
+          // Ensure we always try to show 8 entries (pad with error message if needed)
+          const displayEntries = [...latest8];
           if (displayEntries.length === 0) {
             console.log('No history entries found, displaying error message');
             displayEntries.push({
@@ -498,9 +498,9 @@
               category: 'error'
             });
           }
-          while (displayEntries.length < 5) {
+          while (displayEntries.length < 8) {
             displayEntries.push({
-              title: `Placeholder Entry ${displayEntries.length + 1}`,
+              title: `No additional content available`,
               link: '#',
               category: 'placeholder'
             });
@@ -512,6 +512,7 @@
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
             linkElement.innerHTML = `
               <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
             `;
@@ -526,37 +527,33 @@
           
         } catch (error) {
           console.error('Error loading history-links.txt:', error);
-          const contentLinksContainer = document.querySelector('.content-links');
-          if (contentLinksContainer) {
-            console.log('Displaying error message due to fetch failure');
-            contentLinksContainer.innerHTML = '';
-            const errorEntry = {
-              title: 'Error loading history content. Check history-links.txt or console for details.',
+          contentLinksContainer.innerHTML = '';
+          
+          console.log('Displaying error message due to fetch failure');
+          const displayEntries = [{
+            title: 'Error loading content. Please try again later.',
+            link: '#',
+            category: 'error'
+          }];
+          while (displayEntries.length < 8) {
+            displayEntries.push({
+              title: `No additional content available`,
               link: '#',
-              category: 'error'
-            };
-            const displayEntries = [errorEntry];
-            while (displayEntries.length < 5) {
-              displayEntries.push({
-                title: `Placeholder Entry ${displayEntries.length + 1}`,
-                link: '#',
-                category: 'placeholder'
-              });
-            }
-            displayEntries.forEach((entry, index) => {
-              const linkElement = document.createElement('div');
-              linkElement.className = 'content-link';
-              linkElement.innerHTML = `
-                <span class="link-title">${entry.title}</span>
-              `;
-              linkElement.addEventListener('click', () => {
-                if (entry.link !== '#') {
-                  window.location.href = entry.link;
-                }
-              });
-              contentLinksContainer.appendChild(linkElement);
+              category: 'placeholder'
             });
           }
+          displayEntries.forEach((entry, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
+            linkElement.innerHTML = `
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+            `;
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
         }
       }
       
