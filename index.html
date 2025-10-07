@@ -72,59 +72,26 @@
       text-transform: uppercase;
       letter-spacing: .5px;
       font-size: 42px;
-      color: var(--light-blue);
-      text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue), 0 0 20px var(--light-blue);
-      animation: neonFlicker 6s infinite;
+      background: linear-gradient(
+        90deg,
+        var(--light-blue) 0%,
+        var(--green) 16.67%,
+        var(--violet) 33.33%,
+        var(--pink) 50%,
+        var(--yellow) 66.67%,
+        #5dccdb 83.33%,
+        var(--light-blue) 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      animation: gradientWipe 6s linear infinite;
     }
-    @keyframes neonFlicker {
-      0%, 16% {
-        color: var(--light-blue);
-        text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue), 0 0 20px var(--light-blue);
-      }
-      17% {
-        color: #888;
-        text-shadow: 0 0 2px #888, 0 0 5px #888;
-      }
-      18%, 32% {
-        color: var(--green);
-        text-shadow: 0 0 5px var(--green), 0 0 10px var(--green), 0 0 20px var(--green);
-      }
-      33% {
-        color: #888;
-        text-shadow: 0 0 2px #888, 0 0 5px #888;
-      }
-      34%, 49% {
-        color: var(--violet);
-        text-shadow: 0 0 5px var(--violet), 0 0 10px var(--violet), 0 0 20px var(--violet);
-      }
-      50% {
-        color: #888;
-        text-shadow: 0 0 2px #888, 0 0 5px #888;
-      }
-      51%, 66% {
-        color: var(--pink);
-        text-shadow: 0 0 5px var(--pink), 0 0 10px var(--pink), 0 0 20px var(--pink);
-      }
-      67% {
-        color: #888;
-        text-shadow: 0 0 2px #888, 0 0 5px #888;
-      }
-      68%, 82% {
-        color: var(--yellow);
-        text-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow), 0 0 20px var(--yellow);
-      }
-      83% {
-        color: #888;
-        text-shadow: 0 0 2px #888, 0 0 5px #888;
-      }
-      84%, 99% {
-        color: #5dccdb; /* Cyan from circle-2 */
-        text-shadow: 0 0 5px #5dccdb, 0 0 10px #5dccdb, 0 0 20px #5dccdb;
-      }
-      100% {
-        color: var(--light-blue);
-        text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue), 0 0 20px var(--light-blue);
-      }
+    @keyframes gradientWipe {
+      0% { background-position: 200% 0; }
+      100% { background-position: 0 0; }
     }
 
     .wheel-container {
