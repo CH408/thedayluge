@@ -73,70 +73,30 @@
       letter-spacing: .5px;
       font-size: 42px;
       color: var(--light-blue);
-      text-shadow: 0 0 5px var(--light-blue);
-      animation: glitch 6s infinite;
+      text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue);
+      animation: colorCycle 6s infinite;
+      position: relative;
+      z-index: 12;
     }
-    @keyframes glitch {
-      0%, 16% {
-        color: var(--light-blue);
-        text-shadow: 0 0 5px var(--light-blue);
-        transform: translate(0, 0);
-      }
-      17% {
-        color: var(--light-blue);
-        text-shadow: 2px 0 5px rgba(255, 0, 0, 0.5), -2px 0 5px rgba(0, 255, 255, 0.5);
-        transform: translate(-2px, 2px);
-      }
-      18%, 32% {
-        color: var(--green);
-        text-shadow: 0 0 5px var(--green);
-        transform: translate(0, 0);
-      }
-      33% {
-        color: var(--green);
-        text-shadow: 2px 0 5px rgba(255, 0, 0, 0.5), -2px 0 5px rgba(0, 255, 255, 0.5);
-        transform: translate(2px, -2px);
-      }
-      34%, 49% {
-        color: var(--violet);
-        text-shadow: 0 0 5px var(--violet);
-        transform: translate(0, 0);
-      }
-      50% {
-        color: var(--violet);
-        text-shadow: -2px 0 5px rgba(255, 0, 0, 0.5), 2px 0 5px rgba(0, 255, 255, 0.5);
-        transform: translate(-2px, 2px);
-      }
-      51%, 66% {
-        color: var(--pink);
-        text-shadow: 0 0 5px var(--pink);
-        transform: translate(0, 0);
-      }
-      67% {
-        color: var(--pink);
-        text-shadow: 2px 0 5px rgba(255, 0, 0, 0.5), -2px 0 5px rgba(0, 255, 255, 0.5);
-        transform: translate(2px, -2px);
-      }
-      68%, 82% {
-        color: var(--yellow);
-        text-shadow: 0 0 5px var(--yellow);
-        transform: translate(0, 0);
-      }
-      83% {
-        color: var(--yellow);
-        text-shadow: -2px 0 5px rgba(255, 0, 0, 0.5), 2px 0 5px rgba(0, 255, 255, 0.5);
-        transform: translate(-2px, 2px);
-      }
-      84%, 99% {
-        color: #5dccdb;
-        text-shadow: 0 0 5px #5dccdb;
-        transform: translate(0, 0);
-      }
-      100% {
-        color: var(--light-blue);
-        text-shadow: 0 0 5px var(--light-blue);
-        transform: translate(0, 0);
-      }
+    @keyframes colorCycle {
+      0% { color: var(--light-blue); text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue); }
+      16.67% { color: var(--green); text-shadow: 0 0 5px var(--green), 0 0 10px var(--green); }
+      33.33% { color: var(--violet); text-shadow: 0 0 5px var(--violet), 0 0 10px var(--violet); }
+      50% { color: var(--pink); text-shadow: 0 0 5px var(--pink), 0 0 10px var(--pink); }
+      66.67% { color: var(--yellow); text-shadow: 0 0 5px var(--yellow), 0 0 10px var(--yellow); }
+      83.33% { color: #5dccdb; text-shadow: 0 0 5px #5dccdb, 0 0 10px #5dccdb; }
+      100% { color: var(--light-blue); text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue); }
+    }
+
+    .header-canvas {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      height: 80px;
+      z-index: 11;
     }
 
     .wheel-container {
@@ -295,7 +255,7 @@
     .random-button {
       background: var(--yellow);
       color: var(--red);
-      border: 2px solid var(--red);
+      border: 2px solid #cc0000;
       padding: 14px 28px;
       border-radius: 30px;
       font-family: 'Special Elite', monospace;
@@ -307,7 +267,10 @@
 </head>
 
 <body>
-  <div class="header"><h1>THE DAYLUGE</h1></div>
+  <div class="header">
+    <canvas class="header-canvas" id="headerCanvas"></canvas>
+    <h1>THE DAYLUGE</h1>
+  </div>
 
   <div class="wheel-container">
     <svg class="connection-lines"></svg>
@@ -396,7 +359,67 @@
       });
     }
 
-    window.addEventListener('load', () => setTimeout(drawConnections, 300));
+    // Particle animation for header
+    function initParticles() {
+      const canvas = document.getElementById('headerCanvas');
+      const ctx = canvas.getContext('2d');
+      const header = document.querySelector('.header h1');
+      const colors = ['#33ddff', '#00dd55', '#cc88ff', '#ff69b4', '#ffcc00', '#5dccdb'];
+      let particles = [];
+
+      function resizeCanvas() {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      class Particle {
+        constructor() {
+          this.x = canvas.width * 0.5 + (Math.random() - 0.5) * 200;
+          this.y = canvas.height * 0.5;
+          this.vx = (Math.random() - 0.5) * 4;
+          this.vy = (Math.random() - 0.5) * 4;
+          this.radius = Math.random() * 2 + 1;
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.life = Math.random() * 60 + 60;
+          this.age = 0;
+        }
+
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.globalAlpha = 1 - this.age / this.life;
+          ctx.fill();
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.age++;
+          return this.age < this.life;
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (Math.random() < 0.1) {
+          particles.push(new Particle());
+        }
+        particles = particles.filter(particle => particle.update());
+        particles.forEach(particle => particle.draw());
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(drawConnections, 300);
+      initParticles();
+    });
     window.addEventListener('resize', () => setTimeout(drawConnections, 300));
   </script>
 </body>
