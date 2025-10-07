@@ -217,9 +217,10 @@
     padding: 8px;
   }
 
+  /* Symmetrical circle positions at 45-degree intervals, radius 160px */
   .circle-1 {
-    left: 198px;
-    top: 18px;
+    left: calc(50% - 42px); /* Center - width/2 */
+    top: 40px; /* 240 - 160 - 40 (margin) */
     border: 2px solid var(--silver-white-light);
     color: var(--silver-white);
     animation: sparkle-border 2s ease-in-out infinite;
@@ -232,25 +233,18 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .circle-1 {
+    .circle-1, .circle-2, .circle-3, .circle-4, .circle-5, .circle-6, .circle-7, .circle-8 {
       animation: none;
-      box-shadow: 0 0 15px rgba(0,255,0,0.8);
     }
   }
 
-  .circle-2 { left: 325px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-4 { left: 71px; top: 325px; border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-7 {
-    left: 378px;
-    top: 198px;
-    border: 2px solid var(--bright-dark-green);
-    color: var(--bright-dark-green);
-    animation: sparkle-border 2s ease-in-out infinite;
-  }
-  .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-2 { left: calc(50% + 113.14px); top: 113.14px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-3 { left: calc(50% + 113.14px); top: calc(50% + 113.14px); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-4 { left: calc(50% - 155.14px); top: calc(50% + 113.14px); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-5 { left: calc(50% - 155.14px); top: calc(50% - 42px); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-6 { left: calc(50% - 155.14px); top: 113.14px; border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-7 { left: calc(50% + 113.14px); top: calc(50% - 42px); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-8 { left: calc(50% - 42px); top: calc(50% - 155.14px); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
 
   .button-container {
     display: flex;
@@ -359,20 +353,14 @@
       height: 74px;
       font-size: 11px;
     }
-    .circle-1 {
-      left: 153px;
-      top: 11px;
-    }
-    .circle-2 { left: 257px; top: 257px; }
-    .circle-3 { left: 153px; top: 295px; }
-    .circle-4 { left: 49px; top: 257px; }
-    .circle-5 { left: 11px; top: 153px; }
-    .circle-6 { left: 49px; top: 49px; }
-    .circle-7 {
-      left: 295px;
-      top: 153px;
-    }
-    .circle-8 { left: 257px; top: 49px; }
+    .circle-1 { left: calc(50% - 37px); top: 32px; }
+    .circle-2 { left: calc(50% + 89.52px); top: 89.52px; }
+    .circle-3 { left: calc(50% + 89.52px); top: calc(50% + 89.52px); }
+    .circle-4 { left: calc(50% - 126.52px); top: calc(50% + 89.52px); }
+    .circle-5 { left: calc(50% - 126.52px); top: calc(50% - 37px); }
+    .circle-6 { left: calc(50% - 126.52px); top: 89.52px; }
+    .circle-7 { left: calc(50% + 89.52px); top: calc(50% - 37px); }
+    .circle-8 { left: calc(50% - 37px); top: calc(50% - 126.52px); }
     .connection-path {
       stroke-width: 0.8;
     }
@@ -381,12 +369,6 @@
     }
     .random-button, .random-button-more {
       width: 130px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .circle-1, .circle-2, .circle-3, .circle-4, .circle-5, .circle-6, .circle-7, .circle-8 {
-      animation: none;
     }
   }
 
@@ -409,20 +391,14 @@
       height: 62px;
       font-size: 10px;
     }
-    .circle-1 {
-      left: 129px;
-      top: 9px;
-    }
-    .circle-2 { left: 218px; top: 218px; }
-    .circle-3 { left: 129px; top: 249px; }
-    .circle-4 { left: 40px; top: 218px; }
-    .circle-5 { left: 9px; top: 129px; }
-    .circle-6 { left: 40px; top: 40px; }
-    .circle-7 {
-      left: 249px;
-      top: 129px;
-    }
-    .circle-8 { left: 218px; top: 40px; }
+    .circle-1 { left: calc(50% - 31px); top: 27px; }
+    .circle-2 { left: calc(50% + 75.28px); top: 75.28px; }
+    .circle-3 { left: calc(50% + 75.28px); top: calc(50% + 75.28px); }
+    .circle-4 { left: calc(50% - 106.28px); top: calc(50% + 75.28px); }
+    .circle-5 { left: calc(50% - 106.28px); top: calc(50% - 31px); }
+    .circle-6 { left: calc(50% - 106.28px); top: 75.28px; }
+    .circle-7 { left: calc(50% + 75.28px); top: calc(50% - 31px); }
+    .circle-8 { left: calc(50% - 31px); top: calc(50% - 106.28px); }
     .connection-path {
       stroke-width: 0.6;
     }
@@ -504,27 +480,6 @@
       });
   };
 
-  window.goToRandomArticleMore = function() {
-    const newWindow = window.open('', '_blank');
-    if (!newWindow) return;
-
-    fetch('surprise-me-links.txt')
-      .then(response => response.text())
-      .then(text => {
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) return parts[1].trim();
-          return null;
-        }).filter(link => link !== null);
-        
-        if (links.length > 0) {
-          const randomLink = links[Math.floor(Math.random() * links.length)];
-          newWindow.location.href = randomLink;
-        }
-      });
-  };
-
   window.openArchive = function() {
     window.location.href = 'archive.html';
   };
@@ -535,52 +490,56 @@
     const wheelCenter = document.querySelector('.wheel-center');
     const circles = document.querySelectorAll('.circle');
 
-    wheelContainer.offsetHeight;
-
+    // Ensure the SVG matches the wheel container's dimensions
     const wheelRect = wheelContainer.getBoundingClientRect();
-    const hubRect = wheelCenter.getBoundingClientRect();
-    const hubRadius = hubRect.width / 2;
-    const hubCenterX = hubRect.left - wheelRect.left + hubRadius;
-    const hubCenterY = hubRect.top - wheelRect.top + hubRadius;
-
     svg.setAttribute('width', wheelRect.width);
     svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
 
+    // Calculate the center of the wheel-center element
+    const hubRect = wheelCenter.getBoundingClientRect();
+    const wheelCenterX = hubRect.left - wheelRect.left + hubRect.width / 2;
+    const wheelCenterY = hubRect.top - wheelRect.top + hubRect.height / 2;
+    const hubRadius = hubRect.width / 2;
+
     circles.forEach((circle, index) => {
       const circleRect = circle.getBoundingClientRect();
       const circleRadius = circleRect.width / 2;
-      
+
+      // Calculate circle center relative to wheel container
       const circleCenterX = circleRect.left - wheelRect.left + circleRadius;
       const circleCenterY = circleRect.top - wheelRect.top + circleRadius;
 
-      const dx = circleCenterX - hubCenterX;
-      const dy = circleCenterY - hubCenterY;
+      // Calculate the connection path with gaps
+      const dx = circleCenterX - wheelCenterX;
+      const dy = circleCenterY - wheelCenterY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
       const hubGap = 10;
       const circleGap = 10;
 
-      const startX = hubCenterX + (dx / distance) * (hubRadius + hubGap);
-      const startY = hubCenterY + (dy / distance) * (hubRadius + hubGap);
+      // Normalize direction and calculate start/end points
+      const startX = wheelCenterX + (dx / distance) * (hubRadius + hubGap);
+      const startY = wheelCenterY + (dy / distance) * (hubRadius + hubGap);
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
+      // Create straight path for simplicity and accuracy
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const controlX = (startX + endX) / 2;
-      const controlY = (startY + endY) / 2;
-      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
+      const d = `M${startX},${startY} L${endX},${endY}`;
       path.setAttribute('d', d);
       path.setAttribute('id', `path-${index}`);
       path.classList.add('connection-path');
       svg.appendChild(path);
 
+      // Create three particles per connection
       for (let particleNum = 0; particleNum < 3; particleNum++) {
         const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         particle.setAttribute('class', 'synapse-particle');
         particle.setAttribute('r', '1.5');
         svg.appendChild(particle);
 
+        // Animate particle along the path
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
         animateMotion.setAttribute('dur', '1.6s');
         animateMotion.setAttribute('repeatCount', 'indefinite');
@@ -590,6 +549,7 @@
         animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
         particle.appendChild(animateMotion);
 
+        // Animate particle size
         const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateSize.setAttribute('attributeName', 'r');
         animateSize.setAttribute('values', '1;2.5;1');
@@ -598,6 +558,7 @@
         animateSize.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateSize);
 
+        // Animate particle opacity
         const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateOpacity.setAttribute('attributeName', 'fill-opacity');
         animateOpacity.setAttribute('values', '0.2;1;0.2');
@@ -606,6 +567,7 @@
         animateOpacity.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
         particle.appendChild(animateOpacity);
 
+        // Animate particle color
         const animateColor = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
         animateColor.setAttribute('attributeName', 'fill');
         animateColor.setAttribute('values', '#33ddff;#ffffff;#cc88ff;#33ddff');
@@ -619,7 +581,9 @@
 
   function initConnections() {
     const wheelContainer = document.querySelector('.wheel-container');
-    // Draw connections immediately without waiting for animation
+    // Force layout recalculation
+    wheelContainer.offsetHeight;
+    // Draw connections immediately
     setTimeout(() => {
       drawConnections();
     }, 100);
