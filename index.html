@@ -269,8 +269,8 @@ function drawConnections() {
     for (let burst = 0; burst < 3; burst++) {
       const numSparks = 8 + Math.floor(Math.random() * 5); // 8-12 sparks
       
-      // Create three chasing lines of sparks at different speeds
-      const speeds = [0.9, 1.1, 1.3]; // Fast, medium, slow
+      // Create three chasing lines of sparks at different speeds - all much faster!
+      const speeds = [0.5, 0.65, 0.8]; // Fast, medium, slow (but all faster)
       
       for (let line = 0; line < 3; line++) {
         for (let s = 0; s < numSparks; s++) {
@@ -285,7 +285,7 @@ function drawConnections() {
           motion.setAttribute('keyPoints','0;1;0'); // Go forward then back
           motion.setAttribute('keyTimes','0;0.5;1'); // Spend half time each direction
           motion.setAttribute('calcMode','linear');
-          motion.setAttribute('begin',`${i * 0.05 + burst * 0.3 + s * 0.01 + line * 0.15}s`); // Minimal stagger for immediate start
+          motion.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08}s`); // Even smaller delays for instant start
           motion.innerHTML = `<mpath href="#path${i}" />`;
           spark.appendChild(motion);
           
@@ -296,7 +296,7 @@ function drawConnections() {
           animate.setAttribute('keyTimes','0;0.2;0.8;1');
           animate.setAttribute('dur',`${speeds[line]}s`); // Match the motion speed
           animate.setAttribute('repeatCount','indefinite');
-          animate.setAttribute('begin',`${i * 0.05 + burst * 0.3 + s * 0.01 + line * 0.15}s`);
+          animate.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08}s`);
           spark.appendChild(animate);
         }
       }
