@@ -35,64 +35,33 @@
     --yellow: #ffcc00;
     --bright-blue: #00b7eb;
     --ink: #111;  
-    --bright-purple-glow: #cc88ff;
-    --light-cyan-glow: #33ddff;
-    --gold: #d4af37;
-    --gold-bright: #ffd700;
     --silver-white: #ECEFF1;
     --silver-white-light: #F7F9FB;
-    --bright-dark-green: #00cc44;
-    --dodgers-blue: #5dccdb;
-    --connection-color: var(--light-cyan-glow);
-
+    --connection-color: #cfd8dc;
+    --pulse-color: #ffffff;
     --wheel-size: 480px;
     --circle-size: 84px;
     --radius: 160px; 
-    --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
-    --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
+    --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
+    --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
   }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html, body {
-    height: 100%;
-    overflow-x: hidden;
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
+    font-family: 'Special Elite', monospace;
     color: var(--ink);
-    line-height: 1.5;
-    background: #000000;
+    background: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    position: relative;
     overflow: hidden;
   }
 
-  .header {
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 10;
-  }
-
-  .header h1 {
-    text-transform: uppercase;  
-    letter-spacing: .5px;  
-    font-size: 42px;  
-    margin-bottom: 8px;
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
-  }
+  .header { position: absolute; top: 50px; text-align: center; z-index: 10; }
+  .header h1 { text-transform: uppercase; letter-spacing: .5px; font-size: 42px; color: #fff; }
 
   .wheel-container {
     position: relative;
@@ -100,325 +69,169 @@
     height: var(--wheel-size);
     margin: 0 auto;
     z-index: 5;
-    animation: spin-wheel 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    will-change: transform, opacity;
   }
 
-  @keyframes spin-wheel {
-    0% { transform: rotateZ(0deg); opacity: 0.3; }
-    100% { transform: rotateZ(360deg); opacity: 1; }
-  }
-
-  /* ----- Z-INDEX FIXES ----- */
   .connection-lines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* BELOW circles and center */
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
     pointer-events: none;
+  }
+  .connection-path {
+    fill: none;
+    stroke: var(--connection-color);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-opacity: 0.35;
+  }
+
+  .synapse-particle {
+    fill: var(--pulse-color);
+    filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #cfd8dc);
   }
 
   .wheel-center {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 135px;
-    height: 135px;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 135px; height: 135px;
     background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
     color: yellow;
     border: 2px solid #ffdd00;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 18px;
-    font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
     text-transform: uppercase;
+    font-size: 18px; font-weight: 900;
     letter-spacing: 0.5px;
-    line-height: 1.2;
-    box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
+    box-shadow: 0 0 30px #ffdd0088;
     animation: pulse 5s ease-in-out infinite;
-    text-decoration: none;
-    text-align: center;
+    text-decoration: none; text-align: center;
     z-index: 5;
   }
-
   @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8); border-color: #ffdd00; }
-    50% { box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4); border-color: #ffff00; transform: translate(-50%, -50%) scale(1.02); }
+    0%,100% { box-shadow: 0 0 30px #ffdd0088; }
+    50% { box-shadow: 0 0 60px #ffdd00ff; transform: translate(-50%,-50%) scale(1.02); }
   }
 
   .circle {
     position: absolute;
-    width: var(--circle-size);
-    height: var(--circle-size);
+    width: var(--circle-size); height: var(--circle-size);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-weight: 900;
-    font-size: 12px;
-    line-height: 1.1;
-    cursor: pointer;
-    background: black;
-    padding: 8px;
-    top: var(--top-offset);
-    left: var(--left-offset);
-    transform-origin: 50% calc(50% + var(--radius)); 
-    z-index: 10;
-  }
-
-  .circle span {
-    display: block;
-    transform: rotate(0deg);
-  }
-
-  @keyframes sparkle-border {
-    0% { box-shadow: 0 0 8px currentColor; }
-    50% { box-shadow: 0 0 12px currentColor; }
-    100% { box-shadow: 0 0 8px currentColor; }
-  }
-
-  /* ----- POSITIONS ----- */
-  .circle-1 { transform: rotate(0deg); border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-1 span { transform: rotate(0deg); }
-
-  .circle-8 { transform: rotate(45deg); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-8 span { transform: rotate(-45deg); }
-
-  .circle-7 { transform: rotate(90deg); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-7 span { transform: rotate(-90deg); }
-
-  .circle-2 { transform: rotate(135deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-2 span { transform: rotate(-135deg); }
-
-  /* ✅ FIXED ORANGE 6:00 POSITION CIRCLE */
-  .circle-3 { 
-    transform: rotate(180deg); 
-    border: 2px solid var(--orange); 
-    color: var(--orange); 
-    z-index: 12; /* bring to front */
-    box-shadow: 0 0 15px var(--orange);
+    display: flex; align-items: center; justify-content: center;
     background: #000;
-    animation: sparkle-border 2s ease-in-out infinite;
+    color: #fff;
+    font-weight: 900; font-size: 12px; text-align: center;
+    transform-origin: 50% calc(50% + var(--radius));
+    top: var(--top-offset); left: var(--left-offset);
+    z-index: 10;
+    border: 2px solid #666;
   }
-  .circle-3 span { transform: rotate(-180deg); }
+  .circle span { transform: rotate(0deg); }
 
-  .circle-4 { transform: rotate(225deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-4 span { transform: rotate(-225deg); }
+  /* Positions (same as before) */
+  .circle-1 { transform: rotate(0deg); border-color: var(--silver-white); }
+  .circle-8 { transform: rotate(45deg); border-color: #ffd700; }
+  .circle-7 { transform: rotate(90deg); border-color: #00cc44; }
+  .circle-2 { transform: rotate(135deg); border-color: #5dccdb; }
+  .circle-3 { transform: rotate(180deg); border-color: #ff8800; }
+  .circle-4 { transform: rotate(225deg); border-color: #00ff00; }
+  .circle-5 { transform: rotate(270deg); border-color: #cc88ff; }
+  .circle-6 { transform: rotate(315deg); border-color: #ff69b4; }
 
-  .circle-5 { transform: rotate(270deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-5 span { transform: rotate(-270deg); }
-
-  .circle-6 { transform: rotate(315deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-6 span { transform: rotate(-315deg); }
-
-  .button-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-  }
-
+  .button-container { margin-top: 30px; }
   .random-button {
     background: var(--yellow);
     color: var(--red);
     border: 2px solid var(--red);
     padding: 14px 28px;
     border-radius: 30px;
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 14px;
+    font-family: 'Special Elite', monospace;
     font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     cursor: pointer;
-    position: relative;
     z-index: 10;
-    box-shadow: 0 0 20px var(--yellow), 0 4px 12px rgba(0,0,0,0.3), 0 0 15px var(--red);
-    animation: red-glow 2s ease-in-out infinite;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  @keyframes red-glow {
-    0% { box-shadow: 0 0 10px var(--red), 0 0 20px var(--red), 0 0 20px var(--yellow); }
-    50% { box-shadow: 0 0 25px var(--red), 0 0 40px var(--red), 0 0 25px var(--yellow); }
-    100% { box-shadow: 0 0 10px var(--red), 0 0 20px var(--red), 0 0 20px var(--yellow); }
-  }
-
-  .random-button:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 40px var(--red), 0 8px 20px rgba(0,0,0,0.4), 0 0 25px var(--yellow);
-  }
-
-  .random-button-more {
-    background: var(--dodgers-blue);
-    color: var(--blue);
-    border: 2px solid var(--blue);
-    padding: 7px 28px;
-    border-radius: 30px;
-    font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    font-size: 12px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    position: relative;
-    z-index: 10;
-    box-shadow: 0 0 20px var(--dodgers-blue), 0 4px 12px rgba(0,0,0,0.3), 0 0 15px var(--blue);
-    animation: blue-glow 2s ease-in-out infinite;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 150px;
-  }
-
-  @keyframes blue-glow {
-    0% { box-shadow: 0 0 10px var(--blue), 0 0 20px var(--blue), 0 0 20px var(--dodgers-blue); }
-    50% { box-shadow: 0 0 25px var(--blue), 0 0 40px var(--blue), 0 0 25px var(--dodgers-blue); }
-    100% { box-shadow: 0 0 10px var(--blue), 0 0 20px var(--blue), 0 0 20px var(--dodgers-blue); }
-  }
-
-  .random-button-more:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 40px var(--blue), 0 8px 20px rgba(0,0,0,0.4), 0 0 25px var(--dodgers-blue);
-  }
-
-  .archive-bottom {
-    position: fixed;
-    bottom: 15px;
-    left: 15px;
-    font-size: 11px;
-    color: #aaccff;
-    text-decoration: underline;
-    cursor: pointer;
-    opacity: 0.7;
-    text-shadow: 0 0 5px #00ddff;
-  }
-
-  .archive-bottom:hover {
-    opacity: 1;
-    color: #ffffff;
-    text-shadow: 0 0 10px #00ddff;
-  }
-
-  @media (max-width: 600px) {
-    :root {
-      --wheel-size: 380px;
-      --circle-size: 74px;
-      --radius: 125px; 
-      --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
-      --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
-    }
-    .header h1 { font-size: 28px; letter-spacing: 0.3px; }
-    .wheel-center { width: 120px; height: 120px; font-size: 18px; }
-    .circle { font-size: 11px; }
-  }
-
-  @media (max-width: 400px) {
-    :root {
-      --wheel-size: 320px;
-      --circle-size: 62px;
-      --radius: 100px; 
-      --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
-      --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
-    }
-    .header h1 { font-size: 28px; letter-spacing: 0.3px; }
-    .wheel-center { width: 96px; height: 96px; font-size: 15px; }
-    .circle { font-size: 10px; }
   }
 </style>
 </head>
 
 <body>
-  <div class="header">
-    <h1>THE DAYLUGE</h1>
-  </div>
+  <div class="header"><h1>THE DAYLUGE</h1></div>
 
   <div class="wheel-container">
-    <svg class="connection-lines" width="100%" height="100%"></svg>
-    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event','click_circle',{'circle':'trending_news'});">TRENDING<br>NEWS</a>
+    <svg class="connection-lines"></svg>
+    <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
 
-    <div class="circle circle-1" onclick="goToCategory('politics');"><span>POLITICS</span></div>
-    <div class="circle circle-8" onclick="goToCategory('history');"><span>HISTORY</span></div>
-    <div class="circle circle-7" onclick="goToCategory('markets-economics');"><span>MARKETS & ECONOMICS</span></div>
-    <div class="circle circle-2" onclick="goToCategory('science-nature-technology');"><span>SCIENCE, NATURE & TECH</span></div>
-    <div class="circle circle-3" onclick="goToCategory('sports-leisure');"><span>SPORTS & LEISURE</span></div>
-    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner');"><span>CONSPIRACY CORNER</span></div>
-    <div class="circle circle-5" onclick="goToCategory('arts-literature');"><span>ARTS & LITERATURE</span></div>
-    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy');"><span>WISDOM & PHILOSOPHY</span></div>
+    <div class="circle circle-1"><span>POLITICS</span></div>
+    <div class="circle circle-8"><span>HISTORY</span></div>
+    <div class="circle circle-7"><span>MARKETS & ECONOMICS</span></div>
+    <div class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></div>
+    <div class="circle circle-3"><span>SPORTS & LEISURE</span></div>
+    <div class="circle circle-4"><span>CONSPIRACY CORNER</span></div>
+    <div class="circle circle-5"><span>ARTS & LITERATURE</span></div>
+    <div class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></div>
   </div>
 
   <div class="button-container">
-    <button class="random-button" onclick="goToRandomArticle();">SURPRISE ME!</button>
+    <button class="random-button">SURPRISE ME!</button>
   </div>
 
-  <div class="archive-bottom" onclick="openArchive();">archive</div>
-
 <script>
-  const categoryMap = {
-    'politics': '/politics/politics.html',
-    'markets-economics': '/markets-econ/markets-econ.html',
-    'sports-leisure': '/sports-leisure.html',
-    'science-nature-technology': '/science-nature-technology.html',
-    'arts-literature': '/arts-literature.html',
-    'wisdom-philosophy': '/wisdom-philosophy.html',
-    'conspiracy-corner': '/conspiracy-corner.html',
-    'history': '/history/history.html'
-  };
+function drawConnections() {
+  const svg = document.querySelector('.connection-lines');
+  const wheel = document.querySelector('.wheel-container');
+  const hub = document.querySelector('.wheel-center');
+  const circles = document.querySelectorAll('.circle');
+  const rect = wheel.getBoundingClientRect();
+  svg.setAttribute('width', rect.width);
+  svg.setAttribute('height', rect.height);
+  svg.innerHTML = '';
 
-  function goToCategory(category){ const url = categoryMap[category]; if(url) window.location.href=url; }
+  const hubRect = hub.getBoundingClientRect();
+  const cx = hubRect.left - rect.left + hubRect.width / 2;
+  const cy = hubRect.top - rect.top + hubRect.height / 2;
+  const hubR = hubRect.width / 2;
 
-  function goToRandomArticle(){
-    const newWindow = window.open('', '_blank'); if(!newWindow) return;
-    fetch('surprise-me-links.txt')
-      .then(r=>r.text())
-      .then(text=>{
-        const links = text.split('\n').filter(l=>l.trim()).map(l=>l.split('|')[1]?.trim()).filter(Boolean);
-        if(links.length){ const random = links[Math.floor(Math.random()*links.length)]; newWindow.location.href=random; }
-      });
-  }
+  circles.forEach((circle, i) => {
+    const cr = circle.getBoundingClientRect();
+    const r = cr.width / 2;
+    const x = cr.left - rect.left + r;
+    const y = cr.top - rect.top + r;
+    const dx = x - cx;
+    const dy = y - cy;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const sx = cx + (dx/dist)*(hubR+10);
+    const sy = cy + (dy/dist)*(hubR+10);
+    const ex = x - (dx/dist)*(r+10);
+    const ey = y - (dy/dist)*(r+10);
 
-  function openArchive(){ window.location.href='archive.html'; }
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${sx},${sy} L${ex},${ey}`);
+    path.classList.add('connection-path');
+    svg.appendChild(path);
 
-  function drawConnections(){
-    const svg=document.querySelector('.connection-lines');
-    const wheel=document.querySelector('.wheel-container');
-    const center=document.querySelector('.wheel-center');
-    const circles=document.querySelectorAll('.circle');
-    const wheelRect=wheel.getBoundingClientRect();
-    svg.setAttribute('width',wheelRect.width); svg.setAttribute('height',wheelRect.height); svg.innerHTML='';
-    const hubRect=center.getBoundingClientRect();
-    const cx=hubRect.left-wheelRect.left+hubRect.width/2;
-    const cy=hubRect.top-wheelRect.top+hubRect.height/2;
-    const hubR=hubRect.width/2;
-    circles.forEach((circle,i)=>{
-      const rect=circle.getBoundingClientRect();
-      const cr=rect.width/2;
-      const x=rect.left-wheelRect.left+cr;
-      const y=rect.top-wheelRect.top+cr;
-      const dx=x-cx, dy=y-cy;
-      const dist=Math.sqrt(dx*dx+dy*dy);
-      const startX=cx+(dx/dist)*(hubR+10);
-      const startY=cy+(dy/dist)*(hubR+10);
-      const endX=x-(dx/dist)*(cr+10);
-      const endY=y-(dy/dist)*(cr+10);
-      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('d',`M${startX},${startY} L${endX},${endY}`);
-      path.classList.add('connection-path');
-      svg.appendChild(path);
-    });
-  }
+    // calm continuous pulses
+    for (let n=0; n<2; n++) {
+      const particle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      particle.setAttribute('class','synapse-particle');
+      particle.setAttribute('r','2');
+      svg.appendChild(particle);
 
-  function initConnections(){ setTimeout(drawConnections,200); }
-  window.addEventListener('load',initConnections);
-  window.addEventListener('resize',()=>setTimeout(drawConnections,200));
+      const motion = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+      motion.setAttribute('dur','2s');
+      motion.setAttribute('repeatCount','indefinite');
+      motion.setAttribute('keyTimes','0;0.5;1');
+      motion.setAttribute('keyPoints','0;1;0');
+      motion.setAttribute('calcMode','linear');
+      motion.setAttribute('begin',`${i*0.25 + n*1}s`);
+      motion.innerHTML = `<mpath href="#path${i}" />`;
+      // use ID
+      path.setAttribute('id',`path${i}`);
+      particle.appendChild(motion);
+    }
+  });
+}
+
+window.addEventListener('load', ()=> setTimeout(drawConnections, 300));
+window.addEventListener('resize', ()=> setTimeout(drawConnections, 300));
 </script>
 </body>
 </html>
