@@ -553,18 +553,14 @@
     const wheelCenter = document.querySelector('.wheel-center');
     const circles = document.querySelectorAll('.circle');
 
-    // Force layout reflow to ensure accurate positioning
     wheelContainer.offsetHeight;
 
-    // Get wheel container dimensions
     const wheelRect = wheelContainer.getBoundingClientRect();
     const hubRect = wheelCenter.getBoundingClientRect();
     const hubRadius = hubRect.width / 2;
-    // Calculate hub center relative to wheel container
-    const hubCenterX = hubRect.left + hubRadius - wheelRect.left + (wheelRect.width - 480) / 2; // Adjust for potential container width mismatch
+    const hubCenterX = hubRect.left + hubRadius - wheelRect.left + (wheelRect.width - 480) / 2;
     const hubCenterY = hubRect.top + hubRadius - wheelRect.top + (wheelRect.height - 480) / 2;
 
-    // Set SVG dimensions explicitly to match wheel-container
     svg.setAttribute('width', wheelRect.width);
     svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
@@ -575,7 +571,6 @@
       const top = parseFloat(style.top);
       const circleRadius = circle.offsetWidth / 2;
 
-      // Use CSS positions as fallback, adjusted relative to wheel container
       const circleCenterX = left + circleRadius;
       const circleCenterY = top + circleRadius;
 
@@ -642,9 +637,29 @@
     });
   }
 
-  // Initialize connections after spin-wheel animation ends
   function initConnections() {
     const wheelContainer = document.querySelector('.wheel-container');
     wheelContainer.addEventListener('animationend', () => {
-      // Force a redraw to ensure final layout
-      wheelContainer.style.display = '
+      wheelContainer.style.display = 'none';
+      wheelContainer.offsetHeight;
+      wheelContainer.style.display = '';
+      drawConnections();
+    }, { once: true });
+  }
+
+  function debounce(func, wait) {
+    let timeout;
+    return function() {
+      clearTimeout(timeout);
+      timeout = setTimeout(func, wait);
+    };
+  }
+
+  const debouncedInitConnections = debounce(initConnections, 200);
+
+  window.addEventListener('load', initConnections);
+  window.addEventListener('resize', debouncedInitConnections);
+  window.addEventListener('orientationchange', debouncedInitConnections);
+</script>
+</body>
+</html>
