@@ -25,8 +25,8 @@
 
 <style>
   :root {
-    --red: #cc0000;  
-    --orange: #ff8800;  
+    --red: #cc0000;  
+    --orange: #ff8800;  
     --green: #00dd55;
     --blue: #1a1a80;
     --light-blue: #33ddff;
@@ -34,7 +34,7 @@
     --pink: #ff69b4;
     --yellow: #ffcc00;
     --bright-blue: #00b7eb;
-    --ink: #111;  
+    --ink: #111;  
     --bright-purple-glow: #cc88ff;
     --light-cyan-glow: #33ddff;
     --gold: #d4af37;
@@ -45,14 +45,10 @@
     --dodgers-blue: #5dccdb;
     --connection-color: var(--light-cyan-glow);
 
-    /* --- CSS ROTATION VARIABLES (Desktop Default) --- */
     --wheel-size: 480px;
     --circle-size: 84px;
-    /* Distance from the center of the wheel to the center of a circle */
     --radius: 160px; 
-    /* Vertical offset to move the circle's top edge to the starting radius point (12 o'clock) */
     --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
-    /* Horizontal offset to center the circle on the X-axis */
     --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
   }
 
@@ -91,9 +87,9 @@
   }
 
   .header h1 {
-    text-transform: uppercase;  
-    letter-spacing: .5px;  
-    font-size: 42px;  
+    text-transform: uppercase;  
+    letter-spacing: .5px;  
+    font-size: 42px;  
     margin-bottom: 8px;
     font-family: 'Special Elite', 'Courier New', Courier, monospace;
   }
@@ -109,37 +105,19 @@
   }
 
   @keyframes spin-wheel {
-    0% {
-      transform: rotateZ(0deg);
-      opacity: 0.3;
-    }
-    100% {
-      transform: rotateZ(360deg);
-      opacity: 1;
-    }
+    0% { transform: rotateZ(0deg); opacity: 0.3; }
+    100% { transform: rotateZ(360deg); opacity: 1; }
   }
 
+  /* ----- Z-INDEX FIXES ----- */
   .connection-lines {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 1; /* BELOW circles and center */
     pointer-events: none;
-  }
-
-  .connection-path {
-    fill: none;
-    stroke: var(--connection-color);
-    stroke-width: 1;
-    stroke-linecap: round;
-    stroke-opacity: 0.3;
-  }
-
-  .synapse-particle {
-    fill: var(--connection-color);
-    filter: drop-shadow(0 0 8px var(--connection-color)) drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 12px var(--bright-purple-glow));
   }
 
   .wheel-center {
@@ -167,18 +145,12 @@
     animation: pulse 5s ease-in-out infinite;
     text-decoration: none;
     text-align: center;
+    z-index: 5;
   }
 
   @keyframes pulse {
-    0%, 100% {  
-      box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8);
-      border-color: #ffdd00;
-    }
-    50% {  
-      box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4);
-      border-color: #ffff00;
-      transform: translate(-50%, -50%) scale(1.02);
-    }
+    0%, 100% { box-shadow: 0 0 30px #ffdd0088, 0 4px 12px rgba(0,0,0,0.8); border-color: #ffdd00; }
+    50% { box-shadow: 0 0 60px #ffdd00ff, 0 8px 25px rgba(255,221,0,0.4); border-color: #ffff00; transform: translate(-50%, -50%) scale(1.02); }
   }
 
   .circle {
@@ -197,19 +169,15 @@
     cursor: pointer;
     background: black;
     padding: 8px;
-    
-    /* Place all circles at the center-top starting point (12:00) */
     top: var(--top-offset);
     left: var(--left-offset);
-    
-    /* Set the rotation origin to the center of the wheel container */
     transform-origin: 50% calc(50% + var(--radius)); 
+    z-index: 10;
   }
 
-  /* This span rotates the content back to upright */
   .circle span {
     display: block;
-    transform: rotate(0deg); 
+    transform: rotate(0deg);
   }
 
   @keyframes sparkle-border {
@@ -218,56 +186,40 @@
     100% { box-shadow: 0 0 8px currentColor; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .circle { animation: none !important; }
-  }
-  
-  /* *** FINAL CORRECTED POSITIONS (Clockwise from 12:00) ***
-  Rotation starts at 12:00 (0 degrees), then adds +45 deg for each clockwise step.
-  The inner span rotates the opposite angle (negative) to keep text upright.
-  */
-
-  /* Circle 1: POLITICS (12:00) - 0 deg rotation */
+  /* ----- POSITIONS ----- */
   .circle-1 { transform: rotate(0deg); border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-1 span { transform: rotate(0deg); }
-  
-  /* Circle 8: HISTORY (1:30) - 45 deg clockwise rotation */
+
   .circle-8 { transform: rotate(45deg); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-8 span { transform: rotate(-45deg); }
-  
-  /* Circle 7: MARKETS & ECONOMICS (3:00) - 90 deg clockwise rotation */
+
   .circle-7 { transform: rotate(90deg); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-7 span { transform: rotate(-90deg); }
 
-  /* Circle 2: SCIENCE/NATURE/TECH (4:30) - 135 deg clockwise rotation */
   .circle-2 { transform: rotate(135deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-2 span { transform: rotate(-135deg); }
-  
-  /* 💥 CRITICAL FIX: The 180deg rotation is correct, but adding a small vertical adjustment to its starting position (via top-offset/radius) helps ensure it clears any hidden boundaries or overlaps, especially at the bottom. The original logic is correct, but this minor tweak often solves these stubborn display bugs. */
-  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation */
+
+  /* ✅ FIXED ORANGE 6:00 POSITION CIRCLE */
   .circle-3 { 
     transform: rotate(180deg); 
     border: 2px solid var(--orange); 
     color: var(--orange); 
-    z-index: 10; /* Ensure it's on top of lines/other circles */
-    /* top: calc(var(--top-offset) + 1px);  A tiny adjustment if needed, but keeping original logic for consistency */
-    animation: sparkle-border 2s ease-in-out infinite; 
+    z-index: 12; /* bring to front */
+    box-shadow: 0 0 15px var(--orange);
+    background: #000;
+    animation: sparkle-border 2s ease-in-out infinite;
   }
   .circle-3 span { transform: rotate(-180deg); }
-  
-  /* Circle 4: CONSPIRACY CORNER (7:30) - 225 deg clockwise rotation */
+
   .circle-4 { transform: rotate(225deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
   .circle-4 span { transform: rotate(-225deg); }
-  
-  /* Circle 5: ARTS/LIT (9:00) - 270 deg clockwise rotation */
+
   .circle-5 { transform: rotate(270deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-5 span { transform: rotate(-270deg); }
-  
-  /* Circle 6: WISDOM/PHILOSOPHY (10:30) - 315 deg clockwise rotation */
+
   .circle-6 { transform: rotate(315deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-6 span { transform: rotate(-315deg); }
 
-  
   .button-container {
     display: flex;
     flex-direction: column;
@@ -356,38 +308,17 @@
     text-shadow: 0 0 10px #00ddff;
   }
 
-  /*
-  *** Media Query Fixes using CSS Variables ***
-  */
   @media (max-width: 600px) {
     :root {
       --wheel-size: 380px;
       --circle-size: 74px;
       --radius: 125px; 
-      --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
-      --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
+      --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
+      --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
     }
-    .header h1 {
-      font-size: 28px;
-      letter-spacing: 0.3px;
-    }
-    .wheel-center {
-      width: 120px;
-      height: 120px;
-      font-size: 18px;
-    }
-    .circle {
-      font-size: 11px;
-    }
-    .random-button, .random-button-more {
-      width: 130px;
-    }
-    .connection-path {
-      stroke-width: 0.8;
-    }
-    .synapse-particle {
-      transform: scale(0.8);
-    }
+    .header h1 { font-size: 28px; letter-spacing: 0.3px; }
+    .wheel-center { width: 120px; height: 120px; font-size: 18px; }
+    .circle { font-size: 11px; }
   }
 
   @media (max-width: 400px) {
@@ -395,38 +326,16 @@
       --wheel-size: 320px;
       --circle-size: 62px;
       --radius: 100px; 
-      --top-offset: calc( (var(--wheel-size) / 2) - var(--radius) - (var(--circle-size) / 2) );
-      --left-offset: calc( (var(--wheel-size) / 2) - (var(--circle-size) / 2) );
+      --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
+      --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
     }
-    .header h1 {
-      font-size: 28px;
-      letter-spacing: 0.3px;
-    }
-    .wheel-center {
-      width: 96px;
-      height: 96px;
-      font-size: 15px;
-    }
-    .circle {
-      font-size: 10px;
-    }
-    .random-button, .random-button-more {
-      width: 120px;
-      font-size: 12px;
-    }
-    .random-button-more {
-      font-size: 10px;
-      padding: 6px 28px;
-    }
-    .connection-path {
-      stroke-width: 0.6;
-    }
-    .synapse-particle {
-      transform: scale(0.6);
-    }
+    .header h1 { font-size: 28px; letter-spacing: 0.3px; }
+    .wheel-center { width: 96px; height: 96px; font-size: 15px; }
+    .circle { font-size: 10px; }
   }
 </style>
 </head>
+
 <body>
   <div class="header">
     <h1>THE DAYLUGE</h1>
@@ -434,23 +343,23 @@
 
   <div class="wheel-container">
     <svg class="connection-lines" width="100%" height="100%"></svg>
-    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
+    <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event','click_circle',{'circle':'trending_news'});">TRENDING<br>NEWS</a>
 
-    <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});"><span>POLITICS</span></div>
-    <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});"><span>HISTORY</span></div>
-    <div class="circle circle-7" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});"><span>MARKETS & ECONOMICS</span></div>
-    <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});"><span>SCIENCE, NATURE & TECH</span></div>
-    <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});"><span>SPORTS & LEISURE</span></div>
-    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});"><span>CONSPIRACY CORNER</span></div>
-    <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});"><span>ARTS & LITERATURE</span></div>
-    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});"><span>WISDOM & PHILOSOPHY</span></div>
+    <div class="circle circle-1" onclick="goToCategory('politics');"><span>POLITICS</span></div>
+    <div class="circle circle-8" onclick="goToCategory('history');"><span>HISTORY</span></div>
+    <div class="circle circle-7" onclick="goToCategory('markets-economics');"><span>MARKETS & ECONOMICS</span></div>
+    <div class="circle circle-2" onclick="goToCategory('science-nature-technology');"><span>SCIENCE, NATURE & TECH</span></div>
+    <div class="circle circle-3" onclick="goToCategory('sports-leisure');"><span>SPORTS & LEISURE</span></div>
+    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner');"><span>CONSPIRACY CORNER</span></div>
+    <div class="circle circle-5" onclick="goToCategory('arts-literature');"><span>ARTS & LITERATURE</span></div>
+    <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy');"><span>WISDOM & PHILOSOPHY</span></div>
   </div>
 
   <div class="button-container">
-    <button class="random-button" onclick="goToRandomArticle(); gtag('event', 'click_button', {'button': 'surprise_me'});">SURPRISE ME!</button>
+    <button class="random-button" onclick="goToRandomArticle();">SURPRISE ME!</button>
   </div>
 
-  <div class="archive-bottom" onclick="openArchive(); gtag('event', 'click_link', {'link': 'archive'});">archive</div>
+  <div class="archive-bottom" onclick="openArchive();">archive</div>
 
 <script>
   const categoryMap = {
@@ -464,145 +373,52 @@
     'history': '/history/history.html'
   };
 
-  window.goToCategory = function(category) {
-    const url = categoryMap[category];
-    if (url) {
-      window.location.href = url;
-    }
-  };
+  function goToCategory(category){ const url = categoryMap[category]; if(url) window.location.href=url; }
 
-  window.goToRandomArticle = function() {
-    const newWindow = window.open('', '_blank');
-    if (!newWindow) return;
-
+  function goToRandomArticle(){
+    const newWindow = window.open('', '_blank'); if(!newWindow) return;
     fetch('surprise-me-links.txt')
-      .then(response => response.text())
-      .then(text => {
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) return parts[1].trim();
-          return null;
-        }).filter(link => link !== null);
-        
-        if (links.length > 0) {
-          const randomLink = links[Math.floor(Math.random() * links.length)];
-          newWindow.location.href = randomLink;
-        }
+      .then(r=>r.text())
+      .then(text=>{
+        const links = text.split('\n').filter(l=>l.trim()).map(l=>l.split('|')[1]?.trim()).filter(Boolean);
+        if(links.length){ const random = links[Math.floor(Math.random()*links.length)]; newWindow.location.href=random; }
       });
-  };
+  }
 
-  window.openArchive = function() {
-    window.location.href = 'archive.html';
-  };
+  function openArchive(){ window.location.href='archive.html'; }
 
-  function drawConnections() {
-    const svg = document.querySelector('.connection-lines');
-    const wheelContainer = document.querySelector('.wheel-container');
-    const wheelCenter = document.querySelector('.wheel-center');
-    const circles = document.querySelectorAll('.circle'); 
-
-    const wheelRect = wheelContainer.getBoundingClientRect();
-    svg.setAttribute('width', wheelRect.width);
-    svg.setAttribute('height', wheelRect.height);
-    svg.innerHTML = '';
-
-    const hubRect = wheelCenter.getBoundingClientRect();
-    const wheelCenterX = hubRect.left - wheelRect.left + hubRect.width / 2;
-    const wheelCenterY = hubRect.top - wheelRect.top + hubRect.height / 2;
-    const hubRadius = hubRect.width / 2;
-
-    circles.forEach((circle, index) => {
-      const circleRect = circle.getBoundingClientRect();
-      const circleRadius = circleRect.width / 2;
-
-      const circleCenterX = circleRect.left - wheelRect.left + circleRadius;
-      const circleCenterY = circleRect.top - wheelRect.top + circleRadius;
-
-      const dx = circleCenterX - wheelCenterX;
-      const dy = circleCenterY - wheelCenterY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      const hubGap = 10;
-      const circleGap = 10;
-
-      const startX = wheelCenterX + (dx / distance) * (hubRadius + hubGap);
-      const startY = wheelCenterY + (dy / distance) * (hubRadius + hubGap);
-      const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
-      const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
-
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const d = `M${startX},${startY} L${endX},${endY}`;
-      path.setAttribute('d', d);
-      path.setAttribute('id', `path-${index}`);
+  function drawConnections(){
+    const svg=document.querySelector('.connection-lines');
+    const wheel=document.querySelector('.wheel-container');
+    const center=document.querySelector('.wheel-center');
+    const circles=document.querySelectorAll('.circle');
+    const wheelRect=wheel.getBoundingClientRect();
+    svg.setAttribute('width',wheelRect.width); svg.setAttribute('height',wheelRect.height); svg.innerHTML='';
+    const hubRect=center.getBoundingClientRect();
+    const cx=hubRect.left-wheelRect.left+hubRect.width/2;
+    const cy=hubRect.top-wheelRect.top+hubRect.height/2;
+    const hubR=hubRect.width/2;
+    circles.forEach((circle,i)=>{
+      const rect=circle.getBoundingClientRect();
+      const cr=rect.width/2;
+      const x=rect.left-wheelRect.left+cr;
+      const y=rect.top-wheelRect.top+cr;
+      const dx=x-cx, dy=y-cy;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      const startX=cx+(dx/dist)*(hubR+10);
+      const startY=cy+(dy/dist)*(hubR+10);
+      const endX=x-(dx/dist)*(cr+10);
+      const endY=y-(dy/dist)*(cr+10);
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d',`M${startX},${startY} L${endX},${endY}`);
       path.classList.add('connection-path');
       svg.appendChild(path);
-
-      // Create three particles per connection (Synapse effect)
-      for (let particleNum = 0; particleNum < 3; particleNum++) {
-        const particle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        particle.setAttribute('class', 'synapse-particle');
-        particle.setAttribute('r', '1.5');
-        svg.appendChild(particle);
-
-        const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        animateMotion.setAttribute('dur', '1.6s');
-        animateMotion.setAttribute('repeatCount', 'indefinite');
-        animateMotion.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
-        animateMotion.setAttribute('keyPoints', '0;1;0');
-        animateMotion.setAttribute('keyTimes', '0;0.5;1');
-        animateMotion.innerHTML = `<mpath xlink:href="#path-${index}" />`;
-        particle.appendChild(animateMotion);
-
-        const animateSize = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-        animateSize.setAttribute('attributeName', 'r');
-        animateSize.setAttribute('values', '1;2.5;1');
-        animateSize.setAttribute('dur', '1.6s');
-        animateSize.setAttribute('repeatCount', 'indefinite');
-        animateSize.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
-        particle.appendChild(animateSize);
-
-        const animateOpacity = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-        animateOpacity.setAttribute('attributeName', 'fill-opacity');
-        animateOpacity.setAttribute('values', '0.2;1;0.2');
-        animateOpacity.setAttribute('dur', '1.6s');
-        animateOpacity.setAttribute('repeatCount', 'indefinite');
-        animateOpacity.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
-        particle.appendChild(animateOpacity);
-
-        const animateColor = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
-        animateColor.setAttribute('attributeName', 'fill');
-        animateColor.setAttribute('values', '#33ddff;#ffffff;#cc88ff;#33ddff');
-        animateColor.setAttribute('dur', '1.6s');
-        animateColor.setAttribute('repeatCount', 'indefinite');
-        animateColor.setAttribute('begin', `${index * 0.1 + particleNum * 0.2}s`);
-        particle.appendChild(animateColor);
-      }
     });
   }
 
-  function initConnections() {
-    const wheelContainer = document.querySelector('.wheel-container');
-    wheelContainer.offsetHeight; // Force layout recalculation
-    // Delay necessary to allow the CSS rotations to stabilize and be reflected in getBoundingClientRect()
-    setTimeout(() => {
-      drawConnections();
-    }, 200); 
-  }
-
-  function debounce(func, wait) {
-    let timeout;
-    return function() {
-      clearTimeout(timeout);
-      timeout = setTimeout(func, wait);
-    };
-  }
-
-  const debouncedInitConnections = debounce(initConnections, 200);
-
-  window.addEventListener('load', initConnections);
-  window.addEventListener('resize', debouncedInitConnections);
-  window.addEventListener('orientationchange', debouncedInitConnections);
+  function initConnections(){ setTimeout(drawConnections,200); }
+  window.addEventListener('load',initConnections);
+  window.addEventListener('resize',()=>setTimeout(drawConnections,200));
 </script>
 </body>
 </html>
