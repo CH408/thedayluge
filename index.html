@@ -74,9 +74,16 @@
       font-size: 42px;
       color: var(--light-blue);
       text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue);
-      animation: colorCycle 6s infinite;
-      position: relative;
-      z-index: 12;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.7) 50%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: colorCycle 6s infinite, shine 2s linear infinite;
     }
     @keyframes colorCycle {
       0% { color: var(--light-blue); text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue); }
@@ -87,16 +94,9 @@
       83.33% { color: #5dccdb; text-shadow: 0 0 5px #5dccdb, 0 0 10px #5dccdb; }
       100% { color: var(--light-blue); text-shadow: 0 0 5px var(--light-blue), 0 0 10px var(--light-blue); }
     }
-
-    .header-canvas {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 600px;
-      height: 80px;
-      z-index: 11;
+    @keyframes shine {
+      0% { background-position: 200% 0; }
+      100% { background-position: 0 0; }
     }
 
     .wheel-container {
@@ -268,7 +268,6 @@
 
 <body>
   <div class="header">
-    <canvas class="header-canvas" id="headerCanvas"></canvas>
     <h1>THE DAYLUGE</h1>
   </div>
 
@@ -359,67 +358,7 @@
       });
     }
 
-    // Particle animation for header
-    function initParticles() {
-      const canvas = document.getElementById('headerCanvas');
-      const ctx = canvas.getContext('2d');
-      const header = document.querySelector('.header h1');
-      const colors = ['#33ddff', '#00dd55', '#cc88ff', '#ff69b4', '#ffcc00', '#5dccdb'];
-      let particles = [];
-
-      function resizeCanvas() {
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-      }
-
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      class Particle {
-        constructor() {
-          this.x = canvas.width * 0.5 + (Math.random() - 0.5) * 200;
-          this.y = canvas.height * 0.5;
-          this.vx = (Math.random() - 0.5) * 4;
-          this.vy = (Math.random() - 0.5) * 4;
-          this.radius = Math.random() * 2 + 1;
-          this.color = colors[Math.floor(Math.random() * colors.length)];
-          this.life = Math.random() * 60 + 60;
-          this.age = 0;
-        }
-
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          ctx.fillStyle = this.color;
-          ctx.globalAlpha = 1 - this.age / this.life;
-          ctx.fill();
-        }
-
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          this.age++;
-          return this.age < this.life;
-        }
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (Math.random() < 0.1) {
-          particles.push(new Particle());
-        }
-        particles = particles.filter(particle => particle.update());
-        particles.forEach(particle => particle.draw());
-        requestAnimationFrame(animate);
-      }
-
-      animate();
-    }
-
-    window.addEventListener('load', () => {
-      setTimeout(drawConnections, 300);
-      initParticles();
-    });
+    window.addEventListener('load', () => setTimeout(drawConnections, 300));
     window.addEventListener('resize', () => setTimeout(drawConnections, 300));
   </script>
 </body>
