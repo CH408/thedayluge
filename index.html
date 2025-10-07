@@ -122,13 +122,14 @@
     height: 480px;
     margin: 0 auto;
     z-index: 5;
-    animation: spin-wheel 0.75s ease-out forwards;
+    animation: spin-wheel 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    will-change: transform, opacity;
   }
 
   @keyframes spin-wheel {
     0% {
       transform: rotateZ(0deg);
-      opacity: 0.5;
+      opacity: 0.3;
     }
     100% {
       transform: rotateZ(360deg);
@@ -361,21 +362,17 @@
     .circle-1 {
       left: 153px;
       top: 11px;
-      border: 2px solid var(--silver-white-light);
-      color: var(--silver-white);
-      animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-2 { left: 257px; top: 257px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-3 { left: 153px; top: 295px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-4 { left: 49px; top: 257px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-5 { left: 11px; top: 153px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-6 { left: 49px; top: 49px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-2 { left: 257px; top: 257px; }
+    .circle-3 { left: 153px; top: 295px; }
+    .circle-4 { left: 49px; top: 257px; }
+    .circle-5 { left: 11px; top: 153px; }
+    .circle-6 { left: 49px; top: 49px; }
     .circle-7 {
       left: 295px;
       top: 153px;
-      animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-8 { left: 257px; top: 49px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-8 { left: 257px; top: 49px; }
     .connection-path {
       stroke-width: 0.8;
     }
@@ -415,21 +412,17 @@
     .circle-1 {
       left: 129px;
       top: 9px;
-      border: 2px solid var(--silver-white-light);
-      color: var(--silver-white);
-      animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-2 { left: 218px; top: 218px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-3 { left: 129px; top: 249px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-4 { left: 40px; top: 218px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-5 { left: 9px; top: 129px; animation: sparkle-border 2s ease-in-out infinite; }
-    .circle-6 { left: 40px; top: 40px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-2 { left: 218px; top: 218px; }
+    .circle-3 { left: 129px; top: 249px; }
+    .circle-4 { left: 40px; top: 218px; }
+    .circle-5 { left: 9px; top: 129px; }
+    .circle-6 { left: 40px; top: 40px; }
     .circle-7 {
       left: 249px;
       top: 129px;
-      animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-8 { left: 218px; top: 40px; animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-8 { left: 218px; top: 40px; }
     .connection-path {
       stroke-width: 0.6;
     }
@@ -455,13 +448,13 @@
   <div class="wheel-container">
     <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
-    <div class="circle circle-1" style="left: 198px; top: 18px;" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
+    <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
     <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECH</div>
     <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
     <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
     <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
     <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
-    <div class="circle circle-7" style="left: 378px; top: 198px;" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
+    <div class="circle circle-7" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
     <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});">HISTORY</div>
   </div>
 
@@ -547,21 +540,19 @@
     const wheelRect = wheelContainer.getBoundingClientRect();
     const hubRect = wheelCenter.getBoundingClientRect();
     const hubRadius = hubRect.width / 2;
-    const hubCenterX = hubRect.left + hubRadius - wheelRect.left + (wheelRect.width - 480) / 2;
-    const hubCenterY = hubRect.top + hubRadius - wheelRect.top + (wheelRect.height - 480) / 2;
+    const hubCenterX = hubRect.left - wheelRect.left + hubRadius;
+    const hubCenterY = hubRect.top - wheelRect.top + hubRadius;
 
     svg.setAttribute('width', wheelRect.width);
     svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
 
     circles.forEach((circle, index) => {
-      const style = window.getComputedStyle(circle);
-      const left = parseFloat(style.left);
-      const top = parseFloat(style.top);
-      const circleRadius = circle.offsetWidth / 2;
-
-      const circleCenterX = left + circleRadius;
-      const circleCenterY = top + circleRadius;
+      const circleRect = circle.getBoundingClientRect();
+      const circleRadius = circleRect.width / 2;
+      
+      const circleCenterX = circleRect.left - wheelRect.left + circleRadius;
+      const circleCenterY = circleRect.top - wheelRect.top + circleRadius;
 
       const dx = circleCenterX - hubCenterX;
       const dy = circleCenterY - hubCenterY;
@@ -628,12 +619,10 @@
 
   function initConnections() {
     const wheelContainer = document.querySelector('.wheel-container');
-    wheelContainer.addEventListener('animationend', () => {
-      wheelContainer.style.display = 'none';
-      wheelContainer.offsetHeight;
-      wheelContainer.style.display = '';
+    // Draw connections immediately without waiting for animation
+    setTimeout(() => {
       drawConnections();
-    }, { once: true });
+    }, 100);
   }
 
   function debounce(func, wait) {
