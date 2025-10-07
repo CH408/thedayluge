@@ -209,7 +209,7 @@
   /* This span keeps the text inside the circle upright */
   .circle span {
     display: block;
-    transform: rotate(0deg); /* This will be overwritten by specific circle styles */
+    transform: rotate(0deg); 
   }
 
   @keyframes sparkle-border {
@@ -222,39 +222,39 @@
     .circle { animation: none !important; }
   }
   
-  /* *** CORRECTED ROTATIONS FOR INTENDED POSITIONS (Based on 90 deg at top) *** */
-  
-  /* Circle 1: POLITICS (Top-Center / 90°) */
+  /* *** FINAL CORRECTED POSITIONS (Clockwise from top, starting with POLITICS) *** */
+
+  /* Circle 1: POLITICS (Top-Center: 90°) */
   .circle-1 { transform: rotate(-90deg); border: 2px solid var(--silver-white-light); color: var(--silver-white); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-1 span { transform: rotate(90deg); }
   
-  /* Circle 2: SCIENCE, NATURE & TECH (Top-Right / 45°) */
+  /* Circle 2: SCIENCE, NATURE & TECH (Top-Right: 45°) */
   .circle-2 { transform: rotate(-45deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-2 span { transform: rotate(45deg); }
   
-  /* Circle 7: MARKETS & ECONOMICS (Right-Center / 0°) */
-  .circle-7 { transform: rotate(0deg); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-7 span { transform: rotate(0deg); }
+  /* Circle 3: SPORTS & LEISURE (Bottom-Right: 315° / +45°) */
+  .circle-3 { transform: rotate(0deg); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-3 span { transform: rotate(0deg); }
+  
+  /* Circle 4: CONSPIRACY CORNER (Bottom-Center: 270° / +90°) */
+  .circle-4 { transform: rotate(45deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-4 span { transform: rotate(-45deg); }
+  
+  /* Circle 5: ARTS & LITERATURE (Bottom-Left: 225° / +135°) */
+  .circle-5 { transform: rotate(90deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-5 span { transform: rotate(-90deg); }
+  
+  /* Circle 6: WISDOM & PHILOSOPHY (Top-Left: 135° / -135°) */
+  .circle-6 { transform: rotate(135deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-6 span { transform: rotate(-135deg); }
+  
+  /* Circle 7: MARKETS & ECONOMICS (Left-Center: 180° / -180°) */
+  .circle-7 { transform: rotate(180deg); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-7 span { transform: rotate(-180deg); }
 
-  /* Circle 3: SPORTS & LEISURE (Bottom-Right / 315° or +45°) */
-  .circle-3 { transform: rotate(45deg); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-3 span { transform: rotate(-45deg); }
-  
-  /* Circle 8: HISTORY (Bottom-Center / 270° or +90°) */
-  .circle-8 { transform: rotate(90deg); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-8 span { transform: rotate(-90deg); }
-  
-  /* Circle 4: CONSPIRACY CORNER (Bottom-Left / 225° or +135°) */
-  .circle-4 { transform: rotate(135deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-4 span { transform: rotate(-135deg); }
-  
-  /* Circle 5: ARTS & LITERATURE (Left-Center / 180° or -180°) */
-  .circle-5 { transform: rotate(180deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-5 span { transform: rotate(-180deg); }
-  
-  /* Circle 6: WISDOM & PHILOSOPHY (Top-Left / 135° or -135°) */
-  .circle-6 { transform: rotate(-135deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-6 span { transform: rotate(135deg); }
+  /* Circle 8: HISTORY (Top-Left corner of circle arrangement: 135° / -45°) */
+  .circle-8 { transform: rotate(-135deg); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-8 span { transform: rotate(135deg); }
 
   
   .button-container {
