@@ -72,34 +72,46 @@
       text-transform: uppercase;
       letter-spacing: .5px;
       font-size: 42px;
-      background: linear-gradient(
-        90deg,
-        #1a3c6b 0%,    /* Deep blue */
-        #2e5b4c 12.5%, /* Dark teal */
-        #4b0082 25%,   /* Indigo */
-        #2f4f4f 37.5%, /* Slate teal */
-        #483d8b 50%,   /* Dark slate blue */
-        #006400 62.5%, /* Dark green */
-        #6a5acd 75%,   /* Slate blue */
-        #3c2f6b 87.5%, /* Muted purple */
-        #1a3c6b 100%   /* Deep blue */
-      );
-      background-size: 400% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2), 2px 2px 8px rgba(0, 100, 255, 0.2);
-      animation: mysticDrift 3s ease-in-out infinite, auraPulse 2s ease-in-out infinite;
+      color: #1a3c6b;
+      text-shadow: 0 0 5px rgba(26, 60, 107, 0.7), 0 0 10px rgba(26, 60, 107, 0.5);
+      animation: neonPulse 6s ease-in-out infinite;
     }
-    @keyframes mysticDrift {
-      0% { background-position: 400% 0; }
-      50% { background-position: 0 0; }
-      100% { background-position: 400% 0; }
-    }
-    @keyframes auraPulse {
-      0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2), 2px 2px 8px rgba(0, 100, 255, 0.2); }
-      50% { text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.4), 3px 3px 12px rgba(0, 100, 255, 0.3); }
-      100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2), 2px 2px 8px rgba(0, 100, 255, 0.2); }
+    @keyframes neonPulse {
+      0% {
+        color: #1a3c6b; /* Deep blue */
+        text-shadow: 0 0 5px rgba(26, 60, 107, 0.7), 0 0 10px rgba(26, 60, 107, 0.5);
+        transform: scale(1);
+      }
+      16.67% {
+        color: #2e5b4c; /* Dark teal */
+        text-shadow: 0 0 5px rgba(46, 91, 76, 0.7), 0 0 10px rgba(46, 91, 76, 0.5);
+        transform: scale(1.05);
+      }
+      33.33% {
+        color: #4b0082; /* Indigo */
+        text-shadow: 0 0 5px rgba(75, 0, 130, 0.7), 0 0 10px rgba(75, 0, 130, 0.5);
+        transform: scale(1);
+      }
+      50% {
+        color: #483d8b; /* Dark slate blue */
+        text-shadow: 0 0 5px rgba(72, 61, 139, 0.7), 0 0 10px rgba(72, 61, 139, 0.5);
+        transform: scale(1.05);
+      }
+      66.67% {
+        color: #006400; /* Dark green */
+        text-shadow: 0 0 5px rgba(0, 100, 0, 0.7), 0 0 10px rgba(0, 100, 0, 0.5);
+        transform: scale(1);
+      }
+      83.33% {
+        color: #6a5acd; /* Slate blue */
+        text-shadow: 0 0 5px rgba(106, 90, 205, 0.7), 0 0 10px rgba(106, 90, 205, 0.5);
+        transform: scale(1.05);
+      }
+      100% {
+        color: #1a3c6b; /* Deep blue */
+        text-shadow: 0 0 5px rgba(26, 60, 107, 0.7), 0 0 10px rgba(26, 60, 107, 0.5);
+        transform: scale(1);
+      }
     }
 
     .wheel-container {
