@@ -217,10 +217,10 @@
     padding: 8px;
   }
 
-  /* Symmetrical circle positions at 45-degree intervals */
+  /* Original circle positions restored */
   .circle-1 {
-    left: calc(50% - 42px); /* Center - width/2 */
-    top: 0px;
+    left: 198px;
+    top: 18px;
     border: 2px solid var(--silver-white-light);
     color: var(--silver-white);
     animation: sparkle-border 2s ease-in-out infinite;
@@ -233,18 +233,19 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .circle-1, .circle-2, .circle-3, .circle-4, .circle-5, .circle-6, .circle-7, .circle-8 {
+    .circle-1 {
       animation: none;
+      box-shadow: 0 0 15px rgba(0,255,0,0.8);
     }
   }
 
-  .circle-2 { left: calc(50% + 84.85px); top: 84.85px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-3 { left: calc(50% + 84.85px); top: calc(50% + 84.85px); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-4 { left: calc(50% - 126.85px); top: calc(50% + 84.85px); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-5 { left: calc(50% - 126.85px); top: calc(50% - 42px); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-6 { left: calc(50% - 126.85px); top: 84.85px; border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-7 { left: calc(50% + 84.85px); top: calc(50% - 42px); border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
-  .circle-8 { left: calc(50% - 42px); top: calc(50% - 126.85px); border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-2 { left: 348px; top: 84px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-3 { left: 378px; top: 234px; border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-4 { left: 312px; top: 384px; border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-5 { left: 162px; top: 414px; border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-6 { left: 12px; top: 348px; border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-7 { left: -18px; top: 198px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-8 { left: 18px; top: 48px; border: 2px solid var(--gold-bright); color: var(--gold-bright); animation: sparkle-border 2s ease-in-out infinite; }
 
   .button-container {
     display: flex;
@@ -353,14 +354,14 @@
       height: 74px;
       font-size: 11px;
     }
-    .circle-1 { left: calc(50% - 37px); top: 0px; }
-    .circle-2 { left: calc(50% + 67.18px); top: 67.18px; }
-    .circle-3 { left: calc(50% + 67.18px); top: calc(50% + 67.18px); }
-    .circle-4 { left: calc(50% - 104.18px); top: calc(50% + 67.18px); }
-    .circle-5 { left: calc(50% - 104.18px); top: calc(50% - 37px); }
-    .circle-6 { left: calc(50% - 104.18px); top: 67.18px; }
-    .circle-7 { left: calc(50% + 67.18px); top: calc(50% - 37px); }
-    .circle-8 { left: calc(50% - 37px); top: calc(50% - 104.18px); }
+    .circle-1 { left: 153px; top: 14px; }
+    .circle-2 { left: 275px; top: 66px; }
+    .circle-3 { left: 299px; top: 185px; }
+    .circle-4 { left: 247px; top: 304px; }
+    .circle-5 { left: 128px; top: 327px; }
+    .circle-6 { left: 9px; top: 275px; }
+    .circle-7 { left: -14px; top: 157px; }
+    .circle-8 { left: 14px; top: 38px; }
     .connection-path {
       stroke-width: 0.8;
     }
@@ -369,6 +370,12 @@
     }
     .random-button, .random-button-more {
       width: 130px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .circle-1, .circle-2, .circle-3, .circle-4, .circle-5, .circle-6, .circle-7, .circle-8 {
+      animation: none;
     }
   }
 
@@ -391,14 +398,14 @@
       height: 62px;
       font-size: 10px;
     }
-    .circle-1 { left: calc(50% - 31px); top: 0px; }
-    .circle-2 { left: calc(50% + 56.57px); top: 56.57px; }
-    .circle-3 { left: calc(50% + 56.57px); top: calc(50% + 56.57px); }
-    .circle-4 { left: calc(50% - 87.57px); top: calc(50% + 56.57px); }
-    .circle-5 { left: calc(50% - 87.57px); top: calc(50% - 31px); }
-    .circle-6 { left: calc(50% - 87.57px); top: 56.57px; }
-    .circle-7 { left: calc(50% + 56.57px); top: calc(50% - 31px); }
-    .circle-8 { left: calc(50% - 31px); top: calc(50% - 87.57px); }
+    .circle-1 { left: 129px; top: 12px; }
+    .circle-2 { left: 231px; top: 56px; }
+    .circle-3 { left: 252px; top: 156px; }
+    .circle-4 { left: 207px; top: 256px; }
+    .circle-5 { left: 108px; top: 276px; }
+    .circle-6 { left: 8px; top: 231px; }
+    .circle-7 { left: -12px; top: 132px; }
+    .circle-8 { left: 12px; top: 32px; }
     .connection-path {
       stroke-width: 0.6;
     }
@@ -496,10 +503,11 @@
     svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
 
-    // Calculate the center of the wheel container
-    const wheelCenterX = wheelRect.width / 2;
-    const wheelCenterY = wheelRect.height / 2;
-    const hubRadius = wheelCenter.offsetWidth / 2;
+    // Calculate the center of the wheel-center element
+    const hubRect = wheelCenter.getBoundingClientRect();
+    const wheelCenterX = hubRect.left - wheelRect.left + hubRect.width / 2;
+    const wheelCenterY = hubRect.top - wheelRect.top + hubRect.height / 2;
+    const hubRadius = hubRect.width / 2;
 
     circles.forEach((circle, index) => {
       const circleRect = circle.getBoundingClientRect();
@@ -523,11 +531,9 @@
       const endX = circleCenterX - (dx / distance) * (circleRadius + circleGap);
       const endY = circleCenterY - (dy / distance) * (circleRadius + circleGap);
 
-      // Create quadratic Bezier curve for smooth connection
+      // Create straight path (removed Bezier curve for simplicity)
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const controlX = (startX + endX) / 2;
-      const controlY = (startY + endY) / 2;
-      const d = `M${startX},${startY} Q${controlX},${controlY} ${endX},${endY}`;
+      const d = `M${startX},${startY} L${endX},${endY}`;
       path.setAttribute('d', d);
       path.setAttribute('id', `path-${index}`);
       path.classList.add('connection-path');
