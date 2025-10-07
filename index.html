@@ -515,22 +515,27 @@
 
   function drawConnections() {
     const svg = document.querySelector('.connection-lines');
+    const wheelContainer = document.querySelector('.wheel-container');
     const wheelCenter = document.querySelector('.wheel-center');
     const circles = document.querySelectorAll('.circle');
 
+    // Get the bounding rectangle of the wheel container for relative positioning
+    const wheelRect = wheelContainer.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
     const hubRect = wheelCenter.getBoundingClientRect();
     const hubRadius = hubRect.width / 2;
-    const hubCenterX = hubRect.left + hubRadius - svgRect.left;
-    const hubCenterY = hubRect.top + hubRadius - svgRect.top;
+    // Calculate hub center relative to the wheel container
+    const hubCenterX = hubRect.left + hubRadius - wheelRect.left;
+    const hubCenterY = hubRect.top + hubRadius - wheelRect.top;
 
     svg.innerHTML = '';
 
     circles.forEach((circle, index) => {
       const rect = circle.getBoundingClientRect();
       const circleRadius = rect.width / 2;
-      const circleCenterX = rect.left + circleRadius - svgRect.left;
-      const circleCenterY = rect.top + circleRadius - svgRect.top;
+      // Calculate circle center relative to the wheel container
+      const circleCenterX = rect.left + circleRadius - wheelRect.left;
+      const circleCenterY = rect.top + circleRadius - wheelRect.top;
 
       const dx = circleCenterX - hubCenterX;
       const dy = circleCenterY - hubCenterY;
@@ -595,9 +600,14 @@
     });
   }
 
-  window.addEventListener('load', drawConnections);
-  window.addEventListener('resize', drawConnections);
-  window.addEventListener('orientationchange', drawConnections);
+  // Use a slight delay to ensure DOM is fully rendered
+  function initConnections() {
+    setTimeout(drawConnections, 100);
+  }
+
+  window.addEventListener('load', initConnections);
+  window.addEventListener('resize', initConnections);
+  window.addEventListener('orientationchange', initConnections);
 </script>
 </body>
 </html>
