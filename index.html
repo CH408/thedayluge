@@ -42,6 +42,8 @@
     --gold: #d4af37;
     --gold-bright: #ffd700;
     --marble-gray: #d3d3d3;
+    --silver-white: #ECEFF1;
+    --silver-white-light: #F7F9FB;
     --bright-dark-green: #00aa33;
     --dodgers-blue: #1e90ff;
     --synapse-duration: 1.6s;
@@ -214,7 +216,28 @@
     padding: 8px;
   }
 
-  .circle-1 { left: 378px; top: 198px; border: 2px solid var(--marble-gray); color: var(--marble-gray); }
+  .circle-1 {
+    left: 378px;
+    top: 198px;
+    border: 2px solid var(--silver-white-light);
+    color: var(--silver-white);
+    box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5);
+    animation: sparkle-border 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle-border {
+    0% { box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5); }
+    50% { box-shadow: 0 0 25px rgba(247,249,251,1), 0 0 35px rgba(247,249,251,0.7); }
+    100% { box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .circle-1 {
+      animation: none;
+      box-shadow: 0 0 15px rgba(247,249,251,0.8);
+    }
+  }
+
   .circle-2 { left: 325px; top: 325px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
   .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); }
   .circle-4 { left: 71px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
@@ -330,7 +353,11 @@
       height: 74px;
       font-size: 11px;
     }
-    .circle-1 { left: 295px; top: 153px; }
+    .circle-1 {
+      left: 295px;
+      top: 153px;
+      box-shadow: 0 0 12px rgba(247,249,251,0.8), 0 0 20px rgba(247,249,251,0.5);
+    }
     .circle-2 { left: 257px; top: 257px; }
     .circle-3 { left: 153px; top: 295px; }
     .circle-4 { left: 49px; top: 257px; }
@@ -368,7 +395,11 @@
       height: 62px;
       font-size: 10px;
     }
-    .circle-1 { left: 249px; top: 129px; }
+    .circle-1 {
+      left: 249px;
+      top: 129px;
+      box-shadow: 0 0 10px rgba(247,249,251,0.8), 0 0 15px rgba(247,249,251,0.5);
+    }
     .circle-2 { left: 218px; top: 218px; }
     .circle-3 { left: 129px; top: 249px; }
     .circle-4 { left: 40px; top: 218px; }
