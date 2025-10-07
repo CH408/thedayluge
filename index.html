@@ -285,7 +285,7 @@ function drawConnections() {
           motion.setAttribute('keyPoints','0;1;0'); // Go forward then back
           motion.setAttribute('keyTimes','0;0.5;1'); // Spend half time each direction
           motion.setAttribute('calcMode','linear');
-          motion.setAttribute('begin',`${i * 0.3 + burst * 0.8 + s * 0.05 + line * 0.25}s`); // Stagger the start times
+          motion.setAttribute('begin',`${i * 0.05 + burst * 0.3 + s * 0.01 + line * 0.15}s`); // Minimal stagger for immediate start
           motion.innerHTML = `<mpath href="#path${i}" />`;
           spark.appendChild(motion);
           
@@ -296,7 +296,7 @@ function drawConnections() {
           animate.setAttribute('keyTimes','0;0.2;0.8;1');
           animate.setAttribute('dur',`${speeds[line]}s`); // Match the motion speed
           animate.setAttribute('repeatCount','indefinite');
-          animate.setAttribute('begin',`${i * 0.3 + burst * 0.8 + s * 0.05 + line * 0.25}s`);
+          animate.setAttribute('begin',`${i * 0.05 + burst * 0.3 + s * 0.01 + line * 0.15}s`);
           spark.appendChild(animate);
         }
       }
