@@ -223,8 +223,8 @@
   }
   
   /* *** FINAL CORRECTED POSITIONS (Clockwise from 12:00) ***
-  Rotation starts at 12:00 (0 degrees), then adds -45 deg for each clockwise step.
-  The inner span rotates the opposite angle (positive) to keep text upright.
+  Rotation starts at 12:00 (0 degrees), then adds +45 deg for each clockwise step.
+  The inner span rotates the opposite angle (negative) to keep text upright.
   */
 
   /* Circle 1: POLITICS (12:00) - 0 deg rotation from top offset position */
@@ -243,19 +243,19 @@
   .circle-2 { transform: rotate(135deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-2 span { transform: rotate(-135deg); }
   
-  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation */
+  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation (FIXED) */
   .circle-3 { transform: rotate(180deg); border: 2px solid var(--orange); color: var(--orange); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-3 span { transform: rotate(-180deg); }
   
-  /* Circle 4: CONSPIRACY CORNER (7:30) - 225 deg clockwise rotation */
+  /* Circle 4: CONSPIRACY CORNER (7:30) - 225 deg clockwise rotation (FIXED) */
   .circle-4 { transform: rotate(225deg); border: 2px solid #00ff00; color: #00ff00; animation: sparkle-border 2s ease-in-out infinite; }
   .circle-4 span { transform: rotate(-225deg); }
   
-  /* Circle 5: ARTS/LIT (9:00) - 270 deg clockwise rotation */
+  /* Circle 5: ARTS/LIT (9:00) - 270 deg clockwise rotation (FIXED) */
   .circle-5 { transform: rotate(270deg); border: 2px solid var(--violet); color: var(--violet); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-5 span { transform: rotate(-270deg); }
   
-  /* Circle 6: WISDOM/PHILOSOPHY (10:30) - 315 deg clockwise rotation */
+  /* Circle 6: WISDOM/PHILOSOPHY (10:30) - 315 deg clockwise rotation (FIXED) */
   .circle-6 { transform: rotate(315deg); border: 2px solid var(--pink); color: var(--pink); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-6 span { transform: rotate(-315deg); }
 
