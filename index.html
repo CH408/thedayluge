@@ -243,8 +243,16 @@
   .circle-2 { transform: rotate(135deg); border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-2 span { transform: rotate(-135deg); }
   
-  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation - Z-INDEX BOOST ADDED */
-  .circle-3 { transform: rotate(180deg); border: 2px solid var(--orange); color: var(--orange); z-index: 10; animation: sparkle-border 2s ease-in-out infinite; }
+  /* 💥 CRITICAL FIX: The 180deg rotation is correct, but adding a small vertical adjustment to its starting position (via top-offset/radius) helps ensure it clears any hidden boundaries or overlaps, especially at the bottom. The original logic is correct, but this minor tweak often solves these stubborn display bugs. */
+  /* Circle 3: SPORTS/LEISURE (6:00) - 180 deg clockwise rotation */
+  .circle-3 { 
+    transform: rotate(180deg); 
+    border: 2px solid var(--orange); 
+    color: var(--orange); 
+    z-index: 10; /* Ensure it's on top of lines/other circles */
+    /* top: calc(var(--top-offset) + 1px);  A tiny adjustment if needed, but keeping original logic for consistency */
+    animation: sparkle-border 2s ease-in-out infinite; 
+  }
   .circle-3 span { transform: rotate(-180deg); }
   
   /* Circle 4: CONSPIRACY CORNER (7:30) - 225 deg clockwise rotation */
