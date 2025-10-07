@@ -217,24 +217,24 @@
   }
 
   .circle-1 {
-    left: 378px;
-    top: 198px;
-    border: 2px solid var(--silver-white-light);
-    color: var(--silver-white);
-    box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5);
+    left: 198px;
+    top: 18px;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5);
     animation: sparkle-border 2s ease-in-out infinite;
   }
 
   @keyframes sparkle-border {
-    0% { box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5); }
-    50% { box-shadow: 0 0 25px rgba(247,249,251,1), 0 0 35px rgba(247,249,251,0.7); }
-    100% { box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5); }
+    0% { box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5); }
+    50% { box-shadow: 0 0 25px rgba(0,255,0,1), 0 0 35px rgba(0,255,0,0.7); }
+    100% { box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .circle-1 {
       animation: none;
-      box-shadow: 0 0 15px rgba(247,249,251,0.8);
+      box-shadow: 0 0 15px rgba(0,255,0,0.8);
     }
   }
 
@@ -243,7 +243,7 @@
   .circle-4 { left: 71px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
   .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); }
   .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); }
-  .circle-7 { left: 198px; top: 18px; border: 2px solid #00ff00; color: #00ff00; }
+  .circle-7 { left: 378px; top: 198px; border: 2px solid var(--silver-white-light); color: var(--silver-white); box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
@@ -354,16 +354,16 @@
       font-size: 11px;
     }
     .circle-1 {
-      left: 295px;
-      top: 153px;
-      box-shadow: 0 0 12px rgba(247,249,251,0.8), 0 0 20px rgba(247,249,251,0.5);
+      left: 153px;
+      top: 11px;
+      box-shadow: 0 0 12px rgba(0,255,0,0.8), 0 0 20px rgba(0,255,0,0.5);
     }
     .circle-2 { left: 257px; top: 257px; }
     .circle-3 { left: 153px; top: 295px; }
     .circle-4 { left: 49px; top: 257px; }
     .circle-5 { left: 11px; top: 153px; }
     .circle-6 { left: 49px; top: 49px; }
-    .circle-7 { left: 153px; top: 11px; }
+    .circle-7 { left: 295px; top: 153px; box-shadow: 0 0 12px rgba(247,249,251,0.8), 0 0 20px rgba(247,249,251,0.5); }
     .circle-8 { left: 257px; top: 49px; }
     .connection-path {
       stroke-width: 0.8;
@@ -396,16 +396,16 @@
       font-size: 10px;
     }
     .circle-1 {
-      left: 249px;
-      top: 129px;
-      box-shadow: 0 0 10px rgba(247,249,251,0.8), 0 0 15px rgba(247,249,251,0.5);
+      left: 129px;
+      top: 9px;
+      box-shadow: 0 0 10px rgba(0,255,0,0.8), 0 0 15px rgba(0,255,0,0.5);
     }
     .circle-2 { left: 218px; top: 218px; }
     .circle-3 { left: 129px; top: 249px; }
     .circle-4 { left: 40px; top: 218px; }
     .circle-5 { left: 9px; top: 129px; }
     .circle-6 { left: 40px; top: 40px; }
-    .circle-7 { left: 129px; top: 9px; }
+    .circle-7 { left: 249px; top: 129px; box-shadow: 0 0 10px rgba(247,249,251,0.8), 0 0 15px rgba(247,249,251,0.5); }
     .circle-8 { left: 218px; top: 40px; }
     .connection-path {
       stroke-width: 0.6;
@@ -432,13 +432,13 @@
   <div class="wheel-container">
     <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
-    <div class="circle circle-1" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
+    <div class="circle circle-1" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
     <div class="circle circle-2" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
     <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
     <div class="circle circle-4" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECHNOLOGY</div>
     <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
     <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
-    <div class="circle circle-7" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
+    <div class="circle circle-7" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
     <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});">HISTORY</div>
   </div>
 
