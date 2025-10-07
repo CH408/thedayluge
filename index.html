@@ -39,9 +39,9 @@
       --silver-white-light: #F7F9FB;
       --connection-color: #cfd8dc;
       --pulse-color: #ffffff;
-      --wheel-size: 480px;
-      --circle-size: 84px;
-      --radius: 160px;
+      --wheel-size: 480px; /* Original size */
+      --circle-size: 84px; /* Original size */
+      --radius: 160px; /* Original size */
       --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
       --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
     }
@@ -56,21 +56,22 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100dvh; /* Use dynamic viewport height */
-      overflow-x: hidden; /* Allow vertical scroll, prevent horizontal */
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); /* Respect safe areas */
+      min-height: 100dvh; /* Dynamic viewport height for iPhone */
+      overflow-x: hidden; /* Prevent horizontal overflow */
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); /* Respect iPhone safe areas */
     }
 
     .header {
       position: absolute;
-      top: 20px; /* Reduced for mobile */
+      top: 20px; /* Adjusted to avoid overlap */
       text-align: center;
       z-index: 10;
+      width: 100%; /* Ensure header centers across full width */
     }
     .header h1 {
       text-transform: uppercase;
       letter-spacing: .5px;
-      font-size: clamp(24px, 5vw, 36px); /* Responsive font size */
+      font-size: 42px; /* Original size */
       color: #fff;
     }
 
@@ -113,7 +114,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 135px;
+      width: 135px; /* Original size */
       height: 135px;
       background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
       color: yellow;
@@ -123,7 +124,7 @@
       align-items: center;
       justify-content: center;
       text-transform: uppercase;
-      font-size: 18px;
+      font-size: 18px; /* Original size */
       font-weight: 900;
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
@@ -148,7 +149,7 @@
       background: #000;
       color: #fff;
       font-weight: 900;
-      font-size: 12px;
+      font-size: 12px; /* Original size */
       text-align: center;
       transform-origin: 50% calc(50% + var(--radius));
       top: var(--top-offset);
@@ -232,41 +233,12 @@
       background: var(--yellow);
       color: var(--red);
       border: 2px solid var(--red);
-      padding: 14px 28px;
+      padding: 14px 28px; /* Original size */
       border-radius: 30px;
       font-family: 'Special Elite', monospace;
       font-weight: 900;
+      font-size: 16px; /* Original size */
       cursor: pointer;
-    }
-
-    /* Media queries for mobile responsiveness */
-    @media (max-width: 600px) {
-      :root {
-        --wheel-size: 300px; /* Smaller wheel for mobile */
-        --circle-size: 60px;
-        --radius: 100px;
-      }
-      .header {
-        top: 10px;
-      }
-      .header h1 {
-        font-size: 24px;
-      }
-      .wheel-center {
-        width: 100px;
-        height: 100px;
-        font-size: 14px;
-      }
-      .circle {
-        font-size: 10px;
-      }
-      .button-container {
-        margin-top: 20px;
-      }
-      .random-button {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
     }
   </style>
 </head>
