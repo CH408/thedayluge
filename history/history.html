@@ -129,7 +129,7 @@
     .content-links {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 14px;
       flex: 1;
       max-height: calc(100% - 38px);
       overflow-y: auto;
@@ -176,6 +176,12 @@
       width: 100%;
       overflow-wrap: anywhere;
       hyphens: auto;
+    }
+    .loading-indicator {
+      text-align: center;
+      font-size: 15px;
+      color: var(--gold);
+      padding: 10px;
     }
     .perimeter-box {
       position: absolute;
@@ -437,6 +443,15 @@
       // Load content from history-links.txt
       async function loadHistoryContent() {
         console.log('Starting to load history content');
+        const contentLinksContainer = document.querySelector('.content-links');
+        if (!contentLinksContainer) {
+          console.error('Content links container not found');
+          return;
+        }
+        
+        // Show loading indicator
+        contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
+        
         try {
           console.log('Attempting to fetch ./history-links.txt');
           const response = await fetch('./history-links.txt');
@@ -469,14 +484,8 @@
           
           // Take first 8 entries across all categories for central box
           const latest8 = entries.slice(0, 8);
-          const contentLinksContainer = document.querySelector('.content-links');
           
-          if (!contentLinksContainer) {
-            console.error('Content links container not found');
-            return;
-          }
-          
-          // Clear existing placeholder content
+          // Clear loading indicator
           contentLinksContainer.innerHTML = '';
           
           // Ensure we always try to show 8 entries (pad with error message if needed)
@@ -491,7 +500,7 @@
           }
           while (displayEntries.length < 8) {
             displayEntries.push({
-              title: `Placeholder Entry ${displayEntries.length + 1}`,
+              title: `No additional content available`,
               link: '#',
               category: 'placeholder'
             });
@@ -503,6 +512,7 @@
           displayEntries.forEach((entry, index) => {
             const linkElement = document.createElement('div');
             linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
             linkElement.innerHTML = `
               <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
             `;
@@ -517,37 +527,33 @@
           
         } catch (error) {
           console.error('Error loading history-links.txt:', error);
-          const contentLinksContainer = document.querySelector('.content-links');
-          if (contentLinksContainer) {
-            console.log('Displaying error message due to fetch failure');
-            contentLinksContainer.innerHTML = '';
-            const errorEntry = {
-              title: 'Error loading history content. Check history-links.txt or console for details.',
+          contentLinksContainer.innerHTML = '';
+          
+          console.log('Displaying error message due to fetch failure');
+          const displayEntries = [{
+            title: 'Error loading content. Please try again later.',
+            link: '#',
+            category: 'error'
+          }];
+          while (displayEntries.length < 8) {
+            displayEntries.push({
+              title: `No additional content available`,
               link: '#',
-              category: 'error'
-            };
-            const displayEntries = [errorEntry];
-            while (displayEntries.length < 8) {
-              displayEntries.push({
-                title: `Placeholder Entry ${displayEntries.length + 1}`,
-                link: '#',
-                category: 'placeholder'
-              });
-            }
-            displayEntries.forEach((entry, index) => {
-              const linkElement = document.createElement('div');
-              linkElement.className = 'content-link';
-              linkElement.innerHTML = `
-                <span class="link-title">${entry.title}</span>
-              `;
-              linkElement.addEventListener('click', () => {
-                if (entry.link !== '#') {
-                  window.location.href = entry.link;
-                }
-              });
-              contentLinksContainer.appendChild(linkElement);
+              category: 'placeholder'
             });
           }
+          displayEntries.forEach((entry, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
+            linkElement.innerHTML = `
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+            `;
+            linkElement.addEventListener('click', (e) => {
+              if (entry.link === '#') e.preventDefault();
+            });
+            contentLinksContainer.appendChild(linkElement);
+          });
         }
       }
       
