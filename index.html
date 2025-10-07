@@ -44,8 +44,8 @@
     --marble-gray: #d3d3d3;
     --silver-white: #ECEFF1;
     --silver-white-light: #F7F9FB;
-    --bright-dark-green: #00aa33;
-    --dodgers-blue: #1e90ff;
+    --bright-dark-green: #00cc44;
+    --dodgers-blue: #5dccdb;
     --synapse-duration: 1.6s;
     --connection-color: var(--light-cyan-glow);
   }
@@ -226,9 +226,9 @@
   }
 
   @keyframes sparkle-border {
-    0% { box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5); }
-    50% { box-shadow: 0 0 25px rgba(0,255,0,1), 0 0 35px rgba(0,255,0,0.7); }
-    100% { box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5); }
+    0% { box-shadow: 0 0 8px currentColor; }
+    50% { box-shadow: 0 0 12px currentColor; }
+    100% { box-shadow: 0 0 8px currentColor; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -238,20 +238,20 @@
     }
   }
 
-  .circle-2 { left: 325px; top: 325px; border: 2px solid var(--bright-dark-green); color: var(--bright-dark-green); }
-  .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); }
-  .circle-4 { left: 71px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
-  .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); }
-  .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); }
+  .circle-2 { left: 325px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); box-shadow: 0 0 15px rgba(93,204,219,0.8), 0 0 25px rgba(93,204,219,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-3 { left: 198px; top: 378px; border: 2px solid var(--orange); color: var(--orange); box-shadow: 0 0 15px rgba(255,136,0,0.8), 0 0 25px rgba(255,136,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-4 { left: 71px; top: 325px; border: 2px solid #00ff00; color: #00ff00; box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); box-shadow: 0 0 15px rgba(204,136,255,0.8), 0 0 25px rgba(204,136,255,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); box-shadow: 0 0 15px rgba(255,105,180,0.8), 0 0 25px rgba(255,105,180,0.5); animation: sparkle-border 2s ease-in-out infinite; }
   .circle-7 {
     left: 378px;
     top: 198px;
-    border: 2px solid #00ff00;
-    color: #00ff00;
-    box-shadow: 0 0 15px rgba(0,255,0,0.8), 0 0 25px rgba(0,255,0,0.5);
+    border: 2px solid var(--bright-dark-green);
+    color: var(--bright-dark-green);
+    box-shadow: 0 0 15px rgba(0,204,68,0.8), 0 0 25px rgba(0,204,68,0.5);
     animation: sparkle-border 2s ease-in-out infinite;
   }
-  .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
+  .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); box-shadow: 0 0 15px rgba(255,215,0,0.8), 0 0 25px rgba(255,215,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
 
   .button-container {
     display: flex;
@@ -368,20 +368,18 @@
       box-shadow: 0 0 12px rgba(247,249,251,0.8), 0 0 20px rgba(247,249,251,0.5);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-2 { left: 257px; top: 257px; }
-    .circle-3 { left: 153px; top: 295px; }
-    .circle-4 { left: 49px; top: 257px; }
-    .circle-5 { left: 11px; top: 153px; }
-    .circle-6 { left: 49px; top: 49px; }
+    .circle-2 { left: 257px; top: 257px; box-shadow: 0 0 12px rgba(93,204,219,0.8), 0 0 20px rgba(93,204,219,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-3 { left: 153px; top: 295px; box-shadow: 0 0 12px rgba(255,136,0,0.8), 0 0 20px rgba(255,136,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-4 { left: 49px; top: 257px; box-shadow: 0 0 12px rgba(0,255,0,0.8), 0 0 20px rgba(0,255,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-5 { left: 11px; top: 153px; box-shadow: 0 0 12px rgba(204,136,255,0.8), 0 0 20px rgba(204,136,255,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-6 { left: 49px; top: 49px; box-shadow: 0 0 12px rgba(255,105,180,0.8), 0 0 20px rgba(255,105,180,0.5); animation: sparkle-border 2s ease-in-out infinite; }
     .circle-7 {
       left: 295px;
       top: 153px;
-      border: 2px solid #00ff00;
-      color: #00ff00;
-      box-shadow: 0 0 12px rgba(0,255,0,0.8), 0 0 20px rgba(0,255,0,0.5);
+      box-shadow: 0 0 12px rgba(0,204,68,0.8), 0 0 20px rgba(0,204,68,0.5);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-8 { left: 257px; top: 49px; }
+    .circle-8 { left: 257px; top: 49px; box-shadow: 0 0 12px rgba(255,215,0,0.8), 0 0 20px rgba(255,215,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
     .connection-path {
       stroke-width: 0.8;
     }
@@ -394,7 +392,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .circle-1, .circle-7 {
+    .circle-1, .circle-2, .circle-3, .circle-4, .circle-5, .circle-6, .circle-7, .circle-8 {
       animation: none;
       box-shadow: 0 0 12px rgba(0,255,0,0.8);
     }
@@ -427,20 +425,18 @@
       box-shadow: 0 0 10px rgba(247,249,251,0.8), 0 0 15px rgba(247,249,251,0.5);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-2 { left: 218px; top: 218px; }
-    .circle-3 { left: 129px; top: 249px; }
-    .circle-4 { left: 40px; top: 218px; }
-    .circle-5 { left: 9px; top: 129px; }
-    .circle-6 { left: 40px; top: 40px; }
+    .circle-2 { left: 218px; top: 218px; box-shadow: 0 0 10px rgba(93,204,219,0.8), 0 0 15px rgba(93,204,219,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-3 { left: 129px; top: 249px; box-shadow: 0 0 10px rgba(255,136,0,0.8), 0 0 15px rgba(255,136,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-4 { left: 40px; top: 218px; box-shadow: 0 0 10px rgba(0,255,0,0.8), 0 0 15px rgba(0,255,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-5 { left: 9px; top: 129px; box-shadow: 0 0 10px rgba(204,136,255,0.8), 0 0 15px rgba(204,136,255,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+    .circle-6 { left: 40px; top: 40px; box-shadow: 0 0 10px rgba(255,105,180,0.8), 0 0 15px rgba(255,105,180,0.5); animation: sparkle-border 2s ease-in-out infinite; }
     .circle-7 {
       left: 249px;
       top: 129px;
-      border: 2px solid #00ff00;
-      color: #00ff00;
-      box-shadow: 0 0 10px rgba(0,255,0,0.8), 0 0 15px rgba(0,255,0,0.5);
+      box-shadow: 0 0 10px rgba(0,204,68,0.8), 0 0 15px rgba(0,204,68,0.5);
       animation: sparkle-border 2s ease-in-out infinite;
     }
-    .circle-8 { left: 218px; top: 40px; }
+    .circle-8 { left: 218px; top: 40px; box-shadow: 0 0 10px rgba(255,215,0,0.8), 0 0 15px rgba(255,215,0,0.5); animation: sparkle-border 2s ease-in-out infinite; }
     .connection-path {
       stroke-width: 0.6;
     }
@@ -467,12 +463,12 @@
     <svg class="connection-lines" width="100%" height="100%"></svg>
     <a class="wheel-center" href="./news.html" aria-label="Go to Trending News" onclick="gtag('event', 'click_circle', {'circle': 'trending_news'});">TRENDING<br>NEWS</a>
     <div class="circle circle-1" style="left: 198px; top: 18px;" onclick="goToCategory('politics'); gtag('event', 'click_circle', {'circle': 'politics'});">POLITICS</div>
-    <div class="circle circle-2" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
+    <div class="circle circle-2" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECHNOLOGY</div>
     <div class="circle circle-3" onclick="goToCategory('sports-leisure'); gtag('event', 'click_circle', {'circle': 'sports_leisure'});">SPORTS & LEISURE</div>
-    <div class="circle circle-4" onclick="goToCategory('science-nature-technology'); gtag('event', 'click_circle', {'circle': 'science_nature_technology'});">SCIENCE, NATURE & TECHNOLOGY</div>
+    <div class="circle circle-4" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
     <div class="circle circle-5" onclick="goToCategory('arts-literature'); gtag('event', 'click_circle', {'circle': 'arts_literature'});">ARTS & LITERATURE</div>
     <div class="circle circle-6" onclick="goToCategory('wisdom-philosophy'); gtag('event', 'click_circle', {'circle': 'wisdom_philosophy'});">WISDOM & PHILOSOPHY</div>
-    <div class="circle circle-7" style="left: 378px; top: 198px;" onclick="goToCategory('conspiracy-corner'); gtag('event', 'click_circle', {'circle': 'conspiracy_corner'});">CONSPIRACY CORNER</div>
+    <div class="circle circle-7" style="left: 378px; top: 198px;" onclick="goToCategory('markets-economics'); gtag('event', 'click_circle', {'circle': 'markets_economics'});">MARKETS & ECONOMICS</div>
     <div class="circle circle-8" onclick="goToCategory('history'); gtag('event', 'click_circle', {'circle': 'history'});">HISTORY</div>
   </div>
 
