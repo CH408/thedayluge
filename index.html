@@ -3,22 +3,54 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Option 6: Gradient Flow</title>
+<title>THE DAYLUGE</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+<script>
+  window.cookieconsent.initialise({
+    "palette": { "popup": { "background": "#000" }, "button": { "background": "#f1d600" } },
+    "content": { "message": "We use cookies for Google Analytics.", "dismiss": "Got it!", "link": "Learn more", "href": "/privacy" }
+  });
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM9B5CP8GS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZM9B5CP8GS');
+</script>
+
 <style>
   :root {
     --red: #cc0000;  
+    --orange: #ff8800;  
+    --green: #00dd55;
+    --blue: #1a1a80;
+    --light-blue: #33ddff;
+    --violet: #cc88ff;
+    --pink: #ff69b4;
+    --yellow: #ffcc00;
+    --bright-blue: #00b7eb;
+    --ink: #111;  
     --silver-white: #ECEFF1;
+    --silver-white-light: #F7F9FB;
     --connection-color: #cfd8dc;
+    --pulse-color: #ffffff;
     --wheel-size: 480px;
     --circle-size: 84px;
     --radius: 160px; 
     --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
     --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
     font-family: 'Special Elite', monospace;
+    color: var(--ink);
     background: #000;
     display: flex;
     flex-direction: column;
@@ -27,9 +59,10 @@
     min-height: 100vh;
     overflow: hidden;
   }
-  .header { position: absolute; top: 20px; text-align: center; z-index: 10; }
-  .header h1 { font-size: 24px; color: #fff; margin-bottom: 5px; }
-  .header p { font-size: 12px; color: #0f0; }
+
+  .header { position: absolute; top: 50px; text-align: center; z-index: 10; }
+  .header h1 { text-transform: uppercase; letter-spacing: .5px; font-size: 42px; color: #fff; }
+
   .wheel-container {
     position: relative;
     width: var(--wheel-size);
@@ -37,6 +70,7 @@
     margin: 0 auto;
     z-index: 5;
   }
+
   .connection-lines {
     position: absolute; top: 0; left: 0;
     width: 100%; height: 100%;
@@ -45,16 +79,53 @@
   }
   .connection-path {
     fill: none;
-    stroke: url(#gradient);
-    stroke-width: 1.8;
+    stroke: var(--connection-color);
+    stroke-width: 0.5;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 16px var(--connection-color));
+    stroke-opacity: 0.25;
   }
-  @keyframes gradientShift {
-    0% { stop-opacity: 0; }
-    50% { stop-opacity: 1; }
-    100% { stop-opacity: 0; }
+
+  .glow-path {
+    fill: none;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 12px currentColor);
+    stroke-dasharray: 20 1000;
+    stroke-dashoffset: 0;
   }
+  
+  .glow-fast {
+    animation: glowPulseFast 1.5s ease-in-out infinite;
+  }
+  
+  .glow-medium {
+    animation: glowPulseMedium 2s ease-in-out infinite;
+  }
+  
+  .glow-slow {
+    animation: glowPulseSlow 2.5s ease-in-out infinite;
+  }
+  
+  @keyframes glowPulseFast {
+    0%, 100% { stroke-dashoffset: 0; opacity: 0; stroke-width: 1; }
+    10% { opacity: 0.8; stroke-width: 1.2; }
+    50% { stroke-dashoffset: -1020; opacity: 1; stroke-width: 2; }
+    90% { opacity: 0; stroke-width: 1; }
+  }
+  
+  @keyframes glowPulseMedium {
+    0%, 100% { stroke-dashoffset: 0; opacity: 0; stroke-width: 1; }
+    10% { opacity: 0.8; stroke-width: 1.2; }
+    50% { stroke-dashoffset: -1020; opacity: 1; stroke-width: 2.2; }
+    90% { opacity: 0; stroke-width: 1; }
+  }
+  
+  @keyframes glowPulseSlow {
+    0%, 100% { stroke-dashoffset: 0; opacity: 0; stroke-width: 1; }
+    10% { opacity: 0.8; stroke-width: 1.2; }
+    50% { stroke-dashoffset: -1020; opacity: 1; stroke-width: 2.5; }
+    90% { opacity: 0; stroke-width: 1; }
+  }
+
   .wheel-center {
     position: absolute;
     top: 50%; left: 50%;
@@ -65,73 +136,134 @@
     border: 2px solid #ffdd00;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 900;
+    text-transform: uppercase;
+    font-size: 18px; font-weight: 900;
+    letter-spacing: 0.5px;
     box-shadow: 0 0 30px #ffdd0088;
+    animation: pulse 5s ease-in-out infinite;
+    text-decoration: none; text-align: center;
     z-index: 5;
   }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 30px #ffdd0088; }
+    50% { box-shadow: 0 0 60px #ffdd00ff; transform: translate(-50%,-50%) scale(1.02); }
+  }
+
   .circle {
     position: absolute;
     width: var(--circle-size); height: var(--circle-size);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     background: #000;
-    font-weight: 900; font-size: 11px; text-align: center;
+    color: #fff;
+    font-weight: 900; font-size: 12px; text-align: center;
     transform-origin: 50% calc(50% + var(--radius));
     top: var(--top-offset); left: var(--left-offset);
     z-index: 10;
     border: 2px solid #666;
   }
-  .circle-1 { transform: rotate(0deg); border-color: var(--silver-white); color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
+
+  /* Positions with counter-rotated text and colored text/glow */
+  .circle-1 { 
+    transform: rotate(0deg); 
+    border-color: var(--silver-white); 
+    color: var(--silver-white);
+    box-shadow: 0 0 8px var(--silver-white);
+  }
   .circle-1 span { transform: rotate(0deg); }
-  .circle-8 { transform: rotate(45deg); border-color: #ffd700; color: #ffd700; box-shadow: 0 0 8px #ffd700; }
+  
+  .circle-8 { 
+    transform: rotate(45deg); 
+    border-color: #ffd700; 
+    color: #ffd700;
+    box-shadow: 0 0 8px #ffd700;
+  }
   .circle-8 span { transform: rotate(-45deg); }
-  .circle-7 { transform: rotate(90deg); border-color: #00cc44; color: #00cc44; box-shadow: 0 0 8px #00cc44; }
+  
+  .circle-7 { 
+    transform: rotate(90deg); 
+    border-color: #00cc44; 
+    color: #00cc44;
+    box-shadow: 0 0 8px #00cc44;
+  }
   .circle-7 span { transform: rotate(-90deg); }
-  .circle-2 { transform: rotate(135deg); border-color: #5dccdb; color: #5dccdb; box-shadow: 0 0 8px #5dccdb; }
+  
+  .circle-2 { 
+    transform: rotate(135deg); 
+    border-color: #5dccdb; 
+    color: #5dccdb;
+    box-shadow: 0 0 8px #5dccdb;
+  }
   .circle-2 span { transform: rotate(-135deg); }
-  .circle-3 { transform: rotate(180deg); border-color: #ff8800; color: #ff8800; box-shadow: 0 0 8px #ff8800; }
+  
+  .circle-3 { 
+    transform: rotate(180deg); 
+    border-color: #ff8800; 
+    color: #ff8800;
+    box-shadow: 0 0 8px #ff8800;
+  }
   .circle-3 span { transform: rotate(-180deg); }
-  .circle-4 { transform: rotate(225deg); border-color: #00ff00; color: #00ff00; box-shadow: 0 0 8px #00ff00; }
+  
+  .circle-4 { 
+    transform: rotate(225deg); 
+    border-color: #00ff00; 
+    color: #00ff00;
+    box-shadow: 0 0 8px #00ff00;
+  }
   .circle-4 span { transform: rotate(-225deg); }
-  .circle-5 { transform: rotate(270deg); border-color: #cc88ff; color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
+  
+  .circle-5 { 
+    transform: rotate(270deg); 
+    border-color: #cc88ff; 
+    color: #cc88ff;
+    box-shadow: 0 0 8px #cc88ff;
+  }
   .circle-5 span { transform: rotate(-270deg); }
-  .circle-6 { transform: rotate(315deg); border-color: #ff69b4; color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
+  
+  .circle-6 { 
+    transform: rotate(315deg); 
+    border-color: #ff69b4; 
+    color: #ff69b4;
+    box-shadow: 0 0 8px #ff69b4;
+  }
   .circle-6 span { transform: rotate(-315deg); }
+
+  .button-container { margin-top: 30px; }
+  .random-button {
+    background: var(--yellow);
+    color: var(--red);
+    border: 2px solid var(--red);
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-family: 'Special Elite', monospace;
+    font-weight: 900;
+    cursor: pointer;
+    z-index: 10;
+  }
 </style>
 </head>
+
 <body>
-  <div class="header">
-    <h1>OPTION 6</h1>
-    <p>Animated Gradient Flow</p>
-  </div>
+  <div class="header"><h1>THE DAYLUGE</h1></div>
+
   <div class="wheel-container">
-    <svg class="connection-lines">
-      <defs>
-        <linearGradient id="gradient">
-          <stop offset="0%" style="stop-color:#cfd8dc;stop-opacity:0.3" />
-          <stop offset="40%" style="stop-color:#ffffff;stop-opacity:2">
-            <animate attributeName="offset" values="0%;100%;0%" dur="3s" repeatCount="indefinite" />
-          </stop>
-          <stop offset="50%" style="stop-color:#ffffff;stop-opacity:2.5">
-            <animate attributeName="offset" values="0%;100%;0%" dur="3s" repeatCount="indefinite" />
-          </stop>
-          <stop offset="60%" style="stop-color:#ffffff;stop-opacity:2">
-            <animate attributeName="offset" values="0%;100%;0%" dur="3s" repeatCount="indefinite" />
-          </stop>
-          <stop offset="100%" style="stop-color:#cfd8dc;stop-opacity:0.3" />
-        </linearGradient>
-      </defs>
-    </svg>
-    <div class="wheel-center">CENTER</div>
+    <svg class="connection-lines"></svg>
+    <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
+
     <div class="circle circle-1"><span>POLITICS</span></div>
     <div class="circle circle-8"><span>HISTORY</span></div>
-    <div class="circle circle-7"><span>MARKETS</span></div>
-    <div class="circle circle-2"><span>SCIENCE</span></div>
-    <div class="circle circle-3"><span>SPORTS</span></div>
-    <div class="circle circle-4"><span>CONSPIRACY</span></div>
-    <div class="circle circle-5"><span>ARTS</span></div>
-    <div class="circle circle-6"><span>WISDOM</span></div>
+    <div class="circle circle-7"><span>MARKETS & ECONOMICS</span></div>
+    <div class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></div>
+    <div class="circle circle-3"><span>SPORTS & LEISURE</span></div>
+    <div class="circle circle-4"><span>CONSPIRACY CORNER</span></div>
+    <div class="circle circle-5"><span>ARTS & LITERATURE</span></div>
+    <div class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></div>
   </div>
+
+  <div class="button-container">
+    <button class="random-button">SURPRISE ME!</button>
+  </div>
+
 <script>
 function drawConnections() {
   const svg = document.querySelector('.connection-lines');
@@ -141,6 +273,7 @@ function drawConnections() {
   const rect = wheel.getBoundingClientRect();
   svg.setAttribute('width', rect.width);
   svg.setAttribute('height', rect.height);
+  svg.innerHTML = '';
 
   const hubRect = hub.getBoundingClientRect();
   const cx = hubRect.left - rect.left + hubRect.width / 2;
@@ -157,78 +290,26 @@ function drawConnections() {
     const dist = Math.sqrt(dx*dx + dy*dy);
     const sx = cx + (dx/dist)*(hubR+10);
     const sy = cy + (dy/dist)*(hubR+10);
-    const ex = x - (dx/dist)*(r+2);  // Extended closer to circle edge
-    const ey = y - (dy/dist)*(r+2);
+    const ex = x - (dx/dist)*(r+10);
+    const ey = y - (dy/dist)*(r+10);
 
-    // Create unique gradient for each line
-    const gradId = `gradient${i}`;
-    const grad = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
-    grad.setAttribute('id', gradId);
-    grad.setAttribute('x1', '0%');
-    grad.setAttribute('y1', '0%');
-    grad.setAttribute('x2', '100%');
-    grad.setAttribute('y2', '0%');
-    
-    const stop1 = document.createElementNS('http://www.w3.org/2000/svg','stop');
-    stop1.setAttribute('offset', '0%');
-    stop1.setAttribute('style', 'stop-color:#cfd8dc;stop-opacity:0.3');
-    
-    const stop2 = document.createElementNS('http://www.w3.org/2000/svg','stop');
-    stop2.setAttribute('offset', '45%');
-    stop2.setAttribute('style', 'stop-color:#ffffff;stop-opacity:2.5');
-    const anim2 = document.createElementNS('http://www.w3.org/2000/svg','animate');
-    anim2.setAttribute('attributeName', 'offset');
-    anim2.setAttribute('values', '0%;100%;0%');
-    anim2.setAttribute('dur', '3s');
-    anim2.setAttribute('repeatCount', 'indefinite');
-    anim2.setAttribute('begin', `${i * 0.3}s`);
-    stop2.appendChild(anim2);
-    
-    const stop3 = document.createElementNS('http://www.w3.org/2000/svg','stop');
-    stop3.setAttribute('offset', '50%');
-    stop3.setAttribute('style', 'stop-color:#ffffff;stop-opacity:3');
-    const anim3 = document.createElementNS('http://www.w3.org/2000/svg','animate');
-    anim3.setAttribute('attributeName', 'offset');
-    anim3.setAttribute('values', '0%;100%;0%');
-    anim3.setAttribute('dur', '3s');
-    anim3.setAttribute('repeatCount', 'indefinite');
-    anim3.setAttribute('begin', `${i * 0.3}s`);
-    stop3.appendChild(anim3);
-    
-    const stop4 = document.createElementNS('http://www.w3.org/2000/svg','stop');
-    stop4.setAttribute('offset', '55%');
-    stop4.setAttribute('style', 'stop-color:#ffffff;stop-opacity:2.5');
-    const anim4 = document.createElementNS('http://www.w3.org/2000/svg','animate');
-    anim4.setAttribute('attributeName', 'offset');
-    anim4.setAttribute('values', '0%;100%;0%');
-    anim4.setAttribute('dur', '3s');
-    anim4.setAttribute('repeatCount', 'indefinite');
-    anim4.setAttribute('begin', `${i * 0.3}s`);
-    stop4.appendChild(anim4);
-    
-    const stop5 = document.createElementNS('http://www.w3.org/2000/svg','stop');
-    stop5.setAttribute('offset', '100%');
-    stop5.setAttribute('style', 'stop-color:#cfd8dc;stop-opacity:0.3');
-    
-    grad.appendChild(stop1);
-    grad.appendChild(stop2);
-    grad.appendChild(stop3);
-    grad.appendChild(stop4);
-    grad.appendChild(stop5);
-    
-    const defs = svg.querySelector('defs');
-    defs.appendChild(grad);
-
+    // Base line
     const path = document.createElementNS('http://www.w3.org/2000/svg','path');
     path.setAttribute('d',`M${sx},${sy} L${ex},${ey}`);
-    path.setAttribute('stroke', `url(#${gradId})`);
     path.classList.add('connection-path');
     svg.appendChild(path);
+
+    // Glowing pulse line
+    const glowPath = document.createElementNS('http://www.w3.org/2000/svg','path');
+    glowPath.setAttribute('d',`M${sx},${sy} L${ex},${ey}`);
+    glowPath.classList.add('glow-path');
+    glowPath.style.animationDelay = `${i * 0.4}s`;
+    svg.appendChild(glowPath);
   });
 }
 
-window.addEventListener('load', ()=> setTimeout(drawConnections, 100));
-window.addEventListener('resize', ()=> setTimeout(drawConnections, 100));
+window.addEventListener('load', ()=> setTimeout(drawConnections, 300));
+window.addEventListener('resize', ()=> setTimeout(drawConnections, 300));
 </script>
 </body>
 </html>
