@@ -243,7 +243,14 @@
   .circle-4 { left: 71px; top: 325px; border: 2px solid var(--dodgers-blue); color: var(--dodgers-blue); }
   .circle-5 { left: 18px; top: 198px; border: 2px solid var(--violet); color: var(--violet); }
   .circle-6 { left: 71px; top: 71px; border: 2px solid var(--pink); color: var(--pink); }
-  .circle-7 { left: 378px; top: 198px; border: 2px solid var(--silver-white-light); color: var(--silver-white); box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5); animation: sparkle-border 2s ease-in-out infinite; }
+  .circle-7 {
+    left: 378px;
+    top: 198px;
+    border: 2px solid var(--silver-white-light);
+    color: var(--silver-white);
+    box-shadow: 0 0 15px rgba(247,249,251,0.8), 0 0 25px rgba(247,249,251,0.5);
+    animation: sparkle-border 2s ease-in-out infinite;
+  }
   .circle-8 { left: 325px; top: 71px; border: 2px solid var(--gold-bright); color: var(--gold-bright); }
 
   .button-container {
@@ -356,14 +363,24 @@
     .circle-1 {
       left: 153px;
       top: 11px;
+      border: 2px solid #00ff00;
+      color: #00ff00;
       box-shadow: 0 0 12px rgba(0,255,0,0.8), 0 0 20px rgba(0,255,0,0.5);
+      animation: sparkle-border 2s ease-in-out infinite;
     }
     .circle-2 { left: 257px; top: 257px; }
     .circle-3 { left: 153px; top: 295px; }
     .circle-4 { left: 49px; top: 257px; }
     .circle-5 { left: 11px; top: 153px; }
     .circle-6 { left: 49px; top: 49px; }
-    .circle-7 { left: 295px; top: 153px; box-shadow: 0 0 12px rgba(247,249,251,0.8), 0 0 20px rgba(247,249,251,0.5); }
+    .circle-7 {
+      left: 295px;
+      top: 153px;
+      border: 2px solid var(--silver-white-light);
+      color: var(--silver-white);
+      box-shadow: 0 0 12px rgba(247,249,251,0.8), 0 0 20px rgba(247,249,251,0.5);
+      animation: sparkle-border 2s ease-in-out infinite;
+    }
     .circle-8 { left: 257px; top: 49px; }
     .connection-path {
       stroke-width: 0.8;
@@ -373,6 +390,13 @@
     }
     .random-button, .random-button-more {
       width: 130px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .circle-1, .circle-7 {
+      animation: none;
+      box-shadow: 0 0 12px rgba(0,255,0,0.8);
     }
   }
 
@@ -398,14 +422,24 @@
     .circle-1 {
       left: 129px;
       top: 9px;
+      border: 2px solid #00ff00;
+      color: #00ff00;
       box-shadow: 0 0 10px rgba(0,255,0,0.8), 0 0 15px rgba(0,255,0,0.5);
+      animation: sparkle-border 2s ease-in-out infinite;
     }
     .circle-2 { left: 218px; top: 218px; }
     .circle-3 { left: 129px; top: 249px; }
     .circle-4 { left: 40px; top: 218px; }
     .circle-5 { left: 9px; top: 129px; }
     .circle-6 { left: 40px; top: 40px; }
-    .circle-7 { left: 249px; top: 129px; box-shadow: 0 0 10px rgba(247,249,251,0.8), 0 0 15px rgba(247,249,251,0.5); }
+    .circle-7 {
+      left: 249px;
+      top: 129px;
+      border: 2px solid var(--silver-white-light);
+      color: var(--silver-white);
+      box-shadow: 0 0 10px rgba(247,249,251,0.8), 0 0 15px rgba(247,249,251,0.5);
+      animation: sparkle-border 2s ease-in-out infinite;
+    }
     .circle-8 { left: 218px; top: 40px; }
     .connection-path {
       stroke-width: 0.6;
