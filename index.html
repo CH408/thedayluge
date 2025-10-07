@@ -540,21 +540,19 @@
     const wheelRect = wheelContainer.getBoundingClientRect();
     const hubRect = wheelCenter.getBoundingClientRect();
     const hubRadius = hubRect.width / 2;
-    const hubCenterX = hubRect.left + hubRadius - wheelRect.left + (wheelRect.width - 480) / 2;
-    const hubCenterY = hubRect.top + hubRadius - wheelRect.top + (wheelRect.height - 480) / 2;
+    const hubCenterX = hubRect.left - wheelRect.left + hubRadius;
+    const hubCenterY = hubRect.top - wheelRect.top + hubRadius;
 
     svg.setAttribute('width', wheelRect.width);
     svg.setAttribute('height', wheelRect.height);
     svg.innerHTML = '';
 
     circles.forEach((circle, index) => {
-      const style = window.getComputedStyle(circle);
-      const left = parseFloat(style.left);
-      const top = parseFloat(style.top);
-      const circleRadius = circle.offsetWidth / 2;
-
-      const circleCenterX = left + circleRadius;
-      const circleCenterY = top + circleRadius;
+      const circleRect = circle.getBoundingClientRect();
+      const circleRadius = circleRect.width / 2;
+      
+      const circleCenterX = circleRect.left - wheelRect.left + circleRadius;
+      const circleCenterY = circleRect.top - wheelRect.top + circleRadius;
 
       const dx = circleCenterX - hubCenterX;
       const dy = circleCenterY - hubCenterY;
