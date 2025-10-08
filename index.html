@@ -365,21 +365,10 @@
           return response.text();
         })
         .then(text => {
-          // DEBUG: Log what we actually received from the file
-          // This helps us see if we're getting the text file or something else entirely
-          console.log('File contents (first 500 chars):', text.substring(0, 500));
-          
-          // Split the file into individual lines, removing whitespace and empty lines
           const lines = text.split('\n')
             .map(line => line.trim())
             .filter(line => line.length > 0);
           
-          // DEBUG: See how many lines we found
-          console.log('Number of lines found:', lines.length);
-          console.log('First line:', lines[0]);
-          
-          // Extract the URL from each line (the part after the pipe character)
-          // Your format is "Title|URL" so we split on the pipe and take the second part
           const links = lines
             .map(line => {
               const parts = line.split('|');
@@ -387,20 +376,9 @@
             })
             .filter(link => link.length > 0);
           
-          // DEBUG: See how many valid links we extracted
-          console.log('Number of links extracted:', links.length);
-          console.log('First link:', links[0]);
-          
-          // Pick a random link from the array
           const randomIndex = Math.floor(Math.random() * links.length);
           const randomLink = links[randomIndex];
           
-          // DEBUG: Show exactly which URL was chosen before we navigate
-          // This alert will pause execution so you can see what link it selected
-          alert('About to navigate to: ' + randomLink);
-          console.log('Selected link:', randomLink);
-          
-          // Navigate to the selected link
           window.location.href = randomLink;
         })
         .catch(error => {
