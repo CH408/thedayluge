@@ -203,7 +203,7 @@
       font-weight: 900;
       text-align: center;
       line-height: 1.1;
-      padding: 8px;
+      padding: 10px; /* Increased padding for more space */
       transform-origin: 50% calc(50% + var(--radius));
       top: var(--top-offset);
       left: var(--left-offset);
@@ -217,43 +217,60 @@
     }
     .circle span {
       display: block;
-      width: 80%;
+      max-width: 75%; /* Reduced to ensure no overflow */
       line-height: 1.1;
       hyphens: none;
       word-break: keep-all;
+      font-size: calc(var(--circle-size) / 6); /* Base font size relative to circle size */
+      transform-origin: center;
+      /* Scale down if needed to prevent overflow */
+      transform: scale(1);
+    }
+    /* Adjust scale for longer texts to fit within bounds */
+    .circle-2 span, .circle-4 span, .circle-5 span, .circle-6 span, .circle-7 span {
+      transform: scale(0.85); /* Slightly smaller for longer titles */
+    }
+    /* Ensure readability on smaller screens */
+    @media (max-width: 480px) {
+      .circle span {
+        font-size: calc(var(--circle-size) / 7);
+      }
+      .circle-2 span, .circle-4 span, .circle-5 span, .circle-6 span, .circle-7 span {
+        transform: scale(0.75);
+      }
     }
 
     .circle-1 { transform: rotate(0deg); border-color: var(--silver-white);
                 color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
-    .circle-1 span { transform: rotate(0deg); }
+    .circle-1 span { transform: rotate(0deg) scale(1); }
 
     .circle-8 { transform: rotate(45deg); border-color: #ffd700;
                 color: #ffd700; box-shadow: 0 0 8px #ffd700; }
-    .circle-8 span { transform: rotate(-45deg); }
+    .circle-8 span { transform: rotate(-45deg) scale(1); }
 
     .circle-7 { transform: rotate(90deg); border-color: #00cc44;
                 color: #00cc44; box-shadow: 0 0 8px #00cc44; }
-    .circle-7 span { transform: rotate(-90deg); }
+    .circle-7 span { transform: rotate(-90deg) scale(0.85); }
 
     .circle-2 { transform: rotate(135deg); border-color: #5dccdb;
                 color: #5dccdb; box-shadow: 0 0 8px #5dccdb; }
-    .circle-2 span { transform: rotate(-135deg); }
+    .circle-2 span { transform: rotate(-135deg) scale(0.85); }
 
     .circle-3 { transform: rotate(180deg); border-color: #ff8800;
                 color: #ff8800; box-shadow: 0 0 8px #ff8800; }
-    .circle-3 span { transform: rotate(-180deg); }
+    .circle-3 span { transform: rotate(-180deg) scale(0.85); }
 
     .circle-4 { transform: rotate(225deg); border-color: #00ff00;
                 color: #00ff00; box-shadow: 0 0 8px #00ff00; }
-    .circle-4 span { transform: rotate(-225deg); }
+    .circle-4 span { transform: rotate(-225deg) scale(0.85); }
 
     .circle-5 { transform: rotate(270deg); border-color: #cc88ff;
                 color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
-    .circle-5 span { transform: rotate(-270deg); }
+    .circle-5 span { transform: rotate(-270deg) scale(0.85); }
 
     .circle-6 { transform: rotate(315deg); border-color: #ff69b4;
                 color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
-    .circle-6 span { transform: rotate(-315deg); }
+    .circle-6 span { transform: rotate(-315deg) scale(0.85); }
 
     .button-container {
       display: flex;
@@ -302,34 +319,6 @@
   </div>
 
   <script>
-    // Function to dynamically adjust font size to fit text within circles
-    function fitText() {
-      const circles = document.querySelectorAll('.circle span');
-      circles.forEach(span => {
-        const circle = span.parentElement;
-        const originalTransform = span.style.transform; // Save rotation
-        span.style.transform = 'rotate(0deg)'; // Reset rotation for accurate measurement
-        const circleRect = circle.getBoundingClientRect();
-        const maxWidth = circleRect.width * 0.80; // 80% of circle width for safety
-        const maxHeight = circleRect.height - 20; // Account for 8px padding + 2px border per side
-        let fontSize = 20; // Start with a conservative maximum
-        const minFontSize = 8; // Minimum for readability
-        span.style.fontSize = `${fontSize}px`;
-
-        // Reduce font size until text fits within circle bounds
-        while (fontSize > minFontSize) {
-          const textRect = span.getBoundingClientRect();
-          if (textRect.width <= maxWidth && textRect.height <= maxHeight) {
-            break; // Text fits
-          }
-          fontSize -= 0.25; // Finer decrement for precision
-          span.style.fontSize = `${fontSize}px`;
-        }
-
-        span.style.transform = originalTransform; // Restore rotation
-      });
-    }
-
     function drawConnections() {
       const svg = document.querySelector('.connection-lines');
       const wheel = document.querySelector('.wheel-container');
@@ -398,21 +387,13 @@
       });
     }
 
-    // Initialize text fitting and connections after wheel animation
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        fitText();
-        drawConnections();
-      }, 1500);
-    });
+    // Initialize connections after wheel animation
+    window.addEventListener('load', () => setTimeout(drawConnections, 1500));
     // Re-run on resize with debounce
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        fitText();
-        drawConnections();
-      }, 300);
+      resizeTimeout = setTimeout(drawConnections, 300);
     });
 
     document.querySelector('.random-button').addEventListener('click', function() {
