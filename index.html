@@ -40,7 +40,7 @@
       --connection-color: #cfd8dc;
       --pulse-color: #ffffff;
       --wheel-size: 480px;
-      --circle-size: 78px;
+      --circle-size: 84px;
       --radius: 160px;
       --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
       --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
@@ -58,20 +58,20 @@
       justify-content: center;
       min-height: 100dvh;
       overflow-x: hidden;
-      padding: 20px;
-      width: 100%;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
     .header {
+      position: absolute;
+      top: 20px;
       text-align: center;
       z-index: 10;
       width: 100%;
-      margin-bottom: 40px;
     }
     .header h1 {
       text-transform: uppercase;
       letter-spacing: .5px;
-      font-size: 32px;
+      font-size: 42px;
       color: #4682b4;
       text-shadow: 0 0 5px rgba(70, 130, 180, 0.7), 0 0 10px rgba(70, 130, 180, 0.5);
       animation: neonGlow 6s ease-in-out infinite;
@@ -109,9 +109,8 @@
 
     .wheel-container {
       position: relative;
-      width: 100%;
-      max-width: var(--wheel-size);
-      aspect-ratio: 1;
+      width: var(--wheel-size);
+      height: var(--wheel-size);
       margin: 0 auto;
       z-index: 5;
       display: flex;
@@ -147,8 +146,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 120px;
-      height: 120px;
+      width: 135px;
+      height: 135px;
       background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
       color: yellow;
       border: 2px solid #ffdd00;
@@ -157,7 +156,7 @@
       align-items: center;
       justify-content: center;
       text-transform: uppercase;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 900;
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
@@ -262,7 +261,6 @@
       display: flex;
       justify-content: center;
       z-index: 10;
-      width: 100%;
     }
     .random-button {
       background: var(--yellow);
@@ -274,21 +272,6 @@
       font-weight: 900;
       font-size: 16px;
       cursor: pointer;
-    }
-
-    @media (max-width: 520px) {
-      body {
-        padding: 10px;
-      }
-      .header h1 {
-        font-size: 24px;
-      }
-      .wheel-container {
-        transform: scale(0.65);
-        transform-origin: center center;
-        margin-top: -40px;
-        margin-bottom: -40px;
-      }
     }
   </style>
 </head>
