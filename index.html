@@ -201,7 +201,6 @@
       background: #000;
       color: #fff;
       font-weight: 900;
-      /* Remove static font-size to allow dynamic sizing */
       text-align: center;
       line-height: 1.1;
       padding: 8px;
@@ -218,7 +217,7 @@
     }
     .circle span {
       display: block;
-      width: 88%;
+      width: 80%;
       line-height: 1.1;
       hyphens: none;
       word-break: keep-all;
@@ -308,22 +307,26 @@
       const circles = document.querySelectorAll('.circle span');
       circles.forEach(span => {
         const circle = span.parentElement;
+        const originalTransform = span.style.transform; // Save rotation
+        span.style.transform = 'rotate(0deg)'; // Reset rotation for accurate measurement
         const circleRect = circle.getBoundingClientRect();
-        const maxWidth = circleRect.width * 0.88; // Match span width (88%)
-        const maxHeight = circleRect.height - 16; // Account for 8px padding
-        let fontSize = 30; // Start with a reasonable maximum
-        const minFontSize = 8; // Minimum to ensure readability
+        const maxWidth = circleRect.width * 0.80; // 80% of circle width for safety
+        const maxHeight = circleRect.height - 20; // Account for 8px padding + 2px border per side
+        let fontSize = 20; // Start with a conservative maximum
+        const minFontSize = 8; // Minimum for readability
         span.style.fontSize = `${fontSize}px`;
 
         // Reduce font size until text fits within circle bounds
         while (fontSize > minFontSize) {
           const textRect = span.getBoundingClientRect();
           if (textRect.width <= maxWidth && textRect.height <= maxHeight) {
-            break; // Text fits, stop reducing
+            break; // Text fits
           }
-          fontSize -= 0.5; // Decrease font size incrementally
+          fontSize -= 0.25; // Finer decrement for precision
           span.style.fontSize = `${fontSize}px`;
         }
+
+        span.style.transform = originalTransform; // Restore rotation
       });
     }
 
