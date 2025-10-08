@@ -25,6 +25,7 @@
 
   <style>
     :root {
+      /* Colors */
       --red: #cc0000;
       --orange: #ff8800;
       --green: #00dd55;
@@ -33,15 +34,14 @@
       --violet: #cc88ff;
       --pink: #ff69b4;
       --yellow: #ffcc00;
-      --bright-blue: #00b7eb;
       --ink: #111;
       --silver-white: #ECEFF1;
-      --silver-white-light: #F7F9FB;
       --connection-color: #cfd8dc;
-      --pulse-color: #ffffff;
-      --wheel-size: 480px;
-      --circle-size: 84px;
-      --radius: 160px;
+
+      /* Responsive geometry */
+      --wheel-size: min(80vw, 480px);
+      --circle-size: calc(var(--wheel-size) / 6);
+      --radius: calc(var(--wheel-size) / 3);
       --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
       --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
     }
@@ -58,52 +58,55 @@
       justify-content: center;
       min-height: 100dvh;
       overflow-x: hidden;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      text-align: center;
+      gap: 2rem;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right)
+               env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
     .header {
-      position: absolute;
-      top: 20px;
+      position: relative;
       text-align: center;
-      z-index: 10;
       width: 100%;
+      z-index: 10;
     }
     .header h1 {
       text-transform: uppercase;
       letter-spacing: .5px;
       font-size: 42px;
       color: #4682b4;
-      text-shadow: 0 0 5px rgba(70, 130, 180, 0.7), 0 0 10px rgba(70, 130, 180, 0.5);
+      text-shadow: 0 0 5px rgba(70, 130, 180, 0.7),
+                   0 0 10px rgba(70, 130, 180, 0.5);
       animation: neonGlow 6s ease-in-out infinite;
     }
     @keyframes neonGlow {
       0% {
         color: #4682b4;
-        text-shadow: 0 0 5px rgba(70, 130, 180, 0.7), 0 0 10px rgba(70, 130, 180, 0.5);
+        text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5);
       }
       16.67% {
         color: #20b2aa;
-        text-shadow: 0 0 8px rgba(32, 178, 170, 0.9), 0 0 15px rgba(32, 178, 170, 0.7);
+        text-shadow: 0 0 8px rgba(32,178,170,0.9),0 0 15px rgba(32,178,170,0.7);
       }
       33.33% {
         color: #7b68ee;
-        text-shadow: 0 0 5px rgba(123, 104, 238, 0.7), 0 0 10px rgba(123, 104, 238, 0.5);
+        text-shadow: 0 0 5px rgba(123,104,238,0.7),0 0 10px rgba(123,104,238,0.5);
       }
       50% {
         color: #00ced1;
-        text-shadow: 0 0 8px rgba(0, 206, 209, 0.9), 0 0 15px rgba(0, 206, 209, 0.7);
+        text-shadow: 0 0 8px rgba(0,206,209,0.9),0 0 15px rgba(0,206,209,0.7);
       }
       66.67% {
         color: #3cb371;
-        text-shadow: 0 0 5px rgba(60, 179, 113, 0.7), 0 0 10px rgba(60, 179, 113, 0.5);
+        text-shadow: 0 0 5px rgba(60,179,113,0.7),0 0 10px rgba(60,179,113,0.5);
       }
       83.33% {
         color: #9370db;
-        text-shadow: 0 0 8px rgba(147, 112, 219, 0.9), 0 0 15px rgba(147, 112, 219, 0.7);
+        text-shadow: 0 0 8px rgba(147,112,219,0.9),0 0 15px rgba(147,112,219,0.7);
       }
       100% {
         color: #4682b4;
-        text-shadow: 0 0 5px rgba(70, 130, 180, 0.7), 0 0 10px rgba(70, 130, 180, 0.5);
+        text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5);
       }
     }
 
@@ -112,10 +115,10 @@
       width: var(--wheel-size);
       height: var(--wheel-size);
       margin: 0 auto;
-      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 5;
     }
 
     .connection-lines {
@@ -146,8 +149,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 135px;
-      height: 135px;
+      width: calc(var(--wheel-size) / 3.5);
+      height: calc(var(--wheel-size) / 3.5);
       background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
       color: yellow;
       border: 2px solid #ffdd00;
@@ -156,7 +159,7 @@
       align-items: center;
       justify-content: center;
       text-transform: uppercase;
-      font-size: 18px;
+      font-size: calc(var(--wheel-size) / 25);
       font-weight: 900;
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
@@ -166,10 +169,12 @@
       z-index: 5;
     }
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px #ffdd0088; }
-      50% { box-shadow: 0 0 60px #ffdd00ff; transform: translate(-50%, -50%) scale(1.02); }
+      0%,100% { box-shadow: 0 0 30px #ffdd0088; }
+      50% { box-shadow: 0 0 60px #ffdd00ff;
+            transform: translate(-50%, -50%) scale(1.02); }
     }
 
+    /* --- CIRCLES --- */
     .circle {
       position: absolute;
       width: var(--circle-size);
@@ -181,8 +186,10 @@
       background: #000;
       color: #fff;
       font-weight: 900;
-      font-size: 12px;
+      font-size: calc(var(--wheel-size) / 40);
       text-align: center;
+      line-height: 1.1;
+      padding: 4px;
       transform-origin: 50% calc(50% + var(--radius));
       top: var(--top-offset);
       left: var(--left-offset);
@@ -190,77 +197,54 @@
       border: 2px solid #666;
       text-decoration: none;
       cursor: pointer;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .circle span {
+      display: block;
+      width: 90%;
+      overflow-wrap: break-word;
+      line-height: 1.1;
+      hyphens: auto;
     }
 
-    .circle-1 {
-      transform: rotate(0deg);
-      border-color: var(--silver-white);
-      color: var(--silver-white);
-      box-shadow: 0 0 8px var(--silver-white);
-    }
+    /* Circle colors */
+    .circle-1 { transform: rotate(0deg); border-color: var(--silver-white);
+                color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
     .circle-1 span { transform: rotate(0deg); }
 
-    .circle-8 {
-      transform: rotate(45deg);
-      border-color: #ffd700;
-      color: #ffd700;
-      box-shadow: 0 0 8px #ffd700;
-    }
+    .circle-8 { transform: rotate(45deg); border-color: #ffd700;
+                color: #ffd700; box-shadow: 0 0 8px #ffd700; }
     .circle-8 span { transform: rotate(-45deg); }
 
-    .circle-7 {
-      transform: rotate(90deg);
-      border-color: #00cc44;
-      color: #00cc44;
-      box-shadow: 0 0 8px #00cc44;
-    }
+    .circle-7 { transform: rotate(90deg); border-color: #00cc44;
+                color: #00cc44; box-shadow: 0 0 8px #00cc44; }
     .circle-7 span { transform: rotate(-90deg); }
 
-    .circle-2 {
-      transform: rotate(135deg);
-      border-color: #5dccdb;
-      color: #5dccdb;
-      box-shadow: 0 0 8px #5dccdb;
-    }
+    .circle-2 { transform: rotate(135deg); border-color: #5dccdb;
+                color: #5dccdb; box-shadow: 0 0 8px #5dccdb; }
     .circle-2 span { transform: rotate(-135deg); }
 
-    .circle-3 {
-      transform: rotate(180deg);
-      border-color: #ff8800;
-      color: #ff8800;
-      box-shadow: 0 0 8px #ff8800;
-    }
+    .circle-3 { transform: rotate(180deg); border-color: #ff8800;
+                color: #ff8800; box-shadow: 0 0 8px #ff8800; }
     .circle-3 span { transform: rotate(-180deg); }
 
-    .circle-4 {
-      transform: rotate(225deg);
-      border-color: #00ff00;
-      color: #00ff00;
-      box-shadow: 0 0 8px #00ff00;
-    }
+    .circle-4 { transform: rotate(225deg); border-color: #00ff00;
+                color: #00ff00; box-shadow: 0 0 8px #00ff00; }
     .circle-4 span { transform: rotate(-225deg); }
 
-    .circle-5 {
-      transform: rotate(270deg);
-      border-color: #cc88ff;
-      color: #cc88ff;
-      box-shadow: 0 0 8px #cc88ff;
-    }
+    .circle-5 { transform: rotate(270deg); border-color: #cc88ff;
+                color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
     .circle-5 span { transform: rotate(-270deg); }
 
-    .circle-6 {
-      transform: rotate(315deg);
-      border-color: #ff69b4;
-      color: #ff69b4;
-      box-shadow: 0 0 8px #ff69b4;
-    }
+    .circle-6 { transform: rotate(315deg); border-color: #ff69b4;
+                color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
     .circle-6 span { transform: rotate(-315deg); }
 
     .button-container {
-      margin-top: 30px;
       display: flex;
       justify-content: center;
-      z-index: 10;
     }
     .random-button {
       background: var(--yellow);
@@ -272,6 +256,12 @@
       font-weight: 900;
       font-size: 16px;
       cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      .wheel-container { margin-top: 1rem; }
+      .random-button { transform: translateY(0.25rem); }
+      .circle { font-size: calc(var(--wheel-size) / 45); }
     }
   </style>
 </head>
