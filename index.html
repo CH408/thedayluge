@@ -70,15 +70,14 @@
       width: 100%;
       z-index: 10;
     }
-    .header h1 {
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      font-size: 42px;
-      color: #4682b4;
-      text-shadow: 0 0 5px rgba(70, 130, 180, 0.7),
-                   0 0 10px rgba(70, 130, 180, 0.5);
-      animation: neonGlow 6s ease-in-out infinite;
-    }
+   .header h1 {
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-size: 32px; /* smaller title */
+  color: #4682b4;
+  text-shadow: 0 0 5px rgba(70,130,180,.7),0 0 10px rgba(70,130,180,.5);
+  animation: neonGlow 3s ease-in-out infinite; /* faster color rotation */
+}
     @keyframes neonGlow {
       0% {
         color: #4682b4;
