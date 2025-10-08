@@ -203,7 +203,7 @@
       font-weight: 900;
       text-align: center;
       line-height: 1.1;
-      padding: 12px; /* Increased for more clearance */
+      padding: 12px;
       transform-origin: 50% calc(50% + var(--radius));
       top: var(--top-offset);
       left: var(--left-offset);
@@ -217,12 +217,12 @@
     }
     .circle span {
       display: inline-block;
-      max-width: 70%; /* Tighter constraint to prevent overflow */
-      max-height: calc(var(--circle-size) - 28px); /* Account for padding and border */
+      max-width: 70%;
+      max-height: calc(var(--circle-size) - 28px);
       line-height: 1.1;
       hyphens: none;
       word-break: keep-all;
-      font-size: clamp(8px, calc(var(--circle-size) / 7), 14px); /* Responsive with caps */
+      font-size: clamp(8px, calc(var(--circle-size) / 7), 14px);
       overflow: hidden;
       text-overflow: clip;
     }
@@ -230,38 +230,38 @@
     .circle-2 span, .circle-4 span, .circle-5 span, .circle-6 span, .circle-7 span {
       font-size: clamp(7px, calc(var(--circle-size) / 8), 12px);
     }
-    /* Remove span rotation, apply only to circle container */
+    /* Counter-rotate text to be horizontal */
     .circle-1 { transform: rotate(0deg); border-color: var(--silver-white);
                 color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
-    .circle-1 span { transform: none; }
+    .circle-1 span { transform: rotate(0deg); }
 
     .circle-8 { transform: rotate(45deg); border-color: #ffd700;
                 color: #ffd700; box-shadow: 0 0 8px #ffd700; }
-    .circle-8 span { transform: none; }
+    .circle-8 span { transform: rotate(-45deg); }
 
     .circle-7 { transform: rotate(90deg); border-color: #00cc44;
                 color: #00cc44; box-shadow: 0 0 8px #00cc44; }
-    .circle-7 span { transform: none; }
+    .circle-7 span { transform: rotate(-90deg); }
 
     .circle-2 { transform: rotate(135deg); border-color: #5dccdb;
                 color: #5dccdb; box-shadow: 0 0 8px #5dccdb; }
-    .circle-2 span { transform: none; }
+    .circle-2 span { transform: rotate(-135deg); }
 
     .circle-3 { transform: rotate(180deg); border-color: #ff8800;
                 color: #ff8800; box-shadow: 0 0 8px #ff8800; }
-    .circle-3 span { transform: none; }
+    .circle-3 span { transform: rotate(-180deg); }
 
     .circle-4 { transform: rotate(225deg); border-color: #00ff00;
                 color: #00ff00; box-shadow: 0 0 8px #00ff00; }
-    .circle-4 span { transform: none; }
+    .circle-4 span { transform: rotate(-225deg); }
 
     .circle-5 { transform: rotate(270deg); border-color: #cc88ff;
                 color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
-    .circle-5 span { transform: none; }
+    .circle-5 span { transform: rotate(-270deg); }
 
     .circle-6 { transform: rotate(315deg); border-color: #ff69b4;
                 color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
-    .circle-6 span { transform: none; }
+    .circle-6 span { transform: rotate(-315deg); }
 
     .button-container {
       display: flex;
