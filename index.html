@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -274,21 +273,21 @@
     <svg class="connection-lines"></svg>
     <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
 
-    <a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
-    <a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
-    <a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS & ECONOMICS</span></a>
-    <a href="./science.html" class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></a>
-    <a href="./sports.html" class="circle circle-3"><span>SPORTS & LEISURE</span></a>
-    <a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY CORNER</span></a>
-    <a href="./arts.html" class="circle circle-5"><span>ARTS & LITERATURE</span></a>
-    <a href="./wisdom.html" class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></a>
-  </div>
+<a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
+<a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
+<a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS & ECONOMICS</span></a>
+<a href="./science.html" class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></a>
+<a href="./sports.html" class="circle circle-3"><span>SPORTS & LEISURE</span></a>
+<a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY CORNER</span></a>
+<a href="./arts.html" class="circle circle-5"><span>ARTS & LITERATURE</span></a>
+<a href="./wisdom.html" class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></a>  </div>
 
   <div class="button-container">
     <button class="random-button">SURPRISE ME!</button>
   </div>
 
   <script>
+    // Function to draw the animated connection lines between hub and circles
     function drawConnections() {
       const svg = document.querySelector('.connection-lines');
       const wheel = document.querySelector('.wheel-container');
@@ -357,8 +356,43 @@
       });
     }
 
+    // Draw connections when page loads and when window resizes
     window.addEventListener('load', () => setTimeout(drawConnections, 300));
     window.addEventListener('resize', () => setTimeout(drawConnections, 300));
+
+    // Handle the "Surprise Me!" button click
+    document.querySelector('.random-button').addEventListener('click', function() {
+      // Fetch the text file containing all possible surprise links
+      fetch('./surprise-me-links.txt')
+        .then(response => {
+          // Check if the file was found successfully
+          if (!response.ok) {
+            throw new Error('Could not load surprise links');
+          }
+          return response.text();
+        })
+        .then(text => {
+          // Split the file content into individual lines (one link per line)
+          // Then clean up each line by removing extra whitespace
+          // Finally filter out any empty lines
+          const links = text.split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0);
+          
+          // Pick a random number between 0 and the number of links
+          const randomIndex = Math.floor(Math.random() * links.length);
+          const randomLink = links[randomIndex];
+          
+          // Navigate the browser to the randomly selected link
+          window.location.href = randomLink;
+        })
+        .catch(error => {
+          // If anything goes wrong (file not found, network error, etc.)
+          // show an error message to the user
+          console.error('Error loading surprise links:', error);
+          alert('Sorry, the surprise feature is currently unavailable!');
+        });
+    });
   </script>
 </body>
 </html>
