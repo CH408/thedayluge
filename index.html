@@ -217,18 +217,16 @@
     }
     .circle span {
       display: inline-block;
-      max-width: 70%;
-      max-height: calc(var(--circle-size) - 28px);
+      max-width: 80%; /* Increased to allow more text */
+      max-height: calc(var(--circle-size) - 24px); /* Adjusted for padding */
       line-height: 1.1;
       hyphens: none;
       word-break: keep-all;
-      font-size: clamp(8px, calc(var(--circle-size) / 7), 14px);
-      overflow: hidden;
-      text-overflow: clip;
+      font-size: clamp(8px, calc(var(--circle-size) / 6.5), 15px); /* Slightly larger */
     }
     /* Smaller font for longer titles */
-    .circle-2 span, .circle-4 span, .circle-5 span, .circle-6 span, .circle-7 span {
-      font-size: clamp(7px, calc(var(--circle-size) / 8), 12px);
+    .circle-2 span, .circle-4 span, .circle-6 span {
+      font-size: clamp(7px, calc(var(--circle-size) / 7.5), 13px);
     }
     /* Counter-rotate text to be horizontal */
     .circle-1 { transform: rotate(0deg); border-color: var(--silver-white);
@@ -283,10 +281,10 @@
       .wheel-container { margin-top: 1rem; }
       .random-button { transform: translateY(0.25rem); }
       .circle span {
-        font-size: clamp(7px, calc(var(--circle-size) / 8), 12px);
+        font-size: clamp(7px, calc(var(--circle-size) / 7.5), 13px);
       }
-      .circle-2 span, .circle-4 span, .circle-5 span, .circle-6 span, .circle-7 span {
-        font-size: clamp(6px, calc(var(--circle-size) / 9), 10px);
+      .circle-2 span, .circle-4 span, .circle-6 span {
+        font-size: clamp(6px, calc(var(--circle-size) / 8.5), 11px);
       }
     }
   </style>
