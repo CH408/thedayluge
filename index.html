@@ -377,7 +377,7 @@
               motion.setAttribute('keyPoints','0;1;0');
               motion.setAttribute('keyTimes','0;0.5;1');
               motion.setAttribute('calcMode','linear');
-              motion.setAttribute('begin',`${i * 0.01 + burst * 0.08 + s * 0.003 + line * 0.04}s`);
+              motion.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08}s`);
               motion.innerHTML = `<mpath href="#path${i}" />`;
               spark.appendChild(motion);
 
@@ -387,7 +387,7 @@
               animate.setAttribute('keyTimes','0;0.2;0.8;1');
               animate.setAttribute('dur',`${speeds[line]}s`);
               animate.setAttribute('repeatCount','indefinite');
-              animate.setAttribute('begin',`${i * 0.01 + burst * 0.08 + s * 0.003 + line * 0.04}s`);
+              animate.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08}s`);
               spark.appendChild(animate);
             }
           }
@@ -395,7 +395,7 @@
       });
     }
 
-    window.addEventListener('load', () => setTimeout(drawConnections, 200));
+    window.addEventListener('load', () => setTimeout(drawConnections, 1500));
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
