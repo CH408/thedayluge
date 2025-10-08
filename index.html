@@ -58,20 +58,20 @@
       justify-content: center;
       min-height: 100dvh;
       overflow-x: hidden;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      padding: 20px;
+      width: 100%;
     }
 
     .header {
-      position: absolute;
-      top: 20px;
       text-align: center;
       z-index: 10;
       width: 100%;
+      margin-bottom: 40px;
     }
     .header h1 {
       text-transform: uppercase;
       letter-spacing: .5px;
-      font-size: 42px;
+      font-size: 32px;
       color: #4682b4;
       text-shadow: 0 0 5px rgba(70, 130, 180, 0.7), 0 0 10px rgba(70, 130, 180, 0.5);
       animation: neonGlow 6s ease-in-out infinite;
@@ -109,8 +109,9 @@
 
     .wheel-container {
       position: relative;
-      width: var(--wheel-size);
-      height: var(--wheel-size);
+      width: 100%;
+      max-width: var(--wheel-size);
+      aspect-ratio: 1;
       margin: 0 auto;
       z-index: 5;
       display: flex;
@@ -261,6 +262,7 @@
       display: flex;
       justify-content: center;
       z-index: 10;
+      width: 100%;
     }
     .random-button {
       background: var(--yellow);
@@ -272,6 +274,18 @@
       font-weight: 900;
       font-size: 16px;
       cursor: pointer;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 10px;
+      }
+      .header h1 {
+        font-size: 32px;
+      }
+      .wheel-container {
+        width: calc(100vw - 40px);
+      }
     }
   </style>
 </head>
