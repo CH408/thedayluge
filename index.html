@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -69,14 +70,14 @@
       width: 100%;
       z-index: 10;
     }
-   .header h1 {
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  font-size: 32px;
-  color: #4682b4;
-  text-shadow: 0 0 5px rgba(70,130,180,.7),0 0 10px rgba(70,130,180,.5);
-  animation: neonGlow 3s ease-in-out infinite;
-}
+    .header h1 {
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-size: 32px;
+      color: #4682b4;
+      text-shadow: 0 0 5px rgba(70,130,180,.7),0 0 10px rgba(70,130,180,.5);
+      animation: neonGlow 3s ease-in-out infinite;
+    }
     @keyframes neonGlow {
       0% {
         color: #4682b4;
@@ -117,13 +118,10 @@
       align-items: center;
       justify-content: center;
       z-index: 5;
-      /* 3D perspective creates depth for the spin animation */
       perspective: 1000px;
-      /* The wheel spins open toward the viewer on page load */
       animation: spinOpen 1.2s ease-out forwards;
     }
 
-    /* Animation that makes the wheel spin open toward the viewer */
     @keyframes spinOpen {
       0% {
         transform: scale(0.3) rotateX(-90deg);
@@ -203,11 +201,9 @@
       background: #000;
       color: #fff;
       font-weight: 900;
-      /* Base font size - will be overridden per circle */
-      font-size: calc(var(--wheel-size) / 50);
+      /* Remove static font-size to allow dynamic sizing */
       text-align: center;
       line-height: 1.1;
-      /* Less padding to give more room for text */
       padding: 8px;
       transform-origin: 50% calc(50% + var(--radius));
       top: var(--top-offset);
@@ -217,7 +213,6 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
-      /* Keep all words completely intact - never break them mid-word */
       word-break: keep-all;
       white-space: normal;
     }
@@ -225,7 +220,6 @@
       display: block;
       width: 88%;
       line-height: 1.1;
-      /* Ensure words stay together as complete units */
       hyphens: none;
       word-break: keep-all;
     }
@@ -281,8 +275,6 @@
     @media (max-width: 480px) {
       .wheel-container { margin-top: 1rem; }
       .random-button { transform: translateY(0.25rem); }
-      /* Slightly smaller text on mobile but still readable */
-      .circle { font-size: calc(var(--wheel-size) / 40); }
     }
   </style>
 </head>
@@ -296,20 +288,45 @@
     <svg class="connection-lines"></svg>
     <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
 
-<a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
-<a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
-<a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS & ECONOMICS</span></a>
-<a href="./science.html" class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></a>
-<a href="./sports.html" class="circle circle-3"><span>SPORTS & LEISURE</span></a>
-<a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY CORNER</span></a>
-<a href="./arts.html" class="circle circle-5"><span>ARTS & LITERATURE</span></a>
-<a href="./wisdom.html" class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></a>  </div>
+    <a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
+    <a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
+    <a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS & ECONOMICS</span></a>
+    <a href="./science.html" class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></a>
+    <a href="./sports.html" class="circle circle-3"><span>SPORTS & LEISURE</span></a>
+    <a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY CORNER</span></a>
+    <a href="./arts.html" class="circle circle-5"><span>ARTS & LITERATURE</span></a>
+    <a href="./wisdom.html" class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></a>
+  </div>
 
   <div class="button-container">
     <button class="random-button">SURPRISE ME!</button>
   </div>
 
   <script>
+    // Function to dynamically adjust font size to fit text within circles
+    function fitText() {
+      const circles = document.querySelectorAll('.circle span');
+      circles.forEach(span => {
+        const circle = span.parentElement;
+        const circleRect = circle.getBoundingClientRect();
+        const maxWidth = circleRect.width * 0.88; // Match span width (88%)
+        const maxHeight = circleRect.height - 16; // Account for 8px padding
+        let fontSize = 30; // Start with a reasonable maximum
+        const minFontSize = 8; // Minimum to ensure readability
+        span.style.fontSize = `${fontSize}px`;
+
+        // Reduce font size until text fits within circle bounds
+        while (fontSize > minFontSize) {
+          const textRect = span.getBoundingClientRect();
+          if (textRect.width <= maxWidth && textRect.height <= maxHeight) {
+            break; // Text fits, stop reducing
+          }
+          fontSize -= 0.5; // Decrease font size incrementally
+          span.style.fontSize = `${fontSize}px`;
+        }
+      });
+    }
+
     function drawConnections() {
       const svg = document.querySelector('.connection-lines');
       const wheel = document.querySelector('.wheel-container');
@@ -378,10 +395,22 @@
       });
     }
 
-    // Wait for the wheel spin animation to complete (1200ms) before drawing connections
-    // The extra 300ms buffer ensures the wheel is fully settled before sparks appear
-    window.addEventListener('load', () => setTimeout(drawConnections, 1500));
-    window.addEventListener('resize', () => setTimeout(drawConnections, 300));
+    // Initialize text fitting and connections after wheel animation
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        fitText();
+        drawConnections();
+      }, 1500);
+    });
+    // Re-run on resize with debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        fitText();
+        drawConnections();
+      }, 300);
+    });
 
     document.querySelector('.random-button').addEventListener('click', function() {
       fetch('./surprise-me-links.txt')
