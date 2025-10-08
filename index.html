@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -73,10 +72,10 @@
    .header h1 {
   text-transform: uppercase;
   letter-spacing: .5px;
-  font-size: 32px; /* smaller title */
+  font-size: 32px;
   color: #4682b4;
   text-shadow: 0 0 5px rgba(70,130,180,.7),0 0 10px rgba(70,130,180,.5);
-  animation: neonGlow 3s ease-in-out infinite; /* faster color rotation */
+  animation: neonGlow 3s ease-in-out infinite;
 }
     @keyframes neonGlow {
       0% {
@@ -118,6 +117,26 @@
       align-items: center;
       justify-content: center;
       z-index: 5;
+      /* 3D perspective creates depth for the spin animation */
+      perspective: 1000px;
+      /* The wheel spins open toward the viewer on page load */
+      animation: spinOpen 1.2s ease-out forwards;
+    }
+
+    /* Animation that makes the wheel spin open toward the viewer */
+    @keyframes spinOpen {
+      0% {
+        transform: scale(0.3) rotateX(-90deg);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.05) rotateX(5deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) rotateX(0deg);
+        opacity: 1;
+      }
     }
 
     .connection-lines {
@@ -173,7 +192,6 @@
             transform: translate(-50%, -50%) scale(1.02); }
     }
 
-    /* --- CIRCLES --- */
     .circle {
       position: absolute;
       width: var(--circle-size);
@@ -185,10 +203,12 @@
       background: #000;
       color: #fff;
       font-weight: 900;
-      font-size: calc(var(--wheel-size) / 40);
+      /* Base font size - will be overridden per circle */
+      font-size: calc(var(--wheel-size) / 50);
       text-align: center;
       line-height: 1.1;
-      padding: 4px;
+      /* Less padding to give more room for text */
+      padding: 8px;
       transform-origin: 50% calc(50% + var(--radius));
       top: var(--top-offset);
       left: var(--left-offset);
@@ -197,18 +217,19 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
+      /* Keep all words completely intact - never break them mid-word */
+      word-break: keep-all;
+      white-space: normal;
     }
     .circle span {
       display: block;
-      width: 90%;
-      overflow-wrap: break-word;
+      width: 88%;
       line-height: 1.1;
-      hyphens: auto;
+      /* Ensure words stay together as complete units */
+      hyphens: none;
+      word-break: keep-all;
     }
 
-    /* Circle colors */
     .circle-1 { transform: rotate(0deg); border-color: var(--silver-white);
                 color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
     .circle-1 span { transform: rotate(0deg); }
@@ -260,7 +281,8 @@
     @media (max-width: 480px) {
       .wheel-container { margin-top: 1rem; }
       .random-button { transform: translateY(0.25rem); }
-      .circle { font-size: calc(var(--wheel-size) / 45); }
+      /* Slightly smaller text on mobile but still readable */
+      .circle { font-size: calc(var(--wheel-size) / 40); }
     }
   </style>
 </head>
@@ -274,15 +296,14 @@
     <svg class="connection-lines"></svg>
     <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
 
-    <a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
-    <a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
-    <a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS & ECONOMICS</span></a>
-    <a href="./science.html" class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></a>
-    <a href="./sports.html" class="circle circle-3"><span>SPORTS & LEISURE</span></a>
-    <a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY CORNER</span></a>
-    <a href="./arts.html" class="circle circle-5"><span>ARTS & LITERATURE</span></a>
-    <a href="./wisdom.html" class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></a>
-  </div>
+<a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
+<a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
+<a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS & ECONOMICS</span></a>
+<a href="./science.html" class="circle circle-2"><span>SCIENCE, NATURE & TECH</span></a>
+<a href="./sports.html" class="circle circle-3"><span>SPORTS & LEISURE</span></a>
+<a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY CORNER</span></a>
+<a href="./arts.html" class="circle circle-5"><span>ARTS & LITERATURE</span></a>
+<a href="./wisdom.html" class="circle circle-6"><span>WISDOM & PHILOSOPHY</span></a>  </div>
 
   <div class="button-container">
     <button class="random-button">SURPRISE ME!</button>
@@ -357,8 +378,41 @@
       });
     }
 
-    window.addEventListener('load', () => setTimeout(drawConnections, 300));
+    // Wait for the wheel spin animation to complete (1200ms) before drawing connections
+    // The extra 300ms buffer ensures the wheel is fully settled before sparks appear
+    window.addEventListener('load', () => setTimeout(drawConnections, 1500));
     window.addEventListener('resize', () => setTimeout(drawConnections, 300));
+
+    document.querySelector('.random-button').addEventListener('click', function() {
+      fetch('./surprise-me-links.txt')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Could not load surprise links');
+          }
+          return response.text();
+        })
+        .then(text => {
+          const lines = text.split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0);
+          
+          const links = lines
+            .map(line => {
+              const parts = line.split('|');
+              return parts.length > 1 ? parts[1].trim() : line;
+            })
+            .filter(link => link.length > 0);
+          
+          const randomIndex = Math.floor(Math.random() * links.length);
+          const randomLink = links[randomIndex];
+          
+          window.location.href = randomLink;
+        })
+        .catch(error => {
+          console.error('Error loading surprise links:', error);
+          alert('Sorry, the surprise feature is currently unavailable!');
+        });
+    });
   </script>
 </body>
 </html>
