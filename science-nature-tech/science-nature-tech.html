@@ -453,8 +453,8 @@
         contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
         
         try {
-          console.log('Attempting to fetch ./science-nature-tech-links.txt');
-          const response = await fetch('./science-nature-tech-links.txt');
+          console.log('Attempting to fetch ./snt-links.txt');
+          const response = await fetch('./snt-links.txt');
           console.log('Fetch response:', response.ok, response.status);
           if (!response.ok) {
             throw new Error(`Fetch failed with status ${response.status}`);
@@ -493,7 +493,7 @@
           if (displayEntries.length === 0) {
             console.log('No SNT entries found, displaying error message');
             displayEntries.push({
-              title: 'No science, nature & tech content available. Check science-nature-tech-links.txt.',
+              title: 'No science, nature & tech content available. Check snt-links.txt.',
               link: '#',
               category: 'error'
             });
@@ -522,11 +522,11 @@
             contentLinksContainer.appendChild(linkElement);
           });
           
-          console.log('Loaded', entries.length, 'SNT entries from science-nature-tech-links.txt');
+          console.log('Loaded', entries.length, 'SNT entries from snt-links.txt');
           console.log('Displaying', displayEntries.length, 'entries in central box');
           
         } catch (error) {
-          console.error('Error loading science-nature-tech-links.txt:', error);
+          console.error('Error loading snt-links.txt:', error);
           contentLinksContainer.innerHTML = '';
           
           console.log('Displaying error message due to fetch failure');
