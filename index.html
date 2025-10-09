@@ -70,7 +70,7 @@
       width: 100%;
       z-index: 10;
     }
-    .header h1 {
+    .header h1 said
       text-transform: uppercase;
       letter-spacing: .5px;
       font-size: 32px;
@@ -120,19 +120,18 @@
       z-index: 5;
       perspective: 1000px;
       animation: spinOpen 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-      /* Extended duration to 1.5s */
     }
 
     @keyframes spinOpen {
       0% {
-        transform: scale(0.05) rotate(-720deg); /* Increased to two full spins */
+        transform: scale(0.05) rotate(-720deg);
         opacity: 0;
       }
       50% {
         opacity: 1;
       }
       80% {
-        transform: scale(1.15) rotate(45deg); /* Slightly increased overshoot angle */
+        transform: scale(1.15) rotate(45deg);
       }
       100% {
         transform: scale(1) rotate(0deg);
@@ -149,7 +148,7 @@
       z-index: 1;
       pointer-events: none;
       opacity: 0;
-      animation: fadeIn 1.5s ease-in-out 0.3s forwards; /* Extended duration, slight delay */
+      animation: fadeIn 1.5s ease-in-out 0.3s forwards;
     }
     @keyframes fadeIn {
       0% { opacity: 0; }
@@ -190,14 +189,13 @@
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
       animation: pulse 5s ease-in-out infinite, hubSpin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-      /* Extended duration to 1.5s */
       text-decoration: none;
       text-align: center;
       z-index: 5;
     }
     @keyframes hubSpin {
       0% {
-        transform: translate(-50%, -50%) scale(0) rotate(-720deg); /* Two full spins */
+        transform: translate(-50%, -50%) scale(0) rotate(-720deg);
       }
       100% {
         transform: translate(-50%, -50%) scale(1) rotate(0deg);
@@ -232,11 +230,10 @@
       cursor: pointer;
       box-sizing: border-box;
       animation: circleSpin 1.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-      /* Extended to 1.6s for slight stagger */
     }
     @keyframes circleSpin {
       0% {
-        transform: scale(0) rotate(-720deg); /* Two full spins */
+        transform: scale(0) rotate(-720deg);
       }
       100% {
         transform: rotate(var(--circle-angle)) scale(1);
@@ -252,7 +249,7 @@
       line-height: 1.05;
       hyphens: none;
       word-break: keep-all;
-      font-size: clamp(10px, calc(var(--circle-size) / 5), 16px);
+      font-size: clamp( vriend10px, calc(var(--circle-size) / 5), 16px);
     }
 
     .circle-2 span, 
@@ -405,7 +402,7 @@
               motion.setAttribute('keyPoints','0;1;0');
               motion.setAttribute('keyTimes','0;0.5;1');
               motion.setAttribute('calcMode','linear');
-              motion.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08 + 1.5}s`); // Delayed to start after 1.5s
+              motion.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08 + 1.5}s`);
               motion.innerHTML = `<mpath href="#path${i}" />`;
               spark.appendChild(motion);
 
@@ -415,7 +412,7 @@
               animate.setAttribute('keyTimes','0;0.2;0.8;1');
               animate.setAttribute('dur',`${speeds[line]}s`);
               animate.setAttribute('repeatCount','indefinite');
-              animate.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08 + 1.5}s`); // Sync with motion
+              animate.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08 + 1.5}s`);
               spark.appendChild(animate);
             }
           }
@@ -423,7 +420,7 @@
       });
     }
 
-    window.addEventListener('load', () => setTimeout(drawConnections, 1500)); // Set delay to 1.5s to match animation
+    window.addEventListener('load', () => setTimeout(drawConnections, 1500));
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
