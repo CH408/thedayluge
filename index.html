@@ -34,7 +34,6 @@
       --violet: #cc88ff;
       --pink: #ff69b4;
       --yellow: #ffcc00;
- міні-10px;
       --ink: #111;
       --silver-white: #ECEFF1;
       --connection-color: #cfd8dc;
@@ -120,12 +119,12 @@
       justify-content: center;
       z-index: 5;
       perspective: 1000px;
-      animation: spinOpen 1.5s linear forwards; /* Changed to linear easing for smooth spin */
+      animation: spinOpen 1.5s linear forwards;
     }
 
     @keyframes spinOpen {
       0% {
-        transform: scale(0.05) rotate(-1080deg); /* Three full spins for faster effect */
+        transform: scale(0.05) rotate(-1080deg);
         opacity: 0;
       }
       50% {
@@ -186,14 +185,14 @@
       font-weight: 900;
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
-      animation: pulse 5s ease-in-out infinite, hubSpin 1.5s linear forwards; /* Linear easing */
+      animation: pulse 5s ease-in-out infinite, hubSpin 1.5s linear forwards;
       text-decoration: none;
       text-align: center;
       z-index: 5;
     }
     @keyframes hubSpin {
       0% {
-        transform: translate(-50%, -50%) scale(0) rotate(-1080deg); /* Three spins */
+        transform: translate(-50%, -50%) scale(0) rotate(-1080deg);
       }
       100% {
         transform: translate(-50%, -50%) scale(1) rotate(0deg);
@@ -227,11 +226,11 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
-      animation: circleSpin 1.6s linear forwards; /* Linear easing, 1.6s for stagger */
+      animation: circleSpin 1.6s linear forwards;
     }
     @keyframes circleSpin {
       0% {
-        transform: scale(0) rotate(-1080deg); /* Three spins */
+        transform: scale(0) rotate(-1080deg);
       }
       100% {
         transform: rotate(var(--circle-angle)) scale(1);
@@ -385,12 +384,12 @@
         svg.appendChild(path);
 
         for (let burst = 0; burst < 3; burst++) {
-          const numSparks = 8 + Math.floor(Math.random() * 5);
+          const numSparks = 12; // Fixed to 12 sparks for consistent activity
           const speeds = [0.5, 0.65, 0.8];
           for (let line = 0; line < 3; line++) {
             for (let s = 0; s < numSparks; s++) {
               const spark = document.createElementNS('http://www.w3.org/2000/svg','circle');
-              spark.setAttribute('r', Math.random() * 0.5 + 0.25);
+              spark.setAttribute('r', Math.random() * 0.5 + 0.5); // Slightly larger sparks for visibility
               spark.classList.add('spark');
               svg.appendChild(spark);
 
@@ -400,7 +399,7 @@
               motion.setAttribute('keyPoints','0;1;0');
               motion.setAttribute('keyTimes','0;0.5;1');
               motion.setAttribute('calcMode','linear');
-              motion.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08 + 1.5}s`);
+              motion.setAttribute('begin',`${s * 0.05 + line * 0.1 + 1.5}s`); // Simplified timing for uniformity
               motion.innerHTML = `<mpath href="#path${i}" />`;
               spark.appendChild(motion);
 
@@ -410,7 +409,7 @@
               animate.setAttribute('keyTimes','0;0.2;0.8;1');
               animate.setAttribute('dur',`${speeds[line]}s`);
               animate.setAttribute('repeatCount','indefinite');
-              animate.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08 + 1.5}s`);
+              animate.setAttribute('begin',`${s * 0.05 + line * 0.1 + 1.5}s`); // Sync with motion
               spark.appendChild(animate);
             }
           }
