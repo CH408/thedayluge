@@ -119,22 +119,16 @@
       justify-content: center;
       z-index: 5;
       perspective: 1000px;
-      animation: spinOpen 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation: spinOpen 1.5s linear forwards;
     }
 
     @keyframes spinOpen {
       0% {
-        transform: scale(0.1) rotate(-180deg);
+        transform: scale(0.05) rotate(-1080deg);
         opacity: 0;
       }
       50% {
         opacity: 1;
-      }
-      70% {
-        transform: scale(1.08) rotate(10deg);
-      }
-      85% {
-        transform: scale(0.98) rotate(-5deg);
       }
       100% {
         transform: scale(1) rotate(0deg);
@@ -150,7 +144,14 @@
       height: 100%;
       z-index: 1;
       pointer-events: none;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-in-out 0.3s forwards;
     }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
     .connection-path {
       fill: none;
       stroke: var(--connection-color);
@@ -169,7 +170,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(0);
       width: calc(var(--wheel-size) / 3.5);
       height: calc(var(--wheel-size) / 3.5);
       background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
@@ -184,10 +185,18 @@
       font-weight: 900;
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
-      animation: pulse 5s ease-in-out infinite;
+      animation: pulse 5s ease-in-out infinite, hubSpin 1.5s linear forwards;
       text-decoration: none;
       text-align: center;
       z-index: 5;
+    }
+    @keyframes hubSpin {
+      0% {
+        transform: translate(-50%, -50%) scale(0) rotate(-1080deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      }
     }
     @keyframes pulse {
       0%,100% { box-shadow: 0 0 30px #ffdd0088; }
@@ -217,8 +226,17 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
+      animation: circleSpin 1.6s linear forwards;
     }
-    
+    @keyframes circleSpin {
+      0% {
+        transform: scale(0) rotate(-1080deg);
+      }
+      100% {
+        transform: rotate(var(--circle-angle)) scale(1);
+      }
+    }
+
     .circle span {
       display: flex;
       align-items: center;
@@ -230,8 +248,7 @@
       word-break: keep-all;
       font-size: clamp(10px, calc(var(--circle-size) / 5), 16px);
     }
-    
-    /* Smaller font for longest titles */
+
     .circle-2 span, 
     .circle-4 span, 
     .circle-6 span,
@@ -239,37 +256,37 @@
       font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px);
       line-height: 1;
     }
-    
+
     /* Counter-rotate text to be horizontal */
-    .circle-1 { transform: rotate(0deg); border-color: var(--silver-white);
+    .circle-1 { --circle-angle: 0deg; border-color: var(--silver-white);
                 color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
     .circle-1 span { transform: rotate(0deg); }
 
-    .circle-8 { transform: rotate(45deg); border-color: #ffd700;
+    .circle-8 { --circle-angle: 45deg; border-color: #ffd700;
                 color: #ffd700; box-shadow: 0 0 8px #ffd700; }
     .circle-8 span { transform: rotate(-45deg); }
 
-    .circle-7 { transform: rotate(90deg); border-color: #00cc44;
+    .circle-7 { --circle-angle: 90deg; border-color: #00cc44;
                 color: #00cc44; box-shadow: 0 0 8px #00cc44; }
     .circle-7 span { transform: rotate(-90deg); }
 
-    .circle-2 { transform: rotate(135deg); border-color: #5dccdb;
+    .circle-2 { --circle-angle: 135deg; border-color: #5dccdb;
                 color: #5dccdb; box-shadow: 0 0 8px #5dccdb; }
     .circle-2 span { transform: rotate(-135deg); }
 
-    .circle-3 { transform: rotate(180deg); border-color: #ff8800;
+    .circle-3 { --circle-angle: 180deg; border-color: #ff8800;
                 color: #ff8800; box-shadow: 0 0 8px #ff8800; }
     .circle-3 span { transform: rotate(-180deg); }
 
-    .circle-4 { transform: rotate(225deg); border-color: #00ff00;
+    .circle-4 { --circle-angle: 225deg; border-color: #00ff00;
                 color: #00ff00; box-shadow: 0 0 8px #00ff00; }
     .circle-4 span { transform: rotate(-225deg); }
 
-    .circle-5 { transform: rotate(270deg); border-color: #cc88ff;
+    .circle-5 { --circle-angle: 270deg; border-color: #cc88ff;
                 color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
     .circle-5 span { transform: rotate(-270deg); }
 
-    .circle-6 { transform: rotate(315deg); border-color: #ff69b4;
+    .circle-6 { --circle-angle: 315deg; border-color: #ff69b4;
                 color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
     .circle-6 span { transform: rotate(-315deg); }
 
@@ -367,12 +384,12 @@
         svg.appendChild(path);
 
         for (let burst = 0; burst < 3; burst++) {
-          const numSparks = 8 + Math.floor(Math.random() * 5);
+          const numSparks = 12; // Fixed to 12 sparks for consistent activity
           const speeds = [0.5, 0.65, 0.8];
           for (let line = 0; line < 3; line++) {
             for (let s = 0; s < numSparks; s++) {
               const spark = document.createElementNS('http://www.w3.org/2000/svg','circle');
-              spark.setAttribute('r', Math.random() * 0.5 + 0.25);
+              spark.setAttribute('r', Math.random() * 0.5 + 0.5); // Slightly larger sparks for visibility
               spark.classList.add('spark');
               svg.appendChild(spark);
 
@@ -382,7 +399,7 @@
               motion.setAttribute('keyPoints','0;1;0');
               motion.setAttribute('keyTimes','0;0.5;1');
               motion.setAttribute('calcMode','linear');
-              motion.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08}s`);
+              motion.setAttribute('begin',`${s * 0.05 + line * 0.1 + 1.5}s`); // Simplified timing for uniformity
               motion.innerHTML = `<mpath href="#path${i}" />`;
               spark.appendChild(motion);
 
@@ -392,7 +409,7 @@
               animate.setAttribute('keyTimes','0;0.2;0.8;1');
               animate.setAttribute('dur',`${speeds[line]}s`);
               animate.setAttribute('repeatCount','indefinite');
-              animate.setAttribute('begin',`${i * 0.02 + burst * 0.15 + s * 0.005 + line * 0.08}s`);
+              animate.setAttribute('begin',`${s * 0.05 + line * 0.1 + 1.5}s`); // Sync with motion
               spark.appendChild(animate);
             }
           }
