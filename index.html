@@ -34,6 +34,7 @@
       --violet: #cc88ff;
       --pink: #ff69b4;
       --yellow: #ffcc00;
+ міні-10px;
       --ink: #111;
       --silver-white: #ECEFF1;
       --connection-color: #cfd8dc;
@@ -70,7 +71,7 @@
       width: 100%;
       z-index: 10;
     }
-    .header h1 said
+    .header h1 {
       text-transform: uppercase;
       letter-spacing: .5px;
       font-size: 32px;
@@ -119,19 +120,16 @@
       justify-content: center;
       z-index: 5;
       perspective: 1000px;
-      animation: spinOpen 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      animation: spinOpen 1.5s linear forwards; /* Changed to linear easing for smooth spin */
     }
 
     @keyframes spinOpen {
       0% {
-        transform: scale(0.05) rotate(-720deg);
+        transform: scale(0.05) rotate(-1080deg); /* Three full spins for faster effect */
         opacity: 0;
       }
       50% {
         opacity: 1;
-      }
-      80% {
-        transform: scale(1.15) rotate(45deg);
       }
       100% {
         transform: scale(1) rotate(0deg);
@@ -188,14 +186,14 @@
       font-weight: 900;
       letter-spacing: 0.5px;
       box-shadow: 0 0 30px #ffdd0088;
-      animation: pulse 5s ease-in-out infinite, hubSpin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      animation: pulse 5s ease-in-out infinite, hubSpin 1.5s linear forwards; /* Linear easing */
       text-decoration: none;
       text-align: center;
       z-index: 5;
     }
     @keyframes hubSpin {
       0% {
-        transform: translate(-50%, -50%) scale(0) rotate(-720deg);
+        transform: translate(-50%, -50%) scale(0) rotate(-1080deg); /* Three spins */
       }
       100% {
         transform: translate(-50%, -50%) scale(1) rotate(0deg);
@@ -229,11 +227,11 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
-      animation: circleSpin 1.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      animation: circleSpin 1.6s linear forwards; /* Linear easing, 1.6s for stagger */
     }
     @keyframes circleSpin {
       0% {
-        transform: scale(0) rotate(-720deg);
+        transform: scale(0) rotate(-1080deg); /* Three spins */
       }
       100% {
         transform: rotate(var(--circle-angle)) scale(1);
@@ -249,7 +247,7 @@
       line-height: 1.05;
       hyphens: none;
       word-break: keep-all;
-      font-size: clamp( vriend10px, calc(var(--circle-size) / 5), 16px);
+      font-size: clamp(10px, calc(var(--circle-size) / 5), 16px);
     }
 
     .circle-2 span, 
