@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -150,20 +149,6 @@
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 1; }
-    }
-
-    .connection-path {
-      fill: none;
-      stroke: var(--connection-color);
-      stroke-width: 0.25;
-      stroke-linecap: round;
-      stroke-opacity: 0.2;
-      stroke-dasharray: 2 4;
-    }
-
-    .spark {
-      fill: #ffffff;
-      filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #cfd8dc);
     }
 
     .wheel-center {
@@ -342,12 +327,19 @@
 
     <a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
     <a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
-    <a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS &<br>ECONOMICS</span></a>
-    <a href="./science-nature-tech/science-nature-tech.html" class="circle circle-2"><span>SCIENCE,<br>NATURE &<br>TECH</span></a>
-    <a href="./sports-leisure/sports-leisure.html" class="circle circle-3"><span>SPORTS &<br>LEISURE</span></a>
-    <a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY<br>CORNER</span></a>
-    <a href="./arts.html" class="circle circle-5"><span>ARTS &<br>LITERATURE</span></a>
-    <a href="./wisdom.html" class="circle circle-6"><span>WISDOM &<br>PHILOSOPHY</span></a>
+    <a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS &amp;
+    ECONOMICS</span></a>
+    <a href="./science-nature-tech/science-nature-tech.html" class="circle circle-2"><span>SCIENCE,
+    NATURE &amp;
+    TECH</span></a>
+    <a href="./sports-leisure/sports-leisure.html" class="circle circle-3"><span>SPORTS &amp;
+    LEISURE</span></a>
+    <a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY
+    CORNER</span></a>
+    <a href="./arts.html" class="circle circle-5"><span>ARTS &amp;
+    LITERATURE</span></a>
+    <a href="./wisdom.html" class="circle circle-6"><span>WISDOM &amp;
+    PHILOSOPHY</span></a>
   </div>
 
   <div class="button-container">
@@ -355,11 +347,11 @@
   </div>
 
   <script>
-    function drawConnections() {
+    function drawDNAHelix() {
       const svg = document.querySelector('.connection-lines');
       const wheel = document.querySelector('.wheel-container');
       const hub = document.querySelector('.wheel-center');
-      const circles = document.querySAll('.circle');
+      const circles = document.querySelectorAll('.circle');
       const rect = wheel.getBoundingClientRect();
       svg.setAttribute('width', rect.width);
       svg.setAttribute('height', rect.height);
@@ -370,6 +362,10 @@
       const cy = hubRect.top - rect.top + hubRect.height / 2;
       const hubR = hubRect.width / 2;
 
+      // DNA Helix colors - Deep Blue / Teal
+      const color1 = '#0066ff';
+      const color2 = '#00cccc';
+
       circles.forEach((circle, i) => {
         const cr = circle.getBoundingClientRect();
         const r = cr.width / 2;
@@ -378,56 +374,86 @@
         const dx = x - cx;
         const dy = y - cy;
         const dist = Math.sqrt(dx*dx + dy*dy);
-        const sx = cx + (dx/dist)*(hubR+2);
-        const sy = cy + (dy/dist)*(hubR+2);
-        const ex = x - (dx/dist)*(r+2);
-        const ey = y - (dy/dist)*(r+2);
 
-        const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-        path.setAttribute('d',`M${sx},${sy} L${ex},${ey}`);
-        path.setAttribute('id',`path${i}`);
-        path.classList.add('connection-path');
-        svg.appendChild(path);
+        // Create first spiral path
+        const pathData = [];
+        const steps = 50;
+        for (let s = 0; s <= steps; s++) {
+          const t = s / steps;
+          const px = cx + dx * t;
+          const py = cy + dy * t;
+          const perpX = -dy / dist * Math.sin(t * Math.PI * 4) * 8;
+          const perpY = dx / dist * Math.sin(t * Math.PI * 4) * 8;
+          pathData.push(`${s === 0 ? 'M' : 'L'}${px + perpX},${py + perpY}`);
+        }
 
-        for (let burst = 0; burst < 3; burst++) {
-          const numSparks = 12; // Fixed to 12 sparks for consistent activity
-          const speeds = [0.5, 0.65, 0.8];
-          for (let line = 0; line < 3; line++) {
-            for (let s = 0; s < numSparks; s++) {
-              const spark = document.createElementNS('http://www.w3.org/2000/svg','circle');
-              spark.setAttribute('r', Math.random() * 0.5 + 0.5); // Slightly larger sparks for visibility
-              spark.classList.add('spark');
-              svg.appendChild(spark);
+        const path1 = document.createElementNS('http://www.w3.org/2000/svg','path');
+        path1.setAttribute('d', pathData.join(' '));
+        path1.setAttribute('id', `helix1-${i}`);
+        path1.setAttribute('stroke', color1);
+        path1.setAttribute('stroke-width', '1');
+        path1.setAttribute('stroke-opacity', '0.4');
+        path1.setAttribute('fill', 'none');
+        svg.appendChild(path1);
 
-              const motion = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
-              motion.setAttribute('dur',`${speeds[line]}s`);
-              motion.setAttribute('repeatCount','indefinite');
-              motion.setAttribute('keyPoints','0;1;0');
-              motion.setAttribute('keyTimes','0;0.5;1');
-              motion.setAttribute('calcMode','linear');
-              motion.setAttribute('begin',`${s * 0.05 + line * 0.1 + 1.5}s`); // Simplified timing for uniformity
-              motion.innerHTML = `<mpath href="#path${i}" />`;
-              spark.appendChild(motion);
+        // Create second spiral path (opposite phase)
+        const pathData2 = [];
+        for (let s = 0; s <= steps; s++) {
+          const t = s / steps;
+          const px = cx + dx * t;
+          const py = cy + dy * t;
+          const perpX = -dy / dist * Math.sin(t * Math.PI * 4 + Math.PI) * 8;
+          const perpY = dx / dist * Math.sin(t * Math.PI * 4 + Math.PI) * 8;
+          pathData2.push(`${s === 0 ? 'M' : 'L'}${px + perpX},${py + perpY}`);
+        }
 
-              const animate = document.createElementNS('http://www.w3.org/2000/svg','animate');
-              animate.setAttribute('attributeName','opacity');
-              animate.setAttribute('values','0;1;1;0');
-              animate.setAttribute('keyTimes','0;0.2;0.8;1');
-              animate.setAttribute('dur',`${speeds[line]}s`);
-              animate.setAttribute('repeatCount','indefinite');
-              animate.setAttribute('begin',`${s * 0.05 + line * 0.1 + 1.5}s`); // Sync with motion
-              spark.appendChild(animate);
-            }
-          }
+        const path2 = document.createElementNS('http://www.w3.org/2000/svg','path');
+        path2.setAttribute('d', pathData2.join(' '));
+        path2.setAttribute('id', `helix2-${i}`);
+        path2.setAttribute('stroke', color2);
+        path2.setAttribute('stroke-width', '1');
+        path2.setAttribute('stroke-opacity', '0.4');
+        path2.setAttribute('fill', 'none');
+        svg.appendChild(path2);
+
+        // Add particles on each strand
+        for (let p = 0; p < 8; p++) {
+          // First strand particles
+          const particle1 = document.createElementNS('http://www.w3.org/2000/svg','circle');
+          particle1.setAttribute('r', '2');
+          particle1.setAttribute('fill', color1);
+          particle1.setAttribute('filter', `drop-shadow(0 0 3px ${color1})`);
+          svg.appendChild(particle1);
+
+          const motion1 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+          motion1.setAttribute('dur', '3s');
+          motion1.setAttribute('repeatCount', 'indefinite');
+          motion1.setAttribute('begin', `${p * 0.3}s`);
+          motion1.innerHTML = `<mpath href="#helix1-${i}" />`;
+          particle1.appendChild(motion1);
+
+          // Second strand particles
+          const particle2 = document.createElementNS('http://www.w3.org/2000/svg','circle');
+          particle2.setAttribute('r', '2');
+          particle2.setAttribute('fill', color2);
+          particle2.setAttribute('filter', `drop-shadow(0 0 3px ${color2})`);
+          svg.appendChild(particle2);
+
+          const motion2 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
+          motion2.setAttribute('dur', '3s');
+          motion2.setAttribute('repeatCount', 'indefinite');
+          motion2.setAttribute('begin', `${p * 0.3}s`);
+          motion2.innerHTML = `<mpath href="#helix2-${i}" />`;
+          particle2.appendChild(motion2);
         }
       });
     }
 
-    window.addEventListener('load', () => setTimeout(drawConnections, 1600));
+    window.addEventListener('load', () => setTimeout(drawDNAHelix, 1600));
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(drawConnections, 300);
+      resizeTimeout = setTimeout(drawDNAHelix, 300);
     });
 
     document.querySelector('.random-button').addEventListener('click', function() {
