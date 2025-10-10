@@ -221,7 +221,7 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
-      animation: circleSpin 1.6s ease-out forwards;
+      animation: circleSpin 1.6s ease-out forwards, pulseGlow 4s ease-in-out infinite 1.6s;
       opacity: 0;
     }
     @keyframes circleSpin {
@@ -232,6 +232,14 @@
       100% {
         transform: rotate(var(--circle-angle)) scale(1);
         opacity: 1;
+      }
+    }
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 5px currentColor;
+      }
+      50% {
+        box-shadow: 0 0 12px currentColor, 0 0 4px currentColor;
       }
     }
 
