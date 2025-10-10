@@ -1,1 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sports & Leisure - Video Clips</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+    :root {
+      --orange: #ff8800;
+      --orange-light: #ffbb8b;
+      --ink: #111;
+      --black-bg: #000000; /* Jet black background */
+      --dark-gray: #111111;
+      --gray: #333333;
+      --maxw: 1200px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      color: var(--orange);
+      line-height: 1.3;
+      background: var(--black-bg);
+      padding: 10px;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(255,136,0,0.1) 0%, transparent 70%);
+      animation: energy-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    body::after {
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes energy-pulse {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+    }
+    @keyframes edge-glow {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
+    }
+    #particle-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
+    .title-container {
+      display: flex;
+      align-items: center;
+      max-width: 800px;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+    .block-title {
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-align: left;
+      color: var(--orange);
+      animation: block-title-pulse-orange 8s ease-in-out infinite;
+    }
+    @keyframes block-title-pulse-orange {
+      0% { text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      12.5% { text-shadow: 0 0 16px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      25% { text-shadow: 0 0 17px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 20px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      75% { text-shadow: 0 0 17px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .headlines { list-style: none; max-width: 800px; }
+    .headline {
+      font-size: 16px;
+      margin-bottom: 5px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.5s ease forwards;
+      color: var(--orange);
+    }
+    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
+    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
+    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
+    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
+    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
+    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
+    .headlines .headline:nth-child(7) { animation-delay: 0.35s; }
+    .headlines .headline:nth-child(8) { animation-delay: 0.4s; }
+    .headlines .headline:nth-child(9) { animation-delay: 0.45s; }
+    .headlines .headline:nth-child(10) { animation-delay: 0.5s; }
+    .headlines .headline:nth-child(11) { animation-delay: 0.55s; }
+    .headlines .headline:nth-child(12) { animation-delay: 0.6s; }
+    .headlines .headline:nth-child(13) { animation-delay: 0.65s; }
+    .headlines .headline:nth-child(14) { animation-delay: 0.7s; }
+    .headlines .headline:nth-child(15) { animation-delay: 0.75s; }
+    .headlines .headline:nth-child(16) { animation-delay: 0.8s; }
+    .headlines .headline:nth-child(17) { animation-delay: 0.85s; }
+    .headlines .headline:nth-child(18) { animation-delay: 0.9s; }
+    .headlines .headline:nth-child(19) { animation-delay: 0.95s; }
+    .headlines .headline:nth-child(20) { animation-delay: 1.0s; }
+    .headlines .headline:nth-child(21) { animation-delay: 1.05s; }
+    .headlines .headline:nth-child(22) { animation-delay: 1.1s; }
+    .headlines .headline:nth-child(23) { animation-delay: 1.15s; }
+    .headlines .headline:nth-child(24) { animation-delay: 1.2s; }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .headline a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .headlines .headline a:hover {
+      color: var(--orange-light);
+      text-shadow: 0 0 10px var(--orange-light);
+    }
+    .random-button, .home-btn, .pagination-button {
+      display: inline-block;
+      background: transparent;
+      color: var(--orange);
+      padding: 8px 16px;
+      border: 1px solid var(--orange);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--orange);
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      cursor: pointer;
+    }
+    .random-button:hover, .home-btn:hover, .pagination-button:hover {
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 15px rgba(255,136,0,0.3);
+      transform: scale(1.05);
+    }
+    .pagination-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .button-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .home-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+    }
+    .error-message {
+      color: var(--orange);
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .block-title { font-size: 16px; }
+      .headline { font-size: 14px; }
+      .random-button, .pagination-button, .home-btn { font-size: 10px; padding: 6px 12px; }
+      .title-container { flex-direction: row; align-items: center; justify-content: flex-start; }
+      .error-message { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="../sports-leisure.html" class="home-btn">← Back to Sports & Leisure</a>
+  <canvas id="particle-canvas"></canvas>
+  <div class="wrap">
+    <div class="global-news">
+      <div class="title-container">
+        <div class="block-title global-news-title" id="page-title">Sports & Leisure - Video Clips - Page 1</div>
+      </div>
+      <ul class="headlines" id="headlines"></ul>
+      <p class="error-message" id="error-message" style="display: none;">Unable to load video clips links. Please try again later.</p>
+    </div>
+    <div class="button-container">
+      <button class="random-button" onclick="goToRandomClip()">⚛️ SURPRISE ME!</button>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+  
+  <script>
+    // Particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particlesArray = [];
+    const numberOfParticles = 50;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1.5 - 0.75;
+        this.speedY = Math.random() * 1.5 - 0.75;
+        this.color = ['#ff8800', '#ffbb8b', '#ff9900', '#ff7700', '#ffaa00', '#ff6600'][Math.floor(Math.random() * 6)];
+        this.hasTail = Math.random() < 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color;
+        if (this.hasTail) {
+          const gradient = ctx.createLinearGradient(
+            this.x, this.y,
+            this.x - this.speedX * 10, this.y - this.speedY * 10
+          );
+          gradient.addColorStop(0, this.color + '33');
+          gradient.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = this.size;
+          ctx.stroke();
+        }
+      }
+    }
+    
+    function init() {
+      particlesArray.length = 0;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const particle of particlesArray) {
+        particle.update();
+        particle.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    
+    init();
+    animate();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
 
+    // Load video clips links with pagination
+    async function loadClipsContent(page = 1) {
+      try {
+        console.log('Fetching sports-leisure-links.txt from ./sports-leisure-links.txt');
+        const response = await fetch('./sports-leisure-links.txt');
+        console.log('Fetch response:', response.status, response.statusText);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const text = await response.text();
+        console.log('Fetched text length:', text.length);
+        const lines = text.split('\n').filter(line => line.trim());
+        console.log('Parsed lines:', lines.length);
+        const entries = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 3) {
+            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+            return { title: cleanTitle, link: parts[1].trim(), category: parts[2].trim().toLowerCase() };
+          }
+          return null;
+        }).filter(entry => entry !== null && entry.category === 'clips');
+        
+        console.log('Filtered clips entries:', entries.length);
+        const itemsPerPage = 24;
+        const totalPages = Math.ceil(entries.length / itemsPerPage);
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedEntries = entries.slice(start, end);
+        
+        const headlines = document.getElementById('headlines');
+        const pageTitle = document.getElementById('page-title');
+        const errorMessage = document.getElementById('error-message');
+        if (headlines) {
+          headlines.innerHTML = paginatedEntries.length > 0
+            ? paginatedEntries.map((entry, index) => `
+                <li class="headline">
+                  <a href="${entry.link}" target="_blank">${entry.title}</a>
+                </li>
+              `).join('')
+            : '<li class="headline">No video clips content available.</li>';
+          pageTitle.textContent = `Sports & Leisure - Video Clips - Page ${page}`;
+          errorMessage.style.display = 'none';
+          console.log(`Showing ${paginatedEntries.length} clips on Page ${page}`);
+        } else {
+          throw new Error('Headlines container not found');
+        }
+        
+        // Update pagination
+        const pagination = document.getElementById('pagination');
+        if (pagination) {
+          pagination.innerHTML = '';
+          if (page > 1) {
+            const prevButton = document.createElement('button');
+            prevButton.className = 'pagination-button';
+            prevButton.textContent = '← Previous';
+            prevButton.addEventListener('click', () => loadClipsContent(page - 1));
+            pagination.appendChild(prevButton);
+          } else {
+            const prevButton = document.createElement('button');
+            prevButton.className = 'pagination-button';
+            prevButton.textContent = '← Previous';
+            prevButton.disabled = true;
+            pagination.appendChild(prevButton);
+          }
+          if (page < totalPages) {
+            const nextButton = document.createElement('button');
+            nextButton.className = 'pagination-button';
+            nextButton.textContent = 'Next →';
+            nextButton.addEventListener('click', () => loadClipsContent(page + 1));
+            pagination.appendChild(nextButton);
+          } else {
+            const nextButton = document.createElement('button');
+            nextButton.className = 'pagination-button';
+            nextButton.textContent = 'Next →';
+            nextButton.disabled = true;
+            pagination.appendChild(nextButton);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading video clips links:', error.message);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.style.display = 'block';
+        }
+      }
+    }
+
+    // Random video clip from current page links
+    async function goToRandomClip() {
+      try {
+        const response = await fetch('./sports-leisure-links.txt');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const text = await response.text();
+        const lines = text.split('\n').filter(line => line.trim());
+        const entries = lines.map(line => {
+          const parts = line.split('|');
+          if (parts.length >= 3 && parts[2].trim().toLowerCase() === 'clips') {
+            return parts[1].trim();
+          }
+          return null;
+        }).filter(link => link !== null);
+        const currentLinks = entries.slice((loadClipsContent.page - 1) * 24, loadClipsContent.page * 24);
+        if (currentLinks.length > 0) {
+          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
+          window.open(randomLink, '_blank');
+        } else {
+          throw new Error('No valid video clips links to select randomly on current page');
+        }
+      } catch (error) {
+        console.error('Error loading links for random selection:', error.message);
+        const errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+          errorMessage.style.display = 'block';
+        }
+      }
+    }
+
+    // Track current page in function scope
+    loadClipsContent.page = 1;
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const page = parseInt(urlParams.get('page')) || 1;
+      loadClipsContent.page = page;
+      loadClipsContent(page);
+    });
+  </script>
+</body>
+</html>
