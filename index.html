@@ -206,8 +206,9 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
-      animation: circleSpin 1.6s ease-out forwards, pulseGlow 4s ease-in-out infinite 1.6s;
+      animation: circleSpin 1.6s ease-out forwards;
       opacity: 0;
+      box-shadow: 0 0 8px currentColor, 0 0 15px currentColor, 0 0 3px currentColor inset;
     }
     @keyframes circleSpin {
       0% {
@@ -217,14 +218,6 @@
       100% {
         transform: rotate(var(--circle-angle)) scale(1);
         opacity: 1;
-      }
-    }
-    @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow: 0 0 8px currentColor, 0 0 15px currentColor, 0 0 3px currentColor inset;
-      }
-      50% {
-        box-shadow: 0 0 20px currentColor, 0 0 30px currentColor, 0 0 40px currentColor, 0 0 5px currentColor inset;
       }
     }
 
@@ -240,10 +233,15 @@
       font-size: clamp(10px, calc(var(--circle-size) / 5), 16px);
     }
 
-    .circle-2 span, 
-    .circle-4 span, 
-    .circle-6 span,
+    .circle-2 span,
     .circle-7 span {
+      font-size: clamp(9px, calc(var(--circle-size) / 5.8), 14px);
+      line-height: 1;
+    }
+
+    .circle-4 span, 
+    .circle-5 span,
+    .circle-6 span {
       font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px);
       line-height: 1;
     }
@@ -306,10 +304,13 @@
       .circle span {
         font-size: clamp(9px, calc(var(--circle-size) / 5.5), 14px);
       }
-      .circle-2 span, 
-      .circle-4 span, 
-      .circle-6 span,
+      .circle-2 span,
       .circle-7 span {
+        font-size: clamp(8px, calc(var(--circle-size) / 6.2), 13px);
+      }
+      .circle-4 span, 
+      .circle-5 span,
+      .circle-6 span {
         font-size: clamp(7px, calc(var(--circle-size) / 7), 12px);
       }
     }
