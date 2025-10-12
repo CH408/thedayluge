@@ -206,8 +206,9 @@
       text-decoration: none;
       cursor: pointer;
       box-sizing: border-box;
-      animation: circleSpin 1.6s ease-out forwards, pulseGlow 4s ease-in-out infinite 1.6s;
+      animation: circleSpin 1.6s ease-out forwards;
       opacity: 0;
+      box-shadow: 0 0 8px currentColor, 0 0 15px currentColor, 0 0 3px currentColor inset;
     }
     @keyframes circleSpin {
       0% {
@@ -217,14 +218,6 @@
       100% {
         transform: rotate(var(--circle-angle)) scale(1);
         opacity: 1;
-      }
-    }
-    @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow: 0 0 5px currentColor;
-      }
-      50% {
-        box-shadow: 0 0 12px currentColor, 0 0 4px currentColor;
       }
     }
 
@@ -240,10 +233,15 @@
       font-size: clamp(10px, calc(var(--circle-size) / 5), 16px);
     }
 
-    .circle-2 span, 
-    .circle-4 span, 
-    .circle-6 span,
+    .circle-2 span,
     .circle-7 span {
+      font-size: clamp(9px, calc(var(--circle-size) / 5.8), 14px);
+      line-height: 1;
+    }
+
+    .circle-4 span, 
+    .circle-5 span,
+    .circle-6 span {
       font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px);
       line-height: 1;
     }
@@ -306,10 +304,13 @@
       .circle span {
         font-size: clamp(9px, calc(var(--circle-size) / 5.5), 14px);
       }
-      .circle-2 span, 
-      .circle-4 span, 
-      .circle-6 span,
+      .circle-2 span,
       .circle-7 span {
+        font-size: clamp(8px, calc(var(--circle-size) / 6.2), 13px);
+      }
+      .circle-4 span, 
+      .circle-5 span,
+      .circle-6 span {
         font-size: clamp(7px, calc(var(--circle-size) / 7), 12px);
       }
     }
@@ -457,7 +458,9 @@
     });
 
     document.querySelector('.random-button').addEventListener('click', function() {
-      fetch('./surprise-me-links.txt')
+      // Add cache-busting parameter to prevent loading stale txt file
+      const cacheBuster = '?t=' + Date.now();
+      fetch('./surprise-me-links.txt' + cacheBuster)
         .then(response => {
           if (!response.ok) {
             throw new Error('Could not load surprise links');
@@ -477,7 +480,11 @@
             .filter(link => link.length > 0);
           
           const randomIndex = Math.floor(Math.random() * links.length);
-          const randomLink = links[randomIndex];
+          let randomLink = links[randomIndex];
+          
+          // Add cache-busting parameter to force fresh content load
+          const separator = randomLink.includes('?') ? '&' : '?';
+          randomLink += separator + '_=' + Date.now();
           
           window.location.href = randomLink;
         })
