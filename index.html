@@ -457,7 +457,9 @@
     });
 
     document.querySelector('.random-button').addEventListener('click', function() {
-      fetch('./surprise-me-links.txt')
+      // Add cache-busting parameter to prevent loading stale txt file
+      const cacheBuster = '?t=' + Date.now();
+      fetch('./surprise-me-links.txt' + cacheBuster)
         .then(response => {
           if (!response.ok) {
             throw new Error('Could not load surprise links');
@@ -477,7 +479,11 @@
             .filter(link => link.length > 0);
           
           const randomIndex = Math.floor(Math.random() * links.length);
-          const randomLink = links[randomIndex];
+          let randomLink = links[randomIndex];
+          
+          // Add cache-busting parameter to force fresh content load
+          const separator = randomLink.includes('?') ? '&' : '?';
+          randomLink += separator + '_=' + Date.now();
           
           window.location.href = randomLink;
         })
