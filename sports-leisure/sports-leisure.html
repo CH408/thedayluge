@@ -314,7 +314,7 @@
 
     <div class="columns-container">
       <div class="column">
-        <div class="column-title">Sports News Archives</div>
+        <div class="column-title">Sports News</div>
         <div class="content-list" id="news-list">
           <div class="loading-indicator">Loading content...</div>
         </div>
@@ -457,8 +457,8 @@
             return null;
           }).filter(entry => entry !== null);
           
-          // Take entries 6+ onwards (index 5+)
-          state.news.data = newsEntries.slice(5);
+          // Take all entries
+          state.news.data = newsEntries;
           renderColumn('news', 'news-list', 'news-pagination');
         } else {
           document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading news</div>';
