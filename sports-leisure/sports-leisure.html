@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sports & Leisure - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -91,9 +91,10 @@
     }
 
     .column-title {
+      /* SAME AS news.html: 18px */
+      font-size: 18px;
       /* CENTERED */
       text-align: center;
-      font-size: clamp(18px, 3vw, 24px);
       color: #66B4F2;
       margin-bottom: 20px;
       font-weight: 900;
@@ -156,14 +157,16 @@
     }
 
     .content-item a {
+      /* SAME AS news.html: 16px */
+      font-size: 16px;
       color: #66B4F2;
       text-decoration: none;
-      font-size: clamp(12px, 2vw, 15px);
       display: block;
       line-height: 1.4;
+      font-weight: bold;
       opacity: 0;
       transform: translateY(5px);
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .content-item.animate-in a {
@@ -264,9 +267,10 @@
     }
 
     .section-title {
+      /* SAME AS news.html: 18px */
+      font-size: 18px;
       /* CENTERED */
       text-align: center;
-      font-size: clamp(20px, 3vw, 28px);
       color: #ffffff;
       margin-bottom: 20px;
       font-weight: 900;
@@ -324,15 +328,16 @@
     }
 
     .editor-pick-item a {
+      /* SAME AS news.html: 16px */
+      font-size: 16px;
       color: #ffffff;
       text-decoration: none;
-      font-size: clamp(12px, 2vw, 15px);
       display: block;
       line-height: 1.4;
-      font-weight: 700;
+      font-weight: bold;
       opacity: 0;
       transform: translateY(5px);
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .editor-pick-item.animate-in a {
@@ -453,6 +458,17 @@
 
       .bottom-section {
         padding: 20px;
+      }
+
+      /* SAME AS news.html MOBILE SIZES */
+      .column-title,
+      .section-title {
+        font-size: 16px;
+      }
+
+      .content-item a,
+      .editor-pick-item a {
+        font-size: 14px;
       }
     }
   </style>
