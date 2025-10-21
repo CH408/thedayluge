@@ -59,7 +59,7 @@
     }
 
     .column {
-      /* SIMPLIFIED - PURE BLACK */
+      /* PURE JET BLACK */
       background: #000000;
       border: 2px solid rgba(102,180,242,0.3);
       border-radius: 16px;
@@ -113,7 +113,7 @@
     .content-item {
       /* JET BLACK BACKGROUND */
       background: #000000;
-      /* KEEP VERTICAL BLUE BAR */
+      /* VERTICAL BLUE BAR */
       border: 1px solid rgba(102,180,242,0.2);
       border-left: 3px solid #66B4F2;
       padding: 12px 15px;
@@ -137,7 +137,6 @@
     }
 
     .content-item:hover {
-      /* SLIGHT GLOW ON HOVER - NO BACKGROUND CHANGE */
       border-color: rgba(102,180,242,0.4);
       box-shadow: 0 0 10px rgba(102,180,242,0.3);
       transform: translateX(5px);
@@ -274,9 +273,9 @@
     }
 
     .editor-pick-item {
-      /* JET BLACK BACKGROUND FOR EDITOR PICKS */
+      /* JET BLACK BACKGROUND */
       background: #000000;
-      /* KEEP VERTICAL WHITE BAR */
+      /* VERTICAL WHITE BAR */
       border: 1px solid rgba(255,255,255,0.2);
       border-left: 3px solid #ffffff;
       padding: 12px 15px;
@@ -300,7 +299,6 @@
     }
 
     .editor-pick-item:hover {
-      /* SLIGHT GLOW ON HOVER - NO BACKGROUND CHANGE */
       border-color: rgba(255,255,255,0.4);
       box-shadow: 0 0 10px rgba(255,255,255,0.3);
       transform: translateX(5px);
@@ -476,7 +474,7 @@
 
     <div class="buttons-container">
       <div class="bottom-section">
-        <div class="section-title">Editors' Picks</div>
+        <div class="section-title">Editor's Picks</div>
         <div class="section-content" id="editors-content">
           <div class="loading-indicator">Loading...</div>
         </div>
@@ -545,12 +543,10 @@
       const pageData = columnState.data.slice(startIdx, endIdx);
       
       if (pageData.length > 0) {
-        // Create items with staggered animation delays
         list.innerHTML = pageData.map((item, index) => 
           createContentItem(item, index)
         ).join('');
         
-        // Trigger animations after a brief delay
         setTimeout(() => {
           document.querySelectorAll(`#${listId} .content-item`).forEach(item => {
             item.classList.add('animate-in');
@@ -560,7 +556,6 @@
         list.innerHTML = '<div class="loading-indicator">No content available</div>';
       }
       
-      // Render smart pagination with animation
       const totalPages = Math.ceil(columnState.data.length / columnState.itemsPerPage);
       if (totalPages > 1) {
         pagination.innerHTML = createSmartPagination(columnState.currentPage, totalPages, columnType);
@@ -572,17 +567,9 @@
       }
     };
 
-    // Animate column titles when content loads
-    const animateColumnTitle = (columnTitle) => {
-      setTimeout(() => {
-        columnTitle.classList.add('animate-in');
-      }, 300);
-    };
-
     // Animate editors picks
     const animateEditorsPicks = (container) => {
       setTimeout(() => {
-        container.classList.add('animate-in');
         container.querySelectorAll('.editor-pick-item').forEach((item, index) => {
           item.style.animationDelay = `${index * 0.08}s`;
           item.classList.add('animate-in');
@@ -608,7 +595,7 @@
           title.classList.add('animate-in');
         });
 
-        // Load Sports News from parent directory
+        // Load Sports News
         const newsResponse = await fetch('../sports-news.txt');
         if (newsResponse.ok) {
           const newsText = await newsResponse.text();
@@ -631,7 +618,7 @@
           document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading news</div>';
         }
 
-        // Load Features, Podcasts, and Editors' Picks from sports-leisure-links.txt
+        // Load Features, Podcasts, and Editors' Picks
         const leisureResponse = await fetch('./sports-leisure-links.txt');
         if (leisureResponse.ok) {
           const leisureText = await leisureResponse.text();
@@ -657,7 +644,7 @@
           state.podcasts.data = leisureEntries.filter(e => e.category === 'pods');
           renderColumn('podcasts', 'podcasts-list', 'podcasts-pagination');
           
-          // Filter for Editors' Picks - show first 3
+          // Filter for Editor's Picks - show first 3
           const editorsEntries = leisureEntries.filter(e => e.category === 'editors');
           const editorsContent = document.getElementById('editors-content');
           if (editorsEntries.length > 0) {
@@ -669,7 +656,7 @@
             `).join('');
             animateEditorsPicks(editorsContent);
           } else {
-            editorsContent.innerHTML = '<div class="loading-indicator">No editors picks available</div>';
+            editorsContent.innerHTML = '<div class="loading-indicator">No picks available</div>';
           }
         } else {
           document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading features</div>';
