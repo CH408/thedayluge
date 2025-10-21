@@ -14,7 +14,8 @@
 
     body {
       font-family: 'Special Elite', 'Courier New', monospace;
-      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      /* JET BLACK PAGE BACKGROUND */
+      background: #000000;
       color: #66B4F2;
       min-height: 100vh;
       padding: 20px;
@@ -38,6 +39,16 @@
       letter-spacing: 3px;
       font-weight: 900;
       text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: unfoldHeader 0.8s ease-out 0.2s forwards;
+    }
+
+    @keyframes unfoldHeader {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .columns-container {
@@ -48,8 +59,8 @@
     }
 
     .column {
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(10px);
+      /* PURE JET BLACK */
+      background: #000000;
       border: 2px solid rgba(102,180,242,0.3);
       border-radius: 16px;
       padding: 25px;
@@ -58,6 +69,19 @@
       transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .column:nth-child(1) { animation: unfoldColumn 0.6s ease-out 0.4s forwards; }
+    .column:nth-child(2) { animation: unfoldColumn 0.6s ease-out 0.5s forwards; }
+    .column:nth-child(3) { animation: unfoldColumn 0.6s ease-out 0.6s forwards; }
+
+    @keyframes unfoldColumn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .column:hover {
@@ -67,6 +91,8 @@
     }
 
     .column-title {
+      /* CENTERED */
+      text-align: center;
       font-size: clamp(18px, 3vw, 24px);
       color: #66B4F2;
       margin-bottom: 20px;
@@ -75,6 +101,19 @@
       border-bottom: 2px solid #66B4F2;
       padding-bottom: 12px;
       letter-spacing: 1px;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .column-title.animate-in {
+      animation: unfoldTitle 0.5s ease-out forwards;
+    }
+
+    @keyframes unfoldTitle {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .content-list {
@@ -85,18 +124,34 @@
     }
 
     .content-item {
-      background: rgba(102,180,242,0.05);
+      /* JET BLACK BACKGROUND */
+      background: #000000;
+      /* VERTICAL BLUE BAR */
       border: 1px solid rgba(102,180,242,0.2);
       border-left: 3px solid #66B4F2;
       padding: 12px 15px;
       border-radius: 8px;
       transition: all 0.3s ease;
       cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px) scaleY(0.8);
+      transform-origin: top;
+    }
+
+    .content-item.animate-in {
+      animation: unfoldItem 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes unfoldItem {
+      to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+      }
     }
 
     .content-item:hover {
-      background: rgba(102,180,242,0.15);
       border-color: rgba(102,180,242,0.4);
+      box-shadow: 0 0 10px rgba(102,180,242,0.3);
       transform: translateX(5px);
     }
 
@@ -106,6 +161,20 @@
       font-size: clamp(12px, 2vw, 15px);
       display: block;
       line-height: 1.4;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.2s ease;
+    }
+
+    .content-item.animate-in a {
+      animation: fadeInLink 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeInLink {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .pagination {
@@ -115,6 +184,19 @@
       align-items: center;
       margin-top: 15px;
       flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .pagination.animate-in {
+      animation: fadeInPagination 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeInPagination {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .page-btn {
@@ -164,6 +246,16 @@
       transition: all 0.4s ease;
       width: 100%;
       max-width: 600px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: unfoldBottom 0.7s ease-out 0.8s forwards;
+    }
+
+    @keyframes unfoldBottom {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .bottom-section:hover {
@@ -172,6 +264,8 @@
     }
 
     .section-title {
+      /* CENTERED */
+      text-align: center;
       font-size: clamp(20px, 3vw, 28px);
       color: #ffffff;
       margin-bottom: 20px;
@@ -181,6 +275,12 @@
       padding-bottom: 12px;
       letter-spacing: 2px;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .section-title.animate-in {
+      animation: unfoldTitle 0.5s ease-out forwards;
     }
 
     .section-content {
@@ -192,18 +292,34 @@
     }
 
     .editor-pick-item {
-      background: rgba(255,255,255,0.15);
+      /* JET BLACK BACKGROUND */
+      background: #000000;
+      /* VERTICAL WHITE BAR */
       border: 1px solid rgba(255,255,255,0.2);
       border-left: 3px solid #ffffff;
       padding: 12px 15px;
       border-radius: 8px;
       transition: all 0.3s ease;
       cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px) scaleY(0.8);
+      transform-origin: top;
+    }
+
+    .editor-pick-item.animate-in {
+      animation: unfoldEditorItem 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes unfoldEditorItem {
+      to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+      }
     }
 
     .editor-pick-item:hover {
-      background: rgba(255,255,255,0.25);
       border-color: rgba(255,255,255,0.4);
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
       transform: translateX(5px);
     }
 
@@ -214,6 +330,20 @@
       display: block;
       line-height: 1.4;
       font-weight: 700;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all 0.2s ease;
+    }
+
+    .editor-pick-item.animate-in a {
+      animation: fadeInEditorLink 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeInEditorLink {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .button-wrapper {
@@ -238,6 +368,19 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
       display: inline-block;
       margin: 0 auto;
+      opacity: 0;
+      transform: scale(0.9);
+    }
+
+    .bottom-section.animate-in .more-button {
+      animation: popInButton 0.5s ease-out 1s forwards;
+    }
+
+    @keyframes popInButton {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .more-button:hover {
@@ -263,6 +406,16 @@
       transition: all 0.3s ease;
       box-shadow: 0 0 20px rgba(102,180,242,0.3);
       z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideInHome 0.6s ease-out 0.1s forwards;
+    }
+
+    @keyframes slideInHome {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .home-btn:hover {
@@ -361,10 +514,10 @@
       podcasts: { data: [], currentPage: 1, itemsPerPage: 5 }
     };
 
-    // Helper to create content item HTML
-    const createContentItem = (entry) => {
+    // Helper to create content item HTML with animation classes
+    const createContentItem = (entry, index) => {
       return `
-        <div class="content-item">
+        <div class="content-item" style="animation-delay: ${index * 0.05}s">
           <a href="${entry.link}" target="_blank">${entry.title}</a>
         </div>
       `;
@@ -375,20 +528,15 @@
       let pages = [];
       
       if (totalPages <= 7) {
-        // Show all pages if 7 or fewer
         for (let i = 1; i <= totalPages; i++) {
           pages.push(i);
         }
       } else {
-        // Smart pagination with ellipsis
         if (currentPage <= 4) {
-          // Near start: 1 2 3 4 5 ... 18
           pages = [1, 2, 3, 4, 5, '...', totalPages];
         } else if (currentPage >= totalPages - 3) {
-          // Near end: 1 ... 14 15 16 17 18
           pages = [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
         } else {
-          // Middle: 1 ... 8 9 10 ... 18
           pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
         }
       }
@@ -403,7 +551,7 @@
       }).join('');
     };
 
-    // Render a column's content for current page
+    // Render a column's content for current page with animations
     const renderColumn = (columnType, listId, paginationId) => {
       const columnState = state[columnType];
       const list = document.getElementById(listId);
@@ -414,18 +562,38 @@
       const pageData = columnState.data.slice(startIdx, endIdx);
       
       if (pageData.length > 0) {
-        list.innerHTML = pageData.map(createContentItem).join('');
+        list.innerHTML = pageData.map((item, index) => 
+          createContentItem(item, index)
+        ).join('');
+        
+        setTimeout(() => {
+          document.querySelectorAll(`#${listId} .content-item`).forEach(item => {
+            item.classList.add('animate-in');
+          });
+        }, 100);
       } else {
         list.innerHTML = '<div class="loading-indicator">No content available</div>';
       }
       
-      // Render smart pagination
       const totalPages = Math.ceil(columnState.data.length / columnState.itemsPerPage);
       if (totalPages > 1) {
         pagination.innerHTML = createSmartPagination(columnState.currentPage, totalPages, columnType);
+        setTimeout(() => {
+          pagination.classList.add('animate-in');
+        }, 200);
       } else {
         pagination.innerHTML = '';
       }
+    };
+
+    // Animate editors picks
+    const animateEditorsPicks = (container) => {
+      setTimeout(() => {
+        container.querySelectorAll('.editor-pick-item').forEach((item, index) => {
+          item.style.animationDelay = `${index * 0.08}s`;
+          item.classList.add('animate-in');
+        });
+      }, 400);
     };
 
     // Change page function
@@ -438,14 +606,23 @@
 
     // Load all content on page load
     document.addEventListener('DOMContentLoaded', async () => {
+      // IMMEDIATELY SHOW EDITORS' PICKS TITLE
+      document.querySelector('.section-title').classList.add('animate-in');
+      
+      // Animate column titles
+      document.querySelectorAll('.column-title').forEach((title, index) => {
+        setTimeout(() => {
+          title.classList.add('animate-in');
+        }, 200 + index * 100);
+      });
+
       try {
-        // Load Sports News from parent directory
+        // Load Sports News
         const newsResponse = await fetch('../sports-news.txt');
         if (newsResponse.ok) {
           const newsText = await newsResponse.text();
           const newsLines = newsText.trim().split('\n').filter(line => line.trim());
           
-          // Parse news entries (Title|URL format)
           const newsEntries = newsLines.map(line => {
             const parts = line.split('|');
             if (parts.length >= 2) {
@@ -457,20 +634,18 @@
             return null;
           }).filter(entry => entry !== null);
           
-          // Take all entries
           state.news.data = newsEntries;
           renderColumn('news', 'news-list', 'news-pagination');
         } else {
           document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading news</div>';
         }
 
-        // Load Features, Podcasts, and Editors' Picks from sports-leisure-links.txt
+        // Load Features, Podcasts, and Editors' Picks
         const leisureResponse = await fetch('./sports-leisure-links.txt');
         if (leisureResponse.ok) {
           const leisureText = await leisureResponse.text();
           const leisureLines = leisureText.trim().split('\n').filter(line => line.trim());
           
-          // Parse leisure entries (Title|URL|category format)
           const leisureEntries = leisureLines.map(line => {
             const parts = line.split('|');
             if (parts.length >= 3) {
@@ -483,24 +658,25 @@
             return null;
           }).filter(entry => entry !== null);
           
-          // Filter for Features (art-long)
+          // Filter for Features
           state.features.data = leisureEntries.filter(e => e.category === 'art-long');
           renderColumn('features', 'features-list', 'features-pagination');
           
-          // Filter for Podcasts (pods)
+          // Filter for Podcasts
           state.podcasts.data = leisureEntries.filter(e => e.category === 'pods');
           renderColumn('podcasts', 'podcasts-list', 'podcasts-pagination');
           
-          // Filter for Editors' Picks (editors) - show first 3
+          // Filter for Editors' Picks - show first 3
           const editorsEntries = leisureEntries.filter(e => e.category === 'editors');
           const editorsContent = document.getElementById('editors-content');
           if (editorsEntries.length > 0) {
             const first3 = editorsEntries.slice(0, 3);
-            editorsContent.innerHTML = first3.map(entry => `
-              <div class="editor-pick-item">
+            editorsContent.innerHTML = first3.map((entry, index) => `
+              <div class="editor-pick-item" style="animation-delay: ${index * 0.08}s">
                 <a href="${entry.link}" target="_blank">${entry.title}</a>
               </div>
             `).join('');
+            animateEditorsPicks(editorsContent);
           } else {
             editorsContent.innerHTML = '<div class="loading-indicator">No editors picks available</div>';
           }
