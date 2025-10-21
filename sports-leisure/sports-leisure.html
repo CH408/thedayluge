@@ -474,7 +474,7 @@
 
     <div class="buttons-container">
       <div class="bottom-section">
-        <div class="section-title">Editor's Picks</div>
+        <div class="section-title">Editors' Picks</div>
         <div class="section-content" id="editors-content">
           <div class="loading-indicator">Loading...</div>
         </div>
@@ -574,7 +574,7 @@
           item.style.animationDelay = `${index * 0.08}s`;
           item.classList.add('animate-in');
         });
-        container.parentElement.classList.add('animate-in');
+        container.parentElement.querySelector('.section-title').classList.add('animate-in');
       }, 400);
     };
 
@@ -594,6 +594,10 @@
           title.style.animationDelay = `${0.2 + index * 0.1}s`;
           title.classList.add('animate-in');
         });
+
+        // Animate Editors' Picks title
+        document.querySelector('.section-title').style.animationDelay = '0.3s';
+        document.querySelector('.section-title').classList.add('animate-in');
 
         // Load Sports News
         const newsResponse = await fetch('../sports-news.txt');
@@ -644,7 +648,7 @@
           state.podcasts.data = leisureEntries.filter(e => e.category === 'pods');
           renderColumn('podcasts', 'podcasts-list', 'podcasts-pagination');
           
-          // Filter for Editor's Picks - show first 3
+          // Filter for Editors' Picks - show first 3
           const editorsEntries = leisureEntries.filter(e => e.category === 'editors');
           const editorsContent = document.getElementById('editors-content');
           if (editorsEntries.length > 0) {
@@ -656,7 +660,7 @@
             `).join('');
             animateEditorsPicks(editorsContent);
           } else {
-            editorsContent.innerHTML = '<div class="loading-indicator">No picks available</div>';
+            editorsContent.innerHTML = '<div class="loading-indicator">No editors picks available</div>';
           }
         } else {
           document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading features</div>';
