@@ -112,6 +112,7 @@
       display: flex;
       gap: 10px;
       justify-content: center;
+      align-items: center;
       margin-top: 15px;
       flex-wrap: wrap;
     }
@@ -140,6 +141,14 @@
       border-color: #FF8800;
     }
 
+    .page-ellipsis {
+      color: #FF8800;
+      font-size: 14px;
+      padding: 8px 12px;
+      display: inline-block;
+      font-weight: 900;
+    }
+
     .buttons-container {
       display: flex;
       justify-content: center;
@@ -147,11 +156,11 @@
     }
 
     .bottom-section {
-      background: linear-gradient(135deg, #FF8800 0%, #FFA500 20%, #FFB347 40%, #FFC125 60%, #FFD700 80%, #FFAA00 100%);
+      background: linear-gradient(135deg, #CC6600 0%, #E67700 20%, #FF8800 40%, #FF9900 60%, #FFAA00 80%, #CC8800 100%);
       border: 3px solid rgba(255,255,255,0.3);
       border-radius: 16px;
       padding: 25px;
-      box-shadow: 0 8px 32px rgba(255,136,0,0.4);
+      box-shadow: 0 8px 32px rgba(204,102,0,0.5);
       transition: all 0.4s ease;
       width: 100%;
       max-width: 600px;
@@ -159,7 +168,7 @@
 
     .bottom-section:hover {
       transform: translateY(-5px);
-      box-shadow: 0 12px 48px rgba(255,136,0,0.6);
+      box-shadow: 0 12px 48px rgba(204,102,0,0.7);
     }
 
     .section-title {
@@ -207,50 +216,34 @@
       font-weight: 700;
     }
 
+    .button-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
     .more-button {
-      width: 100%;
       background: rgba(0,0,0,0.3);
       border: 3px solid rgba(0,0,0,0.4);
-      border-radius: 12px;
-      padding: 15px;
-      font-size: clamp(14px, 2.5vw, 18px);
+      border-radius: 25px;
+      padding: 12px 24px;
+      font-size: 14px;
       color: #000000;
       font-family: 'Special Elite', 'Courier New', monospace;
-      font-weight: 900;
+      font-weight: bold;
       text-transform: uppercase;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: all 0.3s ease;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
       text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+      display: inline-block;
+      margin: 0 auto;
     }
 
     .more-button:hover {
       background: rgba(0,0,0,0.4);
-      transform: translateY(-3px);
+      transform: scale(1.05);
       box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    }
-
-    .bottom-button {
-      background: linear-gradient(135deg, #FF8800 0%, #FFA500 20%, #FFB347 40%, #FFC125 60%, #FFD700 80%, #FFAA00 100%);
-      border: 3px solid rgba(255,255,255,0.3);
-      border-radius: 16px;
-      padding: 25px;
-      font-size: clamp(16px, 3vw, 24px);
-      color: #000000;
-      font-family: 'Special Elite', 'Courier New', monospace;
-      font-weight: 900;
-      text-transform: uppercase;
-      cursor: pointer;
-      box-shadow: 0 8px 32px rgba(255,136,0,0.4);
-      transition: all 0.3s ease;
-      letter-spacing: 2px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    }
-
-    .bottom-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 48px rgba(255,136,0,0.6);
     }
 
     .home-btn {
@@ -284,6 +277,10 @@
       padding: 20px;
     }
 
+    .bottom-section .loading-indicator {
+      color: #000000;
+    }
+
     @media (max-width: 900px) {
       .columns-container {
         grid-template-columns: 1fr;
@@ -299,10 +296,6 @@
       .column {
         padding: 20px;
         min-height: 450px;
-      }
-
-      .bottom-button {
-        padding: 20px;
       }
 
       .bottom-section {
@@ -349,11 +342,13 @@
       <div class="bottom-section">
         <div class="section-title">Editors' Picks</div>
         <div class="section-content" id="editors-content">
-          <div class="loading-indicator" style="color: #000000;">Loading...</div>
+          <div class="loading-indicator">Loading...</div>
         </div>
-        <button class="more-button" onclick="window.location.href='./sports-editors-picks.html'">
-          More →
-        </button>
+        <div class="button-wrapper">
+          <button class="more-button" onclick="window.location.href='./sports-editors-picks.html'">
+            More →
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -375,6 +370,39 @@
       `;
     };
 
+    // Create smart pagination with ellipsis
+    const createSmartPagination = (currentPage, totalPages, columnType) => {
+      let pages = [];
+      
+      if (totalPages <= 7) {
+        // Show all pages if 7 or fewer
+        for (let i = 1; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        // Smart pagination with ellipsis
+        if (currentPage <= 4) {
+          // Near start: 1 2 3 4 5 ... 18
+          pages = [1, 2, 3, 4, 5, '...', totalPages];
+        } else if (currentPage >= totalPages - 3) {
+          // Near end: 1 ... 14 15 16 17 18
+          pages = [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+        } else {
+          // Middle: 1 ... 8 9 10 ... 18
+          pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+        }
+      }
+      
+      return pages.map(page => {
+        if (page === '...') {
+          return '<span class="page-ellipsis">...</span>';
+        } else {
+          const activeClass = page === currentPage ? 'active' : '';
+          return `<button class="page-btn ${activeClass}" onclick="changePage('${columnType}', ${page})">${page}</button>`;
+        }
+      }).join('');
+    };
+
     // Render a column's content for current page
     const renderColumn = (columnType, listId, paginationId) => {
       const columnState = state[columnType];
@@ -391,15 +419,10 @@
         list.innerHTML = '<div class="loading-indicator">No content available</div>';
       }
       
-      // Render pagination buttons
+      // Render smart pagination
       const totalPages = Math.ceil(columnState.data.length / columnState.itemsPerPage);
       if (totalPages > 1) {
-        let paginationHTML = '';
-        for (let i = 1; i <= totalPages; i++) {
-          const activeClass = i === columnState.currentPage ? 'active' : '';
-          paginationHTML += `<button class="page-btn ${activeClass}" onclick="changePage('${columnType}', ${i})">${i}</button>`;
-        }
-        pagination.innerHTML = paginationHTML;
+        pagination.innerHTML = createSmartPagination(columnState.currentPage, totalPages, columnType);
       } else {
         pagination.innerHTML = '';
       }
@@ -434,7 +457,7 @@
             return null;
           }).filter(entry => entry !== null);
           
-          // Take entries 6-13 onwards (index 5+)
+          // Take entries 6+ onwards (index 5+)
           state.news.data = newsEntries.slice(5);
           renderColumn('news', 'news-list', 'news-pagination');
         } else {
