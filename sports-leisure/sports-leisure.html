@@ -103,6 +103,17 @@
       transform: translateY(15px);
     }
 
+    .column-title.animate-in {
+      animation: unfoldTitle 0.5s ease-out forwards;
+    }
+
+    @keyframes unfoldTitle {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .content-list {
       display: flex;
       flex-direction: column;
@@ -262,6 +273,10 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
       opacity: 0;
       transform: translateY(15px);
+    }
+
+    .section-title.animate-in {
+      animation: unfoldTitle 0.5s ease-out forwards;
     }
 
     .section-content {
@@ -574,7 +589,6 @@
           item.style.animationDelay = `${index * 0.08}s`;
           item.classList.add('animate-in');
         });
-        container.parentElement.querySelector('.section-title').classList.add('animate-in');
       }, 400);
     };
 
@@ -588,17 +602,17 @@
 
     // Load all content on page load
     document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        // Animate column titles first
-        document.querySelectorAll('.column-title').forEach((title, index) => {
-          title.style.animationDelay = `${0.2 + index * 0.1}s`;
+      // IMMEDIATELY SHOW EDITORS' PICKS TITLE
+      document.querySelector('.section-title').classList.add('animate-in');
+      
+      // Animate column titles
+      document.querySelectorAll('.column-title').forEach((title, index) => {
+        setTimeout(() => {
           title.classList.add('animate-in');
-        });
+        }, 200 + index * 100);
+      });
 
-        // Animate Editors' Picks title
-        document.querySelector('.section-title').style.animationDelay = '0.3s';
-        document.querySelector('.section-title').classList.add('animate-in');
-
+      try {
         // Load Sports News
         const newsResponse = await fetch('../sports-news.txt');
         if (newsResponse.ok) {
