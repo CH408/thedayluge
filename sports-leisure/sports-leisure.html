@@ -4,560 +4,496 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sports & Leisure - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --orange: #ff8800;
-      --orange-light: #ffa040;
-      --ink: #111;
-      --black-bg: #000000;
-      --dark-gray: #111111;
-      --gray: #333333;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
+
     body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--orange);
-      line-height: 1.4;
-      background: var(--black-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Special Elite', 'Courier New', monospace;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      color: #FF8800;
       min-height: 100vh;
-      position: relative;
-      overflow: hidden;
       padding: 20px;
     }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(255,136,0,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
     }
-    body::after {
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(255,136,0,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-    @keyframes edge-glow {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
-    }
+
     .header {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
       text-align: center;
-      z-index: 10;
+      margin-bottom: 40px;
     }
+
     .header h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 32px;
-      margin-bottom: 8px;
-      animation: title-pulse 8s ease-in-out infinite;
-    }
-    @keyframes title-pulse {
-      0% { color: var(--orange); text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { color: var(--orange-light); text-shadow: 0 0 20px var(--orange-light), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { color: var(--orange); text-shadow: 0 0 15px var(--orange), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .layout-container {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      height: 750px;
-      margin: 40px auto 0;
-      z-index: 5;
-    }
-    .central-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 480px;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--orange);
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      z-index: 15;
-      box-shadow: 0 0 30px rgba(255,136,0,0.5), 0 4px 12px rgba(0,0,0,0.8);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(255,136,0,0.5), 0 4px 12px rgba(0,0,0,0.8); }
-      50% { box-shadow: 0 0 40px rgba(255,136,0,0.8), 0 6px 16px rgba(255,136,0,0.4); }
-    }
-    .central-title {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--orange);
-      text-shadow: 0 0 8px var(--orange);
+      font-size: clamp(28px, 6vw, 48px);
+      color: #FF8800;
+      text-shadow: 0 0 30px rgba(255,136,0,0.6);
       margin-bottom: 10px;
-      border-bottom: 1px solid var(--orange);
-      padding-bottom: 6px;
-      flex-shrink: 0;
-    }
-    .content-links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      flex: 1;
-      max-height: calc(100% - 38px);
-      overflow-y: auto;
-    }
-    .content-link {
-      display: flex;
-      align-items: flex-start;
-      padding: 7px 9px;
-      border: 1px solid rgba(255,136,0,0.3);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-size: 15px;
-      line-height: 1.2;
-      min-height: 0;
-      overflow-wrap: anywhere;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: unroll 0.5s ease-out forwards;
-    }
-    @keyframes unroll {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .content-link:nth-child(1) { animation-delay: 0.1s; }
-    .content-link:nth-child(2) { animation-delay: 0.2s; }
-    .content-link:nth-child(3) { animation-delay: 0.3s; }
-    .content-link:nth-child(4) { animation-delay: 0.4s; }
-    .content-link:nth-child(5) { animation-delay: 0.5s; }
-    .content-link:nth-child(6) { animation-delay: 0.6s; }
-    .content-link:nth-child(7) { animation-delay: 0.7s; }
-    .content-link:nth-child(8) { animation-delay: 0.8s; }
-    .content-link:hover {
-      background: rgba(255,136,0,0.2);
-      border-color: var(--orange);
-      box-shadow: 0 0 10px rgba(255,136,0,0.4);
-    }
-    .link-title {
-      color: var(--orange);
-      text-decoration: none;
-      cursor: pointer;
-      width: 100%;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-    }
-    .loading-indicator {
-      text-align: center;
-      font-size: 15px;
-      color: var(--orange);
-      padding: 10px;
-    }
-    .perimeter-box {
-      position: absolute;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--orange);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      letter-spacing: 3px;
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(255,136,0,0.4);
-      animation: electron-pulse 2s ease-in-out infinite;
-      color: var(--orange);
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-      padding: 5px;
     }
-    @keyframes electron-pulse {
-      0%, 100% { 
-        box-shadow: 0 0 20px rgba(255,136,0,0.4); 
-        border-color: var(--orange); 
-      }
-      50% { 
-        box-shadow: 0 0 30px rgba(255,136,0,0.8); 
-        border-color: var(--orange-light); 
-      }
+
+    .columns-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-bottom: 30px;
     }
-    .perimeter-box:hover {
+
+    .column {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255,136,0,0.3);
+      border-radius: 16px;
+      padding: 25px;
+      min-height: 500px;
+      box-shadow: 0 8px 32px rgba(255,136,0,0.15);
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .column:hover {
+      border-color: rgba(255,136,0,0.6);
+      box-shadow: 0 12px 48px rgba(255,136,0,0.3);
+      transform: translateY(-5px);
+    }
+
+    .column-title {
+      font-size: clamp(18px, 3vw, 24px);
+      color: #FF8800;
+      margin-bottom: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      border-bottom: 2px solid #FF8800;
+      padding-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .content-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .content-item {
+      background: rgba(255,136,0,0.05);
+      border: 1px solid rgba(255,136,0,0.2);
+      border-left: 3px solid #FF8800;
+      padding: 12px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .content-item:hover {
+      background: rgba(255,136,0,0.15);
+      border-color: rgba(255,136,0,0.4);
+      transform: translateX(5px);
+    }
+
+    .content-item a {
+      color: #FF8800;
+      text-decoration: none;
+      font-size: clamp(12px, 2vw, 15px);
+      display: block;
+      line-height: 1.4;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .page-btn {
+      background: rgba(255,136,0,0.1);
+      border: 2px solid rgba(255,136,0,0.3);
+      color: #FF8800;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Special Elite', 'Courier New', monospace;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .page-btn:hover {
+      background: rgba(255,136,0,0.2);
+      border-color: rgba(255,136,0,0.5);
       transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(255,136,0,0.9);
-      background: var(--dark-gray);
     }
-    .top-left-box {
-      top: 30px;
-      left: calc(50% - 245px);
-      width: 150px;
-      height: 60px;
-      font-size: 18px;
+
+    .page-btn.active {
+      background: #FF8800;
+      color: #000000;
+      border-color: #FF8800;
     }
-    .top-middle-box {
-      top: 30px;
-      left: calc(50% - 75px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
-      line-height: 1.2;
-      white-space: normal;
+
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
     }
-    .top-right-box {
-      top: 30px;
-      left: calc(50% + 95px);
-      width: 150px;
-      height: 60px;
-      font-size: 18px;
+
+    .bottom-section {
+      background: linear-gradient(135deg, #FF8800 0%, #FFA500 20%, #FFB347 40%, #FFC125 60%, #FFD700 80%, #FFAA00 100%);
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(255,136,0,0.4);
+      transition: all 0.4s ease;
+      width: 100%;
+      max-width: 600px;
     }
-    .bottom-left-box {
-      bottom: 30px;
-      left: calc(50% - 245px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
+
+    .bottom-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 48px rgba(255,136,0,0.6);
     }
-    .bottom-middle-box {
-      bottom: 30px;
-      left: calc(50% - 75px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
-      line-height: 1.2;
-      white-space: normal;
+
+    .section-title {
+      font-size: clamp(20px, 3vw, 28px);
+      color: #000000;
+      margin-bottom: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      border-bottom: 2px solid #000000;
+      padding-bottom: 12px;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
-    .bottom-right-box {
-      bottom: 30px;
-      left: calc(50% + 95px);
-      width: 150px;
-      height: 60px;
-      font-size: 16px;
+
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+      min-height: 150px;
     }
+
+    .editor-pick-item {
+      background: rgba(0,0,0,0.15);
+      border: 1px solid rgba(0,0,0,0.2);
+      border-left: 3px solid #000000;
+      padding: 12px 15px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .editor-pick-item:hover {
+      background: rgba(0,0,0,0.25);
+      border-color: rgba(0,0,0,0.4);
+      transform: translateX(5px);
+    }
+
+    .editor-pick-item a {
+      color: #000000;
+      text-decoration: none;
+      font-size: clamp(12px, 2vw, 15px);
+      display: block;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .more-button {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 3px solid rgba(0,0,0,0.4);
+      border-radius: 12px;
+      padding: 15px;
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: #000000;
+      font-family: 'Special Elite', 'Courier New', monospace;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .more-button:hover {
+      background: rgba(0,0,0,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    .bottom-button {
+      background: linear-gradient(135deg, #FF8800 0%, #FFA500 20%, #FFB347 40%, #FFC125 60%, #FFD700 80%, #FFAA00 100%);
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 16px;
+      padding: 25px;
+      font-size: clamp(16px, 3vw, 24px);
+      color: #000000;
+      font-family: 'Special Elite', 'Courier New', monospace;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(255,136,0,0.4);
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .bottom-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 48px rgba(255,136,0,0.6);
+    }
+
     .home-btn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: var(--black-bg);
-      color: var(--orange);
-      border: 2px solid var(--orange);
-      padding: 10px 20px;
+      background: rgba(26,26,26,0.9);
+      color: #FF8800;
+      border: 2px solid #FF8800;
+      padding: 12px 24px;
       border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      font-family: 'Special Elite', 'Courier New', monospace;
       font-size: 14px;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--orange);
-      box-shadow: 0 0 10px rgba(255,136,0,0.3);
-      z-index: 20;
+      box-shadow: 0 0 20px rgba(255,136,0,0.3);
+      z-index: 1000;
     }
+
     .home-btn:hover {
-      background: var(--dark-gray);
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(255,136,0,0.6);
+      box-shadow: 0 0 30px rgba(255,136,0,0.6);
     }
-    #particle-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+
+    .loading-indicator {
+      text-align: center;
+      color: #FF8800;
+      font-size: 14px;
+      padding: 20px;
     }
+
     @media (max-width: 900px) {
-      .layout-container { max-width: 90%; height: 650px; }
-      .central-content { width: 420px; height: 420px; padding: 12px; }
-      .central-title { font-size: 18px; margin-bottom: 10px; }
-      .content-links { gap: 16px; }
-      .content-link { font-size: 13px; padding: 5px 7px; line-height: 1.2; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 120px;
-        height: 50px;
-        font-size: 14px;
+      .columns-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
       }
-      .top-middle-box { font-size: 12px; }
-      .top-left-box { top: 20px; left: calc(50% - 195px); }
-      .top-middle-box { top: 20px; left: calc(50% - 60px); }
-      .top-right-box { top: 20px; left: calc(50% + 75px); }
-      .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
-      .bottom-middle-box { bottom: 20px; left: calc(50% - 60px); }
-      .bottom-right-box { bottom: 20px; left: calc(50% + 75px); }
     }
+
     @media (max-width: 600px) {
-      .layout-container { height: 600px; }
-      .central-content { width: 340px; height: 360px; padding: 10px; }
-      .central-title { font-size: 14px; margin-bottom: 8px; }
-      .content-links { gap: 14px; }
-      .content-link { font-size: 11px; padding: 4px 6px; line-height: 1.2; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 100px;
-        height: 45px;
-        font-size: 12px;
+      body {
+        padding: 15px;
       }
-      .top-middle-box { font-size: 10px; }
-      .top-left-box { top: 15px; left: calc(50% - 160px); }
-      .top-middle-box { top: 15px; left: calc(50% - 50px); }
-      .top-right-box { top: 15px; left: calc(50% + 60px); }
-      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
-      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
-      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
-      .header h1 { font-size: 28px; }
+
+      .column {
+        padding: 20px;
+        min-height: 450px;
+      }
+
+      .bottom-button {
+        padding: 20px;
+      }
+
+      .bottom-section {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="header"><h1>THE DAYLUGE - SPORTS & LEISURE</h1></div>
   <a href="/" class="home-btn">← Back to Home</a>
-  <canvas id="particle-canvas"></canvas>
-  
-  <div class="layout-container">
-    <!-- Central Content Rectangle -->
-    <div class="central-content">
-      <div class="central-title">Latest Sports & Leisure Content</div>
-      <div class="content-links">
-        <div class="loading-indicator">Loading...</div>
+
+  <div class="container">
+    <div class="header">
+      <h1>Sports & Leisure</h1>
+    </div>
+
+    <div class="columns-container">
+      <div class="column">
+        <div class="column-title">Sports News Archives</div>
+        <div class="content-list" id="news-list">
+          <div class="loading-indicator">Loading content...</div>
+        </div>
+        <div class="pagination" id="news-pagination"></div>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Features</div>
+        <div class="content-list" id="features-list">
+          <div class="loading-indicator">Loading content...</div>
+        </div>
+        <div class="pagination" id="features-pagination"></div>
+      </div>
+
+      <div class="column">
+        <div class="column-title">Podcasts</div>
+        <div class="content-list" id="podcasts-list">
+          <div class="loading-indicator">Loading content...</div>
+        </div>
+        <div class="pagination" id="podcasts-pagination"></div>
       </div>
     </div>
-    
-    <!-- Top Boxes -->
-    <div class="perimeter-box top-left-box" onclick="window.location.href='./sports-podcasts.html'">
-      Podcasts
-    </div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='./sports-articles-longform.html'">
-      Articles & Longform
-    </div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='./sports-clips.html'">
-      Video Clips
-    </div>
-    
-    <!-- Bottom Boxes -->
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='./sports-books.html'">
-      Books
-    </div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./sports-memes.html'">
-      Memes
-    </div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='./sports-tv-movies.html'">
-      TV & Movies
+
+    <div class="buttons-container">
+      <div class="bottom-section">
+        <div class="section-title">Editors' Picks</div>
+        <div class="section-content" id="editors-content">
+          <div class="loading-indicator" style="color: #000000;">Loading...</div>
+        </div>
+        <button class="more-button" onclick="window.location.href='./sports-editors-picks.html'">
+          More →
+        </button>
+      </div>
     </div>
   </div>
-  
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM content loaded, initializing sports & leisure page');
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const particlesArray = [];
-      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
+    // Global state for each column
+    const state = {
+      news: { data: [], currentPage: 1, itemsPerPage: 8 },
+      features: { data: [], currentPage: 1, itemsPerPage: 8 },
+      podcasts: { data: [], currentPage: 1, itemsPerPage: 8 }
+    };
+
+    // Helper to create content item HTML
+    const createContentItem = (entry) => {
+      return `
+        <div class="content-item">
+          <a href="${entry.link}" target="_blank">${entry.title}</a>
+        </div>
+      `;
+    };
+
+    // Render a column's content for current page
+    const renderColumn = (columnType, listId, paginationId) => {
+      const columnState = state[columnType];
+      const list = document.getElementById(listId);
+      const pagination = document.getElementById(paginationId);
       
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.5 - 0.25;
-          this.speedY = Math.random() * 0.5 - 0.25;
-        }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.1;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        draw() {
-          ctx.fillStyle = 'rgba(255,136,0,0.6)';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
+      const startIdx = (columnState.currentPage - 1) * columnState.itemsPerPage;
+      const endIdx = startIdx + columnState.itemsPerPage;
+      const pageData = columnState.data.slice(startIdx, endIdx);
+      
+      if (pageData.length > 0) {
+        list.innerHTML = pageData.map(createContentItem).join('');
+      } else {
+        list.innerHTML = '<div class="loading-indicator">No content available</div>';
       }
       
-      function init() {
-        console.log('Initializing particle effect');
-        for (let i = 0; i < numberOfParticles; i++) {
-          particlesArray.push(new Particle());
+      // Render pagination buttons
+      const totalPages = Math.ceil(columnState.data.length / columnState.itemsPerPage);
+      if (totalPages > 1) {
+        let paginationHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+          const activeClass = i === columnState.currentPage ? 'active' : '';
+          paginationHTML += `<button class="page-btn ${activeClass}" onclick="changePage('${columnType}', ${i})">${i}</button>`;
         }
+        pagination.innerHTML = paginationHTML;
+      } else {
+        pagination.innerHTML = '';
       }
-      
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1);
-            i--;
-            particlesArray.push(new Particle());
-          }
-        }
-        requestAnimationFrame(animate);
-      }
-      
-      init();
-      animate();
-      
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        init();
-      });
-      
-      // Load content from sports-leisure-links.txt
-      async function loadSportsContent() {
-        console.log('Starting to load sports & leisure content');
-        const contentLinksContainer = document.querySelector('.content-links');
-        if (!contentLinksContainer) {
-          console.error('Content links container not found');
-          return;
-        }
-        
-        // Show loading indicator
-        contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        
-        try {
-          console.log('Attempting to fetch ./sports-leisure-links.txt');
-          const response = await fetch('./sports-leisure-links.txt');
-          console.log('Fetch response:', response.ok, response.status);
-          if (!response.ok) {
-            throw new Error(`Fetch failed with status ${response.status}`);
-          }
-          const text = await response.text();
-          console.log('Fetched text, length:', text.length);
-          const lines = text.trim().split('\n').filter(line => line.trim());
-          console.log('Parsed lines:', lines.length);
+    };
+
+    // Change page function
+    window.changePage = (columnType, page) => {
+      state[columnType].currentPage = page;
+      const listId = columnType + '-list';
+      const paginationId = columnType + '-pagination';
+      renderColumn(columnType, listId, paginationId);
+    };
+
+    // Load all content on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Load Sports News from parent directory
+        const newsResponse = await fetch('../sports-news.txt');
+        if (newsResponse.ok) {
+          const newsText = await newsResponse.text();
+          const newsLines = newsText.trim().split('\n').filter(line => line.trim());
           
-          // Parse each line: title|link|category
-          const entries = lines.map((line, index) => {
+          // Parse news entries (Title|URL format)
+          const newsEntries = newsLines.map(line => {
             const parts = line.split('|');
-            if (parts.length < 3) {
-              console.warn(`Invalid entry at line ${index + 1}: ${line}`);
-              return null;
+            if (parts.length >= 2) {
+              return {
+                title: parts[0].trim(),
+                link: parts[1].trim()
+              };
             }
-            // Clean title by removing suffixes like (art-long) or (art+long)
-            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
-            return {
-              title: cleanTitle,
-              link: parts[1].trim(),
-              category: parts[2].trim().toLowerCase()
-            };
+            return null;
           }).filter(entry => entry !== null);
           
-          console.log('Parsed entries:', entries.length);
-          
-          // Take first 8 entries across all categories for central box
-          const latest8 = entries.slice(0, 8);
-          
-          // Clear loading indicator
-          contentLinksContainer.innerHTML = '';
-          
-          // Ensure we always try to show 8 entries (pad with error message if needed)
-          const displayEntries = [...latest8];
-          if (displayEntries.length === 0) {
-            console.log('No sports & leisure entries found, displaying error message');
-            displayEntries.push({
-              title: 'No sports & leisure content available. Check sports-leisure-links.txt.',
-              link: '#',
-              category: 'error'
-            });
-          }
-          while (displayEntries.length < 8) {
-            displayEntries.push({
-              title: `No additional content available`,
-              link: '#',
-              category: 'placeholder'
-            });
-          }
-          
-          console.log('Display entries:', displayEntries.length);
-          
-          // Add content to DOM with animation, using cleaned titles
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.style.animationDelay = `${index * 0.1}s`;
-            linkElement.innerHTML = `
-              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
-            `;
-            linkElement.addEventListener('click', (e) => {
-              if (entry.link === '#') e.preventDefault();
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
-          
-          console.log('Loaded', entries.length, 'sports & leisure entries from sports-leisure-links.txt');
-          console.log('Displaying', displayEntries.length, 'entries in central box');
-          
-        } catch (error) {
-          console.error('Error loading sports-leisure-links.txt:', error);
-          contentLinksContainer.innerHTML = '';
-          
-          console.log('Displaying error message due to fetch failure');
-          const displayEntries = [{
-            title: 'Error loading content. Please try again later.',
-            link: '#',
-            category: 'error'
-          }];
-          while (displayEntries.length < 8) {
-            displayEntries.push({
-              title: `No additional content available`,
-              link: '#',
-              category: 'placeholder'
-            });
-          }
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.style.animationDelay = `${index * 0.1}s`;
-            linkElement.innerHTML = `
-              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
-            `;
-            linkElement.addEventListener('click', (e) => {
-              if (entry.link === '#') e.preventDefault();
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
+          // Take entries 6-13 onwards (index 5+)
+          state.news.data = newsEntries.slice(5);
+          renderColumn('news', 'news-list', 'news-pagination');
+        } else {
+          document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading news</div>';
         }
+
+        // Load Features, Podcasts, and Editors' Picks from sports-leisure-links.txt
+        const leisureResponse = await fetch('./sports-leisure-links.txt');
+        if (leisureResponse.ok) {
+          const leisureText = await leisureResponse.text();
+          const leisureLines = leisureText.trim().split('\n').filter(line => line.trim());
+          
+          // Parse leisure entries (Title|URL|category format)
+          const leisureEntries = leisureLines.map(line => {
+            const parts = line.split('|');
+            if (parts.length >= 3) {
+              return {
+                title: parts[0].trim(),
+                link: parts[1].trim(),
+                category: parts[2].trim().toLowerCase()
+              };
+            }
+            return null;
+          }).filter(entry => entry !== null);
+          
+          // Filter for Features (art-long)
+          state.features.data = leisureEntries.filter(e => e.category === 'art-long');
+          renderColumn('features', 'features-list', 'features-pagination');
+          
+          // Filter for Podcasts (pods)
+          state.podcasts.data = leisureEntries.filter(e => e.category === 'pods');
+          renderColumn('podcasts', 'podcasts-list', 'podcasts-pagination');
+          
+          // Filter for Editors' Picks (editors) - show first 3
+          const editorsEntries = leisureEntries.filter(e => e.category === 'editors');
+          const editorsContent = document.getElementById('editors-content');
+          if (editorsEntries.length > 0) {
+            const first3 = editorsEntries.slice(0, 3);
+            editorsContent.innerHTML = first3.map(entry => `
+              <div class="editor-pick-item">
+                <a href="${entry.link}" target="_blank">${entry.title}</a>
+              </div>
+            `).join('');
+          } else {
+            editorsContent.innerHTML = '<div class="loading-indicator">No editors picks available</div>';
+          }
+        } else {
+          document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading features</div>';
+          document.getElementById('podcasts-list').innerHTML = '<div class="loading-indicator">Error loading podcasts</div>';
+          document.getElementById('editors-content').innerHTML = '<div class="loading-indicator">Error loading picks</div>';
+        }
+
+      } catch (error) {
+        console.error('Error loading content:', error);
+        document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
+        document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
+        document.getElementById('podcasts-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
+        document.getElementById('editors-content').innerHTML = '<div class="loading-indicator">Error loading content</div>';
       }
-      
-      loadSportsContent();
     });
   </script>
 </body>
