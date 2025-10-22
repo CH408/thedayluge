@@ -416,7 +416,7 @@
         svg.appendChild(path2);
 
         // Add particles on each strand
-        for (let p = 0; p < 8; p++) {
+        for (let p = 0; p < 12; p++) {
           // First strand particles
           const particle1 = document.createElementNS('http://www.w3.org/2000/svg','circle');
           particle1.setAttribute('r', '2');
@@ -427,7 +427,7 @@
           const motion1 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
           motion1.setAttribute('dur', '3s');
           motion1.setAttribute('repeatCount', 'indefinite');
-          motion1.setAttribute('begin', `${p * 0.3}s`);
+          motion1.setAttribute('begin', `${p * 0.25}s`);
           motion1.innerHTML = `<mpath href="#helix1-${i}" />`;
           particle1.appendChild(motion1);
 
@@ -441,7 +441,7 @@
           const motion2 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
           motion2.setAttribute('dur', '3s');
           motion2.setAttribute('repeatCount', 'indefinite');
-          motion2.setAttribute('begin', `${p * 0.3}s`);
+          motion2.setAttribute('begin', `${p * 0.25}s`);
           motion2.innerHTML = `<mpath href="#helix2-${i}" />`;
           particle2.appendChild(motion2);
         }
