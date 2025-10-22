@@ -243,16 +243,14 @@
     .circle-5 span,
     .circle-6 span {
       font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px);
-      line-height: 1;
     }
 
-    /* Counter-rotate text to be horizontal */
-    .circle-1 { --circle-angle: 0deg; border-color: var(--silver-white);
-                color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
+    .circle-1 { --circle-angle: 0deg; border-color: #ECEFF1;
+                color: #ECEFF1; box-shadow: 0 0 8px #ECEFF1; }
     .circle-1 span { transform: rotate(0deg); }
 
-    .circle-8 { --circle-angle: 45deg; border-color: #ffd700;
-                color: #ffd700; box-shadow: 0 0 8px #ffd700; }
+    .circle-8 { --circle-angle: 45deg; border-color: #ffcc00;
+                color: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
     .circle-8 span { transform: rotate(-45deg); }
 
     .circle-7 { --circle-angle: 90deg; border-color: #00cc44;
@@ -450,7 +448,14 @@
       });
     }
 
-    window.addEventListener('load', () => setTimeout(drawDNAHelix, 1600));
+    // Draw DNA helix as soon as wheel animation completes
+    const wheelContainer = document.querySelector('.wheel-container');
+    wheelContainer.addEventListener('animationend', (e) => {
+      if (e.animationName === 'spinOpen') {
+        drawDNAHelix();
+      }
+    });
+    
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
