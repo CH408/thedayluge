@@ -53,7 +53,7 @@
 
     .columns-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 30px;
       margin-bottom: 30px;
     }
@@ -75,7 +75,6 @@
 
     .column:nth-child(1) { animation: unfoldColumn 0.6s ease-out 0.4s forwards; }
     .column:nth-child(2) { animation: unfoldColumn 0.6s ease-out 0.5s forwards; }
-    .column:nth-child(3) { animation: unfoldColumn 0.6s ease-out 0.6s forwards; }
 
     @keyframes unfoldColumn {
       to {
@@ -267,24 +266,26 @@
     }
 
     .section-title {
-      /* SAME AS news.html: 18px */
       font-size: 18px;
-      /* CENTERED */
+      color: #000000;
       text-align: center;
-      color: #ffffff;
       margin-bottom: 20px;
       font-weight: 900;
       text-transform: uppercase;
-      border-bottom: 2px solid #ffffff;
-      padding-bottom: 12px;
       letter-spacing: 2px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
       opacity: 0;
-      transform: translateY(15px);
+      transform: translateY(10px);
     }
 
     .section-title.animate-in {
-      animation: unfoldTitle 0.5s ease-out forwards;
+      animation: fadeInTitle 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeInTitle {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .section-content {
@@ -292,21 +293,18 @@
       flex-direction: column;
       gap: 12px;
       margin-bottom: 20px;
-      min-height: 150px;
     }
 
     .editor-pick-item {
-      /* JET BLACK BACKGROUND */
-      background: #000000;
-      /* VERTICAL WHITE BAR */
-      border: 1px solid rgba(255,255,255,0.2);
-      border-left: 3px solid #ffffff;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(0,0,0,0.3);
+      border-left: 3px solid #000000;
       padding: 12px 15px;
       border-radius: 8px;
       transition: all 0.3s ease;
       cursor: pointer;
       opacity: 0;
-      transform: translateY(20px) scaleY(0.8);
+      transform: translateY(15px) scaleY(0.9);
       transform-origin: top;
     }
 
@@ -322,131 +320,88 @@
     }
 
     .editor-pick-item:hover {
-      border-color: rgba(255,255,255,0.4);
-      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.3);
+      border-color: rgba(0,0,0,0.5);
       transform: translateX(5px);
     }
 
     .editor-pick-item a {
-      /* SAME AS news.html: 16px */
       font-size: 16px;
-      color: #ffffff;
+      color: #000000;
       text-decoration: none;
       display: block;
       line-height: 1.4;
       font-weight: bold;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: all 0.3s ease;
-    }
-
-    .editor-pick-item.animate-in a {
-      animation: fadeInEditorLink 0.3s ease-out forwards;
-    }
-
-    @keyframes fadeInEditorLink {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .button-wrapper {
       display: flex;
       justify-content: center;
+      margin-top: 15px;
     }
 
     .more-button {
-      background: linear-gradient(135deg, #1E5FA3 0%, #2B7AC7 50%, #4A9FE5 100%);
-      border: 3px solid rgba(255,255,255,0.4);
-      border-radius: 25px;
-      padding: 12px 24px;
-      font-size: 14px;
-      color: #ffffff;
+      background: #000000;
+      border: 2px solid rgba(0,0,0,0.3);
+      color: #66B4F2;
+      padding: 12px 30px;
+      border-radius: 10px;
       font-family: 'Special Elite', 'Courier New', monospace;
-      font-weight: bold;
-      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 900;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: all 0.3s ease;
+      text-transform: uppercase;
       letter-spacing: 1px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-      display: inline-block;
-      margin: 0 auto;
-      opacity: 0;
-      transform: scale(0.9);
-    }
-
-    .bottom-section.animate-in .more-button {
-      animation: popInButton 0.5s ease-out 1s forwards;
-    }
-
-    @keyframes popInButton {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
     }
 
     .more-button:hover {
-      background: linear-gradient(135deg, #2B7AC7 0%, #3D8DD8 50%, #66B4F2 100%);
+      background: rgba(0,0,0,0.8);
+      border-color: #000000;
       transform: scale(1.05);
-      box-shadow: 0 6px 18px rgba(102,180,242,0.4);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .loading-indicator {
+      color: #66B4F2;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      opacity: 0.7;
     }
 
     .home-btn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(26,26,26,0.9);
+      top: 20px;
+      left: 20px;
+      background: rgba(102,180,242,0.1);
+      border: 2px solid rgba(102,180,242,0.3);
       color: #66B4F2;
-      border: 2px solid #66B4F2;
-      padding: 12px 24px;
-      border-radius: 25px;
+      padding: 10px 20px;
+      border-radius: 10px;
       font-family: 'Special Elite', 'Courier New', monospace;
       font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
+      font-weight: 900;
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 0 20px rgba(102,180,242,0.3);
-      z-index: 1000;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: slideInHome 0.6s ease-out 0.1s forwards;
-    }
-
-    @keyframes slideInHome {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      z-index: 100;
     }
 
     .home-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(102,180,242,0.6);
+      background: rgba(102,180,242,0.2);
+      border-color: rgba(102,180,242,0.5);
+      transform: translateX(-5px);
     }
 
-    .loading-indicator {
-      text-align: center;
-      color: #66B4F2;
-      font-size: 14px;
-      padding: 20px;
-    }
-
-    .bottom-section .loading-indicator {
-      color: #ffffff;
-    }
-
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       .columns-container {
         grid-template-columns: 1fr;
-        gap: 25px;
       }
+
+      .column:nth-child(2) { animation: unfoldColumn 0.6s ease-out 0.6s forwards; }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       body {
         padding: 15px;
       }
@@ -497,14 +452,6 @@
         </div>
         <div class="pagination" id="features-pagination"></div>
       </div>
-
-      <div class="column">
-        <div class="column-title">Podcasts</div>
-        <div class="content-list" id="podcasts-list">
-          <div class="loading-indicator">Loading content...</div>
-        </div>
-        <div class="pagination" id="podcasts-pagination"></div>
-      </div>
     </div>
 
     <div class="buttons-container">
@@ -526,8 +473,7 @@
     // Global state for each column
     const state = {
       news: { data: [], currentPage: 1, itemsPerPage: 5 },
-      features: { data: [], currentPage: 1, itemsPerPage: 5 },
-      podcasts: { data: [], currentPage: 1, itemsPerPage: 5 }
+      features: { data: [], currentPage: 1, itemsPerPage: 5 }
     };
 
     // Helper to create content item HTML with animation classes
@@ -656,7 +602,7 @@
           document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading news</div>';
         }
 
-        // Load Features, Podcasts, and Editors' Picks
+        // Load Features and Editors' Picks
         const leisureResponse = await fetch('./sports-leisure-links.txt');
         if (leisureResponse.ok) {
           const leisureText = await leisureResponse.text();
@@ -678,10 +624,6 @@
           state.features.data = leisureEntries.filter(e => e.category === 'art-long');
           renderColumn('features', 'features-list', 'features-pagination');
           
-          // Filter for Podcasts
-          state.podcasts.data = leisureEntries.filter(e => e.category === 'pods');
-          renderColumn('podcasts', 'podcasts-list', 'podcasts-pagination');
-          
           // Filter for Editors' Picks - show first 3
           const editorsEntries = leisureEntries.filter(e => e.category === 'editors');
           const editorsContent = document.getElementById('editors-content');
@@ -698,7 +640,6 @@
           }
         } else {
           document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading features</div>';
-          document.getElementById('podcasts-list').innerHTML = '<div class="loading-indicator">Error loading podcasts</div>';
           document.getElementById('editors-content').innerHTML = '<div class="loading-indicator">Error loading picks</div>';
         }
 
@@ -706,7 +647,6 @@
         console.error('Error loading content:', error);
         document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
         document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
-        document.getElementById('podcasts-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
         document.getElementById('editors-content').innerHTML = '<div class="loading-indicator">Error loading content</div>';
       }
     });
