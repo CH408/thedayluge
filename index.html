@@ -243,16 +243,14 @@
     .circle-5 span,
     .circle-6 span {
       font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px);
-      line-height: 1;
     }
 
-    /* Counter-rotate text to be horizontal */
-    .circle-1 { --circle-angle: 0deg; border-color: var(--silver-white);
-                color: var(--silver-white); box-shadow: 0 0 8px var(--silver-white); }
+    .circle-1 { --circle-angle: 0deg; border-color: #ECEFF1;
+                color: #ECEFF1; box-shadow: 0 0 8px #ECEFF1; }
     .circle-1 span { transform: rotate(0deg); }
 
-    .circle-8 { --circle-angle: 45deg; border-color: #ffd700;
-                color: #ffd700; box-shadow: 0 0 8px #ffd700; }
+    .circle-8 { --circle-angle: 45deg; border-color: #ffcc00;
+                color: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
     .circle-8 span { transform: rotate(-45deg); }
 
     .circle-7 { --circle-angle: 90deg; border-color: #00cc44;
@@ -418,7 +416,7 @@
         svg.appendChild(path2);
 
         // Add particles on each strand
-        for (let p = 0; p < 8; p++) {
+        for (let p = 0; p < 12; p++) {
           // First strand particles
           const particle1 = document.createElementNS('http://www.w3.org/2000/svg','circle');
           particle1.setAttribute('r', '2');
@@ -429,7 +427,7 @@
           const motion1 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
           motion1.setAttribute('dur', '3s');
           motion1.setAttribute('repeatCount', 'indefinite');
-          motion1.setAttribute('begin', `${p * 0.3}s`);
+          motion1.setAttribute('begin', `${p * 0.25}s`);
           motion1.innerHTML = `<mpath href="#helix1-${i}" />`;
           particle1.appendChild(motion1);
 
@@ -443,14 +441,21 @@
           const motion2 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
           motion2.setAttribute('dur', '3s');
           motion2.setAttribute('repeatCount', 'indefinite');
-          motion2.setAttribute('begin', `${p * 0.3}s`);
+          motion2.setAttribute('begin', `${p * 0.25}s`);
           motion2.innerHTML = `<mpath href="#helix2-${i}" />`;
           particle2.appendChild(motion2);
         }
       });
     }
 
-    window.addEventListener('load', () => setTimeout(drawDNAHelix, 1600));
+    // Draw DNA helix as soon as wheel animation completes
+    const wheelContainer = document.querySelector('.wheel-container');
+    wheelContainer.addEventListener('animationend', (e) => {
+      if (e.animationName === 'spinOpen') {
+        drawDNAHelix();
+      }
+    });
+    
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
