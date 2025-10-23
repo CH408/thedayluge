@@ -28,7 +28,7 @@
 
     .header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 25px;
     }
 
     .header h1 {
@@ -54,8 +54,8 @@
     .columns-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-bottom: 30px;
+      gap: 20px;
+      margin-bottom: 20px;
     }
 
     .column {
@@ -63,8 +63,8 @@
       background: #000000;
       border: 2px solid rgba(102,180,242,0.3);
       border-radius: 16px;
-      padding: 25px;
-      min-height: 500px;
+      padding: 20px;
+      min-height: 400px;
       box-shadow: 0 8px 32px rgba(102,180,242,0.15);
       transition: all 0.4s ease;
       display: flex;
@@ -95,11 +95,11 @@
       /* CENTERED */
       text-align: center;
       color: #66B4F2;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       font-weight: 900;
       text-transform: uppercase;
       border-bottom: 2px solid #66B4F2;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       letter-spacing: 1px;
       opacity: 0;
       transform: translateY(15px);
@@ -119,7 +119,7 @@
     .content-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
       flex: 1;
     }
 
@@ -129,7 +129,7 @@
       /* VERTICAL BLUE BAR */
       border: 1px solid rgba(102,180,242,0.2);
       border-left: 3px solid #66B4F2;
-      padding: 12px 15px;
+      padding: 10px 12px;
       border-radius: 8px;
       transition: all 0.3s ease;
       cursor: pointer;
@@ -184,7 +184,7 @@
       gap: 10px;
       justify-content: center;
       align-items: center;
-      margin-top: 15px;
+      margin-top: 12px;
       flex-wrap: wrap;
       opacity: 0;
       transform: translateY(10px);
@@ -236,14 +236,14 @@
     .buttons-container {
       display: flex;
       justify-content: center;
-      margin-top: 40px;
+      margin-top: 25px;
     }
 
     .bottom-section {
       background: linear-gradient(135deg, #154A85 0%, #1E5FA3 20%, #2B7AC7 40%, #3D8DD8 60%, #4A9FE5 80%, #66B4F2 100%);
       border: 3px solid rgba(255,255,255,0.3);
       border-radius: 16px;
-      padding: 25px;
+      padding: 20px;
       box-shadow: 0 8px 32px rgba(102,180,242,0.5);
       transition: all 0.4s ease;
       width: 100%;
@@ -269,7 +269,7 @@
       font-size: 18px;
       color: #000000;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -291,15 +291,15 @@
     .section-content {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 8px;
+      margin-bottom: 15px;
     }
 
     .editor-pick-item {
       background: rgba(0,0,0,0.2);
       border: 1px solid rgba(0,0,0,0.3);
       border-left: 3px solid #000000;
-      padding: 12px 15px;
+      padding: 10px 12px;
       border-radius: 8px;
       transition: all 0.3s ease;
       cursor: pointer;
@@ -408,11 +408,11 @@
 
       .column {
         padding: 20px;
-        min-height: 450px;
+        min-height: 350px;
       }
 
       .bottom-section {
-        padding: 20px;
+        padding: 18px;
       }
 
       /* SAME AS news.html MOBILE SIZES */
@@ -470,10 +470,10 @@
   </div>
 
   <script>
-    // Global state for each column
+    // Global state for each column - Updated to 8 items per page
     const state = {
-      news: { data: [], currentPage: 1, itemsPerPage: 5 },
-      features: { data: [], currentPage: 1, itemsPerPage: 5 }
+      news: { data: [], currentPage: 1, itemsPerPage: 8 },
+      features: { data: [], currentPage: 1, itemsPerPage: 8 }
     };
 
     // Helper to create content item HTML with animation classes
