@@ -6,514 +6,368 @@
   <title>Sports & Leisure - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
+    :root {
+      --electric-blue: #00D4FF;
+      --electric-blue-light: #66E8FF;
+      --ink: #111;
+      --black-bg: #000000;
+      --dark-gray: #111111;
+      --gray: #333333;
     }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
     body {
-      font-family: 'Special Elite', 'Courier New', monospace;
-      /* JET BLACK PAGE BACKGROUND */
-      background: #000000;
-      color: #66B4F2;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
+      color: var(--electric-blue);
+      line-height: 1.4;
+      background: var(--black-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       min-height: 100vh;
+      position: relative;
+      overflow: hidden;
       padding: 20px;
     }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(0,212,255,0.1) 0%, transparent 70%);
+      animation: energy-pulse 6s ease-in-out infinite;
+      pointer-events: none;
     }
-
+    body::after {
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background:
+        linear-gradient(0deg, transparent 0%, rgba(0,212,255,0.3) 1%, transparent 3%),
+        linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.3) 1%, transparent 3%),
+        linear-gradient(180deg, transparent 0%, rgba(0,212,255,0.3) 1%, transparent 3%),
+        linear-gradient(270deg, transparent 0%, rgba(0,212,255,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
     .header {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       text-align: center;
-      margin-bottom: 25px;
+      z-index: 10;
     }
-
     .header h1 {
-      font-size: clamp(28px, 6vw, 48px);
-      color: #66B4F2;
-      text-shadow: 0 0 30px rgba(102,180,242,0.6);
-      margin-bottom: 10px;
-      letter-spacing: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 32px;
+      margin-bottom: 8px;
+      animation: title-pulse 8s ease-in-out infinite;
+    }
+    @keyframes title-pulse {
+      0% { color: var(--electric-blue); text-shadow: 0 0 15px var(--electric-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+      50% { color: var(--electric-blue-light); text-shadow: 0 0 20px var(--electric-blue-light), 2px 2px 4px rgba(0,0,0,0.8); }
+      100% { color: var(--electric-blue); text-shadow: 0 0 15px var(--electric-blue), 2px 2px 4px rgba(0,0,0,0.8); }
+    }
+    .layout-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 750px;
+      margin: 40px auto 0;
+      z-index: 5;
+    }
+    .central-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 480px;
+      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
+      border: 2px solid var(--electric-blue);
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      z-index: 15;
+      box-shadow: 0 0 30px rgba(0,212,255,0.5), 0 4px 12px rgba(0,0,0,0.8);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(0,212,255,0.5), 0 4px 12px rgba(0,0,0,0.8); }
+      50% { box-shadow: 0 0 40px rgba(0,212,255,0.8), 0 6px 16px rgba(0,0,0,0.4); }
+    }
+    .central-title {
+      text-align: center;
+      font-size: 22px;
       font-weight: 900;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--electric-blue);
+      text-shadow: 0 0 8px var(--electric-blue);
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--electric-blue);
+      padding-bottom: 6px;
+      flex-shrink: 0;
+    }
+    .content-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+      max-height: calc(100% - 38px);
+      overflow-y: auto;
+    }
+    .content-link {
+      display: flex;
+      align-items: flex-start;
+      padding: 7px 9px;
+      border: 1px solid rgba(0,212,255,0.3);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-size: 15px;
+      line-height: 1.2;
+      min-height: 0;
+      overflow-wrap: anywhere;
+      cursor: pointer;
       opacity: 0;
       transform: translateY(-20px);
-      animation: unfoldHeader 0.8s ease-out 0.2s forwards;
+      animation: unroll 0.5s ease-out forwards;
     }
-
-    @keyframes unfoldHeader {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes unroll { to { opacity: 1; transform: translateY(0); } }
+    .content-link:nth-child(1) { animation-delay: 0.1s; }
+    .content-link:nth-child(2) { animation-delay: 0.2s; }
+    .content-link:nth-child(3) { animation-delay: 0.3s; }
+    .content-link:nth-child(4) { animation-delay: 0.4s; }
+    .content-link:nth-child(5) { animation-delay: 0.5s; }
+    .content-link:nth-child(6) { animation-delay: 0.6s; }
+    .content-link:nth-child(7) { animation-delay: 0.7s; }
+    .content-link:nth-child(8) { animation-delay: 0.8s; }
+    .content-link:hover {
+      background: rgba(0,212,255,0.2);
+      border-color: var(--electric-blue);
+      box-shadow: 0 0 10px rgba(0,212,255,0.4);
     }
-
-    .columns-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 20px;
+    .link-title {
+      color: var(--electric-blue);
+      text-decoration: none;
+      cursor: pointer;
+      width: 100%;
+      overflow-wrap: anywhere;
+      hyphens: auto;
     }
-
-    .column {
-      /* PURE JET BLACK */
-      background: #000000;
-      border: 2px solid rgba(102,180,242,0.3);
-      border-radius: 16px;
-      padding: 20px;
-      min-height: 400px;
-      box-shadow: 0 8px 32px rgba(102,180,242,0.15);
-      transition: all 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .column:nth-child(1) { animation: unfoldColumn 0.6s ease-out 0.4s forwards; }
-    .column:nth-child(2) { animation: unfoldColumn 0.6s ease-out 0.5s forwards; }
-    .column:nth-child(3) { animation: unfoldColumn 0.6s ease-out 0.6s forwards; }
-
-    @keyframes unfoldColumn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .column:hover {
-      border-color: rgba(102,180,242,0.6);
-      box-shadow: 0 12px 48px rgba(102,180,242,0.3);
-      transform: translateY(-5px);
-    }
-
-    .column-title {
-      /* SAME AS news.html: 18px */
-      font-size: 18px;
-      /* CENTERED */
+    .loading-indicator {
       text-align: center;
-      color: #66B4F2;
-      margin-bottom: 15px;
+      font-size: 15px;
+      color: var(--electric-blue);
+      padding: 10px;
+    }
+    .perimeter-box {
+      position: absolute;
+      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
+      border: 2px solid var(--electric-blue);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
       font-weight: 900;
       text-transform: uppercase;
-      border-bottom: 2px solid #66B4F2;
-      padding-bottom: 10px;
-      letter-spacing: 1px;
-      opacity: 0;
-      transform: translateY(15px);
-    }
-
-    .column-title.animate-in {
-      animation: unfoldTitle 0.5s ease-out forwards;
-    }
-
-    @keyframes unfoldTitle {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .content-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex: 1;
-    }
-
-    .content-item {
-      /* JET BLACK BACKGROUND */
-      background: #000000;
-      border: 1px solid rgba(102,180,242,0.2);
-      padding: 10px 12px 10px 40px;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(20px) scaleY(0.8);
-      transform-origin: top;
-      position: relative;
-    }
-
-    .content-item::before {
-      content: '►';
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #66B4F2;
-      font-size: 16px;
-      text-shadow: 0 0 10px rgba(102,180,242,0.8);
-      animation: terminalPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes terminalPulse {
-      0%, 100% {
-        opacity: 1;
-        text-shadow: 0 0 10px rgba(102,180,242,0.8), 0 0 20px rgba(102,180,242,0.4);
-      }
-      50% {
-        opacity: 0.6;
-        text-shadow: 0 0 5px rgba(102,180,242,0.6), 0 0 10px rgba(102,180,242,0.2);
-      }
-    }
-
-    .content-item.animate-in {
-      animation: unfoldItem 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-
-    @keyframes unfoldItem {
-      to {
-        opacity: 1;
-        transform: translateY(0) scaleY(1);
-      }
-    }
-
-    .content-item:hover {
-      border-color: rgba(102,180,242,0.4);
-      box-shadow: 0 0 10px rgba(102,180,242,0.3);
-      transform: translateX(5px);
-    }
-
-    .content-item:hover::before {
-      text-shadow: 0 0 15px rgba(102,180,242,1), 0 0 25px rgba(102,180,242,0.6);
-      animation: none;
-      opacity: 1;
-    }
-
-    .content-item a {
-      /* SAME AS news.html: 16px */
-      font-size: 16px;
-      color: #66B4F2;
-      text-decoration: none;
-      display: block;
-      line-height: 1.4;
-      font-weight: bold;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: all 0.3s ease;
-    }
-
-    .content-item.animate-in a {
-      animation: fadeInLink 0.3s ease-out forwards;
-    }
-
-    @keyframes fadeInLink {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .pagination {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      margin-top: 12px;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    .pagination.animate-in {
-      animation: fadeInPagination 0.5s ease-out forwards;
-    }
-
-    @keyframes fadeInPagination {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .page-btn {
-      background: rgba(102,180,242,0.1);
-      border: 2px solid rgba(102,180,242,0.3);
-      color: #66B4F2;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-family: 'Special Elite', 'Courier New', monospace;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .page-btn:hover {
-      background: rgba(102,180,242,0.2);
-      border-color: rgba(102,180,242,0.5);
-      transform: scale(1.05);
-    }
-
-    .page-btn.active {
-      background: #66B4F2;
-      color: #000000;
-      border-color: #66B4F2;
-    }
-
-    .page-ellipsis {
-      color: #66B4F2;
-      font-size: 14px;
-      padding: 8px 12px;
-      display: inline-block;
-      font-weight: 900;
-    }
-
-    .loading-indicator {
-      color: rgba(102,180,242,0.6);
+      letter-spacing: 0.3px;
       text-align: center;
-      padding: 20px;
-      font-size: 14px;
+      box-shadow: 0 0 20px rgba(0,212,255,0.4);
+      animation: electron-pulse 2s ease-in-out infinite;
+      color: var(--electric-blue);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      padding: 5px;
     }
-
+    @keyframes electron-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.4); border-color: var(--electric-blue); }
+      50% { box-shadow: 0 0 30px rgba(0,212,255,0.8); border-color: var(--electric-blue-light); }
+    }
+    .perimeter-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 5px rgba(0,212,255,0.9);
+      background: var(--dark-gray);
+    }
+    .top-left-box { top: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; }
+    .top-middle-box { top: 30px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
+    .top-right-box { top: 30px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 18px; }
+    .bottom-left-box { bottom: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 16px; }
+    .bottom-middle-box { bottom: 30px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
+    .bottom-right-box { bottom: 30px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 16px; }
     .home-btn {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      background: rgba(102,180,242,0.1);
-      border: 2px solid rgba(102,180,242,0.3);
-      color: #66B4F2;
+      bottom: 20px; right: 20px;
+      background: var(--black-bg);
+      color: var(--electric-blue);
+      border: 2px solid var(--electric-blue);
       padding: 10px 20px;
-      border-radius: 10px;
-      font-family: 'Special Elite', 'Courier New', monospace;
+      border-radius: 25px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace;
       font-size: 14px;
-      font-weight: 900;
+      font-weight: bold;
+      text-transform: uppercase;
       text-decoration: none;
       transition: all 0.3s ease;
-      z-index: 100;
+      text-shadow: 0 0 5px var(--electric-blue);
+      box-shadow: 0 0 10px rgba(0,212,255,0.3);
+      z-index: 20;
     }
-
     .home-btn:hover {
-      background: rgba(102,180,242,0.2);
-      border-color: rgba(102,180,242,0.5);
-      transform: translateX(-5px);
+      background: var(--dark-gray);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,212,255,0.6);
     }
-
-    @media (max-width: 1200px) {
-      .columns-container {
-        grid-template-columns: 1fr;
-      }
-
-      .column:nth-child(2) { animation: unfoldColumn 0.6s ease-out 0.6s forwards; }
-      .column:nth-child(3) { animation: unfoldColumn 0.6s ease-out 0.7s forwards; }
+    #particle-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 15px;
+    @media (max-width: 900px) {
+      .layout-container { max-width: 90%; height: 650px; }
+      .central-content { width: 420px; height: 420px; padding: 12px; }
+      .central-title { font-size: 18px; margin-bottom: 10px; }
+      .content-links { gap: 16px; }
+      .content-link { font-size: 13px; padding: 5px 7px; line-height: 1.2; }
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 120px; height: 50px; font-size: 14px;
       }
-
-      .column {
-        padding: 20px;
-        min-height: 350px;
+      .top-middle-box { font-size: 12px; }
+      .top-left-box { top: 20px; left: calc(50% -  Invoice195px); }
+      .top-middle-box { top: 20px; left: calc(50% - 60px); }
+      .top-right-box { top: 20px; left: calc(50% + 75px); }
+      .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
+      .bottom-middle-box { bottom: 20px; left: calc(50% - 60px); }
+      .bottom-right-box { bottom: 20px; left: calc(50% + 75px); }
+    }
+    @media (max-width: 600px) {
+      .layout-container { height: 600px; }
+      .central-content { width: 340px; height: 360px; padding: 10px; }
+      .central-title { font-size: 14px; margin-bottom: 8px; }
+      .content-links { gap: 14px; }
+      .content-link { font-size: 11px; padding: 4px 6px; line-height: 1.2; }
+      .top-left-box, .top-middle-box, .top-right-box,
+      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
+        width: 100px; height: 45px; font-size: 12px;
       }
-
-      /* SAME AS news.html MOBILE SIZES */
-      .column-title {
-        font-size: 16px;
-      }
-
-      .content-item a {
-        font-size: 14px;
-      }
+      .top-middle-box { font-size: 10px; }
+      .top-left-box { top: 15px; left: calc(50% - 160px); }
+      .top-middle-box { top: 15px; left: calc(50% - 50px); }
+      .top-right-box { top: 15px; left: calc(50% + 60px); }
+      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
+      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
+      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
+      .header h1 { font-size: 28px; }
     }
   </style>
 </head>
 <body>
-  <a href="/" class="home-btn">← Back to Home</a>
-
-  <div class="container">
-    <div class="header">
-      <h1>Sports & Leisure</h1>
-    </div>
-
-    <div class="columns-container">
-      <div class="column">
-        <div class="column-title">Sports News</div>
-        <div class="content-list" id="news-list">
-          <div class="loading-indicator">Loading content...</div>
-        </div>
-        <div class="pagination" id="news-pagination"></div>
-      </div>
-
-      <div class="column">
-        <div class="column-title">Features</div>
-        <div class="content-list" id="features-list">
-          <div class="loading-indicator">Loading content...</div>
-        </div>
-        <div class="pagination" id="features-pagination"></div>
-      </div>
-
-      <div class="column">
-        <div class="column-title">Pods & Clips</div>
-        <div class="content-list" id="pods-list">
-          <div class="loading-indicator">Loading content...</div>
-        </div>
-        <div class="pagination" id="pods-pagination"></div>
+  <div class="header"><h1>THE DAYLUGE - SPORTS & LEISURE</h1></div>
+  <a href="/" class="home-btn">Back to Home</a>
+  <canvas id="particle-canvas"></canvas>
+  
+  <div class="layout-container">
+    <div class="central-content">
+      <div class="central-title">Latest Sports & Leisure</div>
+      <div class="content-links">
+        <div class="loading-indicator">Loading...</div>
       </div>
     </div>
+    
+    <div class="perimeter-box top-left-box" onclick="window.location.href='./sports-podcasts.html'">Podcasts</div>
+    <div class="perimeter-box top-middle-box" onclick="window.location.href='./sports-articles-longform.html'">Articles & Longform</div>
+    <div class="perimeter-box top-right-box" onclick="window.location.href='./sports-clips.html'">Video Clips</div>
+    <div class="perimeter-box bottom-left-box" onclick="window.location.href='./sports-books.html'">Books</div>
+    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./sports-memes.html'">Memes</div>
+    <div class="perimeter-box bottom-right-box" onclick="window.location.href='./sports-tv-movies.html'">TV & Movies</div>
   </div>
-
+  
   <script>
-    // Global state for each column - Updated to 8 items per page
-    const state = {
-      news: { data: [], currentPage: 1, itemsPerPage: 8 },
-      features: { data: [], currentPage: 1, itemsPerPage: 8 },
-      pods: { data: [], currentPage: 1, itemsPerPage: 8 }
-    };
-
-    // Helper to create content item HTML with animation classes
-    const createContentItem = (entry, index) => {
-      return `
-        <div class="content-item" style="animation-delay: ${index * 0.05}s">
-          <a href="${entry.link}" target="_blank">${entry.title}</a>
-        </div>
-      `;
-    };
-
-    // Create smart pagination with ellipsis
-    const createSmartPagination = (currentPage, totalPages, columnType) => {
-      let pages = [];
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particlesArray = [];
+      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
       
-      if (totalPages <= 7) {
-        for (let i = 1; i <= totalPages; i++) {
-          pages.push(i);
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 2 + 1;
+          this.speedX = Math.random() * 0.5 - 0.25;
+          this.speedY = Math.random() * 0.5 - 0.25;
         }
-      } else {
-        if (currentPage <= 4) {
-          pages = [1, 2, 3, 4, 5, '...', totalPages];
-        } else if (currentPage >= totalPages - 3) {
-          pages = [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
-        } else {
-          pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.1;
+          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+        draw() {
+          ctx.fillStyle = 'rgba(0,212,255,0.6)';
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
         }
       }
       
-      return pages.map(page => {
-        if (page === '...') {
-          return '<span class="page-ellipsis">...</span>';
-        } else {
-          const activeClass = page === currentPage ? 'active' : '';
-          return `<button class="page-btn ${activeClass}" onclick="changePage('${columnType}', ${page})">${page}</button>`;
+      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+            particlesArray.splice(i, 1); i--;
+            particlesArray.push(new Particle());
+          }
         }
-      }).join('');
-    };
-
-    // Render a column's content for current page with animations
-    const renderColumn = (columnType, listId, paginationId) => {
-      const columnState = state[columnType];
-      const list = document.getElementById(listId);
-      const pagination = document.getElementById(paginationId);
+        requestAnimationFrame(animate);
+      }
+      init(); animate();
+      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
       
-      const startIdx = (columnState.currentPage - 1) * columnState.itemsPerPage;
-      const endIdx = startIdx + columnState.itemsPerPage;
-      const pageData = columnState.data.slice(startIdx, endIdx);
-      
-      if (pageData.length > 0) {
-        list.innerHTML = pageData.map((item, index) => 
-          createContentItem(item, index)
-        ).join('');
+      async function loadContent() {
+        const container = document.querySelector('.content-links');
+        container.innerHTML = '<div class="loading-indicator">Loading...</div>';
         
-        setTimeout(() => {
-          document.querySelectorAll(`#${listId} .content-item`).forEach(item => {
-            item.classList.add('animate-in');
+        try {
+          const response = await fetch('sports-leisure-links.txt?t=' + Date.now());
+          if (!response.ok) throw new Error('File not found');
+          const text = await response.text();
+          const lines = text.trim().split('\n').filter(l => l.trim());
+          const entries = lines.map(line => {
+            const p = line.split('|');
+            if (p.length < 3) return null;
+            return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim() };
+          }).filter(e => e);
+          
+          const latest8 = entries.slice(0, 8);
+          container.innerHTML = '';
+          latest8.forEach((e, i) => {
+            const el = document.createElement('div');
+            el.className = 'content-link';
+            el.style.animationDelay = `${i * 0.1}s`;
+            el.innerHTML = `<a href="${e.link}" class="link-title" target="_blank">${e.title}</a>`;
+            container.appendChild(el);
           });
-        }, 100);
-      } else {
-        list.innerHTML = '<div class="loading-indicator">No content available</div>';
+        } catch (err) {
+          container.innerHTML = `<div class="content-link" style="border-color:#ff4444;opacity:1"><a style="color:#ff8888">Error: ${err.message}</a></div>`;
+        }
       }
       
-      const totalPages = Math.ceil(columnState.data.length / columnState.itemsPerPage);
-      if (totalPages > 1) {
-        pagination.innerHTML = createSmartPagination(columnState.currentPage, totalPages, columnType);
-        setTimeout(() => {
-          pagination.classList.add('animate-in');
-        }, 200);
-      } else {
-        pagination.innerHTML = '';
-      }
-    };
-
-    // Change page function
-    window.changePage = (columnType, page) => {
-      state[columnType].currentPage = page;
-      const listId = columnType + '-list';
-      const paginationId = columnType + '-pagination';
-      renderColumn(columnType, listId, paginationId);
-    };
-
-    // Load all content on page load
-    document.addEventListener('DOMContentLoaded', async () => {
-      // Animate column titles
-      document.querySelectorAll('.column-title').forEach((title, index) => {
-        setTimeout(() => {
-          title.classList.add('animate-in');
-        }, 200 + index * 100);
-      });
-
-      try {
-        // Load Sports News
-        const newsResponse = await fetch('../sports-news.txt');
-        if (newsResponse.ok) {
-          const newsText = await newsResponse.text();
-          const newsLines = newsText.trim().split('\n').filter(line => line.trim());
-          
-          const newsEntries = newsLines.map(line => {
-            const parts = line.split('|');
-            if (parts.length >= 2) {
-              return {
-                title: parts[0].trim(),
-                link: parts[1].trim()
-              };
-            }
-            return null;
-          }).filter(entry => entry !== null);
-          
-          state.news.data = newsEntries;
-          renderColumn('news', 'news-list', 'news-pagination');
-        } else {
-          document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading news</div>';
-        }
-
-        // Load Features and Pods & Clips
-        const leisureResponse = await fetch('./sports-leisure-links.txt');
-        if (leisureResponse.ok) {
-          const leisureText = await leisureResponse.text();
-          const leisureLines = leisureText.trim().split('\n').filter(line => line.trim());
-          
-          const leisureEntries = leisureLines.map(line => {
-            const parts = line.split('|');
-            if (parts.length >= 3) {
-              return {
-                title: parts[0].trim(),
-                link: parts[1].trim(),
-                category: parts[2].trim().toLowerCase()
-              };
-            }
-            return null;
-          }).filter(entry => entry !== null);
-          
-          // Filter for Features
-          state.features.data = leisureEntries.filter(e => e.category === 'art-long');
-          renderColumn('features', 'features-list', 'features-pagination');
-          
-          // Filter for Pods & Clips - entries ending in 'pods' or 'clips'
-          state.pods.data = leisureEntries.filter(e => e.category === 'pods' || e.category === 'clips');
-          renderColumn('pods', 'pods-list', 'pods-pagination');
-        } else {
-          document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading features</div>';
-          document.getElementById('pods-list').innerHTML = '<div class="loading-indicator">Error loading pods & clips</div>';
-        }
-
-      } catch (error) {
-        console.error('Error loading content:', error);
-        document.getElementById('news-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
-        document.getElementById('features-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
-        document.getElementById('pods-list').innerHTML = '<div class="loading-indicator">Error loading content</div>';
-      }
+      loadContent();
     });
   </script>
 </body>
