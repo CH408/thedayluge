@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orbital v1 - Classic Rings</title>
+  <title>Orbital v2 - Bold Rings</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -21,7 +21,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      padding-top: 130px;
+      padding-top: 140px;
       padding-bottom: 80px;
     }
     
@@ -36,7 +36,7 @@
     
     .header {
       text-align: center;
-      padding: 25px 20px 20px;
+      padding: 28px 20px 22px;
       position: fixed;
       top: 0;
       left: 0;
@@ -46,25 +46,25 @@
     }
     
     .header h1 {
-      font-size: 42px;
+      font-size: 46px;
       text-transform: uppercase;
       color: var(--silver-white);
-      text-shadow: 0 0 25px var(--silver-white);
+      text-shadow: 0 0 30px var(--silver-white);
       margin-bottom: 8px;
       animation: title-pulse 3s ease-in-out infinite;
     }
     
     @keyframes title-pulse {
       0%, 100% { 
-        text-shadow: 0 0 25px var(--silver-white);
+        text-shadow: 0 0 30px var(--silver-white);
       }
       50% { 
-        text-shadow: 0 0 40px var(--silver-light);
+        text-shadow: 0 0 50px var(--silver-light);
       }
     }
     
     .header .subtitle {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--silver-medium);
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -72,72 +72,74 @@
     
     .orbital-container {
       position: relative;
-      width: 700px;
-      height: 700px;
+      width: 800px;
+      height: 800px;
       margin: 0 auto;
       z-index: 5;
     }
     
-    /* VISIBLE PULSING ROTATING ORBITAL RINGS */
+    /* THICKER BOLD PULSING ROTATING ORBITAL RINGS */
     .orbit {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      border: 2px solid var(--silver-medium);
+      border: 3px solid var(--silver-white);
       border-radius: 50%;
-      opacity: 0.6;
-      box-shadow: 0 0 15px rgba(236, 239, 241, 0.3), inset 0 0 15px rgba(236, 239, 241, 0.1);
-      animation: orbit-pulse-rotate 4s ease-in-out infinite;
+      opacity: 0.5;
+      box-shadow: 0 0 20px rgba(236, 239, 241, 0.4), inset 0 0 20px rgba(236, 239, 241, 0.15);
+      animation: orbit-bold-rotate 5s ease-in-out infinite;
     }
     
-    @keyframes orbit-pulse-rotate {
+    @keyframes orbit-bold-rotate {
       0% { 
-        transform: translate(-50%, -50%) rotate(0deg);
-        border-color: var(--silver-medium);
-        box-shadow: 0 0 15px rgba(236, 239, 241, 0.3), inset 0 0 15px rgba(236, 239, 241, 0.1);
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        border-color: var(--silver-white);
+        opacity: 0.5;
+        box-shadow: 0 0 20px rgba(236, 239, 241, 0.4), inset 0 0 20px rgba(236, 239, 241, 0.15);
       }
       50% { 
-        transform: translate(-50%, -50%) rotate(180deg);
-        border-color: var(--silver-white);
-        box-shadow: 0 0 25px rgba(236, 239, 241, 0.5), inset 0 0 25px rgba(236, 239, 241, 0.2);
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.02);
+        border-color: var(--silver-light);
+        opacity: 0.7;
+        box-shadow: 0 0 35px rgba(236, 239, 241, 0.6), inset 0 0 30px rgba(236, 239, 241, 0.25);
       }
       100% { 
-        transform: translate(-50%, -50%) rotate(360deg);
-        border-color: var(--silver-medium);
-        box-shadow: 0 0 15px rgba(236, 239, 241, 0.3), inset 0 0 15px rgba(236, 239, 241, 0.1);
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+        border-color: var(--silver-white);
+        opacity: 0.5;
+        box-shadow: 0 0 20px rgba(236, 239, 241, 0.4), inset 0 0 20px rgba(236, 239, 241, 0.15);
       }
     }
     
     .orbit-1 { 
-      width: 500px; 
-      height: 500px;
-      animation-duration: 60s;
+      width: 570px; 
+      height: 570px;
+      animation-duration: 50s;
     }
     .orbit-2 { 
-      width: 600px; 
-      height: 600px;
-      animation-duration: 80s;
+      width: 685px; 
+      height: 685px;
+      animation-duration: 70s;
     }
     .orbit-3 { 
-      width: 700px; 
-      height: 700px;
-      animation-duration: 100s;
+      width: 800px; 
+      height: 800px;
+      animation-duration: 90s;
     }
     
-    /* Central sun */
     .central-sun {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 340px;
-      height: 340px;
+      width: 380px;
+      height: 380px;
       background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
       border: none;
       border-radius: 50%;
-      box-shadow: 0 0 50px rgba(236, 239, 241, 0.3);
-      padding: 30px 22px;
+      box-shadow: 0 0 60px rgba(236, 239, 241, 0.35);
+      padding: 35px 26px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -145,13 +147,13 @@
     }
     
     .sun-title {
-      font-size: 15px;
+      font-size: 17px;
       text-transform: uppercase;
       color: var(--silver-white);
       text-align: center;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      text-shadow: 0 0 15px var(--silver-white);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      text-shadow: 0 0 18px var(--silver-white);
       flex-shrink: 0;
       line-height: 1.3;
     }
@@ -167,9 +169,9 @@
     .scroll-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      animation: auto-scroll 20s linear infinite;
-      padding: 12px 0;
+      gap: 11px;
+      animation: auto-scroll 22s linear infinite;
+      padding: 14px 0;
     }
     
     @keyframes auto-scroll {
@@ -182,42 +184,42 @@
     }
     
     .content-link {
-      padding: 10px 12px;
-      background: rgba(236, 239, 241, 0.08);
+      padding: 11px 13px;
+      background: rgba(236, 239, 241, 0.1);
       border: none;
-      border-radius: 6px;
+      border-radius: 7px;
       transition: all 0.3s ease;
       cursor: pointer;
       flex-shrink: 0;
     }
     
     .content-link:hover {
-      background: rgba(236, 239, 241, 0.18);
-      box-shadow: 0 0 15px rgba(236, 239, 241, 0.3);
-      transform: translateX(5px);
+      background: rgba(236, 239, 241, 0.2);
+      box-shadow: 0 0 20px rgba(236, 239, 241, 0.4);
+      transform: translateX(6px);
     }
     
     .link-title {
       color: var(--silver-white);
-      font-size: 12px;
+      font-size: 13px;
       line-height: 1.5;
       text-decoration: none;
       display: block;
     }
     
     .link-category {
-      font-size: 9px;
+      font-size: 10px;
       color: var(--silver-medium);
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 5px;
       letter-spacing: 1px;
     }
     
-    /* PULSING GLOWING WHITE PLANETS */
+    /* LARGER PULSING GLOWING PLANETS */
     .planet {
       position: absolute;
-      width: 120px;
-      height: 120px;
+      width: 135px;
+      height: 135px;
       border-radius: 50%;
       background: #FFFFFF;
       border: none;
@@ -225,43 +227,43 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
       transition: all 0.3s ease;
       z-index: 15;
-      animation: planet-glow 3s ease-in-out infinite;
+      animation: planet-glow 3.5s ease-in-out infinite;
     }
     
     @keyframes planet-glow {
       0%, 100% { 
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+        box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
         background: #FFFFFF;
       }
       50% { 
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.9), 0 0 80px rgba(236, 239, 241, 0.5);
+        box-shadow: 0 0 55px rgba(255, 255, 255, 0.9), 0 0 90px rgba(236, 239, 241, 0.5);
         background: #F7F9FB;
       }
     }
     
     .planet-text {
       text-align: center;
-      font-size: 13px;
+      font-size: 14px;
       color: #000;
       font-weight: bold;
       text-transform: uppercase;
-      line-height: 1.3;
-      letter-spacing: 0.8px;
-      padding: 8px;
+      line-height: 1.35;
+      letter-spacing: 0.9px;
+      padding: 10px;
     }
     
     .planet:hover {
-      transform: scale(1.15);
-      box-shadow: 0 0 60px rgba(255, 255, 255, 1), 0 0 100px rgba(236, 239, 241, 0.6);
+      transform: scale(1.12);
+      box-shadow: 0 0 65px rgba(255, 255, 255, 1), 0 0 110px rgba(236, 239, 241, 0.6);
       animation: none;
     }
     
     .planet.active {
       background: var(--silver-light);
-      box-shadow: 0 0 70px rgba(255, 255, 255, 1), 0 0 110px rgba(236, 239, 241, 0.7);
+      box-shadow: 0 0 75px rgba(255, 255, 255, 1), 0 0 120px rgba(236, 239, 241, 0.7);
       transform: scale(1.08);
     }
     
@@ -269,55 +271,55 @@
     .planet-1 {
       top: 50%;
       left: 50%;
-      margin-left: -60px;
-      margin-top: -410px;
+      margin-left: -67.5px;
+      margin-top: -475px;
     }
     
     .planet-2 {
       top: 50%;
       left: 50%;
-      margin-left: 260px;
-      margin-top: -230px;
+      margin-left: 285px;
+      margin-top: -270px;
     }
     
     .planet-3 {
       top: 50%;
       left: 50%;
-      margin-left: 260px;
-      margin-top: 110px;
+      margin-left: 285px;
+      margin-top: 135px;
     }
     
     .planet-4 {
       top: 50%;
       left: 50%;
-      margin-left: -60px;
-      margin-top: 290px;
+      margin-left: -67.5px;
+      margin-top: 340px;
     }
     
     .planet-5 {
       top: 50%;
       left: 50%;
-      margin-left: -380px;
-      margin-top: 110px;
+      margin-left: -420px;
+      margin-top: 135px;
     }
     
     .planet-6 {
       top: 50%;
       left: 50%;
-      margin-left: -380px;
-      margin-top: -230px;
+      margin-left: -420px;
+      margin-top: -270px;
     }
     
     @media (max-width: 900px) {
-      body { padding-top: 90px; }
-      .header h1 { font-size: 32px; }
+      body { padding-top: 95px; }
+      .header h1 { font-size: 34px; }
       .orbital-container { width: 95vw; height: auto; min-height: 70vh; }
       .orbit { display: none; }
       .central-sun {
         position: relative;
         width: 90vw;
         height: auto;
-        min-height: 350px;
+        min-height: 360px;
         border-radius: 16px;
         margin-bottom: 20px;
         transform: none;
@@ -327,12 +329,13 @@
       .planet {
         position: relative !important;
         width: 44vw;
-        height: 80px;
+        height: 85px;
         border-radius: 12px;
         margin: 5px !important;
         top: auto !important;
         left: auto !important;
       }
+      .planet-text { font-size: 13px; }
       .mobile-planets {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -385,11 +388,11 @@
   
   <div class="header">
     <h1>POLITICS</h1>
-    <div class="subtitle">Version 1: Classic Rings</div>
+    <div class="subtitle">Version 2: Bold Rings</div>
   </div>
   
   <div class="orbital-container">
-    <!-- VISIBLE ROTATING ORBITAL RINGS -->
+    <!-- THICK BOLD ROTATING ORBITAL RINGS -->
     <div class="orbit orbit-1"></div>
     <div class="orbit orbit-2"></div>
     <div class="orbit orbit-3"></div>
@@ -433,8 +436,8 @@
   </div>
 
   <div class="version-nav">
-    <a href="orbital-v1.html" class="current">Version 1</a>
-    <a href="orbital-v2.html">Version 2</a>
+    <a href="orbital-v1.html">Version 1</a>
+    <a href="orbital-v2.html" class="current">Version 2</a>
     <a href="orbital-v3.html">Version 3</a>
   </div>
   
