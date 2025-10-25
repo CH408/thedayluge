@@ -1,616 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Politics - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --silver-white: #ECEFF1;
-      --silver-white-light: #F7F9FB;
-      --ink: #111;
-      --black-bg: #000000;
-      --dark-gray: #111111;
-      --gray: #333333;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--silver-white);
-      line-height: 1.4;
-      background: var(--black-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 20px;
-    }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(236,239,241,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-    body::after {
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-    @keyframes edge-glow {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
-    }
-    .header {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
-    }
-    .header h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 32px;
-      margin-bottom: 8px;
-      animation: title-pulse 8s ease-in-out infinite;
-    }
-    @keyframes title-pulse {
-      0% { color: var(--silver-white); text-shadow: 0 0 15px var(--silver-white), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { color: var(--silver-white-light); text-shadow: 0 0 20px var(--silver-white-light), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { color: var(--silver-white); text-shadow: 0 0 15px var(--silver-white), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .layout-container {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      height: 750px;
-      margin: 40px auto 0;
-      z-index: 5;
-    }
-    .central-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 480px;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--silver-white);
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      z-index: 15;
-      box-shadow: 0 0 30px rgba(236,239,241,0.5), 0 4px 12px rgba(0,0,0,0.8);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(236,239,241,0.5), 0 4px 12px rgba(0,0,0,0.8); }
-      50% { box-shadow: 0 0 40px rgba(236,239,241,0.8), 0 6px 16px rgba(236,239,241,0.4); }
-    }
-    .central-title {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--silver-white);
-      text-shadow: 0 0 5px rgba(236,239,241,0.3);
-      margin-bottom: 10px;
-      border-bottom: 1px solid var(--silver-white);
-      padding-bottom: 6px;
-      flex-shrink: 0;
-    }
-    .content-links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      flex: 1;
-      max-height: calc(100% - 38px);
-      overflow-y: auto;
-    }
-    .content-link {
-      display: flex;
-      align-items: flex-start;
-      padding: 7px 9px;
-      border: 1px solid rgba(236,239,241,0.3);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-size: 15px;
-      line-height: 1.2;
-      min-height: 0;
-      overflow-wrap: anywhere;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: unroll 0.5s ease-out forwards;
-    }
-    @keyframes unroll {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .content-link:hover {
-      background: rgba(236,239,241,0.2);
-      border-color: var(--silver-white);
-      box-shadow: 0 0 10px rgba(236,239,241,0.4);
-    }
-    .link-title {
-      color: var(--silver-white);
-      text-decoration: none;
-      cursor: pointer;
-      width: 100%;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-    }
-    .loading-indicator {
-      text-align: center;
-      font-size: 15px;
-      color: var(--silver-white);
-      padding: 10px;
-    }
-    .perimeter-box {
-      position: absolute;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--silver-white);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(236,239,241,0.4);
-      animation: electron-pulse 2s ease-in-out infinite;
-      color: var(--silver-white);
-      text-shadow: 0 0 5px rgba(236,239,241,0.3);
-      padding: 5px;
-    }
-    @keyframes electron-pulse {
-      0%, 100% { 
-        box-shadow: 0 0 20px rgba(236,239,241,0.4); 
-        border-color: var(--silver-white); 
-      }
-      50% { 
-        box-shadow: 0 0 30px rgba(236,239,241,0.8); 
-        border-color: var(--silver-white-light); 
-      }
-    }
-    .perimeter-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(236,239,241,0.9);
-      background: var(--dark-gray);
-    }
-    .top-left-box {
-      top: 30px;
-      left: calc(50% - 245px);
-      width: 150px;
-      height: 60px;
-      font-size: 17px;
-    }
-    .top-middle-box {
-      top: 30px;
-      left: calc(50% - 75px);
-      width: 150px;
-      height: 60px;
-      font-size: 15px;
-      line-height: 1.2;
-      white-space: normal;
-    }
-    .top-right-box {
-      top: 30px;
-      left: calc(50% + 95px);
-      width: 150px;
-      height: 60px;
-      font-size: 17px;
-    }
-    .bottom-left-box {
-      bottom: 30px;
-      left: calc(50% - 245px);
-      width: 150px;
-      height: 60px;
-      font-size: 15px;
-    }
-    .bottom-middle-box {
-      bottom: 30px;
-      left: calc(50% - 75px);
-      width: 150px;
-      height: 60px;
-      font-size: 15px;
-      line-height: 1.2;
-      white-space: normal;
-    }
-    .bottom-right-box {
-      bottom: 30px;
-      left: calc(50% + 95px);
-      width: 150px;
-      height: 60px;
-      font-size: 15px;
-    }
-    .home-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--black-bg);
-      color: var(--silver-white);
-      border: 2px solid var(--silver-white);
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 13px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px rgba(236,239,241,0.3);
-      box-shadow: 0 0 10px rgba(236,239,241,0.3);
-      z-index: 20;
-    }
-    .home-btn:hover {
-      background: var(--dark-gray);
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(236,239,241,0.6);
-    }
-    #particle-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-    @media (max-width: 900px) {
-      .layout-container { max-width: 90%; height: 650px; }
-      .central-content { width: 420px; height: 420px; padding: 12px; }
-      .central-title { font-size: 18px; margin-bottom: 10px; }
-      .content-links { gap: 16px; }
-      .content-link { font-size: 13px; padding: 5px 7px; line-height: 1.2; }
-      .loading-indicator { font-size: 13px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 120px;
-        height: 50px;
-        font-size: 13px;
-      }
-      .top-middle-box { font-size: 11px; }
-      .top-left-box { top: 20px; left: calc(50% - 195px); }
-      .top-middle-box { top: 20px; left: calc(50% - 60px); }
-      .top-right-box { top: 20px; left: calc(50% + 75px); }
-      .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
-      .bottom-middle-box { bottom: 20px; left: calc(50% - 60px); }
-      .bottom-right-box { bottom: 20px; left: calc(50% + 75px); }
-      .home-btn { font-size: 11px; }
-    }
-    @media (max-width: 600px) {
-      .layout-container { height: 600px; }
-      .central-content { width: 340px; height: 360px; padding: 10px; }
-      .central-title { font-size: 14px; margin-bottom: 8px; }
-      .content-links { gap: 14px; }
-      .content-link { font-size: 11px; padding: 4px 6px; line-height: 1.2; }
-      .loading-indicator { font-size: 11px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 100px;
-        height: 45px;
-        font-size: 11px;
-      }
-      .top-middle-box { font-size: 9px; }
-      .top-left-box { top: 15px; left: calc(50% - 160px); }
-      .top-middle-box { top: 15px; left: calc(50% - 50px); }
-      .top-right-box { top: 15px; left: calc(50% + 60px); }
-      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
-      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
-      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
-      .header h1 { font-size: 28px; }
-      .home-btn { font-size: 9px; }
-    }
-  </style>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Orbital v7 - Smooth Glowing Rings</title>
+ <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+ <style>
+ :root {
+ --silver-white: #ECEFF1;
+ --silver-light: #F7F9FB;
+ --silver-medium: #CFD8DC;
+ --glow: rgba(236, 239, 241, 0.8);
+ }
+ 
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+ body {
+ font-family: 'Special Elite', monospace;
+ background: #000;
+ color: var(--silver-white);
+ min-height: 100vh;
+ overflow-x: hidden;
+ position: relative;
+ padding-top: 155px;
+ padding-bottom: 80px;
+ }
+ 
+ .background-canvas {
+ position: fixed;
+ top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+ }
+ 
+ .header {
+ text-align: center;
+ padding: 26px 20px 22px;
+ position: fixed;
+ top: 0; left: 0; right: 0; z-index: 100;
+ background: linear-gradient(to bottom, #000 70%, rgba(0,0,0,0.95) 85%, rgba(0,0,0,0.7) 95%, transparent 100%);
+ }
+ 
+ .header h1 {
+ font-size: 44px;
+ text-transform: uppercase;
+ color: var(--silver-white);
+ text-shadow: 0 0 25px var(--silver-white);
+ margin-bottom: 6px;
+ }
+ 
+ .header .subtitle {
+ font-size: 13px;
+ color: var(--silver-medium);
+ text-transform:: uppercase;
+ letter-spacing: 2px;
+ }
+ 
+ .orbital-container {
+ position: relative;
+ width: 750px;
+ height: 750px;
+ margin: 0 auto;
+ z-index: 5;
+ }
+ 
+ /* SMOOTH GLOWING ORBITAL RINGS */
+ .orbit {
+ position: absolute;
+ top: 50%; left: 50%;
+ transform: translate(-50%, -50%);
+ border: 2px solid transparent;
+ border-radius: 50%;
+ opacity: 0.9;
+ background: conic-gradient(from 0deg, transparent, var(--glow), transparent);
+ box-shadow: 
+ 0 0 30px var(--glow),
+ 0 0 60px rgba(236,239,241,0.4),
+ inset 0 0 20px rgba(236,239,241,0.2);
+ animation: orbit-glow 6s ease-in-out infinite, orbit-rotate 20s linear infinite;
+ }
+ 
+ @keyframes orbit-glow {
+ 0%, 100% { 
+ box-shadow: 0 0 30px var(--glow), 0 0 60px rgba(236,239,241,0.4), inset 0 0 20px rgba(236,239,241,0.2);
+ }
+ 50% { 
+ box-shadow: 0 0 50px var(--glow), 0 0 100px rgba(236,239,241,0.6), inset 0 0 30px rgba(236,239,241,0.3);
+ }
+ }
+ 
+ @keyframes orbit-rotate {
+ from { transform: translate(-50%, -50%) rotate(0deg); }
+ to { transform: translate(-50%, -50%) rotate(360deg); }
+ }
+ 
+ .orbit-1 { width: 540px; height: 540px; animation-duration: 55s, 55s; }
+ .orbit-2 { width: 645px; height: 645px; animation-duration: 75s, 75s; }
+ .orbit-3 { width: 750px; height: 750px; animation-duration: 95s, 95s; }
+
+ .central-sun {
+ position: absolute;
+ top: 50%; left: 50%;
+ transform: translate(-50%, -50%);
+ width: 360px; height: 360px;
+ background: radial-gradient(circle at center, #1a1a1a 20%, #0a0a0a 100%);
+ border-radius: 50%;
+ box-shadow: 0 0 55px rgba(236,239,241,0.35);
+ padding: 32px 24px;
+ display: flex; flex-direction: column; overflow: hidden;
+ z-index: 20;
+ }
+ 
+ .sun-title {
+ font-size: 16px; text-transform: uppercase;
+ color: var(--silver-white); text-align: center;
+ margin-bottom: 15px; padding-bottom: 10px;
+ text-shadow: 0 0 15px var(--silver-white);
+ flex-shrink: 0; line-height: 1.3;
+ }
+ 
+ .sun-content {
+ flex: 1; position: relative; overflow: hidden;
+ mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+ -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+ }
+ 
+ .scroll-wrapper {
+ display: flex; flex-direction: column; gap: 10px;
+ animation: auto-scroll 24s linear infinite;
+ padding: 14px 0;
+ }
+ 
+ @keyframes auto-scroll {
+ 0% { transform: translateY(0); }
+ 100% { transform: translateY(-50%); }
+ }
+ 
+ .scroll-wrapper:hover { animation-play-state: paused; }
+ 
+ .content-link {
+ padding: 10px 13px;
+ background: rgba(236,239,241,0.08);
+ border-radius: 6px;
+ transition: all .25s ease;
+ cursor: pointer; flex-shrink: 0;
+ }
+ .content-link:hover {
+ background: rgba(236,239,241,0.18);
+ box-shadow: 0 0 18px rgba(236,239,241,0.35);
+ transform: translateX(5px);
+ }
+ 
+ .link-title { color: var(--silver-white); font-size: 12px; line-height: 1.5; text-decoration: none; display: block; }
+ .link-category{ font-size: 9px; color: var(--silver-medium); text-transform: uppercase; margin-top: 4px; letter-spacing: 1px; opacity: .8; }
+
+ /* 6 PLANETS ORBITING SMOOTHLY */
+ .planet {
+ position: absolute;
+ width: 128px; height: 128px;
+ border-radius: 50%;
+ background: #FFFFFF;
+ display: flex; align-items: center; justify-content: center;
+ cursor: pointer;
+ box-shadow: 0 4px 30px rgba(255,255,255,.5);
+ transition: all .3s cubic-bezier(.4,0,.2,1);
+ z-index: 15;
+ animation: planet-glow 3.2s ease-in-out infinite;
+ top: 50%; left: 50%;
+ transform: translate(-50%, -50%) translateY(-270px);
+ }
+
+ @keyframes planet-glow {
+ 0%,100% { box-shadow: 0 4px 30px rgba(255,255,255,.5); background:#FFF; transform:scale(1); }
+ 50% { box-shadow: 0 6px 50px rgba(255,255,255,.9), 0 12px 80px rgba(236,239,241,.5); background:#F7F9FB; transform:scale(1.05); }
+ }
+
+ .planet:hover {
+ transform: scale(1.15) !important;
+ box-shadow: 0 8px 60px rgba(255,255,255,1), 0 16px 110px rgba(236,239,241,.7);
+ animation: planet-glow 3.2s ease-in-out infinite;
+ }
+
+ .planet.active {
+ background: var(--silver-light);
+ box-shadow: 0 6px 60px rgba(255,255,255,1), 0 12px 110px rgba(236,239,241,.6);
+ transform: scale(1.08);
+ }
+
+ .planet-text {
+ position: absolute;
+ width: 100%; text-align: center;
+ font-size: 13px; color: #000; font-weight: bold;
+ text-transform: uppercase; line-height: 1.3; letter-spacing: .7px;
+ padding: 8px;
+ animation: counter-rotate 18s linear infinite;
+ }
+
+ @keyframes counter-rotate {
+ from { transform: rotate(0deg); }
+ to { transform: rotate(-360deg); }
+ }
+
+ /* ORBIT PATHS */
+ .planet-1 { animation: orbit-1 55s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+ .planet-2 { animation: orbit-2 75s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+ .planet-3 { animation: orbit-3 95s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+ .planet-4 { animation: orbit-3 95s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+ .planet-5 { animation: orbit-2 75s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+ .planet-6 { animation: orbit-1 55s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+
+ @keyframes orbit-1 {
+ 0% { transform: translate(-50%, -50%) translateY(-270px); }
+ 100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-270px); }
+ }
+ @keyframes orbit-2 {
+ 0% { transform: translate(-50%, -50%) translateY(-322.5px); }
+ 100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-322.5px); }
+ }
+ @keyframes orbit-3 {
+ 0% { transform: translate(-50%, -50%) translateY(-375px); }
+ 100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-375px); }
+ }
+
+ /* MOBILE */
+ @media (max-width: 900px) {
+ body { padding-top: 100px; }
+ .header h1 { font-size: 33px; }
+ .orbital-container { width: 95vw; height: 95vw; max-width: 600px; max-height: 600px; margin: 0 auto; }
+ .orbit { display: block !important; }
+ .orbit-1 { width: 65%; height: 65%; }
+ .orbit-2 { width: 80%; height: 80%; }
+ .orbit-3 { width: 95%; height: 95%; }
+
+ .central-sun {
+ width: 45%; height: 45%; min-height: 280px;
+ transform: translate(-50%, -50%);
+ top: 50%; left: 50%;
+ }
+
+ .planet {
+ width: 90px; height: 90px;
+ animation: planet-glow 3.2s ease-in-out infinite;
+ }
+
+ .planet-text { font-size: 11px; }
+
+ @keyframes orbit-1 {
+ 0% { transform: translate(-50%, -50%) translateY(-190px); }
+ 100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-190px); }
+ }
+ @keyframes orbit-2 {
+ 0% { transform: translate(-50%, -50%) translateY(-228px); }
+ 100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-228px); }
+ }
+ @keyframes orbit-3 {
+ 0% { transform: translate(-50%, -50%) translateY(-266px); }
+ 100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-266px); }
+ }
+ }
+ </style>
 </head>
 <body>
-  <div class="header"><h1>THE DAYLUGE - POLITICS</h1></div>
-  <a href="/" class="home-btn">← Back to Home</a>
-  <canvas id="particle-canvas"></canvas>
-  
-  <div class="layout-container">
-    <div class="central-content">
-      <div class="central-title">Latest Politics Content</div>
-      <div class="content-links">
-        <div class="loading-indicator">Loading...</div>
-      </div>
-    </div>
-    
-    <div class="perimeter-box top-left-box" onclick="window.location.href='./politics-podcasts.html'">
-      Podcasts
-    </div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='./politics-articles-longform.html'">
-      Articles & Longform
-    </div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='./politics-clips.html'">
-      Video Clips
-    </div>
-    
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='./politics-books.html'">
-      Books
-    </div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./politics-memes.html'">
-      Memes
-    </div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='./politics-tv-movies.html'">
-      Movies & TV
-    </div>
-  </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM content loaded, initializing politics page');
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const particlesArray = [];
-      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
-      
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.5 - 0.25;
-          this.speedY = Math.random() * 0.5 - 0.25;
-        }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.1;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        draw() {
-          ctx.fillStyle = 'rgba(236,239,241,0.6)';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-      
-      function init() {
-        console.log('Initializing particle effect');
-        for (let i = 0; i < numberOfParticles; i++) {
-          particlesArray.push(new Particle());
-        }
-      }
-      
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1);
-            i--;
-            particlesArray.push(new Particle());
-          }
-        }
-        requestAnimationFrame(animate);
-      }
-      
-      init();
-      animate();
-      
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        init();
-      });
-      
-      async function loadPoliticsContent() {
-        const contentLinksContainer = document.querySelector('.content-links');
-        if (!contentLinksContainer) {
-          console.error('Content links container not found');
-          return;
-        }
-        
-        // Show loading indicator
-        contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        
-        try {
-          console.log('Attempting to fetch ./politics-links.txt');
-          // Add cache-busting query parameter
-          const response = await fetch(`./politics-links.txt?_=${new Date().getTime()}`);
-          console.log('Fetch response:', response.ok, response.status);
-          if (!response.ok) {
-            throw new Error(`Fetch failed with status ${response.status}`);
-          }
-          const text = await response.text();
-          console.log('Fetched text, length:', text.length);
-          
-          // Cache the content
-          localStorage.setItem('politics-links', text);
-          
-          const lines = text.trim().split('\n').filter(line => line.trim());
-          console.log('Parsed lines:', lines.length);
-          
-          const entries = lines.map((line, index) => {
-            const parts = line.split('|');
-            if (parts.length < 3) {
-              console.warn(`Invalid entry at line ${index + 1}: ${line}`);
-              return null;
-            }
-            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
-            return {
-              title: cleanTitle,
-              link: parts[1].trim(),
-              category: parts[2].trim().toLowerCase()
-            };
-          }).filter(entry => entry !== null);
-          
-          console.log('Parsed entries:', entries.length);
-          
-          // Take first 8 entries
-          const latest8 = entries.slice(0, 8);
-          
-          // Clear loading indicator
-          contentLinksContainer.innerHTML = '';
-          
-          // Display entries
-          const displayEntries = [...latest8];
-          if (displayEntries.length === 0) {
-            console.log('No valid entries found, using cached content or error message');
-            const cached = localStorage.getItem('politics-links');
-            if (cached) {
-              const cachedLines = cached.trim().split('\n').filter(line => line.trim());
-              const cachedEntries = cachedLines.map((line, index) => {
-                const parts = line.split('|');
-                if (parts.length < 3) return null;
-                const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
-                return {
-                  title: cleanTitle,
-                  link: parts[1].trim(),
-                  category: parts[2].trim().toLowerCase()
-                };
-              }).filter(entry => entry !== null).slice(0, 8);
-              displayEntries.push(...cachedEntries);
-            }
-            if (displayEntries.length === 0) {
-              displayEntries.push({
-                title: 'No politics content available. Please try again later.',
-                link: '#',
-                category: 'error'
-              });
-            }
-          }
-          
-          while (displayEntries.length < 8) {
-            displayEntries.push({
-              title: 'No additional content available',
-              link: '#',
-              category: 'placeholder'
-            });
-          }
-          
-          console.log('Display entries:', displayEntries.length);
-          
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.style.animationDelay = `${index * 0.1}s`;
-            linkElement.innerHTML = `
-              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
-            `;
-            linkElement.addEventListener('click', (e) => {
-              if (entry.link === '#') e.preventDefault();
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
-          
-          console.log('Loaded', entries.length, 'politics entries from politics-links.txt');
-          console.log('Displaying', displayEntries.length, 'entries in central box');
-          
-        } catch (error) {
-          console.error('Error loading politics-links.txt:', error.message);
-          contentLinksContainer.innerHTML = '';
-          
-          // Try cached content
-          const cached = localStorage.getItem('politics-links');
-          if (cached) {
-            console.log('Using cached content');
-            const cachedLines = cached.trim().split('\n').filter(line => line.trim());
-            const cachedEntries = cachedLines.map((line, index) => {
-              const parts = line.split('|');
-              if (parts.length < 3) return null;
-              const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
-              return {
-                title: cleanTitle,
-                link: parts[1].trim(),
-                category: parts[2].trim().toLowerCase()
-              };
-            }).filter(entry => entry !== null).slice(0, 8);
-            
-            if (cachedEntries.length > 0) {
-              const displayEntries = [...cachedEntries];
-              while (displayEntries.length < 8) {
-                displayEntries.push({
-                  title: 'No additional content available',
-                  link: '#',
-                  category: 'placeholder'
-                });
-              }
-              displayEntries.forEach((entry, index) => {
-                const linkElement = document.createElement('div');
-                linkElement.className = 'content-link';
-                linkElement.style.animationDelay = `${index * 0.1}s`;
-                linkElement.innerHTML = `
-                  <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
-                `;
-                linkElement.addEventListener('click', (e) => {
-                  if (entry.link === '#') e.preventDefault();
-                });
-                contentLinksContainer.appendChild(linkElement);
-              });
-              return;
-            }
-          }
-          
-          // Fallback to error message
-          console.log('Displaying error message due to fetch failure');
-          const displayEntries = [{
-            title: 'Error loading content. Please try again later.',
-            link: '#',
-            category: 'error'
-          }];
-          while (displayEntries.length < 8) {
-            displayEntries.push({
-              title: 'No additional content available',
-              link: '#',
-              category: 'placeholder'
-            });
-          }
-          displayEntries.forEach((entry, index) => {
-            const linkElement = document.createElement('div');
-            linkElement.className = 'content-link';
-            linkElement.style.animationDelay = `${index * 0.1}s`;
-            linkElement.innerHTML = `
-              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
-            `;
-            linkElement.addEventListener('click', (e) => {
-              if (entry.link === '#') e.preventDefault();
-            });
-            contentLinksContainer.appendChild(linkElement);
-          });
-        }
-      }
-      
-      loadPoliticsContent();
-    });
-  </script>
+ <canvas class="background-canvas" id="starfield"></canvas>
+ 
+ <div class="header">
+ <h1>POLITICS</h1>
+ <div class="subtitle">Version 7: Smooth Glowing Rings</div>
+ </div>
+ 
+ <div class="orbital-container">
+ <div class="orbit orbit-1"></div>
+ <div class="orbit orbit-2"></div>
+ <div class="orbit orbit-3"></div>
+ 
+ <div class="central-sun">
+ <div class="sun-title">Latest Politics</div>
+ <div class="sun-content">
+ <div class="scroll-wrapper" id="scrollWrapper"></div>
+ </div>
+ </div>
+ 
+ <div class="desktop-planets">
+ <div class="planet planet-1" data-category="podcasts">
+ <div class="planet-text">PODCASTS</div>
+ </div>
+ <div class="planet planet-2" data-category="video clips">
+ <div class="planet-text">VIDEO CLIPS</div>
+ </div>
+ <div class="planet planet-3" data-category="essays & opinion">
+ <div class="planet-text">ESSAYS & OPINION</div>
+ </div>
+ <div class="planet planet-4" data-category="books & movies">
+ <div class="planet-text">BOOKS & MOVIES</div>
+ </div>
+ <div class="planet planet-5" data-category="memes">
+ <div class="planet-text">MEMES</div>
+ </div>
+ <div class="planet planet-6" data-category="surprise">
+ <div class="planet-text">SURPRISE ME</div>
+ </div>
+ </div>
+ </div>
+
+ <script>
+ const canvas = document.getElementById('starfield');
+ const ctx = canvas.getContext('2d');
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
+ 
+ const stars = Array.from({length:150}, () => ({
+ x: Math.random()*canvas.width,
+ y: Math.random()*canvas.height,
+ size: Math.random()*1.2+0.3,
+ brightness: Math.random()*0.6+0.4
+ }));
+ 
+ function animateStars() {
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ stars.forEach(s => {
+ s.brightness += (Math.random()-0.5)*0.08;
+ s.brightness = Math.max(0.3, Math.min(1, s.brightness));
+ ctx.fillStyle = `rgba(236,239,241,${s.brightness})`;
+ ctx.beginPath();
+ ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+ ctx.fill();
+ });
+ requestAnimationFrame(animateStars);
+ }
+ animateStars();
+ 
+ window.addEventListener('resize', () => {
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
+ });
+ 
+ const allContent = [
+ {title:"Senate Passes Bipartisan Infrastructure Bill in Historic Vote",category:"podcasts",link:"#"},
+ {title:"Documentary: Inside the Campaign Trail - Behind the Scenes",category:"video clips",link:"#"},
+ {title:"Op-Ed: Why Democracy Needs Stronger Civic Education",category:"essays & opinion",link:"#"},
+ {title:"Book Review: 'The New Populism' Examines Global Political Shifts",category:"books & movies",link:"#"},
+ {title:"Political Cartoon Goes Viral: Capitol Chaos Edition",category:"memes",link:"#"},
+ {title:"Breaking: Supreme Court Announces Major Ruling on Voting Rights",category:"podcasts",link:"#"},
+ {title:"Analysis: How Social Media Changed Political Campaigns Forever",category:"essays & opinion",link:"#"},
+ {title:"Exclusive Interview: Governor Discusses Climate Policy Priorities",category:"video clips",link:"#"}
+ ];
+ 
+ function displayContent(cat='all'){
+ const container = document.getElementById('scrollWrapper');
+ const title = document.querySelector('.sun-title');
+ const list = cat==='all' ? allContent.slice(0,5) : allContent.filter(i=>i.category===cat).slice(0,5);
+ title.textContent = cat==='all' ? 'Latest Politics' : cat.toUpperCase();
+ const dup = [...list,...list];
+ container.innerHTML='';
+ dup.forEach(i=>{
+ const d=document.createElement('div');
+ d.className='content-link';
+ d.innerHTML=`<a href="${i.link}" class="link-title">${i.title}</a><div class="link-category">${i.category}</div>`;
+ container.appendChild(d);
+ });
+ }
+ 
+ document.querySelectorAll('.planet').forEach(p=>{
+ p.addEventListener('click',function(){
+ const c=this.getAttribute('data-category');
+ if(c==='surprise'){
+ const r=allContent.slice(0,5)[Math.floor(Math.random()*5)];
+ window.open(r.link,'_blank');
+ return;
+ }
+ document.querySelectorAll('.planet').forEach(x=>x.classList.remove('active'));
+ this.classList.add('active');
+ displayContent(c);
+ });
+ });
+ 
+ displayContent('all');
+ </script>
 </body>
 </html>
