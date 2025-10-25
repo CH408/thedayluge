@@ -21,7 +21,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      padding-top: 135px;
+      padding-top: 155px; /* Increased to prevent overlap */
       padding-bottom: 80px;
     }
     
@@ -114,24 +114,9 @@
       }
     }
     
-    .orbit-1 { 
-      width: 540px; 
-      height: 540px;
-      animation-duration: 55s;
-      border-width: 2px;
-    }
-    .orbit-2 { 
-      width: 645px; 
-      height: 645px;
-      animation-duration: 75s;
-      border-width: 2.5px;
-    }
-    .orbit-3 { 
-      width: 750px; 
-      height: 750px;
-      animation-duration: 95s;
-      border-width: 3px;
-    }
+    .orbit-1 { width: 540px; height: 540px; animation-duration: 55s; border-width: 2px; }
+    .orbit-2 { width: 645px; height: 645px; animation-duration: 75s; border-width: 2.5px; }
+    .orbit-3 { width: 750px; height: 750px; animation-duration: 95s; border-width: 3px; }
     
     .central-sun {
       position: absolute;
@@ -220,8 +205,8 @@
       letter-spacing: 1px;
       opacity: 0.8;
     }
-    
-    /* CRISP PULSING GLOWING WHITE PLANETS */
+
+    /* ENHANCED PULSING + SPINNING PLANETS */
     .planet {
       position: absolute;
       width: 128px;
@@ -236,20 +221,27 @@
       box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 15;
-      animation: planet-glow 3.2s ease-in-out infinite;
+      animation: planet-glow 3.2s ease-in-out infinite, planet-spin 18s linear infinite;
     }
-    
+
     @keyframes planet-glow {
       0%, 100% { 
         box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
         background: #FFFFFF;
+        transform: scale(1);
       }
       50% { 
-        box-shadow: 0 4px 50px rgba(255, 255, 255, 0.8), 0 8px 80px rgba(236, 239, 241, 0.4);
+        box-shadow: 0 6px 50px rgba(255, 255, 255, 0.9), 0 12px 80px rgba(236, 239, 241, 0.5);
         background: #F7F9FB;
+        transform: scale(1.05);
       }
     }
-    
+
+    @keyframes planet-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     .planet-text {
       text-align: center;
       font-size: 13px;
@@ -262,8 +254,8 @@
     }
     
     .planet:hover {
-      transform: scale(1.12);
-      box-shadow: 0 6px 50px rgba(255, 255, 255, 0.9), 0 12px 100px rgba(236, 239, 241, 0.5);
+      transform: scale(1.15) !important;
+      box-shadow: 0 8px 60px rgba(255, 255, 255, 1), 0 16px 110px rgba(236, 239, 241, 0.7);
       animation: none;
     }
     
@@ -272,52 +264,17 @@
       box-shadow: 0 6px 60px rgba(255, 255, 255, 1), 0 12px 110px rgba(236, 239, 241, 0.6);
       transform: scale(1.08);
     }
-    
-    /* Planet positions - NO OVERLAPS */
-    .planet-1 {
-      top: 50%;
-      left: 50%;
-      margin-left: -64px;
-      margin-top: -438px;
-    }
-    
-    .planet-2 {
-      top: 50%;
-      left: 50%;
-      margin-left: 270px;
-      margin-top: -248px;
-    }
-    
-    .planet-3 {
-      top: 50%;
-      left: 50%;
-      margin-left: 270px;
-      margin-top: 120px;
-    }
-    
-    .planet-4 {
-      top: 50%;
-      left: 50%;
-      margin-left: -64px;
-      margin-top: 310px;
-    }
-    
-    .planet-5 {
-      top: 50%;
-      left: 50%;
-      margin-left: -398px;
-      margin-top: 120px;
-    }
-    
-    .planet-6 {
-      top: 50%;
-      left: 50%;
-      margin-left: -398px;
-      margin-top: -248px;
-    }
-    
+
+    /* FIXED POSITIONS — NO OVERLAP WITH HEADER */
+    .planet-1 { top: 50%; left: 50%; margin-left: -64px; margin-top: -410px; } /* PODCASTS - lower */
+    .planet-2 { top: 50%; left: 50%; margin-left: 270px; margin-top: -248px; }
+    .planet-3 { top: 50%; left: 50%; margin-left: 270px; margin-top: 120px; }
+    .planet-4 { top: 50%; left: 50%; margin-left: -64px; margin-top: 310px; }
+    .planet-5 { top: 50%; left: 50%; margin-left: -398px; margin-top: 120px; }
+    .planet-6 { top: 50%; left: 50%; margin-left: -398px; margin-top: -248px; }
+
     @media (max-width: 900px) {
-      body { padding-top: 90px; }
+      body { padding-top: 100px; }
       .header h1 { font-size: 33px; }
       .orbital-container { width: 95vw; height: auto; min-height: 70vh; }
       .orbit { display: none; }
@@ -340,6 +297,7 @@
         margin: 5px !important;
         top: auto !important;
         left: auto !important;
+        animation: planet-glow 3.2s ease-in-out infinite;
       }
       .planet-text { font-size: 12px; }
       .mobile-planets {
@@ -530,7 +488,7 @@
     document.querySelectorAll('.planet').forEach(planet => {
       planet.addEventListener('click', function() {
         const category = this.getAttribute('data-category');
-        if (category === 'surprise') {
+        if  (category === 'surprise') {
           const recentFive = allContent.slice(0, 5);
           const random = recentFive[Math.floor(Math.random() * recentFive.length)];
           window.open(random.link, '_blank');
