@@ -5,7 +5,7 @@ Major White House Renovations Through History|https://www.history.com/articles/w
 9 Remarkable Facts About the US Navy|https://www.history.com/articles/us-navy-history-facts|art-long
 Classroom to Carnage: West Point Rivals Clash in Civil War Defeat|https://www.military.com/daily-news/opinions/civil-war-battle-where-west-point-professor-defeated-his-confederate-student.html|art-long
 Today in 1776: Edward Gibbon Published First Volume of 'The Decline and Fall of the Roman Empire'|https://x.com/HistoryNutOTD/status/1891497664526623163|art-long
-Watch a Saddam Hussein Purge Unfold Live on Video|https://www.instagram.com/p/DAG0Ug-pMsh//clips
+Watch a Saddam Hussein Purge Unfold Live on Video|https://www.instagram.com/p/DAG0Ug-pMsh/|clips
 A Day in the Life of a World War I Soldier|https://youtu.be/bSPh5Jgx_wY?si=veZgrRVSMMzbN2RR|clips
 Post-WWI Peace Proposal: Europe’s Unexecuted Pizza Pie State|https://bigthink.com/strange-maps/a-bizarre-peace-proposal-slice-europe-up-like-a-pie/|art-long
 How Britain's Tea Obsession Created The World's Fastest Sailing Ship|https://www.youtube.com/watch?v=4MHtDWTrm3Y|clips
@@ -15,7 +15,7 @@ Phoenicians: Ancient Mariners Who Challenged Rome’s Might|https://www.historye
 Kenya vs. Zambia: How History Fuels Election Violence|https://theconversation.com/how-history-explains-election-violence-kenya-and-zambia-tell-the-story-131405|art-long
 Oct. 5th in History: Truman Gives First-Ever Televised Presidential Speech|https://www.history.com/this-day-in-history/october-5/first-presidential-speech-on-tv|art-long
 How Vikings Conquered Eastern Europe Without Longships|https://www.historyextra.com/period/viking/longships-norse-dominate-eastern-europe/|art-long
-12,000-Year-Old Camels Carved in Saudi Desert Rewrite Human History|https://apnews.com/article/rock-art-saudi-arabia-desert-ab914512f46e80d722537f3d5506a616|art+long
+12,000-Year-Old Camels Carved in Saudi Desert Rewrite Human History|https://apnews.com/article/rock-art-saudi-arabia-desert-ab914512f46e80d722537f3d5506a616|art-long
 When a Secret President Ran the Country: Wilson’s Hidden 1919 Stroke|https://www.pbs.org/newshour/health/woodrow-wilson-stroke|art-long
 Franz Ferdinand and the Fall of Empires|https://www.nationalgeographic.com/history/article/franz-ferdinand-assassination-world-war-i|art-long
 Muir, Roosevelt, and the Making of Yosemite National Park|https://www.myyosemitepark.com/park/history/how-yosemite-became/|art-long
@@ -41,5 +41,5 @@ The Lost Cosmopolitan Legacy of the Levant|https://www.theamericanconservative.c
 1954: Bikini Atoll Nuclear Test 1000x Stronger Than Hiroshima|https://x.com/Rainmaker1973/status/1959655344709173469|art-long
 7 Brilliant Acts of Psychological Warfare in History|https://www.history.com/articles/brilliant-psyops-psychological-warfare|art-long
 How Did Moscow Become Europe's Biggest City?|https://unchartedterritories.tomaspueyo.com/p/why-is-moscow-so-weird|art-long
-Twilight of the House of Lords|https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-21139129&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa-21139129&mc_eid=f42f0d2b82|art-long
+Twilight of the House of Lords|https://crisismagazine.com/opinion/christendoms-last-gasp-the-twilight-of-the-house-of-lords?utm_source=Crisis+Magazine&utm_campaign=fb27a8ddfa-21139129&utm_medium=email&utm_term=0_a5a13625fd-fb27a8ddfa-21139129&mc_cid=fb27a8ddfa&mc_eid=f42f0d2b82|art-long
 Israel's 1996 'Clean Break Memo'|https://www.dougfeith.com/docs/Clean_Break.pdf|art-long
