@@ -21,6 +21,8 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
+      padding-top: 100px;
+      padding-bottom: 80px;
     }
     
     .background-canvas {
@@ -34,33 +36,35 @@
     
     .header {
       text-align: center;
-      padding: 15px 20px 10px;
-      position: relative;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
+      background: linear-gradient(to bottom, #000 60%, rgba(0,0,0,0.9) 80%, transparent 100%);
     }
     
     .header h1 {
-      font-size: 28px;
+      font-size: 42px;
       text-transform: uppercase;
       color: var(--silver-white);
-      text-shadow: 0 0 20px var(--silver-white);
-      margin-bottom: 5px;
+      text-shadow: 0 0 25px var(--silver-white);
+      margin-bottom: 8px;
       animation: title-pulse 3s ease-in-out infinite;
     }
     
     @keyframes title-pulse {
       0%, 100% { 
-        text-shadow: 0 0 20px var(--silver-white);
-        color: var(--silver-white);
+        text-shadow: 0 0 25px var(--silver-white);
       }
       50% { 
-        text-shadow: 0 0 30px var(--silver-light);
-        color: var(--silver-light);
+        text-shadow: 0 0 40px var(--silver-light);
       }
     }
     
     .header .subtitle {
-      font-size: 11px;
+      font-size: 13px;
       color: var(--silver-medium);
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -68,13 +72,13 @@
     
     .orbital-container {
       position: relative;
-      width: min(75vh, 750px);
-      height: min(75vh, 750px);
-      margin: 20px auto 0;
+      width: 700px;
+      height: 700px;
+      margin: 0 auto;
       z-index: 5;
     }
     
-    /* ROTATING orbit rings with visible markers - NO BORDERS */
+    /* Orbit rings - just markers */
     .orbit {
       position: absolute;
       top: 50%;
@@ -82,46 +86,35 @@
       transform: translate(-50%, -50%);
       border: none;
       border-radius: 50%;
-      opacity: 0.4;
-    }
-    
-    /* Visible markers on orbits to show rotation */
-    .orbit::before,
-    .orbit::after {
-      content: '';
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: var(--silver-white);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--silver-white);
     }
     
     .orbit::before {
-      top: -3px;
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--silver-white);
+      border-radius: 50%;
+      opacity: 0.4;
+      top: -4px;
       left: 50%;
-      margin-left: -3px;
-    }
-    
-    .orbit::after {
-      bottom: -3px;
-      left: 50%;
-      margin-left: -3px;
+      margin-left: -4px;
+      box-shadow: 0 0 12px var(--silver-white);
     }
     
     .orbit-1 { 
-      width: 550px; 
-      height: 550px;
+      width: 500px; 
+      height: 500px;
       animation: rotate-orbit 60s linear infinite;
     }
     .orbit-2 { 
-      width: 650px; 
-      height: 650px;
+      width: 600px; 
+      height: 600px;
       animation: rotate-orbit 80s linear infinite;
     }
     .orbit-3 { 
-      width: 750px; 
-      height: 750px;
+      width: 700px; 
+      height: 700px;
       animation: rotate-orbit 100s linear infinite;
     }
     
@@ -130,19 +123,19 @@
       to { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
-    /* Central sun - NO BORDER */
+    /* Central sun */
     .central-sun {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
+      width: 340px;
+      height: 340px;
       background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
       border: none;
       border-radius: 50%;
       box-shadow: 0 0 50px rgba(236, 239, 241, 0.3);
-      padding: 35px 25px;
+      padding: 30px 22px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -150,32 +143,31 @@
     }
     
     .sun-title {
-      font-size: 16px;
+      font-size: 15px;
       text-transform: uppercase;
       color: var(--silver-white);
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
       padding-bottom: 10px;
       text-shadow: 0 0 15px var(--silver-white);
       flex-shrink: 0;
       line-height: 1.3;
     }
     
-    /* Scrolling container */
     .sun-content {
       flex: 1;
       position: relative;
       overflow: hidden;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
     }
     
     .scroll-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       animation: auto-scroll 20s linear infinite;
-      padding: 10px 0;
+      padding: 12px 0;
     }
     
     @keyframes auto-scroll {
@@ -187,9 +179,8 @@
       animation-play-state: paused;
     }
     
-    /* Content links - NO BORDERS */
     .content-link {
-      padding: 9px 11px;
+      padding: 10px 12px;
       background: rgba(236, 239, 241, 0.08);
       border: none;
       border-radius: 6px;
@@ -206,116 +197,118 @@
     
     .link-title {
       color: var(--silver-white);
-      font-size: 11px;
-      line-height: 1.4;
+      font-size: 12px;
+      line-height: 1.5;
       text-decoration: none;
       display: block;
     }
     
     .link-category {
-      font-size: 8px;
+      font-size: 9px;
       color: var(--silver-medium);
       text-transform: uppercase;
-      margin-top: 3px;
+      margin-top: 4px;
       letter-spacing: 1px;
     }
     
-    /* SOLID WHITE PLANETS with BLACK TEXT */
+    /* PULSING GLOWING WHITE PLANETS - BIGGER TEXT */
     .planet {
       position: absolute;
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      background: var(--silver-white);
+      background: #FFFFFF;
       border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 0 25px rgba(236, 239, 241, 0.5);
-      transition: all 0.4s ease;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
       z-index: 15;
-      animation: planet-pulse 3s ease-in-out infinite;
+      animation: planet-glow 3s ease-in-out infinite;
     }
     
-    @keyframes planet-pulse {
+    @keyframes planet-glow {
       0%, 100% { 
-        transform: scale(1);
-        box-shadow: 0 0 25px rgba(236, 239, 241, 0.5);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+        background: #FFFFFF;
       }
       50% { 
-        transform: scale(1.05);
-        box-shadow: 0 0 35px rgba(236, 239, 241, 0.7);
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.9), 0 0 80px rgba(236, 239, 241, 0.5);
+        background: #F7F9FB;
       }
     }
     
     .planet-text {
       text-align: center;
-      font-size: 11px;
+      font-size: 13px;
       color: #000;
       font-weight: bold;
       text-transform: uppercase;
-      line-height: 1.2;
-      letter-spacing: 0.5px;
-      padding: 5px;
+      line-height: 1.3;
+      letter-spacing: 0.8px;
+      padding: 8px;
     }
     
     .planet:hover {
-      transform: scale(1.15) !important;
-      box-shadow: 0 0 50px var(--silver-white);
+      transform: scale(1.15);
+      box-shadow: 0 0 60px rgba(255, 255, 255, 1), 0 0 100px rgba(236, 239, 241, 0.6);
+      animation: none;
     }
     
     .planet.active {
       background: var(--silver-light);
-      box-shadow: 0 0 60px var(--silver-white);
+      box-shadow: 0 0 70px rgba(255, 255, 255, 1), 0 0 110px rgba(236, 239, 241, 0.7);
+      transform: scale(1.08);
     }
     
-    /* Planet positions */
+    /* Planet positions - WELL SPACED, NO OVERLAPS */
     .planet-1 {
       top: 50%;
       left: 50%;
-      margin-left: -55px;
-      margin-top: -430px;
+      margin-left: -60px;
+      margin-top: -410px;
     }
     
     .planet-2 {
       top: 50%;
       left: 50%;
-      margin-left: 275px;
-      margin-top: -242px;
+      margin-left: 260px;
+      margin-top: -230px;
     }
     
     .planet-3 {
       top: 50%;
       left: 50%;
-      margin-left: 275px;
-      margin-top: 132px;
+      margin-left: 260px;
+      margin-top: 110px;
     }
     
     .planet-4 {
       top: 50%;
       left: 50%;
-      margin-left: -55px;
-      margin-top: 320px;
+      margin-left: -60px;
+      margin-top: 290px;
     }
     
     .planet-5 {
       top: 50%;
       left: 50%;
-      margin-left: -385px;
-      margin-top: 132px;
+      margin-left: -380px;
+      margin-top: 110px;
     }
     
     .planet-6 {
       top: 50%;
       left: 50%;
-      margin-left: -385px;
-      margin-top: -242px;
+      margin-left: -380px;
+      margin-top: -230px;
     }
     
-    /* Mobile responsive */
     @media (max-width: 900px) {
-      .header h1 { font-size: 24px; }
+      body { padding-top: 80px; }
+      .header h1 { font-size: 32px; }
       .orbital-container { width: 95vw; height: auto; min-height: 70vh; }
       .orbit { display: none; }
       .central-sun {
@@ -332,7 +325,7 @@
       .planet {
         position: relative !important;
         width: 44vw;
-        height: 70px;
+        height: 80px;
         border-radius: 12px;
         margin: 5px !important;
         top: auto !important;
@@ -364,24 +357,24 @@
     }
 
     .version-nav a {
-      padding: 10px 20px;
-      background: rgba(236, 239, 241, 0.9);
+      padding: 12px 24px;
+      background: rgba(236, 239, 241, 0.95);
       color: #000;
       text-decoration: none;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: bold;
       transition: all 0.3s;
     }
 
     .version-nav a:hover {
-      background: var(--silver-white);
-      box-shadow: 0 0 20px var(--silver-white);
+      background: #FFFFFF;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
     }
 
     .version-nav a.current {
-      background: var(--silver-white);
-      box-shadow: 0 0 15px var(--silver-white);
+      background: #FFFFFF;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
     }
   </style>
 </head>
