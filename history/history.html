@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>History - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
- <style>
+  <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --gold: #FFD700;
@@ -405,4 +405,113 @@
         draw() {
           ctx.fillStyle = 'rgba(255,215,0,0.6)';
           ctx.beginPath();
-          ctx.arc(this.x, ...
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      
+      function init() {
+        console.log('Initializing particle effect');
+        for (let i = 0; i < numberOfParticles; i++) {
+          particlesArray.push(new Particle());
+        }
+      }
+      
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+            particlesArray.splice(i, 1);
+            i--;
+            particlesArray.push(new Particle());
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+      
+      init();
+      animate();
+      
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      });
+      
+      // === STANDARD CATEGORY MAPPING ===
+      const CATEGORIES = {
+        'art-long': 'Articles & Longform',
+        'clips': 'Video Clips',
+        'pods': 'Podcasts',
+        'books': 'Books',
+        'memes': 'Memes',
+        'tv-movies': 'TV & Movies'
+      };
+
+      // Load content from history-links.txt
+      async function loadHistoryContent() {
+        console.log('Starting to load history content');
+        const contentLinksContainer = document.querySelector('.content-links');
+        if (!contentLinksContainer) {
+          console.error('Content links container not found');
+          return;
+        }
+        
+        // Show loading
+        contentLinksContainer.innerHTML = '<div class="loading-indicator">Loading...</div>';
+        
+        try {
+          // FIXED: Correct path + cache buster
+          const cacheBuster = '?t=' + Date.now();
+          const response = await fetch('history-links.txt' + cacheBuster);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: File not found`);
+          }
+          
+          const text = await response.text();
+          const lines = text.trim().split('\n').filter(line => line.trim());
+          
+          const entries = lines.map((line, index) => {
+            const parts = line.split('|');
+            if (parts.length < 3) return null;
+            const cleanTitle = parts[0].trim().replace(/\s*\([^)]+\)\s*$/, '');
+            return {
+              title: cleanTitle,
+              link: parts[1].trim(),
+              category: parts[2].trim()
+            };
+          }).filter(entry => entry !== null);
+          
+          const latest8 = entries.slice(0, 8);
+          contentLinksContainer.innerHTML = '';
+          
+          latest8.forEach((entry, index) => {
+            const linkElement = document.createElement('div');
+            linkElement.className = 'content-link';
+            linkElement.style.animationDelay = `${index * 0.1}s`;
+            linkElement.innerHTML = `
+              <a href="${entry.link}" class="link-title" target="_blank">${entry.title}</a>
+            `;
+            contentLinksContainer.appendChild(linkElement);
+          });
+          
+          console.log('Loaded', entries.length, 'entries. Showing first 8.');
+          
+        } catch (error) {
+          console.error('Failed to load history-links.txt:', error);
+          contentLinksContainer.innerHTML = `
+            <div class="content-link" style="animation: none; opacity: 1; border-color: #ff4444;">
+              <a class="link-title" style="color: #ff8888;">Error: Could not load content. Check file path.</a>
+            </div>
+          `;
+        }
+      }
+      
+      loadHistoryContent();
+    });
+  </script>
+</body>
+</html>
