@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orbital v5 - True Orbit + Horizontal Text</title>
+  <title>Orbital v6 - Perfect Orbit + Mobile</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -141,7 +141,7 @@
     .link-title   { color: var(--silver-white); font-size: 12px; line-height: 1.5; text-decoration: none; display: block; }
     .link-category{ font-size: 9px; color: var(--silver-medium); text-transform: uppercase; margin-top: 4px; letter-spacing: 1px; opacity: .8; }
 
-    /* TRUE ORBITAL MOTION + HORIZONTAL TEXT */
+    /* PLANETS WITH TRUE ORBIT + HORIZONTAL TEXT */
     .planet {
       position: absolute;
       width: 128px; height: 128px;
@@ -153,6 +153,9 @@
       transition: all .3s cubic-bezier(.4,0,.2,1);
       z-index: 15;
       animation: planet-glow 3.2s ease-in-out infinite;
+      /* Initial position at top of orbit */
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) translateY(-270px);
     }
 
     @keyframes planet-glow {
@@ -188,28 +191,28 @@
       to   { transform: rotate(-360deg); }
     }
 
-    /* ORBITAL PATH ANIMATION (planets move around rings) */
-    .planet-1 { animation: orbit-1-path 55s linear infinite, planet-glow 3.2s ease-in-out infinite; }
-    .planet-2 { animation: orbit-2-path 75s linear infinite, planet-glow 3.2s ease-in-out infinite; }
-    .planet-3 { animation: orbit-3-path 95s linear infinite, planet-glow 3.2s ease-in-out infinite; }
-    .planet-4 { animation: orbit-3-path 95s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
-    .planet-5 { animation: orbit-2-path 75s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
-    .planet-6 { animation: orbit-1-path 55s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+    /* ORBIT PATHS - ONE PER PLANET */
+    .planet-1 { animation: orbit-1 55s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+    .planet-2 { animation: orbit-2 75s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+    .planet-3 { animation: orbit-3 95s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+    .planet-4 { animation: orbit-3 95s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+    .planet-5 { animation: orbit-2 75s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+    .planet-6 { animation: orbit-1 55s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
 
-    @keyframes orbit-1-path {
+    @keyframes orbit-1 {
       0%   { transform: translate(-50%, -50%) translateY(-270px); }
       100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-270px); }
     }
-    @keyframes orbit-2-path {
+    @keyframes orbit-2 {
       0%   { transform: translate(-50%, -50%) translateY(-322.5px); }
       100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-322.5px); }
     }
-    @keyframes orbit-3-path {
+    @keyframes orbit-3 {
       0%   { transform: translate(-50%, -50%) translateY(-375px); }
       100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-375px); }
     }
 
-    /* MOBILE: FULL ORBITAL LAYOUT */
+    /* MOBILE: FULL ORBITAL */
     @media (max-width: 900px) {
       body { padding-top: 100px; }
       .header h1 { font-size: 33px; }
@@ -232,15 +235,15 @@
 
       .planet-text { font-size: 11px; }
 
-      @keyframes orbit-1-path {
+      @keyframes orbit-1 {
         0%   { transform: translate(-50%, -50%) translateY(-190px); }
         100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-190px); }
       }
-      @keyframes orbit-2-path {
+      @keyframes orbit-2 {
         0%   { transform: translate(-50%, -50%) translateY(-228px); }
         100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-228px); }
       }
-      @keyframes orbit-3-path {
+      @keyframes orbit-3 {
         0%   { transform: translate(-50%, -50%) translateY(-266px); }
         100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-266px); }
       }
@@ -252,7 +255,7 @@
   
   <div class="header">
     <h1>POLITICS</h1>
-    <div class="subtitle">Version 5: True Orbit + Horizontal Text</div>
+    <div class="subtitle">Version 6: Perfect Orbit + Mobile</div>
   </div>
   
   <div class="orbital-container">
