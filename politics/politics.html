@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orbital - Stationary Headlines - THE DAYLUGE</title>
+  <title>Orbital - Scrolling Headlines - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -193,15 +193,37 @@
       }
     }
     
+    /* Scrolling container */
     .sun-content {
       flex: 1;
+      position: relative;
+      overflow: hidden;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    }
+    
+    .scroll-wrapper {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      overflow: visible;
+      animation: auto-scroll 20s linear infinite;
+      padding: 20px 0;
     }
     
-    /* Stationary headlines */
+    @keyframes auto-scroll {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-50%);
+      }
+    }
+    
+    .scroll-wrapper:hover {
+      animation-play-state: paused;
+    }
+    
+    /* Scrolling headlines */
     .content-link {
       padding: 11px 14px;
       background: rgba(236, 239, 241, 0.05);
@@ -210,6 +232,7 @@
       transition: all 0.3s ease;
       cursor: pointer;
       animation: item-glow 3s ease-in-out infinite;
+      flex-shrink: 0;
     }
     
     @keyframes item-glow {
@@ -399,7 +422,7 @@
   
   <div class="header">
     <h1>POLITICS</h1>
-    <div class="subtitle">🪐 Orbital • Stationary Headlines</div>
+    <div class="subtitle">🪐 Orbital • Auto-Scrolling Headlines</div>
   </div>
   
   <div class="orbital-container">
@@ -411,8 +434,10 @@
     <!-- Central sun with content -->
     <div class="central-sun">
       <div class="sun-title">Latest Politics Content</div>
-      <div class="sun-content" id="sunContent">
-        <!-- 5 most recent headlines (stationary) -->
+      <div class="sun-content">
+        <div class="scroll-wrapper" id="scrollWrapper">
+          <!-- 5 most recent headlines (auto-scrolling, duplicated for seamless loop) -->
+        </div>
       </div>
     </div>
     
@@ -501,7 +526,7 @@
     ];
     
     function displayContent(category = 'all') {
-      const container = document.getElementById('sunContent');
+      const container = document.getElementById('scrollWrapper');
       const titleEl = document.querySelector('.sun-title');
       
       // Show only 5 most recent
@@ -513,12 +538,14 @@
         ? 'Latest Politics Content' 
         : category.toUpperCase();
       
+      // Duplicate content for seamless scrolling
+      const duplicatedContent = [...filtered, ...filtered];
+      
       container.innerHTML = '';
       
-      filtered.forEach((item, index) => {
+      duplicatedContent.forEach((item, index) => {
         const linkDiv = document.createElement('div');
         linkDiv.className = 'content-link';
-        linkDiv.style.animationDelay = `${index * 0.2}s`;
         linkDiv.innerHTML = `
           <a href="${item.link}" class="link-title">${item.title}</a>
           <div class="link-category">${item.category}</div>
