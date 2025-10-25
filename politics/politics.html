@@ -1,207 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Latest Politics • Grok</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orbital v3 - Elegant Dashed Rings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .glass { background: rgba(30, 30, 30, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .dot { height: 6px; width: 6px; background-color: #10b981; border-radius: 50%; display: inline-block; }
-    .sidebar-link { @apply text-gray-400 hover:text-white transition-colors; }
-    .sidebar-link.active { @apply text-white font-medium; }
+    :root {
+      --silver-white: #ECEFF1;
+      --silver-light: #F7F9FB;
+      --silver-medium: #CFD8DC;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Special Elite', monospace;
+      background: #000;
+      color: var(--silver-white);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      padding-top: 155px; /* Increased to prevent overlap */
+      padding-bottom: 80px;
+    }
+    
+    .background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 26px 20px 22px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: linear-gradient(to bottom, #000 70%, rgba(0,0,0,0.95) 85%, rgba(0,0,0,0.7) 95%, transparent 100%);
+    }
+    
+    .header h1 {
+      font-size: 44px;
+      text-transform: uppercase;
+      color: var(--silver-white);
+      text-shadow: 0 0 25px var(--silver-white);
+      margin-bottom: 6px;
+    }
+    
+    .header .subtitle {
+      font-size: 13px;
+      color: var(--silver-medium);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .orbital-container {
+      position: relative;
+      width: 750px;
+      height: 750px;
+      margin: 0 auto;
+      z-index: 5;
+    }
+    
+    /* ELEGANT DASHED PULSING ROTATING ORBITAL RINGS */
+    .orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px dashed var(--silver-white);
+      border-radius: 50%;
+      opacity: 0.65;
+      box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
+      animation: orbit-elegant-rotate 6s linear infinite;
+    }
+    
+    @keyframes orbit-elegant-rotate {
+      0% { 
+        transform: translate(-50%, -50%) rotate(0deg);
+        border-color: var(--silver-white);
+        opacity: 0.65;
+        box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
+      }
+      25% { 
+        transform: translate(-50%, -50%) rotate(90deg);
+        border-color: var(--silver-light);
+        opacity: 0.8;
+        box-shadow: 0 0 28px rgba(236, 239, 241, 0.5);
+      }
+      50% { 
+        transform: translate(-50%, -50%) rotate(180deg);
+        border-color: var(--silver-white);
+        opacity: 0.65;
+        box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
+      }
+      75% { 
+        transform: translate(-50%, -50%) rotate(270deg);
+        border-color: var(--silver-light);
+        opacity: 0.8;
+        box-shadow: 0 0 28px rgba(236, 239, 241, 0.5);
+      }
+      100% { 
+        transform: translate(-50%, -50%) rotate(360deg);
+        border-color: var(--silver-white);
+        opacity: 0.65;
+        box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
+      }
+    }
+    
+    .orbit-1 { width: 540px; height: 540px; animation-duration: 55s; border-width: 2px; }
+    .orbit-2 { width: 645px; height: 645px; animation-duration: 75s; border-width: 2.5px; }
+    .orbit-3 { width: 750px; height: 750px; animation-duration: 95s; border-width: 3px; }
+    
+    .central-sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle at center, #1a1a1a 20%, #0a0a0a 100%);
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 0 55px rgba(236, 239, 241, 0.35);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 20;
+    }
+    
+    .sun-title {
+      font-size: 16px;
+      text-transform: uppercase;
+      color: var(--silver-white);
+      text-align: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      text-shadow: 0 0 15px var(--silver-white);
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+    
+    .sun-content {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    }
+    
+    .scroll-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: auto-scroll 24s linear infinite;
+      padding: 14px 0;
+    }
+    
+    @keyframes auto-scroll {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    
+    .scroll-wrapper:hover {
+      animation-play-state: paused;
+    }
+    
+    .content-link {
+      padding: 10px 13px;
+      background: rgba(236, 239, 241, 0.08);
+      border: none;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    
+    .content-link:hover {
+      background: rgba(236, 239, 241, 0.18);
+      box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
+      transform: translateX(5px);
+    }
+    
+    .link-title {
+      color: var(--silver-white);
+      font-size: 12px;
+      line-height: 1.5;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .link-category {
+      font-size: 9px;
+      color: var(--silver-medium);
+      text-transform: uppercase;
+      margin-top: 4px;
+      letter-spacing: 1px;
+      opacity: 0.8;
+    }
+
+    /* ENHANCED PULSING + SPINNING PLANETS */
+    .planet {
+      position: absolute;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 15;
+      animation: planet-glow 3.2s ease-in-out infinite, planet-spin 18s linear infinite;
+    }
+
+    @keyframes planet-glow {
+      0%, 100% { 
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
+        background: #FFFFFF;
+        transform: scale(1);
+      }
+      50% { 
+        box-shadow: 0 6px 50px rgba(255, 255, 255, 0.9), 0 12px 80px rgba(236, 239, 241, 0.5);
+        background: #F7F9FB;
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes planet-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .planet-text {
+      text-align: center;
+      font-size: 13px;
+      color: #000;
+      font-weight: bold;
+      text-transform: uppercase;
+      line-height: 1.3;
+      letter-spacing: 0.7px;
+      padding: 8px;
+    }
+    
+    .planet:hover {
+      transform: scale(1.15) !important;
+      box-shadow: 0 8px 60px rgba(255, 255, 255, 1), 0 16px 110px rgba(236, 239, 241, 0.7);
+      animation: none;
+    }
+    
+    .planet.active {
+      background: var(--silver-light);
+      box-shadow: 0 6px 60px rgba(255, 255, 255, 1), 0 12px 110px rgba(236, 239, 241, 0.6);
+      transform: scale(1.08);
+    }
+
+    /* FIXED POSITIONS — NO OVERLAP WITH HEADER */
+    .planet-1 { top: 50%; left: 50%; margin-left: -64px; margin-top: -410px; } /* PODCASTS - lower */
+    .planet-2 { top: 50%; left: 50%; margin-left: 270px; margin-top: -248px; }
+    .planet-3 { top: 50%; left: 50%; margin-left: 270px; margin-top: 120px; }
+    .planet-4 { top: 50%; left: 50%; margin-left: -64px; margin-top: 310px; }
+    .planet-5 { top: 50%; left: 50%; margin-left: -398px; margin-top: 120px; }
+    .planet-6 { top: 50%; left: 50%; margin-left: -398px; margin-top: -248px; }
+
+    @media (max-width: 900px) {
+      body { padding-top: 100px; }
+      .header h1 { font-size: 33px; }
+      .orbital-container { width: 95vw; height: auto; min-height: 70vh; }
+      .orbit { display: none; }
+      .central-sun {
+        position: relative;
+        width: 90vw;
+        height: auto;
+        min-height: 350px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        transform: none;
+        top: auto;
+        left: auto;
+      }
+      .planet {
+        position: relative !important;
+        width: 44vw;
+        height: 82px;
+        border-radius: 12px;
+        margin: 5px !important;
+        top: auto !important;
+        left: auto !important;
+        animation: planet-glow 3.2s ease-in-out infinite;
+      }
+      .planet-text { font-size: 12px; }
+      .mobile-planets {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+      }
+    }
+    
+    .mobile-planets { display: none; }
+    
+    @media (max-width: 900px) {
+      .desktop-planets { display: none; }
+      .mobile-planets { display: grid; }
+    }
   </style>
 </head>
-<body class="bg-black text-white min-h-screen flex">
-  <!-- Sidebar -->
-  <aside class="hidden md:flex flex-col w-64 border-r border-gray-800 h-screen sticky top-0">
-    <div class="p-4">
-      <div class="flex items-center space-x-2 mb-8">
-        <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-green-600 rounded-lg"></div>
-        <span class="text-xl font-bold">Grok</span>
-      </div>
-      <nav class="space-y-1">
-        <a href="index.html" class="sidebar-link flex items-center space-x-3 py-2 px-3 rounded-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18M3 6h18M3 18h18"/></svg>
-          <span>Home</span>
-        </a>
-        <a href="#" class="sidebar-link flex items-center space-x-3 py-2 px-3 rounded-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
-          <span>New Chat</span>
-        </a>
-        <a href="#" class="sidebar-link flex items-center space-x-3 py-2 px-3 rounded-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>
-          <span>History</span>
-        </a>
-        <a href="#" class="sidebar-link flex items-center space-x-3 py-2 px-3 rounded-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V5z"/></svg>
-          <span>Saved</span>
-        </a>
-      </nav>
-    </div>
-    <div class="mt-auto p-4 border-t border-gray-800">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full"></div>
-        <div class="flex-1">
-          <p class="text-sm font-medium">John Doe</p>
-          <p class="text-xs text-gray-400">Premium User</p>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main Content -->
-  <div class="flex-1 flex flex-col h-screen overflow-y-auto scrollbar-hide">
-    <!-- Header -->
-    <header class="border-b border-gray-800 px-4 py-3 sticky top-0 backdrop-blur-lg bg-black bg-opacity-80 z-10">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <button class="md:hidden text-gray-400 hover:text-white">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-          </button>
-          <h1 class="text-xl font-semibold">Latest Politics</h1>
-        </div>
-        <div class="flex items-center space-x-3">
-          <button class="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/></svg>
-          </button>
-          <button class="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405C18.21 15.21 18 14.21 18 13.5 18 11.014 15.986 9 13.5 9h-3C8.014 9 6 11.014 6 13.5S8.014 18 10.5 18H15z"/></svg>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="px-4 py-8 md:py-12 max-w-7xl mx-auto w-full">
-      <div class="text-center mb-8">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">Latest Politics</h2>
-        <p class="text-gray-400 text-lg">Real-time election updates, policy changes, and global diplomacy</p>
-      </div>
-
-      <!-- Quick Actions -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <button class="glass p-4 rounded-xl text-left hover:ring-2 hover:ring-emerald-500 transition-all group">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-sm font-medium">Election Tracker</span>
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          </div>
-          <p class="text-xs text-gray-400">Polls, swing states, live results</p>
-        </button>
-        <button class="glass p-4 rounded-xl text-left hover:ring-2 hover:ring-emerald-500 transition-all group">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-sm font-medium">Policy Briefs</span>
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002-2h2a2 2 0 002 2M9 5a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h2z"/></svg>
-          </div>
-          <p class="text-xs text-gray-400">Bills, votes, amendments</p>
-        </button>
-        <button class="glass p-4 rounded-xl text-left hover:ring-2 hover:ring-emerald-500 transition-all group">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-sm font-medium">Global Affairs</span>
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5a2 2 0 002 2h2a2 2 0 002-2V3.935M16 11h3a2 2 0 012 2v1a2 2 0 01-2 2 2 2 0 01-2 2v2.945"/></svg>
-          </div>
-          <p class="text-xs text-gray-400">UN, NATO, trade, summits</p>
-        </button>
-        <button class="glass p-4 rounded-xl text-left hover:ring-2 hover:ring-emerald-500 transition-all group">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-sm font-medium">Ask Grok</span>
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 1.514-2.092 2.772-2.092 2.25 0 4 1.75 4 4 0 1.355-.874 2.506-2.094 3.328m0 0c-.789.66-1.332 1.55-1.332 2.664h2.664c0-1.114-.543-2.004-1.332-2.664C11.914 13.414 11 12.25 11 11c0-2.21 1.79-4 4-4 1.23 0 2.33.623 3 1.574"/></svg>
-          </div>
-          <p class="text-xs text-gray-400">Unbiased analysis on any issue</p>
-        </button>
-      </div>
-
-      <!-- Search Input -->
-      <div class="glass rounded-2xl p-4 mb-6">
-        <div class="flex items-center space-x-3">
-          <div class="flex-1 relative">
-            <input type="text" placeholder="Search politics, candidates, bills..." class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none text-lg"/>
-          </div>
-          <button class="p-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-          </button>
-        </div>
-        <div class="flex items-center justify-between mt-3">
-          <div class="flex items-center space-x-4 text-xs text-gray-400">
-            <button class="hover:text-white transition-colors flex items-center space-x-1">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.586-6.586"/></svg>
-              <span>Attach</span>
-            </button>
-          </div>
-          <p class="text-xs text-gray-500">Grok 4 • 0/4000</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Top Stories -->
-    <section class="px-4 pb-8 max-w-7xl mx-auto w-full">
-      <h3 class="text-lg font-semibold mb-4">Top Stories Right Now</h3>
-      <div class="space-y-4">
-        <!-- Story 1 -->
-        <div class="glass rounded-xl p-5 hover:ring-2 hover:ring-emerald-500 transition-all cursor-pointer">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
-              <h4 class="font-medium text-lg">Senate Passes $1.7T Spending Bill</h4>
-              <p class="text-sm text-gray-300 mt-1">Includes border security, Ukraine aid, disaster relief. Final vote: 68-29.</p>
-              <div class="flex items-center space-x-4 mt-3 text-xs text-gray-400">
-                <span class="flex items-center space-x-1">
-                  <span class="dot"></span>
-                  <span>2 hours ago</span>
-                </span>
-                <span>Source: C-SPAN, Reuters</span>
-              </div>
-            </div>
-            <div class="ml-4 w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
-              <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- Story 2 -->
-        <div class="glass rounded-xl p-5 hover:ring-2 hover:ring-blue-500 transition-all cursor-pointer">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
-              <h4 class="font-medium text-lg">EU Imposes New Sanctions on Russia</h4>
-              <p class="text-sm text-gray-300 mt-1">Targets energy sector and 200+ individuals. Putin calls it "economic warfare."</p>
-              <div class="flex items-center space-x-4 mt-3 text-xs text-gray-400">
-                <span class="flex items-center space-x-1">
-                  <span class="dot"></span>
-                  <span>5 hours ago</span>
-                </span>
-                <span>Source: BBC, AP</span>
-              </div>
-            </div>
-            <div class="ml-4 w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center">
-              <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5a2 2 0 002 2h2a2 2 0 002-2V3.935M16 11h3a2 2 0 012 2v1a2 2 0 01-2 2 2 2 0 01-2 2v2.945"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <!-- Story 3 -->
-        <div class="glass rounded-xl p-5 hover:ring-2 hover:ring-purple-500 transition-all cursor-pointer">
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
-              <h4 class="font-medium text-lg">Supreme Court to Hear Social Media Case</h4>
-              <p class="text-sm text-gray-300 mt-1">Texas and Florida laws on content moderation face First Amendment challenge.</p>
-              <div class="flex items-center space-x-4 mt-3 text-xs text-gray-400">
-                <span class="flex items-center space-x-1">
-                  <span class="dot"></span>
-                  <span>8 hours ago</span>
-                </span>
-                <span>Source: SCOTUSblog, NYT</span>
-              </div>
-            </div>
-            <div class="ml-4 w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
-              <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 2v2m-6-6h12"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<body>
+  <canvas class="background-canvas" id="starfield"></canvas>
+  
+  <div class="header">
+    <h1>POLITICS</h1>
+    <div class="subtitle">Version 3: Elegant Dashed Rings</div>
   </div>
+  
+  <div class="orbital-container">
+    <!-- ELEGANT DASHED ROTATING ORBITAL RINGS -->
+    <div class="orbit orbit-1"></div>
+    <div class="orbit orbit-2"></div>
+    <div class="orbit orbit-3"></div>
+    
+    <div class="central-sun">
+      <div class="sun-title">Latest Politics</div>
+      <div class="sun-content">
+        <div class="scroll-wrapper" id="scrollWrapper"></div>
+      </div>
+    </div>
+    
+    <div class="desktop-planets">
+      <div class="planet planet-1" data-category="podcasts">
+        <div class="planet-text">PODCASTS</div>
+      </div>
+      <div class="planet planet-2" data-category="video clips">
+        <div class="planet-text">VIDEO<br>CLIPS</div>
+      </div>
+      <div class="planet planet-3" data-category="essays & opinion">
+        <div class="planet-text">ESSAYS &<br>OPINION</div>
+      </div>
+      <div class="planet planet-4" data-category="books & movies">
+        <div class="planet-text">BOOKS &<br>MOVIES</div>
+      </div>
+      <div class="planet planet-5" data-category="memes">
+        <div class="planet-text">MEMES</div>
+      </div>
+      <div class="planet planet-6" data-category="surprise">
+        <div class="planet-text">SURPRISE<br>ME</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mobile-planets">
+    <div class="planet" data-category="podcasts"><div class="planet-text">PODCASTS</div></div>
+    <div class="planet" data-category="video clips"><div class="planet-text">VIDEO CLIPS</div></div>
+    <div class="planet" data-category="essays & opinion"><div class="planet-text">ESSAYS & OPINION</div></div>
+    <div class="planet" data-category="books & movies"><div class="planet-text">BOOKS & MOVIES</div></div>
+    <div class="planet" data-category="memes"><div class="planet-text">MEMES</div></div>
+    <div class="planet" data-category="surprise"><div class="planet-text">SURPRISE ME</div></div>
+  </div>
+  
+  <script>
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const stars = [];
+    for (let i = 0; i < 150; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 1.2 + 0.3,
+        brightness: Math.random() * 0.6 + 0.4
+      });
+    }
+    
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(star => {
+        star.brightness += (Math.random() - 0.5) * 0.08;
+        star.brightness = Math.max(0.3, Math.min(1, star.brightness));
+        ctx.fillStyle = `rgba(236, 239, 241, ${star.brightness})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+    
+    const allContent = [
+      { title: "Senate Passes Bipartisan Infrastructure Bill in Historic Vote", category: "podcasts", link: "#" },
+      { title: "Documentary: Inside the Campaign Trail - Behind the Scenes", category: "video clips", link: "#" },
+      { title: "Op-Ed: Why Democracy Needs Stronger Civic Education", category: "essays & opinion", link: "#" },
+      { title: "Book Review: 'The New Populism' Examines Global Political Shifts", category: "books & movies", link: "#" },
+      { title: "Political Cartoon Goes Viral: Capitol Chaos Edition", category: "memes", link: "#" },
+      { title: "Breaking: Supreme Court Announces Major Ruling on Voting Rights", category: "podcasts", link: "#" },
+      { title: "Analysis: How Social Media Changed Political Campaigns Forever", category: "essays & opinion", link: "#" },
+      { title: "Exclusive Interview: Governor Discusses Climate Policy Priorities", category: "video clips", link: "#" },
+      { title: "The Lincoln Project's Latest Ad Sparks Controversy", category: "video clips", link: "#" },
+      { title: "Podcast: Deep Dive into Congressional Committee Hearings", category: "podcasts", link: "#" },
+      { title: "Satire Piece: 'Local Politician Discovers Term Limits' Goes Viral", category: "memes", link: "#" },
+      { title: "Film Review: New Documentary Chronicles the 2020 Election", category: "books & movies", link: "#" }
+    ];
+    
+    function displayContent(category = 'all') {
+      const container = document.getElementById('scrollWrapper');
+      const titleEl = document.querySelector('.sun-title');
+      
+      let filtered = category === 'all' 
+        ? allContent.slice(0, 5)
+        : allContent.filter(item => item.category === category).slice(0, 5);
+      
+      titleEl.textContent = category === 'all' 
+        ? 'Latest Politics' 
+        : category.toUpperCase();
+      
+      const duplicatedContent = [...filtered, ...filtered];
+      container.innerHTML = '';
+      
+      duplicatedContent.forEach((item) => {
+        const linkDiv = document.createElement('div');
+        linkDiv.className = 'content-link';
+        linkDiv.innerHTML = `
+          <a href="${item.link}" class="link-title">${item.title}</a>
+          <div class="link-category">${item.category}</div>
+        `;
+        container.appendChild(linkDiv);
+      });
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 40px; opacity: 0.6;">No content in this category yet.</div>';
+      }
+    }
+    
+    document.querySelectorAll('.planet').forEach(planet => {
+      planet.addEventListener('click', function() {
+        const category = this.getAttribute('data-category');
+        if (category === 'surprise') {
+          const recentFive = allContent.slice(0, 5);
+          const random = recentFive[Math.floor(Math.random() * recentFive.length)];
+          window.open(random.link, '_blank');
+          return;
+        }
+        document.querySelectorAll('.planet').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        displayContent(category);
+      });
+    });
+    
+    displayContent('all');
+  </script>
 </body>
 </html>
