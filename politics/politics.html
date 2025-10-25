@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orbital v4 - Fixed Horizontal Text + Mobile Rings</title>
+  <title>Orbital v5 - True Orbit + Horizontal Text</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -27,21 +27,14 @@
     
     .background-canvas {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
+      top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
     }
     
     .header {
       text-align: center;
       padding: 26px 20px 22px;
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
+      top: 0; left: 0; right: 0; z-index: 100;
       background: linear-gradient(to bottom, #000 70%, rgba(0,0,0,0.95) 85%, rgba(0,0,0,0.7) 95%, transparent 100%);
     }
     
@@ -68,279 +61,190 @@
       z-index: 5;
     }
     
-    /* ELEGANT DASHED PULSING ROTATING ORBITAL RINGS */
+    /* DASHED ORBITAL RINGS */
     .orbit {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       border: 2px dashed var(--silver-white);
       border-radius: 50%;
       opacity: 0.65;
-      box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
-      animation: orbit-elegant-rotate 6s linear infinite;
+      box-shadow: 0 0 18px rgba(236,239,241,0.35);
+      animation: orbit-rotate 6s linear infinite;
     }
     
-    @keyframes orbit-elegant-rotate {
-      0% { 
-        transform: translate(-50%, -50 Paparazzi%) rotate(0deg);
-        border-color: var(--silver-white);
-        opacity: 0.65;
-        box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
-      }
-      25% { 
-        transform: translate(-50%, -50%) rotate(90deg);
-        border-color: var(--silver-light);
-        opacity: 0.8;
-        box-shadow: 0 0 28px rgba(236, 239, 241, 0.5);
-      }
-      50% { 
-        transform: translate(-50%, -50%) rotate(180deg);
-        border-color: var(--silver-white);
-        opacity: 0.65;
-        box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
-      }
-      75% { 
-        transform: translate(-50%, -50%) rotate(270deg);
-        border-color: var(--silver-light);
-        opacity: 0.8;
-        box-shadow: 0 0 28px rgba(236, 239, 241, 0.5);
-      }
-      100% { 
-        transform: translate(-50%, -50%) rotate(360deg);
-        border-color: var(--silver-white);
-        opacity: 0.65;
-        box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
-      }
+    @keyframes orbit-rotate {
+      0%   { border-color: var(--silver-white); opacity: 0.65; box-shadow: 0 0 18px rgba(236,239,241,0.35); }
+      25%  { border-color: var(--silver-light); opacity: 0.8; box-shadow: 0 0 28px rgba(236,239,241,0.5); }
+      50%  { border-color: var(--silver-white); opacity: 0.65; box-shadow: 0 0 18px rgba(236,239,241,0.35); }
+      75%  { border-color: var(--silver-light); opacity: 0.8; box-shadow: 0 0 28px rgba(236,239,241,0.5); }
+      100% { border-color: var(--silver-white); opacity: 0.65; box-shadow: 0 0 18px rgba(236,239,241,0.35); }
     }
     
-    .orbit-1 { width: 540px; height: 540px; animation-duration: 55s; border-width: 2px; }
-    .orbit-2 { width: 645px; height: 645px; animation-duration: 75s; border-width: 2.5px; }
-    .orbit-3 { width: 750px; height: 750px; animation-duration: 95s; border-width: 3px; }
-    
+    .orbit-1 { width: 540px; height: 540px; animation-duration: 55s; }
+    .orbit-2 { width: 645px; height: 645px; animation-duration: 75s; }
+    .orbit-3 { width: 750px; height: 750px; animation-duration: 95s; }
+
     .central-sun {
       position: absolute;
-      top: 50%;
-      left:cce: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 360px;
-      height: 360px;
+      width: 360px; height: 360px;
       background: radial-gradient(circle at center, #1a1a1a 20%, #0a0a0a 100%);
-      border: none;
       border-radius: 50%;
-      box-shadow: 0 0 55px rgba(236, 239, 241, 0.35);
+      box-shadow: 0 0 55px rgba(236,239,241,0.35);
       padding: 32px 24px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      display: flex; flex-direction: column; overflow: hidden;
       z-index: 20;
     }
     
     .sun-title {
-      font-size: 16px;
-      text-transform: uppercase;
-      color: var(--silver-white);
-      text-align: center;
-      margin-bottom: 15px;
-      padding-bottom: 10px;
+      font-size: 16px; text-transform: uppercase;
+      color: var(--silver-white); text-align: center;
+      margin-bottom: 15px; padding-bottom: 10px;
       text-shadow: 0 0 15px var(--silver-white);
-      flex-shrink: 0;
-      line-height: 1.3;
+      flex-shrink: 0; line-height: 1.3;
     }
     
     .sun-content {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
+      flex: 1; position: relative; overflow: hidden;
       mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
     }
     
     .scroll-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      display: flex; flex-direction: column; gap: 10px;
       animation: auto-scroll 24s linear infinite;
       padding: 14px 0;
     }
     
     @keyframes auto-scroll {
-      0% { transform: translateY(0); }
+      0%   { transform: translateY(0); }
       100% { transform: translateY(-50%); }
     }
     
-    .scroll-wrapper:hover {
-      animation-play-state: paused;
-    }
+    .scroll-wrapper:hover { animation-play-state: paused; }
     
     .content-link {
       padding: 10px 13px;
-      background: rgba(236, 239, 241, 0.08);
-      border: none;
+      background: rgba(236,239,241,0.08);
       border-radius: 6px;
-      transition: all 0.25s ease;
-      cursor: pointer;
-      flex-shrink: 0;
+      transition: all .25s ease;
+      cursor: pointer; flex-shrink: 0;
     }
-    
     .content-link:hover {
-      background: rgba(236, 239, 241, 0.18);
-      box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
+      background: rgba(236,239,241,0.18);
+      box-shadow: 0 0 18px rgba(236,239,241,0.35);
       transform: translateX(5px);
     }
     
-    .link-title {
-      color: var(--silver-white);
-      font-size: 12px;
-      line-height: 1.5;
-      text-decoration: none;
-      display: block;
-    }
-    
-    .link-category {
-      font-size: 9px;
-      color: var(--silver-medium);
-      text-transform: uppercase;
-      margin-top: 4px;
-      letter-spacing: 1px;
-      opacity: 0.8;
-    }
+    .link-title   { color: var(--silver-white); font-size: 12px; line-height: 1.5; text-decoration: none; display: block; }
+    .link-category{ font-size: 9px; color: var(--silver-medium); text-transform: uppercase; margin-top: 4px; letter-spacing: 1px; opacity: .8; }
 
-    /* FIXED HORIZONTAL TEXT + SPINNING PLANETS */
+    /* TRUE ORBITAL MOTION + HORIZONTAL TEXT */
     .planet {
       position: absolute;
-      width: 128px;
-      height: 128px;
+      width: 128px; height: 128px;
       border-radius: 50%;
       background: #FFFFFF;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 30px rgba(255,255,255,.5);
+      transition: all .3s cubic-bezier(.4,0,.2,1);
       z-index: 15;
-      animation: planet-glow 3.2s ease-in-out infinite, planet-orbit 18s linear infinite;
+      animation: planet-glow 3.2s ease-in-out infinite;
     }
 
     @keyframes planet-glow {
-      0%, 100% { 
-        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
-        background: #FFFFFF;
-        transform: scale(1);
-      }
-      50% { 
-        box-shadow: 0 6px 50px rgba(255, 255, 255, 0.9), 0 12px 80px rgba(236, 239, 241, 0.5);
-        background: #F7F9FB;
-        transform: scale(1.05);
-      }
+      0%,100% { box-shadow: 0 4px 30px rgba(255,255,255,.5); background:#FFF; transform:scale(1); }
+      50%     { box-shadow: 0 6px 50px rgba(255,255,255,.9), 0 12px 80px rgba(236,239,241,.5); background:#F7F9FB; transform:scale(1.05); }
     }
 
-    /* ORBIT ANIMATION (NO TEXT ROTATION) */
-    @keyframes planet-orbit {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .planet:hover {
+      transform: scale(1.15) !important;
+      box-shadow: 0 8px 60px rgba(255,255,255,1), 0 16px 110px rgba(236,239,241,.7);
+      animation: planet-glow 3.2s ease-in-out infinite;
     }
 
+    .planet.active {
+      background: var(--silver-light);
+      box-shadow: 0 6px 60px rgba(255,255,255,1), 0 12px 110px rgba(236,239,241,.6);
+      transform: scale(1.08);
+    }
+
+    /* TEXT ALWAYS HORIZONTAL */
     .planet-text {
-      text-align: center;
-      font-size: 13px;
-      color: #000;
-      font-weight: bold;
-      text-transform: uppercase;
-      line-height: 1.3;
-      letter-spacing: 0.7px;
-      padding: 8px;
-      /* TEXT STAYS HORIZONTAL */
       position: absolute;
-      width: 100%;
-      transform: rotate(0deg);
+      width: 100%; text-align: center;
+      font-size: 13px; color: #000; font-weight: bold;
+      text-transform: uppercase; line-height: 1.3; letter-spacing: .7px;
+      padding: 8px;
+      /* Counter-rotate to keep text upright */
       animation: counter-rotate 18s linear infinite;
     }
 
     @keyframes counter-rotate {
       from { transform: rotate(0deg); }
-      to { transform: rotate(-360deg); }
-    }
-    
-    .planet:hover {
-      transform: scale(1.15) !important;
-      box-shadow: 0 8px 60px rgba(255, 255, 255, 1), 0 16px 110px rgba(236, 239, 241, 0.7);
-      animation: planet-glow 3.2s ease-in-out infinite;
-    }
-    
-    .planet.active {
-      background: var(--silver-light);
-      box-shadow: 0 6px 60px rgba(255, 255, 255, 1), 0 12px 110px rgba(236, 239, 241, 0.6);
-      transform: scale(1.08);
+      to   { transform: rotate(-360deg); }
     }
 
-    /* FIXED POSITIONS */
-    .planet-1 { top: 50%; left: 50%; margin-left: -64px; margin-top: -410px; } 
-    .planet-2 { top: 50%; left: 50%; margin-left: 270px; margin-top: -248px; }
-    .planet-3 { top: 50%; left: 50%; margin-left: 270px; margin-top: 120px; }
-    .planet-4 { top: 50%; left: 50%; margin-left: -64px; margin-top: 310px; }
-    .planet-5 { top: 50%; left: 50%; margin-left: -398px; margin-top: 120px; }
-    .planet-6 { top: 50%; left: 50%; margin-left: -398px; margin-top: -248px; }
+    /* ORBITAL PATH ANIMATION (planets move around rings) */
+    .planet-1 { animation: orbit-1-path 55s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+    .planet-2 { animation: orbit-2-path 75s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+    .planet-3 { animation: orbit-3-path 95s linear infinite, planet-glow 3.2s ease-in-out infinite; }
+    .planet-4 { animation: orbit-3-path 95s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+    .planet-5 { animation: orbit-2-path 75s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
+    .planet-6 { animation: orbit-1-path 55s linear infinite reverse, planet-glow 3.2s ease-in-out infinite; }
 
-    /* MOBILE: ORBITAL RINGS + HORIZONTAL TEXT */
+    @keyframes orbit-1-path {
+      0%   { transform: translate(-50%, -50%) translateY(-270px); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-270px); }
+    }
+    @keyframes orbit-2-path {
+      0%   { transform: translate(-50%, -50%) translateY(-322.5px); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-322.5px); }
+    }
+    @keyframes orbit-3-path {
+      0%   { transform: translate(-50%, -50%) translateY(-375px); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-375px); }
+    }
+
+    /* MOBILE: FULL ORBITAL LAYOUT */
     @media (max-width: 900px) {
       body { padding-top: 100px; }
       .header h1 { font-size: 33px; }
-      .orbital-container { 
-        width: 95vw; 
-        height: 95vw; 
-        max-width: 600px; 
-        max-height: 600px; 
-        margin: 0 auto;
-      }
-      .orbit { 
-        display: block !important;
-        width: 70% !important;
-        height: 70% !important;
-        animation-duration: 40s !important;
-      }
+      .orbital-container { width: 95vw; height: 95vw; max-width: 600px; max-height: 600px; margin: 0 auto; }
+      .orbit { display: block !important; }
       .orbit-1 { width: 65%; height: 65%; }
       .orbit-2 { width: 80%; height: 80%; }
       .orbit-3 { width: 95%; height: 95%; }
 
       .central-sun {
-        position: absolute;
-        width: 45%;
-        height: 45%;
-        min-height: 280px;
-        border-radius: 50%;
-        margin: 0;
+        width: 45%; height: 45%; min-height: 280px;
         transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
+        top: 50%; left: 50%;
       }
 
       .planet {
-        position: absolute !important;
-        width: 90px;
-        height: 90px;
-        top: auto !important;
-        left: auto !important;
-        margin: 0 !important;
-        animation: planet-glow 3.2s ease-in-out infinite, planet-orbit-mobile 18s linear infinite;
+        width: 90px; height: 90px;
+        animation: planet-glow 3.2s ease-in-out infinite;
       }
 
-      @keyframes planet-orbit-mobile {
-        from { transform: translate(-50%, -50%) rotate(0deg); }
-        to { transform: translate(-50%, -50%) rotate(360deg); }
-      }
+      .planet-text { font-size: 11px; }
 
-      .planet-text {
-        font-size: 11px;
-        animation: counter-rotate 18s linear infinite;
+      @keyframes orbit-1-path {
+        0%   { transform: translate(-50%, -50%) translateY(-190px); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-190px); }
       }
-
-      .mobile-planets { display: none; }
+      @keyframes orbit-2-path {
+        0%   { transform: translate(-50%, -50%) translateY(-228px); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-228px); }
+      }
+      @keyframes orbit-3-path {
+        0%   { transform: translate(-50%, -50%) translateY(-266px); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateY(-266px); }
+      }
     }
-
-    .mobile-planets { display: none; }
   </style>
 </head>
 <body>
@@ -348,11 +252,10 @@
   
   <div class="header">
     <h1>POLITICS</h1>
-    <div class="subtitle">Version 4: Fixed Text + Mobile Rings</div>
+    <div class="subtitle">Version 5: True Orbit + Horizontal Text</div>
   </div>
   
   <div class="orbital-container">
-    <!-- ELEGANT DASHED ROTATING ORBITAL RINGS -->
     <div class="orbit orbit-1"></div>
     <div class="orbit orbit-2"></div>
     <div class="orbit orbit-3"></div>
@@ -392,24 +295,21 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    const stars = [];
-    for (let i = 0; i < 150; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 1.2 + 0.3,
-        brightness: Math.random() * 0.6 + 0.4
-      });
-    }
+    const stars = Array.from({length:150}, () => ({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      size: Math.random()*1.2+0.3,
+      brightness: Math.random()*0.6+0.4
+    }));
     
     function animateStars() {
-      ctx.clearRect(0, 0, 0, canvas.height);
-      stars.forEach(star => {
-        star.brightness += (Math.random() - 0.5) * 0.08;
-        star.brightness = Math.max(0.3, Math.min(1, star.brightness));
-        ctx.fillStyle = `rgba(236, 239, 241, ${star.brightness})`;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      stars.forEach(s => {
+        s.brightness += (Math.random()-0.5)*0.08;
+        s.brightness = Math.max(0.3, Math.min(1, s.brightness));
+        ctx.fillStyle = `rgba(236,239,241,${s.brightness})`;
         ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
         ctx.fill();
       });
       requestAnimationFrame(animateStars);
@@ -422,58 +322,42 @@
     });
     
     const allContent = [
-      { title: "Senate Passes Bipartisan Infrastructure Bill in Historic Vote", category: "podcasts", link: "#" },
-      { title: "Documentary: Inside the Campaign Trail - Behind the Scenes", category: "video clips", link: "#" },
-      { title: "Op-Ed: Why Democracy Needs Stronger Civic Education", category: "essays & opinion", link: "#" },
-      { title: "Book Review: 'The New Populism' Examines Global Political Shifts", category: "books & movies", link: "#" },
-      { title: "Political Cartoon Goes Viral: Capitol Chaos Edition", category: "memes", link: "#" },
-      { title: "Breaking: Supreme Court Announces Major Ruling on Voting Rights", category: "podcasts", link: "#" },
-      { title: "Analysis: How Social Media Changed Political Campaigns Forever", category: "essays & opinion", link: "#" },
-      { title: "Exclusive Interview: Governor Discusses Climate Policy Priorities", category: "video clips", link: "#" }
+      {title:"Senate Passes Bipartisan Infrastructure Bill in Historic Vote",category:"podcasts",link:"#"},
+      {title:"Documentary: Inside the Campaign Trail - Behind the Scenes",category:"video clips",link:"#"},
+      {title:"Op-Ed: Why Democracy Needs Stronger Civic Education",category:"essays & opinion",link:"#"},
+      {title:"Book Review: 'The New Populism' Examines Global Political Shifts",category:"books & movies",link:"#"},
+      {title:"Political Cartoon Goes Viral: Capitol Chaos Edition",category:"memes",link:"#"},
+      {title:"Breaking: Supreme Court Announces Major Ruling on Voting Rights",category:"podcasts",link:"#"},
+      {title:"Analysis: How Social Media Changed Political Campaigns Forever",category:"essays & opinion",link:"#"},
+      {title:"Exclusive Interview: Governor Discusses Climate Policy Priorities",category:"video clips",link:"#"}
     ];
     
-    function displayContent(category = 'all') {
+    function displayContent(cat='all'){
       const container = document.getElementById('scrollWrapper');
-      const titleEl = document.querySelector('.sun-title');
-      
-      let filtered = category === 'all' 
-        ? allContent.slice(0, 5)
-        : allContent.filter(item => item.category === category).slice(0, 5);
-      
-      titleEl.textContent = category === 'all' 
-        ? 'Latest Politics' 
-        : category.toUpperCase();
-      
-      const duplicatedContent = [...filtered, ...filtered];
-      container.innerHTML = '';
-      
-      duplicatedContent.forEach((item) => {
-        const linkDiv = document.createElement('div');
-        linkDiv.className = 'content-link';
-        linkDiv.innerHTML = `
-          <a href="${item.link}" class="link-title">${item.title}</a>
-          <div class="link-category">${item.category}</div>
-        `;
-        container.appendChild(linkDiv);
+      const title = document.querySelector('.sun-title');
+      const list = cat==='all' ? allContent.slice(0,5) : allContent.filter(i=>i.category===cat).slice(0,5);
+      title.textContent = cat==='all' ? 'Latest Politics' : cat.toUpperCase();
+      const dup = [...list,...list];
+      container.innerHTML='';
+      dup.forEach(i=>{
+        const d=document.createElement('div');
+        d.className='content-link';
+        d.innerHTML=`<a href="${i.link}" class="link-title">${i.title}</a><div class="link-category">${i.category}</div>`;
+        container.appendChild(d);
       });
-      
-      if (filtered.length === 0) {
-        container.innerHTML = '<div style="text-align: center; padding: 40px; opacity: 0.6;">No content in this category yet.</div>';
-      }
     }
     
-    document.querySelectorAll('.planet').forEach(planet => {
-      planet.addEventListener('click', function() {
-        const category = this.getAttribute('data-category');
-        if (category === 'surprise') {
-          const recentFive = allContent.slice(0, 5);
-          const random = recentFive[Math.floor(Math.random() * recentFive.length)];
-          window.open(random.link, '_blank');
+    document.querySelectorAll('.planet').forEach(p=>{
+      p.addEventListener('click',function(){
+        const c=this.getAttribute('data-category');
+        if(c==='surprise'){
+          const r=allContent.slice(0,5)[Math.floor(Math.random()*5)];
+          window.open(r.link,'_blank');
           return;
         }
-        document.querySelectorAll('.planet').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.planet').forEach(x=>x.classList.remove('active'));
         this.classList.add('active');
-        displayContent(category);
+        displayContent(c);
       });
     });
     
