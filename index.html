@@ -1,503 +1,226 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>THE DAYLUGE</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Experience the thrill of alpine luge racing down stunning mountain tracks. Book your adventure today!" />
+  <title>The Day Luge - Extreme Alpine Adventure</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <!-- Google Font: Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
-  <script>
-    window.cookieconsent.initialise({
-      "palette": { "popup": { "background": "#000" }, "button": { "background": "#f1d600" } },
-      "content": { "message": "We use cookies for Google Analytics.", "dismiss": "Got it!", "link": "Learn more", "href": "/privacy" }
-    });
-  </script>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM9B5CP8GS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-ZM9B5CP8GS');
-  </script>
+  <!-- Favicon (add your own favicon.png or .ico to root) -->
+  <link rel="icon" href="favicon.png" sizes="32x32">
 
   <style>
-    :root {
-      /* Colors */
-      --red: #cc0000;
-      --orange: #ff8800;
-      --green: #00dd55;
-      --blue: #1a1a80;
-      --light-blue: #33ddff;
-      --violet: #cc88ff;
-      --pink: #ff69b4;
-      --yellow: #ffcc00;
-      --ink: #111;
-      --silver-white: #ECEFF1;
-      --connection-color: #cfd8dc;
-
-      /* Responsive geometry */
-      --wheel-size: min(80vw, 480px);
-      --circle-size: calc(var(--wheel-size) / 4.5);
-      --radius: calc(var(--wheel-size) / 3);
-      --top-offset: calc((var(--wheel-size)/2) - var(--radius) - (var(--circle-size)/2));
-      --left-offset: calc((var(--wheel-size)/2) - (var(--circle-size)/2));
+    /* ==== Global Reset & Base ==== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #111;
+      color: #eee;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    a {
+      color: inherit;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ==== Layout ==== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    header, main, footer {
+      padding: 2rem 1rem;
+      text-align: center;
+    }
 
-    body {
-      font-family: 'Special Elite', monospace;
-      color: var(--ink);
-      background: #000;
+    /* ==== Hero Header ==== */
+    .hero {
+      background: url('hero-bg.jpg') center/cover no-repeat;
+      min-height: 80vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      min-height: 100dvh;
-      overflow-x: hidden;
-      text-align: center;
+      align-items: center;
+      color: #fff;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ==== Buttons ==== */
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      margin: 0.5rem;
+      background: #e63946;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+    .btn:hover {
+      background: #d00000;
+      transform: translateY(-2px);
+    }
+
+    /* ==== Circle Navigation ==== */
+    .circles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 2rem;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right)
-               env(safe-area-inset-bottom) env(safe-area-inset-left);
+      margin: 3rem 0;
     }
-
-    .header {
-      position: relative;
-      text-align: center;
-      width: 100%;
-      z-index: 10;
-    }
-    .header h1 {
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      font-size: 32px;
-      color: #4682b4;
-      text-shadow: 0 0 5px rgba(70,130,180,.7),0 0 10px rgba(70,130,180,.5);
-      animation: neonGlow 3s ease-in-out infinite;
-    }
-    @keyframes neonGlow {
-      0% {
-        color: #4682b4;
-        text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5);
-      }
-      16.67% {
-        color: #20b2aa;
-        text-shadow: 0 0 8px rgba(32,178,170,0.9),0 0 15px rgba(32,178,170,0.7);
-      }
-      33.33% {
-        color: #7b68ee;
-        text-shadow: 0 0 5px rgba(123,104,238,0.7),0 0 10px rgba(123,104,238,0.5);
-      }
-      50% {
-        color: #00ced1;
-        text-shadow: 0 0 8px rgba(0,206,209,0.9),0 0 15px rgba(0,206,209,0.7);
-      }
-      66.67% {
-        color: #3cb371;
-        text-shadow: 0 0 5px rgba(60,179,113,0.7),0 0 10px rgba(60,179,113,0.5);
-      }
-      83.33% {
-        color: #9370db;
-        text-shadow: 0 0 8px rgba(147,112,219,0.9),0 0 15px rgba(147,112,219,0.7);
-      }
-      100% {
-        color: #4682b4;
-        text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5);
-      }
-    }
-
-    .wheel-container {
-      position: relative;
-      width: var(--wheel-size);
-      height: var(--wheel-size);
-      margin: 0 auto;
+    .circle {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: #333;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 5;
-      animation: spinOpen 1.5s ease-out forwards;
-      opacity: 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
-
-    @keyframes spinOpen {
-      0% {
-        transform: scale(0.01) rotateZ(-720deg);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1) rotateZ(0deg);
-        opacity: 1;
-      }
+    .circle:hover {
+      transform: scale(1.12);
+      background: #e63946;
     }
-
-    .connection-lines {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .circle a {
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem;
+      display: block;
       width: 100%;
       height: 100%;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0;
-      animation: fadeIn 1.5s ease-in-out 0.4s forwards;
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    .wheel-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      width: calc(var(--wheel-size) / 3.5);
-      height: calc(var(--wheel-size) / 3.5);
-      background: radial-gradient(circle, var(--red) 0%, #aa0000 100%);
-      color: yellow;
-      border: 2px solid #ffdd00;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-transform: uppercase;
-      font-size: calc(var(--wheel-size) / 25);
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 30px #ffdd0088;
-      animation: hubSpin 1.5s ease-out forwards;
-      text-decoration: none;
-      text-align: center;
-      z-index: 5;
-    }
-    @keyframes hubSpin {
-      0% {
-        transform: translate(-50%, -50%) scale(0) rotateZ(-720deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1) rotateZ(0deg);
-      }
     }
 
-    .circle {
-      position: absolute;
-      width: var(--circle-size);
-      height: var(--circle-size);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000;
-      color: #fff;
-      font-weight: 900;
-      text-align: center;
-      line-height: 1.1;
-      padding: 10px;
-      transform-origin: 50% calc(50% + var(--radius));
-      top: var(--top-offset);
-      left: var(--left-offset);
-      z-index: 10;
-      border: 2px solid #666;
-      text-decoration: none;
-      cursor: pointer;
-      box-sizing: border-box;
-      animation: circleSpin 1.6s ease-out forwards;
-      opacity: 0;
-      box-shadow: 0 0 8px currentColor, 0 0 15px currentColor, 0 0 3px currentColor inset;
+    /* ==== Sections ==== */
+    section {
+      margin: 3rem 0;
     }
-    @keyframes circleSpin {
-      0% {
-        transform: scale(0) rotateZ(-720deg);
-        opacity: 0;
-      }
-      100% {
-        transform: rotate(var(--circle-angle)) scale(1);
-        opacity: 1;
-      }
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #e63946;
     }
 
-    .circle span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      width: 100%;
-      line-height: 1.05;
-      hyphens: none;
-      word-break: keep-all;
-      font-size: clamp(10px, calc(var(--circle-size) / 5), 16px);
+    /* ==== Gallery ==== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
     }
 
-    .circle-2 span,
-    .circle-7 span {
-      font-size: clamp(9px, calc(var(--circle-size) / 5.8), 14px);
-      line-height: 1;
+    /* ==== Booking Teaser ==== */
+    #book {
+      background: rgba(255,255,255,0.05);
+      padding: 3rem 1.5rem;
+      border-radius: 12px;
+    }
+    #book a {
+      color: #e63946;
+      text-decoration: underline;
     }
 
-    .circle-4 span, 
-    .circle-5 span,
-    .circle-6 span {
-      font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px);
-    }
-
-    .circle-1 { --circle-angle: 0deg; border-color: #ECEFF1;
-                color: #ECEFF1; box-shadow: 0 0 8px #ECEFF1; }
-    .circle-1 span { transform: rotate(0deg); }
-
-    .circle-8 { --circle-angle: 45deg; border-color: #ffcc00;
-                color: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
-    .circle-8 span { transform: rotate(-45deg); }
-
-    .circle-7 { --circle-angle: 90deg; border-color: #00cc44;
-                color: #00cc44; box-shadow: 0 0 8px #00cc44; }
-    .circle-7 span { transform: rotate(-90deg); }
-
-    .circle-2 { --circle-angle: 135deg; border-color: #ff8800;
-                color: #ff8800; box-shadow: 0 0 8px #ff8800; }
-    .circle-2 span { transform: rotate(-135deg); }
-
-    .circle-3 { --circle-angle: 180deg; border-color: #66B4F2;
-                color: #66B4F2; box-shadow: 0 0 8px #66B4F2; }
-    .circle-3 span { transform: rotate(-180deg); }
-
-    .circle-4 { --circle-angle: 225deg; border-color: #00ff00;
-                color: #00ff00; box-shadow: 0 0 8px #00ff00; }
-    .circle-4 span { transform: rotate(-225deg); }
-
-    .circle-5 { --circle-angle: 270deg; border-color: #cc88ff;
-                color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
-    .circle-5 span { transform: rotate(-270deg); }
-
-    .circle-6 { --circle-angle: 315deg; border-color: #ff69b4;
-                color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
-    .circle-6 span { transform: rotate(-315deg); }
-
-    .button-container {
-      display: flex;
-      justify-content: center;
-    }
-    .random-button {
-      background: var(--yellow);
-      color: var(--red);
-      border: 2px solid #cc0000;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-family: 'Special Elite', monospace;
-      font-weight: 900;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 480px) {
-      .wheel-container { margin-top: 1rem; }
-      .random-button { transform: translateY(0.25rem); }
-      .circle {
-        padding: 8px;
-      }
-      .circle span {
-        font-size: clamp(9px, calc(var(--circle-size) / 5.5), 14px);
-      }
-      .circle-2 span,
-      .circle-7 span {
-        font-size: clamp(8px, calc(var(--circle-size) / 6.2), 13px);
-      }
-      .circle-4 span, 
-      .circle-5 span,
-      .circle-6 span {
-        font-size: clamp(7px, calc(var(--circle-size) / 7), 12px);
-      }
+    /* ==== Footer ==== */
+    footer {
+      font-size: 0.9rem;
+      color: #aaa;
+      padding: 2rem 1rem;
+      border-top: 1px solid #333;
     }
   </style>
 </head>
 
 <body>
-  <div class="header">
-    <h1>THE DAYLUGE</h1>
-  </div>
+  <!-- ==================== HERO HEADER ==================== -->
+  <header class="hero">
+    <div class="container">
+      <h1>The Day Luge</h1>
+      <p>Alpine Adventure Racing</p>
+      <div>
+        <a href="#book" class="btn">Book Now</a>
+        <a href="#tracks" class="btn">View Tracks</a>
+      </div>
+    </div>
+  </header>
 
-  <div class="wheel-container">
-    <svg class="connection-lines"></svg>
-    <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="container">
 
-    <a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
-    <a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
-    <a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS &amp;
-    ECONOMICS</span></a>
-    <a href="./science-nature-tech/science-nature-tech.html" class="circle circle-2"><span>SCIENCE,
-    NATURE &amp;
-    TECH</span></a>
-    <a href="./sports-leisure/sports-leisure.html" class="circle circle-3"><span>SPORTS &amp;
-    LEISURE</span></a>
-    <a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY
-    CORNER</span></a>
-    <a href="./arts.html" class="circle circle-5"><span>ARTS &amp;
-    LITERATURE</span></a>
-    <a href="./wisdom.html" class="circle circle-6"><span>WISDOM &amp;
-    PHILOSOPHY</span></a>
-  </div>
+    <!-- Intro -->
+    <section id="intro">
+      <p>
+        Experience the rush of alpine luge as you speed down breathtaking mountain tracks. 
+        Perfect for thrill-seekers and families alike!
+      </p>
+    </section>
 
-  <div class="button-container">
-    <button class="random-button">SURPRISE ME!</button>
-  </div>
+    <!-- Circle Navigation Links -->
+    <section id="circles" class="circles">
+      <div class="circle"><a href="history.html">History</a></div>
+      <div class="circle"><a href="tracks.html">Tracks</a></div>
+      <div class="circle"><a href="safety.html">Safety</a></div>
+      <div class="circle"><a href="booking.html">Booking</a></div>
+    </section>
 
-  <script>
-    function drawDNAHelix() {
-      const svg = document.querySelector('.connection-lines');
-      const wheel = document.querySelector('.wheel-container');
-      const hub = document.querySelector('.wheel-center');
-      const circles = document.querySelectorAll('.circle');
-      const rect = wheel.getBoundingClientRect();
-      svg.setAttribute('width', rect.width);
-      svg.setAttribute('height', rect.height);
-      svg.innerHTML = '';
+    <!-- Image Gallery -->
+    <section id="gallery" class="gallery">
+      <img src="luge1.jpg" alt="Rider speeding down alpine luge track with mountain backdrop" loading="lazy">
+      <img src="luge2.jpg" alt="Scenic view of winding luge track through alpine forest" loading="lazy">
+      <img src="luge3.jpg" alt="Group of friends celebrating after completing the luge run" loading="lazy">
+    </section>
 
-      const hubRect = hub.getBoundingClientRect();
-      const cx = hubRect.left - rect.left + hubRect.width / 2;
-      const cy = hubRect.top - rect.top + hubRect.height / 2;
-      const hubR = hubRect.width / 2;
+    <!-- Booking Call-to-Action -->
+    <section id="book">
+      <h2>Ready to Ride?</h2>
+      <p>Email: <a href="mailto:info@thedayluge.com">info@thedayluge.com</a></p>
+      <p>Call: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+      <a href="booking.html" class="btn">Reserve Your Spot</a>
+    </section>
 
-      // DNA Helix colors - Deep Blue / Teal
-      const color1 = '#0066ff';
-      const color2 = '#00cccc';
+  </main>
 
-      circles.forEach((circle, i) => {
-        const cr = circle.getBoundingClientRect();
-        const r = cr.width / 2;
-        const x = cr.left - rect.left + r;
-        const y = cr.top - rect.top + r;
-        const dx = x - cx;
-        const dy = y - cy;
-        const dist = Math.sqrt(dx*dx + dy*dy);
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <p>© 2025 The Day Luge. All rights reserved.</p>
+    </div>
+  </footer>
 
-        // Create first spiral path
-        const pathData = [];
-        const steps = 50;
-        for (let s = 0; s <= steps; s++) {
-          const t = s / steps;
-          const px = cx + dx * t;
-          const py = cy + dy * t;
-          const perpX = -dy / dist * Math.sin(t * Math.PI * 4) * 8;
-          const perpY = dx / dist * Math.sin(t * Math.PI * 4) * 8;
-          pathData.push(`${s === 0 ? 'M' : 'L'}${px + perpX},${py + perpY}`);
-        }
-
-        const path1 = document.createElementNS('http://www.w3.org/2000/svg','path');
-        path1.setAttribute('d', pathData.join(' '));
-        path1.setAttribute('id', `helix1-${i}`);
-        path1.setAttribute('stroke', color1);
-        path1.setAttribute('stroke-width', '1');
-        path1.setAttribute('stroke-opacity', '0.4');
-        path1.setAttribute('fill', 'none');
-        svg.appendChild(path1);
-
-        // Create second spiral path (opposite phase)
-        const pathData2 = [];
-        for (let s = 0; s <= steps; s++) {
-          const t = s / steps;
-          const px = cx + dx * t;
-          const py = cy + dy * t;
-          const perpX = -dy / dist * Math.sin(t * Math.PI * 4 + Math.PI) * 8;
-          const perpY = dx / dist * Math.sin(t * Math.PI * 4 + Math.PI) * 8;
-          pathData2.push(`${s === 0 ? 'M' : 'L'}${px + perpX},${py + perpY}`);
-        }
-
-        const path2 = document.createElementNS('http://www.w3.org/2000/svg','path');
-        path2.setAttribute('d', pathData2.join(' '));
-        path2.setAttribute('id', `helix2-${i}`);
-        path2.setAttribute('stroke', color2);
-        path2.setAttribute('stroke-width', '1');
-        path2.setAttribute('stroke-opacity', '0.4');
-        path2.setAttribute('fill', 'none');
-        svg.appendChild(path2);
-
-        // Add particles on each strand
-        for (let p = 0; p < 12; p++) {
-          // First strand particles
-          const particle1 = document.createElementNS('http://www.w3.org/2000/svg','circle');
-          particle1.setAttribute('r', '2');
-          particle1.setAttribute('fill', color1);
-          particle1.setAttribute('filter', `drop-shadow(0 0 3px ${color1})`);
-          svg.appendChild(particle1);
-
-          const motion1 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
-          motion1.setAttribute('dur', '3s');
-          motion1.setAttribute('repeatCount', 'indefinite');
-          motion1.setAttribute('begin', `${p * 0.25}s`);
-          motion1.innerHTML = `<mpath href="#helix1-${i}" />`;
-          particle1.appendChild(motion1);
-
-          // Second strand particles
-          const particle2 = document.createElementNS('http://www.w3.org/2000/svg','circle');
-          particle2.setAttribute('r', '2');
-          particle2.setAttribute('fill', color2);
-          particle2.setAttribute('filter', `drop-shadow(0 0 3px ${color2})`);
-          svg.appendChild(particle2);
-
-          const motion2 = document.createElementNS('http://www.w3.org/2000/svg','animateMotion');
-          motion2.setAttribute('dur', '3s');
-          motion2.setAttribute('repeatCount', 'indefinite');
-          motion2.setAttribute('begin', `${p * 0.25}s`);
-          motion2.innerHTML = `<mpath href="#helix2-${i}" />`;
-          particle2.appendChild(motion2);
-        }
-      });
-    }
-
-    // Draw DNA helix as soon as wheel animation completes
-    const wheelContainer = document.querySelector('.wheel-container');
-    wheelContainer.addEventListener('animationend', (e) => {
-      if (e.animationName === 'spinOpen') {
-        drawDNAHelix();
-      }
-    });
-    
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(drawDNAHelix, 300);
-    });
-
-    document.querySelector('.random-button').addEventListener('click', function() {
-      // Add cache-busting parameter to prevent loading stale txt file
-      const cacheBuster = '?t=' + Date.now();
-      fetch('./surprise-me-links.txt' + cacheBuster)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Could not load surprise links');
-          }
-          return response.text();
-        })
-        .then(text => {
-          const lines = text.split('\n')
-            .map(line => line.trim())
-            .filter(line => line.length > 0);
-          
-          const links = lines
-            .map(line => {
-              const parts = line.split('|');
-              return parts.length > 1 ? parts[1].trim() : line;
-            })
-            .filter(link => link.length > 0);
-          
-          const randomIndex = Math.floor(Math.random() * links.length);
-          let randomLink = links[randomIndex];
-          
-          // Add cache-busting parameter to force fresh content load
-          const separator = randomLink.includes('?') ? '&' : '?';
-          randomLink += separator + '_=' + Date.now();
-          
-          window.location.href = randomLink;
-        })
-        .catch(error => {
-          console.error('Error loading surprise links:', error);
-          alert('Sorry, the surprise feature is currently unavailable!');
-        });
-    });
-  </script>
+  <!-- Future scripts (deferred) -->
+  <!-- <script defer src="script.js"></script> -->
 </body>
 </html>
