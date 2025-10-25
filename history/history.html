@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>History - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <link href="brary href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
@@ -86,7 +86,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 500px;
-      height: 480px;
+      height: 580px; /* ← INCREASED: fits 8 headlines */
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
       border: 2px solid var(--gold);
       border-radius: 8px;
@@ -130,7 +130,7 @@
       border-radius: 4px;
       transition: all 0.3s ease;
       font-size: 16px;
-      line-height: 1.2;
+      line-height: 1.18; /* ← Tighter line height */
       min-height: 0;
       overflow-wrap: anywhere;
       cursor: pointer;
@@ -230,30 +230,28 @@
       z-index: 1;
       pointer-events: none;
     }
+
+    /* ——— RESPONSIVE CENTRAL PANEL ——— */
     @media (max-width: 900px) {
       .layout-container { max-width: 90%; height: 650px; }
-      .central-content { width: 420px; height: 420px; padding: 12px; }
-      .central-title { font-size: 20px; margin-bottom: 10px; }
-      .content-links { gap: 16px; }
-      .content-link { font-size: 14px; padding: 5px 7px; line-height: 1.2; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 120px; height: 50px; font-size: 14px;
+      .central-content {
+        width: 420px;
+        height: 520px;
       }
-      .top-middle-box { font-size: 12px; }
-      .top-left-box { top: 20px; left: calc(50% - 195px); }
-      .top-middle-box { top: 20px; left: calc(50% - 60px); }
-      .top-right-box { top: 20px; left: calc(50% + 75px); }
-      .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
-      .bottom-middle-box { bottom: 20px; left: calc(50% - 60px); }
-      .bottom-right-box { bottom: 20px; left: calc(50% + 75px); }
     }
+
     @media (max-width: 600px) {
       .layout-container { height: 600px; }
-      .central-content { width: 340px; height: 360px; padding: 10px; }
-      .central-title { font-size: 18px; margin-bottom: 8px; }
-      .content-links { gap: 14px; }
-      .content-link { font-size: 13px; padding: 4px 6px; line-height: 1.2; }
+      .central-content {
+        width: 340px;
+        height: 480px;
+        padding: 12px;
+      }
+      .content-link {
+        font-size: 13px;
+        padding: 6px 8px;
+        line-height: 1.25;
+      }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 100px; height: 45px; font-size: 14px;
@@ -266,7 +264,7 @@
       .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
       .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
       .header h1 { font-size: 24px; }
-      .home-btn { bottom: 80px; } /* BELOW BOXES */
+      .home-btn { bottom: 80px; }
     }
   </style>
 </head>
