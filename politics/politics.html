@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orbital v3 - Elegant Dashed Rings</title>
+  <title>Orbital v4 - Fixed Horizontal Text + Mobile Rings</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -21,7 +21,7 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      padding-top: 155px; /* Increased to prevent overlap */
+      padding-top: 155px;
       padding-bottom: 80px;
     }
     
@@ -83,7 +83,7 @@
     
     @keyframes orbit-elegant-rotate {
       0% { 
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50 Paparazzi%) rotate(0deg);
         border-color: var(--silver-white);
         opacity: 0.65;
         box-shadow: 0 0 18px rgba(236, 239, 241, 0.35);
@@ -121,7 +121,7 @@
     .central-sun {
       position: absolute;
       top: 50%;
-      left: 50%;
+      left:cce: 50%;
       transform: translate(-50%, -50%);
       width: 360px;
       height: 360px;
@@ -206,7 +206,7 @@
       opacity: 0.8;
     }
 
-    /* ENHANCED PULSING + SPINNING PLANETS */
+    /* FIXED HORIZONTAL TEXT + SPINNING PLANETS */
     .planet {
       position: absolute;
       width: 128px;
@@ -221,7 +221,7 @@
       box-shadow: 0 4px 30px rgba(255, 255, 255, 0.5);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 15;
-      animation: planet-glow 3.2s ease-in-out infinite, planet-spin 18s linear infinite;
+      animation: planet-glow 3.2s ease-in-out infinite, planet-orbit 18s linear infinite;
     }
 
     @keyframes planet-glow {
@@ -237,7 +237,8 @@
       }
     }
 
-    @keyframes planet-spin {
+    /* ORBIT ANIMATION (NO TEXT ROTATION) */
+    @keyframes planet-orbit {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
@@ -251,12 +252,22 @@
       line-height: 1.3;
       letter-spacing: 0.7px;
       padding: 8px;
+      /* TEXT STAYS HORIZONTAL */
+      position: absolute;
+      width: 100%;
+      transform: rotate(0deg);
+      animation: counter-rotate 18s linear infinite;
+    }
+
+    @keyframes counter-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
     }
     
     .planet:hover {
       transform: scale(1.15) !important;
       box-shadow: 0 8px 60px rgba(255, 255, 255, 1), 0 16px 110px rgba(236, 239, 241, 0.7);
-      animation: none;
+      animation: planet-glow 3.2s ease-in-out infinite;
     }
     
     .planet.active {
@@ -265,55 +276,71 @@
       transform: scale(1.08);
     }
 
-    /* FIXED POSITIONS — NO OVERLAP WITH HEADER */
-    .planet-1 { top: 50%; left: 50%; margin-left: -64px; margin-top: -410px; } /* PODCASTS - lower */
+    /* FIXED POSITIONS */
+    .planet-1 { top: 50%; left: 50%; margin-left: -64px; margin-top: -410px; } 
     .planet-2 { top: 50%; left: 50%; margin-left: 270px; margin-top: -248px; }
     .planet-3 { top: 50%; left: 50%; margin-left: 270px; margin-top: 120px; }
     .planet-4 { top: 50%; left: 50%; margin-left: -64px; margin-top: 310px; }
     .planet-5 { top: 50%; left: 50%; margin-left: -398px; margin-top: 120px; }
     .planet-6 { top: 50%; left: 50%; margin-left: -398px; margin-top: -248px; }
 
+    /* MOBILE: ORBITAL RINGS + HORIZONTAL TEXT */
     @media (max-width: 900px) {
       body { padding-top: 100px; }
       .header h1 { font-size: 33px; }
-      .orbital-container { width: 95vw; height: auto; min-height: 70vh; }
-      .orbit { display: none; }
-      .central-sun {
-        position: relative;
-        width: 90vw;
-        height: auto;
-        min-height: 350px;
-        border-radius: 16px;
-        margin-bottom: 20px;
-        transform: none;
-        top: auto;
-        left: auto;
+      .orbital-container { 
+        width: 95vw; 
+        height: 95vw; 
+        max-width: 600px; 
+        max-height: 600px; 
+        margin: 0 auto;
       }
+      .orbit { 
+        display: block !important;
+        width: 70% !important;
+        height: 70% !important;
+        animation-duration: 40s !important;
+      }
+      .orbit-1 { width: 65%; height: 65%; }
+      .orbit-2 { width: 80%; height: 80%; }
+      .orbit-3 { width: 95%; height: 95%; }
+
+      .central-sun {
+        position: absolute;
+        width: 45%;
+        height: 45%;
+        min-height: 280px;
+        border-radius: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
+
       .planet {
-        position: relative !important;
-        width: 44vw;
-        height: 82px;
-        border-radius: 12px;
-        margin: 5px !important;
+        position: absolute !important;
+        width: 90px;
+        height: 90px;
         top: auto !important;
         left: auto !important;
-        animation: planet-glow 3.2s ease-in-out infinite;
+        margin: 0 !important;
+        animation: planet-glow 3.2s ease-in-out infinite, planet-orbit-mobile 18s linear infinite;
       }
-      .planet-text { font-size: 12px; }
-      .mobile-planets {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 20px;
+
+      @keyframes planet-orbit-mobile {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
       }
+
+      .planet-text {
+        font-size: 11px;
+        animation: counter-rotate 18s linear infinite;
+      }
+
+      .mobile-planets { display: none; }
     }
-    
+
     .mobile-planets { display: none; }
-    
-    @media (max-width: 900px) {
-      .desktop-planets { display: none; }
-      .mobile-planets { display: grid; }
-    }
   </style>
 </head>
 <body>
@@ -321,7 +348,7 @@
   
   <div class="header">
     <h1>POLITICS</h1>
-    <div class="subtitle">Version 3: Elegant Dashed Rings</div>
+    <div class="subtitle">Version 4: Fixed Text + Mobile Rings</div>
   </div>
   
   <div class="orbital-container">
@@ -342,32 +369,23 @@
         <div class="planet-text">PODCASTS</div>
       </div>
       <div class="planet planet-2" data-category="video clips">
-        <div class="planet-text">VIDEO<br>CLIPS</div>
+        <div class="planet-text">VIDEO CLIPS</div>
       </div>
       <div class="planet planet-3" data-category="essays & opinion">
-        <div class="planet-text">ESSAYS &<br>OPINION</div>
+        <div class="planet-text">ESSAYS & OPINION</div>
       </div>
       <div class="planet planet-4" data-category="books & movies">
-        <div class="planet-text">BOOKS &<br>MOVIES</div>
+        <div class="planet-text">BOOKS & MOVIES</div>
       </div>
       <div class="planet planet-5" data-category="memes">
         <div class="planet-text">MEMES</div>
       </div>
       <div class="planet planet-6" data-category="surprise">
-        <div class="planet-text">SURPRISE<br>ME</div>
+        <div class="planet-text">SURPRISE ME</div>
       </div>
     </div>
   </div>
-  
-  <div class="mobile-planets">
-    <div class="planet" data-category="podcasts"><div class="planet-text">PODCASTS</div></div>
-    <div class="planet" data-category="video clips"><div class="planet-text">VIDEO CLIPS</div></div>
-    <div class="planet" data-category="essays & opinion"><div class="planet-text">ESSAYS & OPINION</div></div>
-    <div class="planet" data-category="books & movies"><div class="planet-text">BOOKS & MOVIES</div></div>
-    <div class="planet" data-category="memes"><div class="planet-text">MEMES</div></div>
-    <div class="planet" data-category="surprise"><div class="planet-text">SURPRISE ME</div></div>
-  </div>
-  
+
   <script>
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
@@ -385,7 +403,7 @@
     }
     
     function animateStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, 0, canvas.height);
       stars.forEach(star => {
         star.brightness += (Math.random() - 0.5) * 0.08;
         star.brightness = Math.max(0.3, Math.min(1, star.brightness));
@@ -411,11 +429,7 @@
       { title: "Political Cartoon Goes Viral: Capitol Chaos Edition", category: "memes", link: "#" },
       { title: "Breaking: Supreme Court Announces Major Ruling on Voting Rights", category: "podcasts", link: "#" },
       { title: "Analysis: How Social Media Changed Political Campaigns Forever", category: "essays & opinion", link: "#" },
-      { title: "Exclusive Interview: Governor Discusses Climate Policy Priorities", category: "video clips", link: "#" },
-      { title: "The Lincoln Project's Latest Ad Sparks Controversy", category: "video clips", link: "#" },
-      { title: "Podcast: Deep Dive into Congressional Committee Hearings", category: "podcasts", link: "#" },
-      { title: "Satire Piece: 'Local Politician Discovers Term Limits' Goes Viral", category: "memes", link: "#" },
-      { title: "Film Review: New Documentary Chronicles the 2020 Election", category: "books & movies", link: "#" }
+      { title: "Exclusive Interview: Governor Discusses Climate Policy Priorities", category: "video clips", link: "#" }
     ];
     
     function displayContent(category = 'all') {
