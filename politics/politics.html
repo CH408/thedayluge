@@ -37,9 +37,9 @@
     
     .header {
       text-align: center;
-      padding: 25px 20px;
+      padding: 25px 20px 15px;
       position: relative;
-      z-index: 10;
+      z-index: 100;
     }
     
     .header h1 {
@@ -78,13 +78,13 @@
     
     .orbital-container {
       position: relative;
-      width: min(85vh, 850px);
-      height: min(85vh, 850px);
+      width: min(80vh, 800px);
+      height: min(80vh, 800px);
       margin: 0 auto;
       z-index: 5;
     }
     
-    /* PERFECTLY CIRCULAR rotating orbit rings */
+    /* ROTATING orbit rings with visible markers */
     .orbit {
       position: absolute;
       top: 50%;
@@ -94,35 +94,47 @@
       border-radius: 50%;
       opacity: 0.6;
       box-shadow: 0 0 20px var(--silver-white), inset 0 0 20px rgba(236, 239, 241, 0.2);
-      animation: orbit-pulse 3s ease-in-out infinite;
     }
     
-    @keyframes orbit-pulse {
-      0%, 100% { 
-        border-color: var(--silver-medium);
-        box-shadow: 0 0 20px var(--silver-white), inset 0 0 20px rgba(236, 239, 241, 0.2);
-      }
-      50% { 
-        border-color: var(--silver-white);
-        box-shadow: 0 0 35px var(--silver-light), inset 0 0 30px rgba(236, 239, 241, 0.4);
-      }
+    /* Add visible markers on orbits to show rotation */
+    .orbit::before,
+    .orbit::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--silver-white);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--silver-white);
+    }
+    
+    .orbit::before {
+      top: -4px;
+      left: 50%;
+      margin-left: -4px;
+    }
+    
+    .orbit::after {
+      bottom: -4px;
+      left: 50%;
+      margin-left: -4px;
     }
     
     /* Perfectly circular - same width and height */
     .orbit-1 { 
       width: 600px; 
       height: 600px;
-      animation: orbit-pulse 3s ease-in-out infinite, rotate-orbit 60s linear infinite;
+      animation: rotate-orbit 60s linear infinite;
     }
     .orbit-2 { 
       width: 700px; 
       height: 700px;
-      animation: orbit-pulse 3s ease-in-out infinite 0.5s, rotate-orbit 80s linear infinite;
+      animation: rotate-orbit 80s linear infinite;
     }
     .orbit-3 { 
       width: 800px; 
       height: 800px;
-      animation: orbit-pulse 3s ease-in-out infinite 1s, rotate-orbit 100s linear infinite;
+      animation: rotate-orbit 100s linear infinite;
     }
     
     @keyframes rotate-orbit {
@@ -130,14 +142,14 @@
       to { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
-    /* Central sun (content hub) - perfectly circular */
+    /* Central sun (content hub) - perfectly circular with better sizing */
     .central-sun {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 420px;
-      height: 420px;
+      width: 450px;
+      height: 450px;
       background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
       border: 3px solid var(--silver-white);
       border-radius: 50%;
@@ -146,7 +158,7 @@
         0 0 80px var(--silver-medium),
         inset 0 0 60px rgba(236, 239, 241, 0.1);
       animation: sun-pulse 4s ease-in-out infinite;
-      padding: 35px;
+      padding: 40px 30px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -171,16 +183,17 @@
     }
     
     .sun-title {
-      font-size: 20px;
+      font-size: 18px;
       text-transform: uppercase;
       color: var(--silver-white);
       text-align: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
       border-bottom: 2px solid var(--silver-medium);
       text-shadow: 0 0 15px var(--silver-white);
       animation: text-glow 2.5s ease-in-out infinite;
       flex-shrink: 0;
+      line-height: 1.3;
     }
     
     @keyframes text-glow {
@@ -194,21 +207,21 @@
       }
     }
     
-    /* Scrolling container */
+    /* Scrolling container with improved masking */
     .sun-content {
       flex: 1;
       position: relative;
       overflow: hidden;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
     }
     
     .scroll-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       animation: auto-scroll 20s linear infinite;
-      padding: 20px 0;
+      padding: 15px 0;
     }
     
     @keyframes auto-scroll {
@@ -226,7 +239,7 @@
     
     /* Scrolling headlines */
     .content-link {
-      padding: 11px 14px;
+      padding: 10px 12px;
       background: rgba(236, 239, 241, 0.05);
       border: 1px solid var(--silver-medium);
       border-radius: 8px;
@@ -256,7 +269,7 @@
     
     .link-title {
       color: var(--silver-white);
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.4;
       text-decoration: none;
       display: block;
@@ -264,70 +277,81 @@
     }
     
     .link-category {
-      font-size: 10px;
-      color: var(--silver-medium);
+      font-size: 9px;
+      color: var(--silver-dark);
       text-transform: uppercase;
-      margin-top: 5px;
-      opacity: 0.9;
-      text-shadow: 0 0 5px var(--silver-medium);
+      margin-top: 4px;
+      letter-spacing: 1px;
     }
     
-    /* STATIONARY Planets with pulsing and rotating in place */
+    /* Planets - with stationary text using counter-rotation */
     .planet {
       position: absolute;
-      background: radial-gradient(circle at 30% 30%, var(--silver-light), var(--silver-medium));
-      border: 2px solid var(--silver-white);
-      border-radius: 50%;
       width: 115px;
       height: 115px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(236, 239, 241, 0.2), rgba(236, 239, 241, 0.05));
+      border: 2px solid var(--silver-medium);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
-      font-weight: 900;
-      text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 25px var(--silver-white), inset 0 0 15px rgba(236, 239, 241, 0.3);
-      text-align: center;
-      line-height: 1.1;
-      padding: 10px;
-      z-index: 10;
-      color: #000;
-      text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
-      /* STATIONARY - no floating, just pulse and spin */
-      animation: planet-pulse 3s ease-in-out infinite, planet-spin 8s linear infinite;
+      box-shadow: 0 0 25px rgba(236, 239, 241, 0.3), inset 0 0 25px rgba(236, 239, 241, 0.1);
+      transition: all 0.4s ease;
+      z-index: 15;
+      animation: planet-pulse 3s ease-in-out infinite;
     }
     
-    /* Pulse effect - scales and glows */
     @keyframes planet-pulse {
       0%, 100% { 
-        box-shadow: 0 0 25px var(--silver-white), inset 0 0 15px rgba(236, 239, 241, 0.3);
-        border-color: var(--silver-white);
-        transform: scale(1);
+        transform: rotate(0deg) scale(1);
+        box-shadow: 0 0 25px rgba(236, 239, 241, 0.3), inset 0 0 25px rgba(236, 239, 241, 0.1);
+        border-color: var(--silver-medium);
       }
       50% { 
-        box-shadow: 0 0 40px var(--silver-light), inset 0 0 25px rgba(236, 239, 241, 0.5);
-        border-color: var(--silver-light);
-        transform: scale(1.08);
+        transform: rotate(5deg) scale(1.05);
+        box-shadow: 0 0 40px rgba(236, 239, 241, 0.5), inset 0 0 40px rgba(236, 239, 241, 0.2);
+        border-color: var(--silver-white);
       }
     }
     
-    /* Rotate in place */
-    @keyframes planet-spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    /* CRITICAL: Inner text wrapper that counter-rotates to stay stationary */
+    .planet-text {
+      animation: counter-rotate 3s ease-in-out infinite;
+      text-align: center;
+      font-size: 12px;
+      color: var(--silver-white);
+      text-transform: uppercase;
+      text-shadow: 0 0 10px var(--silver-white);
+      line-height: 1.3;
+      letter-spacing: 1px;
+      padding: 5px;
+    }
+    
+    @keyframes counter-rotate {
+      0%, 100% { 
+        transform: rotate(0deg);
+      }
+      50% { 
+        transform: rotate(-5deg);
+      }
     }
     
     .planet:hover {
-      transform: scale(1.25) !important;
-      box-shadow: 0 0 50px var(--silver-light), inset 0 0 30px rgba(236, 239, 241, 0.6);
-      background: radial-gradient(circle at 30% 30%, var(--platinum), var(--chrome));
+      transform: scale(1.15) !important;
+      box-shadow: 0 0 45px var(--silver-white), inset 0 0 35px rgba(236, 239, 241, 0.3);
+      border-color: var(--silver-white);
+    }
+    
+    .planet:hover .planet-text {
+      transform: rotate(0deg) !important;
+      text-shadow: 0 0 20px var(--silver-white);
     }
     
     .planet.active {
-      background: radial-gradient(circle at 30% 30%, #fff, var(--silver-light));
-      box-shadow: 0 0 60px var(--silver-light);
+      background: radial-gradient(circle at 30% 30%, rgba(236, 239, 241, 0.4), rgba(236, 239, 241, 0.15));
+      border-color: var(--silver-white);
+      box-shadow: 0 0 50px var(--silver-white), inset 0 0 40px rgba(236, 239, 241, 0.3);
     }
     
     /* Position planets in perfect circle around center - STATIONARY positions */
@@ -382,6 +406,7 @@
     /* Mobile responsive */
     @media (max-width: 900px) {
       .header h1 { font-size: 28px; }
+      .header { padding: 20px 15px 10px; }
       
       .orbital-container {
         width: 95vw;
@@ -437,11 +462,11 @@
   
   <div class="header">
     <h1>POLITICS</h1>
-    <div class="subtitle">🪐 Orbital v2 • Circular Rings • Stationary Planets</div>
+    <div class="subtitle">🪐 Orbital v2 • Rotating Rings • Stationary Text</div>
   </div>
   
   <div class="orbital-container">
-    <!-- Perfectly circular rotating orbit rings -->
+    <!-- Perfectly circular rotating orbit rings with visible markers -->
     <div class="orbit orbit-1"></div>
     <div class="orbit orbit-2"></div>
     <div class="orbit orbit-3"></div>
@@ -456,25 +481,49 @@
       </div>
     </div>
     
-    <!-- Desktop: Stationary pulsing/rotating planets -->
+    <!-- Desktop: Stationary pulsing/rotating planets with counter-rotating text -->
     <div class="desktop-planets">
-      <div class="planet planet-1" data-category="podcasts">PODCASTS</div>
-      <div class="planet planet-2" data-category="video clips">VIDEO<br>CLIPS</div>
-      <div class="planet planet-3" data-category="essays & opinion">ESSAYS &<br>OPINION</div>
-      <div class="planet planet-4" data-category="books & movies">BOOKS &<br>MOVIES</div>
-      <div class="planet planet-5" data-category="memes">MEMES</div>
-      <div class="planet planet-6" data-category="surprise">SURPRISE<br>ME</div>
+      <div class="planet planet-1" data-category="podcasts">
+        <div class="planet-text">PODCASTS</div>
+      </div>
+      <div class="planet planet-2" data-category="video clips">
+        <div class="planet-text">VIDEO<br>CLIPS</div>
+      </div>
+      <div class="planet planet-3" data-category="essays & opinion">
+        <div class="planet-text">ESSAYS &<br>OPINION</div>
+      </div>
+      <div class="planet planet-4" data-category="books & movies">
+        <div class="planet-text">BOOKS &<br>MOVIES</div>
+      </div>
+      <div class="planet planet-5" data-category="memes">
+        <div class="planet-text">MEMES</div>
+      </div>
+      <div class="planet planet-6" data-category="surprise">
+        <div class="planet-text">SURPRISE<br>ME</div>
+      </div>
     </div>
   </div>
   
   <!-- Mobile: Grid layout -->
   <div class="mobile-planets">
-    <div class="planet" data-category="podcasts">PODCASTS</div>
-    <div class="planet" data-category="video clips">VIDEO CLIPS</div>
-    <div class="planet" data-category="essays & opinion">ESSAYS & OPINION</div>
-    <div class="planet" data-category="books & movies">BOOKS & MOVIES</div>
-    <div class="planet" data-category="memes">MEMES</div>
-    <div class="planet" data-category="surprise">SURPRISE ME</div>
+    <div class="planet" data-category="podcasts">
+      <div class="planet-text">PODCASTS</div>
+    </div>
+    <div class="planet" data-category="video clips">
+      <div class="planet-text">VIDEO CLIPS</div>
+    </div>
+    <div class="planet" data-category="essays & opinion">
+      <div class="planet-text">ESSAYS & OPINION</div>
+    </div>
+    <div class="planet" data-category="books & movies">
+      <div class="planet-text">BOOKS & MOVIES</div>
+    </div>
+    <div class="planet" data-category="memes">
+      <div class="planet-text">MEMES</div>
+    </div>
+    <div class="planet" data-category="surprise">
+      <div class="planet-text">SURPRISE ME</div>
+    </div>
   </div>
   
   <script>
