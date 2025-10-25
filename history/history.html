@@ -52,9 +52,11 @@
     }
     @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
     @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+
+    /* ——— HEADER ——— */
     .header {
       position: absolute;
-      top: 15px;
+      top: 8px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -72,21 +74,32 @@
       50% { color: var(--gold-light); text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
       100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
     }
-    .layout-container {
+
+    /* ——— LAYOUT WRAPPER (anchors button) ——— */
+    .layout-wrapper {
       position: relative;
       width: 100%;
       max-width: 800px;
-      height: 750px;
-      margin: 40px auto 0;
+      margin: 30px auto 80px; /* ← space for button */
       z-index: 5;
     }
+
+    /* ——— LAYOUT CONTAINER ——— */
+    .layout-container {
+      position: relative;
+      width: 100%;
+      height: 750px;
+      z-index: 5;
+    }
+
+    /* ——— CENTRAL CONTENT ——— */
     .central-content {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 500px;
-      height: 480px;
+      height: 580px;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
       border: 2px solid var(--gold);
       border-radius: 8px;
@@ -130,7 +143,7 @@
       border-radius: 4px;
       transition: all 0.3s ease;
       font-size: 16px;
-      line-height: 1.2;
+      line-height: 1.18;
       min-height: 0;
       overflow-wrap: anywhere;
       cursor: pointer;
@@ -166,6 +179,8 @@
       color: var(--gold);
       padding: 10px;
     }
+
+    /* ——— PERIMETER BOXES ——— */
     .perimeter-box {
       position: absolute;
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
@@ -195,15 +210,19 @@
       box-shadow: 0 0 35px rgba(255,215,0,0.9);
       background: var(--dark-gray);
     }
-    .top-left-box { top: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; }
-    .top-middle-box { top: 30px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
-    .top-right-box { top: 30px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 18px; }
-    .bottom-left-box { bottom: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 16px; }
-    .bottom-middle-box { bottom: 30px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
-    .bottom-right-box { bottom: 30px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 16px; }
+    .top-left-box    { top: 18px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; }
+    .top-middle-box  { top: 18px; left: calc(50% - 75px);  width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
+    .top-right-box   { top: 18px; left: calc(50% + 95px);  width: 150px; height: 60px; font-size: 18px; }
+    .bottom-left-box { bottom: 18px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 16px; }
+    .bottom-middle-box { bottom: 18px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
+    .bottom-right-box  { bottom: 18px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 16px; }
+
+    /* ——— BACK TO HOME BUTTON ——— */
     .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
+      position: absolute;
+      bottom: -55px; /* ← Now anchored to .layout-wrapper */
+      left: 50%;
+      transform: translateX(-50%);
       background: var(--black-bg);
       color: var(--gold);
       border: 2px solid var(--gold);
@@ -218,77 +237,89 @@
       text-shadow: 0 0 5px var(--gold);
       box-shadow: 0 0 10px rgba(255,215,0,0.3);
       z-index: 20;
+      white-space: nowrap;
     }
     .home-btn:hover {
       background: var(--dark-gray);
-      transform: scale(1.05);
+      transform: translateX(-50%) scale(1.05);
       box-shadow: 0 0 20px rgba(255,215,0,0.6);
     }
+
     #particle-canvas {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: 1;
       pointer-events: none;
     }
+
+    /* ——— RESPONSIVE ——— */
     @media (max-width: 900px) {
-      .layout-container { max-width: 90%; height: 650px; }
-      .central-content { width: 420px; height: 420px; padding: 12px; }
-      .central-title { font-size: 20px; margin-bottom: 10px; }
-      .content-links { gap: 16px; }
-      .content-link { font-size: 14px; padding: 5px 7px; line-height: 1.2; }
+      .layout-wrapper { margin: 20px auto 70px; }
+      .layout-container { height: 650px; }
+      .central-content { width: 420px; height: 520px; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 120px; height: 50px; font-size: 14px;
       }
       .top-middle-box { font-size: 12px; }
-      .top-left-box { top: 20px; left: calc(50% - 195px); }
-      .top-middle-box { top: 20px; left: calc(50% - 60px); }
-      .top-right-box { top: 20px; left: calc(50% + 75px); }
-      .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
-      .bottom-middle-box { bottom: 20px; left: calc(50% - 60px); }
-      .bottom-right-box { bottom: 20px; left: calc(50% + 75px); }
+      .top-left-box    { top: 12px; left: calc(50% - 195px); }
+      .top-middle-box  { top: 12px; left: calc(50% - 60px); }
+      .top-right-box   { top: 12px; left: calc(50% + 75px); }
+      .bottom-left-box { bottom: 12px; left: calc(50% - 195px); }
+      .bottom-middle-box { bottom: 12px; left: calc(50% - 60px); }
+      .bottom-right-box  { bottom: 12px; left: calc(50% + 75px); }
+      .home-btn { bottom: -50px; }
     }
+
     @media (max-width: 600px) {
+      .layout-wrapper { margin: 15px auto 65px; }
       .layout-container { height: 600px; }
-      .central-content { width: 340px; height: 360px; padding: 10px; }
-      .central-title { font-size: 18px; margin-bottom: 8px; }
-      .content-links { gap: 14px; }
-      .content-link { font-size: 13px; padding: 4px 6px; line-height: 1.2; }
+      .central-content { width: 340px; height: 480px; padding: 12px; }
+      .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 100px; height: 45px; font-size: 14px;
       }
       .top-middle-box { font-size: 10px; }
-      .top-left-box { top: 15px; left: calc(50% - 160px); }
-      .top-middle-box { top: 15px; left: calc(50% - 50px); }
-      .top-right-box { top: 15px; left: calc(50% + 60px); }
-      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
-      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
-      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
+      .top-left-box    { top: 8px; left: calc(50% - 160px); }
+      .top-middle-box  { top: 8px; left: calc(50% - 50px); }
+      .top-right-box   { top: 8px; left: calc(50% + 60px); }
+      .bottom-left-box { bottom: 8px; left: calc(50% - 160px); }
+      .bottom-middle-box { bottom: 8px; left: calc(50% - 50px); }
+      .bottom-right-box  { bottom: 8px; left: calc(50% + 60px); }
       .header h1 { font-size: 24px; }
-      .home-btn { bottom: 80px; } /* BELOW BOXES */
+      .home-btn { 
+        bottom: -48px; 
+        font-size: 12px; 
+        padding: 8px 16px; 
+      }
     }
   </style>
 </head>
 <body>
   <div class="header"><h1>THE DAYLUGE - HISTORY</h1></div>
-  <a href="/" class="home-btn">Back to Home</a>
   <canvas id="particle-canvas"></canvas>
   
-  <div class="layout-container">
-    <div class="central-content">
-      <div class="central-title">Latest History</div>
-      <div class="content-links">
-        <div class="loading-indicator">Loading...</div>
+  <!-- NEW: Wrapper anchors the button -->
+  <div class="layout-wrapper">
+    <div class="layout-container">
+      <div class="central-content">
+        <div class="central-title">Latest History</div>
+        <div class="content-links">
+          <div class="loading-indicator">Loading...</div>
+        </div>
       </div>
+      
+      <div class="perimeter-box top-left-box" onclick="window.location.href='./hist-podcasts.html'">Podcasts</div>
+      <div class="perimeter-box top-middle-box" onclick="window.location.href='./hist-articles-longform.html'">Articles & Longform</div>
+      <div class="perimeter-box top-right-box" onclick="window.location.href='./hist-clips.html'">Video Clips</div>
+      <div class="perimeter-box bottom-left-box" onclick="window.location.href='./hist-books.html'">Books</div>
+      <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./hist-memes.html'">Memes</div>
+      <div class="perimeter-box bottom-right-box" onclick="window.location.href='./hist-tv-movies.html'">TV & Movies</div>
     </div>
-    
-    <div class="perimeter-box top-left-box" onclick="window.location.href='./hist-podcasts.html'">Podcasts</div>
-    <div class="perimeter-box top-middle-box" onclick="window.location.href='./hist-articles-longform.html'">Articles & Longform</div>
-    <div class="perimeter-box top-right-box" onclick="window.location.href='./hist-clips.html'">Video Clips</div>
-    <div class="perimeter-box bottom-left-box" onclick="window.location.href='./hist-books.html'">Books</div>
-    <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./hist-memes.html'">Memes</div>
-    <div class="perimeter-box bottom-right-box" onclick="window.location.href='./hist-tv-movies.html'">TV & Movies</div>
+
+    <!-- Button now safely inside wrapper -->
+    <a href="/" class="home-btn">Back to Home</a>
   </div>
   
   <script>
