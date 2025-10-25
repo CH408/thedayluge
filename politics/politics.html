@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Orbital v3 - Dynamic Nebula</title>
+  <title>Orbital v3 - Final Edition</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -67,7 +67,6 @@
       letter-spacing: 2.5px;
     }
     
-    /* CONTAINER SCALED TO FIT LAPTOP */
     .orbital-container {
       position: relative;
       width: 660px;
@@ -79,7 +78,7 @@
       z-index: 5;
     }
     
-    /* DYNAMIC NEBULA ORBITAL RINGS — PULSING + ORBITING */
+    /* DYNAMIC NEBULA ORBITAL RINGS */
     .orbit {
       position: absolute;
       border-radius: 50%;
@@ -104,7 +103,7 @@
         box-shadow: 
           0 0 35px 10px rgba(167, 255, 235, 0.28),
           0 0 70px 18px rgba(178, 235, 242, 0.18),
-          inset 0 0 50px rgba(236, 239, 2410.08);
+          inset 0 0 50px rgba(236, 239, 241, 0.08);
         opacity: 0.75;
       }
       100% {
@@ -116,23 +115,10 @@
       }
     }
 
-    .orbit-1 { 
-      width: 480px; height: 480px; 
-      top: 50%; left: 50%;
-      animation-duration: 45s, 3.8s;
-    }
-    .orbit-2 { 
-      width: 570px; height: 570px; 
-      top: 50%; left: 50%;
-      animation-duration: 65s, 4.2s;
-    }
-    .orbit-3 { 
-      width: 660px; height: 660px; 
-      top: 50%; left: 50%;
-      animation-duration: 85s, 4.6s;
-    }
+    .orbit-1 { width: 480px; height: 480px; top: 50%; left: 50%; animation-duration: 45s, 3.8s; }
+    .orbit-2 { width: 570px; height: 570px; top: 50%; left: 50%; animation-duration: 65s, 4.2s; }
+    .orbit-3 { width: 660px; height: 660px; top: 50%; left: 50%; animation-duration: 85s, 4.6s; }
     
-    /* COMPACT CENTRAL SUN */
     .central-sun {
       position: absolute;
       top: 50%; left: 50%;
@@ -287,15 +273,14 @@
       transform: scale(1.09);
     }
 
-    /* TIGHTER PLANET POSITIONS */
-    .planet-1 { top: 50%; left: 50%; margin-left: -58px; margin-top: -350px; }
-    .planet-2 { top: 50%; left: 50%; margin-left: 234px; margin-top: -216px; }
-    .planet-3 { top: 50%; left: 50%; margin-left: 234px; margin-top: 102px; }
-    .planet-4 { top: 50%; left: 50%; margin-left: -58px; margin-top: 270px; }
-    .planet-5 { top: 50%; left: 50%; margin-left: -342px; margin-top: 102px; }
-    .planet-6 { top: 50%; left: 50%; margin-left: -342px; margin-top: -216px; }
+    /* FINAL CLOCKWISE ORDER — STARTING AT 12:00 */
+    .planet-1 { top: 50%; left: 50%; margin-left: -58px; margin-top: -350px; } /* 12:00 - ESSAYS & OPINION */
+    .planet-2 { top: 50%; left: 50%; margin-left: 234px; margin-top: -216px; }  /* 2:00 - VIDEO CLIPS */
+    .planet-3 { top: 50%; left: 50%; margin-left: 234px; margin-top: 102px; }   /* 4:00 - MEMES */
+    .planet-4 { top: 50%; left: 50%; margin-left: -58px; margin-top: 270px; }   /* 6:00 - BOOKS & MOVIES */
+    .planet-5 { top: 50%; left: 50%; margin-left: -342px; margin-top: 102px; }  /* 8:00 - SURPRISE ME */
+    .planet-6 { top: 50%; left: 50%; margin-left: -342px; margin-top: -216px; } /* 10:00 - PODCASTS */
 
-    /* MOBILE: COMPACT & CLEAN */
     @media (max-width: 900px) {
       body { padding-top: 100px; padding-bottom: 70px; }
       .header h1 { font-size: 32px; }
@@ -374,7 +359,7 @@
   
   <div class="header">
     <h1>POLITICS</h1>
-    <div class="subtitle">Version 3: Dynamic Nebula</div>
+    <div class="subtitle">Version 3: Final Edition</div>
   </div>
   
   <div class="orbital-container">
@@ -391,34 +376,40 @@
     </div>
     
     <div class="desktop-planets">
-      <div class="planet planet-1" data-category="podcasts">
-        <div class="planet-inner"><div class="planet-text">PODCASTS</div></div>
+      <!-- 12:00 - ESSAYS & OPINION -->
+      <div class="planet planet-1" data-category="essays & opinion">
+        <div class="planet-inner"><div class="planet-text">ESSAYS &<br>OPINION</div></div>
       </div>
+      <!-- 2:00 - VIDEO CLIPS -->
       <div class="planet planet-2" data-category="video clips">
         <div class="planet-inner"><div class="planet-text">VIDEO<br>CLIPS</div></div>
       </div>
-      <div class="planet planet-3" data-category="essays & opinion">
-        <div class="planet-inner"><div class="planet-text">ESSAYS &<br>OPINION</div></div>
+      <!-- 4:00 - MEMES -->
+      <div class="planet planet-3" data-category="memes">
+        <div class="planet-inner"><div class="planet-text">MEMES</div></div>
       </div>
+      <!-- 6:00 - BOOKS & MOVIES -->
       <div class="planet planet-4" data-category="books & movies">
         <div class="planet-inner"><div class="planet-text">BOOKS &<br>MOVIES</div></div>
       </div>
-      <div class="planet planet-5" data-category="memes">
-        <div class="planet-inner"><div class="planet-text">MEMES</div></div>
-      </div>
-      <div class="planet planet-6" data-category="surprise">
+      <!-- 8:00 - SURPRISE ME -->
+      <div class="planet planet-5" data-category="surprise">
         <div class="planet-inner"><div class="planet-text">SURPRISE<br>ME</div></div>
+      </div>
+      <!-- 10:00 - PODCASTS -->
+      <div class="planet planet-6" data-category="podcasts">
+        <div class="planet-inner"><div class="planet-text">PODCASTS</div></div>
       </div>
     </div>
   </div>
   
   <div class="mobile-planets">
-    <div class="planet" data-category="podcasts"><div class="planet-text">PODCASTS</div></div>
-    <div class="planet" data-category="video clips"><div class="planet-text">VIDEO CLIPS</div></div>
     <div class="planet" data-category="essays & opinion"><div class="planet-text">ESSAYS & OPINION</div></div>
-    <div class="planet" data-category="books & movies"><div class="planet-text">BOOKS & MOVIES</div></div>
+    <div class="planet" data-category="video clips"><div class="planet-text">VIDEO CLIPS</div></div>
     <div class="planet" data-category="memes"><div class="planet-text">MEMES</div></div>
+    <div class="planet" data-category="books & movies"><div class="planet-text">BOOKS & MOVIES</div></div>
     <div class="planet" data-category="surprise"><div class="planet-text">SURPRISE ME</div></div>
+    <div class="planet" data-category="podcasts"><div class="planet-text">PODCASTS</div></div>
   </div>
 
   <div class="version-nav">
@@ -466,18 +457,18 @@
     });
     
     const allContent = [
-      { title: "Senate Passes Bipartisan Infrastructure Bill in Historic Vote", category: "podcasts", link: "#" },
-      { title: "Documentary: Inside the Campaign Trail - Behind the Scenes", category: "video clips", link: "#" },
       { title: "Op-Ed: Why Democracy Needs Stronger Civic Education", category: "essays & opinion", link: "#" },
-      { title: "Book Review: 'The New Populism' Examines Global Political Shifts", category: "books & movies", link: "#" },
-      { title: "Political Cartoon Goes Viral: Capitol Chaos Edition", category: "memes", link: "#" },
-      { title: "Breaking: Supreme Court Announces Major Ruling on Voting Rights", category: "podcasts", link: "#" },
       { title: "Analysis: How Social Media Changed Political Campaigns Forever", category: "essays & opinion", link: "#" },
+      { title: "Documentary: Inside the Campaign Trail - Behind the Scenes", category: "video clips", link: "#" },
       { title: "Exclusive Interview: Governor Discusses Climate Policy Priorities", category: "video clips", link: "#" },
       { title: "The Lincoln Project's Latest Ad Sparks Controversy", category: "video clips", link: "#" },
-      { title: "Podcast: Deep Dive into Congressional Committee Hearings", category: "podcasts", link: "#" },
+      { title: "Political Cartoon Goes Viral: Capitol Chaos Edition", category: "memes", link: "#" },
       { title: "Satire Piece: 'Local Politician Discovers Term Limits' Goes Viral", category: "memes", link: "#" },
-      { title: "Film Review: New Documentary Chronicles the 2020 Election", category: "books & movies", link: "#" }
+      { title: "Book Review: 'The New Populism' Examines Global Political Shifts", category: "books & movies", link: "#" },
+      { title: "Film Review: New Documentary Chronicles the 2020 Election", category: "books & movies", link: "#" },
+      { title: "Senate Passes Bipartisan Infrastructure Bill in Historic Vote", category: "podcasts", link: "#" },
+      { title: "Breaking: Supreme Court Announces Major Ruling on Voting Rights", category: "podcasts", link: "#" },
+      { title: "Podcast: Deep Dive into Congressional Committee Hearings", category: "podcasts", link: "#" }
     ];
     
     function displayContent(category = 'all') {
