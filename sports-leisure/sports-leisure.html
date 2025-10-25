@@ -54,7 +54,7 @@
     @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
     .header {
       position: absolute;
-      top: 20px;
+      top: 15px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -63,7 +63,7 @@
     .header h1 {
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      font-size: 32px;
+      font-size: 28px;
       margin-bottom: 8px;
       animation: title-pulse 8s ease-in-out infinite;
     }
@@ -103,7 +103,7 @@
     }
     .central-title {
       text-align: center;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -129,7 +129,7 @@
       border: 1px solid rgba(0,212,255,0.3);
       border-radius: 4px;
       transition: all 0.3s ease;
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.2;
       min-height: 0;
       overflow-wrap: anywhere;
@@ -162,7 +162,7 @@
     }
     .loading-indicator {
       text-align: center;
-      font-size: 15px;
+      font-size: 16px;
       color: var(--electric-blue);
       padding: 10px;
     }
@@ -192,7 +192,7 @@
     }
     .perimeter-box:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 5px rgba(0,212,255,0.9);
+      box-shadow: 0 0 35px rgba(0,212,255,0.9);
       background: var(--dark-gray);
     }
     .top-left-box { top: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; }
@@ -233,15 +233,15 @@
     @media (max-width: 900px) {
       .layout-container { max-width: 90%; height: 650px; }
       .central-content { width: 420px; height: 420px; padding: 12px; }
-      .central-title { font-size: 18px; margin-bottom: 10px; }
+      .central-title { font-size: 20px; margin-bottom: 10px; }
       .content-links { gap: 16px; }
-      .content-link { font-size: 13px; padding: 5px 7px; line-height: 1.2; }
+      .content-link { font-size: 14px; padding: 5px 7px; line-height: 1.2; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
         width: 120px; height: 50px; font-size: 14px;
       }
       .top-middle-box { font-size: 12px; }
-      .top-left-box { top: 20px; left: calc(50% -  Invoice195px); }
+      .top-left-box { top: 20px; left: calc(50% - 195px); }
       .top-middle-box { top: 20px; left: calc(50% - 60px); }
       .top-right-box { top: 20px; left: calc(50% + 75px); }
       .bottom-left-box { bottom: 20px; left: calc(50% - 195px); }
@@ -251,12 +251,12 @@
     @media (max-width: 600px) {
       .layout-container { height: 600px; }
       .central-content { width: 340px; height: 360px; padding: 10px; }
-      .central-title { font-size: 14px; margin-bottom: 8px; }
+      .central-title { font-size: 18px; margin-bottom: 8px; }
       .content-links { gap: 14px; }
-      .content-link { font-size: 11px; padding: 4px 6px; line-height: 1.2; }
+      .content-link { font-size: 13px; padding: 4px 6px; line-height: 1.2; }
       .top-left-box, .top-middle-box, .top-right-box,
       .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 100px; height: 45px; font-size: 12px;
+        width: 100px; height: 45px; font-size: 14px;
       }
       .top-middle-box { font-size: 10px; }
       .top-left-box { top: 15px; left: calc(50% - 160px); }
@@ -265,7 +265,8 @@
       .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
       .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
       .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
-      .header h1 { font-size: 28px; }
+      .header h1 { font-size: 24px; }
+      .home-btn { bottom: 80px; }
     }
   </style>
 </head>
@@ -353,7 +354,9 @@
             return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim() };
           }).filter(e => e);
           
-          const latest8 = entries.slice(0, 8);
+          const nonMemeEntries = entries.filter(e => e.category !== 'memes');
+          const latest8 = nonMemeEntries.slice(0, 8);
+          
           container.innerHTML = '';
           latest8.forEach((e, i) => {
             const el = document.createElement('div');
@@ -363,7 +366,7 @@
             container.appendChild(el);
           });
         } catch (err) {
-          container.innerHTML = `<div class="content-link" style="border-color:#ff4444;opacity:1"><a style="color:#ff8888">Error: ${err.message}</a></div>`;
+          container.innerHTML = `<div class, "content-link" style="border-color:#ff4444;opacity:1"><a style="color:#ff8888">Error: ${err.message}</a></div>`;
         }
       }
       
