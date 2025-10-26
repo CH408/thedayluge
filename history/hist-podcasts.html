@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - HISTORY: Podcasts — Deep-dive history podcasts, episodes, and audio documentaries. Curated daily.">
+  <meta name="description" content="THE DAYLUGE - HISTORY: Podcasts — Deep audio dives into the past. Curated daily.">
   <meta property="og:title" content="Podcasts - History - THE DAYLUGE">
-  <meta property="og:description" content="Daily curated history podcasts and audio documentaries. Fresh every day.">
+  <meta property="og:description" content="Top history podcasts, episodes, and audio stories. Updated daily.">
   <meta property="og:image" content="https://thedayluge.com/og-history-podcasts.jpg">
   <meta property="og:url" content="https://thedayluge.com/history/hist-podcasts.html">
   <meta property="og:type" content="website">
@@ -380,7 +380,7 @@
         });
 
         if (pageItems.length === 0 && allEntries.length > 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No more podcasts.</em></div>';
+          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No podcasts available yet.</em></div>';
         }
 
         renderPagination();
@@ -446,7 +446,7 @@
             const p = line.split('|');
             if (p.length < 3) return null;
             return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e && e.category === 'pod-ep');
+          }).filter(e => e && e.category === 'podcasts');
 
           currentPage = 1;
           renderPage(1);
