@@ -116,7 +116,7 @@
       animation: pulse 3s ease-in-out infinite;
     }
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(255,215,0,0.5), 0 4px 12px rgba(0,0,0,0.8); }
+      0%, 100% { box-shadow: 0 0 30 Cpx rgba(255,215,0,0.5), 0 4px 12px rgba(0,0,0,0.8); }
       50% { box-shadow: 0 0 40px rgba(255,215,0,0.8), 0 6px 16px rgba(0,0,0,0.4); }
     }
 
@@ -209,6 +209,7 @@
       margin-top: 12px;
       flex-wrap: wrap;
       font-size: 14px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
     .page-btn {
       background: transparent;
@@ -220,6 +221,7 @@
       min-width: 32px;
       text-align: center;
       transition: all 0.2s;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
     .page-btn:hover {
       background: rgba(255,215,0,0.2);
@@ -233,6 +235,7 @@
     .page-ellipsis {
       color: #aaa;
       padding: 4px 4px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
 
     .home-btn {
@@ -377,7 +380,7 @@
         });
 
         if (pageItems.length === 0 && allEntries.length > 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No more articles.</em></div>';
+          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No articles available yet.</em></div>';
         }
 
         renderPagination();
@@ -395,18 +398,15 @@
           startPage = Math.max(1, endPage - maxVisible + 1);
         }
 
-        // First page
         if (startPage > 1) {
           addPageBtn(1);
           if (startPage > 2) addEllipsis();
         }
 
-        // Middle pages
         for (let i = startPage; i <= endPage; i++) {
           addPageBtn(i);
         }
 
-        // Last page
         if (endPage < totalPages) {
           if (endPage < totalPages - 1) addEllipsis();
           addPageBtn(totalPages);
