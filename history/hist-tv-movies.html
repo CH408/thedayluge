@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - HISTORY: TV & Movies — Curated history documentaries, films, and series. Updated daily.">
+  <meta name="description" content="THE DAYLUGE - HISTORY: TV & Movies — Cinematic journeys through time. Curated daily.">
   <meta property="og:title" content="TV & Movies - History - THE DAYLUGE">
-  <meta property="og:description" content="Daily curated history TV shows, movies, and documentaries. Fresh every day.">
+  <meta property="og:description" content="History documentaries, films, series, and movie clips. Updated daily.">
   <meta property="og:image" content="https://thedayluge.com/og-history-tv-movies.jpg">
   <meta property="og:url" content="https://thedayluge.com/history/hist-tv-movies.html">
   <meta property="og:type" content="website">
@@ -380,7 +380,7 @@
         });
 
         if (pageItems.length === 0 && allEntries.length > 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No more entries.</em></div>';
+          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No TV or movies available yet.</em></div>';
         }
 
         renderPagination();
@@ -446,7 +446,7 @@
             const p = line.split('|');
             if (p.length < 3) return null;
             return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e && e.category === 'tv-movie');
+          }).filter(e => e && e.category === 'tv-movies');
 
           currentPage = 1;
           renderPage(1);
@@ -454,7 +454,7 @@
         } catch (err) {
           container.innerHTML = `
             <div class="error-state" role="alert">
-              <p>Failed to load TV & Movies: ${err.message}</p>
+              <p>Failed to load TV & movies: ${err.message}</p>
               <button class="retry-btn" onclick="loadContent()">Retry</button>
             </div>
           `;
