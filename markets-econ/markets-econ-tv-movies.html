@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - MARKETS & ECONOMICS: Real-time insights, analysis, and commentary. Curated daily.">
-  <meta property="og:title" content="Markets & Economics - THE DAYLUGE">
-  <meta property="og:description" content="Latest market updates, economic analysis, podcasts, books, and more. Updated daily.">
-  <meta property="og:image" content="https://thedayluge.com/og-markets-econ.jpg">
-  <meta property="og:url" content="https://thedayluge.com/markets-econ/markets-econ.html">
+  <meta name="description" content="THE DAYLUGE - MARKETS & ECONOMICS: Movies & TV — Films and shows about finance, trading, and economic history. Curated daily.">
+  <meta property="og:title" content="Movies & TV - Markets & Economics - THE DAYLUGE">
+  <meta property="og:description" content="Essential documentaries, dramas, and series on markets, money, and power. Updated daily.">
+  <meta property="og:image" content="https://thedayluge.com/og-markets-econ-tv-movies.jpg">
+  <meta property="og:url" content="https://thedayluge.com/markets-econ/markets-econ-tv-movies.html">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#000000">
-  <link rel="canonical" href="https://thedayluge.com/markets-econ/markets-econ.html">
+  <link rel="canonical" href="https://thedayluge.com/markets-econ/markets-econ-tv-movies.html">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <title>Markets & Economics - THE DAYLUGE</title>
+  <title>Movies & TV - Markets & Economics - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --gold: #00cc44;
-      --gold-light: #33ff77;
+      --gold-light: #33ff66;
       --ink: #111;
       --black-bg: #000000;
       --dark-gray: #111111;
@@ -202,43 +202,41 @@
       font-size: 13px;
     }
 
-    .perimeter-box {
-      position: absolute;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 6px;
+    .pagination {
       display: flex;
-      align-items: center;
       justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,204,68,0.4);
-      animation: electron-pulse 2s ease-in-out infinite;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
+    }
+    .page-btn {
+      background: transparent;
       color: var(--gold);
-      text-shadow: 0 0 5px rgba(0,204,68,0.3);
-      padding: 5px;
-      z-index: 10;
+      border: 1px solid rgba(0,204,68,0.4);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      min-width: 32px;
+      text-align: center;
+      transition: all 0.2s;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
-    @keyframes electron-pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(0,204,68,0.4); border-color: var(--gold); }
-      50% { box-shadow: 0 0 30px rgba(0,204,68,0.8); border-color: var(--gold-light); }
+    .page-btn:hover {
+      background: rgba(0,204,68,0.2);
+      border-color: var(--gold);
     }
-    .perimeter-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(0,204,68,0.9);
-      background: var(--dark-gray);
+    .page-btn.active {
+      background: var(--gold);
+      color: #000;
+      font-weight: bold;
     }
-
-    .top-left-box    { top: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 17px; }
-    .top-middle-box  { top: 30px; left: calc(50% - 75px);  width: 150px; height: 60px; font-size: 15px; line-height: 1.2; white-space: normal; }
-    .top-right-box   { top: 30px; left: calc(50% + 95px);  width: 150px; height: 60px; font-size: 17px; }
-    .bottom-left-box { bottom: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 15px; }
-    .bottom-middle-box { bottom: 30px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 15px; line-height: 1.2; white-space: normal; }
-    .bottom-right-box  { bottom: 30px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 15px; }
+    .page-ellipsis {
+      color: #aaa;
+      padding: 4px 4px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
+    }
 
     .home-btn {
       position: absolute;
@@ -279,17 +277,6 @@
       .layout-container { height: 650px; }
       .central-content { width: 420px; height: 520px; }
       .home-btn { bottom: -50px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 120px; height: 50px; font-size: 13px;
-      }
-      .top-middle-box, .bottom-middle-box { font-size: 11px; }
-      .top-left-box { left: calc(50% - 195px); }
-      .top-middle-box { left: calc(50% - 60px); }
-      .top-right-box { left: calc(50% + 75px); }
-      .bottom-left-box { left: calc(50% - 195px); }
-      .bottom-middle-box { left: calc(50% - 60px); }
-      .bottom-right-box { left: calc(50% + 75px); }
     }
 
     @media (max-width: 600px) {
@@ -299,55 +286,27 @@
       .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; }
       .header h1 { font-size: 24px; }
       .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 100px; height: 45px; font-size: 11px;
-      }
-      .top-middle-box, .bottom-middle-box { font-size: 9px; }
-      .top-left-box { top: 15px; left: calc(50% - 160px); }
-      .top-middle-box { top: 15px; left: calc(50% - 50px); }
-      .top-right-box { top: 15px; left: calc(50% + 60px); }
-      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
-      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
-      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
+      .pagination { gap: 6px; font-size: 13px; }
+      .page-btn { padding: 3px 6px; min-width: 28px; }
     }
   </style>
 </head>
 <body>
-  <div class="header"><h1>MARKETS & ECONOMICS</h1></div>
+  <div class="header"><h1>MOVIES & TV - MARKETS & ECONOMICS</h1></div>
   <canvas id="particle-canvas"></canvas>
   
   <div class="layout-wrapper">
     <div class="layout-container">
       <div class="central-content">
-        <div class="central-title">Latest Markets & Economics</div>
+        <div class="central-title">Movies & TV</div>
         <div class="content-links">
           <div class="loading-indicator">Loading...</div>
         </div>
-      </div>
-
-      <div class="perimeter-box top-left-box" onclick="window.location.href='./markets-econ-podcasts.html'">
-        Podcasts
-      </div>
-      <div class="perimeter-box top-middle-box" onclick="window.location.href='./markets-econ-articles-longform.html'">
-        Articles & Longform
-      </div>
-      <div class="perimeter-box top-right-box" onclick="window.location.href='./markets-econ-clips.html'">
-        Video Clips
-      </div>
-
-      <div class="perimeter-box bottom-left-box" onclick="window.location.href='./markets-econ-books.html'">
-        Books
-      </div>
-      <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./markets-econ-memes.html'">
-        Memes
-      </div>
-      <div class="perimeter-box bottom-right-box" onclick="window.location.href='./markets-econ-tv-movies.html'">
-        Movies & TV
+        <div class="pagination"></div>
       </div>
     </div>
 
-    <a href="../index.html" class="home-btn" rel="noopener" aria-label="Back to Home">Back to Home</a>
+    <a href="../markets-econ.html" class="home-btn" rel="noopener" aria-label="Back to Markets & Economics Hub">Back to Markets & Economics</a>
   </div>
   
   <script>
@@ -399,44 +358,18 @@
       window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
       
       const container = document.querySelector('.content-links');
+      const pagination = document.querySelector('.pagination');
       let allEntries = [];
+      let currentPage = 1;
+      const itemsPerPage = 10;
 
-      async function loadContent() {
-        container.innerHTML = '<div class="loading-indicator">Loading...</div>';
+      function renderPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = allEntries.slice(start, end);
 
-        try {
-          const response = await fetch('./markets-econ-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error('File not found');
-          const text = await response.text();
-          const lines = text.trim().split('\n').filter(l => l.trim());
-          allEntries = lines.map(line => {
-            const p = line.split('|');
-            if (p.length < 3) return null;
-            return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e);
-
-          renderLatest8();
-
-        } catch (err) {
-          container.innerHTML = `
-            <div class="error-state" role="alert">
-              <p>Failed to load content: ${err.message}</p>
-              <button class="retry-btn" onclick="loadContent()">Retry</button>
-            </div>
-          `;
-        }
-      }
-
-      function renderLatest8() {
-        const latest = allEntries.slice(0, 8);
         container.innerHTML = '';
-
-        if (latest.length === 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No content available yet.</em></div>';
-          return;
-        }
-
-        latest.forEach((e, i) => {
+        pageItems.forEach((e, i) => {
           const el = document.createElement('div');
           el.className = 'content-link';
           el.style.animationDelay = `${i * 0.05}s`;
@@ -445,6 +378,88 @@
           `;
           container.appendChild(el);
         });
+
+        if (pageItems.length === 0 && allEntries.length > 0) {
+          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No movies & TV available yet.</em></div>';
+        }
+
+        renderPagination();
+      }
+
+      function renderPagination() {
+        pagination.innerHTML = '';
+        const totalPages = Math.ceil(allEntries.length / itemsPerPage);
+        if (totalPages <= 1) return;
+
+        const maxVisible = 7;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+        if (endPage - startPage + 1 < maxVisible) {
+          startPage = Math.max(1, endPage - maxVisible + 1);
+        }
+
+        if (startPage > 1) {
+          addPageBtn(1);
+          if (startPage > 2) addEllipsis();
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+          addPageBtn(i);
+        }
+
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) addEllipsis();
+          addPageBtn(totalPages);
+        }
+      }
+
+      function addPageBtn(page) {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn';
+        btn.textContent = page;
+        if (page === currentPage) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          currentPage = page;
+          renderPage(page);
+          window.scrollTo({ top: document.querySelector('.central-content').offsetTop - 100, behavior: 'smooth' });
+        });
+        pagination.appendChild(btn);
+      }
+
+      function addEllipsis() {
+        const el = document.createElement('span');
+        el.className = 'page-ellipsis';
+        el.textContent = '...';
+        pagination.appendChild(el);
+      }
+
+      async function loadContent() {
+        container.innerHTML = '<div class="loading-indicator">Loading...</div>';
+        pagination.innerHTML = '';
+
+        try {
+          const response = await fetch('../markets-econ-links.txt?t=' + Date.now());
+          if (!response.ok) throw new Error('File not found');
+          const text = await response.text();
+          const lines = text.trim().split('\n').filter(l => l.trim());
+          allEntries = lines.map(line => {
+            const p = line.split('|');
+            if (p.length < 3) return null;
+            return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
+          }).filter(e => e && e.category === 'tv-movies');
+
+          currentPage = 1;
+          renderPage(1);
+
+        } catch (err) {
+          container.innerHTML = `
+            <div class="error-state" role="alert">
+              <p>Failed to load movies & TV: ${err.message}</p>
+              <button class="retry-btn" onclick="loadContent()">Retry</button>
+            </div>
+          `;
+          pagination.innerHTML = '';
+        }
       }
       
       loadContent();
