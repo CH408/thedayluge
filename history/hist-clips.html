@@ -209,6 +209,7 @@
       margin-top: 12px;
       flex-wrap: wrap;
       font-size: 14px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
     .page-btn {
       background: transparent;
@@ -220,6 +221,7 @@
       min-width: 32px;
       text-align: center;
       transition: all 0.2s;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
     .page-btn:hover {
       background: rgba(255,215,0,0.2);
@@ -233,6 +235,7 @@
     .page-ellipsis {
       color: #aaa;
       padding: 4px 4px;
+      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
 
     .home-btn {
@@ -363,7 +366,7 @@
       function renderPage(page) {
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
-        const pageItems = allEntries.slice(start, end);
+        pageItems = allEntries.slice(start, end);
 
         container.innerHTML = '';
         pageItems.forEach((e, i) => {
