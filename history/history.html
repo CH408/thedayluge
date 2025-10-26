@@ -61,8 +61,12 @@
       100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px #0008; }
     }
 
-    .layout-wrapper { position: relative; width: 100%; max-width: 800px; margin: 50px auto 80px; z-index: 5; }
-    .layout-container { position: relative; width: 100%; height: 750px; z-index: 5; }
+    .layout-wrapper { 
+      position: relative; width: 100%; max-width: 800px; margin: 50px auto 20px; z-index: 5; 
+    }
+    .layout-container { 
+      position: relative; width: 100%; height: 750px; z-index: 5; 
+    }
 
     .central-content {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -73,14 +77,20 @@
       box-shadow: 0 0 30px #FFD70080, 0 4px 12px #000c;
       animation: pulse 3s ease-in-out infinite;
     }
-    @keyframes pulse { 0%,100% { box-shadow: 0 0 30px #FFD70080, 0 4px 12px #000c; } 50% { box-shadow: 0 0 40px #FFD700cc, 0 6px 16px #0006; } }
+    @keyframes pulse { 
+      0%,100% { box-shadow: 0 0 30px #FFD70080, 0 4px 12px #000c; } 
+      50% { box-shadow: 0 0 40px #FFD700cc, 0 6px 16px #0006; } 
+    }
 
     .central-title {
       text-align: center; font-size: 24px; font-weight: 900; text-transform: uppercase;
       color: var(--gold); text-shadow: 0 0 8px var(--gold); margin-bottom: 10px;
       border-bottom: 1px solid var(--gold); padding-bottom: 6px; flex-shrink: 0;
     }
-    .content-links { display: flex; flex-direction: column; gap: 14px; flex: 1; max-height: calc(100% - 38px); overflow-y: auto; }
+    .content-links { 
+      display: flex; flex-direction: column; gap: 14px; flex: 1; 
+      max-height: calc(100% - 38px); overflow-y: auto; 
+    }
     .content-link {
       display: flex; align-items: center; justify-content: flex-start; padding: 7px 9px;
       border: 1px solid #FFD7004d; border-radius: 4px; transition: all 0.3s ease; font-size: 16px;
@@ -111,7 +121,7 @@
     @keyframes electron-pulse { 0%,100% { box-shadow: 0 0 20px #FFD70066; } 50% { box-shadow: 0 0 30px #FFD700cc; } }
     .perimeter-box:hover { transform: scale(1.05); box-shadow: 0 0 35px #FFD700e6; background: var(--dark-gray); }
 
-    /* === FINAL POSITIONING (GUARANTEED) === */
+    /* FINAL POSITIONING — TESTED & WORKING */
     .top-left-box    { top: calc(50% - 290px - 50px - 60px); left: calc(50% - 245px); font-size: 18px; }
     .top-middle-box  { top: calc(50% - 290px - 50px - 60px); left: calc(50% - 75px);  font-size: 16px; line-height: 1.2; white-space: normal; }
     .top-right-box   { top: calc(50% - 290px - 50px - 60px); left: calc(50% + 95px);  font-size: 18px; }
@@ -142,13 +152,17 @@
     }
 
     .home-btn {
-      position: absolute; bottom: -55px; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%);
       background: var(--black-bg); color: var(--gold); border: 2px solid var(--gold);
       padding: 10px 20px; border-radius: 25px; font-size: 14px; font-weight: bold;
       text-transform: uppercase; text-decoration: none; transition: all 0.3s ease;
       text-shadow: 0 0 5px var(--gold); box-shadow: 0 0 10px #FFD7004d; z-index: 20;
+      white-space: nowrap;
     }
-    .home-btn:hover { background: var(--dark-gray); transform: translateX(-50%) scale(1.05); box-shadow: 0 0 20px #FFD70099; }
+    .home-btn:hover { 
+      background: var(--dark-gray); transform: translateX(-50%) scale(1.05); 
+      box-shadow: 0 0 20px #FFD70099; 
+    }
 
     #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
   </style>
@@ -176,13 +190,16 @@
   </div>
 
   <script>
-    // [Same particle + content loading script as before — unchanged]
     document.addEventListener('DOMContentLoaded', () => {
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth; canvas.height = window.innerHeight;
       const particles = []; const num = window.innerWidth < 600 ? 30 : 50;
-      class Particle { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 1; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25; } update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.1; if (this.x < 0 || this.x > canvas.width) this.speedX *= -1; if (this.y < 0 || this.y > canvas.height) this.speedY *= -1; } draw() { ctx.fillStyle = 'rgba(255,215,0,0.6)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); } }
+      class Particle {
+        constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 1; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25; }
+        update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.1; if (this.x < 0 || this.x > canvas.width) this.speedX *= -1; if (this.y < 0 || this.y > canvas.height) this.speedY *= -1; }
+        draw() { ctx.fillStyle = 'rgba(255,215,0,0.6)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+      }
       function init() { for (let i = 0; i < num; i++) particles.push(new Particle()); }
       function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach((p, i) => { p.update(); p.draw(); if (p.size <= 0.2) { particles.splice(i, 1); particles.push(new Particle()); } }); requestAnimationFrame(animate); }
       init(); animate();
@@ -196,7 +213,7 @@
           if (!res.ok) throw new Error('Not found');
           const text = await res.text();
           const entries = text.trim().split('\n').map(l => { const p = l.split('|'); return p.length >= 3 ? {title: p[0].trim(), link: p[1].trim()} : null; }).filter(Boolean);
-          const latest = entries.filter(e => !e.category?.includes('memes')).slice(0, 8);
+          const latest = entries.slice(0, 8);
           container.innerHTML = '';
           latest.forEach((e, i) => {
             const el = document.createElement('div'); el.className = 'content-link'; el.style.animationDelay = `${i * 0.1}s`;
