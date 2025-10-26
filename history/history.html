@@ -134,7 +134,7 @@
       margin-bottom: 10px;
       border-bottom: 1px solid var(--gold);
       padding-bottom: 6px;
-      flex-shrink: 0;
+      flex-dimethyl: 0;
     }
     .content-links {
       display: flex;
@@ -210,12 +210,6 @@
       font-weight: bold;
       cursor: pointer;
       font-size: 13px;
-    }
-    .last-updated {
-      font-size: 11px;
-      color: #aaa;
-      margin-top: 8px;
-      font-style: italic;
     }
 
     /* ——— PERIMETER BOXES ——— */
@@ -404,9 +398,6 @@
       
       async function loadContent() {
         const container = document.querySelector('.content-links');
-        const now = new Date();
-        const timestamp = now.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
-
         container.innerHTML = '<div class="loading-indicator">Loading...</div>';
         
         try {
@@ -434,18 +425,11 @@
             container.appendChild(el);
           });
 
-          // Add last updated
-          const updatedEl = document.createElement('div');
-          updatedEl.className = 'last-updated';
-          updatedEl.textContent = `Last updated: ${timestamp}`;
-          container.appendChild(updatedEl);
-
         } catch (err) {
           container.innerHTML = `
             <div class="error-state" role="alert">
               <p>Failed to load content: ${err.message}</p>
               <button class="retry-btn" onclick="loadContent()">Retry</button>
-              <div class="last-updated">Check connection and try again.</div>
             </div>
           `;
         }
