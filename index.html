@@ -1,7 +1,17 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="THE DAYLUGE: Curated daily links across history, politics, science, arts, wisdom, and more. Updated every day.">
+  <meta property="og:title" content="THE DAYLUGE">
+  <meta property="og:description" content="Daily curated links: history, politics, science, arts, wisdom, and more. Fresh every day.">
+  <meta property="og:image" content="https://thedayluge.com/og-preview.jpg">
+  <meta property="og:url" content="https://thedayluge.com/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://thedayluge.com/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <title>THE DAYLUGE</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
@@ -24,7 +34,6 @@
 
   <style>
     :root {
-      /* Colors */
       --red: #cc0000;
       --orange: #ff8800;
       --green: #00dd55;
@@ -37,7 +46,6 @@
       --silver-white: #ECEFF1;
       --connection-color: #cfd8dc;
 
-      /* Responsive geometry */
       --wheel-size: min(80vw, 480px);
       --circle-size: calc(var(--wheel-size) / 4.5);
       --radius: calc(var(--wheel-size) / 3);
@@ -78,34 +86,13 @@
       animation: neonGlow 3s ease-in-out infinite;
     }
     @keyframes neonGlow {
-      0% {
-        color: #4682b4;
-        text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5);
-      }
-      16.67% {
-        color: #20b2aa;
-        text-shadow: 0 0 8px rgba(32,178,170,0.9),0 0 15px rgba(32,178,170,0.7);
-      }
-      33.33% {
-        color: #7b68ee;
-        text-shadow: 0 0 5px rgba(123,104,238,0.7),0 0 10px rgba(123,104,238,0.5);
-      }
-      50% {
-        color: #00ced1;
-        text-shadow: 0 0 8px rgba(0,206,209,0.9),0 0 15px rgba(0,206,209,0.7);
-      }
-      66.67% {
-        color: #3cb371;
-        text-shadow: 0 0 5px rgba(60,179,113,0.7),0 0 10px rgba(60,179,113,0.5);
-      }
-      83.33% {
-        color: #9370db;
-        text-shadow: 0 0 8px rgba(147,112,219,0.9),0 0 15px rgba(147,112,219,0.7);
-      }
-      100% {
-        color: #4682b4;
-        text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5);
-      }
+      0% { color: #4682b4; text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5); }
+      16.67% { color: #20b2aa; text-shadow: 0 0 8px rgba(32,178,170,0.9),0 0 15px rgba(32,178,170,0.7); }
+      33.33% { color: #7b68ee; text-shadow: 0 0 5px rgba(123,104,238,0.7),0 0 10px rgba(123,104,238,0.5); }
+      50% { color: #00ced1; text-shadow: 0 0 8px rgba(0,206,209,0.9),0 0 15px rgba(0,206,209,0.7); }
+      66.67% { color: #3cb371; text-shadow: 0 0 5px rgba(60,179,113,0.7),0 0 10px rgba(60,179,113,0.5); }
+      83.33% { color: #9370db; text-shadow: 0 0 8px rgba(147,112,219,0.9),0 0 15px rgba(147,112,219,0.7); }
+      100% { color: #4682b4; text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5); }
     }
 
     .wheel-container {
@@ -122,39 +109,23 @@
     }
 
     @keyframes spinOpen {
-      0% {
-        transform: scale(0.01) rotateZ(-720deg);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1) rotateZ(0deg);
-        opacity: 1;
-      }
+      0% { transform: scale(0.01) rotateZ(-720deg); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: scale(1) rotateZ(0deg); opacity: 1; }
     }
 
     .connection-lines {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none;
       opacity: 0;
       animation: fadeIn 1.5s ease-in-out 0.4s forwards;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
+    @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
 
     .wheel-center {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%) scale(0);
       width: calc(var(--wheel-size) / 3.5);
       height: calc(var(--wheel-size) / 3.5);
@@ -176,12 +147,8 @@
       z-index: 5;
     }
     @keyframes hubSpin {
-      0% {
-        transform: translate(-50%, -50%) scale(0) rotateZ(-720deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1) rotateZ(0deg);
-      }
+      0% { transform: translate(-50%, -50%) scale(0) rotateZ(-720deg); }
+      100% { transform: translate(-50%, -50%) scale(1) rotateZ(0deg); }
     }
 
     .circle {
@@ -211,14 +178,8 @@
       box-shadow: 0 0 8px currentColor, 0 0 15px currentColor, 0 0 3px currentColor inset;
     }
     @keyframes circleSpin {
-      0% {
-        transform: scale(0) rotateZ(-720deg);
-        opacity: 0;
-      }
-      100% {
-        transform: rotate(var(--circle-angle)) scale(1);
-        opacity: 1;
-      }
+      0% { transform: scale(0) rotateZ(-720deg); opacity: 0; }
+      100% { transform: rotate(var(--circle-angle)) scale(1); opacity: 1; }
     }
 
     .circle span {
@@ -233,54 +194,34 @@
       font-size: clamp(10px, calc(var(--circle-size) / 5), 16px);
     }
 
-    .circle-2 span,
-    .circle-7 span {
-      font-size: clamp(9px, calc(var(--circle-size) / 5.8), 14px);
-      line-height: 1;
-    }
+    .circle-2 span, .circle-7 span { font-size: clamp(9px, calc(var(--circle-size) / 5.8), 14px); line-height: 1; }
+    .circle-4 span, .circle-5 span, .circle-6 span { font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px); }
 
-    .circle-4 span, 
-    .circle-5 span,
-    .circle-6 span {
-      font-size: clamp(8px, calc(var(--circle-size) / 6.5), 13px);
-    }
-
-    .circle-1 { --circle-angle: 0deg; border-color: #ECEFF1;
-                color: #ECEFF1; box-shadow: 0 0 8px #ECEFF1; }
+    .circle-1 { --circle-angle: 0deg; border-color: #ECEFF1; color: #ECEFF1; box-shadow: 0 0 8px #ECEFF1; }
     .circle-1 span { transform: rotate(0deg); }
 
-    .circle-8 { --circle-angle: 45deg; border-color: #ffcc00;
-                color: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
+    .circle-8 { --circle-angle: 45deg; border-color: #ffcc00; color: #ffcc00; box-shadow: 0 0 8px #ffcc00; }
     .circle-8 span { transform: rotate(-45deg); }
 
-    .circle-7 { --circle-angle: 90deg; border-color: #00cc44;
-                color: #00cc44; box-shadow: 0 0 8px #00cc44; }
+    .circle-7 { --circle-angle: 90deg; border-color: #00cc44; color: #00cc44; box-shadow: 0 0 8px #00cc44; }
     .circle-7 span { transform: rotate(-90deg); }
 
-    .circle-2 { --circle-angle: 135deg; border-color: #ff8800;
-                color: #ff8800; box-shadow: 0 0 8px #ff8800; }
+    .circle-2 { --circle-angle: 135deg; border-color: #ff8800; color: #ff8800; box-shadow: 0 0 8px #ff8800; }
     .circle-2 span { transform: rotate(-135deg); }
 
-    .circle-3 { --circle-angle: 180deg; border-color: #66B4F2;
-                color: #66B4F2; box-shadow: 0 0 8px #66B4F2; }
+    .circle-3 { --circle-angle: 180deg; border-color: #66B4F2; color: #66B4F2; box-shadow: 0 0 8px #66B4F2; }
     .circle-3 span { transform: rotate(-180deg); }
 
-    .circle-4 { --circle-angle: 225deg; border-color: #00ff00;
-                color: #00ff00; box-shadow: 0 0 8px #00ff00; }
+    .circle-4 { --circle-angle: 225deg; border-color: #00ff00; color: #00ff00; box-shadow: 0 0 8px #00ff00; }
     .circle-4 span { transform: rotate(-225deg); }
 
-    .circle-5 { --circle-angle: 270deg; border-color: #cc88ff;
-                color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
+    .circle-5 { --circle-angle: 270deg; border-color: #cc88ff; color: #cc88ff; box-shadow: 0 0 8px #cc88ff; }
     .circle-5 span { transform: rotate(-270deg); }
 
-    .circle-6 { --circle-angle: 315deg; border-color: #ff69b4;
-                color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
+    .circle-6 { --circle-angle: 315deg; border-color: #ff69b4; color: #ff69b4; box-shadow: 0 0 8px #ff69b4; }
     .circle-6 span { transform: rotate(-315deg); }
 
-    .button-container {
-      display: flex;
-      justify-content: center;
-    }
+    .button-container { display: flex; justify-content: center; }
     .random-button {
       background: var(--yellow);
       color: var(--red);
@@ -296,21 +237,23 @@
     @media (max-width: 480px) {
       .wheel-container { margin-top: 1rem; }
       .random-button { transform: translateY(0.25rem); }
-      .circle {
-        padding: 8px;
-      }
-      .circle span {
-        font-size: clamp(9px, calc(var(--circle-size) / 5.5), 14px);
-      }
-      .circle-2 span,
-      .circle-7 span {
-        font-size: clamp(8px, calc(var(--circle-size) / 6.2), 13px);
-      }
-      .circle-4 span, 
-      .circle-5 span,
-      .circle-6 span {
-        font-size: clamp(7px, calc(var(--circle-size) / 7), 12px);
-      }
+      .circle { padding: 8px; }
+      .circle span { font-size: clamp(9px, calc(var(--circle-size) / 5.5), 14px); }
+      .circle-2 span, .circle-7 span { font-size: clamp(8px, calc(var(--circle-size) / 6.2), 13px); }
+      .circle-4 span, .circle-5 span, .circle-6 span { font-size: clamp(7px, calc(var(--circle-size) / 7), 12px); }
+    }
+
+    .surprise-error {
+      background: #330000;
+      color: #ff8888;
+      border: 1px solid #cc0000;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-family: 'Special Elite', monospace;
+      font-size: 14px;
+      max-width: 300px;
+      margin: 1rem auto;
+      text-align: center;
     }
   </style>
 </head>
@@ -322,27 +265,20 @@
 
   <div class="wheel-container">
     <svg class="connection-lines"></svg>
-    <a class="wheel-center" href="./news.html">TRENDING<br>NEWS</a>
+    <a class="wheel-center" href="./news.html" rel="noopener">TRENDING<br>NEWS</a>
 
-    <a href="./politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
-    <a href="./history/history.html" class="circle circle-8"><span>HISTORY</span></a>
-    <a href="./markets-econ/markets-econ.html" class="circle circle-7"><span>MARKETS &amp;
-    ECONOMICS</span></a>
-    <a href="./science-nature-tech/science-nature-tech.html" class="circle circle-2"><span>SCIENCE,
-    NATURE &amp;
-    TECH</span></a>
-    <a href="./sports-leisure/sports-leisure.html" class="circle circle-3"><span>SPORTS &amp;
-    LEISURE</span></a>
-    <a href="./conspiracy.html" class="circle circle-4"><span>CONSPIRACY
-    CORNER</span></a>
-    <a href="./arts.html" class="circle circle-5"><span>ARTS &amp;
-    LITERATURE</span></a>
-    <a href="./wisdom.html" class="circle circle-6"><span>WISDOM &amp;
-    PHILOSOPHY</span></a>
+    <a href="./politics/politics.html" class="circle circle-1" rel="noopener"><span>POLITICS</span></a>
+    <a href="./history/history.html" class="circle circle-8" rel="noopener"><span>HISTORY</span></a>
+    <a href="./markets-econ/markets-econ.html" class="circle circle-7" rel="noopener"><span>MARKETS &amp; ECONOMICS</span></a>
+    <a href="./science-nature-tech/science-nature-tech.html" class="circle circle-2" rel="noopener"><span>SCIENCE, NATURE &amp; TECH</span></a>
+    <a href="./sports-leisure/sports-leisure.html" class="circle circle-3" rel="noopener"><span>SPORTS &amp; LEISURE</span></a>
+    <a href="./conspiracy.html" class="circle circle-4" rel="noopener"><span>CONSPIRACY CORNER</span></a>
+    <a href="./arts.html" class="circle circle-5" rel="noopener"><span>ARTS &amp; LITERATURE</span></a>
+    <a href="./wisdom.html" class="circle circle-6" rel="noopener"><span>WISDOM &amp; PHILOSOPHY</span></a>
   </div>
 
   <div class="button-container">
-    <button class="random-button">SURPRISE ME!</button>
+    <button class="random-button" aria-label="Go to a random curated link">SURPRISE ME!</button>
   </div>
 
   <script>
@@ -359,9 +295,7 @@
       const hubRect = hub.getBoundingClientRect();
       const cx = hubRect.left - rect.left + hubRect.width / 2;
       const cy = hubRect.top - rect.top + hubRect.height / 2;
-      const hubR = hubRect.width / 2;
 
-      // DNA Helix colors - Deep Blue / Teal
       const color1 = '#0066ff';
       const color2 = '#00cccc';
 
@@ -374,7 +308,6 @@
         const dy = y - cy;
         const dist = Math.sqrt(dx*dx + dy*dy);
 
-        // Create first spiral path
         const pathData = [];
         const steps = 50;
         for (let s = 0; s <= steps; s++) {
@@ -395,7 +328,6 @@
         path1.setAttribute('fill', 'none');
         svg.appendChild(path1);
 
-        // Create second spiral path (opposite phase)
         const pathData2 = [];
         for (let s = 0; s <= steps; s++) {
           const t = s / steps;
@@ -415,9 +347,7 @@
         path2.setAttribute('fill', 'none');
         svg.appendChild(path2);
 
-        // Add particles on each strand
         for (let p = 0; p < 12; p++) {
-          // First strand particles
           const particle1 = document.createElementNS('http://www.w3.org/2000/svg','circle');
           particle1.setAttribute('r', '2');
           particle1.setAttribute('fill', color1);
@@ -431,7 +361,6 @@
           motion1.innerHTML = `<mpath href="#helix1-${i}" />`;
           particle1.appendChild(motion1);
 
-          // Second strand particles
           const particle2 = document.createElementNS('http://www.w3.org/2000/svg','circle');
           particle2.setAttribute('r', '2');
           particle2.setAttribute('fill', color2);
@@ -448,14 +377,11 @@
       });
     }
 
-    // Draw DNA helix as soon as wheel animation completes
     const wheelContainer = document.querySelector('.wheel-container');
     wheelContainer.addEventListener('animationend', (e) => {
-      if (e.animationName === 'spinOpen') {
-        drawDNAHelix();
-      }
+      if (e.animationName === 'spinOpen') drawDNAHelix();
     });
-    
+
     let resizeTimeout;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
@@ -463,39 +389,38 @@
     });
 
     document.querySelector('.random-button').addEventListener('click', function() {
-      // Add cache-busting parameter to prevent loading stale txt file
       const cacheBuster = '?t=' + Date.now();
       fetch('./surprise-me-links.txt' + cacheBuster)
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Could not load surprise links');
-          }
+          if (!response.ok) throw new Error('File not found or server error');
           return response.text();
         })
         .then(text => {
-          const lines = text.split('\n')
-            .map(line => line.trim())
-            .filter(line => line.length > 0);
-          
-          const links = lines
-            .map(line => {
-              const parts = line.split('|');
-              return parts.length > 1 ? parts[1].trim() : line;
-            })
-            .filter(link => link.length > 0);
-          
-          const randomIndex = Math.floor(Math.random() * links.length);
-          let randomLink = links[randomIndex];
-          
-          // Add cache-busting parameter to force fresh content load
+          const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+          if (lines.length === 0) throw new Error('No links available');
+
+          const links = lines.map(line => {
+            const parts = line.split('|');
+            return parts.length > 1 ? parts[1].trim() : line;
+          }).filter(l => l);
+
+          const randomLink = links[Math.floor(Math.random() * links.length)];
           const separator = randomLink.includes('?') ? '&' : '?';
-          randomLink += separator + '_=' + Date.now();
-          
-          window.location.href = randomLink;
+          window.location.href = randomLink + separator + '_=' + Date.now();
         })
-        .catch(error => {
-          console.error('Error loading surprise links:', error);
-          alert('Sorry, the surprise feature is currently unavailable!');
+        .catch(err => {
+          console.error('Surprise Me failed:', err);
+          const container = document.querySelector('.button-container');
+          container.insertAdjacentHTML('afterend', `
+            <div class="surprise-error">
+              Surprise feature unavailable.<br>
+              <small>Try again later or check back soon!</small>
+            </div>
+          `);
+          setTimeout(() => {
+            const el = document.querySelector('.surprise-error');
+            if (el) el.remove();
+          }, 5000);
         });
     });
   </script>
