@@ -210,25 +210,30 @@
       font-weight: bold;
       cursor: pointer;
       font-size: 13px;
+      transition: all 0.3s ease;
+    }
+    .retry-btn:hover {
+      background: var(--gold-light);
+      transform: scale(1.05);
     }
 
     /* ——— PERIMETER BOXES ——— */
     .perimeter-box {
       position: absolute;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 6px;
+      background: var(--gray);
+      border: 2px solid rgba(255,215,0,0.4);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-weight: 900;
-      text-align: center;
+      font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--gold);
-      text-shadow: 0 0 6px var(--gold);
+      overflow-wrap: anywhere;
+      text-align: center;
+      padding: 5px;
       box-shadow: 0 0 15px rgba(255,215,0,0.3);
       z-index: 10;
     }
@@ -238,9 +243,9 @@
       box-shadow: 0 0 25px rgba(255,215,0,0.6);
       border-color: var(--gold-light);
     }
-    .top-left-box    { top: 18px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; }
-    .top-middle-box  { top: 18px; left: calc(50% - 75px);  width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
-    .top-right-box   { top: 18px; left: calc(50% + 95px);  width: 150px; height: 60px; font-size: 18px; }
+    .top-left-box    { top: 25px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; }
+    .top-middle-box  { top: 25px; left: calc(50% - 75px);  width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
+    .top-right-box   { top: 25px; left: calc(50% + 95px);  width: 150px; height: 60px; font-size: 18px; }
     .bottom-left-box { bottom: 18px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 16px; }
     .bottom-middle-box { bottom: 18px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
     .bottom-right-box  { bottom: 18px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 16px; }
@@ -290,9 +295,9 @@
         width: 120px; height: 50px; font-size: 14px;
       }
       .top-middle-box { font-size: 12px; }
-      .top-left-box    { top: 18px; left: calc(50% - 195px); }
-      .top-middle-box  { top: 18px; left: calc(50% - 60px); }
-      .top-right-box   { top: 18px; left: calc(50% + 75px); }
+      .top-left-box    { top: 20px; left: calc(50% - 195px); }
+      .top-middle-box  { top: 20px; left: calc(50% - 60px); }
+      .top-right-box   { top: 20px; left: calc(50% + 75px); }
       .bottom-left-box { bottom: 12px; left: calc(50% - 195px); }
       .bottom-middle-box { bottom: 12px; left: calc(50% - 60px); }
       .bottom-right-box  { bottom: 12px; left: calc(50% + 75px); }
@@ -309,9 +314,9 @@
         width: 100px; height: 45px; font-size: 14px;
       }
       .top-middle-box { font-size: 10px; }
-      .top-left-box    { top: 8px; left: calc(50% - 160px); }
-      .top-middle-box  { top: 8px; left: calc(50% - 50px); }
-      .top-right-box   { top: 8px; left: calc(50% + 60px); }
+      .top-left-box    { top: 15px; left: calc(50% - 160px); }
+      .top-middle-box  { top: 15px; left: calc(50% - 50px); }
+      .top-right-box   { top: 15px; left: calc(50% + 60px); }
       .bottom-left-box { bottom: 8px; left: calc(50% - 160px); }
       .bottom-middle-box { bottom: 8px; left: calc(50% - 50px); }
       .bottom-right-box  { bottom: 8px; left: calc(50% + 60px); }
