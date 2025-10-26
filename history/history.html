@@ -16,9 +16,10 @@
       --gray: #333333;
 
       /* === LAYOUT CONTROL === */
+      --central-width: 500px;
       --central-height: 580px;
       --perimeter-height: 60px;
-      --gap: 40px; /* ← Change this to adjust gap on desktop */
+      --gap: 40px; /* ← Adjust this to change gap size (desktop) */
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
@@ -100,9 +101,10 @@
     /* ——— CENTRAL CONTENT ——— */
     .central-content {
       position: absolute;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
-      width: 500px;
+      transform: translate(-50%, -50%);
+      width: var(--central-width);
       height: var(--central-height);
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
       border: 2px solid var(--gold);
@@ -113,9 +115,6 @@
       z-index: 15;
       box-shadow: 0 0 30px rgba(255,215,0,0.5), 0 4px 12px rgba(0,0,0,0.8);
       animation: pulse 3s ease-in-out infinite;
-
-      /* === PRECISE VERTICAL CENTERING WITH GAP === */
-      top: calc(50% - var(--central-height)/2 - var(--gap)/2 - var(--perimeter-height)/2);
     }
     @keyframes pulse {
       0%, 100% { box-shadow: 0 0 30px rgba(255,215,0,0.5), 0 4px 12px rgba(0,0,0,0.8); }
@@ -224,38 +223,33 @@
     }
 
     /* === DESKTOP: TOP & BOTTOM BOXES WITH EQUAL GAP === */
-    .top-left-box    { top: 28px; left: calc(50% - 245px); font-size: 18px; }
-    .top-middle-box  { top: 28px; left: calc(50% - 75px);  font-size: 16px; line-height: 1.2; white-space: normal; }
-    .top-right-box   { top: 28px; left: calc(50% + 95px);  font-size: 18px; }
+    .top-left-box    { top: calc(var(--gap)); left: calc(50% - 245px); font-size: 18px; }
+    .top-middle-box  { top: calc(var(--gap)); left: calc(50% - 75px);  font-size: 16px; line-height: 1.2; white-space: normal; }
+    .top-right-box   { top: calc(var(--gap)); left: calc(50% + 95px);  font-size: 18px; }
 
-    .bottom-left-box   { bottom: 18px; left: calc(50% - 245px); font-size: 16px; }
-    .bottom-middle-box { bottom: 18px; left: calc(50% - 75px); font-size: 16px; line-height: 1.2; white-space: normal; }
-    .bottom-right-box  { bottom: 18px; left: calc(50% + 95px); font-size: 16px; }
+    .bottom-left-box   { bottom: calc(var(--gap)); left: calc(50% - 245px); font-size: 16px; }
+    .bottom-middle-box { bottom: calc(var(--gap)); left: calc(50% - 75px); font-size: 16px; line-height: 1.2; white-space: normal; }
+    .bottom-right-box  { bottom: calc(var(--gap)); left: calc(50% + 95px); font-size: 16px; }
 
     /* === TABLET (≤900px) === */
     @media (max-width: 900px) {
       :root {
+        --central-width: 420px;
         --central-height: 520px;
         --perimeter-height: 50px;
         --gap: 30px;
       }
       .layout-wrapper { margin: 40px auto 70px; }
       .layout-container { height: 650px; }
-      .central-content { width: 420px; }
 
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 120px; height: var(--perimeter-height); font-size: 14px;
-      }
-      .top-middle-box { font-size: 12px; }
+      .perimeter-box { width: 120px; }
+      .top-left-box    { top: calc(var(--gap)); left: calc(50% - 195px); }
+      .top-middle-box  { top: calc(var(--gap)); left: calc(50% - 60px); }
+      .top-right-box   { top: calc(var(--gap)); left: calc(50% + 75px); }
 
-      .top-left-box    { top: 18px; left: calc(50% - 195px); }
-      .top-middle-box  { top: 18px; left: calc(50% - 60px); }
-      .top-right-box   { top: 18px; left: calc(50% + 75px); }
-
-      .bottom-left-box   { bottom: 12px; left: calc(50% - 195px); }
-      .bottom-middle-box { bottom: 12px; left: calc(50% - 60px); }
-      .bottom-right-box  { bottom: 12px; left: calc(50% + 75px); }
+      .bottom-left-box   { bottom: calc(var(--gap)); left: calc(50% - 195px); }
+      .bottom-middle-box { bottom: calc(var(--gap)); left: calc(50% - 60px); }
+      .bottom-right-box  { bottom: calc(var(--gap)); left: calc(50% + 75px); }
 
       .home-btn { bottom: -50px; }
     }
@@ -263,28 +257,26 @@
     /* === MOBILE (≤600px) === */
     @media (max-width: 600px) {
       :root {
+        --central-width: 340px;
         --central-height: 480px;
         --perimeter-height: 45px;
         --gap: 20px;
       }
       .layout-wrapper { margin: 15px auto 65px; }
       .layout-container { height: 600px; }
-      .central-content { width: 340px; padding: 12px; }
+      .central-content { padding: 12px; }
       .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; gap: 6px; }
 
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 100px; height: var(--perimeter-height); font-size: 14px;
-      }
+      .perimeter-box { width: 100px; font-size: 14px; }
       .top-middle-box { font-size: 10px; }
 
-      .top-left-box    { top: 8px; left: calc(50% - 160px); }
-      .top-middle-box  { top: 8px; left: calc(50% - 50px); }
-      .top-right-box   { top: 8px; left: calc(50% + 60px); }
+      .top-left-box    { top: calc(var(--gap)); left: calc(50% - 160px); }
+      .top-middle-box  { top: calc(var(--gap)); left: calc(50% - 50px); }
+      .top-right-box   { top: calc(var(--gap)); left: calc(50% + 60px); }
 
-      .bottom-left-box   { bottom: 8px; left: calc(50% - 160px); }
-      .bottom-middle-box { bottom: 8px; left: calc(50% - 50px); }
-      .bottom-right-box  { bottom: 8px; left: calc(50% + 60px); }
+      .bottom-left-box   { bottom: calc(var(--gap)); left: calc(50% - 160px); }
+      .bottom-middle-box { bottom: calc(var(--gap)); left: calc(50% - 50px); }
+      .bottom-right-box  { bottom: calc(var(--gap)); left: calc(50% + 60px); }
 
       .header h1 { font-size: 24px; }
       .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
