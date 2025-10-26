@@ -16,7 +16,7 @@
       --gray: #333333;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
+    html, body { height: 100%; overflow-x: hidden Such; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--gold);
@@ -80,7 +80,7 @@
       position: relative;
       width: 100%;
       max-width: 800px;
-      margin: 50px auto 80px; /* ↑ Increased from 30px → 50px */
+      margin: 50px auto 80px;
       z-index: 5;
     }
 
@@ -138,7 +138,7 @@
     .content-link {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 7px 9px;
       border: 1px solid rgba(255,215,0,0.3);
       border-radius: 4px;
@@ -174,29 +174,6 @@
       flex: 1;
       overflow-wrap: anywhere;
       hyphens: auto;
-    }
-
-    /* ——— CATEGORY BADGES (GOLD ONLY) ——— */
-    .category-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      font-size: 10px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-radius: 4px;
-      background: rgba(255,215,0,0.15);
-      color: var(--gold);
-      border: 1px solid var(--gold);
-      text-shadow: 0 0 4px var(--gold);
-      box-shadow: 0 0 6px rgba(255,215,0,0.4);
-      animation: quantum-glow 2s ease-in-out infinite alternate;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    @keyframes quantum-glow {
-      from { box-shadow: 0 0 6px rgba(255,215,0,0.4); }
-      to { box-shadow: 0 0 12px rgba(255,215,0,0.8), 0 0 4px var(--gold) inset; }
     }
 
     .loading-indicator {
@@ -236,12 +213,12 @@
       box-shadow: 0 0 35px rgba(255,215,0,0.9);
       background: var(--dark-gray);
     }
-    .top-left-box    { top: 28px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; } /* ↑ 18px → 28px */
+    .top-left-box    { top: 28px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 18px; }
     .top-middle-box  { top: 28px; left: calc(50% - 75px);  width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
     .top-right-box   { top: 28px; left: calc(50% + 95px);  width: 150px; height: 60px; font-size: 18px; }
     .bottom-left-box { bottom: 18px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 16px; }
     .bottom-middle-box { bottom: 18px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 16px; line-height: 1.2; white-space: normal; }
-    .bottom-right-box  { bottom: 18px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 16px; }
+    .bottom-right-box  { bottom: 18px; left: calc(50% + 95px); width: 150px; height: 60px; font-font: 16px; }
 
     /* ——— BACK TO HOME BUTTON ——— */
     .home-btn {
@@ -280,7 +257,7 @@
 
     /* ——— RESPONSIVE ——— */
     @media (max-width: 900px) {
-      .layout-wrapper { margin: 40px auto 70px; } /* ↑ 20px → 40px */
+      .layout-wrapper { margin: 40px auto 70px; }
       .layout-container { height: 650px; }
       .central-content { width: 420px; height: 520px; }
       .top-left-box, .top-middle-box, .top-right-box,
@@ -288,14 +265,13 @@
         width: 120px; height: 50px; font-size: 14px;
       }
       .top-middle-box { font-size: 12px; }
-      .top-left-box    { top: 18px; left: calc(50% - 195px); } /* ↑ 12px → 18px */
+      .top-left-box    { top: 18px; left: calc(50% - 195px); }
       .top-middle-box  { top: 18px; left: calc(50% - 60px); }
       .top-right-box   { top: 18px; left: calc(50% + 75px); }
       .bottom-left-box { bottom: 12px; left: calc(50% - 195px); }
       .bottom-middle-box { bottom: 12px; left: calc(50% - 60px); }
       .bottom-right-box  { bottom: 12px; left: calc(50% + 75px); }
       .home-btn { bottom: -50px; }
-      .category-badge { font-size: 9px; padding: 1px 5px; }
     }
 
     @media (max-width: 600px) {
@@ -320,7 +296,6 @@
         font-size: 12px; 
         padding: 8px 16px; 
       }
-      .category-badge { font-size: 8px; padding: 1px 4px; }
     }
   </style>
 </head>
@@ -349,18 +324,6 @@
   </div>
   
   <script>
-    // Badge text mapping (no colors)
-    const badgeTextMap = {
-      'podcast': 'PODCAST',
-      'art-long': 'ARTICLE',
-      'art+long': 'ARTICLE',
-      'clip': 'CLIP',
-      'book': 'BOOK',
-      'memes': 'MEME',
-      'tv': 'TV',
-      'movie': 'MOVIE'
-    };
-
     document.addEventListener('DOMContentLoaded', () => {
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
@@ -432,17 +395,8 @@
             el.className = 'content-link';
             el.style.animationDelay = `${i * 0.1}s`;
 
-            let badgeText = 'UNKNOWN';
-            for (const [key, text] of Object.entries(badgeTextMap)) {
-              if (e.category.includes(key)) {
-                badgeText = text;
-                break;
-              }
-            }
-
             el.innerHTML = `
               <a href="${e.link}" class="link-title" target="_blank">${e.title}</a>
-              <span class="category-badge">${badgeText}</span>
             `;
             container.appendChild(el);
           });
