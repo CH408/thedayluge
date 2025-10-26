@@ -158,14 +158,7 @@
       animation: unroll 0.5s ease-out forwards;
     }
     @keyframes unroll { to { opacity: 1; transform: translateY(0); } }
-    .content-link:nth-child(1) { animation-delay: 0.1s; }
-    .content-link:nth-child(2) { animation-delay: 0.2s; }
-    .content-link:nth-child(3) { animation-delay: 0.3s; }
-    .content-link:nth-child(4) { animation-delay: 0.4s; }
-    .content-link:nth-child(5) { animation-delay: 0.5s; }
-    .content-link:nth-child(6) { animation-delay: 0.6s; }
-    .content-link:nth-child(7) { animation-delay: 0.7s; }
-    .content-link:nth-child(8) { animation-delay: 0.8s; }
+
     .content-link:hover {
       background: rgba(255,215,0,0.2);
       border-color: var(--gold);
@@ -207,6 +200,39 @@
       font-weight: bold;
       cursor: pointer;
       font-size: 13px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+    .page-btn {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid rgba(255,215,0,0.4);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      min-width: 32px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .page-btn:hover {
+      background: rgba(255,215,0,0.2);
+      border-color: var(--gold);
+    }
+    .page-btn.active {
+      background: var(--gold);
+      color: #000;
+      font-weight: bold;
+    }
+    .page-ellipsis {
+      color: #aaa;
+      padding: 4px 4px;
     }
 
     .home-btn {
@@ -256,11 +282,9 @@
       .central-content { width: 340px; height: 480px; padding: 12px; }
       .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; }
       .header h1 { font-size: 24px; }
-      .home-btn { 
-        bottom: -48px; 
-        font-size: 12px; 
-        padding: 8px 16px; 
-      }
+      .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
+      .pagination { gap: 6px; font-size: 13px; }
+      .page-btn { padding: 3px 6px; min-width: 28px; }
     }
   </style>
 </head>
@@ -275,6 +299,7 @@
         <div class="content-links">
           <div class="loading-indicator">Loading...</div>
         </div>
+        <div class="pagination"></div>
       </div>
     </div>
 
@@ -329,37 +354,102 @@
       init(); animate();
       window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
       
+      const container = document.querySelector('.content-links');
+      const pagination = document.querySelector('.pagination');
+      let allEntries = [];
+      let currentPage = 1;
+      const itemsPerPage = 10;
+
+      function renderPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = allEntries.slice(start, end);
+
+        container.innerHTML = '';
+        pageItems.forEach((e, i) => {
+          const el = document.createElement('div');
+          el.className = 'content-link';
+          el.style.animationDelay = `${i * 0.05}s`;
+          el.innerHTML = `
+            <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
+          `;
+          container.appendChild(el);
+        });
+
+        if (pageItems.length === 0 && allEntries.length > 0) {
+          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No more articles.</em></div>';
+        }
+
+        renderPagination();
+      }
+
+      function renderPagination() {
+        pagination.innerHTML = '';
+        const totalPages = Math.ceil(allEntries.length / itemsPerPage);
+        if (totalPages <= 1) return;
+
+        const maxVisible = 7;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+        if (endPage - startPage + 1 < maxVisible) {
+          startPage = Math.max(1, endPage - maxVisible + 1);
+        }
+
+        // First page
+        if (startPage > 1) {
+          addPageBtn(1);
+          if (startPage > 2) addEllipsis();
+        }
+
+        // Middle pages
+        for (let i = startPage; i <= endPage; i++) {
+          addPageBtn(i);
+        }
+
+        // Last page
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) addEllipsis();
+          addPageBtn(totalPages);
+        }
+      }
+
+      function addPageBtn(page) {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn';
+        btn.textContent = page;
+        if (page === currentPage) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          currentPage = page;
+          renderPage(page);
+          window.scrollTo({ top: document.querySelector('.central-content').offsetTop - 100, behavior: 'smooth' });
+        });
+        pagination.appendChild(btn);
+      }
+
+      function addEllipsis() {
+        const el = document.createElement('span');
+        el.className = 'page-ellipsis';
+        el.textContent = '...';
+        pagination.appendChild(el);
+      }
+
       async function loadContent() {
-        const container = document.querySelector('.content-links');
         container.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        
+        pagination.innerHTML = '';
+
         try {
           const response = await fetch('./history-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error('File not found');
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
-          const entries = lines.map(line => {
+          allEntries = lines.map(line => {
             const p = line.split('|');
             if (p.length < 3) return null;
             return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e);
-          
-          const longformEntries = entries.filter(e => e.category === 'art-long');
-          
-          container.innerHTML = '';
-          longformEntries.forEach((e, i) => {
-            const el = document.createElement('div');
-            el.className = 'content-link';
-            el.style.animationDelay = `${i * 0.05}s`;
-            el.innerHTML = `
-              <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
-            `;
-            container.appendChild(el);
-          });
+          }).filter(e => e && e.category === 'art-long');
 
-          if (longformEntries.length === 0) {
-            container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No articles available yet.</em></div>';
-          }
+          currentPage = 1;
+          renderPage(1);
 
         } catch (err) {
           container.innerHTML = `
@@ -368,6 +458,7 @@
               <button class="retry-btn" onclick="loadContent()">Retry</button>
             </div>
           `;
+          pagination.innerHTML = '';
         }
       }
       
