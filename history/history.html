@@ -9,18 +9,18 @@
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --gold: #FFD700;
-      --gold-light: #FFEC8B;
-      --ink: #111;
+           --gold-light: #FFEC8B;
       --black-bg: #000000;
       --dark-gray: #111111;
-      --gray: #333333;
 
-      /* === LAYOUT CONTROL === */
+      /* === LAYOUT === */
       --central-width: 500px;
       --central-height: 580px;
+      --perimeter-width: 150px;
       --perimeter-height: 60px;
-      --gap: 40px; /* ← Adjust this to change gap size (desktop) */
+      --gap: 50px; /* ← CHANGE THIS TO ADJUST GAP (laptop) */
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
     body {
@@ -81,7 +81,7 @@
       100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
     }
 
-    /* ——— LAYOUT WRAPPER ——— */
+    /* ——— LAYOUT ——— */
     .layout-wrapper {
       position: relative;
       width: 100%;
@@ -89,8 +89,6 @@
       margin: 50px auto 80px;
       z-index: 5;
     }
-
-    /* ——— LAYOUT CONTAINER ——— */
     .layout-container {
       position: relative;
       width: 100%;
@@ -98,7 +96,7 @@
       z-index: 5;
     }
 
-    /* ——— CENTRAL CONTENT ——— */
+    /* ——— CENTRAL BOX ——— */
     .central-content {
       position: absolute;
       top: 50%;
@@ -151,7 +149,6 @@
       transition: all 0.3s ease;
       font-size: 16px;
       line-height: 1.18;
-      min-height: 0;
       overflow-wrap: anywhere;
       cursor: pointer;
       opacity: 0;
@@ -181,7 +178,6 @@
       overflow-wrap: anywhere;
       hyphens: auto;
     }
-
     .loading-indicator {
       text-align: center;
       font-size: 16px;
@@ -209,7 +205,7 @@
       color: var(--gold);
       text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
       padding: 5px;
-      width: 150px;
+      width: var(--perimeter-width);
       height: var(--perimeter-height);
     }
     @keyframes electron-pulse {
@@ -222,67 +218,97 @@
       background: var(--dark-gray);
     }
 
-    /* === DESKTOP: TOP & BOTTOM BOXES WITH EQUAL GAP === */
-    .top-left-box    { top: calc(var(--gap)); left: calc(50% - 245px); font-size: 18px; }
-    .top-middle-box  { top: calc(var(--gap)); left: calc(50% - 75px);  font-size: 16px; line-height: 1.2; white-space: normal; }
-    .top-right-box   { top: calc(var(--gap)); left: calc(50% + 95px);  font-size: 18px; }
+    /* === CALCULATED POSITIONS (LAPTOP) === */
+    .central-top    { top: calc(50% - var(--central-height) / 2); }
+    .central-bottom { top: calc(50% + var(--central-height) / 2); }
 
-    .bottom-left-box   { bottom: calc(var(--gap)); left: calc(50% - 245px); font-size: 16px; }
-    .bottom-middle-box { bottom: calc(var(--gap)); left: calc(50% - 75px); font-size: 16px; line-height: 1.2; white-space: normal; }
-    .bottom-right-box  { bottom: calc(var(--gap)); left: calc(50% + 95px); font-size: 16px; }
+    .top-box-bottom    { top: calc(var(--central-top) - var(--gap)); }
+    .bottom-box-top    { top: calc(var(--central-bottom) + var(--gap)); }
 
-    /* === TABLET (≤900px) === */
+    .top-left-box    { 
+      top: calc(var(--top-box-bottom) - var(--perimeter-height)); 
+      left: calc(50% - 245px); 
+      font-size: 18px; 
+    }
+    .top-middle-box  { 
+      top: calc(var(--top-box-bottom) - var(--perimeter-height)); 
+      left: calc(50% - 75px); 
+      font-size: 16px; 
+      line-height: 1.2; 
+      white-space: normal; 
+    }
+    .top-right-box   { 
+      top: calc(var(--top-box-bottom) - var(--perimeter-height)); 
+      left: calc(50% + 95px); 
+      font-size: 18px; 
+    }
+
+    .bottom-left-box   { 
+      top: var(--bottom-box-top); 
+      left: calc(50% - 245px); 
+      font-size: 16px; 
+    }
+    .bottom-middle-box { 
+      top: var(--bottom-box-top); 
+      left: calc(50% - 75px); 
+      font-size: 16px; 
+      line-height: 1.2; 
+      white-space: normal; 
+    }
+    .bottom-right-box  { 
+      top: var(--bottom-box-top); 
+      left: calc(50% + 95px); 
+      font-size: 16px; 
+    }
+
+    /* === TABLET === */
     @media (max-width: 900px) {
       :root {
         --central-width: 420px;
         --central-height: 520px;
+        --perimeter-width: 120px;
         --perimeter-height: 50px;
-        --gap: 30px;
+        --gap: 35px;
       }
       .layout-wrapper { margin: 40px auto 70px; }
       .layout-container { height: 650px; }
 
-      .perimeter-box { width: 120px; }
-      .top-left-box    { top: calc(var(--gap)); left: calc(50% - 195px); }
-      .top-middle-box  { top: calc(var(--gap)); left: calc(50% - 60px); }
-      .top-right-box   { top: calc(var(--gap)); left: calc(50% + 75px); }
-
-      .bottom-left-box   { bottom: calc(var(--gap)); left: calc(50% - 195px); }
-      .bottom-middle-box { bottom: calc(var(--gap)); left: calc(50% - 60px); }
-      .bottom-right-box  { bottom: calc(var(--gap)); left: calc(50% + 75px); }
+      .top-left-box    { left: calc(50% - 195px); }
+      .top-middle-box  { left: calc(50% - 60px); }
+      .top-right-box   { left: calc(50% + 75px); }
+      .bottom-left-box   { left: calc(50% - 195px); }
+      .bottom-middle-box { left: calc(50% - 60px); }
+      .bottom-right-box  { left: calc(50% + 75px); }
 
       .home-btn { bottom: -50px; }
     }
 
-    /* === MOBILE (≤600px) === */
+    /* === MOBILE === */
     @media (max-width: 600px) {
       :root {
         --central-width: 340px;
         --central-height: 480px;
+        --perimeter-width: 100px;
         --perimeter-height: 45px;
-        --gap: 20px;
+        --gap: 25px;
       }
       .layout-wrapper { margin: 15px auto 65px; }
       .layout-container { height: 600px; }
       .central-content { padding: 12px; }
       .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; gap: 6px; }
 
-      .perimeter-box { width: 100px; font-size: 14px; }
-      .top-middle-box { font-size: 10px; }
-
-      .top-left-box    { top: calc(var(--gap)); left: calc(50% - 160px); }
-      .top-middle-box  { top: calc(var(--gap)); left: calc(50% - 50px); }
-      .top-right-box   { top: calc(var(--gap)); left: calc(50% + 60px); }
-
-      .bottom-left-box   { bottom: calc(var(--gap)); left: calc(50% - 160px); }
-      .bottom-middle-box { bottom: calc(var(--gap)); left: calc(50% - 50px); }
-      .bottom-right-box  { bottom: calc(var(--gap)); left: calc(50% + 60px); }
+      .top-left-box    { left: calc(50% - 160px); }
+      .top-middle-box  { left: calc(50% - 50px); font-size: 10px; }
+      .top-right-box   { left: calc(50% + 60px); }
+      .bottom-left-box   { left: calc(50% - 160px); }
+      .bottom-middle-box { left: calc(50% - 50px); }
+      .bottom-right-box  { left: calc(50% + 60px); }
 
       .header h1 { font-size: 24px; }
       .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
     }
 
-    /* ——— BACK TO HOME BUTTON ——— */
+    /* ——— HOME BUTTON ——— */
     .home-btn {
       position: absolute;
       bottom: -55px;
@@ -414,10 +440,7 @@
             const el = document.createElement('div');
             el.className = 'content-link';
             el.style.animationDelay = `${i * 0.1}s`;
-
-            el.innerHTML = `
-              <a href="${e.link}" class="link-title" target="_blank">${e.title}</a>
-            `;
+            el.innerHTML = `<a href="${e.link}" class="link-title" target="_blank">${e.title}</a>`;
             container.appendChild(el);
           });
         } catch (err) {
