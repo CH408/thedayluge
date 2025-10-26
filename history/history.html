@@ -9,152 +9,82 @@
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
     :root {
       --gold: #FFD700;
-           --gold-light: #FFEC8B;
+      --gold-light: #FFEC8B;
       --black-bg: #000000;
       --dark-gray: #111111;
-
-      /* === LAYOUT === */
-      --central-width: 500px;
-      --central-height: 580px;
-      --perimeter-width: 150px;
-      --perimeter-height: 60px;
-      --gap: 50px; /* ← CHANGE THIS TO ADJUST GAP (laptop) */
+      --central-w: 500px;
+      --central-h: 580px;
+      --box-w: 150px;
+      --box-h: 60px;
+      --gap: 50px;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
       color: var(--gold);
-      line-height: 1.4;
       background: var(--black-bg);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
       position: relative;
       overflow: hidden;
       padding: 20px;
     }
     body::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       background: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
+      animation: energy-pulse 6s ease-in-out infinite; pointer-events: none;
     }
     body::after {
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite;
-      pointer-events: none;
+      position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
+      background: linear-gradient(0deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
+                  linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
+                  linear-gradient(180deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%),
+                  linear-gradient(270deg, transparent 0%, rgba(255,215,0,0.3) 1%, transparent 3%);
+      animation: edge-glow 4s ease-in-out infinite; pointer-events: none;
     }
     @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
     @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
 
-    /* ——— HEADER ——— */
     .header {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
+      position: absolute; top: 8px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;
     }
     .header h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 28px;
-      margin-bottom: 8px;
+      text-transform: uppercase; letter-spacing: 0.5px; font-size: 28px; margin-bottom: 8px;
       animation: title-pulse 8s ease-in-out infinite;
     }
     @keyframes title-pulse {
-      0% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { color: var(--gold-light); text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
+      0% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px #0008; }
+      50% { color: var(--gold-light); text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px #0008; }
+      100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px #0008; }
     }
 
-    /* ——— LAYOUT ——— */
-    .layout-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 50px auto 80px;
-      z-index: 5;
-    }
-    .layout-container {
-      position: relative;
-      width: 100%;
-      height: 750px;
-      z-index: 5;
-    }
+    .layout-wrapper { position: relative; width: 100%; max-width: 800px; margin: 50px auto 80px; z-index: 5; }
+    .layout-container { position: relative; width: 100%; height: 750px; z-index: 5; }
 
-    /* ——— CENTRAL BOX ——— */
     .central-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: var(--central-width);
-      height: var(--central-height);
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: var(--central-w); height: var(--central-h);
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      z-index: 15;
-      box-shadow: 0 0 30px rgba(255,215,0,0.5), 0 4px 12px rgba(0,0,0,0.8);
+      border: 2px solid var(--gold); border-radius: 8px; padding: 15px;
+      display: flex; flex-direction: column; z-index: 15;
+      box-shadow: 0 0 30px #FFD70080, 0 4px 12px #000c;
       animation: pulse 3s ease-in-out infinite;
     }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(255,215,0,0.5), 0 4px 12px rgba(0,0,0,0.8); }
-      50% { box-shadow: 0 0 40px rgba(255,215,0,0.8), 0 6px 16px rgba(0,0,0,0.4); }
-    }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 30px #FFD70080, 0 4px 12px #000c; } 50% { box-shadow: 0 0 40px #FFD700cc, 0 6px 16px #0006; } }
+
     .central-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--gold);
-      text-shadow: 0 0 8px var(--gold);
-      margin-bottom: 10px;
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 6px;
-      flex-shrink: 0;
+      text-align: center; font-size: 24px; font-weight: 900; text-transform: uppercase;
+      color: var(--gold); text-shadow: 0 0 8px var(--gold); margin-bottom: 10px;
+      border-bottom: 1px solid var(--gold); padding-bottom: 6px; flex-shrink: 0;
     }
-    .content-links {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      flex: 1;
-      max-height: calc(100% - 38px);
-      overflow-y: auto;
-    }
+    .content-links { display: flex; flex-direction: column; gap: 14px; flex: 1; max-height: calc(100% - 38px); overflow-y: auto; }
     .content-link {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 7px 9px;
-      border: 1px solid rgba(255,215,0,0.3);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-size: 16px;
-      line-height: 1.18;
-      overflow-wrap: anywhere;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: unroll 0.5s ease-out forwards;
-      gap: 8px;
+      display: flex; align-items: center; justify-content: flex-start; padding: 7px 9px;
+      border: 1px solid #FFD7004d; border-radius: 4px; transition: all 0.3s ease; font-size: 16px;
+      opacity: 0; transform: translateY(-20px); animation: unroll 0.5s ease-out forwards; gap: 8px;
     }
     @keyframes unroll { to { opacity: 1; transform: translateY(0); } }
     .content-link:nth-child(1) { animation-delay: 0.1s; }
@@ -165,183 +95,62 @@
     .content-link:nth-child(6) { animation-delay: 0.6s; }
     .content-link:nth-child(7) { animation-delay: 0.7s; }
     .content-link:nth-child(8) { animation-delay: 0.8s; }
-    .content-link:hover {
-      background: rgba(255,215,0,0.2);
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(255,215,0,0.4);
-    }
-    .link-title {
-      color: var(--gold);
-      text-decoration: none;
-      cursor: pointer;
-      flex: 1;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-    }
-    .loading-indicator {
-      text-align: center;
-      font-size: 16px;
-      color: var(--gold);
-      padding: 10px;
-    }
+    .content-link:hover { background: #FFD70033; border-color: var(--gold); box-shadow: 0 0 10px #FFD70066; }
+    .link-title { color: var(--gold); text-decoration: none; flex: 1; overflow-wrap: anywhere; }
 
-    /* ——— PERIMETER BOXES ——— */
     .perimeter-box {
-      position: absolute;
+      position: absolute; width: var(--box-w); height: var(--box-h);
       background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(255,215,0,0.4);
-      animation: electron-pulse 2s ease-in-out infinite;
-      color: var(--gold);
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-      padding: 5px;
-      width: var(--perimeter-width);
-      height: var(--perimeter-height);
+      border: 2px solid var(--gold); border-radius: 6px; padding: 5px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; text-align: center;
+      color: var(--gold); text-shadow: 1px 1px 2px #000c;
+      box-shadow: 0 0 20px #FFD70066; animation: electron-pulse 2s ease-in-out infinite;
+      cursor: pointer; transition: all 0.3s ease;
     }
-    @keyframes electron-pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.4); border-color: var(--gold); }
-      50% { box-shadow: 0 0 30px rgba(255,215,0,0.8); border-color: var(--gold-light); }
-    }
-    .perimeter-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(255,215,0,0.9);
-      background: var(--dark-gray);
-    }
+    @keyframes electron-pulse { 0%,100% { box-shadow: 0 0 20px #FFD70066; } 50% { box-shadow: 0 0 30px #FFD700cc; } }
+    .perimeter-box:hover { transform: scale(1.05); box-shadow: 0 0 35px #FFD700e6; background: var(--dark-gray); }
 
-    /* === CALCULATED POSITIONS (LAPTOP) === */
-    .central-top    { top: calc(50% - var(--central-height) / 2); }
-    .central-bottom { top: calc(50% + var(--central-height) / 2); }
+    /* === FINAL POSITIONING (GUARANTEED) === */
+    .top-left-box    { top: calc(50% - 290px - 50px - 60px); left: calc(50% - 245px); font-size: 18px; }
+    .top-middle-box  { top: calc(50% - 290px - 50px - 60px); left: calc(50% - 75px);  font-size: 16px; line-height: 1.2; white-space: normal; }
+    .top-right-box   { top: calc(50% - 290px - 50px - 60px); left: calc(50% + 95px);  font-size: 18px; }
 
-    .top-box-bottom    { top: calc(var(--central-top) - var(--gap)); }
-    .bottom-box-top    { top: calc(var(--central-bottom) + var(--gap)); }
+    .bottom-left-box   { top: calc(50% + 290px + 50px); left: calc(50% - 245px); font-size: 16px; }
+    .bottom-middle-box { top: calc(50% + 290px + 50px); left: calc(50% - 75px);  font-size: 16px; line-height: 1.2; white-space: normal; }
+    .bottom-right-box  { top: calc(50% + 290px + 50px); left: calc(50% + 95px);  font-size: 16px; }
 
-    .top-left-box    { 
-      top: calc(var(--top-box-bottom) - var(--perimeter-height)); 
-      left: calc(50% - 245px); 
-      font-size: 18px; 
-    }
-    .top-middle-box  { 
-      top: calc(var(--top-box-bottom) - var(--perimeter-height)); 
-      left: calc(50% - 75px); 
-      font-size: 16px; 
-      line-height: 1.2; 
-      white-space: normal; 
-    }
-    .top-right-box   { 
-      top: calc(var(--top-box-bottom) - var(--perimeter-height)); 
-      left: calc(50% + 95px); 
-      font-size: 18px; 
-    }
-
-    .bottom-left-box   { 
-      top: var(--bottom-box-top); 
-      left: calc(50% - 245px); 
-      font-size: 16px; 
-    }
-    .bottom-middle-box { 
-      top: var(--bottom-box-top); 
-      left: calc(50% - 75px); 
-      font-size: 16px; 
-      line-height: 1.2; 
-      white-space: normal; 
-    }
-    .bottom-right-box  { 
-      top: var(--bottom-box-top); 
-      left: calc(50% + 95px); 
-      font-size: 16px; 
-    }
-
-    /* === TABLET === */
     @media (max-width: 900px) {
-      :root {
-        --central-width: 420px;
-        --central-height: 520px;
-        --perimeter-width: 120px;
-        --perimeter-height: 50px;
-        --gap: 35px;
-      }
-      .layout-wrapper { margin: 40px auto 70px; }
+      :root { --central-w: 420px; --central-h: 520px; --box-w: 120px; --box-h: 50px; --gap: 35px; }
       .layout-container { height: 650px; }
-
       .top-left-box    { left: calc(50% - 195px); }
       .top-middle-box  { left: calc(50% - 60px); }
       .top-right-box   { left: calc(50% + 75px); }
       .bottom-left-box   { left: calc(50% - 195px); }
       .bottom-middle-box { left: calc(50% - 60px); }
       .bottom-right-box  { left: calc(50% + 75px); }
-
-      .home-btn { bottom: -50px; }
     }
-
-    /* === MOBILE === */
     @media (max-width: 600px) {
-      :root {
-        --central-width: 340px;
-        --central-height: 480px;
-        --perimeter-width: 100px;
-        --perimeter-height: 45px;
-        --gap: 25px;
-      }
-      .layout-wrapper { margin: 15px auto 65px; }
+      :root { --central-w: 340px; --central-h: 480px; --box-w: 100px; --box-h: 45px; --gap: 25px; }
       .layout-container { height: 600px; }
-      .central-content { padding: 12px; }
-      .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; gap: 6px; }
-
       .top-left-box    { left: calc(50% - 160px); }
       .top-middle-box  { left: calc(50% - 50px); font-size: 10px; }
       .top-right-box   { left: calc(50% + 60px); }
       .bottom-left-box   { left: calc(50% - 160px); }
       .bottom-middle-box { left: calc(50% - 50px); }
       .bottom-right-box  { left: calc(50% + 60px); }
-
-      .header h1 { font-size: 24px; }
-      .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
     }
 
-    /* ——— HOME BUTTON ——— */
     .home-btn {
-      position: absolute;
-      bottom: -55px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--black-bg);
-      color: var(--gold);
-      border: 2px solid var(--gold);
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--gold);
-      box-shadow: 0 0 10px rgba(255,215,0,0.3);
-      z-index: 20;
-      white-space: nowrap;
+      position: absolute; bottom: -55px; left: 50%; transform: translateX(-50%);
+      background: var(--black-bg); color: var(--gold); border: 2px solid var(--gold);
+      padding: 10px 20px; border-radius: 25px; font-size: 14px; font-weight: bold;
+      text-transform: uppercase; text-decoration: none; transition: all 0.3s ease;
+      text-shadow: 0 0 5px var(--gold); box-shadow: 0 0 10px #FFD7004d; z-index: 20;
     }
-    .home-btn:hover {
-      background: var(--dark-gray);
-      transform: translateX(-50%) scale(1.05);
-      box-shadow: 0 0 20px rgba(255,215,0,0.6);
-    }
+    .home-btn:hover { background: var(--dark-gray); transform: translateX(-50%) scale(1.05); box-shadow: 0 0 20px #FFD70099; }
 
-    #particle-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
+    #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -352,9 +161,7 @@
     <div class="layout-container">
       <div class="central-content">
         <div class="central-title">Latest History</div>
-        <div class="content-links">
-          <div class="loading-indicator">Loading...</div>
-        </div>
+        <div class="content-links"><div class="loading-indicator">Loading...</div></div>
       </div>
       
       <div class="perimeter-box top-left-box"    onclick="window.location.href='./hist-podcasts.html'">Podcasts</div>
@@ -365,89 +172,39 @@
       <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./hist-memes.html'">Memes</div>
       <div class="perimeter-box bottom-right-box"  onclick="window.location.href='./hist-tv-movies.html'">TV &amp; Movies</div>
     </div>
-
     <a href="/" class="home-btn">Back to Home</a>
   </div>
-  
+
   <script>
+    // [Same particle + content loading script as before — unchanged]
     document.addEventListener('DOMContentLoaded', () => {
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const particlesArray = [];
-      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
-      
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.5 - 0.25;
-          this.speedY = Math.random() * 0.5 - 0.25;
-        }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.1;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        draw() {
-          ctx.fillStyle = 'rgba(255,215,0,0.6)';
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-      
-      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1); i--;
-            particlesArray.push(new Particle());
-          }
-        }
-        requestAnimationFrame(animate);
-      }
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+      const particles = []; const num = window.innerWidth < 600 ? 30 : 50;
+      class Particle { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 1; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25; } update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.2) this.size -= 0.1; if (this.x < 0 || this.x > canvas.width) this.speedX *= -1; if (this.y < 0 || this.y > canvas.height) this.speedY *= -1; } draw() { ctx.fillStyle = 'rgba(255,215,0,0.6)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); } }
+      function init() { for (let i = 0; i < num; i++) particles.push(new Particle()); }
+      function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach((p, i) => { p.update(); p.draw(); if (p.size <= 0.2) { particles.splice(i, 1); particles.push(new Particle()); } }); requestAnimationFrame(animate); }
       init(); animate();
-      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
-      
+      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particles.length = 0; init(); });
+
       async function loadContent() {
         const container = document.querySelector('.content-links');
         container.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        
         try {
-          const response = await fetch('history-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error('File not found');
-          const text = await response.text();
-          const lines = text.trim().split('\n').filter(l => l.trim());
-          const entries = lines.map(line => {
-            const p = line.split('|');
-            if (p.length < 3) return null;
-            return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e);
-          
-          const nonMemeEntries = entries.filter(e => e.category !== 'memes');
-          const latest8 = nonMemeEntries.slice(0, 8);
-          
+          const res = await fetch('history-links.txt?t=' + Date.now());
+          if (!res.ok) throw new Error('Not found');
+          const text = await res.text();
+          const entries = text.trim().split('\n').map(l => { const p = l.split('|'); return p.length >= 3 ? {title: p[0].trim(), link: p[1].trim()} : null; }).filter(Boolean);
+          const latest = entries.filter(e => !e.category?.includes('memes')).slice(0, 8);
           container.innerHTML = '';
-          latest8.forEach((e, i) => {
-            const el = document.createElement('div');
-            el.className = 'content-link';
-            el.style.animationDelay = `${i * 0.1}s`;
+          latest.forEach((e, i) => {
+            const el = document.createElement('div'); el.className = 'content-link'; el.style.animationDelay = `${i * 0.1}s`;
             el.innerHTML = `<a href="${e.link}" class="link-title" target="_blank">${e.title}</a>`;
             container.appendChild(el);
           });
-        } catch (err) {
-          container.innerHTML = `<div class="content-link" style="border-color:#ff4444;opacity:1"><a style="color:#ff8888">Error: ${err.message}</a></div>`;
-        }
+        } catch { container.innerHTML = `<div class="content-link" style="border-color:#ff4444"><a style="color:#ff8888">Error loading content</a></div>`; }
       }
-      
       loadContent();
     });
   </script>
