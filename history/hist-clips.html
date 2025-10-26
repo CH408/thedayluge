@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - HISTORY: Video Clips — Short-form history videos, documentaries, and viral moments. Curated daily.">
+  <meta name="description" content="THE DAYLUGE - HISTORY: Video Clips — Short, powerful history moments. Curated daily.">
   <meta property="og:title" content="Video Clips - History - THE DAYLUGE">
-  <meta property="og:description" content="Daily curated history video clips, documentaries, and viral moments. Fresh every day.">
+  <meta property="og:description" content="Short video clips of historical moments, speeches, and events. Updated daily.">
   <meta property="og:image" content="https://thedayluge.com/og-history-clips.jpg">
   <meta property="og:url" content="https://thedayluge.com/history/hist-clips.html">
   <meta property="og:type" content="website">
@@ -366,7 +366,7 @@
       function renderPage(page) {
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
-        pageItems = allEntries.slice(start, end);
+        const pageItems = allEntries.slice(start, end);
 
         container.innerHTML = '';
         pageItems.forEach((e, i) => {
@@ -380,7 +380,7 @@
         });
 
         if (pageItems.length === 0 && allEntries.length > 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No more clips.</em></div>';
+          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No clips available yet.</em></div>';
         }
 
         renderPagination();
@@ -446,7 +446,7 @@
             const p = line.split('|');
             if (p.length < 3) return null;
             return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e && e.category === 'vid-clip');
+          }).filter(e => e && e.category === 'clips');
 
           currentPage = 1;
           renderPage(1);
