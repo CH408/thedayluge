@@ -21,7 +21,7 @@
       --gold-light: #F7F9FB;
       --ink: #111;
       --black-bg: #000000;
-      --dark-gray: #111111;
+ the-dark-gray: #111111;
       --gray: #333333;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -438,8 +438,9 @@
         pagination.innerHTML = '';
 
         try {
-          const response = await fetch('../politics-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error('File not found');
+          // FIXED PATH: ../../ goes up two levels to reach politics-links.txt
+          const response = await fetch('../../politics-links.txt?t=' + Date.now());
+          if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
           allEntries = lines.map(line => {
@@ -452,6 +453,7 @@
           renderPage(1);
 
         } catch (err) {
+          console.error('Load failed:', err);
           container.innerHTML = `
             <div class="error-state" role="alert">
               <p>Failed to load articles: ${err.message}</p>
