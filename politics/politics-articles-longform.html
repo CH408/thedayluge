@@ -92,7 +92,7 @@
         container.innerHTML = '<div class="loading-indicator">Loading...</div>';
         
         try {
-          const response = await fetch('politics-links.txt?t=' + Date.now());
+          const response = await fetch('/politics/politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error('File not found or server error');
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
@@ -102,7 +102,7 @@
             return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
           }).filter(e => e);
           
-          const longformEntries = entries.filter(e => e.category === 'articles');
+          const longformEntries = entries.filter(e => e.category === 'art-long');
           const latest8 = longformEntries.slice(0, 8);
           
           container.innerHTML = '';
