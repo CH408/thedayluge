@@ -294,7 +294,7 @@
 <body>
   <div class="header"><h1>ARTICLES & LONGFORM - MARKETS & ECONOMICS</h1></div>
   <canvas id="particle-canvas"></canvas>
-  
+
   <div class="layout-wrapper">
     <div class="layout-container">
       <div class="central-content">
@@ -306,18 +306,19 @@
       </div>
     </div>
 
-    <a href="../markets-econ.html" class="home-btn" rel="noopener" aria-label="Back to Markets & Economics Hub">Back to Markets & Economics</a>
+    <a href="./markets-econ.html" class="home-btn" rel="noopener" aria-label="Back to Markets & Economics Hub">Back to Markets & Economics</a>
   </div>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      /* ---------- PARTICLE BACKGROUND ---------- */
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       const particlesArray = [];
       const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
-      
+
       class Particle {
         constructor() {
           this.x = Math.random() * canvas.width;
@@ -340,8 +341,13 @@
           ctx.fill();
         }
       }
-      
-      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
+
+      function init() {
+        particlesArray.length = 0;
+        for (let i = 0; i < numberOfParticles; i++) {
+          particlesArray.push(new Particle());
+        }
+      }
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particlesArray.length; i++) {
@@ -355,8 +361,13 @@
         requestAnimationFrame(animate);
       }
       init(); animate();
-      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
-      
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      });
+
+      /* ---------- CONTENT LOADING ---------- */
       const container = document.querySelector('.content-links');
       const pagination = document.querySelector('.pagination');
       let allEntries = [];
@@ -380,7 +391,7 @@
         });
 
         if (pageItems.length === 0 && allEntries.length > 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No articles & longform available yet.</em></div>';
+          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No articles available yet.</em></div>';
         }
 
         renderPagination();
@@ -438,8 +449,9 @@
         pagination.innerHTML = '';
 
         try {
-          const response = await fetch('../markets-econ-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error('File not found');
+          // FIXED: Same folder → use ./
+          const response = await fetch('./markets-econ-links.txt?t=' + Date.now());
+          if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
           allEntries = lines.map(line => {
@@ -452,16 +464,17 @@
           renderPage(1);
 
         } catch (err) {
+          console.error('Load failed:', err);
           container.innerHTML = `
             <div class="error-state" role="alert">
-              <p>Failed to load articles & longform: ${err.message}</p>
+              <p>Failed to load articles: ${err.message}</p>
               <button class="retry-btn" onclick="loadContent()">Retry</button>
             </div>
           `;
           pagination.innerHTML = '';
         }
       }
-      
+
       loadContent();
     });
   </script>
