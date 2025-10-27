@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - POLITICS: Podcasts — Deep audio dives into power and policy. Curated daily.">
+  <meta name="description" content="THE DAYLUGE - POLITICS: Podcasts — Top political pods, interviews, and audio deep dives. Curated daily.">
   <meta property="og:title" content="Podcasts - Politics - THE DAYLUGE">
-  <meta property="og:description" content="Top political podcasts, episodes, and audio analysis. Updated daily.">
+  <meta property="og:description" content="Best political podcasts, episodes, and interviews. Updated daily.">
   <meta property="og:image" content="https://thedayluge.com/og-politics-podcasts.jpg">
   <meta property="og:url" content="https://thedayluge.com/politics/politics-podcasts.html">
   <meta property="og:type" content="website">
@@ -238,6 +238,8 @@
       font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
     }
 
+    .
+
     .home-btn {
       position: absolute;
       bottom: -55px;
@@ -357,6 +359,8 @@
       init(); animate();
       window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
       
+      const
+
       const container = document.querySelector('.content-links');
       const pagination = document.querySelector('.pagination');
       let allEntries = [];
@@ -438,7 +442,7 @@
         pagination.innerHTML = '';
 
         try {
-          const response = await fetch('../politics-links.txt?t=' + Date.now());
+          const response = await fetch('./politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error('File not found');
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
