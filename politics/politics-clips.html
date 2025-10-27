@@ -306,7 +306,7 @@
       </div>
     </div>
 
-    <a href="../politics.html" class="home-btn" rel="noopener" aria-label="Back to Politics Hub">Back to Politics</a>
+    <a href="./politics.html" class="home-btn" rel="noopener" aria-label="Back to Politics Hub">Back to Politics</a>
   </div>
   
   <script>
@@ -341,7 +341,10 @@
         }
       }
       
-      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
+      function init() { 
+        particlesArray.length = 0;
+        for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); 
+      }
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particlesArray.length; i++) {
@@ -355,7 +358,11 @@
         requestAnimationFrame(animate);
       }
       init(); animate();
-      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+      window.addEventListener('resize', () => { 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight; 
+        init(); 
+      });
       
       const container = document.querySelector('.content-links');
       const pagination = document.querySelector('.pagination');
@@ -438,8 +445,8 @@
         pagination.innerHTML = '';
 
         try {
-          // FIXED: ../../ goes up two levels to reach politics-links.txt
-          const response = await fetch('../../politics-links.txt?t=' + Date.now());
+          // FIXED: Same folder → use ./politics-links.txt
+          const response = await fetch('./politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());

@@ -21,14 +21,14 @@
       --gold-light: #F7F9FB;
       --ink: #111;
       --black-bg: #000000;
-      --dark-gray: #111111;  /* Fixed: was 'the-dark-gray' */
+      --dark-gray: #111111;
       --gray: #333333;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
- |     color: var(--gold);
+      color: var(--gold);
       line-height: 1.4;
       background: var(--black-bg);
       display: flex;
@@ -306,7 +306,6 @@
       </div>
     </div>
 
-    <!-- Back to Politics Hub (correct relative path) -->
     <a href="./politics.html" class="home-btn" rel="noopener" aria-label="Back to Politics Hub">Back to Politics</a>
   </div>
   
@@ -342,7 +341,10 @@
         }
       }
       
-      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
+      function init() { 
+        particlesArray.length = 0;
+        for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); 
+      }
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particlesArray.length; i++) {
@@ -356,7 +358,11 @@
         requestAnimationFrame(animate);
       }
       init(); animate();
-      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+      window.addEventListener('resize', () => { 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight; 
+        init(); 
+      });
       
       const container = document.querySelector('.content-links');
       const pagination = document.querySelector('.pagination');
@@ -375,7 +381,7 @@
           el.className = 'content-link';
           el.style.animationDelay = `${i * 0.05}s`;
           el.innerHTML = `
-            <a href="${e.link}" class="link-title" target="_**blank**" rel="noopener">${e.title}</a>
+            <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
           `;
           container.appendChild(el);
         });
@@ -439,8 +445,8 @@
         pagination.innerHTML = '';
 
         try {
-          // CORRECT PATH: Only go up ONE level to reach politics-links.txt
-          const response = await fetch('../politics-links.txt?t=' + Date.now());
+          // FIXED: Same folder → use ./ or just filename
+          const response = await fetch('./politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
