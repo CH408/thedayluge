@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - POLITICS: Memes — Laughs from the political arena. Curated daily.">
+  <meta name="description" content="THE DAYLUGE - POLITICS: Memes — Viral political memes, satire, and culture war gold. Curated daily.">
   <meta property="og:title" content="Memes - Politics - THE DAYLUGE">
-  <meta property="og:description" content="Funny political memes, image macros, and satirical humor. Updated daily.">
+  <meta property="og:description" content="The funniest and most viral political memes of the day. Updated daily.">
   <meta property="og:image" content="https://thedayluge.com/og-politics-memes.jpg">
   <meta property="og:url" content="https://thedayluge.com/politics/politics-memes.html">
   <meta property="og:type" content="website">
@@ -438,7 +438,7 @@
         pagination.innerHTML = '';
 
         try {
-          const response = await fetch('../politics-links.txt?t=' + Date.now());
+          const response = await fetch('./politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error('File not found');
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
