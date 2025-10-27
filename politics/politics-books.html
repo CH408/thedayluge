@@ -276,7 +276,7 @@
       .layout-wrapper { margin: 40px auto 70px; }
       .layout-container { height: 650px; }
       .central-content { width: 420px; height: 520px; }
-      .home-btn { bottom: -50px; }
+      .home-btn { bottom: -, -50px; }
     }
 
     @media (max-width: 600px) {
@@ -438,8 +438,9 @@
         pagination.innerHTML = '';
 
         try {
-          const response = await fetch('../politics-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error('File not found');
+          // FIXED: ../../ goes up two levels to reach politics-links.txt
+          const response = await fetch('../../politics-links.txt?t=' + Date.now());
+          if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
           allEntries = lines.map(line => {
@@ -452,6 +453,7 @@
           renderPage(1);
 
         } catch (err) {
+          console.error('Books load failed:', err);
           container.innerHTML = `
             <div class="error-state" role="alert">
               <p>Failed to load books: ${err.message}</p>
