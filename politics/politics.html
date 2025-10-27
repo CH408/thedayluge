@@ -13,7 +13,6 @@
   <link rel="canonical" href="https://thedayluge.com/politics/politics.html">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <title>Politics - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
@@ -93,7 +92,7 @@
         container.innerHTML = '<div class="loading-indicator">Loading...</div>';
         
         try {
-          const response = await fetch('politics-links.txt?t=' + Date.now());
+          const response = await fetch('/politics/politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error('File not found or server error');
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
