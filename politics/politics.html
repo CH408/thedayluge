@@ -109,31 +109,12 @@
       box-shadow: 0 0 20px rgba(236,239,241,0.3);
       position: relative;
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: fadeInUp 0.5s ease-out forwards;
-    }
-    @keyframes fadeInUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .category-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(236,239,241,0.15) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
     }
 
     .category-card:hover {
       transform: translateY(-4px) scale(1.02);
       box-shadow: 0 0 35px rgba(236,239,241,0.6);
       border-color: var(--gold-light);
-    }
-    .category-card:hover::before {
-      opacity: 1;
     }
 
     .category-title {
@@ -234,37 +215,37 @@
   
   <div class="layout-wrapper">
     <div class="grid-container">
-      <div class="category-card" style="animation-delay: 0.1s">
+      <div class="category-card">
         <div class="category-title">Articles & Longform</div>
         <div class="category-desc">Deep dives, essays, investigations</div>
         <a href="./politics-articles-longform.html" class="category-link">Enter</a>
       </div>
 
-      <div class="category-card" style="animation-delay: 0.2s">
+      <div class="category-card">
         <div class="category-title">Books</div>
         <div class="category-desc">Political theory, biographies, policy</div>
         <a href="./politics-books.html" class="category-link">Enter</a>
       </div>
 
-      <div class="category-card" style="animation-delay: 0.3s">
+      <div class="category-card">
         <div class="category-title">Clips</div>
         <div class="category-desc">Speeches, debates, viral moments</div>
         <a href="./politics-clips.html" class="category-link">Enter</a>
       </div>
 
-      <div class="category-card" style="animation-delay: 0.4s">
+      <div class="category-card">
         <div class="category-title">Memes</div>
         <div class="category-desc">Satire, culture war, viral gold</div>
         <a href="./politics-memes.html" class="category-link">Enter</a>
       </div>
 
-      <div class="category-card" style="animation-delay: 0.5s">
+      <div class="category-card">
         <div class="category-title">Podcasts</div>
         <div class="category-desc">Interviews, analysis, audio deep dives</div>
         <a href="./politics-podcasts.html" class="category-link">Enter</a>
       </div>
 
-      <div class="category-card" style="animation-delay: 0.6s">
+      <div class="category-card">
         <div class="category-title">TV & Movies</div>
         <div class="category-desc">Documentaries, series, political films</div>
         <a href="./politics-tv-movies.html" class="category-link">Enter</a>
