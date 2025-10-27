@@ -3,310 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - POLITICS: Podcasts — Top political pods, interviews, and audio deep dives. Curated daily.">
-  <meta property="og:title" content="Podcasts - Politics - THE DAYLUGE">
-  <meta property="og:description" content="Best political podcasts, episodes, and interviews. Updated daily.">
-  <meta property="og:image" content="https://thedayluge.com/og-politics-podcasts.jpg">
+  <meta name="description" content="THE DAYLUGE - POLITICS: Podcasts. Curated daily.">
+  <meta property="og:title" content="Podcasts - THE DAYLUGE">
+  <meta property="og:description" content="Daily curated politics podcasts. Fresh every day.">
+  <meta property="og:image" content="https://thedayluge.com/og-politics.jpg">
   <meta property="og:url" content="https://thedayluge.com/politics/politics-podcasts.html">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://thedayluge.com/politics/politics-podcasts.html">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <title>Podcasts - Politics - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --gold: #ECEFF1;
-      --gold-light: #F7F9FB;
-      --ink: #111;
-      --black-bg: #000000;
-      --dark-gray: #111111;
-      --gray: #333333;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--gold);
-      line-height: 1.4;
-      background: var(--black-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 20px;
-    }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(236,239,241,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-    body::after {
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(236,239,241,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
-
-    .header {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
-    }
-    .header h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 28px;
-      margin-bottom: 8px;
-      animation: title-pulse 8s ease-in-out infinite;
-    }
-    @keyframes title-pulse {
-      0% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { color: var(--gold-light); text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-
-    .layout-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 50px auto 80px;
-      z-index: 5;
-    }
-
-    .layout-container {
-      position: relative;
-      width: 100%;
-      height: 750px;
-      z-index: 5;
-    }
-
-    .central-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 580px;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      z-index: 15;
-      box-shadow: 0 0 30px rgba(236,239,241,0.5), 0 4px 12px rgba(0,0,0,0.8);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(236,239,241,0.5), 0 4px 12px rgba(0,0,0,0.8); }
-      50% { box-shadow: 0 0 40px rgba(236,239,241,0.8), 0 6px 16px rgba(0,0,0,0.4); }
-    }
-
-    .central-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--gold);
-      text-shadow: 0 0 8px var(--gold);
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--gold);
-      flex-shrink: 0;
-    }
-
-    .content-links {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      overflow-y: auto;
-      padding: 8px 0;
-      margin-top: 8px;
-    }
-
-    .content-link {
-      display: block;
-      padding: 7px 9px;
-      border: 1px solid rgba(236,239,241,0.3);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-size: 16px;
-      line-height: 1.18;
-      overflow-wrap: anywhere;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: unroll 0.5s ease-out forwards;
-    }
-    @keyframes unroll { to { opacity: 1; transform: translateY(0); } }
-
-    .content-link:hover {
-      background: rgba(236,239,241,0.2);
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(236,239,241,0.4);
-    }
-    .link-title {
-      color: var(--gold);
-      text-decoration: none;
-      cursor: pointer;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-    }
-
-    .loading-indicator {
-      text-align: center;
-      font-size: 16px;
-      color: var(--gold);
-      padding: 10px;
-    }
-
-    .error-state {
-      text-align: center;
-      padding: 15px;
-      background: rgba(139, 0, 0, 0.3);
-      border: 1px solid #ff4444;
-      border-radius: 6px;
-      color: #ffaaaa;
-      font-size: 14px;
-      margin: 10px 0;
-    }
-    .retry-btn {
-      background: var(--gold);
-      color: #000;
-      border: none;
-      padding: 6px 12px;
-      margin-top: 8px;
-      border-radius: 4px;
-      font-family: 'Special Elite', monospace;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
-    }
-    .page-btn {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid rgba(236,239,241,0.4);
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      min-width: 32px;
-      text-align: center;
-      transition: all 0.2s;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
-    }
-    .page-btn:hover {
-      background: rgba(236,239,241,0.2);
-      border-color: var(--gold);
-    }
-    .page-btn.active {
-      background: var(--gold);
-      color: #000;
-      font-weight: bold;
-    }
-    .page-ellipsis {
-      color: #aaa;
-      padding: 4px 4px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
-    }
-
-    .home-btn {
-      position: absolute;
-      bottom: -55px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--black-bg);
-      color: var(--gold);
-      border: 2px solid var(--gold);
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--gold);
-      box-shadow: 0 0 10px rgba(236,239,241,0.3);
-      z-index: 20;
-      white-space: nowrap;
-    }
-    .home-btn:hover {
-      background: var(--dark-gray);
-      transform: translateX(-50%) scale(1.05);
-      box-shadow: 0 0 20px rgba(236,239,241,0.6);
-    }
-
-    #particle-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    @media (max-width: 900px) {
-      .layout-wrapper { margin: 40px auto 70px; }
-      .layout-container { height: 650px; }
-      .central-content { width: 420px; height: 520px; }
-      .home-btn { bottom: -50px; }
-    }
-
-    @media (max-width: 600px) {
-      .layout-wrapper { margin: 15px auto 65px; }
-      .layout-container { height: 600px; }
-      .central-content { width: 340px; height: 480px; padding: 12px; }
-      .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; }
-      .header h1 { font-size: 24px; }
-      .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
-      .pagination { gap: 6px; font-size: 13px; }
-      .page-btn { padding: 3px 6px; min-width: 28px; }
-    }
-  </style>
+  <title>Podcasts - THE DAYLUGE</title>
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-  <div class="header"><h1>PODCASTS - POLITICS</h1></div>
+  <div class="header"><h1>THE DAYLUGE - POLITICS</h1></div>
   <canvas id="particle-canvas"></canvas>
   
   <div class="layout-wrapper">
     <div class="layout-container">
       <div class="central-content">
-        <div class="central-title">Podcasts</div>
+        <div class="central-title">Podcasts</ Confirm>
         <div class="content-links">
           <div class="loading-indicator">Loading...</div>
         </div>
-        <div class="pagination"></div>
       </div>
+      
+      <div class="perimeter-box top-left-box" role="button" tabindex="0" aria-label="Go to Politics Podcasts" onclick="window.location.href='./politics-podcasts.html'">Podcasts</div>
+      <div class="perimeter-box top-middle-box" role="button" tabindex="0" aria-label="Go to Articles & Longform" onclick="window.location.href='./politics-articles-longform.html'">Articles & Longform</div>
+      <div class="perimeter-box top-right-box" role="button" tabindex="0" aria-label="Go to Video Clips" onclick="window.location.href='./politics-clips.html'">Video Clips</div>
+      <div class="perimeter-box bottom-left-box" role="button" tabindex="0" aria-label="Go to Books" onclick="window.location.href='./politics-books.html'">Books</div>
+      <div class="perimeter-box bottom-middle-box" role="button" tabindex="0" aria-label="Go to Memes" onclick="window.location.href='./politics-memes.html'">Memes</div>
+      <div class="perimeter-box bottom-right-box" role="button" tabindex="0" aria-label="Go to TV & Movies" onclick="window.location.href='./politics-tv-movies.html'">TV & Movies</div>
     </div>
 
-    <a href="./politics.html" class="home-btn" rel="noopener" aria-label="Back to Politics Hub">Back to Politics</a>
+    <a href="/" class="home-btn" rel="noopener">Back to Home</a>
   </div>
   
   <script>
@@ -341,10 +71,7 @@
         }
       }
       
-      function init() { 
-        particlesArray.length = 0;
-        for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); 
-      }
+      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = 0; i < particlesArray.length; i++) {
@@ -358,116 +85,49 @@
         requestAnimationFrame(animate);
       }
       init(); animate();
-      window.addEventListener('resize', () Chiu => { 
-        canvas.width = window.innerWidth; 
-        canvas.height = window.innerHeight; 
-        init(); 
-      });
+      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
       
-      const container = document.querySelector('.content-links');
-      const pagination = document.querySelector('.pagination');
-      let allEntries = [];
-      let currentPage = 1;
-      const itemsPerPage = 10;
-
-      function renderPage(page) {
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const pageItems = allEntries.slice(start, end);
-
-        container.innerHTML = '';
-        pageItems.forEach((e, i) => {
-          const el = document.createElement('div');
-          el.className = 'content-link';
-          el.style.animationDelay = `${i * 0.05}s`;
-          el.innerHTML = `
-            <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
-          `;
-          container.appendChild(el);
-        });
-
-        if (pageItems.length === 0 && allEntries.length > 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No podcasts available yet.</em></div>';
-        }
-
-        renderPagination();
-      }
-
-      function renderPagination() {
-        pagination.innerHTML = '';
-        const totalPages = Math.ceil(allEntries.length / itemsPerPage);
-        if (totalPages <= 1) return;
-
-        const maxVisible = 7;
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-        if (endPage - startPage + 1 < maxVisible) {
-          startPage = Math.max(1, endPage - maxVisible + 1);
-        }
-
-        if (startPage > 1) {
-          addPageBtn(1);
-          if (startPage > 2) addEllipsis();
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-          addPageBtn(i);
-        }
-
-        if (endPage < totalPages) {
-          if (endPage < totalPages - 1) addEllipsis();
-          addPageBtn(totalPages);
-        }
-      }
-
-      function addPageBtn(page) {
-        const btn = document.createElement('button');
-        btn.className = 'page-btn';
-        btn.textContent = page;
-        if (page === currentPage) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          currentPage = page;
-          renderPage(page);
-          window.scrollTo({ top: document.querySelector('.central-content').offsetTop - 100, behavior: 'smooth' });
-        });
-        pagination.appendChild(btn);
-      }
-
-      function addEllipsis() {
-        const el = document.createElement('span');
-        el.className = 'page-ellipsis';
-        el.textContent = '...';
-        pagination.appendChild(el);
-      }
-
       async function loadContent() {
+        const container = document.querySelector('.content-links');
         container.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        pagination.innerHTML = '';
-
+        
         try {
-          // FIXED: Same folder → use ./politics-links.txt
-          const response = await fetch('./politics-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
+          const response = await fetch('/politics/politics-links.txt?t=' + Date.now());
+          if (!response.ok) throw new Error('File not found or server error');
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
-          allEntries = lines.map(line => {
+          const entries = lines.map(line => {
             const p = line.split('|');
             if (p.length < 3) return null;
             return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e && e.category === 'podcasts');
-
-          currentPage = 1;
-          renderPage(1);
+          }).filter(e => e);
+          
+          const podcastEntries = entries.filter(e => e.category === 'pods');
+          const latest8 = podcastEntries.slice(0, 8);
+          
+          container.innerHTML = '';
+          if (latest8.length === 0) {
+            container.innerHTML = '<div class="loading-indicator">No podcasts yet today.</div>';
+            return;
+          }
+          latest8.forEach((e, i) => {
+            const el = document.createElement('div');
+            el.className = 'content-link';
+            el.style.animationDelay = `${i * 0.1}s`;
+            el.innerHTML = `
+              <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
+            `;
+            container.appendChild(el);
+          });
 
         } catch (err) {
-          console.error('Podcasts load failed:', err);
+          console.error('Load failed:', err);
           container.innerHTML = `
             <div class="error-state" role="alert">
-              <p>Failed to load podcasts: ${err.message}</p>
+              <p>Failed to load: ${err.message}</p>
               <button class="retry-btn" onclick="loadContent()">Retry</button>
             </div>
           `;
-          pagination.innerHTML = '';
         }
       }
       
