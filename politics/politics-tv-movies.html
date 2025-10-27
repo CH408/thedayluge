@@ -3,7 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Politics - Movies & TV</title>
+  <meta name="description" content="THE DAYLUGE - POLITICS: Movies & TV — Political documentaries, films, and series. Curated daily.">
+  <meta property="og:title" content="Movies & TV - Politics - THE DAYLUGE">
+  <meta property="og:description" content="Political movies, TV shows, documentaries, and series. Updated daily.">
+  <meta property="og:image" content="https://thedayluge.com/og-politics-tv-movies.jpg">
+  <meta property="og:url" content="https://thedayluge.com/politics/politics-tv-movies.html">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://thedayluge.com/politics/politics-tv-movies.html">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <title>Movies & TV - Politics - THE DAYLUGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
@@ -174,7 +183,7 @@
   </style>
 </head>
 <body>
-  <a href="politics.html" class="home-btn">← Back to Politics</a>
+  <a href="../politics.html" class="home-btn">Back to Politics</a>
   <canvas id="particle-canvas"></canvas>
   <div class="wrap">
     <div class="global-news">
@@ -185,7 +194,7 @@
       <p class="error-message" id="error-message" style="display: none;">Unable to load movies & TV. Please try again later.</p>
     </div>
     <div class="button-container">
-      <button class="random-button" onclick="goToRandomMovieTV()">⚛️ SURPRISE ME!</button>
+      <button class="random-button" onclick="goToRandomMovieTV()">SURPRISE ME!</button>
     </div>
     <div class="pagination" id="pagination"></div>
   </div>
@@ -263,19 +272,17 @@
       canvas.height = window.innerHeight;
       init();
     });
+
     // Load movies & TV with pagination
     async function loadMoviesTVContent(page = 1) {
       try {
-        console.log('Fetching politics-links.txt from /politics/politics-links.txt');
-        const response = await fetch('/politics/politics-links.txt');
-        console.log('Fetch response:', response.status, response.statusText);
+        // FIXED: ../../ goes up two levels to reach politics-links.txt
+        const response = await fetch('../../politics-links.txt?t=' + Date.now());
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`HTTP ${response.status}: File not found`);
         }
         const text = await response.text();
-        console.log('Fetched text length:', text.length);
         const lines = text.split('\n').filter(line => line.trim());
-        console.log('Parsed lines:', lines.length);
         const entries = lines.map(line => {
           const parts = line.split('|');
           if (parts.length >= 3) {
@@ -285,7 +292,6 @@
           return null;
         }).filter(entry => entry !== null && entry.category === 'tv-movies');
         
-        console.log('Filtered tv-movies entries:', entries.length);
         const itemsPerPage = 24;
         const totalPages = Math.ceil(entries.length / itemsPerPage);
         const start = (page - 1) * itemsPerPage;
@@ -299,13 +305,12 @@
           headlines.innerHTML = paginatedEntries.length > 0
             ? paginatedEntries.map((entry, index) => `
                 <li class="headline">
-                  <a href="${entry.link}" target="_blank">${entry.title}</a>
+                  <a href="${entry.link}" target="_blank" rel="noopener">${entry.title}</a>
                 </li>
               `).join('')
             : '<li class="headline">No movies & TV available.</li>';
           pageTitle.textContent = `Politics - Movies & TV - Page ${page}`;
           errorMessage.style.display = 'none';
-          console.log(`Showing ${paginatedEntries.length} movies & TV on Page ${page}`);
         } else {
           throw new Error('Headlines container not found');
         }
@@ -324,19 +329,20 @@
           }
         }
       } catch (error) {
-        console.error('Error loading movies & TV:', error.message);
+        console.error('Error loading movies & TV:', error);
         const errorMessage = document.getElementById('error-message');
         if (errorMessage) {
           errorMessage.style.display = 'block';
         }
       }
     }
+
     // Random movie/TV from current page links
     async function goToRandomMovieTV() {
       try {
-        const response = await fetch('/politics/politics-links.txt');
+        const response = await fetch('../../politics-links.txt?t=' + Date.now());
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`HTTP ${response.status}`);
         }
         const text = await response.text();
         const lines = text.split('\n').filter(line => line.trim());
@@ -347,7 +353,13 @@
           }
           return null;
         }).filter(link => link !== null);
-        const currentLinks = entries.slice((loadMoviesTVContent.page - 1) * 24, loadMoviesTVContent.page * 24);
+
+        const currentPage = loadMoviesTVContent.page || 1;
+        const itemsPerPage = 24;
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const currentLinks = entries.slice(start, end);
+
         if (currentLinks.length > 0) {
           const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
           window.open(randomLink, '_blank');
@@ -355,14 +367,15 @@
           throw new Error('No valid movies & TV to select randomly on current page');
         }
       } catch (error) {
-        console.error('Error loading links for random selection:', error.message);
+        console.error('Error loading links for random selection:', error);
         const errorMessage = document.getElementById('error-message');
         if (errorMessage) {
           errorMessage.style.display = 'block';
         }
       }
     }
-    // Track current page in function scope
+
+    // Track current page
     loadMoviesTVContent.page = 1;
     document.addEventListener('DOMContentLoaded', () => loadMoviesTVContent());
   </script>
