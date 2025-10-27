@@ -21,14 +21,14 @@
       --gold-light: #F7F9FB;
       --ink: #111;
       --black-bg: #000000;
- the-dark-gray: #111111;
+      --dark-gray: #111111;  /* Fixed: was 'the-dark-gray' */
       --gray: #333333;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; overflow-x: hidden; }
     body {
       font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--gold);
+ |     color: var(--gold);
       line-height: 1.4;
       background: var(--black-bg);
       display: flex;
@@ -306,7 +306,8 @@
       </div>
     </div>
 
-    <a href="../politics.html" class="home-btn" rel="noopener" aria-label="Back to Politics Hub">Back to Politics</a>
+    <!-- Back to Politics Hub (correct relative path) -->
+    <a href="./politics.html" class="home-btn" rel="noopener" aria-label="Back to Politics Hub">Back to Politics</a>
   </div>
   
   <script>
@@ -374,7 +375,7 @@
           el.className = 'content-link';
           el.style.animationDelay = `${i * 0.05}s`;
           el.innerHTML = `
-            <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
+            <a href="${e.link}" class="link-title" target="_**blank**" rel="noopener">${e.title}</a>
           `;
           container.appendChild(el);
         });
@@ -438,8 +439,8 @@
         pagination.innerHTML = '';
 
         try {
-          // FIXED PATH: ../../ goes up two levels to reach politics-links.txt
-          const response = await fetch('../../politics-links.txt?t=' + Date.now());
+          // CORRECT PATH: Only go up ONE level to reach politics-links.txt
+          const response = await fetch('../politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
