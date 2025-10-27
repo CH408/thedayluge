@@ -438,7 +438,7 @@
         pagination.innerHTML = '';
 
         try {
-          const response = await fetch('../politics-links.txt?t=' + Date.now());
+          const response = await fetch('./politics-links.txt?t=' + Date.now());
           if (!response.ok) throw new Error('File not found');
           const text = await response.text();
           const lines = text.trim().split('\n').filter(l => l.trim());
