@@ -431,6 +431,7 @@
           });
 
         } catch (err) {
+          console.error('Surprise Me failed:', err);
           container.innerHTML = `
             <div class="error-state" role="alert">
               <p>Failed to load content: ${err.message}</p>
