@@ -86,30 +86,27 @@
       animation: neonGlow 3s ease-in-out infinite;
     }
 
-    /* --- SLOWER, MULTI-HUE NOTE --- */
+    /* --- VIBRANT SUNSET FIRE PULSE --- */
     .construction-note {
       font-size: 20px;
       margin-top: 12px;
       font-weight: bold;
       line-height: 1.4;
-      /* Animation slowed to 8s for a more gradual flow */
-      animation: firePulseSmooth 8s ease-in-out infinite;
+      /* Slowed to 8s for gradual flow, brighter color palette used */
+      animation: brightFirePulse 8s ease-in-out infinite;
     }
 
-    @keyframes firePulseSmooth {
-      0%   { color: #990000; text-shadow: 0 0 4px #990000; } 
-      10%  { color: #cc0000; text-shadow: 0 0 6px #cc0000; } 
-      20%  { color: #ff3300; text-shadow: 0 0 8px #ff3300; } 
-      30%  { color: #ff5500; text-shadow: 0 0 10px #ff5500; } 
-      40%  { color: #ff8800; text-shadow: 0 0 14px #ff8800; } 
-      50%  { color: #ffcc00; text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00; } 
-      60%  { color: #ffaa00; text-shadow: 0 0 14px #ffaa00; } 
-      70%  { color: #ff6600; text-shadow: 0 0 10px #ff6600; } 
-      80%  { color: #ff4400; text-shadow: 0 0 8px #ff4400; } 
-      90%  { color: #cc0000; text-shadow: 0 0 6px #cc0000; } 
-      100% { color: #990000; text-shadow: 0 0 4px #990000; } 
+    @keyframes brightFirePulse {
+      0%   { color: #ff4500; text-shadow: 0 0 6px #ff4500; } /* Orange-Red (Bright) */
+      15%  { color: #ff6600; text-shadow: 0 0 8px #ff6600; } /* Pure Orange */
+      30%  { color: #ff8800; text-shadow: 0 0 10px #ff8800; } /* Deep Orange */
+      45%  { color: #ffaa00; text-shadow: 0 0 14px #ffaa00; } /* Gold */
+      60%  { color: #ffdd00; text-shadow: 0 0 20px #ffdd00, 0 0 30px #ffcc00; } /* Bright Yellow */
+      75%  { color: #ffaa00; text-shadow: 0 0 14px #ffaa00; } /* Back to Gold */
+      85%  { color: #ff6600; text-shadow: 0 0 8px #ff6600; } /* Back to Orange */
+      100% { color: #ff4500; text-shadow: 0 0 6px #ff4500; } /* Back to Orange-Red */
     }
-    /* ------------------------------ */
+    /* ---------------------------------- */
 
     @keyframes neonGlow {
       0% { color: #4682b4; text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5); }
