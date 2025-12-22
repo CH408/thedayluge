@@ -66,9 +66,9 @@
       min-height: 100dvh;
       overflow-x: hidden;
       text-align: center;
-      gap: 2rem;
+      gap: 1.5rem;
       padding: env(safe-area-inset-top) env(safe-area-inset-right)
-               env(safe-area-inset-bottom) env(safe-area-inset-left);
+                env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
     .header {
@@ -85,6 +85,32 @@
       text-shadow: 0 0 5px rgba(70,130,180,.7),0 0 10px rgba(70,130,180,.5);
       animation: neonGlow 3s ease-in-out infinite;
     }
+
+    /* --- SLOWER, MULTI-HUE NOTE --- */
+    .construction-note {
+      font-size: 20px;
+      margin-top: 12px;
+      font-weight: bold;
+      line-height: 1.4;
+      /* Animation slowed to 8s for a more gradual flow */
+      animation: firePulseSmooth 8s ease-in-out infinite;
+    }
+
+    @keyframes firePulseSmooth {
+      0%   { color: #990000; text-shadow: 0 0 4px #990000; } 
+      10%  { color: #cc0000; text-shadow: 0 0 6px #cc0000; } 
+      20%  { color: #ff3300; text-shadow: 0 0 8px #ff3300; } 
+      30%  { color: #ff5500; text-shadow: 0 0 10px #ff5500; } 
+      40%  { color: #ff8800; text-shadow: 0 0 14px #ff8800; } 
+      50%  { color: #ffcc00; text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00; } 
+      60%  { color: #ffaa00; text-shadow: 0 0 14px #ffaa00; } 
+      70%  { color: #ff6600; text-shadow: 0 0 10px #ff6600; } 
+      80%  { color: #ff4400; text-shadow: 0 0 8px #ff4400; } 
+      90%  { color: #cc0000; text-shadow: 0 0 6px #cc0000; } 
+      100% { color: #990000; text-shadow: 0 0 4px #990000; } 
+    }
+    /* ------------------------------ */
+
     @keyframes neonGlow {
       0% { color: #4682b4; text-shadow: 0 0 5px rgba(70,130,180,0.7),0 0 10px rgba(70,130,180,0.5); }
       16.67% { color: #20b2aa; text-shadow: 0 0 8px rgba(32,178,170,0.9),0 0 15px rgba(32,178,170,0.7); }
@@ -235,6 +261,7 @@
     }
 
     @media (max-width: 480px) {
+      .construction-note { font-size: 15px; padding: 0 20px; }
       .wheel-container { margin-top: 1rem; }
       .random-button { transform: translateY(0.25rem); }
       .circle { padding: 8px; }
@@ -261,6 +288,10 @@
 <body>
   <div class="header">
     <h1>THE DAYLUGE</h1>
+    <div class="construction-note">
+      Site under construction<br>
+      Please send feedback to suggestionbox@thedayluge.com
+    </div>
   </div>
 
   <div class="wheel-container">
