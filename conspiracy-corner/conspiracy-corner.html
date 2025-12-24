@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conspiracy Corner - THE DAYLUGE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Special Elite', monospace;
+      background: #000;
+      color: #ff69b4;
+      padding: 40px 30px;
+      position: relative;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .constellation-grid .conspiracy-node .node-icon,
+    .minors-grid .conspiracy-node .node-icon {
+      display: none;
+    }
+
+    .conspiracy-node::before {
+      content: "";
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent, currentColor, transparent 100deg);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      animation: rotateBorder 3s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotateBorder {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .conspiracy-node:hover {
+      transform: scale(1.1) !important;
+      background: rgb(255 105 180 / 12%);
+      border-color: rgb(255 105 180 / 50%);
+      box-shadow: 0 0 25px rgb(255 105 180 / 30%);
+    }
+
+    .conspiracy-node:hover::before {
+      opacity: 0.6;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .back-nav {
+      margin-bottom: 30px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff69b4;
+      text-decoration: none;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: .3s;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 105, 180, 0.4);
+      background: rgba(0, 255, 0, .02);
+    }
+
+    .back-link:hover {
+      border-color: rgba(255, 105, 180, 0.2);
+      background: rgba(255, 105, 180, 0.05);
+      transform: translateX(-5px);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .header h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      color: #ff69b4;
+      margin-bottom: 10px;
+      letter-spacing: 6px;
+      text-shadow: 0 0 30px rgba(255, 105, 180, 0.6), 0 0 15px rgba(255, 105, 180, 0.8);
+    }
+
+    .constellation-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 60px;
+      padding: 40px 20px;
+      justify-items: center;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+
+    .minors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      padding: 20px;
+      justify-items: center;
+      align-items: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .conspiracy-node {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255, 105, 180, 0.06);
+      border: 2px solid rgba(255, 105, 180, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: .4s;
+      position: relative;
+      backdrop-filter: blur(5px);
+      animation: pulse 3s ease-in-out infinite;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+    }
+
+    .major-node {
+      width: 180px;
+      height: 180px;
+      border-width: 3px;
+      border-color: rgba(255, 105, 180, 0.5);
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.3), 0 0 40px rgba(255, 105, 180, 0.2), inset 0 0 20px rgba(255, 105, 180, 0.1);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(255, 105, 180, 0.5), 0 0 60px rgba(255, 105, 180, 0.3), inset 0 0 30px rgba(255, 105, 180, 0.15);
+      }
+    }
+
+    .conspiracy-node:nth-child(2n) {
+      animation-delay: .5s;
+    }
+
+    .conspiracy-node:nth-child(3n) {
+      animation-delay: 1s;
+    }
+
+    .conspiracy-node:nth-child(4n) {
+      animation-delay: 1.5s;
+    }
+
+    .conspiracy-node:hover {
+      transform: scale(1.15);
+      background: rgba(255, 105, 180, 0.1);
+      border-color: rgba(255, 105, 180, 0.8);
+      animation: none;
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.6), 0 0 80px rgba(255, 105, 180, 0.4), inset 0 0 30px rgba(255, 105, 180, 0.2);
+    }
+
+    .node-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .major-node .node-icon {
+      font-size: 42px;
+    }
+
+    .node-label {
+      font-size: 14px;
+      text-align: center;
+      color: #ff69b4;
+      letter-spacing: .5px;
+      line-height: 1.15;
+      padding: 0 6px;
+      margin: 0;
+      z-index: 2;
+      position: relative;
+      max-height: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      text-shadow: 0 0 30px rgba(255, 105, 180, 0.6), 0 0 15px rgba(255, 105, 180, 0.8);
+    }
+
+    .major-node .node-label {
+      font-size: 16px;
+    }
+
+    .minor-node .node-label {
+      font-size: 14px;
+      line-height: 1.1;
+    }
+
+    .minor-node {
+      width: 150px;
+      height: 150px;
+      border-width: 1px;
+    }
+
+    @media (max-width:1024px) {
+
+      .constellation-grid,
+      .minors-grid {
+        gap: 20px;
+      }
+
+      .major-node {
+        width: 160px;
+        height: 160px;
+      }
+
+
+      .node-icon {
+        font-size: 32px;
+      }
+
+      .major-node .node-icon {
+        font-size: 38px;
+      }
+
+      .node-label {
+        font-size: 13px;
+      }
+
+      .major-node .node-label {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width:768px) {
+      body {
+        padding: 35px 25px;
+      }
+
+      .constellation-grid,
+      .minors-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 100%;
+        padding: 20px 10px;
+      }
+
+      .minor-node {
+        width: 150px;
+        height: 150px;
+      }
+
+      .header {
+        margin-bottom: 30px;
+      }
+
+      .node-icon {
+        font-size: 24px;
+        margin-bottom: 4px;
+      }
+
+      .major-node .node-icon {
+        font-size: 28px;
+      }
+
+      .node-label {
+        letter-spacing: .4px;
+        padding: 0 4px;
+        line-height: 1.1;
+      }
+
+
+    }
+
+    @media (max-width:480px) {
+
+      .constellation-grid,
+      .minors-grid {
+        gap: 15px;
+        padding: 15px 5px;
+      }
+
+      .major-node {
+        width: 100px;
+        height: 100px;
+      }
+
+      .constellation-grid,
+      .minors-grid {
+        gap: 10px;
+      }
+
+      body {
+        min-height: auto !important;
+      }
+
+      .minor-node {
+        width: 100px;
+        height: 100px;
+      }
+
+      .node-icon {
+        font-size: 20px;
+        margin-bottom: 3px;
+      }
+
+      .major-node .node-icon {
+        font-size: 24px;
+      }
+
+      .node-label {
+        font-size: 10px;
+      }
+
+      .major-node .node-label {
+        font-size: 10px;
+      }
+
+      .minor-node .node-label {
+        font-size: 10px;
+        line-height: 1.05;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="particles"></canvas>
+  <div class="container">
+    <div class="back-nav">
+      <a href="/" class="back-link">Back to Home</a>
+    </div>
+    <div class="header">
+      <h1>CONSPIRACY CORNER</h1>
+    </div>
+    <!-- MAJORS -->
+    <div class="constellation-grid">
+      <a href="/conspiracy-corner/epstein/epstein.html" class="conspiracy-node major-node">
+        <div class="node-icon">🌀</div>
+        <div class="node-label">EPSTEIN'S <br>LABYRINTH </div>
+      </a>
+      <a href="/conspiracy-corner/ufos-aliens/60-UFOS-ALIENS-LANDING.html" class="conspiracy-node major-node">
+        <div class="node-icon">👽</div>
+        <div class="node-label">UFOs & <br>ALIENS </div>
+      </a>
+      <a href="/conspiracy-corner/9-11/67-911-LANDING.html" class="conspiracy-node major-node">
+        <div class="node-icon">✈️</div>
+        <div class="node-label">9/11</div>
+      </a>
+      <a href="/conspiracy-corner/covid/74-COVID-LANDING.html" class="conspiracy-node major-node">
+        <div class="node-icon">🦠</div>
+        <div class="node-label">COVID</div>
+      </a>
+      <a href="/conspiracy-corner/global-goverment/81-GLOBAL-GOVERNMENT-LANDING.html"
+        class="conspiracy-node major-node">
+        <div class="node-icon">🌍</div>
+        <div class="node-label">GLOBAL <br>GOVERNMENT </div>
+      </a>
+      <a href="/conspiracy-corner/charlie-kirk/88-CHARLIE-KIRK-ASSASSINATION-LANDING.html"
+        class="conspiracy-node major-node">
+        <div class="node-icon">🕵️‍♂️</div>
+        <div class="node-label">CHARLIE KIRK <br>ASSASSINATION </div>
+      </a>
+    </div>
+    <!-- MINORS -->
+    <div class="minors-grid">
+      <a href="./95-THE-CLINTONS.html" class="conspiracy-node minor-node">
+        <div class="node-icon">👥</div>
+        <div class="node-label">THE CLINTONS</div>
+      </a>
+      <a href="./96-ANCIENT-CIVILIZATIONS.html" class="conspiracy-node minor-node">
+        <div class="node-icon">🗿</div>
+        <div class="node-label">ANCIENT <br>CIVILIZATIONS </div>
+      </a>
+      <a href="./97-FALSE-FLAGS.html" class="conspiracy-node minor-node">
+        <div class="node-icon">🚩</div>
+        <div class="node-label">FALSE FLAGS</div>
+      </a>
+      <a href="./98-LAS-VEGAS-SHOOTING.html" class="conspiracy-node minor-node">
+        <div class="node-icon">🎲🎲</div>
+        <div class="node-label">LAS VEGAS <br>SHOOTING </div>
+      </a>
+      <a href="./99-MOON-LANDING.html" class="conspiracy-node minor-node">
+        <div class="node-icon">👨‍🚀</div>
+        <div class="node-label">MOON LANDING</div>
+      </a>
+      <a href="./100-THE-CIA.html" class="conspiracy-node minor-node">
+        <div class="node-icon">🕵️</div>
+        <div class="node-label">THE CIA</div>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const fileLocation = "/politics/politics-links.txt?t="
+    const archiveType = "art-long";
+    const icon = "📰";
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.archive-list');
+      const pagination = document.createElement('div');
+      pagination.className = 'pagination';
+      container.parentNode.insertBefore(pagination, container.nextSibling);
+      let allEntries = [];
+      let currentPage = 1;
+      const itemsPerPage = 10;
+
+      function renderPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = allEntries.slice(start, end);
+
+        container.innerHTML = '';
+        pageItems.forEach((e, i) => {
+          const el = document.createElement('a');
+          el.className = 'archive-item';
+          el.href = e.url;
+          el.target = '_blank';
+          el.innerHTML = `
+        <span class="item-icon">${icon}</span>
+        <div class="item-title">${e.title}</div>
+      `;
+          container.appendChild(el);
+        });
+
+        if (pageItems.length === 0 && allEntries.length > 0) {
+          container.innerHTML = '<div class="archive-item"><div class="item-title" style="opacity:1; border-color:#aaa"><em>No articles available yet.</em></div></div>';
+        }
+
+        renderPagination();
+      }
+
+      function renderPagination() {
+        pagination.innerHTML = '';
+        const totalPages = Math.ceil(allEntries.length / itemsPerPage);
+        if (totalPages <= 1) return;
+
+        const maxVisible = 7;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+        if (endPage - startPage + 1 < maxVisible) {
+          startPage = Math.max(1, endPage - maxVisible + 1);
+        }
+
+        if (startPage > 1) {
+          addPageBtn(1);
+          if (startPage > 2) addEllipsis();
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+          addPageBtn(i);
+        }
+
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) addEllipsis();
+          addPageBtn(totalPages);
+        }
+      }
+
+      function addPageBtn(page) {
+        const btn = document.createElement('button');
+        btn.className = 'page-link';
+        btn.textContent = page;
+        if (page === currentPage) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          currentPage = page;
+          renderPage(page);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        pagination.appendChild(btn);
+      }
+
+      function addEllipsis() {
+        const el = document.createElement('span');
+        el.className = 'page-dots';
+        el.textContent = '...';
+        pagination.appendChild(el);
+      }
+
+      async function loadContent() {
+        container.innerHTML = '<div class="loading-indicator">Loading...</div>';
+
+        try {
+          const response = await fetch(fileLocation + Date.now());
+          if (!response.ok) throw new Error('File not found');
+          const text = await response.text();
+          const lines = text.trim().split('\n').filter(l => l.trim());
+          allEntries = lines.map(line => {
+            const p = line.split('|');
+            if (p.length < 3) return null;
+            return { title: p[0].trim(), url: p[1].trim(), category: p[2].trim().toLowerCase() };
+          }).filter(e => e && e.category === archiveType);
+
+          currentPage = 1;
+          renderPage(1);
+
+        } catch (err) {
+          container.innerHTML = `
+        <div class="error-state" role="alert">
+          <p style="text-align:center">Failed to load articles: ${err.message}</p>
+          <button class="retry-btn" onclick="loadContent()">Retry</button>
+        </div>
+      `;
+        }
+      }
+
+      loadContent();
+    });
+  </script>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const stars = [];
+    const starCount = 150;
+    class Star {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + .5;
+        this.brightness = Math.random() * .5 + .5;
+        this.twinkleSpeed = Math.random() * .02 + .01;
+        this.twinklePhase = Math.random() * Math.PI * 2;
+        this.vx = (Math.random() - .5) * .2;
+        this.vy = (Math.random() - .5) * .2
+      }
+      update() {
+        this.twinklePhase += this.twinkleSpeed;
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0
+      }
+      draw() {
+        const twinkle = Math.sin(this.twinklePhase) * .3 + .7;
+        const opacity = this.brightness * twinkle;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${opacity})`;
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = '#fff';
+        ctx.fill()
+      }
+    }
+    for (let i = 0; i < starCount; i++) stars.push(new Star());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.update();
+        s.draw()
+      });
+      requestAnimationFrame(animate)
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight
+    });
+  </script>
+</body>
+
+</html>

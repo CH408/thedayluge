@@ -1,454 +1,546 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - MARKETS & ECONOMICS: Real-time insights, analysis, and commentary. Curated daily.">
-  <meta property="og:title" content="Markets & Economics - THE DAYLUGE">
-  <meta property="og:description" content="Latest market updates, economic analysis, podcasts, books, and more. Updated daily.">
-  <meta property="og:image" content="https://thedayluge.com/og-markets-econ.jpg">
-  <meta property="og:url" content="https://thedayluge.com/markets-econ/markets-econ.html">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#000000">
-  <link rel="canonical" href="https://thedayluge.com/markets-econ/markets-econ.html">
-  <link rel="icon" href="/favicon.ico" sizes="any">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Markets & Economics - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --gold: #00cc44;
-      --gold-light: #33ff77;
-      --ink: #111;
-      --black-bg: #000000;
-      --dark-gray: #111111;
-      --gray: #333333;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
+
     body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--gold);
-      line-height: 1.4;
-      background: var(--black-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      font-family: 'Special Elite', monospace;
+      background: #000000;
+      color: #00ff00;
+      padding: 40px 30px;
       position: relative;
-      overflow: hidden;
-      padding: 20px;
+      overflow-x: hidden;
     }
-    body::before {
-      content: '';
+
+    .row_circles {
+      position: relative;
+      display: flex;
+      gap: 20px;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,204,68,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
     }
-    body::after {
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite;
-      pointer-events: none;
+
+    .politics_container {
+      height: calc(100vh - 80px);
     }
-    @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .back-nav {
+      margin-bottom: 30px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #00ff00;
+      text-decoration: none;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border: 1px solid rgba(0, 255, 0, 0.6);
+      background: rgba(0, 255, 0, 0.02);
+      z-index: 11;
+      position: relative;
+    }
+
+    .back-link:hover {
+      color: #00ff00;
+      border-color: rgba(0, 255, 0, 0.4);
+      background: rgba(0, 255, 0, 0.05);
+      transform: translateX(-5px);
+    }
 
     .header {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
       text-align: center;
-      z-index: 10;
+      margin-bottom: 50px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid rgba(0, 255, 0, 0.2);
     }
+
     .header h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 28px;
-      margin-bottom: 8px;
-      animation: title-pulse 8s ease-in-out infinite;
-    }
-    @keyframes title-pulse {
-      0% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { color: var(--gold-light); text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-
-    .layout-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 50px auto 80px;
-      z-index: 5;
-    }
-
-    .layout-container {
-      position: relative;
-      width: 100%;
-      height: 750px;
-      z-index: 5;
-    }
-
-    .central-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 580px;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      z-index: 15;
-      box-shadow: 0 0 30px rgba(0,204,68,0.5), 0 4px 12px rgba(0,0,0,0.8);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(0,204,68,0.5), 0 4px 12px rgba(0,0,0,0.8); }
-      50% { box-shadow: 0 0 40px rgba(0,204,68,0.8), 0 6px 16px rgba(0,0,0,0.4); }
-    }
-
-    .central-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--gold);
-      text-shadow: 0 0 8px var(--gold);
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--gold);
-      flex-shrink: 0;
-    }
-
-    .content-links {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      overflow-y: auto;
-      padding: 8px 0;
-      margin-top: 8px;
-    }
-
-    .content-link {
-      display: block;
-      padding: 7px 9px;
-      border: 1px solid rgba(0,204,68,0.3);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-size: 16px;
-      line-height: 1.18;
-      overflow-wrap: anywhere;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: unroll 0.5s ease-out forwards;
-    }
-    @keyframes unroll { to { opacity: 1; transform: translateY(0); } }
-
-    .content-link:hover {
-      background: rgba(0,204,68,0.2);
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(0,204,68,0.4);
-    }
-    .link-title {
-      color: var(--gold);
-      text-decoration: none;
-      cursor: pointer;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-    }
-
-    .loading-indicator {
-      text-align: center;
-      font-size: 16px;
-      color: var(--gold);
-      padding: 10px;
-    }
-
-    .error-state {
-      text-align: center;
-      padding: 15px;
-      background: rgba(139, 0, 0, 0.3);
-      border: 1px solid #ff4444;
-      border-radius: 6px;
-      color: #ffaaaa;
-      font-size: 14px;
-      margin: 10px 0;
-    }
-    .retry-btn {
-      background: var(--gold);
-      color: #000;
-      border: none;
-      padding: 6px 12px;
-      margin-top: 8px;
-      border-radius: 4px;
       font-family: 'Special Elite', monospace;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 13px;
+      font-size: clamp(32px, 5vw, 48px);
+      color: #00ff00;
+      margin-bottom: 20px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-shadow: 0 0 30px rgba(0, 255, 0, 0.5), 0 0 15px rgba(0, 255, 0, 0.8);
     }
 
-    .perimeter-box {
-      position: absolute;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 6px;
+
+    .latest-section .news-item:nth-child(5n+2) .news-title {
+      color: #cc88ff;
+    }
+
+    .latest-section .news-item:nth-child(5n+3) .news-title {
+      color: #ff3333;
+    }
+
+    .latest-section .news-item:nth-child(5n+4) .news-title {
+      color: #66ff99;
+    }
+
+    .latest-section .news-item:nth-child(5n+5) .news-title {
+      color: #66b4f2;
+    }
+
+    .latest-section .news-item:nth-child(5n+6) .news-title {
+      color: #ff99cc;
+    }
+
+    .category-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(0, 255, 0, 0.08);
+      border: 1px solid #00ff00;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      font-weight: 900;
+      backdrop-filter: blur(5px);
+      padding-top: 7px;
+    }
+
+    .category-circle:hover {
+      transform: scale(1.1);
+      background: rgba(0, 255, 0, 0.12);
+      border-color: rgba(0, 255, 0, 0.5);
+      box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
+    }
+
+    .category-icon {
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+
+    .category-label {
+      color: #00ff00;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 1px;
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,204,68,0.4);
-      animation: electron-pulse 2s ease-in-out infinite;
-      color: var(--gold);
-      text-shadow: 0 0 5px rgba(0,204,68,0.3);
-      padding: 5px;
-      z-index: 10;
-    }
-    @keyframes electron-pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(0,204,68,0.4); border-color: var(--gold); }
-      50% { box-shadow: 0 0 30px rgba(0,204,68,0.8); border-color: var(--gold-light); }
-    }
-    .perimeter-box:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(0,204,68,0.9);
-      background: var(--dark-gray);
-    }
-
-    .top-left-box    { top: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 17px; }
-    .top-middle-box  { top: 30px; left: calc(50% - 75px);  width: 150px; height: 60px; font-size: 15px; line-height: 1.2; white-space: normal; }
-    .top-right-box   { top: 30px; left: calc(50% + 95px);  width: 150px; height: 60px; font-size: 17px; }
-    .bottom-left-box { bottom: 30px; left: calc(50% - 245px); width: 150px; height: 60px; font-size: 15px; }
-    .bottom-middle-box { bottom: 30px; left: calc(50% - 75px); width: 150px; height: 60px; font-size: 15px; line-height: 1.2; white-space: normal; }
-    .bottom-right-box  { bottom: 30px; left: calc(50% + 95px); width: 150px; height: 60px; font-size: 15px; }
-
-    .home-btn {
-      position: absolute;
-      bottom: -55px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--black-bg);
-      color: var(--gold);
-      border: 2px solid var(--gold);
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px;
-      font-weight: bold;
+      line-height: 1.2;
+      font-size: clamp(10px, 2vw, 15px);
       text-transform: uppercase;
+      font-weight: 900;
       text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--gold);
-      box-shadow: 0 0 10px rgba(0,204,68,0.3);
-      z-index: 20;
-      white-space: nowrap;
-    }
-    .home-btn:hover {
-      background: var(--dark-gray);
-      transform: translateX(-50%) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,204,68,0.6);
     }
 
-    #particle-canvas {
+    .category-circle {
+      box-shadow: 0 0 10px rgba(255, 217, 0, 0.6), inset 0 0 10px rgba(255, 217, 0, 0.5);
+      animation: circle-1 3s ease-in-out infinite;
+    }
+
+    @keyframes circle-1 {
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.6), inset 0 0 10px rgba(0, 255, 0, 0.5);
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.9), inset 0 0 10px rgba(0, 255, 0, 0.7);
+      }
+    }
+
+    @keyframes rotateBorder {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .category-circle::before {
+      content: "";
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent, currentColor, transparent 100deg);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      animation: rotateBorder 3s linear infinite;
+      z-index: -1;
     }
 
-    @media (max-width: 900px) {
-      .layout-wrapper { margin: 40px auto 70px; }
-      .layout-container { height: 650px; }
-      .central-content { width: 420px; height: 520px; }
-      .home-btn { bottom: -50px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 120px; height: 50px; font-size: 13px;
-      }
-      .top-middle-box, .bottom-middle-box { font-size: 11px; }
-      .top-left-box { left: calc(50% - 195px); }
-      .top-middle-box { left: calc(50% - 60px); }
-      .top-right-box { left: calc(50% + 75px); }
-      .bottom-left-box { left: calc(50% - 195px); }
-      .bottom-middle-box { left: calc(50% - 60px); }
-      .bottom-right-box { left: calc(50% + 75px); }
+    .category-circle:hover:before {
+      opacity: 1;
+      opacity: 0.6;
     }
 
-    @media (max-width: 600px) {
-      .layout-wrapper { margin: 15px auto 65px; }
-      .layout-container { height: 600px; }
-      .central-content { width: 340px; height: 480px; padding: 12px; }
-      .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; }
-      .header h1 { font-size: 24px; }
-      .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
-      .top-left-box, .top-middle-box, .top-right-box,
-      .bottom-left-box, .bottom-middle-box, .bottom-right-box {
-        width: 100px; height: 45px; font-size: 11px;
+    .category-circle:hover {
+      box-shadow: 0 0 60px currentColor, 0 0 20px currentColor;
+    }
+
+    .latest-section {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .section-title {
+      font-size: 24px;
+      color: #00ff00;
+      margin-bottom: 35px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0, 255, 0, 0.15);
+    }
+
+    .news-item {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(0, 255, 0, 0.08);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .news-item:hover {
+      padding-left: 30px;
+      border-left: 2px solid rgba(0, 255, 0, 0.6);
+      background: rgba(0, 255, 0, 0.02);
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      color: #00ff00;
+    }
+
+    .news-title {
+      font-size: 17px;
+      line-height: 1.6;
+      color: #00ff00;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .latest-section {
+        padding: 40px 35px;
       }
-      .top-middle-box, .bottom-middle-box { font-size: 9px; }
-      .top-left-box { top: 15px; left: calc(50% - 160px); }
-      .top-middle-box { top: 15px; left: calc(50% - 50px); }
-      .top-right-box { top: 15px; left: calc(50% + 60px); }
-      .bottom-left-box { bottom: 15px; left: calc(50% - 160px); }
-      .bottom-middle-box { bottom: 15px; left: calc(50% - 50px); }
-      .bottom-right-box { bottom: 15px; left: calc(50% + 60px); }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 35px 25px;
+      }
+
+      .categories {
+        gap: 14px;
+      }
+
+
+      .category-icon {
+        font-size: 26px;
+      }
+
+
+      .latest-section {
+        padding: 35px 28px;
+      }
+
+      .section-title {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+
+      .news-title {
+        font-size: 16px;
+      }
+
+      .news-item {
+        gap: 16px;
+        padding: 18px 0;
+      }
+
+      .news-icon {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 25px 18px;
+      }
+
+      .categories {
+        gap: 12px;
+      }
+
+      .category-circle {
+        width: 100px;
+        height: 100px;
+      }
+
+      .row_circles {
+        gap: 10px !important;
+      }
+
+      .category-icon {
+        font-size: 24px;
+      }
+
+      .category-label {
+        font-size: 12px;
+        letter-spacing: 0.5px;
+      }
+
+      .latest-section {
+        padding: 28px 20px;
+      }
+
+      .section-title {
+        font-size: 18px;
+        letter-spacing: 2px;
+      }
+
+      .news-title {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .news-item {
+        gap: 14px;
+        padding: 16px 0;
+      }
+
+      .news-icon {
+        font-size: 20px;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="header"><h1>MARKETS & ECONOMICS</h1></div>
-  <canvas id="particle-canvas"></canvas>
-  
-  <div class="layout-wrapper">
-    <div class="layout-container">
-      <div class="central-content">
-        <div class="central-title">Latest Markets & Economics</div>
-        <div class="content-links">
-          <div class="loading-indicator">Loading...</div>
-        </div>
-      </div>
+  <canvas id="particles"></canvas>
+  <div class="container politics_container">
+    <div class="back-nav">
+      <a href="/" class="back-link"> ← Back to Home </a>
+    </div>
+    <div class="header">
+      <h1>MARKETS & ECONOMICS</h1>
+    </div>
 
-      <div class="perimeter-box top-left-box" onclick="window.location.href='./markets-econ-podcasts.html'">
-        Podcasts
-      </div>
-      <div class="perimeter-box top-middle-box" onclick="window.location.href='./markets-econ-articles-longform.html'">
-        Articles & Longform
-      </div>
-      <div class="perimeter-box top-right-box" onclick="window.location.href='./markets-econ-clips.html'">
-        Video Clips
-      </div>
 
-      <div class="perimeter-box bottom-left-box" onclick="window.location.href='./markets-econ-books.html'">
-        Books
+    <!-- CATEGORY CIRCLES -->
+    <div class="categories">
+      <div class="category-circle">
+        <!-- <div class="category-icon">📰</div> -->
+        <a href="/markets-econ/markets-econ-articles-longform.html" class="category-label">Articles & Longform</a>
       </div>
-      <div class="perimeter-box bottom-middle-box" onclick="window.location.href='./markets-econ-memes.html'">
-        Memes
+      <div class="category-circle">
+        <!-- <div class="category-icon">🎙️</div> -->
+        <a href="/markets-econ/markets-econ-podcasts.html" class="category-label">Podcasts</a>
       </div>
-      <div class="perimeter-box bottom-right-box" onclick="window.location.href='./markets-econ-tv-movies.html'">
-        Movies & TV
+      <div class="category-circle">
+        <!-- <div class="category-icon">🎬</div> -->
+        <a href="/markets-econ/markets-econ-clips.html" class="category-label">X Feeds & Clips</a>
       </div>
     </div>
 
-    <a href="../index.html" class="home-btn" rel="noopener" aria-label="Back to Home">Back to Home</a>
+
   </div>
-  
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const particlesArray = [];
-      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
-      
-      class Particle {
-        constructor() {
-          this.x = Math.random() * canvas.width;
-          this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.5 - 0.25;
-          this.speedY = Math.random() * 0.5 - 0.25;
-        }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.1;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-        draw() {
-          ctx.fillStyle = 'rgba(0,204,68,0.6)';
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const stars = [];
+    const comets = [];
+    const planets = [];
+    const starCount = 150;
+    class Star {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.brightness = Math.random() * 0.5 + 0.5;
+        this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+        this.twinklePhase = Math.random() * Math.PI * 2;
+        this.vx = (Math.random() - 0.5) * 0.2;
+        this.vy = (Math.random() - 0.5) * 0.2;
+      }
+      update() {
+        this.twinklePhase += this.twinkleSpeed;
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+      }
+      draw() {
+        const twinkle = Math.sin(this.twinklePhase) * 0.3 + 0.7;
+        const opacity = this.brightness * twinkle;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = '#fff';
+        ctx.fill();
+      }
+    }
+    class Comet {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = -50;
+        this.vx = (Math.random() - 0.5) * 3;
+        this.vy = Math.random() * 4 + 3;
+        this.size = Math.random() * 2 + 1;
+        this.tail = [];
+        this.maxTail = 15;
+      }
+      update() {
+        this.tail.unshift({
+          x: this.x,
+          y: this.y
+        });
+        if (this.tail.length > this.maxTail) this.tail.pop();
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.y > canvas.height + 50 || this.x < -50 || this.x > canvas.width + 50) this.reset();
+      }
+      draw() {
+        for (let i = 0; i < this.tail.length; i++) {
+          const opacity = (1 - i / this.tail.length) * 0.5;
+          const size = this.size * (1 - i / this.tail.length);
           ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.arc(this.tail[i].x, this.tail[i].y, size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
           ctx.fill();
         }
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#fff';
+        ctx.fill();
       }
-      
-      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1); i--;
-            particlesArray.push(new Particle());
-          }
-        }
-        requestAnimationFrame(animate);
+    }
+    class Planet {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 30 + 20;
+        this.vx = (Math.random() - 0.5) * 0.15;
+        this.vy = (Math.random() - 0.5) * 0.15;
+        this.hue = Math.random() * 60 + 200;
+        this.opacity = Math.random() * 0.15 + 0.1;
+        this.pulsePhase = Math.random() * Math.PI * 2;
+        this.pulseSpeed = Math.random() * 0.01 + 0.005;
       }
-      init(); animate();
-      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
-      
-      const container = document.querySelector('.content-links');
-      let allEntries = [];
-
-      async function loadContent() {
-        container.innerHTML = '<div class="loading-indicator">Loading...</div>';
-
-        try {
-          const response = await fetch('./markets-econ-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error('File not found');
-          const text = await response.text();
-          const lines = text.trim().split('\n').filter(l => l.trim());
-          allEntries = lines.map(line => {
-            const p = line.split('|');
-            if (p.length < 3) return null;
-            return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e);
-
-          renderLatest8();
-
-        } catch (err) {
-          container.innerHTML = `
-            <div class="error-state" role="alert">
-              <p>Failed to load content: ${err.message}</p>
-              <button class="retry-btn" onclick="loadContent()">Retry</button>
-            </div>
-          `;
-        }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.pulsePhase += this.pulseSpeed;
+        if (this.x < -this.size) this.x = canvas.width + this.size;
+        if (this.x > canvas.width + this.size) this.x = -this.size;
+        if (this.y < -this.size) this.y = canvas.height + this.size;
+        if (this.y > canvas.height + this.size) this.y = -this.size;
       }
-
-      function renderLatest8() {
-        const latest = allEntries.slice(0, 8);
-        container.innerHTML = '';
-
-        if (latest.length === 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No content available yet.</em></div>';
-          return;
-        }
-
-        latest.forEach((e, i) => {
-          const el = document.createElement('div');
-          el.className = 'content-link';
-          el.style.animationDelay = `${i * 0.05}s`;
-          el.innerHTML = `
-            <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
-          `;
-          container.appendChild(el);
-        });
+      draw() {
+        const pulse = Math.sin(this.pulsePhase) * 0.2 + 1;
+        const currentSize = this.size * pulse;
+        const gradient = ctx.createRadialGradient(this.x - currentSize * 0.3, this.y - currentSize * 0.3, 0, this.x, this.y, currentSize);
+        gradient.addColorStop(0, `hsla(${this.hue}, 70%, 60%, ${this.opacity})`);
+        gradient.addColorStop(0.7, `hsla(${this.hue}, 60%, 40%, ${this.opacity * 0.6})`);
+        gradient.addColorStop(1, `hsla(${this.hue}, 50%, 20%, 0)`);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
       }
-      
-      loadContent();
+    }
+    for (let i = 0; i < starCount; i++) stars.push(new Star());
+    comets.push(new Comet());
+    for (let i = 0; i < 3; i++) planets.push(new Planet());
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      planets.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      stars.forEach(s => {
+        s.update();
+        s.draw();
+      });
+      comets.forEach(c => {
+        c.update();
+        c.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
   </script>
 </body>
+
 </html>

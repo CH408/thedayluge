@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9/11 Videos - THE DAYLUGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Special Elite', monospace;
+            background: #000000;
+            color: #ff69b4; /* MATCHED TO CONSPIRACY CORNER */
+            padding: 40px 30px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        .archive-list  .archive-item:nth-child(5n+1) .item-title { color: #cc88ff; }
+        .archive-list  .archive-item:nth-child(5n+2) .item-title { color: #ff3333; }
+        .archive-list  .archive-item:nth-child(5n+3) .item-title { color: #66ff99; }
+        .archive-list  .archive-item:nth-child(5n+4) .item-title { color: #66b4f2; }
+        .archive-list  .archive-item:nth-child(5n+5) .item-title { color: #ff99cc; }
+        .back-nav {
+            margin-bottom: 30px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ff69b4;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            background: rgba(255, 105, 180, 0.03);
+        }
+        .back-link:hover {
+            color: #ff69b4;
+            border-color: rgba(255, 105, 180, 0.6);
+            background: rgba(255, 105, 180, 0.08);
+            transform: translateX(-5px);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 105, 180, 0.2);
+        }
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+            color: #ff69b4;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+        }
+        .header h1 {
+            font-size: clamp(28px, 4.5vw, 42px); /* Smaller font */
+            color: #ff69b4;
+            margin-bottom: 8px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(255, 105, 180, 0.5), 0 0 15px rgba(255, 105, 180, 0.8);
+        }
+        .archive-list {
+            background: rgba(0, 10, 0, 0.08);
+            backdrop-filter: blur(10px);
+        }
+        .archive-item {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 105, 180, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .archive-item:hover {
+            padding-left: 30px;
+            border-left: 2px solid #ff69b4;
+            background: rgba(255, 105, 180, 0.05);
+        }
+        .archive-item:last-child { border-bottom: none; }
+        .item-icon { font-size: 24px; flex-shrink: 0; color: #ff69b4; }
+        .item-title {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #ff69b4;
+            font-weight: 300;
+            flex: 1;
+        }
+        .pagination {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 105, 180, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .page-link {
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            background: rgba(255, 105, 180, 0.03);
+            color: #ff69b4;
+            font-family: 'Special Elite', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .page-link:hover {
+            background: rgba(255, 105, 180, 0.1);
+            border-color: rgba(255, 105, 180, 0.6);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .page-link.active {
+            background: rgba(255, 105, 180, 0.2);
+            border-color: rgba(255, 105, 180, 0.7);
+            color: #fff;
+        }
+        .page-link.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .page-dots {
+            color: #ff69b4;
+            padding: 0 8px;
+            font-size: 12px;
+        }
+        @media (max-width: 1024px) {
+            .archive-list { padding: 40px 35px; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 35px 25px; }
+            .archive-list { padding: 35px 28px; }
+            .item-title { font-size: 16px; }
+            .archive-item { gap: 16px; padding: 18px 0; }
+            .item-icon { font-size: 22px; }
+            .pagination { gap: 6px; margin-top: 40px; padding-top: 35px; }
+            .page-link { padding: 8px 12px; font-size: 11px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 25px 18px; }
+            .archive-list { padding: 28px 20px; }
+            .item-title { font-size: 14px; line-height: 1.5; }
+            .archive-item { gap: 14px; padding: 16px 0; }
+            .item-icon { font-size: 20px; }
+            .category-icon { font-size: 40px; }
+            .header h1 { font-size: 24px; letter-spacing: 2px; }
+            .pagination { gap: 4px; margin-top: 35px; padding-top: 30px; }
+            .page-link { padding: 8px 10px; font-size: 10px; }
+            .page-dots { padding: 0 4px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="container">
+        <!-- BACK NAVIGATION -->
+        <div class="back-nav">
+            <a href="67-911-LANDING.html" class="back-link">
+                ← Back to 9/11
+            </a>
+        </div>
+
+        <!-- HEADER -->
+        <div class="header">
+            <span class="category-icon">📽️</span>
+            <h1>9/11 VIDEOS</h1>
+        </div>
+
+        <!-- ARCHIVE LIST -->
+        <div class="archive-list">
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Loose Change: Final Cut (Full Documentary)</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">9/11: Explosive Evidence – Experts Speak Out</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">In Plane Site: The Director’s Cut</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">The New Pearl Harbor (5-Hour Trilogy)</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Pentagon Strike Flash Animation (2004 Viral)</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Richard Gage: Blueprint for Truth</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">9/11 Mysteries: Demolition</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">The Elephant in the Room (BBC Foreknowledge)</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Core of Corruption: In the Shadows</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Fabled Enemies by Jason Bermas</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Zero: An Investigation Into 9/11</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">9/11: The Road to Tyranny (Alex Jones)</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Painful Deceptions by Eric Hufschmid</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">Improbable Collapse: The Demolition of Our Republic</div>
+            </div>
+            <div class="archive-item">
+                <span class="item-icon">📽️</span>
+                <div class="item-title">9/11: Press for Truth (Family Steering Committee)</div>
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="pagination">
+                <a href="#" class="page-link disabled">« Previous</a>
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <span class="page-dots">...</span>
+                <a href="#" class="page-link">8</a>
+                <a href="#" class="page-link">Next »</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        const comets = [];
+        const planets = [];
+        const starCount = 150;
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.brightness = Math.random() * 0.5 + 0.5;
+                this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+                this.twinklePhase = Math.random() * Math.PI * 2;
+                this.vx = (Math.random() - 0.5) * 0.2;
+                this.vy = (Math.random() - 0.5) * 0.2;
+            }
+            update() {
+                this.twinklePhase += this.twinkleSpeed;
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                const twinkle = Math.sin(this.twinklePhase) * 0.3 + 0.7;
+                const opacity = this.brightness * twinkle;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 255, 0, ${opacity})`;
+                ctx.shadowBlur = 4;
+                ctx.shadowColor = '#0f0';
+                ctx.fill();
+            }
+        }
+
+        class Comet {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -50;
+                this.vx = (Math.random() - 0.5) * 3;
+                this.vy = Math.random() * 4 + 3;
+                this.size = Math.random() * 2 + 1;
+                this.tail = [];
+                this.maxTail = 15;
+            }
+            update() {
+                this.tail.unshift({x: this.x, y: this.y});
+                if (this.tail.length > this.maxTail) this.tail.pop();
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.y > canvas.height + 50 || this.x < -50 || this.x > canvas.width + 50) this.reset();
+            }
+            draw() {
+                for (let i = 0; i < this.tail.length; i++) {
+                    const opacity = (1 - i / this.tail.length) * 0.5;
+                    const size = this.size * (1 - i / this.tail.length);
+                    ctx.beginPath();
+                    ctx.arc(this.tail[i].x, this.tail[i].y, size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 255, 0, ${opacity})`;
+                    ctx.fill();
+                }
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = '#0f0';
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = '#0f0';
+                ctx.fill();
+            }
+        }
+
+        class Planet {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 30 + 20;
+                this.vx = (Math.random() - 0.5) * 0.15;
+                this.vy = (Math.random() - 0.5) * 0.15;
+                this.hue = 120;
+                this.opacity = Math.random() * 0.15 + 0.1;
+                this.pulsePhase = Math.random() * Math.PI * 2;
+                this.pulseSpeed = Math.random() * 0.01 + 0.005;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.pulsePhase += this.pulseSpeed;
+                if (this.x < -this.size) this.x = canvas.width + this.size;
+                if (this.x > canvas.width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = canvas.height + this.size;
+                if (this.y > canvas.height + this.size) this.y = -this.size;
+            }
+            draw() {
+                const pulse = Math.sin(this.pulsePhase) * 0.2 + 1;
+                const currentSize = this.size * pulse;
+                const gradient = ctx.createRadialGradient(
+                    this.x - currentSize * 0.3,
+                    this.y - currentSize * 0.3,
+                    0,
+                    this.x,
+                    this.y,
+                    currentSize
+                );
+                gradient.addColorStop(0, `hsla(120, 100%, 50%, ${this.opacity})`);
+                gradient.addColorStop(0.7, `hsla(120, 100%, 30%, ${this.opacity * 0.6})`);
+                gradient.addColorStop(1, `hsla(120, 100%, 20%, 0)`);
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < starCount; i++) stars.push(new Star());
+        comets.push(new Comet());
+        for (let i = 0; i < 3; i++) planets.push(new Planet());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            planets.forEach(p => { p.update(); p.draw(); });
+            stars.forEach(s => { s.update(); s.draw(); });
+            comets.forEach(c => { c.update(); c.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
