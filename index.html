@@ -1,751 +1,901 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PARTICLE v9: Fully Enhanced - THE DAYLUGE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Special Elite", monospace;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 80px 20px;
+      }
+
+      .btn_row {
+        display: flex;
+        gap: 10px;
+        margin-top: 90px;
+      }
+
+      .fixed_btn {
+        position: fixed !important;
+        top: 70px;
+        margin: 0px !important;
+        left: 20px;
+      }
+
+      .btn_row {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .design-label {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 255, 65, 0.2);
+        padding: 10px 20px;
+        border: 1px solid #00ff41;
+        border-radius: 5px;
+        font-size: 12px;
+        z-index: 1000;
+        color: #00ff41;
+      }
+
+      .header {
+        position: relative;
+        z-index: 10;
+        margin-bottom: 4.5rem;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: clamp(24px, 5vw, 40px);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #00ff41;
+        text-shadow: 0 0 20px #00ff41;
+        animation: colorCycle 8s ease-in-out infinite;
+        margin-bottom: 1rem;
+      }
+
+      .headline {
+        font-size: clamp(16px, 3vw, 24px);
+        font-weight: 700;
+        line-height: 1.4;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+        background: linear-gradient(
+          90deg,
+          #ffdd00 0%,
+          #ffc107 25%,
+          #ff9800 50%,
+          #ffc107 75%,
+          #ffdd00 100%
+        );
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation:
+          gradientShift 6s ease-in-out infinite,
+          depthShadow 4s ease-in-out infinite;
+      }
+
+      @keyframes gradientShift {
+        0%,
+        100% {
+          background-position: 0% 50%;
         }
 
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes depthShadow {
+        0%,
+        100% {
+          filter: drop-shadow(2px 2px 4px rgba(255, 140, 0, 0.6))
+            drop-shadow(0 0 10px rgba(255, 221, 0, 0.5));
+        }
+
+        50% {
+          filter: drop-shadow(-2px -2px 4px rgba(255, 140, 0, 0.6))
+            drop-shadow(0 0 15px rgba(255, 221, 0, 0.7));
+        }
+      }
+
+      @keyframes colorCycle {
+        0% {
+          color: #00ff88;
+          text-shadow: 0 0 20px #00ff88;
+        }
+
+        12.5% {
+          color: #00e5ff;
+          text-shadow: 0 0 20px #00e5ff;
+        }
+
+        25% {
+          color: #0096ff;
+          text-shadow: 0 0 20px #0096ff;
+        }
+
+        37.5% {
+          color: #4169ff;
+          text-shadow: 0 0 20px #4169ff;
+        }
+
+        50% {
+          color: #8b5cf6;
+          text-shadow: 0 0 20px #8b5cf6;
+        }
+
+        62.5% {
+          color: #a855f7;
+          text-shadow: 0 0 20px #a855f7;
+        }
+
+        75% {
+          color: #7c3aed;
+          text-shadow: 0 0 20px #7c3aed;
+        }
+
+        87.5% {
+          color: #00d4aa;
+          text-shadow: 0 0 20px #00d4aa;
+        }
+
+        100% {
+          color: #00ff88;
+          text-shadow: 0 0 20px #00ff88;
+        }
+      }
+
+      .wheel-container {
+        position: relative;
+        width: min(70vw, 450px);
+        height: min(70vw, 450px);
+        z-index: 10;
+      }
+
+      .connections {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .wheel-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30%;
+        height: 30%;
+        background: radial-gradient(circle, #cc0000, #8b0000);
+        border: 3px solid #ffdd00;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #ffdd00;
+        font-size: clamp(13px, 2.5vw, 18px);
+        text-align: center;
+        font-weight: 900;
+        text-shadow: 0 0 15px #ffdd00;
+        box-shadow:
+          0 0 40px rgba(255, 221, 0, 0.6),
+          inset 0 0 20px rgba(204, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        line-height: 1.3;
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      .surprise_top_btn {
+        background: radial-gradient(circle, #ffdd00, #ffdd00) !important;
+        border: 3px solid #ffdd00 !important;
+        color: #b50200 !important;
+        text-shadow: 0 0 15px #ffdd00 !important;
+        box-shadow:
+          0 0 40px rgba(255, 221, 0, 0.6),
+          inset 0 0 20px rgba(204, 0, 0, 0.5) !important;
+        padding: 16px 28px 12px 28px !important;
+        font-size: 16px !important;
+      }
+
+      .wheel-center:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow:
+            0 0 40px rgba(255, 221, 0, 0.6),
+            inset 0 0 20px rgba(204, 0, 0, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 60px rgba(255, 221, 0, 0.9),
+            inset 0 0 30px rgba(204, 0, 0, 0.7);
+        }
+      }
+
+      .circle {
+        position: absolute;
+        width: 23%;
+        height: 23%;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: clamp(10px, 2vw, 15px);
+        text-align: center;
+        font-weight: 900;
+        padding: 12px;
+        line-height: 1.2;
+        background: rgb(0, 0, 0);
+        border: 2px solid;
+        transition: 0.1s;
+        cursor: pointer;
+        animation: pulse 1s ease-in-out infinite;
+      }
+
+      @keyframes fadeInCircle {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .circle span {
+        line-height: 1.15;
+        z-index: 2;
+        display: block;
+      }
+
+      .circle::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          currentColor,
+          transparent 100deg
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        animation: rotateBorder 3s linear infinite;
+        z-index: -1;
+      }
+
+      .circle:hover::before {
+        opacity: 0.6;
+      }
+
+      @keyframes rotateBorder {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .circle:hover {
+        box-shadow:
+          0 0 80px currentColor,
+          0 0 120px currentColor;
+        width: 26%;
+        height: 26%;
+      }
+
+      .circle-1 {
+        box-shadow:
+          0 0 10px rgba(255, 255, 255, 0.6),
+          inset 0 0 20px rgba(255, 255, 255, 0.5);
+        animation: circle-1 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-1 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgba(255, 255, 255, 0.6),
+            inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgba(255, 255, 255, 0.9),
+            inset 0 0 30px rgba(255, 255, 255, 0.7);
+        }
+      }
+
+      .circle-2 {
+        box-shadow:
+          0 0 10px rgb(255 215 0.5),
+          inset 0 0 20px rgb(255 215 0.5);
+        animation: circle-2 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-2 {
+        0% {
+          box-shadow:
+            0 0 10px rgb(255 215 0.6),
+            inset 0 0 20px rgb(255 215 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgb(255 215 0.9),
+            inset 0 0 30px rgb(255 215 0.7);
+        }
+      }
+
+      .circle-3 {
+        box-shadow:
+          0 0 10px rgb(0 255 0.6),
+          inset 0 0 20px rgb(0 255 0.5);
+        animation: circle-3 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-3 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgb(0 255 0.6),
+            inset 0 0 20px rgb(0 255 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgb(0 255 0.9),
+            inset 0 0 30px rgb(0 255 0.7);
+        }
+      }
+
+      .circle-4 {
+        box-shadow:
+          0 0 10px rgb(255 119 0.6),
+          inset 0 0 20px rgb(255 119 0.5);
+        animation: circle-4 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-4 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgb(255 119 0.6),
+            inset 0 0 20px rgb(255 119 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgb(255 119 0.9),
+            inset 0 0 30px rgb(255 119 0.7);
+        }
+      }
+
+      .circle-5 {
+        box-shadow:
+          0 0 10px rgba(0, 229, 255, 0.6),
+          inset 0 0 20px rgba(0, 229, 255, 0.5);
+        animation: circle-5 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-5 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgba(0, 229, 255, 0.6),
+            inset 0 0 20px rgba(0, 229, 255, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgba(0, 229, 255, 0.9),
+            inset 0 0 30px rgba(0, 229, 255, 0.7);
+        }
+      }
+
+      .circle-6 {
+        box-shadow:
+          0 0 10px rgba(255, 105, 180, 0.6),
+          inset 0 0 20px rgba(255, 105, 180, 0.5);
+        animation: circle-6 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-6 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgba(255, 105, 180, 0.6),
+            inset 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgba(255, 105, 180, 0.9),
+            inset 0 0 30px rgba(255, 105, 180, 0.7);
+        }
+      }
+
+      .circle-7 {
+        box-shadow:
+          0 0 10px rgba(204, 255, 204, 0.6),
+          inset 0 0 20px rgba(204, 255, 204, 0.5);
+        animation: circle-7 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-7 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgba(204, 255, 204, 0.6),
+            inset 0 0 20px rgba(204, 255, 204, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgba(204, 255, 204, 0.9),
+            inset 0 0 30px rgba(204, 255, 204, 0.7);
+        }
+      }
+
+      .circle-8 {
+        box-shadow:
+          0 0 10px rgba(255, 0, 0, 0.6),
+          inset 0 0 20px rgba(255, 0, 0, 0.5);
+        animation: circle-8 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-8 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgba(255, 0, 0, 0.6),
+            inset 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 30px rgba(255, 0, 0, 0.9),
+            inset 0 0 30px rgba(255, 0, 0, 0.7);
+        }
+      }
+
+      .circle-1 {
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-color: #eceff1;
+        color: #eceff1;
+        animation-delay: 0.05s;
+      }
+
+      .circle-2 {
+        top: 15%;
+        right: 15%;
+        transform: translate(50%, -50%);
+        border-color: #ffd700;
+        color: #ffd700;
+        animation-delay: 0.1s;
+      }
+
+      .circle-3 {
+        top: 50%;
+        right: 0%;
+        transform: translate(50%, -50%);
+        border-color: #00ff00;
+        color: #00ff00;
+        animation-delay: 0.15s;
+      }
+
+      .circle-4 {
+        bottom: 15%;
+        right: 15%;
+        transform: translate(50%, 50%);
+        border-color: #f99034;
+        color: #f99034;
+        animation-delay: 0.2s;
+      }
+
+      .circle-5 {
+        bottom: 0%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        border-color: #00e5ff;
+        color: #00e5ff;
+        animation-delay: 0.25s;
+      }
+
+      .circle-6 {
+        bottom: 15%;
+        left: 15%;
+        transform: translate(-50%, 50%);
+        border-color: #ff69b4;
+        color: #ff69b4;
+        animation-delay: 0.3s;
+      }
+
+      .circle-7 {
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        border-color: #ccffcc;
+        color: #ccffcc;
+        animation-delay: 0.35s;
+      }
+
+      .circle-8 {
+        top: 15%;
+        left: 15%;
+        transform: translate(-50%, -50%);
+        border-color: #f04444;
+        color: #f04444;
+        animation-delay: 0.4s;
+      }
+
+      .surprise-btn {
+        padding: 14px 28px 10px 28px;
+        background: linear-gradient(135deg, #7cb342, #00a86b);
+        border: 2px solid #7cb342;
+        border-radius: 30px;
+        color: #000;
+        font-family: "Special Elite", monospace;
+        font-size: 12px;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: 0 0 15px rgba(124, 179, 66, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 10;
+        text-transform: uppercase;
+      }
+
+      .surprise-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(124, 179, 66, 0.6);
+      }
+
+      @media (max-width: 600px) {
         body {
-            font-family: 'Special Elite', monospace;
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 80px 20px;
-        }
-
-        .btn_row {
-            display: flex;
-            gap: 10px;
-            margin-top: 90px;
-        }
-
-        .fixed_btn {
-            position: fixed !important;
-            top: 70px;
-            margin: 0px !important;
-            left: 20px;
-        }
-
-        .btn_row {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .design-label {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 255, 65, 0.2);
-            padding: 10px 20px;
-            border: 1px solid #00ff41;
-            border-radius: 5px;
-            font-size: 12px;
-            z-index: 1000;
-            color: #00ff41;
+          padding: 60px 15px;
         }
 
         .header {
-            position: relative;
-            z-index: 10;
-            margin-bottom: 4.5rem;
-            text-align: center;
-        }
-
-
-        .header h1 {
-            font-size: clamp(24px, 5vw, 40px);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #00ff41;
-            text-shadow: 0 0 20px #00ff41;
-            animation: colorCycle 8s ease-in-out infinite;
-            margin-bottom: 1rem;
-        }
-
-        .headline {
-            font-size: clamp(16px, 3vw, 24px);
-            font-weight: 700;
-            line-height: 1.4;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            background: linear-gradient(90deg,
-                    #ffdd00 0%,
-                    #ffc107 25%,
-                    #ff9800 50%,
-                    #ffc107 75%,
-                    #ffdd00 100%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 6s ease-in-out infinite, depthShadow 4s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-        }
-
-        @keyframes depthShadow {
-
-            0%,
-            100% {
-                filter: drop-shadow(2px 2px 4px rgba(255, 140, 0, 0.6)) drop-shadow(0 0 10px rgba(255, 221, 0, 0.5));
-            }
-
-            50% {
-                filter: drop-shadow(-2px -2px 4px rgba(255, 140, 0, 0.6)) drop-shadow(0 0 15px rgba(255, 221, 0, 0.7));
-            }
-        }
-
-        @keyframes colorCycle {
-            0% {
-                color: #00ff88;
-                text-shadow: 0 0 20px #00ff88;
-            }
-
-            12.5% {
-                color: #00e5ff;
-                text-shadow: 0 0 20px #00e5ff;
-            }
-
-            25% {
-                color: #0096ff;
-                text-shadow: 0 0 20px #0096ff;
-            }
-
-            37.5% {
-                color: #4169ff;
-                text-shadow: 0 0 20px #4169ff;
-            }
-
-            50% {
-                color: #8b5cf6;
-                text-shadow: 0 0 20px #8b5cf6;
-            }
-
-            62.5% {
-                color: #a855f7;
-                text-shadow: 0 0 20px #a855f7;
-            }
-
-            75% {
-                color: #7c3aed;
-                text-shadow: 0 0 20px #7c3aed;
-            }
-
-            87.5% {
-                color: #00d4aa;
-                text-shadow: 0 0 20px #00d4aa;
-            }
-
-            100% {
-                color: #00ff88;
-                text-shadow: 0 0 20px #00ff88;
-            }
-        }
-
-        .wheel-container {
-            position: relative;
-            width: min(70vw, 450px);
-            height: min(70vw, 450px);
-            z-index: 10;
-        }
-
-        .connections {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .wheel-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30%;
-            height: 30%;
-            background: radial-gradient(circle, #cc0000, #8b0000);
-            border: 3px solid #ffdd00;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: #ffdd00;
-            font-size: clamp(13px, 2.5vw, 18px);
-            text-align: center;
-            font-weight: 900;
-            text-shadow: 0 0 15px #ffdd00;
-            box-shadow: 0 0 40px rgba(255, 221, 0, 0.6), inset 0 0 20px rgba(204, 0, 0, 0.5);
-            transition: all 0.3s ease;
-            line-height: 1.3;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        .surprise_top_btn {
-            background: radial-gradient(circle, #ffdd00, #ffdd00) !important;
-            border: 3px solid #ffdd00 !important;
-            color: #b50200 !important;
-            text-shadow: 0 0 15px #ffdd00 !important;
-            box-shadow: 0 0 40px rgba(255, 221, 0, 0.6), inset 0 0 20px rgba(204, 0, 0, 0.5) !important;
-            padding: 16px 28px 12px 28px !important;
-            font-size: 16px !important;
-        }
-
-        .wheel-center:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                box-shadow: 0 0 40px rgba(255, 221, 0, 0.6), inset 0 0 20px rgba(204, 0, 0, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 60px rgba(255, 221, 0, 0.9), inset 0 0 30px rgba(204, 0, 0, 0.7);
-            }
+          margin-bottom: 3rem;
         }
 
         .circle {
-            position: absolute;
-            width: 23%;
-            height: 23%;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: clamp(10px, 2vw, 15px);
-            text-align: center;
-            font-weight: 900;
-            padding: 12px;
-            line-height: 1.2;
-            background: rgb(0, 0, 0);
-            border: 2px solid;
-            transition: 0.1s;
-            cursor: pointer;
-            animation: pulse 1s ease-in-out infinite;
-
+          font-size: 9px;
+          padding: 8px;
         }
 
-        @keyframes fadeInCircle {
-            to {
-                opacity: 1;
-            }
+        .wheel-center {
+          font-size: 12px;
         }
-
-        .circle span {
-            line-height: 1.15;
-            z-index: 2;
-            display: block;
-        }
-
-        .circle::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg,
-                    transparent,
-                    currentColor,
-                    transparent 100deg);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            animation: rotateBorder 3s linear infinite;
-            z-index: -1;
-        }
-
-        .circle:hover::before {
-            opacity: 0.6;
-        }
-
-        @keyframes rotateBorder {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .circle:hover {
-            box-shadow: 0 0 80px currentColor, 0 0 120px currentColor;
-            width: 26%;
-            height: 26%;
-        }
-
-        .circle-1 {
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.5);
-            animation: circle-1 3s ease-in-out infinite;
-        }
-
-        @keyframes circle-1 {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(255, 255, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), inset 0 0 30px rgba(255, 255, 255, 0.7);
-            }
-        }
-
-        .circle-2 {
-            box-shadow: 0 0 10px rgb(255 215 0.5), inset 0 0 20px rgb(255 215 0.5);
-            animation: circle-2 3s ease-in-out infinite;
-
-        }
-
-        @keyframes circle-2 {
-            0% {
-                box-shadow: 0 0 10px rgb(255 215 0.6), inset 0 0 20px rgb(255 215 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgb(255 215 0.9), inset 0 0 30px rgb(255 215 0.7);
-            }
-        }
-
-        .circle-3 {
-            box-shadow: 0 0 10px rgb(0 255 0.6), inset 0 0 20px rgb(0 255 0.5);
-            animation: circle-3 3s ease-in-out infinite;
-        }
-
-        @keyframes circle-3 {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgb(0 255 0.6), inset 0 0 20px rgb(0 255 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgb(0 255 0.9), inset 0 0 30px rgb(0 255 0.7);
-            }
-        }
-
-
-        .circle-4 {
-            box-shadow: 0 0 10px rgb(255 119 0.6), inset 0 0 20px rgb(255 119 0.5);
-            animation: circle-4 3s ease-in-out infinite;
-        }
-
-        @keyframes circle-4 {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgb(255 119 0.6), inset 0 0 20px rgb(255 119 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgb(255 119 0.9), inset 0 0 30px rgb(255 119 0.7);
-            }
-        }
-
-        .circle-5 {
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.5);
-            animation: circle-5 3s ease-in-out infinite;
-        }
-
-        @keyframes circle-5 {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(0, 229, 255, 0.6), inset 0 0 20px rgba(0, 229, 255, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgba(0, 229, 255, 0.9), inset 0 0 30px rgba(0, 229, 255, 0.7);
-            }
-        }
-
-        .circle-6 {
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.6), inset 0 0 20px rgba(255, 105, 180, 0.5);
-            animation: circle-6 3s ease-in-out infinite;
-        }
-
-        @keyframes circle-6 {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(255, 105, 180, 0.6), inset 0 0 20px rgba(255, 105, 180, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgba(255, 105, 180, 0.9), inset 0 0 30px rgba(255, 105, 180, 0.7);
-            }
-        }
-
-        .circle-7 {
-            box-shadow: 0 0 10px rgba(204, 255, 204, 0.6), inset 0 0 20px rgba(204, 255, 204, 0.5);
-            animation: circle-7 3s ease-in-out infinite;
-        }
-
-        @keyframes circle-7 {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(204, 255, 204, 0.6), inset 0 0 20px rgba(204, 255, 204, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgba(204, 255, 204, 0.9), inset 0 0 30px rgba(204, 255, 204, 0.7);
-            }
-        }
-
-        .circle-8 {
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.6), inset 0 0 20px rgba(255, 0, 0, 0.5);
-            animation: circle-8 3s ease-in-out infinite;
-        }
-
-        @keyframes circle-8 {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(255, 0, 0, 0.6), inset 0 0 20px rgba(255, 0, 0, 0.5);
-            }
-
-            50% {
-                box-shadow: 0 0 30px rgba(255, 0, 0, 0.9), inset 0 0 30px rgba(255, 0, 0, 0.7);
-            }
-        }
-
-        .circle-1 {
-            top: 0%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-color: #ECEFF1;
-            color: #ECEFF1;
-            animation-delay: 0.05s;
-        }
-
-        .circle-2 {
-            top: 15%;
-            right: 15%;
-            transform: translate(50%, -50%);
-            border-color: #ffd700;
-            color: #ffd700;
-            animation-delay: 0.1s;
-        }
-
-        .circle-3 {
-            top: 50%;
-            right: 0%;
-            transform: translate(50%, -50%);
-            border-color: #00ff00;
-            color: #00ff00;
-            animation-delay: 0.15s;
-        }
-
-        .circle-4 {
-            bottom: 15%;
-            right: 15%;
-            transform: translate(50%, 50%);
-            border-color: #f99034;
-            color: #f99034;
-            animation-delay: 0.2s;
-        }
-
-        .circle-5 {
-            bottom: 0%;
-            left: 50%;
-            transform: translate(-50%, 50%);
-            border-color: #00e5ff;
-            color: #00e5ff;
-            animation-delay: 0.25s;
-        }
-
-        .circle-6 {
-            bottom: 15%;
-            left: 15%;
-            transform: translate(-50%, 50%);
-            border-color: #ff69b4;
-            color: #ff69b4;
-            animation-delay: 0.3s;
-        }
-
-        .circle-7 {
-            top: 50%;
-            left: 0%;
-            transform: translate(-50%, -50%);
-            border-color: #ccffcc;
-            color: #ccffcc;
-            animation-delay: 0.35s;
-        }
-
-        .circle-8 {
-            top: 15%;
-            left: 15%;
-            transform: translate(-50%, -50%);
-            border-color: #f04444;
-            color: #f04444;
-            animation-delay: 0.4s;
-        }
-
-        .surprise-btn {
-            padding: 14px 28px 10px 28px;
-            background: linear-gradient(135deg, #7cb342, #00a86b);
-            border: 2px solid #7cb342;
-            border-radius: 30px;
-            color: #000;
-            font-family: 'Special Elite', monospace;
-            font-size: 12px;
-            font-weight: 900;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(124, 179, 66, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 10;
-            text-transform: uppercase;
-        }
-
-        .surprise-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(124, 179, 66, 0.6);
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 60px 15px;
-            }
-
-            .header {
-                margin-bottom: 3rem;
-            }
-
-            .circle {
-                font-size: 9px;
-                padding: 8px;
-            }
-
-            .wheel-center {
-                font-size: 12px;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="design-label">PARTICLE v9: FULL ENHANCEMENT</div>
 
-
     <div class="header">
-        <h1>THE DAYLUGE</h1>
-        <div class="headline">Amazing Top Current Headline </div>
+      <h1>THE DAYLUGE</h1>
+      <div class="headline">Amazing Top Current Headline</div>
     </div>
 
     <div class="wheel-container">
-        <svg class="connections"></svg>
-        <a href="/news.html" class="wheel-center animate">TRENDING<br>NEWS</a>
-        <a href="/politics/politics.html" class="circle circle-1"><span>POLITICS</span></a>
-        <a href="/history/history.html" class="circle circle-2"><span>HISTORY</span></a>
-        <a href="/markets-econ/markets-econ.html" class="circle circle-3"><span>MARKETS &<br>ECONOMICS</span></a>
-        <a href="/science-nature-tech/science-nature-tech.html" class="circle circle-4"><span>SCIENCE, NATURE<br>&
-                TECH</span></a>
-        <a href="/sports-leisure/sports-leisure.html" class="circle circle-5"><span>SPORTS &<br>LEISURE</span></a>
-        <a href="/conspiracy-corner/conspiracy-corner.html"
-            class="circle circle-6"><span>CONSPIRACY<br>CORNER</span></a>
-        <a href="/arts-literature/arts-lit.html" class="circle circle-7"><span>ARTS &<br>LITERATURE</span></a>
-        <a href="/wisdom-philosophy/wisdom-philosophy.html" class="circle circle-8"><span>WISDOM
-                &<br>PHILOSOPHY</span></a>
+      <svg class="connections"></svg>
+      <a href="/news.html" class="wheel-center animate">TRENDING<br />NEWS</a>
+      <a href="/politics/politics.html" class="circle circle-1"
+        ><span>POLITICS</span></a
+      >
+      <a href="/history/history.html" class="circle circle-2"
+        ><span>HISTORY</span></a
+      >
+      <a href="/markets-econ/markets-econ.html" class="circle circle-3"
+        ><span>MARKETS &<br />ECONOMICS</span></a
+      >
+      <a
+        href="/science-nature-tech/science-nature-tech.html"
+        class="circle circle-4"
+        ><span>SCIENCE, NATURE<br />& TECH</span></a
+      >
+      <a href="/sports-leisure/sports-leisure.html" class="circle circle-5"
+        ><span>SPORTS &<br />LEISURE</span></a
+      >
+      <a
+        href="/conspiracy-corner/conspiracy-corner.html"
+        class="circle circle-6"
+        ><span>CONSPIRACY<br />CORNER</span></a
+      >
+      <a href="/arts-literature/arts-lit.html" class="circle circle-7"
+        ><span>ARTS &<br />LITERATURE</span></a
+      >
+      <a
+        href="/wisdom-philosophy/wisdom-philosophy.html"
+        class="circle circle-8"
+        ><span>WISDOM &<br />PHILOSOPHY</span></a
+      >
     </div>
 
     <div class="btn_row">
-        <button class="surprise-btn surprise_top_btn">SURPRISE ME!</button>
-        <div class="bottom_row">
-            <button class="surprise-btn">About us</button>
-            <button class="surprise-btn">Give us feedback</button>
-        </div>
+      <button class="surprise-btn surprise_top_btn random-button">
+        SURPRISE ME!
+      </button>
+      <div class="bottom_row">
+        <button
+          class="surprise-btn"
+          onclick="window.location.href = 'about-us.html'"
+        >
+          About us
+        </button>
+        <button
+          class="surprise-btn"
+          onclick="window.location.href = 'feedback.html'"
+        >
+          Give us feedback
+        </button>
+      </div>
     </div>
 
     <script>
-        const particles = [];
-        let hoveredCircle = null;
+      document
+        .querySelector(".random-button")
+        .addEventListener("click", function () {
+          const cacheBuster = "?t=" + Date.now();
+          fetch("./surprise-me-links.txt" + cacheBuster)
+            .then((response) => {
+              if (!response.ok)
+                throw new Error("File not found or server error");
+              return response.text();
+            })
+            .then((text) => {
+              const lines = text
+                .split("\n")
+                .map((l) => l.trim())
+                .filter((l) => l);
+              if (lines.length === 0) throw new Error("No links available");
 
-        class Particle {
-            constructor(startX, startY, endX, endY, color, reverse = false, circleIndex) {
-                this.startX = startX;
-                this.startY = startY;
-                this.endX = endX;
-                this.endY = endY;
-                this.color = color;
-                this.reverse = reverse;
-                this.circleIndex = circleIndex;
-                this.progress = Math.random();
-                this.baseSpeed = 0.002 + Math.random() * 0.003;
-                this.speed = this.baseSpeed;
-            }
+              const links = lines
+                .map((line) => {
+                  const parts = line.split("|");
+                  return parts.length > 1 ? parts[1].trim() : line;
+                })
+                .filter((l) => l);
 
-            update() {
-                // Speed up particles if their circle is hovered
-                if (hoveredCircle === this.circleIndex) {
-                    this.speed = this.baseSpeed * 3;
-                } else {
-                    this.speed = this.baseSpeed;
-                }
-
-                this.progress += this.speed;
-                if (this.progress > 1) this.progress = 0;
-            }
-
-            get x() {
-                const t = this.reverse ? (1 - this.progress) : this.progress;
-                return this.startX + (this.endX - this.startX) * t;
-            }
-
-            get y() {
-                const t = this.reverse ? (1 - this.progress) : this.progress;
-                return this.startY + (this.endY - this.startY) * t;
-            }
-
-            get opacity() {
-                let baseOpacity = 1;
-                if (this.progress < 0.1) baseOpacity = this.progress * 10;
-                if (this.progress > 0.9) baseOpacity = (1 - this.progress) * 10;
-
-                // Brighter when hovered
-                if (hoveredCircle === this.circleIndex) {
-                    return Math.min(baseOpacity * 1.5, 1);
-                }
-                return baseOpacity;
-            }
-        }
-
-        function initParticles() {
-            const center = document.querySelector('.wheel-center');
-            const circles = document.querySelectorAll('.circle');
-            const container = document.querySelector('.wheel-container');
-            const rect = container.getBoundingClientRect();
-
-            const centerRect = center.getBoundingClientRect();
-            const cx = centerRect.left - rect.left + centerRect.width / 2;
-            const cy = centerRect.top - rect.top + centerRect.height / 2;
-
-            // ONLY matrix green shades - pure monochrome
-            const colors = [
-                '#00ff41', // Classic matrix green
-                '#00ff41', // Same - pure consistency
-                '#00ff41', // Same
-                '#00ff41'  // Same
-            ];
-
-            circles.forEach((circle, i) => {
-                const cr = circle.getBoundingClientRect();
-                const x = cr.left - rect.left + cr.width / 2;
-                const y = cr.top - rect.top + cr.height / 2;
-
-                const color = colors[i % colors.length];
-
-                for (let p = 0; p < 15; p++) {
-                    particles.push(new Particle(cx, cy, x, y, color, false, i));
-                    particles.push(new Particle(cx, cy, x, y, color, true, i));
-                }
-
-                // Add hover listeners
-                circle.addEventListener('mouseenter', () => {
-                    hoveredCircle = i;
-                });
-                circle.addEventListener('mouseleave', () => {
-                    hoveredCircle = null;
-                });
+              const randomLink =
+                links[Math.floor(Math.random() * links.length)];
+              const separator = randomLink.includes("?") ? "&" : "?";
+              window.location.href = randomLink + separator + "_=" + Date.now();
+            })
+            .catch((err) => {
+              console.error("Surprise Me failed:", err);
+              const container = document.querySelector(".button-container");
+              container.insertAdjacentHTML(
+                "afterend",
+                `
+            <div class="surprise-error">
+              Surprise feature unavailable.<br>
+              <small>Try again later or check back soon!</small>
+            </div>
+          `,
+              );
+              setTimeout(() => {
+                const el = document.querySelector(".surprise-error");
+                if (el) el.remove();
+              }, 5000);
             });
-        }
-
-        function draw() {
-            const svg = document.querySelector('.connections');
-            const container = document.querySelector('.wheel-container');
-            const rect = container.getBoundingClientRect();
-
-            svg.setAttribute('width', rect.width);
-            svg.setAttribute('height', rect.height);
-            svg.innerHTML = '';
-
-            const center = document.querySelector('.wheel-center');
-            const circles = document.querySelectorAll('.circle');
-
-            const centerRect = center.getBoundingClientRect();
-            const cx = centerRect.left - rect.left + centerRect.width / 2;
-            const cy = centerRect.top - rect.top + centerRect.height / 2;
-
-            circles.forEach((circle) => {
-                const cr = circle.getBoundingClientRect();
-                const x = cr.left - rect.left + cr.width / 2;
-                const y = cr.top - rect.top + cr.height / 2;
-
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', cx);
-                line.setAttribute('y1', cy);
-                line.setAttribute('x2', x);
-                line.setAttribute('y2', y);
-                line.setAttribute('stroke', '#001100');
-                line.setAttribute('stroke-width', '0.5');
-                line.setAttribute('opacity', '0.3');
-                svg.appendChild(line);
-            });
-
-            particles.forEach(particle => {
-                particle.update();
-
-                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                circle.setAttribute('cx', particle.x);
-                circle.setAttribute('cy', particle.y);
-                circle.setAttribute('r', '1.5');
-                circle.setAttribute('fill', particle.color);
-                circle.setAttribute('opacity', particle.opacity);
-                circle.setAttribute('filter', `drop-shadow(0 0 4px ${particle.color})`);
-                svg.appendChild(circle);
-            });
-        }
-
-        function animate() {
-            draw();
-            requestAnimationFrame(animate);
-        }
-
-        setTimeout(() => {
-            initParticles();
-            animate();
-        }, 100);
-
-        window.addEventListener('resize', () => {
-            particles.length = 0;
-            initParticles();
         });
     </script>
-</body>
 
+    <script>
+      const particles = [];
+      let hoveredCircle = null;
+
+      class Particle {
+        constructor(
+          startX,
+          startY,
+          endX,
+          endY,
+          color,
+          reverse = false,
+          circleIndex,
+        ) {
+          this.startX = startX;
+          this.startY = startY;
+          this.endX = endX;
+          this.endY = endY;
+          this.color = color;
+          this.reverse = reverse;
+          this.circleIndex = circleIndex;
+          this.progress = Math.random();
+          this.baseSpeed = 0.002 + Math.random() * 0.003;
+          this.speed = this.baseSpeed;
+        }
+
+        update() {
+          // Speed up particles if their circle is hovered
+          if (hoveredCircle === this.circleIndex) {
+            this.speed = this.baseSpeed * 3;
+          } else {
+            this.speed = this.baseSpeed;
+          }
+
+          this.progress += this.speed;
+          if (this.progress > 1) this.progress = 0;
+        }
+
+        get x() {
+          const t = this.reverse ? 1 - this.progress : this.progress;
+          return this.startX + (this.endX - this.startX) * t;
+        }
+
+        get y() {
+          const t = this.reverse ? 1 - this.progress : this.progress;
+          return this.startY + (this.endY - this.startY) * t;
+        }
+
+        get opacity() {
+          let baseOpacity = 1;
+          if (this.progress < 0.1) baseOpacity = this.progress * 10;
+          if (this.progress > 0.9) baseOpacity = (1 - this.progress) * 10;
+
+          // Brighter when hovered
+          if (hoveredCircle === this.circleIndex) {
+            return Math.min(baseOpacity * 1.5, 1);
+          }
+          return baseOpacity;
+        }
+      }
+
+      function initParticles() {
+        const center = document.querySelector(".wheel-center");
+        const circles = document.querySelectorAll(".circle");
+        const container = document.querySelector(".wheel-container");
+        const rect = container.getBoundingClientRect();
+
+        const centerRect = center.getBoundingClientRect();
+        const cx = centerRect.left - rect.left + centerRect.width / 2;
+        const cy = centerRect.top - rect.top + centerRect.height / 2;
+
+        // ONLY matrix green shades - pure monochrome
+        const colors = [
+          "#00ff41", // Classic matrix green
+          "#00ff41", // Same - pure consistency
+          "#00ff41", // Same
+          "#00ff41", // Same
+        ];
+
+        circles.forEach((circle, i) => {
+          const cr = circle.getBoundingClientRect();
+          const x = cr.left - rect.left + cr.width / 2;
+          const y = cr.top - rect.top + cr.height / 2;
+
+          const color = colors[i % colors.length];
+
+          for (let p = 0; p < 15; p++) {
+            particles.push(new Particle(cx, cy, x, y, color, false, i));
+            particles.push(new Particle(cx, cy, x, y, color, true, i));
+          }
+
+          // Add hover listeners
+          circle.addEventListener("mouseenter", () => {
+            hoveredCircle = i;
+          });
+          circle.addEventListener("mouseleave", () => {
+            hoveredCircle = null;
+          });
+        });
+      }
+
+      function draw() {
+        const svg = document.querySelector(".connections");
+        const container = document.querySelector(".wheel-container");
+        const rect = container.getBoundingClientRect();
+
+        svg.setAttribute("width", rect.width);
+        svg.setAttribute("height", rect.height);
+        svg.innerHTML = "";
+
+        const center = document.querySelector(".wheel-center");
+        const circles = document.querySelectorAll(".circle");
+
+        const centerRect = center.getBoundingClientRect();
+        const cx = centerRect.left - rect.left + centerRect.width / 2;
+        const cy = centerRect.top - rect.top + centerRect.height / 2;
+
+        circles.forEach((circle) => {
+          const cr = circle.getBoundingClientRect();
+          const x = cr.left - rect.left + cr.width / 2;
+          const y = cr.top - rect.top + cr.height / 2;
+
+          const line = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "line",
+          );
+          line.setAttribute("x1", cx);
+          line.setAttribute("y1", cy);
+          line.setAttribute("x2", x);
+          line.setAttribute("y2", y);
+          line.setAttribute("stroke", "#001100");
+          line.setAttribute("stroke-width", "0.5");
+          line.setAttribute("opacity", "0.3");
+          svg.appendChild(line);
+        });
+
+        particles.forEach((particle) => {
+          particle.update();
+
+          const circle = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "circle",
+          );
+          circle.setAttribute("cx", particle.x);
+          circle.setAttribute("cy", particle.y);
+          circle.setAttribute("r", "1.5");
+          circle.setAttribute("fill", particle.color);
+          circle.setAttribute("opacity", particle.opacity);
+          circle.setAttribute(
+            "filter",
+            `drop-shadow(0 0 4px ${particle.color})`,
+          );
+          svg.appendChild(circle);
+        });
+      }
+
+      function animate() {
+        draw();
+        requestAnimationFrame(animate);
+      }
+
+      setTimeout(() => {
+        initParticles();
+        animate();
+      }, 100);
+
+      window.addEventListener("resize", () => {
+        particles.length = 0;
+        initParticles();
+      });
+    </script>
+  </body>
 </html>

@@ -1,279 +1,436 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The DayLuge Layout Showcase</title>
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --red:#ff3333;
-    --orange:#ffaa33;
-    --green:#33ff66;
-    --blue:#33ccff;
-    --violet:#cc88ff;
-    --pink:#ff66cc;
-    --ink:#111;
-  }
-  * {box-sizing:border-box;margin:0;padding:0;}
-  body {
-    font-family:'Special Elite',monospace;
-    background:#000;
-    color:#fff;
-    min-height:100vh;
-    overflow-x:hidden;
-  }
-  header {
-    display:flex;
-    justify-content:center;
-    gap:1rem;
-    padding:1rem;
-    border-bottom:1px solid rgba(255,255,255,0.1);
-    box-shadow:0 0 20px rgba(255,255,255,0.1);
-    position:sticky;
-    top:0;
-    background:#000;
-    z-index:100;
-  }
-  header button {
-    font-family:'Special Elite',monospace;
-    font-size:14px;
-    background:transparent;
-    border:2px solid var(--blue);
-    color:var(--blue);
-    padding:8px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    text-transform:uppercase;
-    transition:all 0.3s ease;
-  }
-  header button:hover, header button.active {
-    background:var(--blue);
-    color:#000;
-    box-shadow:0 0 10px var(--blue);
-  }
-  #layout-container {
-    position:relative;
-    width:100%;
-    min-height:calc(100vh - 60px);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-  }
-  .layout {
-    position:absolute;
-    width:100%;
-    height:100%;
-    display:none;
-  }
-  .layout.active {display:block;}
-</style>
-</head>
-<body>
-<header>
-  <button data-layout="orbital">Orbital</button>
-  <button data-layout="grid">Grid</button>
-  <button data-layout="neural">Neural</button>
-  <button data-layout="console">Console</button>
-  <button data-layout="helix">Helix</button>
-</header>
-<div id="layout-container">
-
-  <!-- 1. Orbital -->
-  <div id="orbital" class="layout active">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The DayLuge Layout Showcase</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      #orbital .core {
-        position:absolute;top:50%;left:50%;
-        transform:translate(-50%,-50%);
-        background:radial-gradient(circle,#ffcc00,#aa0000);
-        border-radius:50%;
-        width:120px;height:120px;
-        display:flex;align-items:center;justify-content:center;
-        text-align:center;color:#000;font-weight:bold;
-        box-shadow:0 0 40px #ffdd00;
+      :root {
+        --red: #ff3333;
+        --orange: #ffaa33;
+        --green: #33ff66;
+        --blue: #33ccff;
+        --violet: #cc88ff;
+        --pink: #ff66cc;
+        --ink: #111;
       }
-      #orbital .orbit {
-        position:absolute;top:50%;left:50%;
-        border:1px solid rgba(255,255,255,0.2);
-        border-radius:50%;
-        transform-origin:center center;
-        animation:spin 20s linear infinite;
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-      #orbital .orbit1 {width:250px;height:250px;animation-duration:14s;}
-      #orbital .orbit2 {width:350px;height:350px;animation-duration:18s;}
-      #orbital .orbit3 {width:450px;height:450px;animation-duration:22s;}
-      #orbital .orbit4 {width:550px;height:550px;animation-duration:26s;}
-      #orbital .orbit a {
-        position:absolute;top:-10px;left:50%;
-        transform:translateX(-50%);
-        color:#33ddff;text-shadow:0 0 10px currentColor;
-        font-weight:900;text-decoration:none;
+      body {
+        font-family: "Special Elite", monospace;
+        background: #000;
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
       }
-      @keyframes spin {from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+      header {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        position: sticky;
+        top: 0;
+        background: #000;
+        z-index: 100;
+      }
+      header button {
+        font-family: "Special Elite", monospace;
+        font-size: 14px;
+        background: transparent;
+        border: 2px solid var(--blue);
+        color: var(--blue);
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+      }
+      header button:hover,
+      header button.active {
+        background: var(--blue);
+        color: #000;
+        box-shadow: 0 0 10px var(--blue);
+      }
+      #layout-container {
+        position: relative;
+        width: 100%;
+        min-height: calc(100vh - 60px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .layout {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+      .layout.active {
+        display: block;
+      }
     </style>
-    <div class="core">THE<br>DAYLUGE</div>
-    <div class="orbit orbit1"><a href="#">Politics</a></div>
-    <div class="orbit orbit2"><a href="#">Markets</a></div>
-    <div class="orbit orbit3"><a href="#">Science</a></div>
-    <div class="orbit orbit4"><a href="#">Arts</a></div>
-  </div>
+  </head>
+  <body>
+    <header>
+      <button data-layout="orbital">Orbital</button>
+      <button data-layout="grid">Grid</button>
+      <button data-layout="neural">Neural</button>
+      <button data-layout="console">Console</button>
+      <button data-layout="helix">Helix</button>
+    </header>
+    <div id="layout-container">
+      <!-- 1. Orbital -->
+      <div id="orbital" class="layout active">
+        <style>
+          #orbital .core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #ffcc00, #aa0000);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 40px #ffdd00;
+          }
+          #orbital .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform-origin: center center;
+            animation: spin 20s linear infinite;
+          }
+          #orbital .orbit1 {
+            width: 250px;
+            height: 250px;
+            animation-duration: 14s;
+          }
+          #orbital .orbit2 {
+            width: 350px;
+            height: 350px;
+            animation-duration: 18s;
+          }
+          #orbital .orbit3 {
+            width: 450px;
+            height: 450px;
+            animation-duration: 22s;
+          }
+          #orbital .orbit4 {
+            width: 550px;
+            height: 550px;
+            animation-duration: 26s;
+          }
+          #orbital .orbit a {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #33ddff;
+            text-shadow: 0 0 10px currentColor;
+            font-weight: 900;
+            text-decoration: none;
+          }
+          @keyframes spin {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        </style>
+        <div class="core">THE<br />DAYLUGE</div>
+        <div class="orbit orbit1"><a href="#">Politics</a></div>
+        <div class="orbit orbit2"><a href="#">Markets</a></div>
+        <div class="orbit orbit3"><a href="#">Science</a></div>
+        <div class="orbit orbit4"><a href="#">Arts</a></div>
+      </div>
 
-  <!-- 2. Grid -->
-  <div id="grid" class="layout">
-    <style>
-      #grid .hex-grid {
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-        gap:20px;
-        padding:40px;
-        justify-items:center;
-      }
-      #grid .hex {
-        width:120px;aspect-ratio:1/1;
-        background:rgba(255,255,255,0.05);
-        clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0% 50%);
-        display:flex;align-items:center;justify-content:center;
-        font-weight:900;
-        transition:0.3s;
-        text-shadow:0 0 5px currentColor;
-      }
-      #grid .hex.red{color:var(--red);border:2px solid var(--red);}
-      #grid .hex.orange{color:var(--orange);border:2px solid var(--orange);}
-      #grid .hex.green{color:var(--green);border:2px solid var(--green);}
-      #grid .hex.blue{color:var(--blue);border:2px solid var(--blue);}
-      #grid .hex.violet{color:var(--violet);border:2px solid var(--violet);}
-      #grid .hex.pink{color:var(--pink);border:2px solid var(--pink);}
-      #grid .hex:hover{background:currentColor;color:#000;transform:scale(1.1);}
-    </style>
-    <div class="hex-grid">
-      <div class="hex red">Politics</div>
-      <div class="hex orange">Markets</div>
-      <div class="hex green">Science</div>
-      <div class="hex blue">Sports</div>
-      <div class="hex violet">Arts</div>
-      <div class="hex pink">Wisdom</div>
+      <!-- 2. Grid -->
+      <div id="grid" class="layout">
+        <style>
+          #grid .hex-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            justify-items: center;
+          }
+          #grid .hex {
+            width: 120px;
+            aspect-ratio: 1/1;
+            background: rgba(255, 255, 255, 0.05);
+            clip-path: polygon(
+              25% 5%,
+              75% 5%,
+              100% 50%,
+              75% 95%,
+              25% 95%,
+              0% 50%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            transition: 0.3s;
+            text-shadow: 0 0 5px currentColor;
+          }
+          #grid .hex.red {
+            color: var(--red);
+            border: 2px solid var(--red);
+          }
+          #grid .hex.orange {
+            color: var(--orange);
+            border: 2px solid var(--orange);
+          }
+          #grid .hex.green {
+            color: var(--green);
+            border: 2px solid var(--green);
+          }
+          #grid .hex.blue {
+            color: var(--blue);
+            border: 2px solid var(--blue);
+          }
+          #grid .hex.violet {
+            color: var(--violet);
+            border: 2px solid var(--violet);
+          }
+          #grid .hex.pink {
+            color: var(--pink);
+            border: 2px solid var(--pink);
+          }
+          #grid .hex:hover {
+            background: currentColor;
+            color: #000;
+            transform: scale(1.1);
+          }
+        </style>
+        <div class="hex-grid">
+          <div class="hex red">Politics</div>
+          <div class="hex orange">Markets</div>
+          <div class="hex green">Science</div>
+          <div class="hex blue">Sports</div>
+          <div class="hex violet">Arts</div>
+          <div class="hex pink">Wisdom</div>
+        </div>
+      </div>
+
+      <!-- 3. Neural -->
+      <div id="neural" class="layout">
+        <canvas id="network" width="800" height="600"></canvas>
+        <script>
+          const c = document.getElementById("network");
+          const ctx = c.getContext("2d");
+          function resizeNet() {
+            c.width = innerWidth;
+            c.height = innerHeight;
+          }
+          window.addEventListener("resize", resizeNet);
+          resizeNet();
+          const nodes = [
+            { x: 300, y: 300, color: "#ff6666", label: "Politics" },
+            { x: 600, y: 250, color: "#00ffcc", label: "Science" },
+            { x: 500, y: 500, color: "#cc88ff", label: "Arts" },
+            { x: 800, y: 400, color: "#ffaa33", label: "Markets" },
+          ];
+          function drawNet() {
+            ctx.clearRect(0, 0, c.width, c.height);
+            nodes.forEach((n, i) => {
+              nodes.forEach((m, j) => {
+                if (i !== j) {
+                  ctx.strokeStyle = "rgba(255,255,255,0.05)";
+                  ctx.beginPath();
+                  ctx.moveTo(n.x, n.y);
+                  ctx.lineTo(m.x, m.y);
+                  ctx.stroke();
+                }
+              });
+            });
+            nodes.forEach((n) => {
+              ctx.beginPath();
+              ctx.arc(n.x, n.y, 15, 0, Math.PI * 2);
+              ctx.fillStyle = n.color;
+              ctx.shadowColor = n.color;
+              ctx.shadowBlur = 10;
+              ctx.fill();
+              ctx.font = "16px Special Elite";
+              ctx.fillStyle = n.color;
+              ctx.fillText(n.label, n.x + 20, n.y + 5);
+            });
+            requestAnimationFrame(drawNet);
+          }
+          drawNet();
+        </script>
+      </div>
+
+      <!-- 4. Console -->
+      <div id="console" class="layout">
+        <style>
+          #console .console-box {
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid #0f0;
+            padding: 20px;
+            box-shadow: 0 0 15px #0f0;
+          }
+          #console .line {
+            margin-bottom: 6px;
+            white-space: pre;
+          }
+          #console .red {
+            color: var(--red);
+          }
+          #console .orange {
+            color: var(--orange);
+          }
+          #console .yellow {
+            color: #ffcc00;
+          }
+          #console .green {
+            color: var(--green);
+          }
+          #console .cyan {
+            color: var(--blue);
+          }
+          #console .violet {
+            color: var(--violet);
+          }
+          #console .blinking {
+            animation: blink 1s steps(2, start) infinite;
+          }
+          @keyframes blink {
+            to {
+              visibility: hidden;
+            }
+          }
+        </style>
+        <div class="console-box">
+          <div class="line">
+            <span class="cyan">THE DAYLUGE:</span> SYSTEM ONLINE_
+          </div>
+          <div class="line"><span class="green">> FEED STATUS</span> — OK</div>
+          <div class="line"><span class="yellow">> CATEGORY LIST</span></div>
+          <div class="line">
+            <span class="red">POLITICS</span>,
+            <span class="orange">MARKETS</span>,
+            <span class="blue">SCIENCE</span>, <span class="violet">ARTS</span>
+          </div>
+          <div class="line blinking">> Awaiting Input...</div>
+        </div>
+      </div>
+
+      <!-- 5. Helix -->
+      <div id="helix" class="layout">
+        <style>
+          #helix .helix-timeline {
+            position: relative;
+            width: 300px;
+            margin: 80px auto;
+          }
+          #helix .strand {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #33ddff, #cc88ff);
+          }
+          #helix .strand.left {
+            left: 100px;
+          }
+          #helix .strand.right {
+            right: 100px;
+          }
+          #helix .rung {
+            position: relative;
+            margin: 40px 0;
+            text-align: center;
+            font-weight: 900;
+            padding: 8px 0;
+            animation: swing 5s ease-in-out infinite;
+          }
+          #helix .rung::before,
+          #helix .rung::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 100px;
+            height: 2px;
+            background: currentColor;
+          }
+          #helix .rung::before {
+            left: -100px;
+          }
+          #helix .rung::after {
+            right: -100px;
+          }
+          #helix .rung.red {
+            color: var(--red);
+          }
+          #helix .rung.orange {
+            color: var(--orange);
+          }
+          #helix .rung.green {
+            color: var(--green);
+          }
+          #helix .rung.blue {
+            color: var(--blue);
+          }
+          #helix .rung.violet {
+            color: var(--violet);
+          }
+          @keyframes swing {
+            0%,
+            100% {
+              transform: translateY(0) rotateZ(0);
+            }
+            50% {
+              transform: translateY(5px) rotateZ(2deg);
+            }
+          }
+        </style>
+        <div class="helix-timeline">
+          <div class="strand left"></div>
+          <div class="strand right"></div>
+          <div class="rung red">Politics</div>
+          <div class="rung orange">Markets</div>
+          <div class="rung green">Science</div>
+          <div class="rung blue">Sports</div>
+          <div class="rung violet">Arts</div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- 3. Neural -->
-  <div id="neural" class="layout">
-    <canvas id="network" width="800" height="600"></canvas>
     <script>
-      const c=document.getElementById('network');
-      const ctx=c.getContext('2d');
-      function resizeNet(){c.width=innerWidth;c.height=innerHeight;}
-      window.addEventListener('resize',resizeNet);resizeNet();
-      const nodes=[
-        {x:300,y:300,color:'#ff6666',label:'Politics'},
-        {x:600,y:250,color:'#00ffcc',label:'Science'},
-        {x:500,y:500,color:'#cc88ff',label:'Arts'},
-        {x:800,y:400,color:'#ffaa33',label:'Markets'},
-      ];
-      function drawNet(){
-        ctx.clearRect(0,0,c.width,c.height);
-        nodes.forEach((n,i)=>{nodes.forEach((m,j)=>{
-          if(i!==j){ctx.strokeStyle='rgba(255,255,255,0.05)';
-          ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);ctx.stroke();}
-        });});
-        nodes.forEach(n=>{
-          ctx.beginPath();ctx.arc(n.x,n.y,15,0,Math.PI*2);
-          ctx.fillStyle=n.color;ctx.shadowColor=n.color;ctx.shadowBlur=10;ctx.fill();
-          ctx.font='16px Special Elite';ctx.fillStyle=n.color;
-          ctx.fillText(n.label,n.x+20,n.y+5);
+      const buttons = document.querySelectorAll("header button");
+      const layouts = document.querySelectorAll(".layout");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          buttons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const target = btn.dataset.layout;
+          layouts.forEach((l) => l.classList.remove("active"));
+          document.getElementById(target).classList.add("active");
         });
-        requestAnimationFrame(drawNet);
-      }
-      drawNet();
+      });
     </script>
-  </div>
-
-  <!-- 4. Console -->
-  <div id="console" class="layout">
-    <style>
-      #console .console-box{
-        max-width:600px;margin:40px auto;
-        background:rgba(0,255,0,0.05);
-        border:1px solid #0f0;padding:20px;
-        box-shadow:0 0 15px #0f0;
-      }
-      #console .line{margin-bottom:6px;white-space:pre;}
-      #console .red{color:var(--red);}
-      #console .orange{color:var(--orange);}
-      #console .yellow{color:#ffcc00;}
-      #console .green{color:var(--green);}
-      #console .cyan{color:var(--blue);}
-      #console .violet{color:var(--violet);}
-      #console .blinking{animation:blink 1s steps(2,start) infinite;}
-      @keyframes blink{to{visibility:hidden;}}
-    </style>
-    <div class="console-box">
-      <div class="line"><span class="cyan">THE DAYLUGE:</span> SYSTEM ONLINE_</div>
-      <div class="line"><span class="green">> FEED STATUS</span> — OK</div>
-      <div class="line"><span class="yellow">> CATEGORY LIST</span></div>
-      <div class="line"><span class="red">POLITICS</span>, <span class="orange">MARKETS</span>, <span class="blue">SCIENCE</span>, <span class="violet">ARTS</span></div>
-      <div class="line blinking">> Awaiting Input...</div>
-    </div>
-  </div>
-
-  <!-- 5. Helix -->
-  <div id="helix" class="layout">
-    <style>
-      #helix .helix-timeline{
-        position:relative;width:300px;margin:80px auto;
-      }
-      #helix .strand{
-        position:absolute;top:0;bottom:0;width:2px;
-        background:linear-gradient(to bottom,#33ddff,#cc88ff);
-      }
-      #helix .strand.left{left:100px;}
-      #helix .strand.right{right:100px;}
-      #helix .rung{
-        position:relative;margin:40px 0;text-align:center;
-        font-weight:900;padding:8px 0;
-        animation:swing 5s ease-in-out infinite;
-      }
-      #helix .rung::before,#helix .rung::after{
-        content:'';position:absolute;top:50%;width:100px;height:2px;
-        background:currentColor;
-      }
-      #helix .rung::before{left:-100px;}
-      #helix .rung::after{right:-100px;}
-      #helix .rung.red{color:var(--red);}
-      #helix .rung.orange{color:var(--orange);}
-      #helix .rung.green{color:var(--green);}
-      #helix .rung.blue{color:var(--blue);}
-      #helix .rung.violet{color:var(--violet);}
-      @keyframes swing{
-        0%,100%{transform:translateY(0) rotateZ(0);}
-        50%{transform:translateY(5px) rotateZ(2deg);}
-      }
-    </style>
-    <div class="helix-timeline">
-      <div class="strand left"></div>
-      <div class="strand right"></div>
-      <div class="rung red">Politics</div>
-      <div class="rung orange">Markets</div>
-      <div class="rung green">Science</div>
-      <div class="rung blue">Sports</div>
-      <div class="rung violet">Arts</div>
-    </div>
-  </div>
-
-</div>
-
-<script>
-  const buttons=document.querySelectorAll('header button');
-  const layouts=document.querySelectorAll('.layout');
-  buttons.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      buttons.forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const target=btn.dataset.layout;
-      layouts.forEach(l=>l.classList.remove('active'));
-      document.getElementById(target).classList.add('active');
-    });
-  });
-</script>
-</body>
+  </body>
 </html>
