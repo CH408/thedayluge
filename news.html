@@ -1,550 +1,1056 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>News - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --light-red-glow: #ff3333;
-      --headline-red: #ff6666;
-      --light-orange-glow: #ff8833;
-      --headline-orange: #ffaa66;
-      --light-green-glow: #33ff66;
-      --headline-green: #66ff99;
-      --light-cyan-glow: #33ddff;
-      --headline-cyan: #66ccff;
-      --light-pink-glow: #ff66cc;
-      --headline-pink: #ff99cc;
-      --ink: #111;
-      --maxw: 1200px;
-      /* Atomic color palette from index */
-      --red:#cc0000;  
-      --orange:#ff8800;  
-      --green:#00dd55;
-      --blue:#1a1a80;
-      --light-blue:#33ddff;
-      --violet:#cc88ff;
-      --pink:#ff1493;
-      --yellow:#ffdd00;
-      --brown:#8B4513;
-      --dark-green:#006400;
-      --turquoise:#40E0D0;
-      --bright-blue:#00b7eb;
-      --rule:#bfbfbf;
-      --bright-purple-glow: #cc88ff;
-      --aqua-blueish-green: #00cc99;
-      --aqua-blueish-green-dark: #009977;
-      --gold: #d4af37;
-      --gold-dark: #b8860b;
-      --marble-white: #f5f5f5;
-      --marble-gray: #d3d3d3;
-      --bright-dark-green: #00aa33;
-      --bright-dark-green-dark: #008822;
-      --dodgers-blue: #1e90ff;
-      --dodgers-blue-dark: #0066cc;
-      --robins-egg-blue: #ADD8E6;
-      --sports-blue: #66B4F2;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--ink);
-      line-height: 1.3;
-      background: #000000;
-      padding: 10px;
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-    #particle-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-    #comet-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .comet {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: radial-gradient(circle, #ffffff 0%, transparent 70%);
-      box-shadow: 0 0 15px var(--light-cyan-glow);
-      animation: comet-streak 6s linear infinite;
-      opacity: 0;
-    }
-    .comet::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: -40px;
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(to left, var(--light-cyan-glow), transparent);
-      opacity: 0.5;
-      transform: translateY(-50%);
-    }
-    @keyframes comet-streak {
-      0% { opacity: 0; transform: translate(0, 0) rotate(45deg); }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% { opacity: 0; transform: translate(2000px, -2000px) rotate(45deg); }
-    }
-    .comet:nth-child(1) { left: 15%; top: 25%; animation-delay: 0s; }
-    .comet:nth-child(2) { left: 55%; top: 75%; animation-delay: 2s; }
-    .comet:nth-child(3) { left: 85%; top: 35%; animation-delay: 4s; }
-    #asteroid-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .asteroid {
-      position: absolute;
-      width: 15px;
-      height: 15px;
-      background: radial-gradient(circle, var(--light-cyan-glow) 0%, transparent 70%);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--light-cyan-glow);
-      animation: asteroid-drift 25s linear infinite;
-      opacity: 0.6;
-    }
-    @keyframes asteroid-drift {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(800px, 400px); }
-    }
-    .asteroid:nth-child(1) { left: 25%; top: 15%; animation-delay: 0s; }
-    .asteroid:nth-child(2) { left: 65%; top: 55%; animation-delay: 12s; }
-    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .block-title {
-      font-size: 18px;
-      text-transform: uppercase;
-      font-weight: 900;
-      text-align: left;
-    }
-    .title-container {
-      display: flex;
-      align-items: center;
-      max-width: 800px;
-      justify-content: space-between;
-      margin-bottom: 5px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInTitle 0.08s ease-out forwards;
-    }
-    @keyframes fadeInTitle {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .global-news .title-container { animation-delay: 0s; }
-    .us-news .title-container { animation-delay: 0.48s; }
-    .economy-news .title-container { animation-delay: 0.96s; }
-    .sports-news .title-container { animation-delay: 1.44s; }
-    .popculture-news .title-container { animation-delay: 1.92s; }
-    .global-news-title { color: var(--bright-purple-glow); animation: block-title-pulse-purple 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-purple {
-      0% { text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--bright-purple-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .us-news-title { color: var(--light-red-glow); animation: block-title-pulse-light-red 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-light-red {
-      0% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .economy-news-title { color: var(--light-green-glow); animation: block-title-pulse-green 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-green {
-      0% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-green-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .sports-news-title { color: var(--sports-blue); animation: block-title-pulse-sports-blue 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-sports-blue {
-      0% { text-shadow: 0 0 15px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--sports-blue), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .popculture-news-title { color: var(--light-pink-glow); animation: block-title-pulse-pink 8s ease-in-out infinite; }
-    @keyframes block-title-pulse-pink {
-      0% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--light-pink-glow), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .headlines { list-style: none; max-width: 800px; margin-bottom: 30px; }
-    .headline {
-      font-size: 16px;
-      margin-bottom: 5px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.08s ease-out forwards;
-    }
-    .global-news-links .headline { color: var(--bright-purple-glow); }
-    .us-news-links .headline { color: var(--light-red-glow); }
-    .economy-news-links .headline { color: var(--headline-green); }
-    .sports-news-links .headline { color: var(--sports-blue); }
-    .popculture-news-links .headline { color: var(--headline-pink); }
-    /* Global News headlines */
-    .global-news-links .headline:nth-child(1) { animation-delay: 0.08s; }
-    .global-news-links .headline:nth-child(2) { animation-delay: 0.16s; }
-    .global-news-links .headline:nth-child(3) { animation-delay: 0.24s; }
-    .global-news-links .headline:nth-child(4) { animation-delay: 0.32s; }
-    .global-news-links .headline:nth-child(5) { animation-delay: 0.4s; }
-    /* US News headlines */
-    .us-news-links .headline:nth-child(1) { animation-delay: 0.56s; }
-    .us-news-links .headline:nth-child(2) { animation-delay: 0.64s; }
-    .us-news-links .headline:nth-child(3) { animation-delay: 0.72s; }
-    .us-news-links .headline:nth-child(4) { animation-delay: 0.8s; }
-    .us-news-links .headline:nth-child(5) { animation-delay: 0.88s; }
-    /* Economy headlines */
-    .economy-news-links .headline:nth-child(1) { animation-delay: 1.04s; }
-    .economy-news-links .headline:nth-child(2) { animation-delay: 1.12s; }
-    .economy-news-links .headline:nth-child(3) { animation-delay: 1.2s; }
-    .economy-news-links .headline:nth-child(4) { animation-delay: 1.28s; }
-    .economy-news-links .headline:nth-child(5) { animation-delay: 1.36s; }
-    /* Sports headlines */
-    .sports-news-links .headline:nth-child(1) { animation-delay: 1.52s; }
-    .sports-news-links .headline:nth-child(2) { animation-delay: 1.6s; }
-    .sports-news-links .headline:nth-child(3) { animation-delay: 1.68s; }
-    .sports-news-links .headline:nth-child(4) { animation-delay: 1.76s; }
-    .sports-news-links .headline:nth-child(5) { animation-delay: 1.84s; }
-    /* Pop Culture headlines */
-    .popculture-news-links .headline:nth-child(1) { animation-delay: 2.0s; }
-    .popculture-news-links .headline:nth-child(2) { animation-delay: 2.08s; }
-    .popculture-news-links .headline:nth-child(3) { animation-delay: 2.16s; }
-    .popculture-news-links .headline:nth-child(4) { animation-delay: 2.24s; }
-    .popculture-news-links .headline:nth-child(5) { animation-delay: 2.32s; }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .headline a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .global-news-links .headline a:hover { color: var(--bright-purple-glow); text-shadow: 0 0 10px var(--bright-purple-glow); }
-    .us-news-links .headline a:hover { color: var(--light-red-glow); text-shadow: 0 0 10px var(--light-red-glow); }
-    .economy-news-links .headline a:hover { color: var(--light-green-glow); text-shadow: 0 0 10px var(--light-green-glow); }
-    .sports-news-links .headline a:hover { color: var(--sports-blue); text-shadow: 0 0 10px var(--sports-blue); }
-    .popculture-news-links .headline a:hover { color: var(--light-pink-glow); text-shadow: 0 0 10px var(--light-pink-glow); }
-    .go-deeper {
-      display: inline-block;
-      background: transparent;
-      color: inherit;
-      padding: 8px 16px;
-      border: 1px solid;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-    .global-news .go-deeper { border-color: var(--bright-purple-glow); color: var(--bright-purple-glow); text-shadow: 0 0 5px var(--bright-purple-glow); }
-    .us-news .go-deeper { border-color: var(--light-red-glow); color: var(--light-red-glow); text-shadow: 0 0 5px var(--light-red-glow); }
-    .economy-news .go-deeper { border-color: var(--light-green-glow); color: var(--light-green-glow); text-shadow: 0 0 5px var(--light-green-glow); }
-    .sports-news .go-deeper { border-color: var(--sports-blue); color: var(--sports-blue); text-shadow: 0 0 5px var(--sports-blue); }
-    .popculture-news .go-deeper { border-color: var(--light-pink-glow); color: var(--light-pink-glow); text-shadow: 0 0 5px var(--light-pink-glow); }
-    .go-deeper:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
-    }
-    .global-news .go-deeper:hover { box-shadow: 0 0 15px rgba(204,136,255,0.3); }
-    .us-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,51,51,0.3); }
-    .economy-news .go-deeper:hover { box-shadow: 0 0 15px rgba(51,255,102,0.3); }
-    .sports-news .go-deeper:hover { box-shadow: 0 0 15px rgba(102,180,242,0.3); }
-    .popculture-news .go-deeper:hover { box-shadow: 0 0 15px rgba(255,102,204,0.3); }
-    .home-btn {
-      position: fixed;
-      bottom: 20px; right: 20px;
-      background: transparent;
-      color: #ffffff;
-      padding: 8px 16px;
-      border: 1px solid #ffffff;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 5px #ffffff;
-      transition: all 0.3s ease;
-      z-index: 10;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-    .home-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-      transform: scale(1.05);
-    }
-    @media (max-width: 600px) {
-      .block-title { font-size: 16px; }
-      .headline { font-size: 14px; }
-      .go-deeper { font-size: 10px; padding: 6px 12px; margin-left: 10px; }
-      .home-btn {
-        font-size: 12px;
-        padding: 10px 16px;
-        bottom: 30px;
-        right: 15px;
-        line-height: 1.5;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>News - THE DAYLUGE</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap");
+
+      :root {
+        --light-red-glow: #ff3333;
+        --headline-red: #ff6666;
+        --light-orange-glow: #ff8833;
+        --headline-orange: #ffaa66;
+        --light-green-glow: #33ff66;
+        --headline-green: #66ff99;
+        --light-cyan-glow: #33ddff;
+        --headline-cyan: #66ccff;
+        --light-pink-glow: #ff66cc;
+        --headline-pink: #ff99cc;
+        --ink: #111;
+        --maxw: 1200px;
+        /* Atomic color palette from index */
+        --red: #cc0000;
+        --orange: #ff8800;
+        --green: #00dd55;
+        --blue: #1a1a80;
+        --light-blue: #33ddff;
+        --violet: #cc88ff;
+        --pink: #ff1493;
+        --yellow: #ffdd00;
+        --brown: #8b4513;
+        --dark-green: #006400;
+        --turquoise: #40e0d0;
+        --bright-blue: #00b7eb;
+        --rule: #bfbfbf;
+        --bright-purple-glow: #cc88ff;
+        --aqua-blueish-green: #00cc99;
+        --aqua-blueish-green-dark: #009977;
+        --gold: #d4af37;
+        --gold-dark: #b8860b;
+        --marble-white: #f5f5f5;
+        --marble-gray: #d3d3d3;
+        --bright-dark-green: #00aa33;
+        --bright-dark-green-dark: #008822;
+        --dodgers-blue: #1e90ff;
+        --dodgers-blue-dark: #0066cc;
+        --robins-egg-blue: #add8e6;
+        --sports-blue: #66b4f2;
       }
-      .comet {
-        width: 6px;
-        height: 6px;
-        box-shadow: 0 0 10px var(--light-cyan-glow);
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-      .comet::after {
-        width: 30px;
-        height: 1px;
+
+      html,
+      body {
+        height: 100%;
       }
-      .asteroid {
-        width: 12px;
-        height: 12px;
-        box-shadow: 0 0 8px var(--light-cyan-glow);
+
+      body {
+        font-family: "Special Elite", "Courier New", Courier, monospace;
+        color: var(--ink);
+        line-height: 1.3;
+        background: #000000;
+        padding: 10px;
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
+
       body::before {
-        background: radial-gradient(circle at center, rgba(0,255,127,0.08) 0%, transparent 70%);
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(0, 255, 127, 0.1) 0%,
+          transparent 70%
+        );
+        animation: energy-pulse 6s ease-in-out infinite;
+        pointer-events: none;
       }
-    }
-    @media (max-width: 400px) {
-      .comet {
-        width: 5px;
-        height: 5px;
-        box-shadow: 0 0 8px var(--light-cyan-glow);
+
+      @keyframes energy-pulse {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+
+        50% {
+          opacity: 1;
+        }
       }
-      .comet::after {
-        width: 20px;
-        height: 1px;
-      }
-      .asteroid {
-        width: 10px;
-        height: 10px;
-        box-shadow: 0 0 6px var(--light-cyan-glow);
-      }
-      body::before {
-        background: radial-gradient(circle at center, rgba(0,255,127,0.06) 0%, transparent 70%);
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      body::before {
-        animation: none;
-        opacity: 0.4;
-      }
-      .comet {
-        animation: none;
-        opacity: 0.5;
-        box-shadow: 0 0 10px var(--light-cyan-glow);
-      }
-      .comet::after {
-        opacity: 0.3;
-      }
-      .asteroid {
-        animation: none;
-        opacity: 0.5;
-      }
+
       #particle-canvas {
-        animation: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
       }
-    }
-  </style>
-</head>
-<body>
-  <a href="/" class="home-btn">← Home</a>
-  <canvas id="particle-canvas"></canvas>
-  <div id="comet-container">
-    <div class="comet"></div>
-    <div class="comet"></div>
-    <div class="comet"></div>
-  </div>
-  <div id="asteroid-container">
-    <div class="asteroid"></div>
-    <div class="asteroid"></div>
-  </div>
-  <div class="wrap">
-    <div class="global-news">
-      <div class="title-container">
-        <div class="block-title global-news-title">Global News</div>
-        <a href="/global-news-archive.html" class="go-deeper">More Global News</a>
-      </div>
-      <ul class="headlines global-news-links" id="global-news-links"></ul>
-    </div>
-    <div class="us-news">
-      <div class="title-container">
-        <div class="block-title us-news-title">US News</div>
-        <a href="/us-news-archive.html" class="go-deeper">More US News</a>
-      </div>
-      <ul class="headlines us-news-links" id="us-news-links"></ul>
-    </div>
-    <div class="economy-news">
-      <div class="title-container">
-        <div class="block-title economy-news-title">Economy & Markets</div>
-        <a href="/economy-news-archive.html" class="go-deeper">More Economy</a>
-      </div>
-      <ul class="headlines economy-news-links" id="economy-news-links"></ul>
-    </div>
-    <div class="sports-news">
-      <div class="title-container">
-        <div class="block-title sports-news-title">Sports News</div>
-        <a href="/sports-leisure/sports-leisure.html" class="go-deeper">More Sports</a>
-      </div>
-      <ul class="headlines sports-news-links" id="sports-news-links"></ul>
-    </div>
-    <div class="popculture-news">
-      <div class="title-container">
-        <div class="block-title popculture-news-title">Pop Culture & Entertainment</div>
-        <a href="/popculture-news-archive.html" class="go-deeper">More Pop Culture</a>
-      </div>
-      <ul class="headlines popculture-news-links" id="popculture-news-links"></ul>
-    </div>
-  </div>
-  <script>
-    // Particle effect (updated to match index.html)
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const particlesArray = [];
-    const numberOfParticles = 80;
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1 + 0.5;
-        this.speedX = Math.random() * 0.3 - 0.15;
-        this.speedY = Math.random() * 0.3 - 0.15;
-        this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
+
+      #comet-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
       }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.size > 0.2) this.size -= 0.05;
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+
+      .comet {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+        box-shadow: 0 0 15px var(--light-cyan-glow);
+        animation: comet-streak 6s linear infinite;
+        opacity: 0;
       }
-      draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 5;
-        ctx.shadowColor = this.color;
+
+      .comet::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -40px;
+        width: 40px;
+        height: 1px;
+        background: linear-gradient(
+          to left,
+          var(--light-cyan-glow),
+          transparent
+        );
+        opacity: 0.5;
+        transform: translateY(-50%);
       }
-    }
-    function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
+
+      @keyframes comet-streak {
+        0% {
+          opacity: 0;
+          transform: translate(0, 0) rotate(45deg);
+        }
+
+        10% {
+          opacity: 0.8;
+        }
+
+        90% {
+          opacity: 0.8;
+        }
+
+        100% {
+          opacity: 0;
+          transform: translate(2000px, -2000px) rotate(45deg);
+        }
       }
-    }
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-        if (particlesArray[i].size <= 0.2) {
-          particlesArray.splice(i, 1);
-          i--;
+
+      .comet:nth-child(1) {
+        left: 15%;
+        top: 25%;
+        animation-delay: 0s;
+      }
+
+      .comet:nth-child(2) {
+        left: 55%;
+        top: 75%;
+        animation-delay: 2s;
+      }
+
+      .comet:nth-child(3) {
+        left: 85%;
+        top: 35%;
+        animation-delay: 4s;
+      }
+
+      #asteroid-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .asteroid {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: radial-gradient(
+          circle,
+          var(--light-cyan-glow) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--light-cyan-glow);
+        animation: asteroid-drift 25s linear infinite;
+        opacity: 0.6;
+      }
+
+      @keyframes asteroid-drift {
+        0% {
+          transform: translate(0, 0);
+        }
+
+        100% {
+          transform: translate(800px, 400px);
+        }
+      }
+
+      .asteroid:nth-child(1) {
+        left: 25%;
+        top: 15%;
+        animation-delay: 0s;
+      }
+
+      .asteroid:nth-child(2) {
+        left: 65%;
+        top: 55%;
+        animation-delay: 12s;
+      }
+
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        position: relative;
+        z-index: 5;
+        padding-top: 20px;
+      }
+
+      .block-title {
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: 900;
+        text-align: left;
+      }
+
+      .title-container {
+        display: flex;
+        align-items: center;
+        max-width: 800px;
+        justify-content: space-between;
+        margin-bottom: 5px;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInTitle 0.08s ease-out forwards;
+      }
+
+      @keyframes fadeInTitle {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .global-news .title-container {
+        animation-delay: 0s;
+      }
+
+      .us-news .title-container {
+        animation-delay: 0.48s;
+      }
+
+      .economy-news .title-container {
+        animation-delay: 0.96s;
+      }
+
+      .sports-news .title-container {
+        animation-delay: 1.44s;
+      }
+
+      .popculture-news .title-container {
+        animation-delay: 1.92s;
+      }
+
+      .global-news-title {
+        color: var(--bright-purple-glow);
+        animation: block-title-pulse-purple 8s ease-in-out infinite;
+      }
+
+      @keyframes block-title-pulse-purple {
+        0% {
+          text-shadow:
+            0 0 15px var(--bright-purple-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        12.5% {
+          text-shadow:
+            0 0 16px var(--bright-purple-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        25% {
+          text-shadow:
+            0 0 17px var(--bright-purple-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        50% {
+          text-shadow:
+            0 0 20px var(--bright-purple-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        75% {
+          text-shadow:
+            0 0 17px var(--bright-purple-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        100% {
+          text-shadow:
+            0 0 15px var(--bright-purple-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      .us-news-title {
+        color: var(--light-red-glow);
+        animation: block-title-pulse-light-red 8s ease-in-out infinite;
+      }
+
+      @keyframes block-title-pulse-light-red {
+        0% {
+          text-shadow:
+            0 0 15px var(--light-red-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        12.5% {
+          text-shadow:
+            0 0 16px var(--light-red-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        25% {
+          text-shadow:
+            0 0 17px var(--light-red-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        50% {
+          text-shadow:
+            0 0 20px var(--light-red-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        75% {
+          text-shadow:
+            0 0 17px var(--light-red-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        100% {
+          text-shadow:
+            0 0 15px var(--light-red-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      .economy-news-title {
+        color: var(--light-green-glow);
+        animation: block-title-pulse-green 8s ease-in-out infinite;
+      }
+
+      @keyframes block-title-pulse-green {
+        0% {
+          text-shadow:
+            0 0 15px var(--light-green-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        12.5% {
+          text-shadow:
+            0 0 16px var(--light-green-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        25% {
+          text-shadow:
+            0 0 17px var(--light-green-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        50% {
+          text-shadow:
+            0 0 20px var(--light-green-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        75% {
+          text-shadow:
+            0 0 17px var(--light-green-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        100% {
+          text-shadow:
+            0 0 15px var(--light-green-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      .sports-news-title {
+        color: var(--sports-blue);
+        animation: block-title-pulse-sports-blue 8s ease-in-out infinite;
+      }
+
+      @keyframes block-title-pulse-sports-blue {
+        0% {
+          text-shadow:
+            0 0 15px var(--sports-blue),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        12.5% {
+          text-shadow:
+            0 0 16px var(--sports-blue),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        25% {
+          text-shadow:
+            0 0 17px var(--sports-blue),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        50% {
+          text-shadow:
+            0 0 20px var(--sports-blue),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        75% {
+          text-shadow:
+            0 0 17px var(--sports-blue),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        100% {
+          text-shadow:
+            0 0 15px var(--sports-blue),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      .popculture-news-title {
+        color: var(--light-pink-glow);
+        animation: block-title-pulse-pink 8s ease-in-out infinite;
+      }
+
+      @keyframes block-title-pulse-pink {
+        0% {
+          text-shadow:
+            0 0 15px var(--light-pink-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        12.5% {
+          text-shadow:
+            0 0 16px var(--light-pink-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        25% {
+          text-shadow:
+            0 0 17px var(--light-pink-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        50% {
+          text-shadow:
+            0 0 20px var(--light-pink-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        75% {
+          text-shadow:
+            0 0 17px var(--light-pink-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        100% {
+          text-shadow:
+            0 0 15px var(--light-pink-glow),
+            2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      .headlines {
+        list-style: none;
+        max-width: 800px;
+        margin-bottom: 30px;
+      }
+
+      .headline {
+        font-size: 16px;
+        margin-bottom: 5px;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeIn 0.08s ease-out forwards;
+      }
+
+      .global-news-links .headline {
+        color: var(--bright-purple-glow);
+      }
+
+      .us-news-links .headline {
+        color: var(--light-red-glow);
+      }
+
+      .economy-news-links .headline {
+        color: var(--headline-green);
+      }
+
+      .sports-news-links .headline {
+        color: var(--sports-blue);
+      }
+
+      .popculture-news-links .headline {
+        color: var(--headline-pink);
+      }
+
+      /* Global News headlines */
+      .global-news-links .headline:nth-child(1) {
+        animation-delay: 0.08s;
+      }
+
+      .global-news-links .headline:nth-child(2) {
+        animation-delay: 0.16s;
+      }
+
+      .global-news-links .headline:nth-child(3) {
+        animation-delay: 0.24s;
+      }
+
+      .global-news-links .headline:nth-child(4) {
+        animation-delay: 0.32s;
+      }
+
+      .global-news-links .headline:nth-child(5) {
+        animation-delay: 0.4s;
+      }
+
+      /* US News headlines */
+      .us-news-links .headline:nth-child(1) {
+        animation-delay: 0.56s;
+      }
+
+      .us-news-links .headline:nth-child(2) {
+        animation-delay: 0.64s;
+      }
+
+      .us-news-links .headline:nth-child(3) {
+        animation-delay: 0.72s;
+      }
+
+      .us-news-links .headline:nth-child(4) {
+        animation-delay: 0.8s;
+      }
+
+      .us-news-links .headline:nth-child(5) {
+        animation-delay: 0.88s;
+      }
+
+      /* Economy headlines */
+      .economy-news-links .headline:nth-child(1) {
+        animation-delay: 1.04s;
+      }
+
+      .economy-news-links .headline:nth-child(2) {
+        animation-delay: 1.12s;
+      }
+
+      .economy-news-links .headline:nth-child(3) {
+        animation-delay: 1.2s;
+      }
+
+      .economy-news-links .headline:nth-child(4) {
+        animation-delay: 1.28s;
+      }
+
+      .economy-news-links .headline:nth-child(5) {
+        animation-delay: 1.36s;
+      }
+
+      /* Sports headlines */
+      .sports-news-links .headline:nth-child(1) {
+        animation-delay: 1.52s;
+      }
+
+      .sports-news-links .headline:nth-child(2) {
+        animation-delay: 1.6s;
+      }
+
+      .sports-news-links .headline:nth-child(3) {
+        animation-delay: 1.68s;
+      }
+
+      .sports-news-links .headline:nth-child(4) {
+        animation-delay: 1.76s;
+      }
+
+      .sports-news-links .headline:nth-child(5) {
+        animation-delay: 1.84s;
+      }
+
+      /* Pop Culture headlines */
+      .popculture-news-links .headline:nth-child(1) {
+        animation-delay: 2s;
+      }
+
+      .popculture-news-links .headline:nth-child(2) {
+        animation-delay: 2.08s;
+      }
+
+      .popculture-news-links .headline:nth-child(3) {
+        animation-delay: 2.16s;
+      }
+
+      .popculture-news-links .headline:nth-child(4) {
+        animation-delay: 2.24s;
+      }
+
+      .popculture-news-links .headline:nth-child(5) {
+        animation-delay: 2.32s;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .headline a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .global-news-links .headline a:hover {
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 10px var(--bright-purple-glow);
+      }
+
+      .us-news-links .headline a:hover {
+        color: var(--light-red-glow);
+        text-shadow: 0 0 10px var(--light-red-glow);
+      }
+
+      .economy-news-links .headline a:hover {
+        color: var(--light-green-glow);
+        text-shadow: 0 0 10px var(--light-green-glow);
+      }
+
+      .sports-news-links .headline a:hover {
+        color: var(--sports-blue);
+        text-shadow: 0 0 10px var(--sports-blue);
+      }
+
+      .popculture-news-links .headline a:hover {
+        color: var(--light-pink-glow);
+        text-shadow: 0 0 10px var(--light-pink-glow);
+      }
+
+      .go-deeper {
+        display: inline-block;
+        background: transparent;
+        color: inherit;
+        padding: 8px 16px;
+        border: 1px solid;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .global-news .go-deeper {
+        border-color: var(--bright-purple-glow);
+        color: var(--bright-purple-glow);
+        text-shadow: 0 0 5px var(--bright-purple-glow);
+      }
+
+      .us-news .go-deeper {
+        border-color: var(--light-red-glow);
+        color: var(--light-red-glow);
+        text-shadow: 0 0 5px var(--light-red-glow);
+      }
+
+      .economy-news .go-deeper {
+        border-color: var(--light-green-glow);
+        color: var(--light-green-glow);
+        text-shadow: 0 0 5px var(--light-green-glow);
+      }
+
+      .sports-news .go-deeper {
+        border-color: var(--sports-blue);
+        color: var(--sports-blue);
+        text-shadow: 0 0 5px var(--sports-blue);
+      }
+
+      .popculture-news .go-deeper {
+        border-color: var(--light-pink-glow);
+        color: var(--light-pink-glow);
+        text-shadow: 0 0 5px var(--light-pink-glow);
+      }
+
+      .go-deeper:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.05);
+      }
+
+      .global-news .go-deeper:hover {
+        box-shadow: 0 0 15px rgba(204, 136, 255, 0.3);
+      }
+
+      .us-news .go-deeper:hover {
+        box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+      }
+
+      .economy-news .go-deeper:hover {
+        box-shadow: 0 0 15px rgba(51, 255, 102, 0.3);
+      }
+
+      .sports-news .go-deeper:hover {
+        box-shadow: 0 0 15px rgba(102, 180, 242, 0.3);
+      }
+
+      .popculture-news .go-deeper:hover {
+        box-shadow: 0 0 15px rgba(255, 102, 204, 0.3);
+      }
+
+      .home-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: transparent;
+        color: #ffffff;
+        padding: 8px 16px;
+        border: 1px solid #ffffff;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-shadow: 0 0 5px #ffffff;
+        transition: all 0.3s ease;
+        z-index: 10;
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+
+      .home-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 600px) {
+        .block-title {
+          font-size: 16px;
+        }
+
+        .headline {
+          font-size: 14px;
+        }
+
+        .go-deeper {
+          font-size: 10px;
+          padding: 6px 12px;
+          margin-left: 10px;
+        }
+
+        .home-btn {
+          font-size: 12px;
+          padding: 10px 16px;
+          bottom: 30px;
+          right: 15px;
+          line-height: 1.5;
+        }
+
+        .comet {
+          width: 6px;
+          height: 6px;
+          box-shadow: 0 0 10px var(--light-cyan-glow);
+        }
+
+        .comet::after {
+          width: 30px;
+          height: 1px;
+        }
+
+        .asteroid {
+          width: 12px;
+          height: 12px;
+          box-shadow: 0 0 8px var(--light-cyan-glow);
+        }
+
+        body::before {
+          background: radial-gradient(
+            circle at center,
+            rgba(0, 255, 127, 0.08) 0%,
+            transparent 70%
+          );
+        }
+      }
+
+      @media (max-width: 400px) {
+        .comet {
+          width: 5px;
+          height: 5px;
+          box-shadow: 0 0 8px var(--light-cyan-glow);
+        }
+
+        .comet::after {
+          width: 20px;
+          height: 1px;
+        }
+
+        .asteroid {
+          width: 10px;
+          height: 10px;
+          box-shadow: 0 0 6px var(--light-cyan-glow);
+        }
+
+        body::before {
+          background: radial-gradient(
+            circle at center,
+            rgba(0, 255, 127, 0.06) 0%,
+            transparent 70%
+          );
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body::before {
+          animation: none;
+          opacity: 0.4;
+        }
+
+        .comet {
+          animation: none;
+          opacity: 0.5;
+          box-shadow: 0 0 10px var(--light-cyan-glow);
+        }
+
+        .comet::after {
+          opacity: 0.3;
+        }
+
+        .asteroid {
+          animation: none;
+          opacity: 0.5;
+        }
+
+        #particle-canvas {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="/" class="home-btn">← Home</a>
+    <canvas id="particle-canvas"></canvas>
+    <div id="comet-container">
+      <div class="comet"></div>
+      <div class="comet"></div>
+      <div class="comet"></div>
+    </div>
+    <div id="asteroid-container">
+      <div class="asteroid"></div>
+      <div class="asteroid"></div>
+    </div>
+    <div class="wrap">
+      <div class="global-news">
+        <div class="title-container">
+          <div class="block-title global-news-title">Global News</div>
+          <a href="/global-news-archive.html" class="go-deeper"
+            >More Global News</a
+          >
+        </div>
+        <ul class="headlines global-news-links" id="global-news-links"></ul>
+      </div>
+      <div class="us-news">
+        <div class="title-container">
+          <div class="block-title us-news-title">US News</div>
+          <a href="/us-news-archive.html" class="go-deeper">More US News</a>
+        </div>
+        <ul class="headlines us-news-links" id="us-news-links"></ul>
+      </div>
+      <div class="economy-news">
+        <div class="title-container">
+          <div class="block-title economy-news-title">Economy & Markets</div>
+          <a href="/economy-news-archive.html" class="go-deeper"
+            >More Economy</a
+          >
+        </div>
+        <ul class="headlines economy-news-links" id="economy-news-links"></ul>
+      </div>
+      <div class="sports-news">
+        <div class="title-container">
+          <div class="block-title sports-news-title">Sports News</div>
+          <a href="/sports-news-archive.html" class="go-deeper">More Sports</a>
+        </div>
+        <ul class="headlines sports-news-links" id="sports-news-links"></ul>
+      </div>
+      <div class="popculture-news">
+        <div class="title-container">
+          <div class="block-title popculture-news-title">
+            Pop Culture & Entertainment
+          </div>
+          <a href="/popculture-news-archive.html" class="go-deeper"
+            >More Pop Culture</a
+          >
+        </div>
+        <ul
+          class="headlines popculture-news-links"
+          id="popculture-news-links"
+        ></ul>
+      </div>
+    </div>
+    <script>
+      // Particle effect (updated to match index.html)
+      const canvas = document.getElementById("particle-canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particlesArray = [];
+      const numberOfParticles = 80;
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1 + 0.5;
+          this.speedX = Math.random() * 0.3 - 0.15;
+          this.speedY = Math.random() * 0.3 - 0.15;
+          this.color = ["#ffffff", "#33ddff"][Math.floor(Math.random() * 2)];
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.05;
+          if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+          if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+        }
+        draw() {
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 5;
+          ctx.shadowColor = this.color;
+        }
+      }
+      function init() {
+        particlesArray.length = 0;
+        for (let i = 0; i < numberOfParticles; i++) {
           particlesArray.push(new Particle());
         }
       }
-      requestAnimationFrame(animate);
-    }
-    init();
-    animate();
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+            particlesArray.splice(i, 1);
+            i--;
+            particlesArray.push(new Particle());
+          }
+        }
+        requestAnimationFrame(animate);
+      }
       init();
-    });
+      animate();
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      });
 
-    // Enhance home button touch interaction
-    document.querySelector('.home-btn').addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      console.log('Home button touched');
-      window.location.href = this.href;
-    });
+      // Enhance home button touch interaction
+      document
+        .querySelector(".home-btn")
+        .addEventListener("touchstart", function (e) {
+          e.preventDefault();
+          console.log("Home button touched");
+          window.location.href = this.href;
+        });
 
-    // Load section links
-    async function loadSection(file, gridId) {
-      try {
-        const response = await fetch(file);
-        if (!response.ok) throw new Error(`Failed to load ${file}`);
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const [title, url] = line.split('|').map(s => s.trim());
-          return { title, url };
-        }).filter(link => link.title && link.url);
-        
-        console.log(`Loaded ${file}:`, links);
-        
-        const grid = document.getElementById(gridId);
-        if (grid) {
-          grid.innerHTML = links.slice(0, 5).map(link => `
+      // Load section links
+      async function loadSection(file, gridId) {
+        try {
+          const response = await fetch(file);
+          if (!response.ok) throw new Error(`Failed to load ${file}`);
+          const text = await response.text();
+          const lines = text.split("\n").filter((line) => line.trim());
+          const links = lines
+            .map((line) => {
+              const [title, url] = line.split("|").map((s) => s.trim());
+              return { title, url };
+            })
+            .filter((link) => link.title && link.url);
+
+          console.log(`Loaded ${file}:`, links);
+
+          const grid = document.getElementById(gridId);
+          if (grid) {
+            grid.innerHTML = links
+              .slice(0, 5)
+              .map(
+                (link) => `
             <li class="headline">
               <a href="${link.url}" target="_blank">${link.title}</a>
             </li>
-          `).join('');
+          `,
+              )
+              .join("");
+          }
+        } catch (error) {
+          console.error(`Error processing ${file}:`, error);
         }
-      } catch (error) {
-        console.error(`Error processing ${file}:`, error);
       }
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      loadSection('global-news.txt', 'global-news-links');
-      loadSection('us-news.txt', 'us-news-links');
-      loadSection('economy-mkts-news.txt', 'economy-news-links');
-      loadSection('sports-news.txt', 'sports-news-links');
-      loadSection('popculture-news.txt', 'popculture-news-links');
-    });
-  </script>
-</body>
+      document.addEventListener("DOMContentLoaded", () => {
+        loadSection("global-news.txt", "global-news-links");
+        loadSection("us-news.txt", "us-news-links");
+        loadSection("economy-mkts-news.txt", "economy-news-links");
+        loadSection("sports-news.txt", "sports-news-links");
+        loadSection("popculture-news.txt", "popculture-news-links");
+      });
+    </script>
+  </body>
 </html>

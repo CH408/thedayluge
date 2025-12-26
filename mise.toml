@@ -1,0 +1,3 @@
+[tools]
+"npm:decap-server" = "latest"
+"npm:netlify-cli" = "latest"
