@@ -1,312 +1,576 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Arts & Literature - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --blue: #87ceeb;
-      --blue-dark: #4682b4;
-      --blue-light: #add8e6;
-      --ink: #111;
-      --maxw: 1200px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--ink);
-      line-height: 1.3;
-      background: #0a1428;
-      padding: 10px;
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(135,206,235,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; }
-    }
-    #particle-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .wrap { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 5; padding-top: 20px; }
-    .block-title {
-      font-size: 18px;
-      text-transform: uppercase;
-      font-weight: 900;
-      text-align: left;
-      margin-bottom: 10px;
-    }
-    .arts-literature-title {
-      color: var(--blue);
-      animation: block-title-pulse-blue 8s ease-in-out infinite;
-    }
-    @keyframes block-title-pulse-blue {
-      0% { text-shadow: 0 0 15px var(--blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      12.5% { text-shadow: 0 0 16px var(--blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      25% { text-shadow: 0 0 17px var(--blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { text-shadow: 0 0 20px var(--blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      75% { text-shadow: 0 0 17px var(--blue), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { text-shadow: 0 0 15px var(--blue), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
-    .headlines { list-style: none; max-width: 800px; }
-    .headline {
-      font-size: 16px;
-      margin-bottom: 5px;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.5s ease forwards;
-      color: var(--blue);
-    }
-    .headlines .headline:nth-child(1) { animation-delay: 0.05s; }
-    .headlines .headline:nth-child(2) { animation-delay: 0.1s; }
-    .headlines .headline:nth-child(3) { animation-delay: 0.15s; }
-    .headlines .headline:nth-child(4) { animation-delay: 0.2s; }
-    .headlines .headline:nth-child(5) { animation-delay: 0.25s; }
-    .headlines .headline:nth-child(6) { animation-delay: 0.3s; }
-    .headlines .headline:nth-child(7) { animation-delay: 0.35s; }
-    .headlines .headline:nth-child(8) { animation-delay: 0.4s; }
-    .headlines .headline:nth-child(9) { animation-delay: 0.45s; }
-    .headlines .headline:nth-child(10) { animation-delay: 0.5s; }
-    .headlines .headline:nth-child(11) { animation-delay: 0.55s; }
-    .headlines .headline:nth-child(12) { animation-delay: 0.6s; }
-    .headlines .headline:nth-child(13) { animation-delay: 0.65s; }
-    .headlines .headline:nth-child(14) { animation-delay: 0.7s; }
-    .headlines .headline:nth-child(15) { animation-delay: 0.75s; }
-    .headlines .headline:nth-child(16) { animation-delay: 0.8s; }
-    .headlines .headline:nth-child(17) { animation-delay: 0.85s; }
-    .headlines .headline:nth-child(18) { animation-delay: 0.9s; }
-    .headlines .headline:nth-child(19) { animation-delay: 0.95s; }
-    .headlines .headline:nth-child(20) { animation-delay: 1.0s; }
-    .headlines .headline:nth-child(21) { animation-delay: 1.05s; }
-    .headlines .headline:nth-child(22) { animation-delay: 1.1s; }
-    .headlines .headline:nth-child(23) { animation-delay: 1.15s; }
-    .headlines .headline:nth-child(24) { animation-delay: 1.2s; }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .headline a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-    }
-    .arts-literature-links .headline a:hover {
-      color: var(--blue-light);
-      text-shadow: 0 0 10px var(--blue-light);
-    }
-    .go-deeper, .random-button, .home-btn {
-      display: inline-block;
-      background: transparent;
-      color: var(--blue);
-      padding: 8px 16px;
-      border: 1px solid var(--blue);
-      border-radius: 20px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--blue);
-      cursor: pointer;
-    }
-    .go-deeper:hover, .random-button:hover, .home-btn:hover {
-      background: rgba(255,255,255,0.1);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(135,206,235,0.3);
-    }
-    .button-container {
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    @media (max-width: 600px) {
-      .block-title { font-size: 16px; }
-      .headline { font-size: 14px; }
-      .go-deeper, .random-button, .home-btn { 
-        font-family: 'Special Elite', 'Courier New', Courier, monospace;
-        font-size: 10px; 
-        padding: 6px 12px; 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arts & Literature - THE DAYLUGE</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM9B5CP8GS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZM9B5CP8GS');
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-    }
-  </style>
-</head>
-<body>
-  <canvas id="particle-canvas"></canvas>
-  <div class="wrap">
-    <div class="arts-literature">
-      <div class="block-title arts-literature-title">Arts & Literature</div>
-      <ul class="headlines arts-literature-links" id="arts-literature-links" style="display: none;"></ul>
-    </div>
-    <div class="button-container" style="display: none;">
-      <button class="random-button" onclick="goToRandomArtsLiterature()">⚛️ SURPRISE ME!</button>
-      <a href="/arts-literature-archive.html" class="go-deeper">Go Deeper</a>
-      <a href="/" class="home-btn">← Home</a>
-    </div>
-  </div>
-  <script>
-    // Particle effect
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const particlesArray = [];
-    const numberOfParticles = 50;
-    
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1.5 - 0.75;
-        this.speedY = Math.random() * 1.5 - 0.75;
-        this.color = ['#87ceeb', '#4682b4', '#add8e6', '#5f9ea0', '#b0c4de', '#6a5acd'][Math.floor(Math.random() * 6)];
-        this.hasTail = Math.random() < 0.25;
+      body {
+        font-family: "Special Elite", monospace;
+        background: #000000;
+        color: #ccffcc;
+        padding: 40px 30px;
+        position: relative;
+        overflow-x: hidden;
       }
-      
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      .row_circles {
+        position: relative;
+        display: flex;
+        gap: 20px;
       }
-      
-      draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = this.color;
-        
-        if (this.hasTail) {
-          const gradient = ctx.createLinearGradient(
-            this.x, this.y,
-            this.x - this.speedX * 10, this.y - this.speedY * 10
-          );
-          gradient.addColorStop(0, this.color + '33');
-          gradient.addColorStop(1, 'transparent');
-          ctx.beginPath();
-          ctx.moveTo(this.x, this.y);
-          ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = this.size;
-          ctx.stroke();
+
+      .categories {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+      .politics_container {
+        height: calc(100vh - 80px);
+      }
+      #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+      }
+      .back-nav {
+        margin-bottom: 30px;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #ccffcc;
+        text-decoration: none;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+        padding: 8px 12px;
+        border: 1px solid rgba(204, 255, 204, 0.6);
+        background: rgba(0, 255, 255, 0.02);
+        position: relative;
+        z-index: 99;
+      }
+      .back-link:hover {
+        color: #ccffcc;
+        border-color: rgba(204, 255, 204, 0.4);
+        background: rgba(204, 255, 204, 0.05);
+        transform: translateX(-5px);
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(204, 255, 204, 0.4);
+      }
+      .header h1 {
+        font-family: "Special Elite", monospace;
+        font-size: clamp(32px, 5vw, 48px);
+        color: #ccffcc;
+        margin-bottom: 20px;
+        font-weight: 400;
+        letter-spacing: 4px;
+        text-shadow:
+          0 0 30px rgba(204, 255, 204, 0.5),
+          0 0 15px rgba(204, 255, 204, 0.8);
+      }
+      .category-circle {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: rgba(204, 255, 204, 0.08);
+        border: 1px solid rgba(204, 255, 204, 0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+      }
+      .category-circle:hover {
+        transform: scale(1.1);
+        background: rgba(204, 255, 204, 0.12);
+        border-color: rgba(204, 255, 204, 0.5);
+        box-shadow: 0 0 25px rgba(204, 255, 204, 0.3);
+      }
+      .category-icon {
+        font-size: 30px;
+        margin-bottom: 6px;
+      }
+      .category-label {
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #ccffcc;
+        text-align: center;
+        line-height: 1.2;
+      }
+      .latest-section {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+      }
+      .section-title {
+        font-size: 24px;
+        color: #ccffcc;
+        margin-bottom: 35px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(204, 255, 204, 0.15);
+      }
+      .news-item {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(204, 255, 204, 0.08);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .news-item:hover {
+        padding-left: 30px;
+        border-left: 2px solid rgba(204, 255, 204, 0.6);
+        background: rgba(0, 255, 255, 0.02);
+      }
+      .news-item:last-child {
+        border-bottom: none;
+      }
+      .news-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+        color: #ccffcc;
+      }
+
+      .news-title {
+        font-size: 17px;
+        line-height: 1.6;
+        color: #ccffcc;
+        font-weight: 300;
+        flex: 1;
+      }
+      .latest-section .news-item:nth-child(5n + 2) .news-title {
+        color: #cc88ff;
+      }
+      .latest-section .news-item:nth-child(5n + 3) .news-title {
+        color: #ff3333;
+      }
+      .latest-section .news-item:nth-child(5n + 4) .news-title {
+        color: #66ff99;
+      }
+      .latest-section .news-item:nth-child(5n + 5) .news-title {
+        color: #66b4f2;
+      }
+      .latest-section .news-item:nth-child(5n + 6) .news-title {
+        color: #ff99cc;
+      }
+
+      .category-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: rgba(204, 255, 204, 0.08);
+        border: 1px solid #ccffcc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        padding-top: 7px;
+      }
+
+      .category-circle:hover {
+        transform: scale(1.1);
+        background: rgba(204, 255, 204, 0.12);
+        border-color: rgba(204, 255, 204, 0.5);
+        box-shadow: 0 0 25px rgba(204, 255, 204, 0.5);
+      }
+
+      .category-icon {
+        font-size: 30px;
+        margin-bottom: 6px;
+      }
+
+      .category-label {
+        color: #ccffcc;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+        line-height: 1.2;
+        font-size: clamp(10px, 2vw, 15px);
+        text-transform: uppercase;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .category-circle {
+        box-shadow:
+          0 0 10px rgba(204, 255, 204, 0.6),
+          inset 0 0 10px rgba(204, 255, 204, 0.5);
+        animation: circle-1 3s ease-in-out infinite;
+      }
+
+      @keyframes circle-1 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgba(204, 255, 204, 0.6),
+            inset 0 0 10px rgba(204, 255, 204, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 20px rgba(204, 255, 204, 0.9),
+            inset 0 0 10px rgba(204, 255, 204, 0.7);
         }
       }
-    }
-    
-    function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
+
+      @keyframes rotateBorder {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
       }
-    }
-    
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const particle of particlesArray) {
-        particle.update();
-        particle.draw();
+
+      .category-circle::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          currentColor,
+          transparent 100deg
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        animation: rotateBorder 3s linear infinite;
+        z-index: -1;
       }
-      requestAnimationFrame(animate);
-    }
-    
-    init();
-    animate();
-    
-    window.addEventListener('resize', () => {
+
+      .category-circle:hover:before {
+        opacity: 1;
+        opacity: 0.6;
+      }
+
+      .category-circle:hover {
+        box-shadow:
+          0 0 60px currentColor,
+          0 0 20px currentColor;
+      }
+
+      @media (max-width: 1024px) {
+        .latest-section {
+          padding: 40px 35px;
+        }
+      }
+      @media (max-width: 768px) {
+        body {
+          padding: 35px 25px;
+        }
+        .categories {
+          gap: 14px;
+        }
+        .category-icon {
+          font-size: 26px;
+        }
+        .latest-section {
+          padding: 35px 28px;
+        }
+        .section-title {
+          font-size: 20px;
+          margin-bottom: 30px;
+        }
+        .news-title {
+          font-size: 16px;
+        }
+        .news-item {
+          gap: 16px;
+          padding: 18px 0;
+        }
+        .news-icon {
+          font-size: 22px;
+        }
+      }
+      @media (max-width: 480px) {
+        body {
+          padding: 25px 18px;
+        }
+        .categories {
+          gap: 12px;
+        }
+        .category-circle {
+          width: 100px;
+          height: 100px;
+        }
+        .category-icon {
+          font-size: 24px;
+        }
+        .category-label {
+          font-size: 12px;
+          letter-spacing: 0.5px;
+        }
+        .latest-section {
+          padding: 28px 20px;
+        }
+        .section-title {
+          font-size: 18px;
+          letter-spacing: 2px;
+        }
+        .news-title {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+        .news-item {
+          gap: 14px;
+          padding: 16px 0;
+        }
+        .news-icon {
+          font-size: 20px;
+        }
+        .header h1 {
+          font-size: 28px;
+          letter-spacing: 2px;
+        }
+        .row_circles {
+          gap: 10px !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="particles"></canvas>
+    <div class="container politics_container">
+      <div class="back-nav">
+        <a href="../index.html" class="back-link">← Back to Home</a>
+      </div>
+      <div class="header">
+        <h1>ARTS & LITERATURE</h1>
+      </div>
+
+      <!-- CATEGORY CIRCLES -->
+      <div class="categories">
+        <div class="category-circle">
+          <!-- <div class="category-icon">📰</div> -->
+          <a href="./arts-articles.html" class="category-label"
+            >Articles & Longform</a
+          >
+        </div>
+
+        <div class="category-circle">
+          <!-- <div class="category-icon">🎙️</div> -->
+          <a href="./arts-podcasts.html" class="category-label">Podcasts</a>
+        </div>
+
+        <div class="category-circle">
+          <!-- <div class="category-icon">🎬</div> -->
+          <a href="./arts-videos.html" class="category-label"
+            >X Feeds & Clips</a
+          >
+        </div>
+      </div>
+    </div>
+    <script>
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      init();
-    });
-
-    // Load arts-literature links
-    async function loadArtsLiteratureLinks() {
-      try {
-        const response = await fetch('arts-literature-links.txt');
-        if (!response.ok) {
-          console.error('Failed to load arts-literature-links.txt:', response.status);
-          return;
+      const stars = [];
+      const comets = [];
+      const planets = [];
+      const starCount = 150;
+      class Star {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1.5 + 0.5;
+          this.brightness = Math.random() * 0.5 + 0.5;
+          this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+          this.twinklePhase = Math.random() * Math.PI * 2;
+          this.vx = (Math.random() - 0.5) * 0.2;
+          this.vy = (Math.random() - 0.5) * 0.2;
         }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return { title: parts[0].trim(), url: parts[1].trim() };
-          }
-          return null;
-        }).filter(link => link !== null);
-        const displayLinks = links.slice(0, 24);
-        const grid = document.getElementById('arts-literature-links');
-        if (grid && displayLinks.length > 0) {
-          grid.innerHTML = displayLinks.map(link => `
-            <li class="headline">
-              <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a>
-            </li>
-          `).join('');
-          grid.style.display = '';
+        update() {
+          this.twinklePhase += this.twinkleSpeed;
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0) this.x = canvas.width;
+          if (this.x > canvas.width) this.x = 0;
+          if (this.y < 0) this.y = canvas.height;
+          if (this.y > canvas.height) this.y = 0;
         }
-        const buttonContainer = document.querySelector('.button-container');
-        if (buttonContainer) {
-          buttonContainer.style.display = '';
-        }
-        console.log(`Showing ${displayLinks.length} arts & literature links (${links.length - displayLinks.length} moved to archive)`);
-      } catch (error) {
-        console.error('Error loading arts & literature links:', error);
-        const buttonContainer = document.querySelector('.button-container');
-        if (buttonContainer) {
-          buttonContainer.style.display = '';
+        draw() {
+          const twinkle = Math.sin(this.twinklePhase) * 0.3 + 0.7;
+          const opacity = this.brightness * twinkle;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = "#fff";
+          ctx.fill();
         }
       }
-    }
-
-    // Random arts & literature article
-    async function goToRandomArtsLiterature() {
-      try {
-        const response = await fetch('arts-literature-links.txt');
-        if (!response.ok) {
-          console.log('Could not load arts-literature-links.txt for random selection');
-          return;
+      class Comet {
+        constructor() {
+          this.reset();
         }
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        const links = lines.map(line => {
-          const parts = line.split('|');
-          if (parts.length >= 2) {
-            return parts[1].trim();
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = -50;
+          this.vx = (Math.random() - 0.5) * 3;
+          this.vy = Math.random() * 4 + 3;
+          this.size = Math.random() * 2 + 1;
+          this.tail = [];
+          this.maxTail = 15;
+        }
+        update() {
+          this.tail.unshift({
+            x: this.x,
+            y: this.y,
+          });
+          if (this.tail.length > this.maxTail) this.tail.pop();
+          this.x += this.vx;
+          this.y += this.vy;
+          if (
+            this.y > canvas.height + 50 ||
+            this.x < -50 ||
+            this.x > canvas.width + 50
+          )
+            this.reset();
+        }
+        draw() {
+          for (let i = 0; i < this.tail.length; i++) {
+            const opacity = (1 - i / this.tail.length) * 0.5;
+            const size = this.size * (1 - i / this.tail.length);
+            ctx.beginPath();
+            ctx.arc(this.tail[i].x, this.tail[i].y, size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.fill();
           }
-          return null;
-        }).filter(link => link !== null);
-        const currentLinks = links.slice(0, 24);
-        if (currentLinks.length > 0) {
-          const randomLink = currentLinks[Math.floor(Math.random() * currentLinks.length)];
-          window.open(randomLink, '_blank');
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = "#fff";
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = "#fff";
+          ctx.fill();
         }
-      } catch (error) {
-        console.error('Error loading links for random selection:', error);
       }
-    }
+      class Planet {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 30 + 20;
+          this.vx = (Math.random() - 0.5) * 0.15;
+          this.vy = (Math.random() - 0.5) * 0.15;
+          this.hue = Math.random() * 60 + 200;
+          this.opacity = Math.random() * 0.15 + 0.1;
+          this.pulsePhase = Math.random() * Math.PI * 2;
+          this.pulseSpeed = Math.random() * 0.01 + 0.005;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.pulsePhase += this.pulseSpeed;
+          if (this.x < -this.size) this.x = canvas.width + this.size;
+          if (this.x > canvas.width + this.size) this.x = -this.size;
+          if (this.y < -this.size) this.y = canvas.height + this.size;
+          if (this.y > canvas.height + this.size) this.y = -this.size;
+        }
+        draw() {
+          const pulse = Math.sin(this.pulsePhase) * 0.2 + 1;
+          const currentSize = this.size * pulse;
+          const gradient = ctx.createRadialGradient(
+            this.x - currentSize * 0.3,
+            this.y - currentSize * 0.3,
+            0,
+            this.x,
+            this.y,
+            currentSize,
+          );
+          gradient.addColorStop(
+            0,
+            `hsla(${this.hue}, 70%, 60%, ${this.opacity})`,
+          );
+          gradient.addColorStop(
+            0.7,
+            `hsla(${this.hue}, 60%, 40%, ${this.opacity * 0.6})`,
+          );
+          gradient.addColorStop(1, `hsla(${this.hue}, 50%, 20%, 0)`);
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
+      }
+      for (let i = 0; i < starCount; i++) stars.push(new Star());
+      comets.push(new Comet());
+      for (let i = 0; i < 3; i++) planets.push(new Planet());
 
-    document.addEventListener('DOMContentLoaded', loadArtsLiteratureLinks);
-  </script>
-</body>
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        planets.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        stars.forEach((s) => {
+          s.update();
+          s.draw();
+        });
+        comets.forEach((c) => {
+          c.update();
+          c.draw();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
 </html>

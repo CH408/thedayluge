@@ -1,312 +1,369 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>US News Archive - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --light-red-glow: #ff3333;
-      --ink: #111;
-      --maxw: 1200px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--ink);
-      line-height: 1.3;
-      background: #000000;
-      padding: 10px;
-      position: relative;
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,255,127,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes energy-pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-    #particle-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .wrap { 
-      max-width: var(--maxw); 
-      margin: 0 auto; 
-      position: relative; 
-      z-index: 5; 
-      padding-top: 20px;
-      padding-bottom: 100px;
-    }
-    .page-title {
-      font-size: 28px;
-      text-transform: uppercase;
-      font-weight: 900;
-      text-align: center;
-      color: var(--light-red-glow);
-      text-shadow: 0 0 20px var(--light-red-glow), 2px 2px 4px rgba(0,0,0,0.8);
-      margin-bottom: 30px;
-    }
-    .headlines { 
-      list-style: none; 
-      max-width: 900px; 
-      margin: 0 auto 40px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    .headline {
-      font-size: 16px;
-      color: var(--light-red-glow);
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.3s ease-out forwards;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .headline a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      display: block;
-    }
-    .headline a:hover {
-      color: var(--light-red-glow);
-      text-shadow: 0 0 10px var(--light-red-glow);
-      transform: translateX(5px);
-    }
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin: 40px 0;
-    }
-    .page-btn {
-      background: transparent;
-      color: var(--light-red-glow);
-      padding: 10px 18px;
-      border: 1px solid var(--light-red-glow);
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 5px var(--light-red-glow);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-    }
-    .page-btn:hover:not(.disabled) {
-      background: rgba(255,51,51,0.1);
-      box-shadow: 0 0 15px rgba(255,51,51,0.3);
-      transform: scale(1.05);
-    }
-    .page-btn.active {
-      background: var(--light-red-glow);
-      color: #000;
-      text-shadow: none;
-    }
-    .page-btn.disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-    .home-btn, .back-btn {
-      position: fixed;
-      bottom: 20px;
-      background: transparent;
-      color: #ffffff;
-      padding: 8px 16px;
-      border: 1px solid #ffffff;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-shadow: 0 0 5px #ffffff;
-      transition: all 0.3s ease;
-      z-index: 10;
-      cursor: pointer;
-    }
-    .home-btn { right: 20px; }
-    .back-btn { left: 20px; }
-    .home-btn:hover, .back-btn:hover {
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-      transform: scale(1.05);
-    }
-    @media (max-width: 600px) {
-      .page-title { font-size: 20px; }
-      .headline { font-size: 14px; }
-      .page-btn { font-size: 12px; padding: 8px 14px; }
-    }
-  </style>
-</head>
-<body>
-  <a href="/news.html" class="back-btn">← Back to News</a>
-  <a href="/" class="home-btn">← Home</a>
-  <canvas id="particle-canvas"></canvas>
-  <div class="wrap">
-    <h1 class="page-title">US News Archive</h1>
-    <ul class="headlines" id="headlines"></ul>
-    <div class="pagination" id="pagination"></div>
-  </div>
-  <script>
-    // Particle effect
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const particlesArray = [];
-    const numberOfParticles = 80;
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1 + 0.5;
-        this.speedX = Math.random() * 0.3 - 0.15;
-        this.speedY = Math.random() * 0.3 - 0.15;
-        this.color = ['#ffffff', '#33ddff'][Math.floor(Math.random() * 2)];
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>US News Archive - THE DAYLUGE</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM9B5CP8GS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZM9B5CP8GS');
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap");
+      :root {
+        --light-red-glow: #ff3333;
+        --ink: #111;
+        --maxw: 1200px;
       }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.size > 0.2) this.size -= 0.05;
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-      draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 5;
-        ctx.shadowColor = this.color;
+      html,
+      body {
+        height: 100%;
       }
-    }
-    function init() {
-      particlesArray.length = 0;
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
+      body {
+        font-family: "Special Elite", "Courier New", Courier, monospace;
+        color: var(--ink);
+        line-height: 1.3;
+        background: #000000;
+        padding: 10px;
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
-    }
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-        if (particlesArray[i].size <= 0.2) {
-          particlesArray.splice(i, 1);
-          i--;
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(0, 255, 127, 0.1) 0%,
+          transparent 70%
+        );
+        animation: energy-pulse 6s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes energy-pulse {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      #particle-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        position: relative;
+        z-index: 5;
+        padding-top: 20px;
+        padding-bottom: 100px;
+      }
+      .page-title {
+        font-size: 28px;
+        text-transform: uppercase;
+        font-weight: 900;
+        text-align: center;
+        color: var(--light-red-glow);
+        text-shadow:
+          0 0 20px var(--light-red-glow),
+          2px 2px 4px rgba(0, 0, 0, 0.8);
+        margin-bottom: 30px;
+      }
+      .headlines {
+        list-style: none;
+        max-width: 900px;
+        margin: 0 auto 40px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .headline {
+        font-size: 16px;
+        color: var(--light-red-glow);
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeIn 0.3s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .headline a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: block;
+      }
+      .headline a:hover {
+        color: var(--light-red-glow);
+        text-shadow: 0 0 10px var(--light-red-glow);
+        transform: translateX(5px);
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 40px 0;
+      }
+      .page-btn {
+        background: transparent;
+        color: var(--light-red-glow);
+        padding: 10px 18px;
+        border: 1px solid var(--light-red-glow);
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-shadow: 0 0 5px var(--light-red-glow);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-family: "Special Elite", "Courier New", Courier, monospace;
+      }
+      .page-btn:hover:not(.disabled) {
+        background: rgba(255, 51, 51, 0.1);
+        box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+        transform: scale(1.05);
+      }
+      .page-btn.active {
+        background: var(--light-red-glow);
+        color: #000;
+        text-shadow: none;
+      }
+      .page-btn.disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      .home-btn,
+      .back-btn {
+        position: fixed;
+        bottom: 20px;
+        background: transparent;
+        color: #ffffff;
+        padding: 8px 16px;
+        border: 1px solid #ffffff;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-shadow: 0 0 5px #ffffff;
+        transition: all 0.3s ease;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .home-btn {
+        right: 20px;
+      }
+      .back-btn {
+        left: 20px;
+      }
+      .home-btn:hover,
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+      }
+      @media (max-width: 600px) {
+        .page-title {
+          font-size: 20px;
+        }
+        .headline {
+          font-size: 14px;
+        }
+        .page-btn {
+          font-size: 12px;
+          padding: 8px 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/news.html" class="back-btn">← Back to News</a>
+    <a href="/" class="home-btn">← Home</a>
+    <canvas id="particle-canvas"></canvas>
+    <div class="wrap">
+      <h1 class="page-title">US News Archive</h1>
+      <ul class="headlines" id="headlines"></ul>
+      <div class="pagination" id="pagination"></div>
+    </div>
+    <script>
+      // Particle effect
+      const canvas = document.getElementById("particle-canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particlesArray = [];
+      const numberOfParticles = 80;
+      class Particle {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 1 + 0.5;
+          this.speedX = Math.random() * 0.3 - 0.15;
+          this.speedY = Math.random() * 0.3 - 0.15;
+          this.color = ["#ffffff", "#33ddff"][Math.floor(Math.random() * 2)];
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.size > 0.2) this.size -= 0.05;
+          if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+          if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+        }
+        draw() {
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 5;
+          ctx.shadowColor = this.color;
+        }
+      }
+      function init() {
+        particlesArray.length = 0;
+        for (let i = 0; i < numberOfParticles; i++) {
           particlesArray.push(new Particle());
         }
       }
-      requestAnimationFrame(animate);
-    }
-    init();
-    animate();
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-    });
-
-    // Pagination logic
-    let allLinks = [];
-    const linksPerPage = 24;
-    let currentPage = 1;
-
-    async function loadLinks() {
-      try {
-        const response = await fetch('us-news.txt');
-        if (!response.ok) throw new Error('Failed to load us-news.txt');
-        const text = await response.text();
-        const lines = text.split('\n').filter(line => line.trim());
-        allLinks = lines.map(line => {
-          const [title, url] = line.split('|').map(s => s.trim());
-          return { title, url };
-        }).filter(link => link.title && link.url);
-
-        // Skip first 5 links (they're on news.html)
-        allLinks = allLinks.slice(5);
-        
-        displayPage(currentPage);
-      } catch (error) {
-        console.error('Error loading links:', error);
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+          particlesArray[i].draw();
+          if (particlesArray[i].size <= 0.2) {
+            particlesArray.splice(i, 1);
+            i--;
+            particlesArray.push(new Particle());
+          }
+        }
+        requestAnimationFrame(animate);
       }
-    }
+      init();
+      animate();
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+      });
 
-    function displayPage(page) {
-      currentPage = page;
-      const startIndex = (page - 1) * linksPerPage;
-      const endIndex = startIndex + linksPerPage;
-      const pageLinks = allLinks.slice(startIndex, endIndex);
+      // Pagination logic
+      let allLinks = [];
+      const linksPerPage = 24;
+      let currentPage = 1;
 
-      const headlinesContainer = document.getElementById('headlines');
-      headlinesContainer.innerHTML = pageLinks.map((link, index) => `
+      async function loadLinks() {
+        try {
+          const response = await fetch("us-news.txt");
+          if (!response.ok) throw new Error("Failed to load us-news.txt");
+          const text = await response.text();
+          const lines = text.split("\n").filter((line) => line.trim());
+          allLinks = lines
+            .map((line) => {
+              const [title, url] = line.split("|").map((s) => s.trim());
+              return { title, url };
+            })
+            .filter((link) => link.title && link.url);
+
+          // Skip first 5 links (they're on news.html)
+          allLinks = allLinks.slice(5);
+
+          displayPage(currentPage);
+        } catch (error) {
+          console.error("Error loading links:", error);
+        }
+      }
+
+      function displayPage(page) {
+        currentPage = page;
+        const startIndex = (page - 1) * linksPerPage;
+        const endIndex = startIndex + linksPerPage;
+        const pageLinks = allLinks.slice(startIndex, endIndex);
+
+        const headlinesContainer = document.getElementById("headlines");
+        headlinesContainer.innerHTML = pageLinks
+          .map(
+            (link, index) => `
         <li class="headline" style="animation-delay: ${index * 0.05}s">
           <a href="${link.url}" target="_blank">${link.title}</a>
         </li>
-      `).join('');
+      `,
+          )
+          .join("");
 
-      renderPagination();
-    }
-
-    function renderPagination() {
-      const totalPages = Math.ceil(allLinks.length / linksPerPage);
-      const paginationContainer = document.getElementById('pagination');
-      
-      let paginationHTML = '';
-      
-      // Previous button
-      paginationHTML += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" 
-        onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>`;
-      
-      // Page numbers
-      for (let i = 1; i <= totalPages; i++) {
-        if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
-          paginationHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" 
-            onclick="goToPage(${i})">${i}</button>`;
-        } else if (i === currentPage - 3 || i === currentPage + 3) {
-          paginationHTML += `<span style="color: var(--light-red-glow);">...</span>`;
-        }
+        renderPagination();
       }
-      
-      // Next button
-      paginationHTML += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" 
-        onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>`;
-      
-      paginationContainer.innerHTML = paginationHTML;
-    }
 
-    function goToPage(page) {
-      const totalPages = Math.ceil(allLinks.length / linksPerPage);
-      if (page < 1 || page > totalPages) return;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      displayPage(page);
-    }
+      function renderPagination() {
+        const totalPages = Math.ceil(allLinks.length / linksPerPage);
+        const paginationContainer = document.getElementById("pagination");
 
-    document.addEventListener('DOMContentLoaded', loadLinks);
-  </script>
-</body>
+        let paginationHTML = "";
+
+        // Previous button
+        paginationHTML += `<button class="page-btn ${currentPage === 1 ? "disabled" : ""}" 
+        onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? "disabled" : ""}>← Prev</button>`;
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+          if (
+            i === 1 ||
+            i === totalPages ||
+            (i >= currentPage - 2 && i <= currentPage + 2)
+          ) {
+            paginationHTML += `<button class="page-btn ${i === currentPage ? "active" : ""}" 
+            onclick="goToPage(${i})">${i}</button>`;
+          } else if (i === currentPage - 3 || i === currentPage + 3) {
+            paginationHTML += `<span style="color: var(--light-red-glow);">...</span>`;
+          }
+        }
+
+        // Next button
+        paginationHTML += `<button class="page-btn ${currentPage === totalPages ? "disabled" : ""}" 
+        onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? "disabled" : ""}>Next →</button>`;
+
+        paginationContainer.innerHTML = paginationHTML;
+      }
+
+      function goToPage(page) {
+        const totalPages = Math.ceil(allLinks.length / linksPerPage);
+        if (page < 1 || page > totalPages) return;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        displayPage(page);
+      }
+
+      document.addEventListener("DOMContentLoaded", loadLinks);
+    </script>
+  </body>
 </html>

@@ -1,134 +1,617 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - HISTORY: Daily curated history links — articles, clips, podcasts, books, memes, TV & movies. Updated every day.">
-  <meta property="og:title" content="History - THE DAYLUGE">
-  <meta property="og:description" content="Daily curated history: longform articles, video clips, podcasts, books, memes, and more. Fresh every day.">
-  <meta property="og:image" content="https://thedayluge.com/og-history.jpg">
-  <meta property="og:url" content="https://thedayluge.com/history/history.html">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#000000">
-  <link rel="canonical" href="https://thedayluge.com/history/history.html">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <title>History - THE DAYLUGE</title>
-  <link rel="stylesheet" href="/assets/style.css">
-</head>
-<body>
-  <div class="header"><h1>THE DAYLUGE - HISTORY</h1></div>
-  <canvas id="particle-canvas"></canvas>
-  
-  <div class="layout-wrapper">
-    <div class="layout-container">
-      <div class="central-content">
-        <div class="central-title">Latest History</div>
-        <div class="content-links">
-          <div class="loading-indicator">Loading...</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History - THE DAYLUGE</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM9B5CP8GS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZM9B5CP8GS');
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Special Elite", monospace;
+        background: #000000;
+        color: #fff;
+        padding: 40px 30px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .row_circles {
+        position: relative;
+        display: flex;
+        gap: 20px;
+      }
+
+      .categories {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+
+      .politics_container {
+        height: calc(100vh - 80px);
+      }
+
+      /* ELEGANT PARTICLE CANVAS */
+      #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @keyframes rotateBorder {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .category-circle::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          currentColor,
+          transparent 100deg
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        animation: rotateBorder 3s linear infinite;
+        z-index: -1;
+      }
+
+      .category-circle:hover {
+        box-shadow:
+          0 0 60px currentColor,
+          0 0 20px currentColor;
+      }
+
+      .category-circle:hover::before {
+        opacity: 0.6;
+      }
+
+      .category-circle {
+        box-shadow:
+          0 0 10px rgba(255, 217, 0, 0.6),
+          inset 0 0 10px rgba(255, 217, 0, 0.5);
+        animation: circle-1 3s ease-in-out infinite;
+        z-index: 1;
+      }
+
+      @keyframes circle-1 {
+        0%,
+        100% {
+          box-shadow:
+            0 0 10px rgba(255, 217, 0, 0.6),
+            inset 0 0 10px rgba(255, 217, 0, 0.5);
+        }
+
+        50% {
+          box-shadow:
+            0 0 20px rgba(255, 217, 0, 0.9),
+            inset 0 0 10px rgba(255, 217, 0, 0.7);
+        }
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* BACK NAVIGATION */
+      .back-nav {
+        margin-bottom: 30px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #ffd700;
+        text-decoration: none;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 215, 0, 0.6);
+        background: rgba(255, 215, 0, 0.02);
+        z-index: 99;
+        position: relative;
+      }
+
+      .back-link:hover {
+        color: #ffd700;
+        border-color: rgba(255, 215, 0, 0.4);
+        background: rgba(255, 215, 0, 0.05);
+        transform: translateX(-5px);
+      }
+
+      .latest-section .news-item:nth-child(5n + 2) .news-title {
+        color: #cc88ff;
+      }
+
+      .latest-section .news-item:nth-child(5n + 3) .news-title {
+        color: #ff3333;
+      }
+
+      .latest-section .news-item:nth-child(5n + 4) .news-title {
+        color: #66ff99;
+      }
+
+      .latest-section .news-item:nth-child(5n + 5) .news-title {
+        color: #66b4f2;
+      }
+
+      .latest-section .news-item:nth-child(5n + 6) .news-title {
+        color: #ff99cc;
+      }
+
+      /* HEADER */
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      }
+
+      .header h1 {
+        font-family: "Special Elite", monospace;
+        font-size: clamp(32px, 5vw, 48px);
+        color: #ffd700;
+        margin-bottom: 20px;
+        font-weight: 400;
+        letter-spacing: 4px;
+        text-shadow:
+          0 0 30px rgba(255, 215, 0, 0.5),
+          0 0 15px rgba(255, 215, 0, 0.8);
+      }
+
+      .category-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: rgba(255, 215, 0, 0.08);
+        border: 1px solid #ffd700;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        padding-top: 7px;
+      }
+
+      .category-circle:hover {
+        transform: scale(1.1);
+        background: rgba(255, 215, 0, 0.12);
+        border-color: rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+      }
+
+      .category-icon {
+        font-size: 30px;
+        margin-bottom: 6px;
+      }
+
+      .category-label {
+        color: #ffd700;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+        line-height: 1.2;
+        font-size: clamp(10px, 2vw, 15px);
+        text-transform: uppercase;
+        font-weight: 900;
+        color: #ffd700;
+        text-decoration: none;
+      }
+
+      /* LATEST SECTION */
+      .latest-section {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 50px 45px;
+      }
+
+      .section-title {
+        font-size: 24px;
+        color: #ffd700;
+        margin-bottom: 35px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+      }
+
+      .news-item {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.08);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .news-item:hover {
+        padding-left: 30px;
+        border-left: 2px solid rgba(255, 215, 0, 0.6);
+        background: rgba(255, 215, 0, 0.02);
+      }
+
+      .news-item:last-child {
+        border-bottom: none;
+      }
+
+      .news-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+        color: #ffd700;
+      }
+
+      .news-title {
+        font-size: 17px;
+        line-height: 1.6;
+        color: #ffd700;
+        font-weight: 300;
+        flex: 1;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
+        .latest-section {
+          padding: 40px 35px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 35px 25px;
+        }
+
+        .categories {
+          gap: 14px;
+        }
+
+        .category-icon {
+          font-size: 26px;
+        }
+
+        .latest-section {
+          padding: 35px 28px;
+        }
+
+        .section-title {
+          font-size: 20px;
+          margin-bottom: 30px;
+        }
+
+        .news-title {
+          font-size: 16px;
+        }
+
+        .news-item {
+          gap: 16px;
+          padding: 18px 0;
+        }
+
+        .news-icon {
+          font-size: 22px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 25px 18px;
+        }
+
+        .categories {
+          gap: 12px;
+        }
+
+        .category-circle {
+          width: 100px;
+          height: 100px;
+        }
+
+        .category-icon {
+          font-size: 24px;
+        }
+
+        .category-label {
+          font-size: 12px;
+          letter-spacing: 0.5px;
+        }
+
+        .latest-section {
+          padding: 28px 20px;
+        }
+
+        .section-title {
+          font-size: 18px;
+          letter-spacing: 2px;
+        }
+
+        .news-title {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        .news-item {
+          gap: 14px;
+          padding: 16px 0;
+        }
+
+        .news-icon {
+          font-size: 20px;
+        }
+
+        .header h1 {
+          font-size: 28px;
+          letter-spacing: 2px;
+        }
+
+        .row_circles {
+          gap: 10px !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="particles"></canvas>
+
+    <div class="container politics_container">
+      <!-- BACK NAVIGATION -->
+      <div class="back-nav">
+        <a href="/" class="back-link"> ← Back to Home </a>
+      </div>
+
+      <!-- HEADER -->
+      <div class="header">
+        <h1>HISTORY</h1>
+      </div>
+
+      <!-- CATEGORY CIRCLES -->
+      <div class="categories">
+        <div class="row_circles">
+          <div class="category-circle">
+            <!-- <div class="category-icon">📰</div> -->
+            <a href="./hist-articles-longform.html" class="category-label"
+              >Articles & Longform</a
+            >
+          </div>
+
+          <div class="category-circle">
+            <!-- <div class="category-icon">🎙️</div> -->
+            <a href="./hist-podcasts.html" class="category-label">Podcasts</a>
+          </div>
+
+          <div class="category-circle">
+            <!-- <div class="category-icon">🎬</div> -->
+            <a href="./hist-clips.html" class="category-label"
+              >X Feeds & Clips</a
+            >
+          </div>
         </div>
       </div>
-      
-      <div class="perimeter-box top-left-box" role="button" tabindex="0" aria-label="Go to History Podcasts" onclick="window.location.href='./hist-podcasts.html'">Podcasts</div>
-      <div class="perimeter-box top-middle-box" role="button" tabindex="0" aria-label="Go to Articles & Longform" onclick="window.location.href='./hist-articles-longform.html'">Articles & Longform</div>
-      <div class="perimeter-box top-right-box" role="button" tabindex="0" aria-label="Go to Video Clips" onclick="window.location.href='./hist-clips.html'">Video Clips</div>
-      <div class="perimeter-box bottom-left-box" role="button" tabindex="0" aria-label="Go to Books" onclick="window.location.href='./hist-books.html'">Books</div>
-      <div class="perimeter-box bottom-middle-box" role="button" tabindex="0" aria-label="Go to Memes" onclick="window.location.href='./hist-memes.html'">Memes</div>
-      <div class="perimeter-box bottom-right-box" role="button" tabindex="0" aria-label="Go to TV & Movies" onclick="window.location.href='./hist-tv-movies.html'">TV & Movies</div>
     </div>
 
-    <a href="/" class="home-btn" rel="noopener">Back to Home</a>
-  </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
+    <script>
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
+
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      const particlesArray = [];
-      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
-      
-      class Particle {
+
+      const stars = [];
+      const comets = [];
+      const planets = [];
+      const starCount = 150;
+
+      class Star {
         constructor() {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.5 - 0.25;
-          this.speedY = Math.random() * 0.5 - 0.25;
+          this.size = Math.random() * 1.5 + 0.5;
+          this.brightness = Math.random() * 0.5 + 0.5;
+          this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+          this.twinklePhase = Math.random() * Math.PI * 2;
+          this.vx = (Math.random() - 0.5) * 0.2;
+          this.vy = (Math.random() - 0.5) * 0.2;
         }
+
         update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.1;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+          this.twinklePhase += this.twinkleSpeed;
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0) this.x = canvas.width;
+          if (this.x > canvas.width) this.x = 0;
+          if (this.y < 0) this.y = canvas.height;
+          if (this.y > canvas.height) this.y = 0;
         }
+
         draw() {
-          ctx.fillStyle = 'rgba(255,215,0,0.6)';
+          const twinkle = Math.sin(this.twinklePhase) * 0.3 + 0.7;
+          const opacity = this.brightness * twinkle;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = "#fff";
           ctx.fill();
         }
       }
-      
-      function init() { for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle()); }
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1); i--;
-            particlesArray.push(new Particle());
+
+      class Comet {
+        constructor() {
+          this.reset();
+        }
+
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = -50;
+          this.vx = (Math.random() - 0.5) * 3;
+          this.vy = Math.random() * 4 + 3;
+          this.size = Math.random() * 2 + 1;
+          this.tail = [];
+          this.maxTail = 15;
+        }
+
+        update() {
+          this.tail.unshift({ x: this.x, y: this.y });
+          if (this.tail.length > this.maxTail) this.tail.pop();
+          this.x += this.vx;
+          this.y += this.vy;
+          if (
+            this.y > canvas.height + 50 ||
+            this.x < -50 ||
+            this.x > canvas.width + 50
+          ) {
+            this.reset();
           }
         }
-        requestAnimationFrame(animate);
-      }
-      init(); animate();
-      window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
-      
-      async function loadContent() {
-        const container = document.querySelector('.content-links');
-        container.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        
-        try {
-          const response = await fetch('/history/history-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error('File not found or server error');
-          const text = await response.text();
-          const lines = text.trim().split('\n').filter(l => l.trim());
-          const entries = lines.map(line => {
-            const p = line.split('|');
-            if (p.length < 3) return null;
-            return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e);
-          
-          const nonMemeEntries = entries.filter(e => e.category !== 'memes');
-          const latest8 = nonMemeEntries.slice(0, 8);
-          
-          container.innerHTML = '';
-          latest8.forEach((e, i) => {
-            const el = document.createElement('div');
-            el.className = 'content-link';
-            el.style.animationDelay = `${i * 0.1}s`;
-            el.innerHTML = `
-              <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
-            `;
-            container.appendChild(el);
-          });
 
-        } catch (err) {
-          console.error('Load failed:', err);
-          container.innerHTML = `
-            <div class="error-state" role="alert">
-              <p>Failed to load content: ${err.message}</p>
-              <button class="retry-btn" onclick="loadContent()">Retry</button>
-            </div>
-          `;
+        draw() {
+          for (let i = 0; i < this.tail.length; i++) {
+            const opacity = (1 - i / this.tail.length) * 0.5;
+            const size = this.size * (1 - i / this.tail.length);
+            ctx.beginPath();
+            ctx.arc(this.tail[i].x, this.tail[i].y, size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.fill();
+          }
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = "#fff";
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = "#fff";
+          ctx.fill();
         }
       }
-      
-      loadContent();
-    });
-  </script>
-</body>
+
+      class Planet {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 30 + 20;
+          this.vx = (Math.random() - 0.5) * 0.15;
+          this.vy = (Math.random() - 0.5) * 0.15;
+          this.hue = Math.random() * 60 + 200;
+          this.opacity = Math.random() * 0.15 + 0.1;
+          this.pulsePhase = Math.random() * Math.PI * 2;
+          this.pulseSpeed = Math.random() * 0.01 + 0.005;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.pulsePhase += this.pulseSpeed;
+          if (this.x < -this.size) this.x = canvas.width + this.size;
+          if (this.x > canvas.width + this.size) this.x = -this.size;
+          if (this.y < -this.size) this.y = canvas.height + this.size;
+          if (this.y > canvas.height + this.size) this.y = -this.size;
+        }
+
+        draw() {
+          const pulse = Math.sin(this.pulsePhase) * 0.2 + 1;
+          const currentSize = this.size * pulse;
+          const gradient = ctx.createRadialGradient(
+            this.x - currentSize * 0.3,
+            this.y - currentSize * 0.3,
+            0,
+            this.x,
+            this.y,
+            currentSize,
+          );
+          gradient.addColorStop(
+            0,
+            `hsla(${this.hue}, 70%, 60%, ${this.opacity})`,
+          );
+          gradient.addColorStop(
+            0.7,
+            `hsla(${this.hue}, 60%, 40%, ${this.opacity * 0.6})`,
+          );
+          gradient.addColorStop(1, `hsla(${this.hue}, 50%, 20%, 0)`);
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < starCount; i++) {
+        stars.push(new Star());
+      }
+      comets.push(new Comet());
+      for (let i = 0; i < 3; i++) {
+        planets.push(new Planet());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        planets.forEach((planet) => {
+          planet.update();
+          planet.draw();
+        });
+        stars.forEach((star) => {
+          star.update();
+          star.draw();
+        });
+        comets.forEach((comet) => {
+          comet.update();
+          comet.draw();
+        });
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
 </html>

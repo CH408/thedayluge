@@ -1,482 +1,516 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="THE DAYLUGE - MARKETS & ECONOMICS: Articles & Longform — In-depth analysis, reports, and essays. Curated daily.">
-  <meta property="og:title" content="Articles & Longform - Markets & Economics - THE DAYLUGE">
-  <meta property="og:description" content="Deep dives into markets, economics, finance, and policy. Updated daily.">
-  <meta property="og:image" content="https://thedayluge.com/og-markets-econ-articles.jpg">
-  <meta property="og:url" content="https://thedayluge.com/markets-econ/markets-econ-articles-longform.html">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#000000">
-  <link rel="canonical" href="https://thedayluge.com/markets-econ/markets-econ-articles-longform.html">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <title>Articles & Longform - Markets & Economics - THE DAYLUGE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Special+Elite:wght@400&display=swap');
-    :root {
-      --gold: #00cc44;
-      --gold-light: #33ff66;
-      --ink: #111;
-      --black-bg: #000000;
-      --dark-gray: #111111;
-      --gray: #333333;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
-    body {
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      color: var(--gold);
-      line-height: 1.4;
-      background: var(--black-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 20px;
-    }
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, rgba(0,204,68,0.1) 0%, transparent 70%);
-      animation: energy-pulse 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-    body::after {
-      position: absolute;
-      top: -2px; left: -2px; right: -2px; bottom: -2px;
-      background:
-        linear-gradient(0deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
-        linear-gradient(90deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
-        linear-gradient(180deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%),
-        linear-gradient(270deg, transparent 0%, rgba(0,204,68,0.3) 1%, transparent 3%);
-      animation: edge-glow 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes energy-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    @keyframes edge-glow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Articles & Longform - Markets & Economics - THE DAYLUGE</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZM9B5CP8GS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZM9B5CP8GS');
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    .header {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
-    }
-    .header h1 {
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 28px;
-      margin-bottom: 8px;
-      animation: title-pulse 8s ease-in-out infinite;
-    }
-    @keyframes title-pulse {
-      0% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-      50% { color: var(--gold-light); text-shadow: 0 0 20px var(--gold-light), 2px 2px 4px rgba(0,0,0,0.8); }
-      100% { color: var(--gold); text-shadow: 0 0 15px var(--gold), 2px 2px 4px rgba(0,0,0,0.8); }
-    }
+      body {
+        font-family: "Special Elite", monospace;
+        background: #000000;
+        color: #00ff00;
+        padding: 40px 30px;
+        position: relative;
+        overflow-x: hidden;
+      }
 
-    .layout-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 800px;
-      margin: 50px auto 80px;
-      z-index: 5;
-    }
+      #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
 
-    .layout-container {
-      position: relative;
-      width: 100%;
-      height: 750px;
-      z-index: 5;
-    }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+      }
 
-    .central-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 580px;
-      background: linear-gradient(135deg, var(--black-bg) 0%, var(--dark-gray) 100%);
-      border: 2px solid var(--gold);
-      border-radius: 8px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      z-index: 15;
-      box-shadow: 0 0 30px rgba(0,204,68,0.5), 0 4px 12px rgba(0,0,0,0.8);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 30px rgba(0,204,68,0.5), 0 4px 12px rgba(0,0,0,0.8); }
-      50% { box-shadow: 0 0 40px rgba(0,204,68,0.8), 0 6px 16px rgba(0,0,0,0.4); }
-    }
+      .back-nav {
+        margin-bottom: 30px;
+      }
 
-    .central-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--gold);
-      text-shadow: 0 0 8px var(--gold);
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--gold);
-      flex-shrink: 0;
-    }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #00ff00;
+        text-decoration: none;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+        padding: 8px 12px;
+        border: 1px solid rgba(0, 255, 0, 0.6);
+        background: rgba(0, 255, 0, 0.02);
+      }
 
-    .content-links {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      overflow-y: auto;
-      padding: 8px 0;
-      margin-top: 8px;
-    }
+      .back-link:hover {
+        color: #00ff00;
+        border-color: rgba(0, 255, 0, 0.4);
+        background: rgba(0, 255, 0, 0.05);
+        transform: translateX(-5px);
+      }
 
-    .content-link {
-      display: block;
-      padding: 7px 9px;
-      border: 1px solid rgba(0,204,68,0.3);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-size: 16px;
-      line-height: 1.18;
-      overflow-wrap: anywhere;
-      cursor: pointer;
-      opacity: 0;
-      transform: translateY(-20px);
-      animation: unroll 0.5s ease-out forwards;
-    }
-    @keyframes unroll { to { opacity: 1; transform: translateY(0); } }
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+      }
 
-    .content-link:hover {
-      background: rgba(0,204,68,0.2);
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(0,204,68,0.4);
-    }
-    .link-title {
-      color: var(--gold);
-      text-decoration: none;
-      cursor: pointer;
-      overflow-wrap: anywhere;
-      hyphens: auto;
-    }
+      .category-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+        display: block;
+        color: #00ff00;
+      }
 
-    .loading-indicator {
-      text-align: center;
-      font-size: 16px;
-      color: var(--gold);
-      padding: 10px;
-    }
+      .header h1 {
+        font-family: "Special Elite", monospace;
+        font-size: clamp(32px, 5vw, 48px);
+        color: #00ff00;
+        margin-bottom: 8px;
+        font-weight: 400;
+        letter-spacing: 4px;
+        text-shadow:
+          0 0 30px rgba(0, 255, 0, 0.5),
+          0 0 15px rgba(0, 255, 0, 0.8);
+      }
 
-    .error-state {
-      text-align: center;
-      padding: 15px;
-      background: rgba(139, 0, 0, 0.3);
-      border: 1px solid #ff4444;
-      border-radius: 6px;
-      color: #ffaaaa;
-      font-size: 14px;
-      margin: 10px 0;
-    }
-    .retry-btn {
-      background: var(--gold);
-      color: #000;
-      border: none;
-      padding: 6px 12px;
-      margin-top: 8px;
-      border-radius: 4px;
-      font-family: 'Special Elite', monospace;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 13px;
-    }
+      .archive-list {
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+      }
 
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
-    }
-    .page-btn {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid rgba(0,204,68,0.4);
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      min-width: 32px;
-      text-align: center;
-      transition: all 0.2s;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
-    }
-    .page-btn:hover {
-      background: rgba(0,204,68,0.2);
-      border-color: var(--gold);
-    }
-    .page-btn.active {
-      background: var(--gold);
-      color: #000;
-      font-weight: bold;
-    }
-    .page-ellipsis {
-      color: #aaa;
-      padding: 4px 4px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace !important;
-    }
+      .archive-item {
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(0, 255, 0, 0.08);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        text-decoration: none;
+        text-decoration: none;
+      }
 
-    .home-btn {
-      position: absolute;
-      bottom: -55px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--black-bg);
-      color: var(--gold);
-      border: 2px solid var(--gold);
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-family: 'Special Elite', 'Courier New', Courier, monospace;
-      font-size: 14px;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-shadow: 0 0 5px var(--gold);
-      box-shadow: 0 0 10px rgba(0,204,68,0.3);
-      z-index: 20;
-      white-space: nowrap;
-    }
-    .home-btn:hover {
-      background: var(--dark-gray);
-      transform: translateX(-50%) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,204,68,0.6);
-    }
+      .archive-item:hover {
+        padding-left: 30px;
+        border-left: 2px solid rgba(0, 255, 0, 0.6);
+        background: rgba(0, 255, 0, 0.02);
+      }
 
-    #particle-canvas {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
+      .archive-item:last-child {
+        border-bottom: none;
+      }
 
-    @media (max-width: 900px) {
-      .layout-wrapper { margin: 40px auto 70px; }
-      .layout-container { height: 650px; }
-      .central-content { width: 420px; height: 520px; }
-      .home-btn { bottom: -50px; }
-    }
+      .item-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+        color: #00ff00;
+      }
 
-    @media (max-width: 600px) {
-      .layout-wrapper { margin: 15px auto 65px; }
-      .layout-container { height: 600px; }
-      .central-content { width: 340px; height: 480px; padding: 12px; }
-      .content-link { font-size: 13px; padding: 6px 8px; line-height: 1.25; }
-      .header h1 { font-size: 24px; }
-      .home-btn { bottom: -48px; font-size: 12px; padding: 8px 16px; }
-      .pagination { gap: 6px; font-size: 13px; }
-      .page-btn { padding: 3px 6px; min-width: 28px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="header"><h1>ARTICLES & LONGFORM - MARKETS & ECONOMICS</h1></div>
-  <canvas id="particle-canvas"></canvas>
+      .item-title {
+        font-size: 17px;
+        line-height: 1.6;
+        color: #00ff00;
+        font-weight: 300;
+        flex: 1;
+      }
 
-  <div class="layout-wrapper">
-    <div class="layout-container">
-      <div class="central-content">
-        <div class="central-title">Articles & Longform</div>
-        <div class="content-links">
-          <div class="loading-indicator">Loading...</div>
-        </div>
-        <div class="pagination"></div>
+      .pagination {
+        margin-top: 50px;
+        padding-top: 40px;
+        border-top: 1px solid rgba(0, 255, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .page-link {
+        padding: 10px 16px;
+        border: 1px solid rgba(0, 255, 0, 0.2);
+        background: rgba(0, 255, 0, 0.02);
+        color: #00ff00;
+        font-family: "Special Elite", monospace;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .page-link:hover {
+        background: rgba(0, 255, 0, 0.08);
+        border-color: rgba(0, 255, 0, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .page-link.active {
+        background: rgba(0, 255, 0, 0.15);
+        border-color: rgba(0, 255, 0, 0.5);
+        font-weight: 400;
+      }
+
+      .page-link.disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .page-dots {
+        color: #666;
+        padding: 0 8px;
+        font-size: 12px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 35px 25px;
+        }
+
+        .archive-list {
+          padding: 35px 28px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 25px 18px;
+        }
+
+        .archive-list {
+          padding: 28px 20px;
+        }
+
+        .header h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="particles"></canvas>
+    <div class="container">
+      <div class="back-nav">
+        <a href="markets-econ.html" class="back-link">← Back to Markets</a>
       </div>
+      <div class="header">
+        <span class="category-icon">📰</span>
+        <h1>ARTICLES & LONGFORM</h1>
+      </div>
+      <div class="archive-list"></div>
     </div>
 
-    <a href="./markets-econ.html" class="home-btn" rel="noopener" aria-label="Back to Markets & Economics Hub">Back to Markets & Economics</a>
-  </div>
+    <script>
+      const fileLocation = "/markets-econ/markets-econ-links.txt?t=";
+      const archiveType = "art-long";
+      const icon = "📰";
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelector(".archive-list");
+        const pagination = document.createElement("div");
+        pagination.className = "pagination";
+        container.parentNode.insertBefore(pagination, container.nextSibling);
+        let allEntries = [];
+        let currentPage = 1;
+        const itemsPerPage = 10;
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      /* ---------- PARTICLE BACKGROUND ---------- */
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
+        function renderPage(page) {
+          const start = (page - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+          const pageItems = allEntries.slice(start, end);
+
+          container.innerHTML = "";
+          pageItems.forEach((e, i) => {
+            const el = document.createElement("a");
+            el.className = "archive-item";
+            el.href = e.url;
+            el.target = "_blank";
+            el.innerHTML = `
+        <span class="item-icon">${icon}</span>
+        <div class="item-title">${e.title}</div>
+      `;
+            container.appendChild(el);
+          });
+
+          if (pageItems.length === 0 && allEntries.length > 0) {
+            container.innerHTML =
+              '<div class="archive-item"><div class="item-title" style="opacity:1; border-color:#aaa"><em>No articles available yet.</em></div></div>';
+          }
+
+          renderPagination();
+        }
+
+        function renderPagination() {
+          pagination.innerHTML = "";
+          const totalPages = Math.ceil(allEntries.length / itemsPerPage);
+          if (totalPages <= 1) return;
+
+          const maxVisible = 7;
+          let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+          let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+          if (endPage - startPage + 1 < maxVisible) {
+            startPage = Math.max(1, endPage - maxVisible + 1);
+          }
+
+          if (startPage > 1) {
+            addPageBtn(1);
+            if (startPage > 2) addEllipsis();
+          }
+
+          for (let i = startPage; i <= endPage; i++) {
+            addPageBtn(i);
+          }
+
+          if (endPage < totalPages) {
+            if (endPage < totalPages - 1) addEllipsis();
+            addPageBtn(totalPages);
+          }
+        }
+
+        function addPageBtn(page) {
+          const btn = document.createElement("button");
+          btn.className = "page-link";
+          btn.textContent = page;
+          if (page === currentPage) btn.classList.add("active");
+          btn.addEventListener("click", () => {
+            currentPage = page;
+            renderPage(page);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+          pagination.appendChild(btn);
+        }
+
+        function addEllipsis() {
+          const el = document.createElement("span");
+          el.className = "page-dots";
+          el.textContent = "...";
+          pagination.appendChild(el);
+        }
+
+        async function loadContent() {
+          container.innerHTML =
+            '<div class="loading-indicator">Loading...</div>';
+
+          try {
+            const response = await fetch(fileLocation + Date.now());
+            if (!response.ok) throw new Error("File not found");
+            const text = await response.text();
+            const lines = text
+              .trim()
+              .split("\n")
+              .filter((l) => l.trim());
+            allEntries = lines
+              .map((line) => {
+                const p = line.split("|");
+                if (p.length < 3) return null;
+                return {
+                  title: p[0].trim(),
+                  url: p[1].trim(),
+                  category: p[2].trim().toLowerCase(),
+                };
+              })
+              .filter((e) => e && e.category === archiveType);
+
+            currentPage = 1;
+            renderPage(1);
+          } catch (err) {
+            container.innerHTML = `
+        <div class="error-state" role="alert">
+          <p style="text-align:center">Failed to load articles: ${err.message}</p>
+          <button class="retry-btn" onclick="loadContent()">Retry</button>
+        </div>
+      `;
+          }
+        }
+
+        loadContent();
+      });
+    </script>
+
+    <script>
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      const particlesArray = [];
-      const numberOfParticles = window.innerWidth < 600 ? 30 : 50;
-
-      class Particle {
+      const stars = [];
+      const comets = [];
+      const planets = [];
+      const starCount = 150;
+      class Star {
         constructor() {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
-          this.size = Math.random() * 2 + 1;
-          this.speedX = Math.random() * 0.5 - 0.25;
-          this.speedY = Math.random() * 0.5 - 0.25;
+          this.size = Math.random() * 1.5 + 0.5;
+          this.brightness = Math.random() * 0.5 + 0.5;
+          this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+          this.twinklePhase = Math.random() * Math.PI * 2;
+          this.vx = (Math.random() - 0.5) * 0.2;
+          this.vy = (Math.random() - 0.5) * 0.2;
         }
         update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if (this.size > 0.2) this.size -= 0.1;
-          if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-          if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+          this.twinklePhase += this.twinkleSpeed;
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0) this.x = canvas.width;
+          if (this.x > canvas.width) this.x = 0;
+          if (this.y < 0) this.y = canvas.height;
+          if (this.y > canvas.height) this.y = 0;
         }
         draw() {
-          ctx.fillStyle = 'rgba(0,204,68,0.6)';
+          const twinkle = Math.sin(this.twinklePhase) * 0.3 + 0.7;
+          const opacity = this.brightness * twinkle;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = "#fff";
           ctx.fill();
         }
       }
-
-      function init() {
-        particlesArray.length = 0;
-        for (let i = 0; i < numberOfParticles; i++) {
-          particlesArray.push(new Particle());
+      class Comet {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * canvas.width;
+          this.y = -50;
+          this.vx = (Math.random() - 0.5) * 3;
+          this.vy = Math.random() * 4 + 3;
+          this.size = Math.random() * 2 + 1;
+          this.tail = [];
+          this.maxTail = 15;
+        }
+        update() {
+          this.tail.unshift({
+            x: this.x,
+            y: this.y,
+          });
+          if (this.tail.length > this.maxTail) this.tail.pop();
+          this.x += this.vx;
+          this.y += this.vy;
+          if (
+            this.y > canvas.height + 50 ||
+            this.x < -50 ||
+            this.x > canvas.width + 50
+          )
+            this.reset();
+        }
+        draw() {
+          for (let i = 0; i < this.tail.length; i++) {
+            const opacity = (1 - i / this.tail.length) * 0.5;
+            const size = this.size * (1 - i / this.tail.length);
+            ctx.beginPath();
+            ctx.arc(this.tail[i].x, this.tail[i].y, size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+            ctx.fill();
+          }
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = "#fff";
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = "#fff";
+          ctx.fill();
         }
       }
+      class Planet {
+        constructor() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size = Math.random() * 30 + 20;
+          this.vx = (Math.random() - 0.5) * 0.15;
+          this.vy = (Math.random() - 0.5) * 0.15;
+          this.hue = Math.random() * 60 + 200;
+          this.opacity = Math.random() * 0.15 + 0.1;
+          this.pulsePhase = Math.random() * Math.PI * 2;
+          this.pulseSpeed = Math.random() * 0.01 + 0.005;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.pulsePhase += this.pulseSpeed;
+          if (this.x < -this.size) this.x = canvas.width + this.size;
+          if (this.x > canvas.width + this.size) this.x = -this.size;
+          if (this.y < -this.size) this.y = canvas.height + this.size;
+          if (this.y > canvas.height + this.size) this.y = -this.size;
+        }
+        draw() {
+          const pulse = Math.sin(this.pulsePhase) * 0.2 + 1;
+          const currentSize = this.size * pulse;
+          const gradient = ctx.createRadialGradient(
+            this.x - currentSize * 0.3,
+            this.y - currentSize * 0.3,
+            0,
+            this.x,
+            this.y,
+            currentSize,
+          );
+          gradient.addColorStop(
+            0,
+            `hsla(${this.hue}, 70%, 60%, ${this.opacity})`,
+          );
+          gradient.addColorStop(
+            0.7,
+            `hsla(${this.hue}, 60%, 40%, ${this.opacity * 0.6})`,
+          );
+          gradient.addColorStop(1, `hsla(${this.hue}, 50%, 20%, 0)`);
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+          ctx.fillStyle = gradient;
+          ctx.fill();
+        }
+      }
+      for (let i = 0; i < starCount; i++) stars.push(new Star());
+      comets.push(new Comet());
+      for (let i = 0; i < 3; i++) planets.push(new Planet());
+
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-          particlesArray[i].update();
-          particlesArray[i].draw();
-          if (particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1); i--;
-            particlesArray.push(new Particle());
-          }
-        }
+        planets.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        stars.forEach((s) => {
+          s.update();
+          s.draw();
+        });
+        comets.forEach((c) => {
+          c.update();
+          c.draw();
+        });
         requestAnimationFrame(animate);
       }
-      init(); animate();
-      window.addEventListener('resize', () => {
+      animate();
+      window.addEventListener("resize", () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        init();
       });
-
-      /* ---------- CONTENT LOADING ---------- */
-      const container = document.querySelector('.content-links');
-      const pagination = document.querySelector('.pagination');
-      let allEntries = [];
-      let currentPage = 1;
-      const itemsPerPage = 10;
-
-      function renderPage(page) {
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const pageItems = allEntries.slice(start, end);
-
-        container.innerHTML = '';
-        pageItems.forEach((e, i) => {
-          const el = document.createElement('div');
-          el.className = 'content-link';
-          el.style.animationDelay = `${i * 0.05}s`;
-          el.innerHTML = `
-            <a href="${e.link}" class="link-title" target="_blank" rel="noopener">${e.title}</a>
-          `;
-          container.appendChild(el);
-        });
-
-        if (pageItems.length === 0 && allEntries.length > 0) {
-          container.innerHTML = '<div class="content-link" style="opacity:1; border-color:#aaa"><em>No articles available yet.</em></div>';
-        }
-
-        renderPagination();
-      }
-
-      function renderPagination() {
-        pagination.innerHTML = '';
-        const totalPages = Math.ceil(allEntries.length / itemsPerPage);
-        if (totalPages <= 1) return;
-
-        const maxVisible = 7;
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-        if (endPage - startPage + 1 < maxVisible) {
-          startPage = Math.max(1, endPage - maxVisible + 1);
-        }
-
-        if (startPage > 1) {
-          addPageBtn(1);
-          if (startPage > 2) addEllipsis();
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-          addPageBtn(i);
-        }
-
-        if (endPage < totalPages) {
-          if (endPage < totalPages - 1) addEllipsis();
-          addPageBtn(totalPages);
-        }
-      }
-
-      function addPageBtn(page) {
-        const btn = document.createElement('button');
-        btn.className = 'page-btn';
-        btn.textContent = page;
-        if (page === currentPage) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          currentPage = page;
-          renderPage(page);
-          window.scrollTo({ top: document.querySelector('.central-content').offsetTop - 100, behavior: 'smooth' });
-        });
-        pagination.appendChild(btn);
-      }
-
-      function addEllipsis() {
-        const el = document.createElement('span');
-        el.className = 'page-ellipsis';
-        el.textContent = '...';
-        pagination.appendChild(el);
-      }
-
-      async function loadContent() {
-        container.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        pagination.innerHTML = '';
-
-        try {
-          // FIXED: Same folder → use ./
-          const response = await fetch('./markets-econ-links.txt?t=' + Date.now());
-          if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
-          const text = await response.text();
-          const lines = text.trim().split('\n').filter(l => l.trim());
-          allEntries = lines.map(line => {
-            const p = line.split('|');
-            if (p.length < 3) return null;
-            return { title: p[0].trim(), link: p[1].trim(), category: p[2].trim().toLowerCase() };
-          }).filter(e => e && e.category === 'art-long');
-
-          currentPage = 1;
-          renderPage(1);
-
-        } catch (err) {
-          console.error('Load failed:', err);
-          container.innerHTML = `
-            <div class="error-state" role="alert">
-              <p>Failed to load articles: ${err.message}</p>
-              <button class="retry-btn" onclick="loadContent()">Retry</button>
-            </div>
-          `;
-          pagination.innerHTML = '';
-        }
-      }
-
-      loadContent();
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
